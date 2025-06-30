@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCog Unified - Cognitive Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .cognitive-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-bottom: 2px solid #00ff41;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .title {
+            font-size: 18px;
+            color: #00ff41;
+            text-shadow: 0 0 10px #00ff41;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+
+        .control-group input, .control-group button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ff41;
+            color: #e0e0e0;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .control-group button {
+            background: rgba(0, 255, 65, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-group button:hover {
+            background: rgba(0, 255, 65, 0.4);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            position: relative;
+        }
+
+        .visualization-canvas {
+            flex: 1;
+            background: radial-gradient(circle at center, #0d1b2a, #000000);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cognitiveCanvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.9);
+            border-left: 2px solid #00ff41;
+            padding: 20px;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-panel {
+            margin-bottom: 25px;
+        }
+
+        .info-panel h3 {
+            color: #00ff41;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            border-left: 3px solid #00ff41;
+        }
+
+        .attention-overlay {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.3), transparent);
+            transition: all 0.3s ease;
+        }
+
+        .cognitive-node {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00ff41;
+            box-shadow: 0 0 15px #00ff41;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .cognitive-node:hover {
+            transform: scale(1.5);
+            box-shadow: 0 0 25px #00ff41;
+        }
+
+        .cognitive-edge {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(0, 255, 65, 0.6), rgba(0, 255, 65, 0.2));
+            transform-origin: left center;
+            pointer-events: none;
+        }
+
+        .agent-indicator {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #ff6b35;
+            border-radius: 50%;
+            background: rgba(255, 107, 53, 0.2);
+            box-shadow: 0 0 20px #ff6b35;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .pattern-highlight {
+            position: absolute;
+            border: 2px dashed #ffff00;
+            background: rgba(255, 255, 0, 0.1);
+            border-radius: 5px;
+            animation: highlight-pulse 1.5s infinite;
+        }
+
+        @keyframes highlight-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .status-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #00ff41;
+            font-size: 12px;
+            color: #00ff41;
+        }
+
+        .recursive-feedback-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 10px;
+            color: #00ff41;
+            animation: feedback-flash 0.5s ease-out;
+        }
+
+        @keyframes feedback-flash {
+            0% { background: rgba(0, 255, 65, 0.5); }
+            100% { background: rgba(0, 255, 65, 0.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cognitive-container">
+        <div class="header">
+            <div class="title">OpenCog Unified - Phase II Cognitive Visualization</div>
+            <div class="controls">
+                <div class="control-group">
+                    <label>Attention Threshold:</label>
+                    <input type="range" id="attentionThreshold" min="0.1" max="1.0" step="0.1" value="0.5">
+                </div>
+                <div class="control-group">
+                    <label>Update Rate:</label>
+                    <input type="range" id="updateRate" min="1" max="60" value="30">
+                    <span id="updateRateDisplay">30 Hz</span>
+                </div>
+                <div class="control-group">
+                    <button id="startBtn">Start Real-time</button>
+                    <button id="pauseBtn">Pause</button>
+                    <button id="resetBtn">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="visualization-canvas">
+                <canvas id="cognitiveCanvas"></canvas>
+                <div id="recursiveFeedback" class="recursive-feedback-indicator" style="display: none;">
+                    Recursive Feedback Active
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="info-panel">
+                    <h3>Cognitive State</h3>
+                    <div class="info-item">Nodes: <span id="nodeCount">0</span></div>
+                    <div class="info-item">Edges: <span id="edgeCount">0</span></div>
+                    <div class="info-item">Agents: <span id="agentCount">0</span></div>
+                    <div class="info-item">Patterns: <span id="patternCount">0</span></div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>Attention Distribution</h3>
+                    <div id="attentionList"></div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>Emergent Patterns</h3>
+                    <div id="patternList"></div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>Agent Status</h3>
+                    <div id="agentStatus"></div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>Recursive Feedback</h3>
+                    <div class="info-item">Feedback Strength: <span id="feedbackStrength">0.0</span></div>
+                    <div class="info-item">Cycle Count: <span id="cycleCount">0</span></div>
+                    <div class="info-item">Adaptation Rate: <span id="adaptationRate">0.1</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-indicator" id="statusIndicator">
+            Initializing Cognitive Visualization...
+        </div>
+    </div>
+
+    <script src="cognitive-visualization.js"></script>
+</body>
+</html>
