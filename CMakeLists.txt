@@ -13,6 +13,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/deps/CMakeLists.txt")
     add_subdirectory(deps)
 endif()
 
+# Include dependencies (commented out as deps directory doesn't exist)
+# add_subdirectory(deps)
+
 # Include unified cognitive modules
 add_subdirectory(cogutil)
 add_subdirectory(atomspace)
