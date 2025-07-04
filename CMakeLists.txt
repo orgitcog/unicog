@@ -46,5 +46,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tutorial-automation/CMakeLists.txt")
     add_subdirectory(tutorial-automation)
 endif()
 
+# Add unified GGML tensor kernel
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ggml-tensor-kernel/CMakeLists.txt")
+    add_subdirectory(ggml-tensor-kernel)
+endif()
+
 # Global cognitive build targets
 add_custom_target(cognitive ALL DEPENDS cogutil atomspace cogserver)
