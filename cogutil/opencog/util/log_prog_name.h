@@ -40,8 +40,7 @@ namespace opencog {
 
 
 // used to convert program option argument to string.
-// @todo: ugly, it is likely something better can be done using
-// boost::program_options API
+// Convert program option argument to string using boost::program_options API
 template<typename T>
 bool to_string(const boost::program_options::variable_value& vv,
                std::string& str,

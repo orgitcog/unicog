@@ -9,7 +9,7 @@
 (define tname "filter-value-test")
 (test-begin tname)
 
-; Begin by creating a mockup of a complicated data stream. What makes
+; Begin by creating a test data stream. What makes
 ; this "complicated" is that it will consist of nested LinkValues,
 ; a tree of LinkValues, with different kinds of data in the tree.
 

@@ -11,7 +11,7 @@
 
 ; -----------
 
-; A mockup of a stream of data to be filtered.
+; A test stream of data to be filtered.
 (define stream (LinkValue
 	(LinkValue (StringValue "/usr") (StringValue "dir"))
 	(LinkValue (StringValue "/usr/lib") (StringValue "dir"))

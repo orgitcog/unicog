@@ -1,3 +1,7 @@
+//<<<<<<< copilot/fix-17
+// Basic test implementations for catalog manager
+//bool test_catalog_manager() { return true; }
+//=======
 /*
  * test_catalog_manager.cpp
  *
@@ -21,3 +25,4 @@ bool test_catalog_manager() {
     
     return true; 
 }
+//>>>>>>> main

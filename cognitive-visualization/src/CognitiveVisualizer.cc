@@ -210,6 +210,54 @@ std::string CognitiveVisualizer::export_visualization_state() const
 
 bool CognitiveVisualizer::import_visualization_state(const std::string& json_state)
 {
+//<<<<<<< copilot/fix-17
+    // Basic JSON parsing for state import - parse key visualization parameters
+//    std::cout << "📥 Importing visualization state from JSON..." << std::endl;
+    
+    // Simple JSON parsing for core parameters
+//    try {
+        // Parse zoom_level
+//        size_t zoom_pos = json_state.find("\"zoom_level\":");
+//        if (zoom_pos != std::string::npos) {
+//            size_t start = json_state.find(":", zoom_pos) + 1;
+//            size_t end = json_state.find(",", start);
+//            if (end == std::string::npos) end = json_state.find("}", start);
+//            if (start < end) {
+//                std::string zoom_str = json_state.substr(start, end - start);
+//                zoom_level_ = std::stod(zoom_str);
+//            }
+//        }
+        
+        // Parse attention_threshold
+//        size_t threshold_pos = json_state.find("\"attention_threshold\":");
+//        if (threshold_pos != std::string::npos) {
+//            size_t start = json_state.find(":", threshold_pos) + 1;
+//            size_t end = json_state.find(",", start);
+//            if (end == std::string::npos) end = json_state.find("}", start);
+//            if (start < end) {
+//                std::string threshold_str = json_state.substr(start, end - start);
+//                attention_threshold_ = std::stod(threshold_str);
+//            }
+//        }
+        
+        // Parse real_time_mode
+//        size_t realtime_pos = json_state.find("\"real_time_mode\":");
+//        if (realtime_pos != std::string::npos) {
+//            size_t start = json_state.find(":", realtime_pos) + 1;
+//            size_t end = json_state.find(",", start);
+//            if (end == std::string::npos) end = json_state.find("}", start);
+//            if (start < end) {
+//                std::string mode_str = json_state.substr(start, end - start);
+//                real_time_mode_ = (mode_str.find("true") != std::string::npos);
+//            }
+//        }
+        
+//        std::cout << "✅ Successfully imported visualization state" << std::endl;
+//        return true;
+//    }
+//    catch (const std::exception& e) {
+//        std::cout << "⚠️ Error parsing JSON state: " << e.what() << std::endl;
+//=======
     std::cout << "📥 Importing visualization state from JSON..." << std::endl;
     
     if (json_state.empty()) {
@@ -332,6 +380,7 @@ bool CognitiveVisualizer::import_visualization_state(const std::string& json_sta
         
     } catch (const std::exception& e) {
         std::cout << "❌ Failed to import visualization state: " << e.what() << std::endl;
+//>>>>>>> main
         return false;
     }
 }

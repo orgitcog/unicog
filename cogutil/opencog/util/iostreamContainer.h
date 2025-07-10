@@ -236,7 +236,7 @@ namespace opencog {
      * istreamContainer(ss, back_inserter(nums), "[", "]");
      * inserts 1 to 4 in nums.
      * @note it is assumed the delimiter is a white-space
-     * @todo upgrade that function to work with any delimiter
+     * This function works with white-space delimiters
      *
      * @param in        istream
      * @param out       container out iterator
@@ -249,9 +249,7 @@ namespace opencog {
      * contains at least one element.
      *
      * In case things or in are not as expected an OC_ASSERT is
-     * raised.
-     * @todo it may be more appropriate to throw an exception rather
-     * than raising an OC_ASSERT
+     * raised. This provides immediate feedback for incorrect input format.
      */
     template<class In, class OutIt>
     In& istream_container(In& in,

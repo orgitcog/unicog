@@ -1,3 +1,8 @@
+//<<<<<<< copilot/fix-17
+// Basic test implementations for shape deriver
+//bool test_shape_deriver() { return true; }
+//bool test_catalog_manager() { return true; }
+//=======
 /*
  * test_shape_deriver.cpp  
  *
@@ -33,3 +38,4 @@ bool test_catalog_manager() {
     
     return true; 
 }
+//>>>>>>> main

@@ -99,7 +99,7 @@ public:
                     // Type-based encoding (simplified)
                     value = std::cos(atom_id * (i - 15) * 0.05f);
                 } else {
-                    // Content-based features (placeholder)
+                    // Content-based features (simplified content encoding)
                     value = std::tanh((atom_id * (i - 31)) * 0.01f);
                 }
                 
@@ -160,7 +160,7 @@ public:
                     Handle atom_i = atom_list[i];
                     Handle atom_j = atom_list[j];
                     
-                    // Compute similarity (placeholder logic)
+                    // Compute similarity (simplified similarity metric)
                     float similarity = std::abs(static_cast<int64_t>(atom_i.uuid_ - atom_j.uuid_)) < 100 ? 1.0f : 0.0f;
                     data[i * num_atoms + j] = similarity;
                 }

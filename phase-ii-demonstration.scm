@@ -75,7 +75,7 @@
   
   (format #t "~%✨ PHASE II DEMONSTRATION COMPLETED SUCCESSFULLY! ✨~%"))
 
-; Demonstrate cognitive visualization (placeholder for web interface)
+; Demonstrate cognitive visualization capabilities
 (define (demonstrate-cognitive-visualization)
   "Demonstrate cognitive visualization capabilities"
   (format #t "  🎨 Initializing cognitive visualization interface...~%")

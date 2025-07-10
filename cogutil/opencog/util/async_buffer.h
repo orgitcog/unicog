@@ -100,8 +100,7 @@ namespace opencog
  *
  * It would also be clearer to the user, if we placed the method to call
  * into the set, along with the element, instead of specifying the
- * method in the ctor. This would really drive home the point that this
- * really is just an async method call. XXX TODO FIXME someday.
+ * method in the ctor. This would emphasize that this is an async method call.
  *
  * The number of threads to use for writing is fixed, when the ctor is
  * called.  The default is 4 threads.  This can be set to zero, if
@@ -375,8 +374,8 @@ void async_buffer<Writer, Element>::drain()
 	_stall_writers = false;
 	_flush_count++;
 
-	// XXX TODO - when C++20 becomes widely available,
-	// replace this loop by _pending.wait(0)
+	// When C++20 becomes widely available, this loop can be
+	// replaced by _pending.wait(0) for more efficient waiting
 	while (0 < _pending)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));

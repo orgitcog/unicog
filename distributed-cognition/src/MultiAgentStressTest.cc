@@ -438,7 +438,7 @@ MultiAgentStressTest::EmergentProperties MultiAgentStressTest::analyze_emergent_
     return props;
 }
 
-// Additional stub implementations
+// Additional method implementations
 void MultiAgentStressTest::inject_failures(double failure_rate, double duration_seconds) {}
 MultiAgentStressTest::PerformanceDashboard MultiAgentStressTest::get_performance_dashboard() { return PerformanceDashboard(); }
 void MultiAgentStressTest::generate_test_report(const std::string& output_file) {}

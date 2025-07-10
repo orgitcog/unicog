@@ -194,6 +194,16 @@ void DistributedAtomSpaceSync::update_sync_metrics(double latency_ms) {
     average_sync_latency_.store(new_avg);
 }
 
+//<<<<<<< copilot/fix-17
+// Implementation of remaining synchronization methods
+//void DistributedAtomSpaceSync::unsubscribe_from_atom(const std::string& agent_id, const std::string& atom_id) {}
+//AtomSyncRecord DistributedAtomSpaceSync::resolve_conflict(const std::vector<AtomSyncRecord>& conflicting_records) { return AtomSyncRecord(); }
+//void DistributedAtomSpaceSync::set_custom_conflict_resolver(std::function<AtomSyncRecord(const std::vector<AtomSyncRecord>&)> resolver) {}
+//void DistributedAtomSpaceSync::update_agent_reliability(const std::string& agent_id, double new_score) {}
+//std::vector<std::string> DistributedAtomSpaceSync::get_pending_sync_atoms(const std::string& agent_id) { return {}; }
+//void DistributedAtomSpaceSync::mark_atom_synchronized(const std::string& agent_id, const std::string& atom_id) {}
+//bool DistributedAtomSpaceSync::is_atom_fully_synchronized(const std::string& atom_id) { return true; }
+//=======
 // Real implementations for straightforward methods
 void DistributedAtomSpaceSync::unsubscribe_from_atom(const std::string& agent_id, const std::string& atom_id) {
     std::unique_lock<std::shared_mutex> lock(sync_mutex_);
@@ -320,6 +330,7 @@ AtomSyncRecord DistributedAtomSpaceSync::resolve_conflict(const std::vector<Atom
     }
     return *latest;
 }
+//>>>>>>> main
 std::map<std::string, std::vector<std::string>> DistributedAtomSpaceSync::get_sync_topology() const { return sync_topology_; }
 void DistributedAtomSpaceSync::set_sync_strategy(SyncStrategy strategy) { sync_strategy_ = strategy; }
 void DistributedAtomSpaceSync::set_conflict_resolution(ConflictResolution resolution) { conflict_resolution_ = resolution; }
@@ -379,6 +390,15 @@ DistributedAtomSpaceSync::ConsistencyReport DistributedAtomSpaceSync::validate_n
     return report;
 }
 
+//<<<<<<< copilot/fix-17
+// Additional private method implementations
+//AtomSyncRecord DistributedAtomSpaceSync::apply_conflict_resolution(const std::vector<AtomSyncRecord>& records) { return AtomSyncRecord(); }
+//bool DistributedAtomSpaceSync::are_agents_connected(const std::string& agent1, const std::string& agent2) { return true; }
+//bool DistributedAtomSpaceSync::validate_atom_data(const AtomSyncRecord& record) { return true; }
+//double DistributedAtomSpaceSync::calculate_sync_priority(const AtomSyncRecord& record, const std::string& requesting_agent) { return 0.5; }
+//void DistributedAtomSpaceSync::handle_network_partition(const std::vector<std::string>& disconnected_agents) {}
+//AtomSyncRecord DistributedAtomSpaceSync::merge_with_vector_clocks(const std::vector<AtomSyncRecord>& records) { return AtomSyncRecord(); }
+//=======
 // Additional private method implementations and TODOs
 AtomSyncRecord DistributedAtomSpaceSync::apply_conflict_resolution(const std::vector<AtomSyncRecord>& records) { 
     // TODO: Implement sophisticated conflict resolution algorithm
@@ -455,5 +475,6 @@ AtomSyncRecord DistributedAtomSpaceSync::merge_with_vector_clocks(const std::vec
     std::cout << "TODO: Vector clock merging algorithm not implemented. Using simple merge." << std::endl;
     return records.empty() ? AtomSyncRecord() : records[0]; 
 }
+//>>>>>>> main
 
 } // namespace opencog
