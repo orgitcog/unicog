@@ -210,52 +210,177 @@ std::string CognitiveVisualizer::export_visualization_state() const
 
 bool CognitiveVisualizer::import_visualization_state(const std::string& json_state)
 {
+//<<<<<<< copilot/fix-17
     // Basic JSON parsing for state import - parse key visualization parameters
-    std::cout << "📥 Importing visualization state from JSON..." << std::endl;
+//    std::cout << "📥 Importing visualization state from JSON..." << std::endl;
     
     // Simple JSON parsing for core parameters
-    try {
+//    try {
         // Parse zoom_level
-        size_t zoom_pos = json_state.find("\"zoom_level\":");
-        if (zoom_pos != std::string::npos) {
-            size_t start = json_state.find(":", zoom_pos) + 1;
-            size_t end = json_state.find(",", start);
-            if (end == std::string::npos) end = json_state.find("}", start);
-            if (start < end) {
-                std::string zoom_str = json_state.substr(start, end - start);
-                zoom_level_ = std::stod(zoom_str);
-            }
-        }
+//        size_t zoom_pos = json_state.find("\"zoom_level\":");
+//        if (zoom_pos != std::string::npos) {
+//            size_t start = json_state.find(":", zoom_pos) + 1;
+//            size_t end = json_state.find(",", start);
+//            if (end == std::string::npos) end = json_state.find("}", start);
+//            if (start < end) {
+//                std::string zoom_str = json_state.substr(start, end - start);
+//                zoom_level_ = std::stod(zoom_str);
+//            }
+//        }
         
         // Parse attention_threshold
-        size_t threshold_pos = json_state.find("\"attention_threshold\":");
-        if (threshold_pos != std::string::npos) {
-            size_t start = json_state.find(":", threshold_pos) + 1;
-            size_t end = json_state.find(",", start);
-            if (end == std::string::npos) end = json_state.find("}", start);
-            if (start < end) {
-                std::string threshold_str = json_state.substr(start, end - start);
-                attention_threshold_ = std::stod(threshold_str);
-            }
-        }
+//        size_t threshold_pos = json_state.find("\"attention_threshold\":");
+//        if (threshold_pos != std::string::npos) {
+//            size_t start = json_state.find(":", threshold_pos) + 1;
+//            size_t end = json_state.find(",", start);
+//            if (end == std::string::npos) end = json_state.find("}", start);
+//            if (start < end) {
+//                std::string threshold_str = json_state.substr(start, end - start);
+//                attention_threshold_ = std::stod(threshold_str);
+//            }
+//        }
         
         // Parse real_time_mode
-        size_t realtime_pos = json_state.find("\"real_time_mode\":");
-        if (realtime_pos != std::string::npos) {
-            size_t start = json_state.find(":", realtime_pos) + 1;
-            size_t end = json_state.find(",", start);
-            if (end == std::string::npos) end = json_state.find("}", start);
-            if (start < end) {
-                std::string mode_str = json_state.substr(start, end - start);
-                real_time_mode_ = (mode_str.find("true") != std::string::npos);
+//        size_t realtime_pos = json_state.find("\"real_time_mode\":");
+//        if (realtime_pos != std::string::npos) {
+//            size_t start = json_state.find(":", realtime_pos) + 1;
+//            size_t end = json_state.find(",", start);
+//            if (end == std::string::npos) end = json_state.find("}", start);
+//            if (start < end) {
+//                std::string mode_str = json_state.substr(start, end - start);
+//                real_time_mode_ = (mode_str.find("true") != std::string::npos);
+//            }
+//        }
+        
+//        std::cout << "✅ Successfully imported visualization state" << std::endl;
+//        return true;
+//    }
+//    catch (const std::exception& e) {
+//        std::cout << "⚠️ Error parsing JSON state: " << e.what() << std::endl;
+//=======
+    std::cout << "📥 Importing visualization state from JSON..." << std::endl;
+    
+    if (json_state.empty()) {
+        std::cout << "❌ Empty JSON state provided" << std::endl;
+        return false;
+    }
+    
+    try {
+        // Simple JSON parsing implementation for basic state restoration
+        // Look for key fields in the JSON string
+        
+        // Extract zoom_level
+        size_t zoom_pos = json_state.find("\"zoom_level\":");
+        if (zoom_pos != std::string::npos) {
+            size_t value_start = json_state.find(':', zoom_pos) + 1;
+            size_t value_end = json_state.find(',', value_start);
+            if (value_end == std::string::npos) value_end = json_state.find('}', value_start);
+            
+            if (value_start != std::string::npos && value_end != std::string::npos) {
+                std::string zoom_str = json_state.substr(value_start, value_end - value_start);
+                // Remove whitespace
+                zoom_str.erase(0, zoom_str.find_first_not_of(" \t\n\r"));
+                zoom_str.erase(zoom_str.find_last_not_of(" \t\n\r") + 1);
+                
+                try {
+                    zoom_level_ = std::stod(zoom_str);
+                    std::cout << "✅ Restored zoom level: " << zoom_level_ << std::endl;
+                } catch (const std::exception& e) {
+                    std::cout << "⚠️  Failed to parse zoom level" << std::endl;
+                }
             }
         }
         
-        std::cout << "✅ Successfully imported visualization state" << std::endl;
+        // Extract viewport_center
+        size_t viewport_pos = json_state.find("\"viewport_center\":");
+        if (viewport_pos != std::string::npos) {
+            size_t array_start = json_state.find('[', viewport_pos);
+            size_t array_end = json_state.find(']', array_start);
+            
+            if (array_start != std::string::npos && array_end != std::string::npos) {
+                std::string array_content = json_state.substr(array_start + 1, array_end - array_start - 1);
+                size_t comma_pos = array_content.find(',');
+                
+                if (comma_pos != std::string::npos) {
+                    try {
+                        std::string x_str = array_content.substr(0, comma_pos);
+                        std::string y_str = array_content.substr(comma_pos + 1);
+                        
+                        // Remove whitespace
+                        x_str.erase(0, x_str.find_first_not_of(" \t\n\r"));
+                        x_str.erase(x_str.find_last_not_of(" \t\n\r") + 1);
+                        y_str.erase(0, y_str.find_first_not_of(" \t\n\r"));
+                        y_str.erase(y_str.find_last_not_of(" \t\n\r") + 1);
+                        
+                        viewport_center_.first = std::stod(x_str);
+                        viewport_center_.second = std::stod(y_str);
+                        std::cout << "✅ Restored viewport center: (" << viewport_center_.first 
+                                  << ", " << viewport_center_.second << ")" << std::endl;
+                    } catch (const std::exception& e) {
+                        std::cout << "⚠️  Failed to parse viewport center" << std::endl;
+                    }
+                }
+            }
+        }
+        
+        // Extract attention_threshold
+        size_t threshold_pos = json_state.find("\"attention_threshold\":");
+        if (threshold_pos != std::string::npos) {
+            size_t value_start = json_state.find(':', threshold_pos) + 1;
+            size_t value_end = json_state.find(',', value_start);
+            if (value_end == std::string::npos) value_end = json_state.find('}', value_start);
+            
+            if (value_start != std::string::npos && value_end != std::string::npos) {
+                std::string threshold_str = json_state.substr(value_start, value_end - value_start);
+                threshold_str.erase(0, threshold_str.find_first_not_of(" \t\n\r"));
+                threshold_str.erase(threshold_str.find_last_not_of(" \t\n\r") + 1);
+                
+                try {
+                    attention_threshold_ = std::stod(threshold_str);
+                    std::cout << "✅ Restored attention threshold: " << attention_threshold_ << std::endl;
+                } catch (const std::exception& e) {
+                    std::cout << "⚠️  Failed to parse attention threshold" << std::endl;
+                }
+            }
+        }
+        
+        // Extract real_time_mode
+        size_t realtime_pos = json_state.find("\"real_time_mode\":");
+        if (realtime_pos != std::string::npos) {
+            size_t value_start = json_state.find(':', realtime_pos) + 1;
+            size_t value_end = json_state.find(',', value_start);
+            if (value_end == std::string::npos) value_end = json_state.find('}', value_start);
+            
+            if (value_start != std::string::npos && value_end != std::string::npos) {
+                std::string mode_str = json_state.substr(value_start, value_end - value_start);
+                mode_str.erase(0, mode_str.find_first_not_of(" \t\n\r"));
+                mode_str.erase(mode_str.find_last_not_of(" \t\n\r") + 1);
+                
+                if (mode_str.find("true") != std::string::npos) {
+                    real_time_mode_ = true;
+                    std::cout << "✅ Restored real-time mode: enabled" << std::endl;
+                } else if (mode_str.find("false") != std::string::npos) {
+                    real_time_mode_ = false;
+                    std::cout << "✅ Restored real-time mode: disabled" << std::endl;
+                }
+            }
+        }
+        
+        // Clear existing data before importing new state
+        node_positions_.clear();
+        attention_intensities_.clear();
+        cognitive_salience_.clear();
+        
+        // TODO: Implement full node_positions, attention_intensities, and cognitive_salience parsing
+        // For now, this implementation handles the basic state fields
+        std::cout << "⚠️  Note: Full node data parsing not yet implemented - only basic state restored" << std::endl;
+        
+        std::cout << "✅ Visualization state import completed successfully" << std::endl;
         return true;
-    }
-    catch (const std::exception& e) {
-        std::cout << "⚠️ Error parsing JSON state: " << e.what() << std::endl;
+        
+    } catch (const std::exception& e) {
+        std::cout << "❌ Failed to import visualization state: " << e.what() << std::endl;
+//>>>>>>> main
         return false;
     }
 }
