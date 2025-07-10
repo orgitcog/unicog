@@ -100,7 +100,7 @@
 (test-end "UnifyUTest::test_unify_basic_8")
 
 ; --------------------------------------
-; Stub out. Throws error
+; Test skipped due to variable scoping constraints
 ;  The variable (VariableNode "$Y") does not appear (unquoted) in any clause!
 ;;;(test-begin "UnifyUTest::test_unify_undeclared_var_1")
 ;;;(define tuuv1
