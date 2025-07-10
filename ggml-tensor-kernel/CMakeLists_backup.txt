@@ -49,6 +49,7 @@ namespace opencog {
         bool operator==(const Handle& other) const { return uuid_ == other.uuid_; }
         bool operator!=(const Handle& other) const { return !(*this == other); }
     };
+    const Handle Handle::UNDEFINED = Handle(0);
     
     typedef std::unordered_set<Handle> HandleSet;
     
@@ -70,14 +71,6 @@ namespace std {
 #endif
 ")
 
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/atomspace_stub.cc "
-#include \"atomspace_stub.h\"
-
-namespace opencog {
-    const Handle Handle::UNDEFINED = Handle(0);
-}
-")
-
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # Create the minimal tensor kernel implementation
@@ -85,7 +78,6 @@ add_library(ggml-tensor-kernel-minimal SHARED
     src/TensorKernel_minimal.cc
     src/AtomSpaceTensorMapper_minimal.cc
     src/AttentionAllocator_minimal.cc
-    ${CMAKE_CURRENT_BINARY_DIR}/atomspace_stub.cc
 )
 
 target_link_libraries(ggml-tensor-kernel-minimal
