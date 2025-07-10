@@ -20,6 +20,10 @@ set(DISTRIBUTED_SOURCES
     src/AgentCoordinator.cc
     src/SharedHypergraphContext.cc
     src/DistributedCognitionEngine.cc
+    src/ECANResourceManager.cc
+    src/TensorHypergraphProtocol.cc
+    src/DistributedAtomSpaceSync.cc
+    src/MultiAgentStressTest.cc
 )
 
 # Header files
@@ -28,6 +32,10 @@ set(DISTRIBUTED_HEADERS
     include/AgentCoordinator.h
     include/SharedHypergraphContext.h
     include/DistributedCognitionEngine.h
+    include/ECANResourceManager.h
+    include/TensorHypergraphProtocol.h
+    include/DistributedAtomSpaceSync.h
+    include/MultiAgentStressTest.h
 )
 
 # Create include directory
