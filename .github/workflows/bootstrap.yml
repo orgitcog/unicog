@@ -154,8 +154,8 @@ jobs:
       - name: Estimate tensor dimensions and field synthesis
         run: |
           echo "📐 Estimating tensor dimensions and field synthesis potential..."
-          chmod +x ./scripts/estimate-tensor-dimensions.sh
-          ./scripts/estimate-tensor-dimensions.sh
+          chmod +x ./scripts/simple-tensor-analysis.sh
+          ./scripts/simple-tensor-analysis.sh
           
       - name: Encode hypergraph patterns
         run: |
@@ -182,7 +182,7 @@ jobs:
           path: |
             attention-metrics.json
             neural-symbolic-integration-report.json
-            tensor-field-analysis.json
+            simple-tensor-analysis.json
             hypergraph-patterns.json
             workflow-patterns.atomese
             meta-completeness-analysis.json

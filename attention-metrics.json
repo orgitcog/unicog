@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-07-10T05:38:03Z",
+  "timestamp": "2025-07-10T05:45:22Z",
   "ecan_attention_metrics": {
     "cognitive_workload_distribution": {
       "cpp_attention": 0,
@@ -12,10 +12,10 @@
       {"filename": "neural-symbolic-tutorial.scm", "attention_level": 100}
     ],
     "urgency_metrics": {
-      "high_urgency": 0,
+      "high_urgency": 80,
       "medium_urgency": 0,
       "low_urgency": 1246,
-      "total_urgency": 1246
+      "total_urgency": 1326
     },
     "cognitive_resource_allocation": {
       "neural_symbolic_integration_score": 32255,
