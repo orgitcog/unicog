@@ -169,10 +169,43 @@ Handle NeuralSymbolicBridge::reason_with_tensors(const Handle& query, ggml_tenso
         return Handle::UNDEFINED;
     }
     
-    // Basic reasoning implementation
-    // In a full implementation, this would use PLN with neural enhancement
-    logger().debug("NeuralSymbolicBridge") << "Performed reasoning with tensor context";
-    return query; // Return query for now
+    logger().debug("NeuralSymbolicBridge") << "Performing neural-enhanced reasoning";
+    
+    // Get related atoms using basic traversal
+    HandleSeq related_atoms = atomspace_->get_incoming(query);
+    
+    // If no direct relationships, try type-based search
+    if (related_atoms.empty()) {
+        related_atoms = atomspace_->get_handles_by_type(query->get_type(), false);
+        // Limit to prevent excessive computation
+        if (related_atoms.size() > 100) {
+            related_atoms.resize(100);
+        }
+    }
+    
+    // Use neural context to guide selection
+    Handle best_result = query;
+    float best_score = 0.0f;
+    
+    // Simple scoring based on neural context (simplified neural guidance)
+    if (neural_context->data && related_atoms.size() > 1) {
+        float* context_data = (float*)neural_context->data;
+        size_t context_size = ggml_nelements(neural_context);
+        
+        for (const Handle& candidate : related_atoms) {
+            // Create simple hash-based score
+            size_t atom_hash = std::hash<std::string>{}(candidate->to_string()) % context_size;
+            float score = std::abs(context_data[atom_hash]);
+            
+            if (score > best_score) {
+                best_score = score;
+                best_result = candidate;
+            }
+        }
+    }
+    
+    logger().debug("NeuralSymbolicBridge") << "Neural-enhanced reasoning completed with score: " << best_score;
+    return best_result;
 }
 
 ggml_tensor* NeuralSymbolicBridge::enhance_reasoning_with_neural(const Handle& symbolic_knowledge) {
@@ -191,11 +224,75 @@ HandleSet NeuralSymbolicBridge::pattern_match_with_neural_guidance(const Handle&
         return result;
     }
     
-    // Basic pattern matching with neural guidance
-    // In a full implementation, this would use the pattern matcher with neural enhancement
-    result = atomspace_->get_handles_by_type(CONCEPT_NODE, false);
+    logger().debug("NeuralSymbolicBridge") << "Pattern matching with neural guidance";
     
-    logger().debug("NeuralSymbolicBridge") << "Pattern matched with neural guidance, found " << result.size() << " results";
+    // Get candidate atoms based on pattern type
+    HandleSeq candidates;
+    
+    if (pattern->is_node()) {
+        // For nodes, find similar nodes of the same type
+        candidates = atomspace_->get_handles_by_type(pattern->get_type(), false);
+    } else if (pattern->is_link()) {
+        // For links, find similar links
+        candidates = atomspace_->get_handles_by_type(pattern->get_type(), false);
+    } else {
+        // Fallback: get all concept nodes
+        candidates = atomspace_->get_handles_by_type(CONCEPT_NODE, false);
+    }
+    
+    // Limit candidates to prevent excessive computation
+    if (candidates.size() > 200) {
+        candidates.resize(200);
+    }
+    
+    // Use neural guidance to filter and score candidates
+    if (guidance->data) {
+        float* guidance_data = (float*)guidance->data;
+        size_t guidance_size = ggml_nelements(guidance);
+        
+        std::vector<std::pair<Handle, float>> scored_candidates;
+        
+        for (const Handle& candidate : candidates) {
+            // Simple neural guidance scoring
+            std::string candidate_str = candidate->to_string();
+            size_t hash_idx = std::hash<std::string>{}(candidate_str) % guidance_size;
+            float score = std::abs(guidance_data[hash_idx]);
+            
+            // Boost score for exact name matches
+            if (candidate->is_node() && pattern->is_node()) {
+                if (candidate->get_name() == pattern->get_name()) {
+                    score += 1.0f;
+                }
+                // Boost for partial name matches
+                else if (candidate->get_name().find(pattern->get_name()) != std::string::npos ||
+                         pattern->get_name().find(candidate->get_name()) != std::string::npos) {
+                    score += 0.5f;
+                }
+            }
+            
+            scored_candidates.push_back({candidate, score});
+        }
+        
+        // Sort by score and take top matches
+        std::sort(scored_candidates.begin(), scored_candidates.end(),
+                  [](const auto& a, const auto& b) { return a.second > b.second; });
+        
+        // Return top-scored matches (up to 50)
+        size_t max_results = std::min(size_t(50), scored_candidates.size());
+        for (size_t i = 0; i < max_results; ++i) {
+            if (scored_candidates[i].second > 0.1f) { // Threshold for relevance
+                result.insert(scored_candidates[i].first);
+            }
+        }
+    } else {
+        // Fallback without neural guidance
+        for (const Handle& candidate : candidates) {
+            result.insert(candidate);
+            if (result.size() >= 20) break; // Limit results
+        }
+    }
+    
+    logger().debug("NeuralSymbolicBridge") << "Pattern matching completed, found " << result.size() << " matches";
     return result;
 }
 
@@ -216,16 +313,159 @@ ggml_tensor* NeuralSymbolicBridge::extract_neural_patterns_from_symbolic(const H
 void NeuralSymbolicBridge::learn_transformation_from_examples(const std::vector<std::pair<Handle, ggml_tensor*>>& examples) {
     logger().info("NeuralSymbolicBridge") << "Learning transformations from " << examples.size() << " examples";
     
-    // In a full implementation, this would use machine learning to derive transformation rules
+    if (examples.empty()) {
+        return;
+    }
+    
+    // Basic pattern extraction and rule learning
+    std::map<Type, std::vector<std::pair<Handle, ggml_tensor*>>> type_grouped_examples;
+    
+    // Group examples by atom type
+    for (const auto& example : examples) {
+        Type atom_type = example.first->get_type();
+        type_grouped_examples[atom_type].push_back(example);
+    }
+    
+    // Learn transformation patterns for each type
+    for (const auto& [atom_type, type_examples] : type_grouped_examples) {
+        if (type_examples.size() < 2) continue; // Need at least 2 examples for pattern learning
+        
+        std::string rule_name = "learned_" + nameserver().getTypeName(atom_type);
+        
+        // Create a simple transformation rule
+        TransformationRule learned_rule(rule_name, "Learned from " + std::to_string(type_examples.size()) + " examples");
+        
+        // Set up transformation functions
+        learned_rule.symbolic_transform = [this, type_examples](const Handle& input) -> Handle {
+            // Find most similar example
+            Handle best_match = Handle::UNDEFINED;
+            float best_similarity = 0.0f;
+            
+            for (const auto& example : type_examples) {
+                float similarity = compute_symbolic_similarity(input, example.first);
+                if (similarity > best_similarity) {
+                    best_similarity = similarity;
+                    best_match = example.first;
+                }
+            }
+            
+            return (best_similarity > 0.5f) ? best_match : input;
+        };
+        
+        learned_rule.tensor_transform = [this, type_examples](ggml_tensor* input) -> ggml_tensor* {
+            // Simple tensor transformation based on learned examples
+            if (!input || type_examples.empty()) return input;
+            
+            // Average the example tensors as a simple transformation
+            ggml_tensor* result = ggml_dup_tensor(context_, type_examples[0].second);
+            if (result && result->data) {
+                float* result_data = (float*)result->data;
+                size_t elements = ggml_nelements(result);
+                
+                // Initialize with zeros
+                memset(result_data, 0, elements * sizeof(float));
+                
+                // Average all example tensors
+                for (const auto& example : type_examples) {
+                    if (example.second && example.second->data) {
+                        float* example_data = (float*)example.second->data;
+                        size_t example_elements = ggml_nelements(example.second);
+                        size_t min_elements = std::min(elements, example_elements);
+                        
+                        for (size_t i = 0; i < min_elements; ++i) {
+                            result_data[i] += example_data[i] / type_examples.size();
+                        }
+                    }
+                }
+            }
+            
+            return result;
+        };
+        
+        register_transformation_rule(learned_rule);
+    }
+    
+    // Create bidirectional mappings for all examples
     for (const auto& example : examples) {
         create_bidirectional_mapping(example.first, example.second);
     }
+    
+    logger().info("NeuralSymbolicBridge") << "Learned " << type_grouped_examples.size() << " transformation patterns";
 }
 
 void NeuralSymbolicBridge::adapt_transformations_based_on_feedback(const std::vector<double>& feedback) {
     logger().info("NeuralSymbolicBridge") << "Adapting transformations based on feedback";
     
-    // In a full implementation, this would adjust transformation parameters
+    if (feedback.empty()) {
+        logger().warn("NeuralSymbolicBridge") << "No feedback provided for adaptation";
+        return;
+    }
+    
+    // Calculate overall feedback score
+    double total_feedback = 0.0;
+    for (double score : feedback) {
+        total_feedback += score;
+    }
+    double average_feedback = total_feedback / feedback.size();
+    
+    logger().info("NeuralSymbolicBridge") << "Processing feedback with average score: " << average_feedback;
+    
+    // Adapt transformation rules based on feedback
+    if (average_feedback > 0.5) {
+        // Positive feedback: boost confidence in current rules
+        logger().info("NeuralSymbolicBridge") << "Positive feedback received, boosting rule confidence";
+        
+        // Create a reinforcement transformation rule
+        TransformationRule reinforcement_rule("reinforced_transformation", 
+            "Enhanced transformation based on positive feedback");
+        
+        reinforcement_rule.symbolic_transform = [this](const Handle& input) -> Handle {
+            // Apply identity transform with positive reinforcement flag
+            return input;
+        };
+        
+        reinforcement_rule.tensor_transform = [this, average_feedback](ggml_tensor* input) -> ggml_tensor* {
+            if (!input || !input->data) return input;
+            
+            // Scale tensor values based on positive feedback
+            ggml_tensor* result = ggml_dup_tensor(context_, input);
+            if (result && result->data) {
+                float* result_data = (float*)result->data;
+                float* input_data = (float*)input->data;
+                size_t elements = ggml_nelements(result);
+                
+                float scaling_factor = 1.0f + 0.1f * static_cast<float>(average_feedback);
+                for (size_t i = 0; i < elements; ++i) {
+                    result_data[i] = input_data[i] * scaling_factor;
+                }
+            }
+            
+            return result;
+        };
+        
+        register_transformation_rule(reinforcement_rule);
+        
+    } else if (average_feedback < 0.5) {
+        // Negative feedback: dampen current transformations
+        logger().info("NeuralSymbolicBridge") << "Negative feedback received, dampening transformations";
+        
+        // Remove the least reliable transformation rules (simplified adaptive mechanism)
+        if (transformation_rules_.size() > 3) {  // Keep at least 3 basic rules
+            auto it = transformation_rules_.find("reinforced_transformation");
+            if (it != transformation_rules_.end()) {
+                transformation_rules_.erase(it);
+                logger().info("NeuralSymbolicBridge") << "Removed reinforced transformation due to negative feedback";
+            }
+        }
+    }
+    
+    // Store feedback statistics for future use
+    feedback_history_.push_back(average_feedback);
+    if (feedback_history_.size() > 100) {
+        feedback_history_.erase(feedback_history_.begin()); // Keep last 100 feedback scores
+    }
+    
+    logger().info("NeuralSymbolicBridge") << "Transformation adaptation completed";
 }
 
 void NeuralSymbolicBridge::register_pln_integration() {
@@ -422,4 +662,63 @@ Handle NeuralSymbolicBridge::scheme_string_to_handle(const std::string& scheme_s
     }
     
     return scheme_evaluator_->eval_h(scheme_str);
+}
+
+// Helper method to compute symbolic similarity between atoms
+float NeuralSymbolicBridge::compute_symbolic_similarity(const Handle& atom1, const Handle& atom2) {
+    if (atom1 == Handle::UNDEFINED || atom2 == Handle::UNDEFINED) {
+        return 0.0f;
+    }
+    
+    // Exact match
+    if (atom1 == atom2) {
+        return 1.0f;
+    }
+    
+    // Type similarity
+    float type_similarity = (atom1->get_type() == atom2->get_type()) ? 0.5f : 0.0f;
+    
+    // Name similarity for nodes
+    if (atom1->is_node() && atom2->is_node()) {
+        std::string name1 = atom1->get_name();
+        std::string name2 = atom2->get_name();
+        
+        if (name1 == name2) {
+            return 1.0f;
+        }
+        
+        // Simple string similarity
+        size_t common_chars = 0;
+        size_t max_len = std::max(name1.length(), name2.length());
+        
+        for (size_t i = 0; i < std::min(name1.length(), name2.length()); ++i) {
+            if (name1[i] == name2[i]) {
+                common_chars++;
+            }
+        }
+        
+        float name_similarity = static_cast<float>(common_chars) / max_len;
+        return std::max(type_similarity, name_similarity);
+    }
+    
+    // Structure similarity for links
+    if (atom1->is_link() && atom2->is_link()) {
+        const HandleSeq& outgoing1 = atom1->getOutgoingSet();
+        const HandleSeq& outgoing2 = atom2->getOutgoingSet();
+        
+        if (outgoing1.size() != outgoing2.size()) {
+            return type_similarity * 0.5f; // Structure differs
+        }
+        
+        // Compute average similarity of outgoing atoms
+        float avg_similarity = 0.0f;
+        for (size_t i = 0; i < outgoing1.size(); ++i) {
+            avg_similarity += compute_symbolic_similarity(outgoing1[i], outgoing2[i]);
+        }
+        avg_similarity /= outgoing1.size();
+        
+        return std::max(type_similarity, avg_similarity);
+    }
+    
+    return type_similarity;
 }

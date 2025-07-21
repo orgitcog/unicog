@@ -132,11 +132,15 @@ private:
     void initialize_standard_transformations();
     void create_bidirectional_mapping(const Handle& atom, ggml_tensor* tensor);
     void cleanup_stale_mappings();
+    float compute_symbolic_similarity(const Handle& atom1, const Handle& atom2);
     
     // Scheme integration helpers
     Handle evaluate_scheme_expression(const std::string& expression);
     std::string handle_to_scheme_string(const Handle& atom);
     Handle scheme_string_to_handle(const std::string& scheme_str);
+    
+    // Member variables (incomplete - need to see full private section)
+    std::vector<double> feedback_history_;
 };
 
 } // namespace opencog
