@@ -4,58 +4,57 @@
     "agents_created": 10,
     "messages_sent": 200,
     "messages_received": 200,
-    "latency_ms": 100.07810592651367,
+    "latency_ms": 100.08096694946289,
     "success": true
   },
   "ecan_allocation": {
     "test_name": "ecan_allocation",
     "agents_registered": 25,
     "resource_cycles": 10,
-    "fairness_score": 0.9220916115594525,
-    "efficiency_score": 0.8502676918975238,
+    "fairness_score": 0.9095237171386266,
+    "efficiency_score": 0.8541113361317298,
     "success": true
   },
   "tensor_protocol": {
     "test_name": "tensor_protocol",
     "messages_processed": 100,
-    "compression_ratio": 0.42675332330381055,
-    "throughput_msg_per_sec": 940.0475144560492,
-    "tensor_size_avg": 564,
+    "compression_ratio": 0.3378233226964881,
+    "throughput_msg_per_sec": 940.030659721911,
+    "tensor_size_avg": 573,
     "success": true
   },
   "atomspace_sync": {
     "test_name": "atomspace_sync",
     "atoms_synchronized": 500,
-    "sync_latency_ms": 50.11391639709473,
-    "consistency_score": 0.8716100959879844,
-    "conflicts_resolved": 10,
+    "sync_latency_ms": 50.08554458618164,
+    "consistency_score": 0.8626542451011824,
+    "conflicts_resolved": 16,
     "success": true
   },
   "large_scale_stress": {
     "test_name": "large_scale_stress",
     "max_agents": 150,
-    "total_operations": 15600,
-    "peak_throughput": 879.4857906203979,
-    "memory_usage_mb": 321.4207123345245,
-    "stability_score": 0.9491795360299844,
+    "total_operations": 18600,
+    "peak_throughput": 1040.265372238172,
+    "memory_usage_mb": 215.21832144187462,
+    "stability_score": 0.9554316809133091,
     "success": true
   },
   "fairness_emergence": {
     "test_name": "fairness_emergence",
-    "gini_coefficient": 0.32467133357216765,
-    "self_organization_index": 0.8623514840367664,
-    "collective_intelligence": 0.7384452165756514,
-    "adaptation_rate": 0.7247337732971906,
+    "gini_coefficient": 0.20083832749878627,
+    "self_organization_index": 0.745043773774912,
+    "collective_intelligence": 0.8276680819913594,
+    "adaptation_rate": 0.51585683933478,
     "emergent_patterns": [
-      "swarm_behavior",
       "dynamic_coalitions"
     ],
     "success": true
   },
   "fault_tolerance": {
     "test_name": "fault_tolerance",
-    "agents_failed": 7,
-    "recovery_time_ms": 30.095577239990234,
+    "agents_failed": 5,
+    "recovery_time_ms": 30.112266540527344,
     "data_consistency_maintained": true,
     "graceful_degradation": true,
     "success": true
