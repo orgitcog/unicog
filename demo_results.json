@@ -1,14 +1,15 @@
 {
-  "overall_score": 4.306456278463208,
+  "overall_score": 4.354830320040365,
   "patterns": [
     "Resource convergence - agents self-organizing resource allocation",
+    "Collective learning - system intelligence increasing over time",
     "Fairness stabilization - economic balance self-maintaining",
     "Emergent synchronization - distributed consensus emerging naturally"
   ],
   "final_metrics": {
     "fairness": 11.3584,
-    "collective_intelligence": 0.6453605921482537,
-    "sync_success": 0.9059459737997673
+    "collective_intelligence": 0.7754962415534308,
+    "sync_success": 0.8798959074534078
   },
   "agent_count": 25
 }
