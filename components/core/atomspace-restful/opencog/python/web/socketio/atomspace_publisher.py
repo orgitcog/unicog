@@ -92,7 +92,9 @@ class Application(object):
             start_response('200 OK', [('Content-Type', content_type)])
             return [data]
 
-        if path.startswith("socket.io"):
+        from urllib.parse import urlparse
+        parsed_path = urlparse(path).path
+        if parsed_path == "/socket.io":
             socketio_manage(environ, {'/atomspace': AtomSpaceNamespace})
         else:
             return not_found(start_response)
