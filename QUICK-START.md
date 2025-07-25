@@ -155,7 +155,7 @@ cat component-config.json | jq '.integration_phases'
 
 ### Common Issues
 
-#### Missing Dependencies
+#### Component Issues
 ```bash
 # Check what's missing
 ./validate-integration.py --phase 1 | grep "missing"
@@ -173,15 +173,14 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug
 make -j1 VERBOSE=1  # Single threaded with verbose output
 ```
 
-#### Submodule Issues
+#### Monorepo Integration Issues
 ```bash
-# Initialize and update submodules
-git submodule init
-git submodule update --recursive
+# Re-integrate a component if needed
+rm -rf components/category/component
+./integrate-components.sh 1  # or specific phase
 
-# Reset submodules if corrupted
-git submodule deinit --all
-git submodule update --init --recursive
+# Verify components are properly integrated
+ls -la components/*/  # Should show folders without .git directories
 ```
 
 #### Integration Script Issues
@@ -310,5 +309,5 @@ Integration: opencog (final)
 For issues or questions:
 1. Check validation output: `./validate-integration.py`
 2. Review integration logs in script output
-3. Check component-specific documentation in each submodule
+3. Check component-specific documentation in each integrated component folder
 4. Refer to the detailed DEVELOPMENT-ROADMAP.md for context

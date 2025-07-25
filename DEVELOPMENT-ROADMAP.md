@@ -63,7 +63,8 @@ Integration:        opencog (final integration)
 #### Tasks
 - [ ] **Day 1**: Clone atomspace-rocks repository
   ```bash
-  git submodule add https://github.com/opencog/atomspace-rocks.git atomspace-rocks
+  git clone https://github.com/opencog/atomspace-rocks.git atomspace-rocks
+  rm -rf atomspace-rocks/.git
   ```
 - [ ] **Day 2**: Analyze build dependencies and requirements
 - [ ] **Day 3**: Integrate into CMakeLists.txt with atomspace dependency
@@ -415,11 +416,12 @@ Integration:        opencog (final integration)
 
 ### Repository Management
 ```bash
-# Create submodules directory structure
+# Create components directory structure
 mkdir -p components/{core,logic,cognitive,advanced,language}
 
-# Clone strategy with submodules
-git submodule add <repo-url> components/<category>/<component>
+# Monorepo clone strategy
+git clone <repo-url> components/<category>/<component>
+rm -rf components/<category>/<component>/.git
 
 # Unified CMakeLists.txt integration
 foreach(component ${OPENCOG_COMPONENTS})
@@ -527,7 +529,7 @@ tests/
    - **Mitigation**: Performance profiling, optimization phases
 
 ### Contingency Plans
-- **Rollback Strategy**: Git submodule structure allows component rollback
+- **Rollback Strategy**: Monorepo structure allows component rollback via git revision control
 - **Alternative Implementations**: Stub implementations for problematic components
 - **Phased Deployment**: Can deploy partial integrations for early feedback
 

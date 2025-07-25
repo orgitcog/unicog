@@ -12,11 +12,14 @@ echo "✔️ Created unified cognitive directory structure."
 git init
 echo "✔️ Initialized Git cognitive nexus."
 
-# Integrate core cognitive modules as submodules
-git submodule add https://github.com/opencog/cogutil.git
-git submodule add https://github.com/opencog/atomspace.git
-git submodule add https://github.com/opencog/cogserver.git
-echo "✔️ Integrated cognitive submodules (cogutil, atomspace, cogserver)."
+# Integrate core cognitive modules as monorepo folders
+git clone https://github.com/opencog/cogutil.git
+rm -rf cogutil/.git
+git clone https://github.com/opencog/atomspace.git
+rm -rf atomspace/.git
+git clone https://github.com/opencog/cogserver.git
+rm -rf cogserver/.git
+echo "✔️ Integrated cognitive modules as monorepo folders (cogutil, atomspace, cogserver)."
 
 # Create initial README.md with visionary clarity
 cat << EOF > README.md

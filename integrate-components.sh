@@ -83,10 +83,13 @@ clone_component() {
         return 0
     fi
     
-    git submodule add "${REPOS_BASE_URL}/${component}.git" "$target_dir"
+    # Monorepo approach: clone and integrate as folder
+    git clone "${REPOS_BASE_URL}/${component}.git" "$target_dir"
     
     if [ $? -eq 0 ]; then
-        log_success "Successfully cloned ${component}"
+        # Remove .git directory to integrate as monorepo folder
+        rm -rf "$target_dir/.git"
+        log_success "Successfully cloned and integrated ${component} as monorepo folder"
         return 0
     else
         log_error "Failed to clone ${component}"
