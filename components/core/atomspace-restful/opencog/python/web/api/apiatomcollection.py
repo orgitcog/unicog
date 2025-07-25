@@ -275,7 +275,8 @@ class AtomCollectionAPI(Resource):
         try:
            retval = self._get(id=id)
         except Exception as e:
-           retval = jsonify({'error':str(e)})
+           current_app.logger.error(f"Exception occurred: {str(e)}")
+           retval = jsonify({'error': 'An internal error has occurred'})
         return retval
 
     def _get(self, id=""):
