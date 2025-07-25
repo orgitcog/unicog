@@ -1,0 +1,432 @@
+{
+  "timestamp": 1753427189.7209828,
+  "validations": {
+    "directory_structure": {
+      "status": "invalid"
+    },
+    "phase_1": {
+      "phase": 1,
+      "components": [
+        "atomspace-rocks",
+        "atomspace-restful",
+        "moses"
+      ],
+      "validations": {
+        "atomspace-rocks": {
+          "dependencies": {
+            "component": "atomspace-rocks",
+            "dependencies": [
+              "atomspace"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "atomspace-rocks",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "atomspace-restful": {
+          "dependencies": {
+            "component": "atomspace-restful",
+            "dependencies": [
+              "atomspace"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "atomspace-restful",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "moses": {
+          "dependencies": {
+            "component": "moses",
+            "dependencies": [
+              "cogutil"
+            ],
+            "satisfied": [
+              {
+                "dependency": "cogutil",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/cogutil"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "moses",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        }
+      },
+      "status": "invalid"
+    },
+    "phase_2": {
+      "phase": 2,
+      "components": [
+        "unify",
+        "ure",
+        "language-learning"
+      ],
+      "validations": {
+        "unify": {
+          "dependencies": {
+            "component": "unify",
+            "dependencies": [
+              "atomspace"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "unify",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "ure": {
+          "dependencies": {
+            "component": "ure",
+            "dependencies": [
+              "atomspace",
+              "unify"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [
+              "unify"
+            ],
+            "status": "missing_dependencies"
+          },
+          "cmake": {
+            "component": "ure",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "language-learning": {
+          "dependencies": {
+            "component": "language-learning",
+            "dependencies": [
+              "cogutil"
+            ],
+            "satisfied": [
+              {
+                "dependency": "cogutil",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/cogutil"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "language-learning",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        }
+      },
+      "status": "invalid"
+    },
+    "phase_3": {
+      "phase": 3,
+      "components": [
+        "attention",
+        "spacetime"
+      ],
+      "validations": {
+        "attention": {
+          "dependencies": {
+            "component": "attention",
+            "dependencies": [
+              "atomspace",
+              "cogserver"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              },
+              {
+                "dependency": "cogserver",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/cogserver"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "attention",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "spacetime": {
+          "dependencies": {
+            "component": "spacetime",
+            "dependencies": [
+              "atomspace"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "spacetime",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        }
+      },
+      "status": "invalid"
+    },
+    "phase_4": {
+      "phase": 4,
+      "components": [
+        "pln",
+        "miner",
+        "asmoses"
+      ],
+      "validations": {
+        "pln": {
+          "dependencies": {
+            "component": "pln",
+            "dependencies": [
+              "atomspace",
+              "ure",
+              "spacetime"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [
+              "ure",
+              "spacetime"
+            ],
+            "status": "missing_dependencies"
+          },
+          "cmake": {
+            "component": "pln",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "miner": {
+          "dependencies": {
+            "component": "miner",
+            "dependencies": [
+              "atomspace",
+              "ure"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [
+              "ure"
+            ],
+            "status": "missing_dependencies"
+          },
+          "cmake": {
+            "component": "miner",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "asmoses": {
+          "dependencies": {
+            "component": "asmoses",
+            "dependencies": [
+              "atomspace",
+              "ure"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [
+              "ure"
+            ],
+            "status": "missing_dependencies"
+          },
+          "cmake": {
+            "component": "asmoses",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        }
+      },
+      "status": "invalid"
+    },
+    "phase_5": {
+      "phase": 5,
+      "components": [
+        "lg-atomese",
+        "learn",
+        "opencog"
+      ],
+      "validations": {
+        "lg-atomese": {
+          "dependencies": {
+            "component": "lg-atomese",
+            "dependencies": [
+              "atomspace"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "lg-atomese",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "learn": {
+          "dependencies": {
+            "component": "learn",
+            "dependencies": [
+              "atomspace",
+              "cogserver"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              },
+              {
+                "dependency": "cogserver",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/cogserver"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "learn",
+            "cmake_file_exists": false,
+            "integrated_in_main": false,
+            "status": "not_integrated"
+          }
+        },
+        "opencog": {
+          "dependencies": {
+            "component": "opencog",
+            "dependencies": [
+              "atomspace",
+              "cogserver",
+              "attention",
+              "ure",
+              "lg-atomese"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              },
+              {
+                "dependency": "cogserver",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/cogserver"
+              }
+            ],
+            "missing": [
+              "attention",
+              "ure",
+              "lg-atomese"
+            ],
+            "status": "missing_dependencies"
+          },
+          "cmake": {
+            "component": "opencog",
+            "cmake_file_exists": false,
+            "integrated_in_main": true,
+            "status": "not_integrated"
+          }
+        }
+      },
+      "status": "invalid"
+    },
+    "build": {
+      "build_attempted": true,
+      "build_successful": false,
+      "cmake_successful": false,
+      "errors": [
+        "CMake failed: CMake Warning (dev) at cogutil/CMakeLists.txt:97 (FIND_PACKAGE):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning at cogutil/CMakeLists.txt:121 (FIND_PACKAGE):\n  By not providing \"FindCxxtest.cmake\" in CMAKE_MODULE_PATH this project has\n  asked CMake to find a package configuration file provided by \"Cxxtest\", but\n  CMake did not find one.\n\n  Could not find a package configuration file provided by \"Cxxtest\" with any\n  of the following names:\n\n    CxxtestConfig.cmake\n    cxxtest-config.cmake\n\n  Add the installation prefix of \"Cxxtest\" to CMAKE_PREFIX_PATH or set\n  \"Cxxtest_DIR\" to a directory containing one of the above files.  If\n  \"Cxxtest\" provides a separate development package or SDK, be sure it has\n  been installed.\n\n\nCMake Warning at cogutil/CMakeLists.txt:128 (FIND_PACKAGE):\n  By not providing \"FindGNUBacktrace.cmake\" in CMAKE_MODULE_PATH this project\n  has asked CMake to find a package configuration file provided by\n  \"GNUBacktrace\", but CMake did not find one.\n\n  Could not find a package configuration file provided by \"GNUBacktrace\" with\n  any of the following names:\n\n    GNUBacktraceConfig.cmake\n    gnubacktrace-config.cmake\n\n  Add the installation prefix of \"GNUBacktrace\" to CMAKE_PREFIX_PATH or set\n  \"GNUBacktrace_DIR\" to a directory containing one of the above files.  If\n  \"GNUBacktrace\" provides a separate development package or SDK, be sure it\n  has been installed.\n\n\nCMake Warning at cogutil/CMakeLists.txt:137 (FIND_PACKAGE):\n  By not providing \"FindBFD.cmake\" in CMAKE_MODULE_PATH this project has\n  asked CMake to find a package configuration file provided by \"BFD\", but\n  CMake did not find one.\n\n  Could not find a package configuration file provided by \"BFD\" with any of\n  the following names:\n\n    BFDConfig.cmake\n    bfd-config.cmake\n\n  Add the installation prefix of \"BFD\" to CMAKE_PREFIX_PATH or set \"BFD_DIR\"\n  to a directory containing one of the above files.  If \"BFD\" provides a\n  separate development package or SDK, be sure it has been installed.\n\n\nCMake Warning at cogutil/CMakeLists.txt:147 (FIND_PACKAGE):\n  By not providing \"FindIberty.cmake\" in CMAKE_MODULE_PATH this project has\n  asked CMake to find a package configuration file provided by \"Iberty\", but\n  CMake did not find one.\n\n  Could not find a package configuration file provided by \"Iberty\" with any\n  of the following names:\n\n    IbertyConfig.cmake\n    iberty-config.cmake\n\n  Add the installation prefix of \"Iberty\" to CMAKE_PREFIX_PATH or set\n  \"Iberty_DIR\" to a directory containing one of the above files.  If \"Iberty\"\n  provides a separate development package or SDK, be sure it has been\n  installed.\n\n\nCMake Warning at cogutil/CMakeLists.txt:157 (FIND_PACKAGE):\n  By not providing \"FindParallelSTL.cmake\" in CMAKE_MODULE_PATH this project\n  has asked CMake to find a package configuration file provided by\n  \"ParallelSTL\", but CMake did not find one.\n\n  Could not find a package configuration file provided by \"ParallelSTL\" with\n  any of the following names:\n\n    ParallelSTLConfig.cmake\n    parallelstl-config.cmake\n\n  Add the installation prefix of \"ParallelSTL\" to CMAKE_PREFIX_PATH or set\n  \"ParallelSTL_DIR\" to a directory containing one of the above files.  If\n  \"ParallelSTL\" provides a separate development package or SDK, be sure it\n  has been installed.\n\n\n\nBuilding for Ubuntu 24.04.2 LTS\n\nThe following components WILL NOT be built:\n-----------------------------------------------\n   Boost       - Components requiring Boost.\n   Doxygen     - Code documentation.\n   StackPrint  - Pretty printing of stack traces.\n   Unit tests  - Unit tests.\n   Util        - General utility library.\n\nCMake Error at atomspace/CMakeLists.txt:88 (MESSAGE):\n  CogUtil missing: it is needed!\n\n\n"
+      ],
+      "status": "cmake_failed"
+    },
+    "integration_tests": {
+      "tests_found": [],
+      "tests_run": [],
+      "tests_passed": [],
+      "tests_failed": [],
+      "status": "no_tests_found"
+    }
+  },
+  "summary": {
+    "total_phases": 5,
+    "phases_valid": 0,
+    "build_status": "cmake_failed",
+    "test_status": "no_tests_found",
+    "overall_status": "poor"
+  },
+  "errors": [
+    "Missing directories: ['components/core', 'components/logic', 'components/cognitive', 'components/advanced', 'components/learning', 'components/language', 'components/integration', 'tests/integration', 'tests/performance', 'tests/end_to_end']"
+  ]
+}

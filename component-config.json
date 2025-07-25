@@ -1,0 +1,283 @@
+{
+  "opencog_unified_components": {
+    "metadata": {
+      "version": "1.0.0",
+      "created": "2024",
+      "description": "OpenCog Unified component integration configuration"
+    },
+    
+    "foundation_layer": {
+      "cogutil": {
+        "status": "present",
+        "repository": "https://github.com/opencog/cogutil",
+        "dependencies": [],
+        "category": "foundation",
+        "priority": "critical",
+        "integration_phase": 0
+      }
+    },
+    
+    "core_layer": {
+      "atomspace": {
+        "status": "present", 
+        "repository": "https://github.com/opencog/atomspace",
+        "dependencies": ["cogutil"],
+        "category": "core",
+        "priority": "critical",
+        "integration_phase": 0
+      },
+      "atomspace-rocks": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/atomspace-rocks",
+        "dependencies": ["atomspace"],
+        "category": "core",
+        "priority": "high",
+        "integration_phase": 1,
+        "description": "RocksDB storage backend for AtomSpace"
+      },
+      "atomspace-restful": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/atomspace-restful", 
+        "dependencies": ["atomspace"],
+        "category": "core",
+        "priority": "high",
+        "integration_phase": 1,
+        "description": "RESTful API for AtomSpace operations"
+      },
+      "cogserver": {
+        "status": "present",
+        "repository": "https://github.com/opencog/cogserver",
+        "dependencies": ["atomspace"],
+        "category": "core", 
+        "priority": "critical",
+        "integration_phase": 0
+      }
+    },
+    
+    "logic_layer": {
+      "unify": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/unify",
+        "dependencies": ["atomspace"],
+        "category": "logic",
+        "priority": "high",
+        "integration_phase": 2,
+        "description": "Pattern matching and unification algorithms"
+      },
+      "ure": {
+        "status": "pending", 
+        "repository": "https://github.com/opencog/ure",
+        "dependencies": ["atomspace", "unify"],
+        "category": "logic",
+        "priority": "high", 
+        "integration_phase": 2,
+        "description": "Unified Rule Engine for forward/backward chaining"
+      }
+    },
+    
+    "cognitive_systems_layer": {
+      "attention": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/attention",
+        "dependencies": ["atomspace", "cogserver"],
+        "category": "cognitive",
+        "priority": "high",
+        "integration_phase": 3,
+        "description": "Economic Attention Networks (ECAN) implementation"
+      },
+      "spacetime": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/spacetime", 
+        "dependencies": ["atomspace"],
+        "category": "cognitive",
+        "priority": "medium",
+        "integration_phase": 3,
+        "description": "Spatial and temporal reasoning capabilities"
+      }
+    },
+    
+    "advanced_systems_layer": {
+      "pln": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/pln",
+        "dependencies": ["atomspace", "ure", "spacetime"],
+        "category": "advanced",
+        "priority": "high",
+        "integration_phase": 4,
+        "description": "Probabilistic Logic Networks for uncertain reasoning"
+      },
+      "miner": {
+        "status": "pending", 
+        "repository": "https://github.com/opencog/miner",
+        "dependencies": ["atomspace", "ure"],
+        "category": "advanced",
+        "priority": "medium",
+        "integration_phase": 4,
+        "description": "Pattern mining and knowledge discovery"
+      }
+    },
+    
+    "learning_systems_layer": {
+      "moses": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/moses",
+        "dependencies": ["cogutil"],
+        "category": "learning",
+        "priority": "medium", 
+        "integration_phase": 1,
+        "description": "Meta-Optimizing Semantic Evolutionary Search"
+      },
+      "asmoses": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/asmoses",
+        "dependencies": ["atomspace", "ure"],
+        "category": "learning",
+        "priority": "medium",
+        "integration_phase": 4,
+        "description": "AtomSpace MOSES for program evolution"
+      }
+    },
+    
+    "language_processing_layer": {
+      "lg-atomese": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/lg-atomese", 
+        "dependencies": ["atomspace"],
+        "category": "language",
+        "priority": "high",
+        "integration_phase": 5,
+        "description": "Link Grammar to Atomese conversion"
+      },
+      "learn": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/learn",
+        "dependencies": ["atomspace", "cogserver"],
+        "category": "language",
+        "priority": "high",
+        "integration_phase": 5,
+        "description": "Unsupervised language learning"
+      },
+      "language-learning": {
+        "status": "pending", 
+        "repository": "https://github.com/opencog/language-learning",
+        "dependencies": ["cogutil"],
+        "category": "language",
+        "priority": "medium",
+        "integration_phase": 2,
+        "description": "Language learning algorithms and tools"
+      }
+    },
+    
+    "integration_layer": {
+      "opencog": {
+        "status": "pending",
+        "repository": "https://github.com/opencog/opencog",
+        "dependencies": ["atomspace", "cogserver", "attention", "ure", "lg-atomese"],
+        "category": "integration",
+        "priority": "critical",
+        "integration_phase": 5,
+        "description": "Main OpenCog integration and examples"
+      }
+    }
+  },
+  
+  "integration_phases": {
+    "phase_1": {
+      "name": "Core Extensions",
+      "weeks": "1-4",
+      "components": ["atomspace-rocks", "atomspace-restful", "moses"],
+      "focus": "Storage backends, REST API, and basic learning",
+      "success_criteria": [
+        "RocksDB storage functional",
+        "REST API endpoints working", 
+        "MOSES optimization algorithms operational"
+      ]
+    },
+    "phase_2": {
+      "name": "Logic Systems", 
+      "weeks": "5-8",
+      "components": ["unify", "ure", "language-learning"],
+      "focus": "Pattern matching, rule engines, and language processing",
+      "success_criteria": [
+        "Pattern unification working",
+        "Rule engine executing properly",
+        "Language learning algorithms functional"
+      ]
+    },
+    "phase_3": {
+      "name": "Cognitive Systems",
+      "weeks": "9-12", 
+      "components": ["attention", "spacetime"],
+      "focus": "Attention allocation and spatial-temporal reasoning",
+      "success_criteria": [
+        "ECAN attention spreading working",
+        "Spatial reasoning operational",
+        "Temporal sequence processing functional"
+      ]
+    },
+    "phase_4": {
+      "name": "Advanced & Learning",
+      "weeks": "13-16",
+      "components": ["pln", "miner", "asmoses"],
+      "focus": "Probabilistic reasoning, pattern mining, program evolution",
+      "success_criteria": [
+        "PLN uncertain reasoning working",
+        "Pattern mining discovering knowledge",
+        "Program evolution generating solutions"
+      ]
+    },
+    "phase_5": {
+      "name": "Language & Integration",
+      "weeks": "17-20",
+      "components": ["lg-atomese", "learn", "opencog"],
+      "focus": "Language processing and final system integration",
+      "success_criteria": [
+        "Link Grammar parsing functional",
+        "Unsupervised learning working",
+        "Complete OpenCog stack operational"
+      ]
+    }
+  },
+  
+  "build_requirements": {
+    "cmake_minimum": "3.10",
+    "cpp_standard": "17",
+    "boost_minimum": "1.60", 
+    "python_minimum": "3.7",
+    "guile_minimum": "2.2",
+    "additional_libraries": [
+      "RocksDB (for atomspace-rocks)",
+      "HTTP/REST libraries (for atomspace-restful)",
+      "Link Grammar library (for lg-atomese)"
+    ]
+  },
+  
+  "testing_strategy": {
+    "unit_tests": "Component-specific functionality testing",
+    "integration_tests": "Cross-component interaction testing", 
+    "performance_tests": "Scalability and speed benchmarking",
+    "end_to_end_tests": "Complete workflow validation",
+    "regression_tests": "Ensure no functionality loss during integration"
+  },
+  
+  "validation_checkpoints": {
+    "after_each_component": [
+      "Successful build integration",
+      "All existing tests still pass",
+      "New component tests pass",
+      "Dependencies properly resolved"
+    ],
+    "after_each_phase": [
+      "Phase-specific functionality working",
+      "Cross-component integration validated", 
+      "Performance benchmarks met",
+      "Documentation updated"
+    ],
+    "final_validation": [
+      "All 14 components integrated",
+      "End-to-end cognitive workflows functional",
+      "System performance acceptable",
+      "Complete documentation available"
+    ]
+  }
+}
