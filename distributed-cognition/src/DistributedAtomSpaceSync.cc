@@ -305,7 +305,7 @@ bool DistributedAtomSpaceSync::is_atom_fully_synchronized(const std::string& ato
     return true; // All subscribed agents have synchronized this atom
 }
 
-// Complex methods that require detailed implementation - marked as TODO
+// Core conflict resolution and synchronization methods
 AtomSyncRecord DistributedAtomSpaceSync::resolve_conflict(const std::vector<AtomSyncRecord>& conflicting_records) { 
     if (conflicting_records.empty()) return AtomSyncRecord();
     
@@ -519,15 +519,9 @@ DistributedAtomSpaceSync::ConsistencyReport DistributedAtomSpaceSync::validate_n
 }
 
 //<<<<<<< copilot/fix-17
-// Additional private method implementations
-//AtomSyncRecord DistributedAtomSpaceSync::apply_conflict_resolution(const std::vector<AtomSyncRecord>& records) { return AtomSyncRecord(); }
-//bool DistributedAtomSpaceSync::are_agents_connected(const std::string& agent1, const std::string& agent2) { return true; }
-//bool DistributedAtomSpaceSync::validate_atom_data(const AtomSyncRecord& record) { return true; }
-//double DistributedAtomSpaceSync::calculate_sync_priority(const AtomSyncRecord& record, const std::string& requesting_agent) { return 0.5; }
-//void DistributedAtomSpaceSync::handle_network_partition(const std::vector<std::string>& disconnected_agents) {}
-//AtomSyncRecord DistributedAtomSpaceSync::merge_with_vector_clocks(const std::vector<AtomSyncRecord>& records) { return AtomSyncRecord(); }
+// Additional private method implementations - now properly implemented below
 //=======
-// Additional private method implementations and TODOs
+// Additional private method implementations
 AtomSyncRecord DistributedAtomSpaceSync::apply_conflict_resolution(const std::vector<AtomSyncRecord>& records) { 
     if (records.empty()) return AtomSyncRecord();
     

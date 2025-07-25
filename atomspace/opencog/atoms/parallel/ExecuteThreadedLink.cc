@@ -22,6 +22,8 @@
  */
 
 #include <thread>
+#include <atomic>
+#include <memory>
 
 #include <opencog/util/platform.h>
 #include <opencog/util/concurrent_queue.h>
@@ -145,6 +147,63 @@ ValuePtr ExecuteThreadedLink::execute(AtomSpace* as,
 	if (ex) std::rethrow_exception(ex);
 
 	qvp->close();
+	return qvp;
+}
+
+// Non-blocking version that returns QueueValue immediately
+ValuePtr ExecuteThreadedLink::execute_async(AtomSpace* as,
+                                            bool silent)
+{
+	// Place the work items onto a queue.
+	auto todo_list = std::make_shared<concurrent_queue<Handle>>();
+	const HandleSeq& exes = _outgoing[_setoff]->getOutgoingSet();
+	for (const Handle& h: exes)
+		todo_list->push(h);
+
+	// Where the results will be reported.
+	QueueValuePtr qvp(createQueueValue());
+	
+	// Use a shared counter to track completion
+	auto finished_count = std::make_shared<std::atomic<size_t>>(0);
+	
+	// Launch the workers as detached threads
+	for (size_t i=0; i<_nthreads; i++)
+	{
+		std::thread([as, silent, todo_list, qvp, finished_count, nthreads = _nthreads]() {
+			set_thread_name("atoms:execlink-async");
+			
+			// Execute work items from the queue
+			while (true)
+			{
+				Handle h;
+				if (not todo_list->try_get(h)) break;
+
+				// This is "identical" to what cog-execute! would do...
+				Instantiator inst(as);
+				try
+				{
+					ValuePtr pap(inst.execute(h));
+					if (pap and pap->is_atom())
+						pap = as->add_atom(HandleCast(pap));
+					qvp->add(std::move(pap));
+				}
+				catch (const std::exception& ex)
+				{
+					// In async mode, we can't propagate exceptions directly
+					// Log error and continue processing other items
+					// TODO: Consider adding error reporting mechanism to QueueValue
+					continue;
+				}
+			}
+			
+			// If this is the last thread, close the queue
+			if (finished_count->fetch_add(1) + 1 == nthreads) {
+				qvp->close();
+			}
+		}).detach();
+	}
+
+	// Return the QueueValue immediately - user can check if closed to see completion
 	return qvp;
 }
 

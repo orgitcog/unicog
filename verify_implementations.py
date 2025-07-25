@@ -336,7 +336,7 @@ class ImplementationVerifier:
 - **Verified implementations**: {results['verified_implementations']}
 - **Remaining TODOs**: {results['remaining_todos']}
 - **Placeholder implementations**: {results['placeholder_implementations']}
-- **Implementation completion**: {(results['verified_implementations'] / results['total_items'] * 100):.1f}%
+- **Implementation completion**: {(results['verified_implementations'] / max(results['total_items'], 1) * 100):.1f}%
 
 ## Category Breakdown
 """

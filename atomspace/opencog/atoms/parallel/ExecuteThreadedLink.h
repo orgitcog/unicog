@@ -47,7 +47,10 @@ public:
 
 	virtual bool is_executable() const { return true; }
 	virtual ValuePtr execute(AtomSpace*, bool);
-
+	
+	// Non-blocking version that returns QueueValue immediately
+	virtual ValuePtr execute_async(AtomSpace*, bool);
+	
 	static Handle factory(const Handle&);
 };
 
