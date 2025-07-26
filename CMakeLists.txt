@@ -76,10 +76,45 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/agentic-kernels-catalog/CMakeLists.txt")
     add_subdirectory(agentic-kernels-catalog)
 endif()
 
+# Phase II: Logic Systems Integration (Weeks 5-8)
+# Add unify if it exists and has CMakeLists.txt (depends on atomspace)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unify/CMakeLists.txt")
+    add_subdirectory(unify)
+endif()
+
+# Add ure (Unified Rule Engine) if it exists and has CMakeLists.txt (depends on unify)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ure/CMakeLists.txt")
+    add_subdirectory(ure)
+endif()
+
+# Add language-learning if it exists and has CMakeLists.txt (depends on cogutil)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/language-learning/CMakeLists.txt")
+    add_subdirectory(language-learning)
+endif()
+
 # Global cognitive build targets
 add_custom_target(cognitive ALL DEPENDS cogutil atomspace cogserver)
 
-# Add comprehensive target that includes agentic catalog
+# Phase II Logic Systems target
+add_custom_target(logic-systems
+    COMMENT "Building Phase II logic systems components"
+)
+
+# Add dependencies for logic systems if targets exist
+if(TARGET unify)
+    add_dependencies(logic-systems unify)
+    add_dependencies(unify atomspace)
+endif()
+if(TARGET ure)
+    add_dependencies(logic-systems ure)
+    add_dependencies(ure unify)
+endif()
+if(TARGET language-learning)
+    add_dependencies(logic-systems language-learning)
+    add_dependencies(language-learning cogutil)
+endif()
+
+# Add comprehensive target that includes agentic catalog and logic systems
 add_custom_target(cognitive-complete 
-    DEPENDS cognitive agentic-kernels-catalog
-    COMMENT "Building complete cognitive system with agentic kernels catalog")
+    DEPENDS cognitive agentic-kernels-catalog logic-systems
+    COMMENT "Building complete cognitive system with agentic kernels catalog and logic systems")
