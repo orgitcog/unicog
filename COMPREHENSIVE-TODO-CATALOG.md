@@ -2576,7 +2576,7 @@ A section for emergent TODOs.
 ### Persistence Subsystem
 *Total items: 162*
 
-- [ ] **atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82** (CRITICAL, Feature Completion)
+- [x] **atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82** (CRITICAL, Feature Completion)
   - `* XXX FIXME This needs to be fuzzed; it is very likely to crash`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc#L82)
 
@@ -3430,6 +3430,19 @@ A section for emergent TODOs.
 **TODOs Resolved:** 0  
 **TODOs In Progress:** 10  
 **Total Remaining:** 815
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 4  
+**Last Run:** 2025-07-28T03:10:49.262638  
+**TODOs Resolved:** 1  
+**TODOs In Progress:** 14  
+**Total Remaining:** 810
 
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 
