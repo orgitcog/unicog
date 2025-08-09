@@ -1,9 +1,0 @@
-[submodule "unify"]
-	path = unify
-	url = https://github.com/opencog/unify.git
-[submodule "ure"]
-	path = ure
-	url = https://github.com/opencog/ure.git
-[submodule "language-learning"]
-	path = language-learning
-	url = https://github.com/opencog/language-learning.git
