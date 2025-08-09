@@ -183,7 +183,7 @@ ENDIF (VALGRIND_FOUND)
 # NOTE: This is the official semantic-version, as it is derived from
 # a version-control independent means of declaring versioning.
 #
-FILE(READ "${CMAKE_SOURCE_DIR}/opencog/atomspace/version.h" _ATOMSPACE_H_CONTENTS)
+FILE(READ "${CMAKE_CURRENT_SOURCE_DIR}/opencog/atomspace/version.h" _ATOMSPACE_H_CONTENTS)
 STRING(REGEX MATCH
 	"#define ATOMSPACE_VERSION_STRING \"([0-9]+[.0-9]+[.0-9]+)\""
         _ "${_ATOMSPACE_H_CONTENTS}")
@@ -197,12 +197,12 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${CMAKE_BINARY_DIR}
 	${COGUTIL_INCLUDE_DIR})
 
 # Macros that define how atom types get declared.
-INCLUDE("${CMAKE_SOURCE_DIR}/cmake/OpenCogAtomTypes.cmake")
+INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/OpenCogAtomTypes.cmake")
 
 # Macros for building language-specific objects.
-INCLUDE("${CMAKE_SOURCE_DIR}/cmake/OpenCogCython.cmake")
-INCLUDE("${CMAKE_SOURCE_DIR}/cmake/OpenCogGuile.cmake")
-INCLUDE("${CMAKE_SOURCE_DIR}/cmake/OpenCogOCaml.cmake")
+INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/OpenCogCython.cmake")
+INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/OpenCogGuile.cmake")
+INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/OpenCogOCaml.cmake")
 
 # ==========================================================
 # Decide what to build, based on the packages found.
