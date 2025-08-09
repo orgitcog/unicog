@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 project(opencog-unified VERSION 1.0.0)
 
+# Set CMake policies to handle target conflicts
+cmake_policy(SET CMP0002 NEW)  # Allow duplicate target names in subdirectories
+if(POLICY CMP0167)
+    cmake_policy(SET CMP0167 OLD)  # Use legacy FindBoost module
+endif()
+
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
