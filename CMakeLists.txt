@@ -17,8 +17,17 @@ endif()
 # add_subdirectory(deps)
 
 # Include unified cognitive modules
+# Build cogutil first as it's a core dependency
 add_subdirectory(cogutil)
+
+# Export CogUtil configuration for other components
+set(CogUtil_DIR "${CMAKE_CURRENT_BINARY_DIR}/cogutil" CACHE PATH "CogUtil build directory")
+set(ENV{CogUtil_DIR} "${CMAKE_CURRENT_BINARY_DIR}/cogutil")
+
+# Add atomspace (depends on cogutil)
 add_subdirectory(atomspace)
+
+# Add cogserver (depends on atomspace)
 add_subdirectory(cogserver)
 
 # Phase I: Core Extensions (Week 1)
@@ -140,7 +149,78 @@ if(TARGET spacetime)
     add_dependencies(spacetime atomspace)
 endif()
 
-# Add comprehensive target that includes agentic catalog, logic systems, and cognitive systems
+# Phase IV: Advanced & Learning Systems (Weeks 13-16)
+# Add PLN (Probabilistic Logic Networks) - Week 13
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/pln/CMakeLists.txt")
+    add_subdirectory(pln)
+endif()
+
+# Add Miner (Pattern Mining) - Week 14
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/miner/CMakeLists.txt")
+    add_subdirectory(miner)
+endif()
+
+# Add ASMoses (AtomSpace MOSES) - Week 15
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/asmoses/CMakeLists.txt")
+    add_subdirectory(asmoses)
+endif()
+
+# Add Phase IV advanced systems target
+add_custom_target(advanced-systems
+    COMMENT "Building Phase IV advanced and learning systems"
+)
+
+# Add dependencies for advanced systems if targets exist
+if(TARGET pln)
+    add_dependencies(advanced-systems pln)
+    add_dependencies(pln atomspace ure spacetime)
+endif()
+if(TARGET miner)
+    add_dependencies(advanced-systems miner)
+    add_dependencies(miner atomspace ure)
+endif()
+if(TARGET asmoses)
+    add_dependencies(advanced-systems asmoses)
+    add_dependencies(asmoses atomspace ure)
+endif()
+
+# Phase V: Language & Final Integration (Weeks 17-20)
+# Add lg-atomese (Link Grammar to AtomSpace) - Week 17
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/lg-atomese/CMakeLists.txt")
+    add_subdirectory(lg-atomese)
+endif()
+
+# Add learn (Unsupervised Learning) - Week 18
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/learn/CMakeLists.txt")
+    add_subdirectory(learn)
+endif()
+
+# Add opencog main integration - Week 19
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/opencog/CMakeLists.txt")
+    add_subdirectory(opencog)
+endif()
+
+# Add Phase V language and final integration target
+add_custom_target(language-integration
+    COMMENT "Building Phase V language and final integration systems"
+)
+
+# Add dependencies for language integration if targets exist
+if(TARGET lg-atomese)
+    add_dependencies(language-integration lg-atomese)
+    add_dependencies(lg-atomese atomspace)
+endif()
+if(TARGET learn)
+    add_dependencies(language-integration learn)
+    add_dependencies(learn atomspace cogserver)
+endif()
+if(TARGET opencog-main)
+    add_dependencies(language-integration opencog-main)
+    add_dependencies(opencog-main atomspace cogserver attention ure lg-atomese)
+endif()
+
+# Add comprehensive target that includes all phases
 add_custom_target(cognitive-complete 
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems
-    COMMENT "Building complete cognitive system with agentic kernels, logic systems, and cognitive systems")
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, and language systems"
+)
