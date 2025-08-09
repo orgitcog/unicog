@@ -17,9 +17,14 @@ This system implements a cognitive flowchart for systematic resolution of TODO/F
 ./scripts/automate_todo_resolution.sh status
 ```
 
-### Process Next Batch
+### Process Next Batch (with GitHub Integration)
 ```bash
+# With automatic GitHub issue creation (requires GITHUB_TOKEN)
+export GITHUB_TOKEN=your_token_here
 ./scripts/automate_todo_resolution.sh next-batch
+
+# Without GitHub integration
+./scripts/automate_todo_resolution.sh next-batch --no-github
 ```
 
 ### Mark TODO as Completed
@@ -73,7 +78,8 @@ python scripts/test_recursive_todo_resolution.py
 
 ## 📁 Files
 
-- `scripts/recursive_todo_resolver.py` - Core recursive resolution engine
+- `scripts/recursive_todo_resolver.py` - Core recursive resolution engine with GitHub integration
+- `scripts/github_issue_creator.py` - GitHub API integration for automated issue creation  
 - `scripts/automate_todo_resolution.sh` - Convenient automation interface
 - `scripts/test_recursive_todo_resolution.py` - Comprehensive test suite
 - `scripts/generate_todo_catalog.py` - TODO catalog generation (existing)
@@ -100,6 +106,14 @@ The system implements true recursive enhancement:
 2. **Cognitive Synergy** - Groups related TODOs for maximum efficiency
 3. **Systematic Progress** - Tracks resolution across iterations
 4. **Meta-Cognitive Loop** - Self-updates catalog and progress state
+5. **GitHub Integration** - Auto-creates issues and tracks completion (NEW!)
+
+### 🚀 GitHub Integration Features
+- **Automatic Issue Creation**: Creates GitHub issues for each batch with proper labeling
+- **Progress Tracking**: Updates issues when TODOs are completed with PR links
+- **Issue Linking**: Maintains references between batches and GitHub issues
+- **Optional Operation**: Can be disabled with `--no-github` flag
+- **Token-Based Auth**: Uses `GITHUB_TOKEN` environment variable for authentication
 
 ## 🎭 Philosophical Framework
 
@@ -116,16 +130,26 @@ Each TODO represents not merely a task, but a note in the composition of artific
 
 ## 🛠️ Advanced Usage
 
-### Custom Batch Size
+### Custom Batch Size with GitHub Integration
 ```bash
+# Enable GitHub integration with custom batch size
+export GITHUB_TOKEN=your_token_here
 python scripts/recursive_todo_resolver.py --batch-size 10 --next-batch
+
+# Disable GitHub integration
+python scripts/recursive_todo_resolver.py --batch-size 10 --next-batch --no-github
 ```
 
 ### Direct Python API
 ```python
 from scripts.recursive_todo_resolver import RecursiveTODOResolver
 
-resolver = RecursiveTODOResolver(".", batch_size=5)
+# With GitHub integration
+resolver = RecursiveTODOResolver(".", batch_size=5, enable_github_integration=True)
+
+# Without GitHub integration
+resolver = RecursiveTODOResolver(".", batch_size=5, enable_github_integration=False)
+
 resolver.extract_catalog()
 batch = resolver.allocate_attention()
 issue_content = resolver.generate_actionable_issues(batch)
@@ -134,11 +158,18 @@ issue_content = resolver.generate_actionable_issues(batch)
 ### Progress Data Structure
 ```json
 {
-  "current_iteration": 3,
+  "current_iteration": 6,
   "completed_todos": ["file1:line1", "file2:line2"],
   "in_progress_todos": ["file3:line3", "file4:line4"],
-  "last_run": "2025-07-26T13:23:42.301371",
-  "total_resolved": 2
+  "last_run": "2025-07-28T13:23:42.301371",
+  "total_resolved": 2,
+  "github_issues": {
+    "5": {
+      "issue_number": 123,
+      "issue_url": "https://github.com/OzCog/opencog-unified/issues/123",
+      "created_at": "2025-07-28T13:25:00Z"
+    }
+  }
 }
 ```
 

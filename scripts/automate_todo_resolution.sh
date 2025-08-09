@@ -28,7 +28,19 @@ case "${1:-status}" in
     
     "next-batch"|"next")
         echo -e "${YELLOW}🎯 Processing next batch of highest-priority TODOs...${NC}"
-        python scripts/recursive_todo_resolver.py --next-batch
+        
+        # Check if GitHub integration should be enabled
+        GITHUB_FLAG=""
+        if [ "$2" = "--no-github" ]; then
+            GITHUB_FLAG="--no-github"
+            echo -e "${BLUE}📝 GitHub integration disabled${NC}"
+        elif [ -n "$GITHUB_TOKEN" ]; then
+            echo -e "${GREEN}🚀 GitHub integration enabled${NC}"
+        else
+            echo -e "${YELLOW}⚠️  Set GITHUB_TOKEN environment variable to enable automatic issue creation${NC}"
+        fi
+        
+        python scripts/recursive_todo_resolver.py --next-batch $GITHUB_FLAG
         
         # Show what was generated
         if [ -f "TODO_BATCH_$(python scripts/recursive_todo_resolver.py --status 2>/dev/null | grep "Current Iteration" | awk '{print $3-1}')_ISSUE.md" ]; then
