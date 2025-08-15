@@ -1,90 +1,244 @@
-OpenCog Utilities
-=================
+OpenCog Utilities (CogUtil)
+============================
 
-[![CircleCI](https://circleci.com/gh/opencog/cogutil.svg?style=svg)](https://circleci.com/gh/opencog/cogutil)
+[![Build Status](https://github.com/OzCog/opencog-unified/actions/workflows/main.yml/badge.svg)](https://github.com/OzCog/opencog-unified/actions)
 
-The OpenCog utilities is a miscellaneous collection of C++ utilities
-use for typical programming tasks in multiple OpenCog projects.
-These include:
-* thread-safe queues, stacks and sets
-* asynchronous method caller
-* thread-safe resource pool
-* thread-safe backtrace printing
-* high-performance signal-slot
-* random tournament selection
-* OS portability layers.
+The OpenCog utilities (`cogutil`) is a foundational collection of C++ utilities
+used for typical programming tasks across all OpenCog projects within the
+**OpenCog Unified** monorepo.
 
+## Core Components
+
+These utilities include:
+* **Thread-safe collections**: queues, stacks and sets
+* **Async processing**: asynchronous method caller
+* **Resource management**: thread-safe resource pool
+* **Debugging tools**: thread-safe backtrace printing with symbol demangling
+* **Performance**: high-performance signal-slot implementation
+* **AI utilities**: random tournament selection for evolutionary algorithms
+* **Portability**: OS abstraction layers for cross-platform support
+
+## Integration Context
+
+`cogutil` serves as the foundational utility library for the entire OpenCog Unified ecosystem:
+- **Core dependency**: Required by atomspace, cogserver, and all other components
+- **Build order**: Built first in the unified build system
+- **Shared utilities**: Provides common functionality to avoid code duplication
 
 The main project site is at http://opencog.org
 
-Prerequisites
--------------
-To build the OpenCog utilities, the packages listed below are required. With a
-few exceptions, most Linux distributions will provide these packages. Users of
-Ubuntu 14.04 "Trusty Tahr" may use the dependency installer at scripts/octool.
-Users of any version of Linux may use the Dockerfile to quickly build a
-container in which OpenCog will be built and run.
+## Build Prerequisites
 
-###### boost
-> C++ utilities package
-> http://www.boost.org/ | libboost-dev, libboost-filesystem-dev, libboost-program-options-dev, libboost-system-dev, libboost-thread-dev
+### Required Dependencies
+To build cogutil within the OpenCog Unified repository, the following packages are required:
 
-###### cmake
-> Build management tool; v3.12 or higher recommended.
-> http://www.cmake.org/ | cmake
+**Note**: In the unified repository, cogutil is built automatically as part of the overall build system. These dependencies should be installed at the repository root level.
+
+**Essential Libraries:**
+
+###### boost (≥ 1.60)
+> C++ utilities package - **REQUIRED**
+> ```bash
+> sudo apt-get install libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev
+> ```
+> http://www.boost.org/
+
+###### cmake (≥ 3.12)  
+> Build management tool - **REQUIRED**
+> ```bash
+> sudo apt-get install cmake
+> ```
+> http://www.cmake.org/
+
+### Optional Dependencies (Recommended)
+
+The following packages are **strongly recommended** for OpenCog development as they enable enhanced debugging and documentation capabilities:
 
 ###### cxxtest
-> Unit test framework
-> https://cxxtest.com/ | `apt-get install cxxtest`
+> Unit test framework - **Recommended for development**
+> ```bash
+> sudo apt-get install cxxtest
+> ```
+> https://cxxtest.com/
 
-Optional Prerequisites
-----------------------
-The following are optional, but are strongly recommended, as they result
-in "pretty" stack traces, which result in far more useful and readable
-stack traces.  These are requires, and not really optional, if you are
-a regular OpenCog developer.
+###### binutils-dev (BFD library)
+> The GNU binutils "Binary File Descriptor" library - **Essential for debugging**
+> ```bash
+> sudo apt-get install binutils-dev  
+> ```
+> Enables pretty-printed stack traces with symbol resolution
+> http://gnu.org/s/binutils
 
-###### binutils BFD library
-> The GNU binutils linker-loader, ahem, cough, "Binary File Description".
-> http://gnu.org/s/binutils | binutils-dev
-> The linker-loader understands calling conventions.
-
-###### iberty
-> The GNU GCC compiler tools libiberty component.
-> http://gcc.gnu.org | libiberty-dev
-> The GCC compiler, and iberty in particular, know stack traces.
+###### libiberty-dev
+> GNU GCC compiler tools libiberty component - **Essential for debugging**
+> ```bash
+> sudo apt-get install libiberty-dev
+> ```
+> Required for C++ symbol demangling in stack traces  
+> http://gcc.gnu.org
 
 ###### doxygen
-> Documentation generator under GNU General Public License
-> http://www.stack.nl/~dimitri/doxygen/ | doxygen
-> Generates code documentation
+> Documentation generator - **Recommended for documentation**
+> ```bash
+> sudo apt-get install doxygen
+> ```
+> Generates comprehensive API documentation
+> http://www.stack.nl/~dimitri/doxygen/
 
-Building Cogutil
------------------
-Perform the following steps at the shell prompt:
-```
-    cd to project root dir
-    mkdir build
-    cd build
-    cmake ..
-    make
-```
-Libraries will be built into subdirectories within build, mirroring the
-structure of the source directory root.
+### Quick Install (Ubuntu/Debian)
+```bash
+# Essential dependencies
+sudo apt-get install libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev cmake
 
-
-Unit tests
-----------
-To build and run the unit tests, from the ./build directory enter (after
-building opencog as above):
-```
-    make check
+# Recommended for development  
+sudo apt-get install cxxtest binutils-dev libiberty-dev doxygen
 ```
 
+## Building in OpenCog Unified
 
-Install
--------
-After building, you MUST install the utilities!
+### Unified Repository Build
+In the OpenCog Unified monorepo, `cogutil` is built automatically as part of the overall build process:
+
+```bash
+# From the repository root
+cd /path/to/opencog-unified/
+mkdir build  
+cd build
+cmake ..
+make -j$(nproc)
 ```
-    sudo make install
+
+`cogutil` will be built first as it's a core dependency for other components.
+
+### Building CogUtil Standalone
+If you need to build only the cogutil component:
+
+```bash
+cd cogutil/
+mkdir build
+cd build  
+cmake ..
+make -j$(nproc)
 ```
+
+**Build Output**: Libraries are built into `build/opencog/util/` mirroring the source structure.
+
+
+## Testing
+
+### Unit Tests
+To build and run the unit tests (requires cxxtest):
+
+```bash
+# From cogutil build directory
+cd cogutil/build/
+make check
+```
+
+**Note**: Unit tests require the `cxxtest` package to be installed.
+
+### Integration Testing  
+CogUtil is also tested as part of the unified repository's comprehensive test suite:
+
+```bash
+# From repository root build directory  
+cd build/
+ctest
+```
+
+
+## Installation
+
+### Unified Repository Installation
+When building the complete OpenCog Unified repository, installation is handled at the repository level:
+
+```bash
+# From repository root build directory
+cd build/
+sudo make install
+```
+
+### Standalone Installation
+For standalone cogutil installation:
+
+```bash
+# From cogutil build directory
+cd cogutil/build/
+sudo make install  
+```
+
+**Important**: Installation is required for proper linking with dependent OpenCog components.
+
+## Development Notes
+
+### Debugging Support
+For optimal debugging experience, ensure both `binutils-dev` and `libiberty-dev` are installed. This enables:
+- **Symbol resolution**: Function names in stack traces instead of hex addresses
+- **Demangled C++ names**: Human-readable C++ function signatures  
+- **Enhanced error reporting**: Detailed backtrace information
+
+### Thread Safety
+CogUtil provides thread-safe implementations of common data structures. Key components:
+- `concurrent_queue<T>`: Lock-free queue implementation
+- `concurrent_stack<T>`: Thread-safe stack  
+- `concurrent_set<T>`: Thread-safe set operations
+- `ResourcePool<T>`: Thread-safe object pooling
+
+### Performance Considerations  
+- **Signal-slot**: High-performance observer pattern implementation
+- **Random selection**: Optimized tournament selection for evolutionary algorithms
+- **Memory management**: Efficient resource pooling to reduce allocation overhead
+
+## Troubleshooting
+
+### Common Build Issues
+
+**Missing Boost libraries:**
+```
+Could NOT find Boost (missing: Boost_INCLUDE_DIR)
+```
+**Solution**: Install boost development packages:
+```bash
+sudo apt-get install libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev
+```
+
+**Missing stack trace support:**  
+```
+BFD not found
+Libiberty-dev missing: No pretty stack-trace printing.
+```
+**Solution**: Install debugging support libraries:
+```bash
+sudo apt-get install binutils-dev libiberty-dev
+```
+
+**CxxTest not found:**
+```
+CxxTest missing: needed for unit tests.
+```
+**Solution**: Install cxxtest package:
+```bash
+sudo apt-get install cxxtest
+```
+
+### CMake Policy Warnings
+You may see warnings about CMake policy CMP0167. These are harmless and can be ignored, or suppressed with:
+```bash  
+cmake -Wno-dev ..
+```
+
+## Contributing
+
+When contributing to cogutil:
+- **Run tests**: Always run `make check` before submitting changes
+- **Address warnings**: Fix any compiler warnings in your code
+- **Update docs**: Update this README if adding new utilities or dependencies
+- **Thread safety**: Ensure new utilities are thread-safe where applicable
+
+## Related Components
+
+In the OpenCog Unified repository:
+- **atomspace/**: Knowledge representation (depends on cogutil)
+- **cogserver/**: Cognitive server (depends on atomspace → cogutil)  
+- **ure/**: Unified Rule Engine (depends on atomspace → cogutil)
+- **pln/**: Probabilistic Logic Networks (depends on ure → atomspace → cogutil)
