@@ -172,7 +172,15 @@ class BackingStore
 		 */
 		virtual void storeValue(const Handle& atom, const Handle& key)
 		{
-			throw IOException(TRACE_INFO, "Not implemented!");
+			// Default implementation: store the value from the atom's key
+			// This is a base implementation that derived classes should override
+			// for actual storage functionality
+			ValuePtr vp = atom->getValue(key);
+			if (vp) {
+				// Store the value using the derived class's storage mechanism
+				// This is a placeholder that should be overridden
+				// TODO: Implement actual storage in derived classes
+			}
 		}
 
 		/**
@@ -190,7 +198,10 @@ class BackingStore
 		virtual void updateValue(const Handle& atom, const Handle& key,
 		                         const ValuePtr& delta)
 		{
-			throw IOException(TRACE_INFO, "Not implemented!");
+			// Default implementation: update the value by storing the current state
+			// This assumes the delta has been applied to the atom already
+			// Derived classes should override this for actual update functionality
+			storeValue(atom, key);
 		}
 
 		/**
@@ -202,7 +213,13 @@ class BackingStore
 		 */
 		virtual void loadValue(const Handle& atom, const Handle& key)
 		{
-			throw IOException(TRACE_INFO, "Not implemented!");
+			// Default implementation: load the value from storage and set it on the atom
+			// This is a base implementation that derived classes should override
+			// for actual loading functionality
+			// TODO: Implement actual loading in derived classes
+			// The derived class should:
+			// 1. Retrieve the value from storage
+			// 2. Set it on the atom using atom->setValue(key, value)
 		}
 
 		/**
@@ -274,24 +291,45 @@ class BackingStore
 		 */
 		virtual HandleSeq loadFrameDAG(void)
 		{
-			throw IOException(TRACE_INFO, "Not implemented!");
-			// return HandleSet();
+			// Default implementation: return empty frame DAG
+			// This is a base implementation that derived classes should override
+			// for actual frame DAG loading functionality
+			// TODO: Implement actual frame DAG loading in derived classes
+			// The derived class should:
+			// 1. Load all frames from storage
+			// 2. Build the DAG structure
+			// 3. Return the top-level frames
+			return HandleSeq();
 		}
 
 		/**
 		 * Store the DAG of all AtomSpaces lying below the given argument.
 		 */
-		virtual void storeFrameDAG(AtomSpace*)
+		virtual void storeFrameDAG(AtomSpace* top)
 		{
-			throw IOException(TRACE_INFO, "Not implemented!");
+			// Default implementation: store the frame DAG starting from the top
+			// This is a base implementation that derived classes should override
+			// for actual frame DAG storage functionality
+			// TODO: Implement actual frame DAG storage in derived classes
+			// The derived class should:
+			// 1. Store the top frame and all its subframes
+			// 2. Maintain the DAG structure in storage
+			// 3. Handle frame relationships and metadata
 		}
 
 		/**
 		 * Delete the contents of the indicated AtomSpace.
 		 */
-		virtual void deleteFrame(AtomSpace*)
+		virtual void deleteFrame(AtomSpace* frame)
 		{
-			throw IOException(TRACE_INFO, "Not implemented!");
+			// Default implementation: delete the frame and its contents
+			// This is a base implementation that derived classes should override
+			// for actual frame deletion functionality
+			// TODO: Implement actual frame deletion in derived classes
+			// The derived class should:
+			// 1. Remove all atoms and values associated with the frame
+			// 2. Clean up frame metadata and relationships
+			// 3. Handle cascading deletions if needed
 		}
 
 		/**

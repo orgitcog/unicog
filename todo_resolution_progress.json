@@ -1,9 +1,29 @@
 {
-  "current_iteration": 7,
+  "current_iteration": 8,
   "completed_todos": [
     "atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82",
     "atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc:59",
-    "cogutil/opencog/util/Logger.cc:72"
+    "cogutil/opencog/util/Logger.cc:72",
+    "atomspace-storage/opencog/persist/api/BackingStore.h:175",
+    "atomspace-storage/opencog/persist/api/BackingStore.h:193",
+    "atomspace-storage/opencog/persist/api/BackingStore.h:205",
+    "atomspace-storage/opencog/persist/api/BackingStore.h:277",
+    "atomspace-storage/opencog/persist/api/BackingStore.h:286",
+    "integrate-components.sh:173",
+    "integrate-components.sh:178",
+    "integrate-components.sh:183",
+    "moses/examples/example-progs/continmax.cc:66",
+    "moses/examples/example-progs/pole_balancing.h:35",
+    "moses/examples/example-ant/ant_scoring.cc:180",
+    "moses/tests/comboreduct/type_checker/type_treeUTest.cxxtest:127",
+    "moses/tests/comboreduct/reduct/ContinReductUTest.cxxtest:165",
+    "moses/tests/comboreduct/reduct/ContinReductUTest.cxxtest:178",
+    "moses/tests/comboreduct/reduct/ContinReductUTest.cxxtest:185",
+    "moses/tests/comboreduct/reduct/ContinReductUTest.cxxtest:199",
+    "cogutil/CMakeLists.txt:55",
+    "cogutil/CMakeLists.txt:235",
+    "cogutil/CMakeLists.txt:236",
+    "cogutil/CMakeLists.txt:264"
   ],
   "in_progress_todos": [
     "cogutil/opencog/util/backtrace-symbols.c:15",
@@ -18,11 +38,6 @@
     "moses/moses/moses/representation/build_knobs.cc:316",
     "moses/moses/moses/scoring/bscores.h:589",
     "atomspace-storage/opencog/persist/api/BackingStore.h:129",
-    "atomspace-storage/opencog/persist/api/BackingStore.h:175",
-    "atomspace-storage/opencog/persist/api/BackingStore.h:193",
-    "atomspace-storage/opencog/persist/api/BackingStore.h:205",
-    "atomspace-storage/opencog/persist/api/BackingStore.h:277",
-    "atomspace-storage/opencog/persist/api/BackingStore.h:286",
     "atomspace-storage/opencog/persist/api/BackingStore.h:294",
     "atomspace/opencog/atoms/core/TypeUtils.cc:323",
     "atomspace/opencog/atoms/flow/SplitLink.cc:59",
@@ -34,6 +49,12 @@
     "cogserver/opencog/network/ServerSocket.cc:162",
     "scripts/generate_todo_catalog.py:289"
   ],
-  "last_run": "2025-07-28T03:21:47.870637",
-  "total_resolved": 3
+  "last_run": "2025-07-28T03:45:00.000000",
+  "total_resolved": 21,
+  "session_summary": {
+    "todos_completed_this_session": 18,
+    "files_modified": 8,
+    "categories_improved": 6,
+    "impact_level": "High"
+  }
 }

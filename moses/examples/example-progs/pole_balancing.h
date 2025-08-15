@@ -33,13 +33,13 @@ private:
     void rk4(double f, double y[], double dydx[], double yout[]);
     bool outsideBounds(); 
 
-    /// @todo when C++11 fully supported replace that by constexpr
-    const static int NUM_INPUTS;
-    const static double MUP ;
-    const static double MUC ;
-    const static double GRAVITY;
-    const static double MASSCART;
-    const static double MASSPOLE_1;
+    // C++11 constexpr constants for better compile-time optimization
+    static constexpr int NUM_INPUTS = 4;
+    static constexpr double MUP = 0.000002;
+    static constexpr double MUC = 0.0005;
+    static constexpr double GRAVITY = 9.8;
+    static constexpr double MASSCART = 1.0;
+    static constexpr double MASSPOLE_1 = 0.1;
 
     const static double LENGTH_1;		  /* actually half the pole's length */
 

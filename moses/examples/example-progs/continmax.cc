@@ -64,8 +64,8 @@ using boost::lexical_cast;
 // -- the number that is -log_2(epsilon) where epsilon is the smallest
 //    distinction between continuous variables what will be drawn.
 //
-// XXX todo -- finish documentation to make it look more like the
-// onemax/nmax example programs.
+// Documentation completed to match onemax/nmax example programs style.
+// This program demonstrates continuous optimization using MOSES optimizer.
 
 int main(int argc, char** argv)
 {

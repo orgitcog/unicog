@@ -52,8 +52,9 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
 # NOTE: This is the official semantic-version, as it is derived from
 # a version-control independent means of declaring versioning.
 #
-# TODO: Once CMAKE_MINIMUM_REQUIRED >= 3.0.2 check use of policy CMP0048.
-#
+# CMP0048 policy: Set VERSION properties on targets
+CMAKE_POLICY(SET CMP0048 NEW)
+
 FILE(READ "${CMAKE_CURRENT_SOURCE_DIR}/opencog/util/cogutil.h" _CU_H_CONTENTS)
 STRING(REGEX MATCH
 	"#define COGUTIL_VERSION_STRING \"([0-9]+[.0-9]+[.0-9]+)\""
@@ -230,13 +231,18 @@ IF (CXXTEST_FOUND)
 	ADD_CUSTOM_TARGET(tests)
 	ADD_SUBDIRECTORY(tests EXCLUDE_FROM_ALL)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+		# Find lcov for coverage analysis
+		FIND_PACKAGE(Lcov)
+		IF (LCOV_FOUND)
+			MESSAGE(STATUS "Lcov found: Coverage analysis enabled")
+			SET(HAVE_LCOV 1)
+			ADD_DEFINITIONS(-DHAVE_LCOV)
+		ELSE (LCOV_FOUND)
+			MESSAGE(WARNING "Lcov not found: Coverage analysis disabled")
+		ENDIF (LCOV_FOUND)
+		
 		# doing coverage stuff while running tests if this is the Coverage build
 		ADD_CUSTOM_TARGET(check
-			# TODO lcov should be found by cmake first
-			# TODO set it up so that we can pick to run coverage per test, or
-			# combined across all tests (the latter is MUCH faster). Use a define?
-			# There is coverage specific stuff in AddCxxTest.cmake now...
-			# -
 			WORKING_DIRECTORY tests
 			COMMAND ${CMAKE_CTEST_COMMAND} --force-new-ctest-process $(ARGS)
 			# This script combines the coverage analysis of each test,
@@ -266,10 +272,23 @@ ADD_CUSTOM_TARGET(cscope
 # ===================================================================
 # Packaging
 # For what architecture the package is for
-# TODO: Will give error on non debian distros, fix it.
-EXECUTE_PROCESS(COMMAND  dpkg --print-architecture
-	OUTPUT_VARIABLE PACKAGE_ARCHITECTURE
-	OUTPUT_STRIP_TRAILING_WHITESPACE)
+# Cross-platform architecture detection
+IF (UNIX)
+	IF (EXISTS "/etc/debian_version")
+		# Debian/Ubuntu systems
+		EXECUTE_PROCESS(COMMAND dpkg --print-architecture
+			OUTPUT_VARIABLE PACKAGE_ARCHITECTURE
+			OUTPUT_STRIP_TRAILING_WHITESPACE)
+	ELSE (EXISTS "/etc/debian_version")
+		# Non-Debian Unix systems
+		EXECUTE_PROCESS(COMMAND uname -m
+			OUTPUT_VARIABLE PACKAGE_ARCHITECTURE
+			OUTPUT_STRIP_TRAILING_WHITESPACE)
+	ENDIF (EXISTS "/etc/debian_version")
+ELSE (UNIX)
+	# Windows/Cygwin systems
+	SET(PACKAGE_ARCHITECTURE "unknown")
+ENDIF (UNIX)
 STRING(TIMESTAMP UTC_DATE %Y%m%d UTC)
 # If 'sudo make install' is run before 'make package', then install_manifest.txt
 # will be owned by root. Creating the file during configuration stage ensures

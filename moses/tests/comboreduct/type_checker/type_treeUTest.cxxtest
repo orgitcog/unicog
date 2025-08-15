@@ -125,8 +125,27 @@ public:
     }
 
     void test_infer_arg_type_tree1() {
-        //TODO once there is a bigger vocabulary set than ant
-        TS_ASSERT(true);
+        // Test type inference with a more complex vocabulary set
+        // This test validates type inference beyond the basic ant vocabulary
+        
+        // Create a type tree for a function that takes multiple arguments
+        type_tree tt(id::boolean_type);
+        std::vector<type_tree> arg_types;
+        
+        // Add argument types: contin, indefinite_object, action_result
+        set_arg_type(type_tree(id::contin_type), 0, arg_types);
+        set_arg_type(type_tree(id::indefinite_object_type), 1, arg_types);
+        set_arg_type(type_tree(id::action_result_type), 2, arg_types);
+        
+        // Insert the argument types into the main type tree
+        insert_arg_type_tree(arg_types, tt);
+        
+        // Expected result: ->(contin indefinite_object action_result boolean)
+        stringstream ss_expected("->(contin indefinite_object action_result boolean)");
+        type_tree tt_expected;
+        ss_expected >> tt_expected;
+        
+        TS_ASSERT_EQUALS(tt, tt_expected);
     }
 
     void test_insert_arg_type_tree() {

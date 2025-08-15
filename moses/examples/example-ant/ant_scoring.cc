@@ -178,10 +178,15 @@ score_t AntFitnessEstimator::operator()(const combo_tree& tr) const
 behavioral_score ant_bscore::operator()(const combo_tree& tr) const
 {
     behavioral_score bs;
-    // @todo: It is not a good behavioral_score. Instead it should be
-    // -1 for all pellet non-eaten
-    bs.push_back(-89);
-    bs.push_back(_aff(tr));
+    // Improved behavioral score: -1 for each pellet not eaten
+    // This provides better granularity for learning
+    score_t fitness = _aff(tr);
+    int pellets_eaten = static_cast<int>(fitness);
+    int pellets_missed = 89 - pellets_eaten; // Total pellets - eaten
+    
+    // Score based on pellets missed (negative for missed pellets)
+    bs.push_back(-pellets_missed);
+    bs.push_back(fitness);
 
     return bs;
 }
