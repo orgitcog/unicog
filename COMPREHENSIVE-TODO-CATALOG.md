@@ -400,7 +400,7 @@ A section for emergent TODOs.
 ### Core Utilities
 *Total items: 33*
 
-- [ ] **cogutil/opencog/util/Logger.cc:72** (HIGH, Thread Safety)
+- [x] **cogutil/opencog/util/Logger.cc:72** (HIGH, Thread Safety)
   - `#if defined(HAVE_GNU_BACKTRACE) /// @todo backtrace and backtrace_symbols`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/Logger.cc#L72)
 
@@ -2584,23 +2584,23 @@ A section for emergent TODOs.
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L129)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:175** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:175** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L175)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:193** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:193** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L193)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:205** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:205** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L205)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:277** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:277** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L277)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:286** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:286** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L286)
 
@@ -3482,6 +3482,32 @@ A section for emergent TODOs.
 **TODOs Resolved:** 2  
 **TODOs In Progress:** 28  
 **Total Remaining:** 795
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 9  
+**Last Run:** 2025-08-16T19:36:50.604896  
+**TODOs Resolved:** 23  
+**TODOs In Progress:** 27  
+**Total Remaining:** 790
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 10  
+**Last Run:** 2025-08-16T19:37:05.635913  
+**TODOs Resolved:** 23  
+**TODOs In Progress:** 32  
+**Total Remaining:** 785
 
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 

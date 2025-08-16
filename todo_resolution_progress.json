@@ -1,5 +1,5 @@
 {
-  "current_iteration": 8,
+  "current_iteration": 10,
   "completed_todos": [
     "atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82",
     "atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc:59",
@@ -23,10 +23,10 @@
     "cogutil/CMakeLists.txt:55",
     "cogutil/CMakeLists.txt:235",
     "cogutil/CMakeLists.txt:236",
-    "cogutil/CMakeLists.txt:264"
+    "cogutil/CMakeLists.txt:264",
+    "cogutil/opencog/util/backtrace-symbols.c:15"
   ],
   "in_progress_todos": [
-    "cogutil/opencog/util/backtrace-symbols.c:15",
     "components/learning/moses/moses/comboreduct/table/table.h:1287",
     "components/learning/moses/moses/feature-selection/algo/simple.h:118",
     "components/learning/moses/moses/moses/moses/neighborhood_sampling.h:477",
@@ -47,10 +47,20 @@
     "atomspace/opencog/query/SatisfyMixin.cc:178",
     "atomspace/opencog/scm/opencog/base/debug-trace.scm:9",
     "cogserver/opencog/network/ServerSocket.cc:162",
-    "scripts/generate_todo_catalog.py:289"
+    "scripts/generate_todo_catalog.py:289",
+    "scripts/test_todo_catalog.py:27",
+    "scripts/test_todo_catalog.py:28",
+    "scripts/test_todo_catalog.py:76",
+    "components/learning/moses/moses/comboreduct/interpreter/eval.cc:530",
+    "components/learning/moses/moses/comboreduct/interpreter/interpreter.cc:336",
+    "components/learning/moses/moses/comboreduct/main/eval-table.cc:279",
+    "components/learning/moses/moses/comboreduct/table/table.h:781",
+    "components/learning/moses/moses/comboreduct/table/table.h:783",
+    "components/learning/moses/moses/comboreduct/table/table.h:1068",
+    "components/learning/moses/moses/comboreduct/table/table.h:1128"
   ],
-  "last_run": "2025-07-28T03:45:00.000000",
-  "total_resolved": 21,
+  "last_run": "2025-08-16T19:37:05.760851",
+  "total_resolved": 22,
   "session_summary": {
     "todos_completed_this_session": 18,
     "files_modified": 8,
