@@ -190,8 +190,8 @@ ValuePtr ExecuteThreadedLink::execute_async(AtomSpace* as,
 				catch (const std::exception& ex)
 				{
 					// In async mode, we can't propagate exceptions directly
-					// Log error and continue processing other items
-					// TODO: Consider adding error reporting mechanism to QueueValue
+					// Use QueueValue's error reporting mechanism
+					qvp->set_error("Async execution error: " + std::string(ex.what()));
 					continue;
 				}
 			}

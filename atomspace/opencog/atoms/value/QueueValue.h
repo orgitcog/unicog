@@ -61,6 +61,16 @@ public:
 	virtual void clear(void);
 
 	virtual bool operator==(const Value&) const;
+
+	// Error reporting methods
+	virtual void set_error(const std::string& error_msg);
+	virtual bool has_error(void) const;
+	virtual std::string get_error(void) const;
+	virtual void clear_error(void);
+
+protected:
+	mutable std::string _error_msg;
+	mutable bool _has_error = false;
 };
 
 typedef std::shared_ptr<QueueValue> QueueValuePtr;

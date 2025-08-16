@@ -57,81 +57,94 @@ def check_mst_files(input_dir, verbose = 'none'):
         return [], {'check_mst_file_error': 'no input directory'}
 
 
-def check_dict(file_path):          # TODO: update this stub            # 90128
-    if os.path.isfile(file_path):
-        return True
-    else: return False
+def check_dict(file_path):          # Check if file is a valid dictionary file
+    if not os.path.isfile(file_path):
+        return False
+    # Check if file has .dict extension
+    if not file_path.endswith('.dict'):
+        return False
+    # Check if file is readable and not empty
+    try:
+        with open(file_path, 'r') as f:
+            first_line = f.readline().strip()
+            return len(first_line) > 0
+    except:
+        return False
 
 
-def check_ull(file_path):           # TODO: update this stub            # 90128
-    if os.path.isfile(file_path):
-        return True
-    else: return False
-
-
-def check_corpus(input_dir, verbose = 'none'):  # TODO: add file tests  # 90129
-    if check_dir(input_dir, False, verbose):
-        files = check_dir_files(input_dir, verbose)
-        if len(files) > 0:
-            response = {'input files': files}
-            parses = []
-            for i, file in enumerate(files):
-                if check_ull(file):
-                    with open(file, 'r') as f:
-                        lines = f.read().splitlines()
-                    if len(lines) > 0:
-                        parses.extend(lines)
-                        parses.extend([])  # empty line
-            if len(parses) > 0:
-                response.update
+def check_ull(file_path):           # Check if file is a valid ULL (parses) file
+    if not os.path.isfile(file_path):
+        return False
+    # Check if file has expected extensions or is readable
+    try:
+        with open(file_path, 'r') as f:
+            first_line = f.readline().strip()
+            # Check if first line looks like a parse line (starts with digit)
+            if first_line and first_line[0].isdigit():
                 return True
-            else: return False
-        else: return False
-    else: return False
+            # Or check if it's a sentence line (not empty)
+            return len(first_line) > 0
+    except:
+        return False
 
 
-def check_path(par, t = 'else', **kwargs):  # TODO: update stubs...     # 90129
+def check_corpus(input_dir, verbose = 'none'):  # Check if directory contains valid corpus files
+    if not check_dir(input_dir, False, verbose):
+        return False
+    
+    files = check_dir_files(input_dir, verbose)
+    if len(files) == 0:
+        return False
+    
+    # Check if at least one file is a valid ULL file
+    valid_files = 0
+    total_lines = 0
+    
+    for file in files:
+        if check_ull(file):
+            valid_files += 1
+            try:
+                with open(file, 'r') as f:
+                    lines = f.read().splitlines()
+                    total_lines += len([l for l in lines if l.strip()])
+            except:
+                continue
+    
+    # Return True if we have valid files with content
+    return valid_files > 0 and total_lines > 0
+
+
+def check_path(par, t = 'else', **kwargs):  # Check and resolve path based on type
     # default: t = 'else': kwargs[par] is file or dir ⇒ return path
-    if 'module_path' in kwargs:
-        module_path = kwargs['module_path']
-    else:
+    if 'module_path' not in kwargs:
         return None
-    if par in kwargs:
-        path = kwargs[par]
-        if len(path) == 0:
-            path = module_path
-        elif 'home' not in path:
-            if path[0] != '/':
-                path = '/' + path
-            path = module_path + path
-    else:
-        print('"' + par + '" not in kwargs:', kwargs)
+    
+    module_path = kwargs['module_path']
+    
+    if par not in kwargs:
+        print(f'"{par}" not in kwargs: {kwargs}')
         return None
+    
+    path = kwargs[par]
+    if len(path) == 0:
+        path = module_path
+    elif 'home' not in path and not path.startswith('/'):
+        path = os.path.join(module_path, path)
+    
+    # Check path based on type
     if 'dir' in t:
-        if check_dir(path, True, 'max'):
-            return path
-        else: return None
+        return path if check_dir(path, True, 'max') else None
     elif 'fil' in t:  # file
-        if os.path.isfile(path):
-            return path
-        else: return None
+        return path if os.path.isfile(path) else None
     elif 'dic' in t:  # 'dict', '.dict'
-        if check_dict(path):
-            return path
-        else: return None
+        return path if check_dict(path) else None
     elif 'cor' in t:  # corpus: dir with file(s)
-        # if check_mst_files(path, 'max'): FIXME: returns False ?
-        if check_corpus(path):                                          # 90129
-            return path
-        else: return None
+        return path if check_corpus(path) else None
     elif 'ull' in t:  # single corpus file
-        if check_ull(path):
-            return path
-        else: return None
+        return path if check_ull(path) else None
     else:
-        if check_dir(path, False, 'none') or os.path.isfile(path):
-            return path
-        else: return None
+        # Default: check if path exists as file or directory
+        return path if (check_dir(path, False, 'none') or os.path.isfile(path)) else None
 
 # Notes
 

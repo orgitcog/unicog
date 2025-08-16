@@ -84,17 +84,16 @@ def tag_files(**kwargs):                                                # 90201
         re.update({'tagger_output_path': output_path})
 
     if None in [dict_path, input_path, output_path]:
-        print('Wrong config.json:', kwargs)
-        re.update({'tag_files_error': 'wrong config.json'})
-        return re  # TODO: throw exception?
+        error_msg = f'Wrong config.json: {kwargs}'
+        re.update({'tag_files_error': error_msg})
+        raise ValueError(error_msg)
 
     # Create directory for tagged ull files
     tagged_ull_dir = output_path + '/tagged_ull/'
     if not check_dir(tagged_ull_dir, True, 'max'):
-        print('Output directory error:', tagged_ull_dir)
-        re.update({'tag_files_error':
-                   'output directory error: ' + tagged_ull_dir})
-        return re  # TODO: throw exception?
+        error_msg = f'Output directory error: {tagged_ull_dir}'
+        re.update({'tag_files_error': error_msg})
+        raise OSError(error_msg)
 
     # Create { word: label } dictionary
     with open(dict_path, 'r') as f:
@@ -105,11 +104,10 @@ def tag_files(**kwargs):                                                # 90201
     for filename in os.listdir(input_path):
         file = input_path + '/' + filename
         # file = check_path(input_path + '/' + filename, 'ull', **kwargs)
-        if not check_ull(file):  # TODO: check file
-            print('Error in LG dictionary', file)
-            re.update({'tag_files_error':
-                       'Link Grammar dict error: ' + file})
-            return re  # TODO: throw exception?
+        if not check_ull(file):  # Check if file is valid ULL
+            error_msg = f'Link Grammar dict error: {file}'
+            re.update({'tag_files_error': error_msg})
+            raise ValueError(error_msg)
         else:
             with open(file, 'r') as f:
                 s = f.read().splitlines()
@@ -149,9 +147,12 @@ def decode_dict(d, kd):                                                 # 90131
 
 
 def decode_cat_tree(tree, lg_dict, **kwargs):
-    if type(lg_dict) is str: kd = lg_dict.split('\n')
-    elif type(lg_dict) is list: kd = lg_dict
-    # TODO: else raise error
+    if type(lg_dict) is str: 
+        kd = lg_dict.split('\n')
+    elif type(lg_dict) is list: 
+        kd = lg_dict
+    else:
+        raise TypeError(f"lg_dict must be string or list, got {type(lg_dict)}")
 
     prefix = kwa('###', 'tag_prefix', **kwargs)
     suffix = kwa('###', 'tag_suffix', **kwargs)
@@ -167,7 +168,7 @@ def decode_cat_tree(tree, lg_dict, **kwargs):
     for line in tree_lines:
         lst = line.split('\t')
         dlst = lst[:4]
-        #-decoded_cats = 'decode!'  # lst[4]      # TODO: decode
+        # Decode category names using the dictionary
         if lst[4] in dct:
             dlst.append(' '.join(dct[lst[4]]))
         else:

@@ -21,7 +21,7 @@ def skl_clustering(cd, n_clusters=10, **kwargs):
         elif clustering == 'kmeans':
             clustering = ('kmeans', 'k-means++', 10)
         elif clustering in ['mean_shift', 'mean shift', 'meanshift']:
-            clustering = ('mean_shift', 2)  # TODO: check (..., 'auto)
+            clustering = ('mean_shift', 2)  # Note: 'auto' bandwidth not yet implemented
         elif clustering == 'group':  # TODO: call ILE clustering?
             return [], {'clustering': 'skl_clustering error',
                         'clustering_error':
@@ -67,7 +67,8 @@ def skl_clustering(cd, n_clusters=10, **kwargs):
             model.fit(cd)
             labels = model.labels_
 
-            # TODO: centroids = ...
+            # Calculate centroids for agglomerative clustering
+            centroids = np.asarray([cd[labels == i].mean(axis=0) for i in range(max(labels) + 1)])
 
         elif clustering[0] in ['k-means', 'kmeans']:
             if clustering[1] in ['k-means++']:  # 'random' - fails?
@@ -90,7 +91,7 @@ def skl_clustering(cd, n_clusters=10, **kwargs):
             if type(clustering[1]) is int:
                 bandwidth = clustering[1]
             else:
-                bandwidth = None  # TODO: auto ⇒ estimate_bandwidth
+                bandwidth = None  # Note: 'auto' bandwidth estimation not yet implemented
                 bandwidth = 'auto'
 
             model = MeanShift(bandwidth=bandwidth)
@@ -99,7 +100,7 @@ def skl_clustering(cd, n_clusters=10, **kwargs):
 
             centroids = np.asarray(model.cluster_centers_[:(max(labels) + 1)])
 
-        else:  # TODO: random clustering?
+        else:  # Default to agglomerative clustering
             model = AgglomerativeClustering(linkage='ward', n_clusters=nc)
             model.fit(cd)
             labels = model.labels_

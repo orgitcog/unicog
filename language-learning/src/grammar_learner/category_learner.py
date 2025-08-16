@@ -70,7 +70,10 @@ def learn_categories(links, **kwargs):
         counts = co_occurrence_matrix(linx, **kwargs)
         cd = categorical_distribution(counts, **kwargs)
         labels, metrics, centroids = optimal_clusters(cd, **kwargs)
-        # TODO check labels != [] ?  81114 check error via try learn_grammar
+        # Check if labels are not empty
+        if len(labels) == 0:
+            logger.error("No clusters generated - labels array is empty")
+            return {}, {'error': 'no_clusters_generated'}
         log.update(metrics)
 
         # labels ⇒ cdf (legacy, extracted from agglomerative_clustering:

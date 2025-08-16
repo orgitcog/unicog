@@ -113,7 +113,8 @@ def induce_grammar(categories, **kwargs):
                         elif y[-1] == '-':
                             lefts.append(-1 * word_clusters[y[:-1]])
                         else:
-                            print('no sign?', y, 'in', x)  # TODO:ERROR?
+                            logger.warning(f'No sign found in rule "{y}" in "{x}" - skipping')
+                            continue
                 lefts.reverse()  # 81012
                 dj = lefts + rights
                 if len(dj) > 0:
