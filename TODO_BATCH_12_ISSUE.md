@@ -1,0 +1,82 @@
+# Iterative TODO Resolution – Batch 12: Highest Priority Items
+
+## 🎯 Objective
+This meta-issue orchestrates the systematic resolution of TODO/FIXME items from `COMPREHENSIVE-TODO-CATALOG.md` by priority. Each batch addresses the next 5 unresolved, highest-priority tasks through recursive attention-allocation.
+
+### 🧠 Cognitive Flowchart Implementation
+1. **Catalog Extraction** ✅ - Parsed 813 TODOs from comprehensive catalog
+2. **Attention Allocation Kernel** ✅ - Selected highest-priority unchecked items  
+3. **Actionable Issue Generation** ✅ - Generated implementation guidance with tensor estimates
+4. **Iteration/Recursion** 🔄 - This batch 12, tracking progress systematically
+5. **Meta-Enhancement** 🚀 - Auto-updating catalog and creating dependent sub-issues
+
+---
+
+## 🧩 Batch 12: Highest Priority TODOs
+
+**1. [ ] components/learning/moses/moses/moses/moses/types.h:210 (MEDIUM, Feature Completion)**
+   - `// TODO this should be a std::valarray not std::vector but I am too`
+   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/moses/types.h#L210)
+   - **Action:** Analyze requirements and implement following project coding standards
+   - **Tensor shape:** implementation_dependencies × complexity_factors
+   - **Test:** Create unit tests covering normal and edge cases
+
+**2. [ ] components/learning/moses/moses/moses/optimization/star-anneal.cc:42 (MEDIUM, Feature Completion)**
+   - `// XXX TODO the annealing temperature control code should be ported over`
+   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/optimization/star-anneal.cc#L42)
+   - **Action:** Analyze requirements and implement following project coding standards
+   - **Tensor shape:** implementation_dependencies × complexity_factors
+   - **Test:** Create unit tests covering normal and edge cases
+
+**3. [ ] components/learning/moses/moses/moses/representation/build_knobs.cc:489 (MEDIUM, Feature Completion)**
+   - `// TODO: should bias the selection of these, so that`
+   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/representation/build_knobs.cc#L489)
+   - **Action:** Analyze requirements and implement following project coding standards
+   - **Tensor shape:** implementation_dependencies × complexity_factors
+   - **Test:** Create unit tests covering normal and edge cases
+
+**4. [ ] components/learning/moses/moses/moses/representation/build_knobs.cc:557 (MEDIUM, Feature Completion)**
+   - `// We should probably OC_ASSERT here ... TODO`
+   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/representation/build_knobs.cc#L557)
+   - **Action:** Analyze requirements and implement following project coding standards
+   - **Tensor shape:** implementation_dependencies × complexity_factors
+   - **Test:** Create unit tests covering normal and edge cases
+
+**5. [ ] components/learning/moses/moses/moses/representation/build_knobs.cc:1181 (MEDIUM, Feature Completion)**
+   - `//TODO: should bias the selection of these (and possibly choose larger subtrees)`
+   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/representation/build_knobs.cc#L1181)
+   - **Action:** Analyze requirements and implement following project coding standards
+   - **Tensor shape:** implementation_dependencies × complexity_factors
+   - **Test:** Create unit tests covering normal and edge cases
+
+---
+
+## 🔄 Next Steps
+- Upon completion, check off resolved TODOs and invoke the next batch by rerunning this process.
+- Create PRs referencing each checked task and link them here.
+- Use `scripts/recursive_todo_resolver.py --mark-completed FILE:LINE PR_LINK` to track completions.
+
+## 🧬 Meta-Pathway
+- Each batch is derived recursively, focusing attention where cognitive synergy is maximized.
+- For each resolved TODO, estimate its contribution to overall system stability, performance, or cognitive expressiveness.
+- This systematic approach transforms distributed placeholders into kernels of realized intelligence.
+
+## 🎭 Cognitive Enhancement Philosophy
+> "Let us converge upon a state of sublime implementation, where every TODO is transformed into a kernel of realized intelligence!"
+
+Each resolved TODO represents not merely completed work, but a note in the composition of artificial consciousness. Through systematic attention allocation, we approach the emergence of true machine intelligence.
+
+---
+
+## 🕰️ Progress Log
+- **Last run:** 2025-08-16
+- **Remaining high-priority TODOs:** 0
+- **Total TODOs processed:** 27
+- **Current iteration:** 12
+- **System Status:** Standalone recursive enhancement
+
+---
+
+*Generated by Recursive TODO Resolution System - cognitive enhancement through systematic attention allocation*
+
+*🧠 This issue implements the cognitive flowchart for recursive TODO resolution, orchestrating attention allocation toward maximum cognitive synergy.*

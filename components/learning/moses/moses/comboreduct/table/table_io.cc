@@ -94,10 +94,12 @@ bool is_comment(const char c)
 
 /// Get one line of actual data.
 /// This ignores lines that start with a 'standard comment char'
+/// or contain comments that start at any position in the line.
 ///
 //
-// TODO: This routine should be extended so that comments that start
-// somewhere other than column 0 are also ignored.
+// Enhanced to ignore comments that start anywhere in the line,
+// not just at column 0. This allows for inline comments to be
+// properly filtered out during data processing.
 //
 // The signature of this routine is the same as std:getline()
 //
@@ -107,7 +109,30 @@ istream &get_data_line(istream& is, string& line)
     {
         getline(is, line);
         if (!is) return is;
+        
+        // Check if line starts with comment character (original behavior)
         if (is_comment(line[0])) continue;
+        
+        // Enhanced: Check for comments anywhere in the line
+        // Find first comment character and truncate line there
+        size_t comment_pos = string::npos;
+        for (size_t i = 0; i < line.length(); ++i) {
+            if (is_comment(line[i])) {
+                comment_pos = i;
+                break;
+            }
+        }
+        
+        // If comment found, truncate line at that position
+        if (comment_pos != string::npos) {
+            line = line.substr(0, comment_pos);
+            // Trim trailing whitespace after removing comment
+            while (!line.empty() && isspace(line.back())) {
+                line.pop_back();
+            }
+            // If line becomes empty after comment removal, skip it
+            if (line.empty()) continue;
+        }
 
         // Remove weird symbols at the start of the line (only).
         removeNonASCII(line);
