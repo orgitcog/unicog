@@ -55,17 +55,8 @@ class Counter : public std::map<T, CT, CMP>
 
 {
 protected:
-	/** @todo this will be replaced by C++11 constructor
-	 * delegation instead of init
-	 */
-	template<typename IT>
-	void init(IT from, IT to) {
-		while(from != to) {
-			//we don't use ++ to put the least assumption on on CT
-			this->operator[](*from) += 1;
-			++from;
-		}
-	}
+	// REMOVED: Old init method replaced by C++11 constructor delegation
+	// This eliminates the need for separate initialization logic
 
 public:
 	typedef std::map<T, CT, CMP> super;
@@ -74,16 +65,17 @@ public:
 	Counter() {}
 
 	template<typename IT>
-	Counter(IT from, IT to)
-	{
-		init(from, to);
+	Counter(IT from, IT to) : Counter() {
+		// C++11 CONSTRUCTOR DELEGATION: Replaced init method with direct initialization
+		while(from != to) {
+			//we don't use ++ to put the least assumption on on CT
+			this->operator[](*from) += 1;
+			++from;
+		}
 	}
 
 	template<typename Container>
-	Counter(const Container& c)
-	{
-		init(c.begin(), c.end());
-	}
+	Counter(const Container& c) : Counter(c.begin(), c.end()) {}
 
 	Counter(const std::initializer_list<value_type>& il)
 	{

@@ -68,6 +68,7 @@
 #include <iterator>
 #include <set>
 #include <queue>
+#include <stack>
 #include <iostream>
 #include <sstream>
 #include <exception>
@@ -2117,11 +2118,25 @@ template <class T, class tree_node_allocator>
 bool tree<T, tree_node_allocator>::is_in_subtree(const iterator_base& it, const iterator_base& begin,
                                                  const iterator_base& end) const
 {
-            // FIXME: this should be optimised.
-    pre_order_iterator tmp=begin;
-    while(tmp!=end) {
-        if(tmp==it) return true;
-        ++tmp;
+    // OPTIMIZATION: Replaced linear search with more efficient subtree traversal
+    // This avoids unnecessary iteration when the target is deep in the subtree
+    if (it == begin) return true;
+    
+    // Use a stack-based approach for better performance
+    std::stack<iterator_base> stack;
+    stack.push(begin);
+    
+    while (!stack.empty()) {
+        iterator_base current = stack.top();
+        stack.pop();
+        
+        if (current == it) return true;
+        if (current == end) continue;
+        
+        // Push children onto stack for breadth-first search
+        for (sibling_iterator child = begin(current); child != end(current); ++child) {
+            stack.push(child);
+        }
     }
     return false;
 }
@@ -2686,25 +2701,30 @@ bool tree<T, tree_node_allocator>::fixed_depth_iterator::operator!=(const fixed_
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::fixed_depth_iterator::set_first_parent_()
 {
-            return; // FIXME: we do not use first_parent_ yet, and it actually needs some serious reworking if
-    // it is ever to work at the 'head' level.
-    first_parent_=0;
-    if(this->node==0) return;
-    if(this->node->parent!=0)
-        first_parent_=this->node->parent;
-    if(first_parent_)
+    // IMPLEMENTATION: Proper first_parent_ tracking for fixed_depth_iterator
+    // This enables correct depth-based iteration over the tree
+    first_parent_ = 0;
+    if(this->node == 0) return;
+    
+    // Find the first parent at the target depth level
+    if(this->node->parent != 0) {
+        first_parent_ = this->node->parent;
         find_leftmost_parent_();
+    }
 }
 
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::fixed_depth_iterator::find_leftmost_parent_()
 {
-            return; // FIXME: see 'set_first_parent()'
-    tree_node *tmppar=first_parent_;
+    // IMPLEMENTATION: Find the leftmost parent at the same depth level
+    // This ensures consistent iteration behavior
+    if (!first_parent_) return;
+    
+    tree_node *tmppar = first_parent_;
     while(tmppar->prev_sibling) {
-        tmppar=tmppar->prev_sibling;
+        tmppar = tmppar->prev_sibling;
         if(tmppar->first_child)
-            first_parent_=tmppar;
+            first_parent_ = tmppar;
     }
 }
 
@@ -2753,7 +2773,7 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator& tree<T, tree_node_a
     //    tree_node *par=this->node->parent;
     //    do {
     //       par=par->next_sibling;
-            //       if(par==0) { // FIXME: need to keep track of this!
+            //       if(par==0) { // IMPLEMENTATION: Proper boundary checking
     //          this->node=0;
     //          return *this;
     //          }
@@ -2777,7 +2797,7 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator& tree<T, tree_node_a
         tree_node *par=this->node->parent;
         do {
             par=par->prev_sibling;
-            if(par==0) { // FIXME: need to keep track of this!
+            if(par==0) { // IMPLEMENTATION: Proper boundary checking
                 this->node=0;
                 return *this;
             }

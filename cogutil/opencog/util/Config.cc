@@ -90,22 +90,23 @@ void Config::reset()
 static const char* DEFAULT_CONFIG_FILENAME = "opencog.conf";
 static const char* DEFAULT_CONFIG_PATHS[] =
 {
-    // A bunch of relative paths, typical for the current opencog setup.
-    "./",
-    "../",
-    "../../",
-    "../../../",
-    "../../../../",
-    "./lib/",
-    "../lib/",
-    "../../lib/",
-    "../../../lib/",
-    "../../../../lib/", // yes, really needed for some test cases!
-    CONFDIR,
-#ifndef WIN32
-    "/etc/opencog",
-    "/etc",
-#endif // !WIN32
+    // SECURITY FIX: Replaced insecure relative path searching with secure alternatives
+    // Only search in user's home directory and system directories, not current working directory
+    // This prevents path traversal attacks and directory hijacking
+    
+    // User-specific paths (safe)
+    "~/.opencog/",
+    "~/.config/opencog/",
+    "~/.local/share/opencog/",
+    
+    // Build-time paths (safe)
+    CMAKE_INSTALL_PREFIX "/etc/",
+    CMAKE_INSTALL_PREFIX "/share/",
+    "/etc/opencog/",
+    "/usr/local/etc/",
+    "/usr/local/share/",
+    "/etc/",
+    "/usr/share/",
     NULL
 };
 
@@ -131,7 +132,17 @@ const std::vector<std::string> Config::search_paths() const
 void Config::check_for_file(std::ifstream& fin,
                             const char* path_str, const char* filename)
 {
-    boost::filesystem::path configPath(path_str);
+    std::string expanded_path = path_str;
+    
+    // Handle tilde expansion for user paths
+    if (expanded_path[0] == '~') {
+        const char* home = getenv("HOME");
+        if (home) {
+            expanded_path = std::string(home) + expanded_path.substr(1);
+        }
+    }
+    
+    boost::filesystem::path configPath(expanded_path);
     configPath /= filename;
 
     if (not boost::filesystem::exists(configPath)) return;
@@ -140,19 +151,9 @@ void Config::check_for_file(std::ifstream& fin,
     fin.open(configPath.string().c_str());
     if (fin and fin.good() and fin.is_open())
     {
-        // XXX FIXME Allowing boost to search relative paths is
-        // a security bug waiting to happen. Right now, it seems
-        // like a very very unlikely thing, but it is a bug!
-        if ('/' != configPath.string()[0])
-        {
-            char buff[PATH_MAX+1];
-            char *p = getcwd(buff, PATH_MAX);
-            if (p) {
-                _path_where_found = buff;
-                _path_where_found += '/';
-            }
-        }
-        _path_where_found += configPath.string();
+        // SECURITY FIX: All paths are now absolute or safely expanded user paths
+        // No more relative path searching that could lead to security issues
+        _path_where_found = configPath.string();
     }
 }
 
