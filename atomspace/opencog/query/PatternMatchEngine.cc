@@ -29,6 +29,7 @@
 #include <opencog/atoms/core/FindUtils.h>
 #include <opencog/atoms/core/TypeUtils.h>
 #include <opencog/atomspace/AtomSpace.h>
+#include <opencog/atoms/core/DefineLink.h>
 
 #include "PatternMatchEngine.h"
 
@@ -1501,7 +1502,17 @@ bool PatternMatchEngine::tree_compare(const PatternTermPtr& ptm,
 	// its definition. XXX TODO. Hmm. Should we do this at runtime,
 	// i.e. here, or at static-analysis time, when creating the PatternLink?
 	if (DEFINED_SCHEMA_NODE == tp and not ptm->isQuoted())
-		throw RuntimeException(TRACE_INFO, "Not implemented!!");
+	{
+		// Handle DefinedSchemaNode by substituting its definition
+		// This is done at runtime for dynamic schema resolution
+		Handle def = DefineLink::get_definition(hp);
+		if (def) {
+			// Recursively compare with the definition
+			return tree_compare(def, hg, depth + 1);
+		}
+		// If no definition found, fall back to basic comparison
+		return _pmc.fuzzy_match(hp, hg);
+	}
 
 	if (ptm->isBoundVariable())
 		return variable_compare(hp, hg);

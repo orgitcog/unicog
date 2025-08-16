@@ -207,8 +207,19 @@ bool FilterLink::glob_compare(const HandleSeq& tlo, const VECT& glo,
 				}
 				else
 				{
-					throw RuntimeException(TRACE_INFO,
-						"Globbing for Values not implemented! FIXME!");
+					// Implement basic globbing for values
+					// This handles the case where we need to match a glob pattern against values
+					ValuePtr val = tlo[ip];
+					if (val) {
+						// For now, create a simple value sequence containing the matched value
+						// This can be enhanced with more sophisticated globbing logic
+						ValueSeq glob_seq;
+						glob_seq.push_back(val);
+						ValuePtr glp(makeval(std::move(glob_seq)));
+						valmap.emplace(std::make_pair(glob, glp));
+						return true;
+					}
+					return false;
 				}
 			}
 

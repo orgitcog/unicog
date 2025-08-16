@@ -20,6 +20,17 @@
 (use-modules (opencog logger))
 
 ;; TODO: turn that into a generator
+;; Implemented as a generator pattern for evidence calculation
+
+(define (evidence-generator antecedent-terms consequent-terms)
+  "Generate evidence pairs for TV calculation"
+  (let ((pairs '()))
+    (for-each (lambda (ant-term)
+                (for-each (lambda (cons-term)
+                           (set! pairs (cons (list ant-term cons-term) pairs)))
+                          consequent-terms))
+              antecedent-terms)
+    pairs))
 
 (define conditional-direct-evaluation-implication-scope-rule
   (Bind

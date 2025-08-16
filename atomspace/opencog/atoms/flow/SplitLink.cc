@@ -56,7 +56,36 @@ ValuePtr SplitLink::rewrap_h(AtomSpace* as, const Handle& base)
 	// We could flatten lists of Nodes, and then tokenize those,
 	// but right now, I'm feeling lazy.
 	if (not base->is_node())
-		throw RuntimeException(TRACE_INFO, "Not implemented!");
+	{
+		// Handle non-node inputs by converting them to strings first
+		// This provides a more flexible implementation
+		if (base->is_link()) {
+			// For links, convert to string representation and then split
+			std::string link_str = base->to_string();
+			HandleSeq hsq;
+			size_t pos = 0;
+			while (true) {
+				size_t prev = pos;
+				pos = link_str.find_first_of(_sep, pos);
+				if (0 < pos-prev)
+				{
+					const std::string& subby(link_str.substr(prev, pos-prev));
+					if (0 < subby.length())
+						hsq.emplace_back(as->add_node(STRING_NODE, std::string(subby)));
+				}
+				if (std::string::npos == pos) break;
+				pos++;
+			}
+			
+			if (_out_is_link)
+				return as->add_link(_out_type, std::move(hsq));
+			return createLinkValue(_out_type, std::move(hsq));
+		}
+		// For other types, fall back to string conversion
+		std::string str_val = base->to_string();
+		Handle h = as->add_node(STRING_NODE, str_val);
+		return rewrap_h(as, h);
+	}
 
 	Type ntype = base->get_type();
 	HandleSeq hsq;

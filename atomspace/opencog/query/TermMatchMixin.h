@@ -114,6 +114,9 @@ class TermMatchMixin : public virtual PatternMatchCallback
 		const Variables* _pat_bound_vars;
 		const Variables* _gnd_bound_vars;
 
+		// Stack to handle nested scoped links
+		std::vector<std::pair<const Variables*, const Variables*>> _scope_stack;
+
 		// Temp atomspace used for test-groundings of virtual links.
 		AtomSpace* _temp_aspace;
 
