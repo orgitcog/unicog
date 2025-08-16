@@ -4,7 +4,7 @@
 
 ## Summary
 - **Critical Path**: cogutil → opencog
-- **Maximum Parallelization**: 5 components
+- **Maximum Parallelization**: 4 components
 - **Build Phases**: 5
 
 ## Available Components
@@ -42,7 +42,7 @@
 Components: cogutil
 
 ### Phase 2 - Core Systems
-Components: atomspace, cogserver, atomspace_rocks, atomspace_restful
+Components: atomspace, atomspace_storage, cogserver, atomspace_rocks, atomspace_restful
 
 ### Phase 3 - Logic & Reasoning
 Components: unify, ure, pln, miner
@@ -58,32 +58,36 @@ Components: language_learning, lg_atomese, learn, opencog
 **Level 1**: 3 parallel builds possible
 - atomspace, moses, language_learning
 
-**Level 2**: 5 parallel builds possible
-- cogserver, atomspace_rocks, unify, spacetime, lg_atomese
+**Level 2**: 4 parallel builds possible
+- atomspace_storage, unify, spacetime, lg_atomese
 
-**Level 3**: 4 parallel builds possible
-- atomspace_restful, attention, ure, learn
+**Level 3**: 2 parallel builds possible
+- cogserver, atomspace_rocks
 
-**Level 4**: 3 parallel builds possible
+**Level 4**: 4 parallel builds possible
+- atomspace_restful, ure, attention, learn
+
+**Level 5**: 3 parallel builds possible
 - pln, miner, asmoses
 
 ## External Dependencies
 
-**asmoses**: cxxtest, boost, valgrind, mpi, doxygen
-**lg_atomese**: doxygen, uuid, linkgrammar, cxxtest
-**opencog**: valgrind, lgatomese, ghc, stack, cxxtest, boost, doxygen, attentionbank
-**cogutil**: iberty, gnubacktrace, stlport, pthreads, cxxtest, boost, bfd, doxygen, parallelstl
-**ure**: cxxtest, boost, valgrind
-**atomspace_rocks**: doxygen, cxxtest, valgrind, rocksdb
-**moses**: cxxtest, boost, valgrind, mpi, doxygen
-**cogserver**: cxxtest, boost, valgrind, doxygen, openssl
-**spacetime**: doxygen, cxxtest, boost, octomap
-**miner**: cxxtest, boost, valgrind
-**atomspace_restful**: zmq, pkgconfig, tbb, cxxtest, boost, doxygen, attentionbank, jsoncpp
-**unify**: cxxtest, boost, valgrind
-**attention**: doxygen, cxxtest, boost, valgrind
-**atomspace**: ocaml, valgrind, doxygen, pgsql, unixodbc, cxxtest, boost, stack, folly
+**moses**: cxxtest, valgrind, boost, mpi, doxygen
+**miner**: cxxtest, valgrind, boost
+**lg_atomese**: doxygen, cxxtest, uuid, linkgrammar
+**atomspace_rocks**: doxygen, valgrind, cxxtest, rocksdb
+**cogutil**: parallelstl, stlport, boost, doxygen, pthreads, bfd, cxxtest, iberty, gnubacktrace
+**ure**: cxxtest, valgrind, boost
+**asmoses**: cxxtest, valgrind, boost, mpi, doxygen
+**attention**: doxygen, valgrind, cxxtest, boost
+**cogserver**: cxxtest, valgrind, openssl, boost, doxygen
+**atomspace**: valgrind, boost, pgsql, doxygen, stack, folly, cxxtest, ocaml, unixodbc
+**opencog**: valgrind, boost, doxygen, stack, ghc, cxxtest, lgatomese, attentionbank
+**atomspace_restful**: boost, doxygen, tbb, pkgconfig, cxxtest, jsoncpp, attentionbank, zmq
 **pln**: boost
+**unify**: cxxtest, valgrind, boost
+**atomspace_storage**: doxygen, cxxtest, boost, guile
+**spacetime**: doxygen, cxxtest, octomap, boost
 
 ## Build Instructions
 
@@ -115,30 +119,38 @@ parallel -j3 --tagstring '{1}' '{{
   cd {1} && mkdir -p build && cd build && cmake .. && make -j$(nproc) && cd ../..;
 }}' ::: atomspace moses language-learning
 
-### Level 2 - 5 components (can build in parallel)
+### Level 2 - 4 components (can build in parallel)
 # Parallel build possible:
-# Component: cogserver (directory: cogserver)
-# Component: atomspace_rocks (directory: atomspace-rocks)
+# Component: atomspace_storage (directory: atomspace-storage)
 # Component: unify (directory: unify)
 # Component: spacetime (directory: spacetime)
 # Component: lg_atomese (directory: lg-atomese)
 # Build all in parallel:
-parallel -j5 --tagstring '{1}' '{{
+parallel -j4 --tagstring '{1}' '{{
   cd {1} && mkdir -p build && cd build && cmake .. && make -j$(nproc) && cd ../..;
-}}' ::: cogserver atomspace-rocks unify spacetime lg-atomese
+}}' ::: atomspace-storage unify spacetime lg-atomese
 
-### Level 3 - 4 components (can build in parallel)
+### Level 3 - 2 components (can build in parallel)
+# Parallel build possible:
+# Component: cogserver (directory: cogserver)
+# Component: atomspace_rocks (directory: atomspace-rocks)
+# Build all in parallel:
+parallel -j2 --tagstring '{1}' '{{
+  cd {1} && mkdir -p build && cd build && cmake .. && make -j$(nproc) && cd ../..;
+}}' ::: cogserver atomspace-rocks
+
+### Level 4 - 4 components (can build in parallel)
 # Parallel build possible:
 # Component: atomspace_restful (directory: atomspace-restful)
-# Component: attention (directory: attention)
 # Component: ure (directory: ure)
+# Component: attention (directory: attention)
 # Component: learn (directory: learn)
 # Build all in parallel:
 parallel -j4 --tagstring '{1}' '{{
   cd {1} && mkdir -p build && cd build && cmake .. && make -j$(nproc) && cd ../..;
-}}' ::: atomspace-restful attention ure learn
+}}' ::: atomspace-restful ure attention learn
 
-### Level 4 - 3 components (can build in parallel)
+### Level 5 - 3 components (can build in parallel)
 # Parallel build possible:
 # Component: pln (directory: pln)
 # Component: miner (directory: miner)
@@ -148,7 +160,7 @@ parallel -j3 --tagstring '{1}' '{{
   cd {1} && mkdir -p build && cd build && cmake .. && make -j$(nproc) && cd ../..;
 }}' ::: pln miner asmoses
 
-### Level 5 - 1 components (can build in parallel)
+### Level 6 - 1 components (can build in parallel)
 cd opencog
 mkdir -p build && cd build
 cmake ..

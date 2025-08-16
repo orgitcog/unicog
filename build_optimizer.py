@@ -117,7 +117,7 @@ class BuildOptimizer:
                     
                 if comp == 'cogutil' or level == 0:
                     phases['Phase 1 - Foundation'].append(comp)
-                elif comp in ['atomspace', 'cogserver', 'atomspace_rocks', 'atomspace_restful']:
+                elif comp in ['atomspace', 'atomspace_storage', 'cogserver', 'atomspace_rocks', 'atomspace_restful']:
                     phases['Phase 2 - Core Systems'].append(comp)
                 elif comp in ['unify', 'ure', 'pln', 'miner']:
                     phases['Phase 3 - Logic & Reasoning'].append(comp)

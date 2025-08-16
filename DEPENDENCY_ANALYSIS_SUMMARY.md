@@ -3,18 +3,18 @@
 
 ### Executive Summary
 
-- **Total Components Analyzed**: 37
+- **Total Components Analyzed**: 38
 - **Available Components**: 26
 - **External Dependencies**: 40
-- **Critical Path Length**: 6
-- **Parallelization Levels**: 6
+- **Critical Path Length**: 7
+- **Parallelization Levels**: 7
 - **Dependency Cycles**: None detected
 
 ### Critical Path Analysis
 
-**Complete Critical Path** (6 components):
+**Complete Critical Path** (7 components):
 ```
-cogutil → atomspace → cogserver → ure → pln → opencog
+cogutil → atomspace → atomspace_storage → cogserver → ure → pln → opencog
 ```
 
 **Available Critical Path** (2 components):
@@ -24,18 +24,21 @@ cogutil → opencog
 
 ### Parallelization Analysis
 
-**Maximum Parallel Jobs**: 5 components simultaneously
+**Maximum Parallel Jobs**: 4 components simultaneously
 
 **Level 1**: 3 parallel builds
 - Components: atomspace, moses, language_learning
 
-**Level 2**: 5 parallel builds
-- Components: cogserver, atomspace_rocks, unify, spacetime, lg_atomese
+**Level 2**: 4 parallel builds
+- Components: atomspace_storage, unify, spacetime, lg_atomese
 
-**Level 3**: 4 parallel builds
-- Components: atomspace_restful, attention, ure, learn
+**Level 3**: 2 parallel builds
+- Components: cogserver, atomspace_rocks
 
-**Level 4**: 3 parallel builds
+**Level 4**: 4 parallel builds
+- Components: atomspace_restful, ure, attention, learn
+
+**Level 5**: 3 parallel builds
 - Components: pln, miner, asmoses
 
 ### Optimized Build Phases
@@ -44,7 +47,7 @@ cogutil → opencog
 Components (1): cogutil
 
 #### Phase 2 - Core Systems
-Components (4): atomspace, cogserver, atomspace_rocks, atomspace_restful
+Components (5): atomspace, atomspace_storage, cogserver, atomspace_rocks, atomspace_restful
 
 #### Phase 3 - Logic & Reasoning
 Components (4): unify, ure, pln, miner
@@ -59,47 +62,48 @@ Components (4): language_learning, lg_atomese, learn, opencog
 
 **Most Common External Dependencies**:
 
-- **cxxtest**: required by 14 components
-- **boost**: required by 13 components
-- **doxygen**: required by 11 components
+- **cxxtest**: required by 15 components
+- **boost**: required by 14 components
+- **doxygen**: required by 12 components
 - **valgrind**: required by 10 components
 - **mpi**: required by 2 components
 - **stack**: required by 2 components
 - **attentionbank**: required by 2 components
 - **uuid**: required by 1 components
 - **linkgrammar**: required by 1 components
-- **lgatomese**: required by 1 components
+- **rocksdb**: required by 1 components
 
 **Per-Component External Dependencies**:
 
-- **asmoses**: cxxtest, boost, valgrind, mpi, doxygen
-- **atomspace**: ocaml, valgrind, doxygen, pgsql, unixodbc, cxxtest, boost, stack, folly
-- **atomspace_restful**: zmq, pkgconfig, tbb, cxxtest, boost, doxygen, attentionbank, jsoncpp
-- **atomspace_rocks**: doxygen, cxxtest, valgrind, rocksdb
-- **attention**: doxygen, cxxtest, boost, valgrind
-- **cogserver**: cxxtest, boost, valgrind, doxygen, openssl
-- **cogutil**: iberty, gnubacktrace, stlport, pthreads, cxxtest, boost, bfd, doxygen, parallelstl
-- **lg_atomese**: doxygen, uuid, linkgrammar, cxxtest
-- **miner**: cxxtest, boost, valgrind
-- **moses**: cxxtest, boost, valgrind, mpi, doxygen
-- **opencog**: valgrind, lgatomese, ghc, stack, cxxtest, boost, doxygen, attentionbank
+- **asmoses**: cxxtest, valgrind, boost, mpi, doxygen
+- **atomspace**: valgrind, boost, pgsql, doxygen, stack, folly, cxxtest, ocaml, unixodbc
+- **atomspace_restful**: boost, doxygen, tbb, pkgconfig, cxxtest, jsoncpp, attentionbank, zmq
+- **atomspace_rocks**: doxygen, valgrind, cxxtest, rocksdb
+- **atomspace_storage**: doxygen, cxxtest, boost, guile
+- **attention**: doxygen, valgrind, cxxtest, boost
+- **cogserver**: cxxtest, valgrind, openssl, boost, doxygen
+- **cogutil**: parallelstl, stlport, boost, doxygen, pthreads, bfd, cxxtest, iberty, gnubacktrace
+- **lg_atomese**: doxygen, cxxtest, uuid, linkgrammar
+- **miner**: cxxtest, valgrind, boost
+- **moses**: cxxtest, valgrind, boost, mpi, doxygen
+- **opencog**: valgrind, boost, doxygen, stack, ghc, cxxtest, lgatomese, attentionbank
 - **pln**: boost
-- **spacetime**: doxygen, cxxtest, boost, octomap
-- **unify**: cxxtest, boost, valgrind
-- **ure**: cxxtest, boost, valgrind
+- **spacetime**: doxygen, cxxtest, octomap, boost
+- **unify**: cxxtest, valgrind, boost
+- **ure**: cxxtest, valgrind, boost
 
 ### Build Optimization Recommendations
 
-- Critical path: cogutil -> atomspace -> cogserver -> ure -> pln -> opencog
+- Critical path: cogutil -> atomspace -> atomspace_storage -> cogserver -> ure -> pln -> opencog
 - Focus optimization efforts on critical path components
-- Maximum parallelization: 21 components simultaneously
+- Maximum parallelization: 20 components simultaneously
 - Highest complexity components:
--   - cogutil: score 44
--   - atomspace: score 43
+-   - cogutil: score 45
+-   - atomspace: score 44
 -   - opencog: score 22
+-   - cogserver: score 18
 -   - ure: score 17
--   - cogserver: score 16
-- Components with many external deps: cogutil, atomspace, cogserver, atomspace_rocks, atomspace_restful, attention, spacetime, moses, asmoses, lg_atomese, vision, TinyCog, opencog
+- Components with many external deps: cogutil, atomspace, atomspace_storage, cogserver, atomspace_rocks, atomspace_restful, attention, spacetime, moses, asmoses, lg_atomese, vision, TinyCog, opencog
 
 ### Additional Recommendations
 

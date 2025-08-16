@@ -39,7 +39,7 @@ class DependencyAnalyzer:
             'foundation': ['cogutil', 'blender_api_msgs', 'blender_api', 'asmoses', 'moses', 
                           'ocpkg', 'rust_crates', 'external_tools', 'cogprotolab', 'src',
                           'integrated_output', 'guile_dbi', 'test_datasets', 'node_modules'],
-            'core': ['atomspace_agents', 'atomspace_dht', 'atomspace', 'atomspace_rocks',
+            'core': ['atomspace_agents', 'atomspace_dht', 'atomspace', 'atomspace_storage', 'atomspace_rocks',
                     'atomspace_ipfs', 'atomspace_websockets', 'atomspace_restful',
                     'atomspace_typescript', 'atomspace_explorer', 'atomspace_js',
                     'atomspace_bridge', 'atomspace_metta', 'atomspace_rpc', 'atomspace_cog',
@@ -69,8 +69,9 @@ class DependencyAnalyzer:
             
             # Core layer  
             'atomspace': {'cogutil'},
-            'cogserver': {'cogutil', 'atomspace'},
-            'atomspace_rocks': {'cogutil', 'atomspace'},
+            'atomspace_storage': {'cogutil', 'atomspace'},
+            'cogserver': {'cogutil', 'atomspace', 'atomspace_storage'},
+            'atomspace_rocks': {'cogutil', 'atomspace', 'atomspace_storage'},
             'atomspace_restful': {'cogutil', 'atomspace', 'cogserver'},
             'atomspace_agents': {'cogutil', 'atomspace'},
             'atomspace_dht': {'cogutil', 'atomspace'},
@@ -126,6 +127,7 @@ class DependencyAnalyzer:
         external_deps_map = {
             'cogutil': {'boost', 'doxygen', 'gnubacktrace', 'iberty', 'parallelstl', 'cxxtest', 'pthreads', 'bfd', 'stlport'},
             'atomspace': {'boost', 'doxygen', 'pgsql', 'unixodbc', 'valgrind', 'cxxtest', 'stack', 'folly', 'ocaml'},
+            'atomspace_storage': {'boost', 'doxygen', 'cxxtest', 'guile'},
             'cogserver': {'boost', 'doxygen', 'valgrind', 'cxxtest', 'openssl'},
             'atomspace_rocks': {'doxygen', 'valgrind', 'cxxtest', 'rocksdb'},
             'atomspace_restful': {'boost', 'doxygen', 'attentionbank', 'jsoncpp', 'cxxtest', 'zmq', 'pkgconfig', 'tbb'},

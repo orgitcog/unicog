@@ -1,9 +1,9 @@
 {
   "analysis_summary": {
-    "total_components": 37,
+    "total_components": 38,
     "external_dependencies": 40,
-    "critical_path_length": 6,
-    "parallelization_levels": 6,
+    "critical_path_length": 7,
+    "parallelization_levels": 7,
     "has_cycles": false
   },
   "build_sequence": {
@@ -13,8 +13,7 @@
       "moses",
       "language_learning",
       "relex",
-      "cogserver",
-      "atomspace_rocks",
+      "atomspace_storage",
       "atomspace_agents",
       "atomspace_dht",
       "atomspace_ipfs",
@@ -34,10 +33,12 @@
       "sensory",
       "visualization",
       "TinyCog",
+      "cogserver",
+      "atomspace_rocks",
       "atomspace_restful",
       "atomspace_cog",
-      "attention",
       "ure",
+      "attention",
       "learn",
       "pln",
       "miner",
@@ -49,6 +50,7 @@
     "critical_path": [
       "cogutil",
       "atomspace",
+      "atomspace_storage",
       "cogserver",
       "ure",
       "pln",
@@ -65,8 +67,7 @@
         "relex"
       ],
       "2": [
-        "cogserver",
-        "atomspace_rocks",
+        "atomspace_storage",
         "atomspace_agents",
         "atomspace_dht",
         "atomspace_ipfs",
@@ -88,19 +89,23 @@
         "TinyCog"
       ],
       "3": [
-        "atomspace_restful",
-        "atomspace_cog",
-        "attention",
-        "ure",
-        "learn"
+        "cogserver",
+        "atomspace_rocks"
       ],
       "4": [
+        "atomspace_restful",
+        "atomspace_cog",
+        "ure",
+        "attention",
+        "learn"
+      ],
+      "5": [
         "pln",
         "miner",
         "benchmark",
         "asmoses"
       ],
-      "5": [
+      "6": [
         "opencog",
         "python_attic"
       ]
@@ -113,8 +118,7 @@
       ],
       "Phase 2 - Core Systems": [
         "atomspace",
-        "cogserver",
-        "atomspace_rocks",
+        "atomspace_storage",
         "atomspace_agents",
         "atomspace_dht",
         "atomspace_ipfs",
@@ -122,6 +126,8 @@
         "atomspace_bridge",
         "atomspace_metta",
         "atomspace_rpc",
+        "cogserver",
+        "atomspace_rocks",
         "atomspace_restful",
         "atomspace_cog"
       ],
@@ -165,64 +171,77 @@
     "cogutil": {
       "internal_dependencies": 0,
       "external_dependencies": 9,
-      "dependents": 35,
-      "complexity_score": 44,
+      "dependents": 36,
+      "complexity_score": 45,
       "category": "foundation",
       "external_deps": [
-        "iberty",
-        "bfd",
-        "pthreads",
-        "cxxtest",
-        "parallelstl",
+        "boost",
         "doxygen",
         "gnubacktrace",
-        "stlport",
-        "boost"
+        "parallelstl",
+        "bfd",
+        "cxxtest",
+        "pthreads",
+        "iberty",
+        "stlport"
       ]
     },
     "atomspace": {
       "internal_dependencies": 1,
       "external_dependencies": 9,
-      "dependents": 32,
-      "complexity_score": 43,
+      "dependents": 33,
+      "complexity_score": 44,
       "category": "core",
       "external_deps": [
+        "boost",
+        "doxygen",
         "pgsql",
-        "ocaml",
+        "valgrind",
         "cxxtest",
         "unixodbc",
-        "doxygen",
-        "valgrind",
         "stack",
-        "boost",
+        "ocaml",
         "folly"
       ]
     },
-    "cogserver": {
+    "atomspace_storage": {
       "internal_dependencies": 2,
+      "external_dependencies": 4,
+      "dependents": 2,
+      "complexity_score": 10,
+      "category": "core",
+      "external_deps": [
+        "boost",
+        "guile",
+        "doxygen",
+        "cxxtest"
+      ]
+    },
+    "cogserver": {
+      "internal_dependencies": 3,
       "external_dependencies": 5,
       "dependents": 7,
-      "complexity_score": 16,
+      "complexity_score": 18,
       "category": "cognitive",
       "external_deps": [
-        "doxygen",
         "boost",
+        "doxygen",
         "valgrind",
         "openssl",
         "cxxtest"
       ]
     },
     "atomspace_rocks": {
-      "internal_dependencies": 2,
+      "internal_dependencies": 3,
       "external_dependencies": 4,
       "dependents": 0,
-      "complexity_score": 8,
+      "complexity_score": 10,
       "category": "core",
       "external_deps": [
         "doxygen",
+        "rocksdb",
         "valgrind",
-        "cxxtest",
-        "rocksdb"
+        "cxxtest"
       ]
     },
     "atomspace_restful": {
@@ -232,14 +251,14 @@
       "complexity_score": 14,
       "category": "core",
       "external_deps": [
-        "attentionbank",
-        "tbb",
-        "cxxtest",
-        "doxygen",
-        "jsoncpp",
-        "pkgconfig",
         "boost",
-        "zmq"
+        "doxygen",
+        "attentionbank",
+        "pkgconfig",
+        "cxxtest",
+        "zmq",
+        "tbb",
+        "jsoncpp"
       ]
     },
     "atomspace_agents": {
@@ -345,9 +364,9 @@
       "complexity_score": 11,
       "category": "cognitive",
       "external_deps": [
-        "doxygen",
         "boost",
         "valgrind",
+        "doxygen",
         "cxxtest"
       ]
     },
@@ -358,10 +377,10 @@
       "complexity_score": 9,
       "category": "cognitive",
       "external_deps": [
-        "doxygen",
         "boost",
-        "cxxtest",
-        "octomap"
+        "octomap",
+        "doxygen",
+        "cxxtest"
       ]
     },
     "dimensional_embedding": {
@@ -409,10 +428,10 @@
       "complexity_score": 7,
       "category": "foundation",
       "external_deps": [
-        "doxygen",
-        "valgrind",
-        "mpi",
         "boost",
+        "doxygen",
+        "mpi",
+        "valgrind",
         "cxxtest"
       ]
     },
@@ -423,10 +442,10 @@
       "complexity_score": 11,
       "category": "foundation",
       "external_deps": [
-        "doxygen",
-        "valgrind",
-        "mpi",
         "boost",
+        "doxygen",
+        "mpi",
+        "valgrind",
         "cxxtest"
       ]
     },
@@ -462,8 +481,8 @@
       "category": "specialized",
       "external_deps": [
         "doxygen",
-        "linkgrammar",
         "uuid",
+        "linkgrammar",
         "cxxtest"
       ]
     },
@@ -499,8 +518,8 @@
       "category": "specialized",
       "external_deps": [
         "doxygen",
-        "valgrind",
         "opencv",
+        "valgrind",
         "catch2"
       ]
     },
@@ -527,18 +546,18 @@
       "complexity_score": 14,
       "category": "specialized",
       "external_deps": [
+        "protobuf",
+        "opencv",
+        "guile",
+        "pkgconfig",
+        "raspicam",
         "pocketsphinx",
-        "dlib",
         "wiringpi",
         "openmp",
-        "opencv",
-        "raspicam",
-        "protobuf",
+        "dlib",
         "festival",
-        "pkgconfig",
         "alsa",
-        "est",
-        "guile"
+        "est"
       ]
     },
     "opencog": {
@@ -548,14 +567,14 @@
       "complexity_score": 22,
       "category": "integration",
       "external_deps": [
-        "attentionbank",
-        "cxxtest",
         "doxygen",
-        "valgrind",
-        "stack",
         "boost",
-        "ghc",
-        "lgatomese"
+        "lgatomese",
+        "attentionbank",
+        "valgrind",
+        "cxxtest",
+        "stack",
+        "ghc"
       ]
     },
     "python_attic": {
@@ -610,15 +629,15 @@
     "zmq"
   ],
   "recommendations": [
-    "Critical path: cogutil -> atomspace -> cogserver -> ure -> pln -> opencog",
+    "Critical path: cogutil -> atomspace -> atomspace_storage -> cogserver -> ure -> pln -> opencog",
     "Focus optimization efforts on critical path components",
-    "Maximum parallelization: 21 components simultaneously",
+    "Maximum parallelization: 20 components simultaneously",
     "Highest complexity components:",
-    "  - cogutil: score 44",
-    "  - atomspace: score 43",
+    "  - cogutil: score 45",
+    "  - atomspace: score 44",
     "  - opencog: score 22",
+    "  - cogserver: score 18",
     "  - ure: score 17",
-    "  - cogserver: score 16",
-    "Components with many external deps: cogutil, atomspace, cogserver, atomspace_rocks, atomspace_restful, attention, spacetime, moses, asmoses, lg_atomese, vision, TinyCog, opencog"
+    "Components with many external deps: cogutil, atomspace, atomspace_storage, cogserver, atomspace_rocks, atomspace_restful, attention, spacetime, moses, asmoses, lg_atomese, vision, TinyCog, opencog"
   ]
 }
