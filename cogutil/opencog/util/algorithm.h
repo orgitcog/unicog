@@ -366,7 +366,11 @@ template<typename T>
 bool contains(const typename std::set<T>& set,
               const typename std::set<T>::value_type& el)
 {
-	return set.find(el) != set.end();
+#if __cplusplus >= 202002L
+    return set.contains(el);
+#else
+    return set.find(el) != set.cend();
+#endif
 }
 
 /**

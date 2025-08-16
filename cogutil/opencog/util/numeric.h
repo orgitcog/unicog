@@ -198,7 +198,11 @@ template<typename FloatT> bool is_approx_eq(FloatT x, FloatT y, FloatT epsilon)
 template<typename Float>
 Float clamp(Float x, Float l, Float u)
 {
+#if __cplusplus >= 201703L
+    return std::clamp(x, l, u);
+#else
     return std::max(l, std::min(u, x));
+#endif
 }
 
 //! useful for entropy

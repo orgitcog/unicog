@@ -91,7 +91,7 @@
 # TODO : see if it is possible to call the dependency generator at compile time
 # before compiling source files but after generating some source files.
 #
-# Copyright (c) 2010, Judicaël Bedouet, j dot bedouet at infonie dot fr.
+# Copyright (c) 2010, Judicaï¿½l Bedouet, j dot bedouet at infonie dot fr.
 #
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.

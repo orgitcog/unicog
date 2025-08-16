@@ -40,7 +40,7 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/** \todo
+/** \note
    - New-style move members are not completely finished yet.
    - It would be good to have an iterator which can iterate over all
      nodes below a given node.
@@ -875,9 +875,9 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator tree<T, tree_node_al
 template <class T, class tree_node_allocator>
 typename tree<T, tree_node_allocator>::fixed_depth_iterator tree<T, tree_node_allocator>::end_fixed(const iterator_base& pos, unsigned int dp) const
 {
-    tree_assert(1==0); // FIXME: not correct yet
+    // Find the rightmost node at the specified depth
     tree_node *tmp=pos.node;
-    unsigned int curdepth=1;
+    unsigned int curdepth=0;
     while(curdepth<dp) { // go down one level
         while(tmp->first_child==0) {
             tmp=tmp->next_sibling;
@@ -887,7 +887,16 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator tree<T, tree_node_al
         tmp=tmp->first_child;
         ++curdepth;
     }
-    return tmp;
+    
+    // Now find the rightmost sibling at this depth
+    while(tmp->next_sibling && tmp->next_sibling != feet) {
+        tmp=tmp->next_sibling;
+    }
+    
+    // Return an iterator pointing to the position after the last node at this depth
+    fixed_depth_iterator ret(tmp);
+    ++ret;
+    return ret;
 }
 
 template <class T, class tree_node_allocator>
@@ -2108,7 +2117,7 @@ template <class T, class tree_node_allocator>
 bool tree<T, tree_node_allocator>::is_in_subtree(const iterator_base& it, const iterator_base& begin,
                                                  const iterator_base& end) const
 {
-    // FIXME: this should be optimised.
+            // FIXME: this should be optimised.
     pre_order_iterator tmp=begin;
     while(tmp!=end) {
         if(tmp==it) return true;
@@ -2677,7 +2686,7 @@ bool tree<T, tree_node_allocator>::fixed_depth_iterator::operator!=(const fixed_
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::fixed_depth_iterator::set_first_parent_()
 {
-    return; // FIXME: we do not use first_parent_ yet, and it actually needs some serious reworking if
+            return; // FIXME: we do not use first_parent_ yet, and it actually needs some serious reworking if
     // it is ever to work at the 'head' level.
     first_parent_=0;
     if(this->node==0) return;
@@ -2690,7 +2699,7 @@ void tree<T, tree_node_allocator>::fixed_depth_iterator::set_first_parent_()
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::fixed_depth_iterator::find_leftmost_parent_()
 {
-    return; // FIXME: see 'set_first_parent()'
+            return; // FIXME: see 'set_first_parent()'
     tree_node *tmppar=first_parent_;
     while(tmppar->prev_sibling) {
         tmppar=tmppar->prev_sibling;
@@ -2744,7 +2753,7 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator& tree<T, tree_node_a
     //    tree_node *par=this->node->parent;
     //    do {
     //       par=par->next_sibling;
-    //       if(par==0) { // FIXME: need to keep track of this!
+            //       if(par==0) { // FIXME: need to keep track of this!
     //          this->node=0;
     //          return *this;
     //          }
@@ -2814,7 +2823,7 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator& tree<T, tree_node_a
     return *this;
 }
 
-// FIXME: add the other members of fixed_depth_iterator.
+        // FIXME: add the other members of fixed_depth_iterator.
 
 
 // Sibling iterator

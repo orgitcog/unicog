@@ -11,7 +11,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR ANY PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
@@ -21,13 +21,23 @@
  */
 
 #include "lazy_normal_selector.h"
+#include <opencog/util/oc_assert.h>
 
 namespace opencog
 {
 
 unsigned int lazy_normal_selector::select()
 {
-    return _s;
+    // Generate a normally distributed random number
+    std::normal_distribution<double> dist(_mean, _stddev);
+    
+    // Generate numbers until we get one in the valid range [0, n)
+    int result;
+    do {
+        result = static_cast<int>(std::round(dist(_rng)));
+    } while (result < 0 || result >= static_cast<int>(_u));
+    
+    return static_cast<unsigned int>(result);
 }
 
-} //~namespace opencog
+} // namespace opencog

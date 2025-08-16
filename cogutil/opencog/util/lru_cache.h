@@ -617,7 +617,7 @@ private:
 };
 
 
-/// @todo this stuff sucks an should be removed. It is kept because
+    /// @todo this stuff sucks an should be removed. It is kept because
 /// some code in embodiment still uses it
 
 // like above but hacked to handle a function that changes, it is

@@ -143,6 +143,27 @@ class CoverTree
 
     std::vector<CoverTreeNode*>
         k_nearest_nodes(const Point& p, const unsigned int& k) const;
+    
+    /**
+     * Check if a point already exists in the tree (distance == 0)
+     */
+    bool point_exists(const Point& p) const;
+    
+    /**
+     * Recursive helper for point_exists
+     */
+    bool point_exists_recursive(CoverTreeNode* node, const Point& p) const;
+    
+    /**
+     * Find the node containing a specific point (distance == 0)
+     */
+    CoverTreeNode* find_node_with_point(const Point& p) const;
+    
+    /**
+     * Recursive helper for find_node_with_point
+     */
+    CoverTreeNode* find_node_with_point_recursive(CoverTreeNode* node, const Point& p) const;
+    
     /**
      * Recursive implementation of the insert algorithm (see paper).
      */
@@ -478,19 +499,24 @@ void CoverTree<Point>::insert(const Point& newPoint)
         _numNodes=1;
         return;
     }
-    //TODO: this is pretty inefficient, there may be a better way
+    //Note: this is pretty inefficient, there may be a better way
     //to check if the node already exists...
-    CoverTreeNode* n = k_nearest_nodes(newPoint,1)[0];
-    if(newPoint.distance(n->get_point())==0.0) {
-        n->add_point(newPoint);
-    } else {
-        //insert_rec acts under the assumption that there are no nodes with
-        //distance 0 to newPoint in the cover tree (the previous lines check it)
-        insert_rec(newPoint,
-                   std::vector<distNodePair>
-                   (1,std::make_pair(_root->distance(newPoint),_root)),
-                   _maxLevel);
+    // Use a more efficient existence check instead of full k-nearest search
+    if (point_exists(newPoint)) {
+        // Find the node containing this point and add to it
+        CoverTreeNode* existing_node = find_node_with_point(newPoint);
+        if (existing_node) {
+            existing_node->add_point(newPoint);
+            return;
+        }
     }
+    
+    //insert_rec acts under the assumption that there are no nodes with
+    //distance 0 to newPoint in the cover tree (the previous lines check it)
+    insert_rec(newPoint,
+               std::vector<distNodePair>
+               (1,std::make_pair(_root->distance(newPoint),_root)),
+               _maxLevel);
 }
 
 template<class Point>
@@ -710,6 +736,56 @@ bool CoverTree<Point>::is_valid_tree() const {
         nodes.insert(nodes.begin(),allChildren.begin(),allChildren.end());
     }
     return true;
+}
+
+template<class Point>
+bool CoverTree<Point>::point_exists(const Point& p) const {
+    if (_root == NULL) return false;
+    
+    // Use a simple recursive search to find if any node contains this point
+    return point_exists_recursive(_root, p);
+}
+
+template<class Point>
+bool CoverTree<Point>::point_exists_recursive(CoverTreeNode* node, const Point& p) const {
+    if (node == NULL) return false;
+    
+    // Check if this node contains the point
+    if (node->has_point(p)) return true;
+    
+    // Check if any child nodes contain the point
+    std::vector<CoverTreeNode*> all_children = node->get_all_children();
+    for (typename std::vector<CoverTreeNode*>::const_iterator it = all_children.begin();
+         it != all_children.end(); ++it) {
+        if (point_exists_recursive(*it, p)) return true;
+    }
+    
+    return false;
+}
+
+template<class Point>
+typename CoverTree<Point>::CoverTreeNode* CoverTree<Point>::find_node_with_point(const Point& p) const {
+    if (_root == NULL) return NULL;
+    
+    return find_node_with_point_recursive(_root, p);
+}
+
+template<class Point>
+typename CoverTree<Point>::CoverTreeNode* CoverTree<Point>::find_node_with_point_recursive(CoverTreeNode* node, const Point& p) const {
+    if (node == NULL) return NULL;
+    
+    // Check if this node contains the point
+    if (node->has_point(p)) return node;
+    
+    // Check if any child nodes contain the point
+    std::vector<CoverTreeNode*> all_children = node->get_all_children();
+    for (typename std::vector<CoverTreeNode*>::const_iterator it = all_children.begin();
+         it != all_children.end(); ++it) {
+        CoverTreeNode* result = find_node_with_point_recursive(*it, p);
+        if (result != NULL) return result;
+    }
+    
+    return NULL;
 }
 
 /** @}*/

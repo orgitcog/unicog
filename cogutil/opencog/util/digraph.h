@@ -26,6 +26,8 @@
 #include <queue>
 #include <vector>
 #include <set>
+#include <random>
+#include <algorithm>
 #include <opencog/util/algorithm.h>
 #include <opencog/util/exceptions.h>
 #include <opencog/util/oc_assert.h>
@@ -93,7 +95,7 @@ Out randomized_topological_sort(digraph g, Out out)
         nodes(boost::make_counting_iterator(digraph::size_type(0)),
               boost::make_counting_iterator(g.n_nodes()));
     /// @todo replace default random generator by OpenCog's RandGen
-    std::random_shuffle(nodes.begin(), nodes.end());
+    std::shuffle(nodes.begin(), nodes.end(), std::default_random_engine());
     std::queue<value_t> q;
 
     for (value_t node : nodes)

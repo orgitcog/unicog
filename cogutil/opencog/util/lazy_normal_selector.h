@@ -25,6 +25,7 @@
 
 #include <opencog/util/lazy_selector.h>
 #include <opencog/util/oc_assert.h>
+#include <random>
 
 namespace opencog
 {
@@ -32,22 +33,20 @@ namespace opencog
  *  @{
  */
 
-//! apply lazy_selector but the select method returns always the same
-//! number, created for testing
-//
-// XXX FIXME this makes no sense; the normal distribution is not a
-// single number, the normal selector should return a normal
-// distribution with the given mean and deviation, right?
-///
+//! apply lazy_selector but the select method returns numbers following a normal distribution
+//! around the given mean with the given standard deviation
 struct lazy_normal_selector : public lazy_selector {
-    lazy_normal_selector(unsigned int n, unsigned int s = 0) :
-        lazy_selector(n), _s(s) {
-        OC_ASSERT(s < n);
+    lazy_normal_selector(unsigned int n, unsigned int mean = 0, unsigned int stddev = 1) :
+        lazy_selector(n), _mean(mean), _stddev(stddev), _rng(std::random_device{}()) {
+        OC_ASSERT(mean < n, "Mean must be less than n");
+        OC_ASSERT(stddev > 0, "Standard deviation must be positive");
     }
 protected:
-    unsigned int select();
+    unsigned int select() override;
 private:
-    unsigned int _s;
+    unsigned int _mean;
+    unsigned int _stddev;
+    mutable std::mt19937 _rng;
 };
 
 /** @}*/
