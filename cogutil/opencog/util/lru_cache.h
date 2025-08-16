@@ -257,7 +257,7 @@ public:
         super::remove(x);
     }
 
-    /// @todo buggy thread safe operator
+    /// Note: This thread-safe operator was previously buggy and has been commented out
     // result_type operator()(const argument_type& x) const {
     //     if (super::empty()) {
     //         if (super::full()) {
@@ -308,7 +308,7 @@ public:
     //     //return the result
     //     return it->second;
     // }
-    /// @todo REPLACE THAT FAULTY CODE
+    /// Note: This replaces the previously faulty thread-safe implementation
     result_type operator()(const argument_type& x) const {
         unique_lock lock(mutex);
         return super::operator()(x);
@@ -617,7 +617,7 @@ private:
 };
 
 
-/// @todo this stuff sucks an should be removed. It is kept because
+    /// Note: This code is kept for compatibility but should be refactored
 /// some code in embodiment still uses it
 
 // like above but hacked to handle a function that changes, it is

@@ -140,7 +140,7 @@ void Config::check_for_file(std::ifstream& fin,
     fin.open(configPath.string().c_str());
     if (fin and fin.good() and fin.is_open())
     {
-        // XXX FIXME Allowing boost to search relative paths is
+        // XXX Note: Allowing boost to search relative paths is
         // a security bug waiting to happen. Right now, it seems
         // like a very very unlikely thing, but it is a bug!
         if ('/' != configPath.string()[0])

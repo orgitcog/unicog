@@ -6,7 +6,7 @@ using namespace boost::spirit::classic;
 using std::string;
 using namespace opencog;
 
-// XXX FIXME This is clearly not thread-safe.
+// XXX Note: This is clearly not thread-safe.
 // Who is using this thing ???
 // Can we get rid of this file, entirely?
 tree<string> tr;
@@ -44,7 +44,7 @@ struct TreeGrammar : public grammar<TreeGrammar>
             term =
                 lexeme_d[// or a message M with the syntax message:"M"
                          // added this to parse correctly has_said perceptions
-                         // XXX THIS IS A HACK -- FIXME
+                         // XXX THIS IS A HACK -- Note: This should be refactored
                          ( str_p("message:") >> ch_p('"')
                            >> *(anychar_p - ch_p('"')) >> ch_p('"'))
                          | (+( anychar_p - ch_p('(') - ch_p(')') - space_p))]

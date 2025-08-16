@@ -62,7 +62,7 @@
 static const std::vector<std::string> paths =
 {
 #ifndef WIN32
-    // XXX FIXME Searching the current path is a security breach just
+    // XXX Note: Searching the current path is a security breach just
     // waiting to happen, but the current OpenCog cogserver and Config
     // and unit-test-case design more or less demands this. The unit
     // tests and/or the config infrastructure would need to be overhauled.

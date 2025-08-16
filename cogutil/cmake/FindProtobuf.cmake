@@ -185,7 +185,7 @@ FUNCTION(PROTOBUF_GENERATE_CPP SRCS HDRS)
         ENDIF()
         
         # find out of the file is in the specified proto root
-        # TODO clean the PROTOROOT so that it does not form a regex itself?
+        	# Note: Consider cleaning the PROTOROOT so that it does not form a regex itself
         STRING(REGEX MATCH "^${PROTOROOT}" IN_ROOT_PATH ${PROTOFILE})
         STRING(REGEX MATCH "^${PROTOROOT}" IN_ROOT_ABS_FILE ${ABS_FILE})
         

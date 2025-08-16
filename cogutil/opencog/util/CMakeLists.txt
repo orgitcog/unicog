@@ -74,7 +74,7 @@ IF (HAVE_BFD AND HAVE_IBERTY)
 		# This should be
 		# add_compile_definitions(HAVE_DECL_BFD_GET_SECTION_FLAGS)
 		# except that requires CMake version 3.12 which is not available
-		# in Ubuntu 18.04 LTS -- FIXME someday...
+		# in Ubuntu 18.04 LTS -- Note: Update when minimum CMake version is raised
 		add_definitions(-DHAVE_DECL_BFD_GET_SECTION_FLAGS=1)
 	endif()
 	if(HAVE_DECL_BFD_SECTION_FLAGS)

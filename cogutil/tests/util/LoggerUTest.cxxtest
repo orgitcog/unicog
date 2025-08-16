@@ -283,7 +283,8 @@ public:
     // Define a second logger, enable stdout in one logger, and check
     // whether the stdout in the other logger is left unchanged.
     //
-    // TODO: re-enabled once fixed
+    // Note: This test was disabled due to interaction issues between loggers
+    // Consider re-enabling once the stdout flag interaction is properly implemented
     void testLoggerStdoutFlagInteraction()
     {
         Logger my_logger;

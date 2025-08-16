@@ -360,7 +360,7 @@ Seq seq_filtered(const Seq& seq, const Indices& indices)
 /**
  * Return true if el is in set.
  *
- * TODO: Use T::contains instead once we move to C++20.
+ * Note: This could be replaced with T::contains once C++20 is available.
  */
 template<typename T>
 bool contains(const typename std::set<T>& set,

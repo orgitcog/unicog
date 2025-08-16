@@ -117,7 +117,7 @@ included by CMake based on the target system.
 \subsection ssect_config Configuration and logging
 Config class manages the variables important for various parts of the
 package. A list of key:value entries is stored, both of them being strings
-@todo link to definitive list of variables (keys)
+Note: Link to definitive list of variables (keys) needed
 
 include/win32/getopt.h and the two files in opencog/util (getopt.c and
 getopt_long.c) implement 

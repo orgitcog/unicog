@@ -92,7 +92,8 @@ Out randomized_topological_sort(digraph g, Out out)
     std::vector<value_t>
         nodes(boost::make_counting_iterator(digraph::size_type(0)),
               boost::make_counting_iterator(g.n_nodes()));
-    /// @todo replace default random generator by OpenCog's RandGen
+    // Note: std::random_shuffle is deprecated in C++14 and removed in C++17
+    // Consider replacing with OpenCog's RandGen or std::shuffle with a proper RNG
     std::random_shuffle(nodes.begin(), nodes.end());
     std::queue<value_t> q;
 

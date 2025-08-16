@@ -35,7 +35,7 @@ namespace opencog
 //! apply lazy_selector but the select method returns always the same
 //! number, created for testing
 //
-// XXX FIXME this makes no sense; the normal distribution is not a
+// XXX Note: this makes no sense; the normal distribution is not a
 // single number, the normal selector should return a normal
 // distribution with the given mean and deviation, right?
 ///

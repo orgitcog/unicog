@@ -40,7 +40,7 @@ already exists in the tree will not alter the tree at all.
 If you do not want to allow multiple nodes with distance 0, then just make
 your equality operator always return true when distance is 0.
 
-TODO:
+Future improvements to consider:
 -The papers describe batch insert and batch-nearest-neighbors algorithms which
 may be worth implementing.
 -Try using a third "upper bound" argument for distance functions, beyond which

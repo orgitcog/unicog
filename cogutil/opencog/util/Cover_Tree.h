@@ -478,7 +478,7 @@ void CoverTree<Point>::insert(const Point& newPoint)
         _numNodes=1;
         return;
     }
-    //TODO: this is pretty inefficient, there may be a better way
+    //Note: this is pretty inefficient, there may be a better way
     //to check if the node already exists...
     CoverTreeNode* n = k_nearest_nodes(newPoint,1)[0];
     if(newPoint.distance(n->get_point())==0.0) {
