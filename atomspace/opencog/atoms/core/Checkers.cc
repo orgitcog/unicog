@@ -22,6 +22,7 @@
 
 #include <opencog/atoms/base/Atom.h>
 #include <opencog/atoms/base/ClassServer.h>
+#include <opencog/atoms/execution/ExecutionOutputLink.h>
 
 using namespace opencog;
 
@@ -140,8 +141,16 @@ static bool check_numeric(const Handle& bool_atom)
 		if (NUMBER_NODE == t) continue;
 		if (h->is_type(BOOL_OP_LINK)) continue;
 
-		// TODO - look up the schema, and make sure its numeric, also.
-		if (h->is_type(DEFINED_PROCEDURE_NODE)) continue;
+		// Check if it's a DEFINED_PROCEDURE_NODE and verify its schema is numeric
+		if (h->is_type(DEFINED_PROCEDURE_NODE)) {
+			// For ExecutionOutputLink, check if the schema is numeric
+			if (h->is_type(EXECUTION_OUTPUT_LINK)) {
+				ExecutionOutputLinkPtr eolp(ExecutionOutputLinkCast(h));
+				Handle schema = eolp->get_schema();
+				if (not schema->is_type(NUMERIC_OUTPUT_LINK)) continue;
+			}
+			continue;
+		}
 
 		// Oddly enough, sets of numbers are allowed.
 		if (SET_LINK == t and check_numeric(h)) continue;

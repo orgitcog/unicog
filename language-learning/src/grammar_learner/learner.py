@@ -134,7 +134,11 @@ def learn(**kwargs):
         kwargs['context'] = context
 
     categories = add_disjuncts(categories, links, **kwargs)
-    # TODO: check every category has disjuncts?         # 81204,  blocked 81207
+    # Check if every category has disjuncts
+    categories_without_disjuncts = [i for i, disjuncts in enumerate(categories['disjuncts']) 
+                                   if i > 0 and (disjuncts is None or len(disjuncts) == 0)]
+    if categories_without_disjuncts:
+        logger.warning(f"Categories without disjuncts: {categories_without_disjuncts}")
     #  ? categories = prune_cats(categories, **kwargs)  # [F] ⇒ induce_grammar?
     #  ? re = check_cats(categories, **kwargs)
 
@@ -176,9 +180,34 @@ def learn(**kwargs):
         re09 = save_cat_tree(tree, output_categories, verbose='none')
     else:
         re09 = save_cat_tree(rules, output_categories, verbose='none')
-    # TODO: check file save error?
+    
+    # Check file save errors
+    if 'cat_tree_file' in re09:
+        cat_tree_file = re09['cat_tree_file']
+        if not os.path.exists(cat_tree_file) or os.path.getsize(cat_tree_file) == 0:
+            logger.error(f"Failed to save category tree file: {cat_tree_file}")
+            re09['error'] = 'category_tree_save_failed'
+        else:
+            logger.info(f"Category tree saved successfully: {cat_tree_file}")
+    else:
+        logger.error("Category tree save operation failed - no file path returned")
+        re09['error'] = 'category_tree_save_failed'
+    
     log.update(re09)
     re10 = save_link_grammar(rules, output_grammar, grammar_rules)
+    
+    # Check grammar file save errors
+    if 'grammar_file' in re10:
+        grammar_file = re10['grammar_file']
+        if not os.path.exists(grammar_file) or os.path.getsize(grammar_file) == 0:
+            logger.error(f"Failed to save grammar file: {grammar_file}")
+            re10['error'] = 'grammar_file_save_failed'
+        else:
+            logger.info(f"Grammar file saved successfully: {grammar_file}")
+    else:
+        logger.error("Grammar save operation failed - no file path returned")
+        re10['error'] = 'grammar_file_save_failed'
+    
     log.update(re10)
     log.update({'finish': str(UTC())})
     log.update({'grammar_learn_time': sec2string(time.time() - start)})

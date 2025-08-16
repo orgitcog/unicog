@@ -107,7 +107,11 @@ def _filter_parses_(**kwargs):  # 2019-04-06 stub  TODO: restructure    # 190406
     re.update([('parsed_sentences', len(sentences)), ('parsed_links', len(slinks))])
     # Count words
     dct = dict(Counter(x for x in list(itertools.chain.from_iterable(sentences))))
-    # TODO: remove stop words here?
+    # Remove stop words if specified
+    if 'stop_words' in kwargs and kwargs['stop_words']:
+        for stop_word in kwargs['stop_words']:
+            if stop_word in dct:
+                del dct[stop_word]
     tuples = sorted(dct.items(), key=lambda x: (-x[1], x[0]))
     words = np.asarray([''] + [x[0] for x in tuples])
     word_counts = np.asarray([0] + [x[1] for x in tuples])

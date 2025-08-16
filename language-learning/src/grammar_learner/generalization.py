@@ -45,7 +45,9 @@ def aggregate(categories, threshold, similarity_function, verbose = 'none'):
     for mset in merges:
         new_cluster_id = len(cats['parent'])
         cats['cluster'].append(cluster_id(new_cluster_id, new_cluster_id))
-        # TODO: check new_cluster_id > 25**n ⇒ change n_letters in _id's ?
+        # Check if cluster_id needs more letters (base 25 encoding)
+        if new_cluster_id > 25**2:  # More than 2 letters needed
+            logger.warning(f"Large cluster_id {new_cluster_id} may need more letters in encoding")
         cats['parent'].append(0)
         cats['children'].append(mset)
         cats['words'].append(set())

@@ -170,6 +170,31 @@ bool QueueValue::operator==(const Value& other) const
 
 // ==============================================================
 
+// Error reporting methods
+void QueueValue::set_error(const std::string& error_msg)
+{
+	_error_msg = error_msg;
+	_has_error = true;
+}
+
+bool QueueValue::has_error(void) const
+{
+	return _has_error;
+}
+
+std::string QueueValue::get_error(void) const
+{
+	return _error_msg;
+}
+
+void QueueValue::clear_error(void)
+{
+	_error_msg.clear();
+	_has_error = false;
+}
+
+// ==============================================================
+
 // Adds factory when library is loaded.
 DEFINE_VALUE_FACTORY(QUEUE_VALUE,
                      createQueueValue, std::vector<ValuePtr>)

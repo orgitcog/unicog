@@ -194,7 +194,7 @@ def files2links(**kwargs):  # 2018 legacy, 2019-02: » filter_lines, lines2links
 
 
 def filter_lines(lines, **kwargs):                                      # 90216
-    # TODO: logger = logging.getLogger(__name__ + ".filter_lines")
+    logger = logging.getLogger(__name__ + ".filter_lines")
     max_sentence_length = kwa(99, 'max_sentence_length', **kwargs) + 1
     max_unparsed_words = kwa(0, 'max_unparsed_words', **kwargs) + 1
     if lines[-1] != '': lines.append('')
@@ -230,7 +230,7 @@ def filter_lines(lines, **kwargs):                                      # 90216
 
 
 def lines2links(lines, **kwargs):                                       # 190410
-    # TODO: logger = logging.getLogger(__name__ + "lines2links")
+    logger = logging.getLogger(__name__ + "lines2links")
     context = kwa(2, 'context', **kwargs)
     group = True  # always? » kwa(True, 'group', **kwargs)? FIXME:DEL?
 
@@ -239,21 +239,30 @@ def lines2links(lines, **kwargs):                                       # 190410
         df = pd.DataFrame(columns=['word','link'])
         return df, {'filter_lines_error': 'empty_filtered_set'}
 
-    # df = pd.DataFrame(columns=['word', 'link', 'count'])
-    if context > 1:  # ddf - disjuncts DataFrame
-        df = mst2disjuncts(lines, **kwargs)[['word', 'link', 'count']]
-        unique_djs = df.groupby('link', as_index = False).sum()
-        avg_disjunct_count = round(len(df) / len(unique_djs), 1)
-        df['djlen'] = df['link'].apply(lambda x: x.count('&') + 1)
-        avg_disjunct_length = float(round(df['djlen'].mean(), 1))
-        max_disjunct_length = int(df['djlen'].max())
-        re['corpus_stats'].extend([
-            ['Unique disjuncts number', len(unique_djs)],
-            ['Total  disjuncts count ', len(df)],         # FIXME!
-            ['Average disjunct count ', avg_disjunct_count],
-            ['Average disjunct length', avg_disjunct_length],
-            ['Maximum disjunct length', max_disjunct_length]])
-        # TODO: re-calculate stats on df filtered in mst2words with min_word_count?
+            # df = pd.DataFrame(columns=['word', 'link', 'count'])
+        if context > 1:  # ddf - disjuncts DataFrame
+            df = mst2disjuncts(lines, **kwargs)[['word', 'link', 'count']]
+            # Apply min_word_count filtering to get accurate stats
+            min_word_count = kwa(1, 'min_word_count', **kwargs)
+            if min_word_count > 1:
+                # Filter df to only include words that meet the minimum count requirement
+                word_counts = df.groupby('word')['count'].sum()
+                valid_words = word_counts[word_counts >= min_word_count].index
+                df_filtered = df[df['word'].isin(valid_words)]
+            else:
+                df_filtered = df
+            
+            unique_djs = df_filtered.groupby('link', as_index = False).sum()
+            avg_disjunct_count = round(len(df_filtered) / len(unique_djs), 1)
+            df_filtered['djlen'] = df_filtered['link'].apply(lambda x: x.count('&') + 1)
+            avg_disjunct_length = float(round(df_filtered['djlen'].mean(), 1))
+            max_disjunct_length = int(df_filtered['djlen'].max())
+            re['corpus_stats'].extend([
+                ['Unique disjuncts number', len(unique_djs)],
+                ['Total  disjuncts count ', len(df_filtered)],
+                ['Average disjunct count ', avg_disjunct_count],
+                ['Average disjunct length', avg_disjunct_length],
+                ['Maximum disjunct length', max_disjunct_length]])
 
     elif context == 1:  # cdf - connectors DataFrame
         df = mst2connectors(lines, **kwargs)[['word', 'link', 'count']]  # cdf

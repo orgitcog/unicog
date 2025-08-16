@@ -68,12 +68,18 @@ void ThruCommands::init(const AtomSpacePtr& asp)
 		// We cannot write to nodes that are closed.
 		if (snp->connected())
 		{
+			// Check if the StorageNode is read-only
+			if (snp->get_read_only())
+			{
+				logger().info("[Thru Commands] Skipping read-only StorageNode %s\n",
+					snp->to_short_string().c_str());
+				continue;
+			}
+			
 			_targets.push_back(snp);
 			logger().info("[Thru Commands] Will pass-thru to %s\n",
 				snp->to_short_string().c_str());
 		}
-
-		// TODO: check if the StorageNode is read-only.
 	}
 
 	if (0 == _targets.size())

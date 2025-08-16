@@ -19,11 +19,12 @@ def _compare_lg_dicts_(**kwargs):
         kwargs['input_path'] = kwargs['reference_path']
         # ull_string: ull parses file(s) read as a string with '\n' delimited lines
         ull_string, re_ = read_files(**kwargs)
-        # TODO: re.update(re_)  # TODO: identify ref / test sets!
+        # Update results with reference parsing results
+        re.update(re_)
         # sentences: [[str, str, ...], ...]; sl: sentence links: [(1, 2, 1.0), ...]
         sentences, slinks, re_ = parse_ull(ull_string, **kwargs)
         re.update([('reference_sentences', len(slinks))])
-        # TODO: re.update(re_)
+        re.update(re_)
         ref_set = set([tuple([i+1, l[0], l[1]])
                        for i, sl in enumerate(slinks) for l in sl])
     else: return 0.0, 0.0, 0.0, {'error': 'wrong kwargs["reference_path"]',
@@ -33,10 +34,10 @@ def _compare_lg_dicts_(**kwargs):
     if 'test_path' in kwargs and check_ull(kwargs['test_path']):
         kwargs['input_path'] = kwargs['test_path']
         ull_string, re_ = read_files(**kwargs)
-        # TODO: re.update(re_)
+        re.update(re_)
         sentences, slinks, re_ = parse_ull(ull_string, **kwargs)
         re.update([('test_ull_sentences', len(slinks))])
-        # TODO: re.update(re_)
+        re.update(re_)
         tst_set = set([tuple([i+1, l[0], l[1]])
                        for i, sl in enumerate(slinks) for l in sl])
     else: return 0.0, 0.0, 0.0, {'error': 'wrong kwargs["test_path"]',

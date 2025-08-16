@@ -88,8 +88,8 @@ static bool is_comment(const char c)
 /// This ignores lines that start with a 'standard comment char'
 ///
 //
-// TODO: This routine should be extended so that comments that start
-// somewhere other than column 0 are also ignored.
+// This routine now handles comments that start anywhere in the line,
+// not just at column 0.
 //
 // The signature of this routine is the same as std:getline()
 //
@@ -99,7 +99,16 @@ std::istream& get_data_line(std::istream& is, std::string& line)
 	{
 		getline(is, line);
 		if (!is) return is;
-		if (is_comment(line[0])) continue;
+		
+		// Check if any character in the line is a comment character
+		bool is_comment_line = false;
+		for (char c : line) {
+			if (is_comment(c)) {
+				is_comment_line = true;
+				break;
+			}
+		}
+		if (is_comment_line) continue;
 
 		// Remove weird symbols at the start of the line (only).
 		removeNonASCII(line);

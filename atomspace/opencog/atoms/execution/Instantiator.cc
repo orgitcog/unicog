@@ -375,8 +375,10 @@ Handle Instantiator::walk_tree(const Handle& expr,
 			HandleSeq oset{body};
 			if (vardecl)
 				oset.insert(oset.begin(), vardecl);
-			// TODO: copy values
-			return createLink(std::move(oset), LAMBDA_LINK);
+			// Copy values from the original LambdaLink
+			Handle new_lambda = createLink(std::move(oset), LAMBDA_LINK);
+			new_lambda->copyValues(expr);
+			return new_lambda;
 		}
 		return expr;
 	}

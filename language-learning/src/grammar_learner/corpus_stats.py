@@ -37,9 +37,9 @@ def corpus_stats(lines, extended = False):
                         nlw[sentence[j]] += 1  # FIXME:DEL? nlw not returned
                     # nlws = set()
                 # sentence = []
-                if x[-1] == '.':
-                    sentence_lengths.append(len(x)-1)
-                else: sentence_lengths.append(len(x))
+                # Count only parsed words (excluding ###LEFT-WALL### and .)
+                parsed_word_count = len([w for w in x if w not in ['###LEFT-WALL###', '.']])
+                sentence_lengths.append(parsed_word_count)
                 sentence = x
                 nlws = set()  # non-linked words in sentence (indices: 0,1,...)
                 for i, word in enumerate(x):

@@ -205,7 +205,7 @@ def best_clusters(vdf, **kwargs):                                       # 90104
         else:
             clusters, silhouette, inertia = cluster_words_kmeans(vdf, n_clstrs)
             return clusters, silhouette, inertia
-    else:  # TODO: elif algorithm == 'kmeans'
+    elif algorithm == 'kmeans':  # Default kmeans clustering when no specific range is given
         # Check number of clusters <= word vector dimensionality
         max_clusters = min(max(crange[0], crange[1]), len(vdf),
                            max([x for x in list(vdf) if isinstance(x, int)]))
