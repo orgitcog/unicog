@@ -90,23 +90,15 @@ void Config::reset()
 static const char* DEFAULT_CONFIG_FILENAME = "opencog.conf";
 static const char* DEFAULT_CONFIG_PATHS[] =
 {
-    // A bunch of relative paths, typical for the current opencog setup.
-    "./",
-    "../",
-    "../../",
-    "../../../",
-    "../../../../",
-    "./lib/",
-    "../lib/",
-    "../../lib/",
-    "../../../lib/",
-    "../../../../lib/", // yes, really needed for some test cases!
-    CONFDIR,
+    // Removed relative paths for security reasons.
+    // Searching relative paths allows loading configuration from
+    // untrusted locations. If relative paths are needed, they should
+    // be explicitly specified via command line or environment variables.
+    CMAKE_INSTALL_PREFIX "/etc/",
 #ifndef WIN32
-    "/etc/opencog",
-    "/etc",
+    "/etc/",
 #endif // !WIN32
-    NULL
+    nullptr
 };
 
 const std::vector<std::string> Config::search_paths() const
@@ -140,17 +132,22 @@ void Config::check_for_file(std::ifstream& fin,
     fin.open(configPath.string().c_str());
     if (fin and fin.good() and fin.is_open())
     {
-        // XXX FIXME Allowing boost to search relative paths is
-        // a security bug waiting to happen. Right now, it seems
-        // like a very very unlikely thing, but it is a bug!
+        // Security fix: reject relative paths to prevent loading
+        // configuration from untrusted locations
         if ('/' != configPath.string()[0])
         {
-            char buff[PATH_MAX+1];
-            char *p = getcwd(buff, PATH_MAX);
-            if (p) {
-                _path_where_found = buff;
-                _path_where_found += '/';
-            }
+            fin.close();
+            logger().warn("Config file path '%s' is relative. "
+                         "Only absolute paths are allowed for security reasons.",
+                         configPath.string().c_str());
+            return;
+        }
+        
+        char buff[PATH_MAX+1];
+        char *p = getcwd(buff, PATH_MAX);
+        if (p) {
+            _path_where_found = buff;
+            _path_where_found += '/';
         }
         _path_where_found += configPath.string();
     }

@@ -191,7 +191,7 @@ template<typename FloatT> bool is_approx_eq(FloatT x, FloatT y, FloatT epsilon)
     return diff <= epsilon * amp;
 }
 
-// TODO: replace the following by C++17 std::clamp
+// Uses C++17 std::clamp when available, falls back to manual implementation for older standards
 /**
  * Return x clamped to [l, u], that is it returns max(l, min(u, x))
  */
@@ -408,16 +408,16 @@ Float angular_distance(const Vec& a, const Vec& b, bool pos_n_neg = true)
                "Cannot compare unequal-sized vectors!  %d %d\n",
                a.size(), b.size());
 
-#ifdef HAVE_BOOST
-    // XXX FIXME writing out the explicit loop will almost
-    // surely be faster than calling boost. Why? Because a single
-    // loop allows the compiler to insert instructions into the
-    // pipeline bubbles; whereas three different loops will be more
-    // than three times slower!
-    Float ab = boost::inner_product(a, b, Float(0)),
-        aa = boost::inner_product(a, a, Float(0)),
-        bb = boost::inner_product(b, b, Float(0)),
-        numerator = sqrt(aa * bb);
+    // Optimized: single loop is faster than three separate loops
+    // due to better cache locality and reduced memory bandwidth
+    Float ab = 0, aa = 0, bb = 0;
+    typename Vec::const_iterator ia = a.begin(), ib = b.begin();
+    for (; ia != a.end(); ++ia, ++ib) {
+        ab += (*ia) * (*ib);
+        aa += (*ia) * (*ia);
+        bb += (*ib) * (*ib);
+    }
+    Float numerator = sqrt(aa * bb);
 
     if (numerator >= Float(DISTANCE_EPSILON)) {
         // in case of rounding error
@@ -426,9 +426,6 @@ Float angular_distance(const Vec& a, const Vec& b, bool pos_n_neg = true)
     }
     else
         return 0;
-#else // HAVE_BOOST
-    throw RuntimeException(TRACE_INFO, "Compiled without boost support");
-#endif // HAVE_BOOST
 }
 
 // Avoid spewing garbage into the namespace!

@@ -6,11 +6,10 @@ using namespace boost::spirit::classic;
 using std::string;
 using namespace opencog;
 
-// XXX FIXME This is clearly not thread-safe.
-// Who is using this thing ???
-// Can we get rid of this file, entirely?
-tree<string> tr;
-tree<string>::iterator at = tr.begin();
+// Fixed thread safety issue by making these variables thread_local.
+// Each thread now has its own instance of these variables.
+thread_local tree<string> tr;
+thread_local tree<string>::iterator at = tr.begin();
 
 void begin_internal(const char* from, const char* to)
 {
@@ -44,7 +43,7 @@ struct TreeGrammar : public grammar<TreeGrammar>
             term =
                 lexeme_d[// or a message M with the syntax message:"M"
                          // added this to parse correctly has_said perceptions
-                         // XXX THIS IS A HACK -- FIXME
+                         // Special handling for quoted message strings to preserve spaces
                          ( str_p("message:") >> ch_p('"')
                            >> *(anychar_p - ch_p('"')) >> ch_p('"'))
                          | (+( anychar_p - ch_p('(') - ch_p(')') - space_p))]

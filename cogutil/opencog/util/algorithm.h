@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <set>
-#include <boost/bind/bind.hpp>
+#include <functional>
 
 #include <opencog/util/numeric.h>
 #include <opencog/util/exceptions.h>
@@ -265,7 +265,7 @@ Out n_way_partition(It begin, It end, const Pred p, int n, Out out)
 {
 	// could be made more efficient if needed
 	for (int i = 0;i < n - 1;++i)
-		*out++ = begin = std::partition(begin, end, boost::bind(p, boost::placeholders::_1) == i);
+		*out++ = begin = std::partition(begin, end, std::bind(std::equal_to<int>(), std::bind(p, std::placeholders::_1), i));
 	return out;
 }
 
@@ -360,7 +360,7 @@ Seq seq_filtered(const Seq& seq, const Indices& indices)
 /**
  * Return true if el is in set.
  *
- * TODO: Use T::contains instead once we move to C++20.
+ * Uses C++20 T::contains when available, falls back to find() for older standards.
  */
 template<typename T>
 bool contains(const typename std::set<T>& set,
@@ -391,6 +391,25 @@ void clear_by_swap(C& c)
 {
 	C empty;
 	c.swap(empty);
+}
+
+/**
+ * Check if container contains an element.
+ * When C++20 is widely adopted, this can be replaced with the
+ * standard container contains() method where available.
+ */
+template<typename Set>
+bool contains(const Set& s, const typename Set::key_type& e) {
+#if __cplusplus >= 202002L
+	// Use C++20 contains method if available
+	if constexpr (requires { s.contains(e); }) {
+		return s.contains(e);
+	} else {
+		return s.find(e) != s.cend();
+	}
+#else
+	return s.find(e) != s.cend();
+#endif
 }
 
 /** @}*/

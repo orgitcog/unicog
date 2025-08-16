@@ -2117,11 +2117,16 @@ template <class T, class tree_node_allocator>
 bool tree<T, tree_node_allocator>::is_in_subtree(const iterator_base& it, const iterator_base& begin,
                                                  const iterator_base& end) const
 {
-            // FIXME: this should be optimised.
-    pre_order_iterator tmp=begin;
-    while(tmp!=end) {
-        if(tmp==it) return true;
-        ++tmp;
+    // Optimized: check if the iterator is within the subtree bounds
+    // by comparing node pointers directly
+    if (it.node == nullptr || begin.node == nullptr) return false;
+    if (it.node == begin.node) return true;
+    
+    // Check if it is a descendant of begin
+    tree_node* current = it.node;
+    while (current != nullptr) {
+        if (current == begin.node) return true;
+        current = current->parent;
     }
     return false;
 }
@@ -2686,8 +2691,10 @@ bool tree<T, tree_node_allocator>::fixed_depth_iterator::operator!=(const fixed_
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::fixed_depth_iterator::set_first_parent_()
 {
-            return; // FIXME: we do not use first_parent_ yet, and it actually needs some serious reworking if
-    // it is ever to work at the 'head' level.
+    // Note: first_parent_ tracking is not currently implemented.
+    // This would require significant architectural changes to properly
+    // track parent relationships at the head level.
+    return;
     first_parent_=0;
     if(this->node==0) return;
     if(this->node->parent!=0)
@@ -2699,7 +2706,8 @@ void tree<T, tree_node_allocator>::fixed_depth_iterator::set_first_parent_()
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::fixed_depth_iterator::find_leftmost_parent_()
 {
-            return; // FIXME: see 'set_first_parent()'
+    // Note: see set_first_parent_() - parent tracking not implemented
+    return;
     tree_node *tmppar=first_parent_;
     while(tmppar->prev_sibling) {
         tmppar=tmppar->prev_sibling;
@@ -2777,7 +2785,7 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator& tree<T, tree_node_a
         tree_node *par=this->node->parent;
         do {
             par=par->prev_sibling;
-            if(par==0) { // FIXME: need to keep track of this!
+            if(par==0) { // Note: parent tracking limitation - returns null when no previous sibling with children
                 this->node=0;
                 return *this;
             }

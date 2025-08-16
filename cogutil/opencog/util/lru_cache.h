@@ -257,61 +257,58 @@ public:
         super::remove(x);
     }
 
-    /// @todo buggy thread safe operator
-    // result_type operator()(const argument_type& x) const {
-    //     if (super::empty()) {
-    //         if (super::full()) {
-    //             // a size-0 cache never needs hashing
-    //             return if_f(x);
-    //         }
-    //         lru_push_front(x);
-    //         result_type r = ifx_f(x);
-
-    //         unique_lock lock(mutex);
-    //         map_iter it =
-    //             super::_map.insert(make_pair(super::_lru.begin(),r)).first;
-    //         return it->second;
-    //     }
-
-    //     //search for it
-    //     super::_lru.push_front(x);
-    //     map_iter it = super::_map.find(super::_lru.begin());
-    //     super::_lru.pop_front();
-
-    //     //if we've found it, update lru and return
-    //     if (it != super::_map.end()) {
-    //         super::_lru.splice(super::_lru.begin(), super::_lru, it->first);
-    //         super::_hits++;
-    //         return it->second;
-    //     }
-
-    //     //otherwise, call _f and do an insertion
-    //     // briefly free lock for external call
-    //     // lock.unlock();
-    //     result_type r = ifail_f(x);
-    //     // lock.lock();
-    //     //--
-    //     super::_lru.push_front(x);
-    //     it = super::_map.insert(make_pair(super::_lru.begin(), r)).first;
-
-    //     //if full, remove least-recently-used
-    //     if (super::_map.size()>super::_n) {
-    //         super::_map.erase(--super::_lru.end());
-    //         super::_lru.pop_back();
-    //     }
-
-    //     OC_ASSERT(super::_map.size() <= super::_n,
-    //               "lru_cache - _map size greater than _n (%d).", super::_n);
-    //     OC_ASSERT(super::_lru.size() == super::_map.size(),
-    //               "lru_cache - _lru size different from _map size.");
-
-    //     //return the result
-    //     return it->second;
-    // }
-    /// @todo REPLACE THAT FAULTY CODE
+    // Thread-safe operator() implementation
     result_type operator()(const argument_type& x) const {
         unique_lock lock(mutex);
-        return super::operator()(x);
+        
+        if (super::empty()) {
+            if (super::full()) {
+                // a size-0 cache never needs hashing
+                lock.unlock();
+                return super::if_f(x);
+            }
+            super::_lru.push_front(x);
+            lock.unlock();
+            result_type r = super::ifx_f(x);
+            lock.lock();
+            map_iter it = super::_map.insert(make_pair(super::_lru.begin(), r)).first;
+            return it->second;
+        }
+
+        // Search for it
+        super::_lru.push_front(x);
+        map_iter it = super::_map.find(super::_lru.begin());
+
+        // If we've found it, update lru and return
+        if (it != super::_map.end()) {
+            super::_lru.pop_front();
+            super::_lru.splice(super::_lru.begin(), super::_lru, it->first);
+            ++super::_hits;
+            return it->second;
+        }
+
+        // Otherwise, call _f and do an insertion
+        super::_lru.pop_front();
+        lock.unlock();
+        result_type r = super::if_f(x);
+        lock.lock();
+        
+        super::_lru.push_front(x);
+        it = super::_map.insert(make_pair(super::_lru.begin(), r)).first;
+
+        // If full, remove least-recently-used
+        if (super::_map.size() > super::_n) {
+            super::_map.erase(--super::_lru.end());
+            super::_lru.pop_back();
+        }
+
+        OC_ASSERT(super::_map.size() <= super::_n,
+                  "lru_cache - _map size greater than _n (%d).", super::_n);
+        OC_ASSERT(super::_lru.size() == super::_map.size(),
+                  "lru_cache - _lru size different from _map size.");
+
+        // Return the result
+        return it->second;
     }
 
     void clear() {
@@ -617,8 +614,8 @@ private:
 };
 
 
-    /// @todo this stuff sucks an should be removed. It is kept because
-/// some code in embodiment still uses it
+// Legacy cache implementation for backward compatibility with embodiment code.
+// This implementation should be replaced with proper use of lru_cache in the future.
 
 // like above but hacked to handle a function that changes, it is
 // embodiment, but all this is ugly and should be replaced by an

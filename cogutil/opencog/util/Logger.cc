@@ -69,8 +69,9 @@ using namespace opencog;
 #define MAX_PRINTF_STYLE_MESSAGE_SIZE (1<<15)
 const char* levelStrings[] = {"NONE", "ERROR", "WARN", "INFO", "DEBUG", "FINE"};
 
-#if defined(HAVE_GNU_BACKTRACE) /// @todo backtrace and backtrace_symbols
-                                /// is LINUX, we may need a WIN32 version
+#if defined(HAVE_GNU_BACKTRACE)
+// backtrace and backtrace_symbols are GNU/Linux specific.
+// For Windows support, consider using CaptureStackBackTrace or StackWalk64
 static void prt_backtrace(std::ostringstream& oss)
 {
 #define BT_BUFSZ 50
