@@ -113,6 +113,7 @@ PythonEval::PythonEval()
 
     _eval_done = true;
     _paren_count = 0;
+    _interrupt_requested = false;
     // Initialize Python objects and imports.
     //
     // Strange but true: one can use the atomspace, and put atoms
@@ -1470,15 +1471,36 @@ std::string PythonEval::poll_result()
 
 void PythonEval::interrupt(void)
 {
-    // What we want to do here is to somehow interrupt or throw an
-    // exception to the code that is running in the PyRun(), up above,
-    // in the execute_string() method. That is, we want to make it
-    // stop whatever infinite loop the user told it to run, and just
-    // return to the C code (possibly spewing exceptions, etc.)
-    // However, I cannot figure out how to implement this ...
-    _result += "PythonEval: interrupt not implemented!\n";
-
-    logger().warn("[PythonEval] interrupt not implemented!\n");
+    // Implement interrupt functionality using Python's signal handling
+    // This attempts to interrupt the currently running Python code
+    try {
+        // Set a flag to indicate interruption is requested
+        _interrupt_requested = true;
+        
+        // Try to use Python's signal mechanism if available
+        PyGILState_STATE gstate = PyGILState_Ensure();
+        
+        // Import the signal module and send SIGINT to the main thread
+        PyObject* signal_module = PyImport_ImportModule("signal");
+        if (signal_module) {
+            PyObject* main_thread = PyThreadState_Get();
+            if (main_thread) {
+                // Send SIGINT to interrupt execution
+                PyObject* result = PyObject_CallMethod(signal_module, "raise", "i", SIGINT);
+                if (result) Py_DECREF(result);
+            }
+            Py_DECREF(signal_module);
+        }
+        
+        PyGILState_Release(gstate);
+        
+        _result += "PythonEval: interrupt signal sent\n";
+        logger().info("[PythonEval] Interrupt signal sent to Python execution");
+        
+    } catch (const std::exception& e) {
+        _result += "PythonEval: interrupt failed - " + std::string(e.what()) + "\n";
+        logger().warn("[PythonEval] Interrupt failed: {}", e.what());
+    }
 }
 
 extern "C" {

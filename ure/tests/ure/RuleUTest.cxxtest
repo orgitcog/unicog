@@ -302,7 +302,6 @@ void RuleUTest::test_unify_target_deduction_3()
 
 	Handle rule = rules.begin()->first.get_rule();
 	// Expected up to an alpha conversion
-	// TODO
 	Handle expected =
 		_eval.eval_h("(BindLink"
 		             "  (VariableList"
@@ -416,8 +415,12 @@ void RuleUTest::test_unify_target_deduction_3()
 	logger().debug() << "rule = " << oc_to_string(rule);
 	logger().debug() << "expected = " << oc_to_string(expected);
 
+	// Compare the rule with expected result, allowing for alpha conversion
+	TS_ASSERT_EQUALS(rule->get_type(), expected->get_type());
+	TS_ASSERT_EQUALS(rule->get_arity(), expected->get_arity());
+	
+	// Use ScopeLink comparison for more detailed matching
 	ScopeLinkPtr expected_sc = ScopeLinkCast(expected);
-
 	TS_ASSERT(expected_sc->is_equal(rule));
 }
 

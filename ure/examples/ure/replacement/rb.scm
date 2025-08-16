@@ -8,8 +8,8 @@
 ;; link to not bring confusion about its PLN semantics.
 (define (gen-replacement-rule TYPE)
   (define (synonymous A B)
-    ;; TODO: use Set instead of List
-    (Evaluation (Predicate "synonymous") (List A B)))
+    ;; Use Set instead of List for better semantic representation
+    (Evaluation (Predicate "synonymous") (Set A B)))
   (let* ([semi-open (Interval (Number 0) (Number -1))]
 	 [LG (Glob "$LG")]
 	 [RG (Glob "$RG")]

@@ -21,8 +21,6 @@
 
 ;; Mathematics is synonymous to consciousness, supposedly.
 (define (synonymous A B)
-  (Evaluation
-    (Predicate "synonymous")
-    ;; TODO: use Set instead of List
-    (List A B)))
+  ;; Use Set instead of List for better semantic representation
+  (Evaluation (Predicate "synonymous") (Set A B)))
 (synonymous (Concept "Mathematics") (Concept "Consciousness"))

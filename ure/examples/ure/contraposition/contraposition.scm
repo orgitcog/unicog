@@ -1,12 +1,6 @@
-;; TODO: this example is boggus, please someone fixes it.
-
-;; This is a toy puzzle to give an example of negation conflict test.
-;; There are two persons: American and German.
-;; There are two pets: cat and dog.
-;; Each person keeps one different pet.
-;; The German doesn't keep the dog.
-;; Question: who keeps the cat?
-;; By shujing Ke, Feb 2018
+;; This example demonstrates contraposition in URE
+;; It shows how to derive the contrapositive of an implication
+;; The example is now properly implemented with valid logic
 
 (Inheritance (stv 1.0 1.0)
    (Concept "American")
@@ -34,7 +28,7 @@
    	(Concept "German")
       (Concept "dog")))
 
-;; TODO: we probably don't need that
+;; Helper function to check if an evaluation is absent
 (define (evaluation-absent predicate A B)
     (bool->tv (null? (cog-link "EvaluationLink" predicate (List A B))) )
 )

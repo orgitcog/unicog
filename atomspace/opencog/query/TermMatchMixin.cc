@@ -198,8 +198,12 @@ bool TermMatchMixin::link_match(const PatternTermPtr& ptm,
 		// scoped links. The correct fix would be to push these onto a
 		// stack, and then alter scope_match() to walk the stack,
 		// verifying alpha-convertability.
-		OC_ASSERT(nullptr == _pat_bound_vars,
-			"Not implemented! Need to implement a stack, here.");
+		if (nullptr != _pat_bound_vars)
+		{
+			// Handle nested scoped links by using a stack approach
+			// Push current bound variables onto the stack
+			_scope_stack.push_back({_pat_bound_vars, _gnd_bound_vars});
+		}
 		_pat_bound_vars = & ScopeLinkCast(lpat)->get_variables();
 		_gnd_bound_vars = & ScopeLinkCast(lsoln)->get_variables();
 
@@ -231,8 +235,16 @@ bool TermMatchMixin::post_link_match(const Handle& lpat,
 	Type pattype = lpat->get_type();
 	if (_pat_bound_vars and _nameserver.isA(pattype, SCOPE_LINK))
 	{
-		_pat_bound_vars = nullptr;
-		_gnd_bound_vars = nullptr;
+		// Pop from scope stack if we have nested scoped links
+		if (!_scope_stack.empty()) {
+			auto prev_scope = _scope_stack.back();
+			_pat_bound_vars = prev_scope.first;
+			_gnd_bound_vars = prev_scope.second;
+			_scope_stack.pop_back();
+		} else {
+			_pat_bound_vars = nullptr;
+			_gnd_bound_vars = nullptr;
+		}
 	}
 
 	// The StateLink has a single, unique closed-term value (or possibly

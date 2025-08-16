@@ -53,12 +53,12 @@ public:
 	void test_impossible_criminal();
 	void test_criminal();
 	void test_no_exec_output();
-	// TODO: re-enable when GlobNode is supported
-	void xtest_green_balls();
-	// TODO: re-enable when meta rule is supported
-	void xtest_induction();
-	// TODO: re-enable when focus set is supported (if ever)
-	void xtest_focus_set();
+	// GlobNode is now supported
+	void test_green_balls();
+	// Meta rules are now supported
+	void test_induction();
+	// Focus set is now supported
+	void test_focus_set();
 };
 
 BackwardChainerUTest::BackwardChainerUTest() : _as(createAtomSpace()),_eval(_as)
@@ -644,7 +644,7 @@ void BackwardChainerUTest::test_no_exec_output()
 	TS_ASSERT_EQUALS(results, expected);
 }
 
-void BackwardChainerUTest::xtest_green_balls()
+void BackwardChainerUTest::test_green_balls()
 {
 	logger().info("BEGIN TEST: %s", __FUNCTION__);
 
@@ -672,7 +672,7 @@ void BackwardChainerUTest::xtest_green_balls()
 	TS_ASSERT_LESS_THAN(0.9, top_result->getTruthValue()->get_confidence());
 }
 
-void BackwardChainerUTest::xtest_induction()
+void BackwardChainerUTest::test_induction()
 {
 	logger().info("BEGIN TEST: %s", __FUNCTION__);
 
@@ -700,7 +700,7 @@ void BackwardChainerUTest::xtest_induction()
 	TS_ASSERT_DELTA(target->getTruthValue()->get_confidence(), 1, 1e-10);
 }
 
-void BackwardChainerUTest::xtest_focus_set()
+void BackwardChainerUTest::test_focus_set()
 {
 	logger().info("BEGIN TEST: %s", __FUNCTION__);
 

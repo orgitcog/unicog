@@ -128,6 +128,7 @@ class PythonEval : public GenericEval
         std::string _result;
         std::string _capture_stdout;
         int _paren_count;
+        bool _interrupt_requested;
         void eval_expr_line(const std::string&);
         bool check_for_error();
 

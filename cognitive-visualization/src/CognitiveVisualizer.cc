@@ -13,6 +13,7 @@
 #include <chrono>
 #include <sstream>
 #include <iostream>
+#include <nlohmann/json.hpp> // Added for JSON parsing
 
 using namespace opencog;
 
@@ -210,54 +211,6 @@ std::string CognitiveVisualizer::export_visualization_state() const
 
 bool CognitiveVisualizer::import_visualization_state(const std::string& json_state)
 {
-//<<<<<<< copilot/fix-17
-    // Basic JSON parsing for state import - parse key visualization parameters
-//    std::cout << "📥 Importing visualization state from JSON..." << std::endl;
-    
-    // Simple JSON parsing for core parameters
-//    try {
-        // Parse zoom_level
-//        size_t zoom_pos = json_state.find("\"zoom_level\":");
-//        if (zoom_pos != std::string::npos) {
-//            size_t start = json_state.find(":", zoom_pos) + 1;
-//            size_t end = json_state.find(",", start);
-//            if (end == std::string::npos) end = json_state.find("}", start);
-//            if (start < end) {
-//                std::string zoom_str = json_state.substr(start, end - start);
-//                zoom_level_ = std::stod(zoom_str);
-//            }
-//        }
-        
-        // Parse attention_threshold
-//        size_t threshold_pos = json_state.find("\"attention_threshold\":");
-//        if (threshold_pos != std::string::npos) {
-//            size_t start = json_state.find(":", threshold_pos) + 1;
-//            size_t end = json_state.find(",", start);
-//            if (end == std::string::npos) end = json_state.find("}", start);
-//            if (start < end) {
-//                std::string threshold_str = json_state.substr(start, end - start);
-//                attention_threshold_ = std::stod(threshold_str);
-//            }
-//        }
-        
-        // Parse real_time_mode
-//        size_t realtime_pos = json_state.find("\"real_time_mode\":");
-//        if (realtime_pos != std::string::npos) {
-//            size_t start = json_state.find(":", realtime_pos) + 1;
-//            size_t end = json_state.find(",", start);
-//            if (end == std::string::npos) end = json_state.find("}", start);
-//            if (start < end) {
-//                std::string mode_str = json_state.substr(start, end - start);
-//                real_time_mode_ = (mode_str.find("true") != std::string::npos);
-//            }
-//        }
-        
-//        std::cout << "✅ Successfully imported visualization state" << std::endl;
-//        return true;
-//    }
-//    catch (const std::exception& e) {
-//        std::cout << "⚠️ Error parsing JSON state: " << e.what() << std::endl;
-//=======
     std::cout << "📥 Importing visualization state from JSON..." << std::endl;
     
     if (json_state.empty()) {
@@ -371,16 +324,52 @@ bool CognitiveVisualizer::import_visualization_state(const std::string& json_sta
         attention_intensities_.clear();
         cognitive_salience_.clear();
         
-        // TODO: Implement full node_positions, attention_intensities, and cognitive_salience parsing
-        // For now, this implementation handles the basic state fields
-        std::cout << "⚠️  Note: Full node data parsing not yet implemented - only basic state restored" << std::endl;
+        // Parse node_positions, attention_intensities, and cognitive_salience from JSON
+        if (json_state.contains("node_positions") && json_state["node_positions"].is_object()) {
+            for (const auto& node_pair : json_state["node_positions"].items()) {
+                const std::string& node_id = node_pair.key();
+                const auto& pos_data = node_pair.value();
+                
+                if (pos_data.is_array() && pos_data.size() >= 4) {
+                    std::vector<double> position = {
+                        pos_data[0].get<double>(),
+                        pos_data[1].get<double>(),
+                        pos_data[2].get<double>(),
+                        pos_data[3].get<double>()
+                    };
+                    node_positions_[node_id] = position;
+                }
+            }
+        }
+        
+        if (json_state.contains("attention_intensities") && json_state["attention_intensities"].is_object()) {
+            for (const auto& attn_pair : json_state["attention_intensities"].items()) {
+                const std::string& node_id = attn_pair.key();
+                if (attn_pair.value().is_number()) {
+                    attention_intensities_[node_id] = attn_pair.value().get<double>();
+                }
+            }
+        }
+        
+        if (json_state.contains("cognitive_salience") && json_state["cognitive_salience"].is_object()) {
+            for (const auto& sal_pair : json_state["cognitive_salience"].items()) {
+                const std::string& node_id = sal_pair.key();
+                if (sal_pair.value().is_number()) {
+                    cognitive_salience_[node_id] = sal_pair.value().get<double>();
+                }
+            }
+        }
+        
+        std::cout << "✅ Full node data parsing completed - imported " 
+                  << node_positions_.size() << " node positions, "
+                  << attention_intensities_.size() << " attention intensities, "
+                  << cognitive_salience_.size() << " cognitive salience values" << std::endl;
         
         std::cout << "✅ Visualization state import completed successfully" << std::endl;
         return true;
         
     } catch (const std::exception& e) {
         std::cout << "❌ Failed to import visualization state: " << e.what() << std::endl;
-//>>>>>>> main
         return false;
     }
 }

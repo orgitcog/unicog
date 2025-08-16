@@ -198,14 +198,32 @@ bool AndBIT::has_cycle(const Handle& h, HandleSet ancestors) const
 				bool unordered_premises =
 					arg->getOutgoingAtom(1)->get_type() == SET_LINK;
 				if (unordered_premises) {
-					OC_ASSERT(arity == 2,
-					          "Mixture of ordered and unordered"
-					          " premises not implemented!");
-					arg = arg->getOutgoingAtom(1);
-					for (const Handle& ph : arg->getOutgoingSet())
-						if (has_cycle(ph, ancestors))
-							return true;
-					return false;
+					// Handle mixed ordered and unordered premises
+					// For unordered premises, we need to process them as a set
+					if (arity == 2) {
+						// Simple case: just unordered premises
+						arg = arg->getOutgoingAtom(1);
+						for (const Handle& ph : arg->getOutgoingSet())
+							if (has_cycle(ph, ancestors))
+								return true;
+						return false;
+					} else {
+						// Mixed case: handle both ordered and unordered premises
+						// Process ordered premises first (indices 1 to arity-2)
+						for (Arity i = 1; i < arity - 1; ++i) {
+							Handle ph = arg->getOutgoingAtom(i);
+							if (has_cycle(ph, ancestors))
+								return true;
+						}
+						// Then process unordered premises (last atom)
+						Handle unordered_arg = arg->getOutgoingAtom(arity - 1);
+						if (unordered_arg->get_type() == SET_LINK) {
+							for (const Handle& ph : unordered_arg->getOutgoingSet())
+								if (has_cycle(ph, ancestors))
+									return true;
+						}
+						return false;
+					}
 				} else {
 					for (Arity i = 1; i < arity; ++i) {
 						Handle ph = arg->getOutgoingAtom(i);
@@ -267,12 +285,27 @@ std::string AndBIT::fcs_rewrite_to_ascii_art(const Handle& h) const
 				bool unordered_premises =
 					arg->getOutgoingAtom(1)->get_type() == SET_LINK;
 				if (unordered_premises) {
-					OC_ASSERT(arity == 2,
-					          "Mixture of ordered and unordered"
-					          " premises not implemented!");
-					arg = arg->getOutgoingAtom(1);
-					for (const Handle& ph : arg->getOutgoingSet())
-						premises_aas.push_back(fcs_rewrite_to_ascii_art(ph));
+					// Handle mixed ordered and unordered premises
+					// For unordered premises, we need to process them as a set
+					if (arity == 2) {
+						// Simple case: just unordered premises
+						arg = arg->getOutgoingAtom(1);
+						for (const Handle& ph : arg->getOutgoingSet())
+							premises_aas.push_back(fcs_rewrite_to_ascii_art(ph));
+					} else {
+						// Mixed case: handle both ordered and unordered premises
+						// Process ordered premises first (indices 1 to arity-2)
+						for (Arity i = 1; i < arity - 1; ++i) {
+							Handle ph = arg->getOutgoingAtom(i);
+							premises_aas.push_back(fcs_rewrite_to_ascii_art(ph));
+						}
+						// Then process unordered premises (last atom)
+						Handle unordered_arg = arg->getOutgoingAtom(arity - 1);
+						if (unordered_arg->get_type() == SET_LINK) {
+							for (const Handle& ph : unordered_arg->getOutgoingSet())
+								premises_aas.push_back(fcs_rewrite_to_ascii_art(ph));
+						}
+					}
 				} else {
 					for (Arity i = 1; i < arity; ++i) {
 						Handle ph = arg->getOutgoingAtom(i);

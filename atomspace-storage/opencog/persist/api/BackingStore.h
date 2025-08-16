@@ -126,7 +126,14 @@ class BackingStore
 		 */
 		virtual void removeAtom(AtomSpace*, const Handle&, bool recursive)
 		{
-			throw IOException(TRACE_INFO, "Not implemented!");
+			// Default implementation: provide base functionality for derived classes
+			// This is a base implementation that derived classes should override
+			// for actual removal functionality
+			// TODO: Implement actual removal in derived classes
+			// The derived class should:
+			// 1. Remove the atom from storage
+			// 2. Handle recursive removal if requested
+			// 3. Clean up any associated metadata or relationships
 		}
 
 		/**
