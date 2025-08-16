@@ -24,8 +24,12 @@ def test_catalog_contains_required_items():
         'representation/build_knobs.cc',  # MOSES Representation  
         'scoring_base.cc', # MOSES Scoring
         'table.h',         # MOSES Table
-        'Not implemented', # Should find the BackingStore.h items
-        'Ensemble scoring not implemented', # Should find the MOSES scoring item
+    ]
+    
+    # Specific TODO items that must exist
+    required_todo_patterns = [
+        'atomspace-storage/opencog/persist/api/BackingStore.h',  # BackingStore TODO items
+        'moses/scoring/bscores.h',  # MOSES scoring TODO items  
     ]
     
     missing_items = []
@@ -33,8 +37,18 @@ def test_catalog_contains_required_items():
         if item not in content:
             missing_items.append(item)
     
+    # Check for specific TODO patterns
+    missing_todo_patterns = []
+    for pattern in required_todo_patterns:
+        if pattern not in content:
+            missing_todo_patterns.append(pattern)
+    
     if missing_items:
         print(f"❌ Missing required items: {missing_items}")
+        return False
+    
+    if missing_todo_patterns:
+        print(f"❌ Missing required TODO patterns: {missing_todo_patterns}")
         return False
     
     # Check structure requirements
@@ -71,16 +85,16 @@ def test_catalog_statistics():
     with open(catalog_path, 'r') as f:
         content = f.read()
     
-    # Count checkboxes (should be many)
+    # Count checkboxes (should be many) 
     checkbox_count = content.count('- [ ]')
-    if checkbox_count < 100:  # Should have hundreds of TODOs
-        print(f"❌ Too few TODO items found: {checkbox_count}")
+    if checkbox_count < 700:  # Should have hundreds of TODOs (current catalog has ~823)
+        print(f"❌ Too few TODO items found: {checkbox_count}, expected at least 700")
         return False
     
     # Check for GitHub links
     github_link_count = content.count('github.com/OzCog/opencog-unified/blob/')
-    if github_link_count < 100:
-        print(f"❌ Too few GitHub links found: {github_link_count}")
+    if github_link_count < 700:  # Should have many GitHub links (similar to TODO count)
+        print(f"❌ Too few GitHub links found: {github_link_count}, expected at least 700")
         return False
     
     print(f"✅ Found {checkbox_count} TODO items with {github_link_count} GitHub links")

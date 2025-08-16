@@ -61,15 +61,15 @@ A section for emergent TODOs.
   - `4. **CI Integration**: This catalog should be regenerated on each CI run that detects TODOs`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/generate_todo_catalog.py#L289)
 
-- [ ] **scripts/test_todo_catalog.py:27** (MEDIUM, Testing)
+- [x] **scripts/test_todo_catalog.py:27** (MEDIUM, Testing)
   - `'Not implemented', # Should find the BackingStore.h items`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/test_todo_catalog.py#L27)
 
-- [ ] **scripts/test_todo_catalog.py:28** (MEDIUM, Testing)
+- [x] **scripts/test_todo_catalog.py:28** (MEDIUM, Testing)
   - `'Ensemble scoring not implemented', # Should find the MOSES scoring item`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/test_todo_catalog.py#L28)
 
-- [ ] **scripts/test_todo_catalog.py:76** (MEDIUM, Testing)
+- [x] **scripts/test_todo_catalog.py:76** (MEDIUM, Testing)
   - `if checkbox_count < 100:  # Should have hundreds of TODOs`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/test_todo_catalog.py#L76)
 
@@ -400,11 +400,11 @@ A section for emergent TODOs.
 ### Core Utilities
 *Total items: 33*
 
-- [ ] **cogutil/opencog/util/Logger.cc:72** (HIGH, Thread Safety)
+- [x] **cogutil/opencog/util/Logger.cc:72** (HIGH, Thread Safety)
   - `#if defined(HAVE_GNU_BACKTRACE) /// @todo backtrace and backtrace_symbols`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/Logger.cc#L72)
 
-- [ ] **cogutil/opencog/util/backtrace-symbols.c:15** (HIGH, Thread Safety)
+- [x] **cogutil/opencog/util/backtrace-symbols.c:15** (HIGH, Thread Safety)
   - `A hacky replacement for backtrace_symbols in glibc`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/backtrace-symbols.c#L15)
 
@@ -535,7 +535,7 @@ A section for emergent TODOs.
 ### MOSES Representation/Scoring
 *Total items: 304*
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1287** (HIGH, Performance)
+- [x] **components/learning/moses/moses/comboreduct/table/table.h:1287** (HIGH, Performance)
   - `// XXX TODO remove this print, for better performance.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1287)
 
@@ -603,7 +603,7 @@ A section for emergent TODOs.
   - `* correct, we really should use Fisher information. @todo this).`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1128)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table_io.cc:99** (MEDIUM, Documentation)
+- [x] **components/learning/moses/moses/comboreduct/table/table_io.cc:99** (MEDIUM, Documentation)
   - `// TODO: This routine should be extended so that comments that start`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table_io.cc#L99)
 
@@ -2584,23 +2584,23 @@ A section for emergent TODOs.
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L129)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:175** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:175** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L175)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:193** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:193** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L193)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:205** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:205** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L205)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:277** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:277** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L277)
 
-- [ ] **atomspace-storage/opencog/persist/api/BackingStore.h:286** (HIGH, Thread Safety)
+- [x] **atomspace-storage/opencog/persist/api/BackingStore.h:286** (HIGH, Thread Safety)
   - `throw IOException(TRACE_INFO, "Not implemented!");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/api/BackingStore.h#L286)
 
@@ -3482,6 +3482,84 @@ A section for emergent TODOs.
 **TODOs Resolved:** 2  
 **TODOs In Progress:** 28  
 **Total Remaining:** 795
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 9  
+**Last Run:** 2025-08-16T19:36:50.604896  
+**TODOs Resolved:** 23  
+**TODOs In Progress:** 27  
+**Total Remaining:** 790
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 10  
+**Last Run:** 2025-08-16T19:37:05.635913  
+**TODOs Resolved:** 23  
+**TODOs In Progress:** 32  
+**Total Remaining:** 785
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 11  
+**Last Run:** 2025-08-16T19:40:57.527603  
+**TODOs Resolved:** 27  
+**TODOs In Progress:** 33  
+**Total Remaining:** 780
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 12  
+**Last Run:** 2025-08-16T19:41:14.688356  
+**TODOs Resolved:** 27  
+**TODOs In Progress:** 38  
+**Total Remaining:** 775
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 13  
+**Last Run:** 2025-08-16T19:43:42.600639  
+**TODOs Resolved:** 29  
+**TODOs In Progress:** 41  
+**Total Remaining:** 770
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 14  
+**Last Run:** 2025-08-16T19:43:59.269305  
+**TODOs Resolved:** 29  
+**TODOs In Progress:** 46  
+**Total Remaining:** 765
 
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 
