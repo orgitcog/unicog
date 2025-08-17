@@ -1,5 +1,8 @@
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
+find_dependency(CogUtil CONFIG REQUIRED)
+
 include("@CMAKE_INSTALL_PREFIX@/lib/cmake/AtomSpace/AtomSpaceTargets.cmake")
 
 # Execution depends on atomspace and atomspace depends on execution,
