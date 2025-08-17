@@ -3577,6 +3577,32 @@ A section for emergent TODOs.
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 
 ---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 17  
+**Last Run:** 2025-08-17T08:26:05.166069  
+**TODOs Resolved:** 35  
+**TODOs In Progress:** 55  
+**Total Remaining:** 758
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 18  
+**Last Run:** 2025-08-17T08:27:23.267482  
+**TODOs Resolved:** 35  
+**TODOs In Progress:** 60  
+**Total Remaining:** 753
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
 ## Meta-Cognitive Enhancement Instructions
 
 ### For Maintainers: Updating This List
