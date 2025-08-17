@@ -539,7 +539,7 @@ A section for emergent TODOs.
   - `// XXX TODO remove this print, for better performance.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1287)
 
-- [ ] **components/learning/moses/moses/feature-selection/algo/simple.h:118** (HIGH, Performance)
+- [x] **components/learning/moses/moses/feature-selection/algo/simple.h:118** (HIGH, Performance)
   - `// performance... TODO try this, if this is actually a bottleneck.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/feature-selection/algo/simple.h#L118)
 
@@ -623,23 +623,23 @@ A section for emergent TODOs.
   - `// we should count logical and, logical_or, below ..!?!? TODO, clarify.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/moses/complexity.cc#L52)
 
-- [ ] **components/learning/moses/moses/moses/moses/moses_main.h:102** (MEDIUM, Feature Completion)
+- [x] **components/learning/moses/moses/moses/moses/moses_main.h:102** (MEDIUM, Feature Completion)
   - `// XXX TODO this should be fixed, someday...`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/moses/moses_main.h#L102)
 
-- [ ] **components/learning/moses/moses/moses/moses/mpi_moses.cc:311** (MEDIUM, Feature Completion)
+- [x] **components/learning/moses/moses/moses/moses/mpi_moses.cc:311** (MEDIUM, Feature Completion)
   - `// XXX TODO should probably fetch max_time from somewhere...`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/moses/mpi_moses.cc#L311)
 
-- [ ] **components/learning/moses/moses/moses/moses/mpi_moses.cc:562** (MEDIUM, Feature Completion)
+- [x] **components/learning/moses/moses/moses/moses/mpi_moses.cc:562** (MEDIUM, Feature Completion)
   - `print_stats_header(NULL, false /* XXX stats for diversity, should be fixed */);`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/moses/mpi_moses.cc#L562)
 
-- [ ] **components/learning/moses/moses/moses/moses/mpi_moses.cc:608** (MEDIUM, Feature Completion)
+- [x] **components/learning/moses/moses/moses/moses/mpi_moses.cc:608** (MEDIUM, Feature Completion)
   - `// XXX TODO instead of overwritting the demeID it should be`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/moses/mpi_moses.cc#L608)
 
-- [ ] **components/learning/moses/moses/moses/moses/neighborhood_sampling.h:249** (MEDIUM, Feature Completion)
+- [x] **components/learning/moses/moses/moses/moses/neighborhood_sampling.h:249** (MEDIUM, Feature Completion)
   - `* XXX TODO: the current algo could be speeded up a fair bit, cutting`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/moses/neighborhood_sampling.h#L249)
 
@@ -3560,6 +3560,19 @@ A section for emergent TODOs.
 **TODOs Resolved:** 29  
 **TODOs In Progress:** 46  
 **Total Remaining:** 765
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 16  
+**Last Run:** 2025-08-17T03:52:23.876597  
+**TODOs Resolved:** 35  
+**TODOs In Progress:** 50  
+**Total Remaining:** 763
 
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 
