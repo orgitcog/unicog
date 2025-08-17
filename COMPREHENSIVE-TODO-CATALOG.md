@@ -695,11 +695,11 @@ A section for emergent TODOs.
   - `"TODO could be detected automatically.\n")`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/main/eval-table.cc#L279)
 
-- [ ] **moses/moses/comboreduct/table/table.h:782** (MEDIUM, Feature Completion)
+- [x] **moses/moses/comboreduct/table/table.h:782** (MEDIUM, Feature Completion)
   - `* TODO: we really should use iterators here, not column numbers.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L782)
 
-- [ ] **moses/moses/comboreduct/table/table.h:784** (MEDIUM, Feature Completion)
+- [x] **moses/moses/comboreduct/table/table.h:784** (MEDIUM, Feature Completion)
   - `* TODO: should be generalized for multi_type_seq rather than`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L784)
 
@@ -3573,6 +3573,84 @@ A section for emergent TODOs.
 **TODOs Resolved:** 35  
 **TODOs In Progress:** 50  
 **Total Remaining:** 763
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 17  
+**Last Run:** 2025-08-17T08:26:05.166069  
+**TODOs Resolved:** 35  
+**TODOs In Progress:** 55  
+**Total Remaining:** 758
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 18  
+**Last Run:** 2025-08-17T08:27:23.267482  
+**TODOs Resolved:** 35  
+**TODOs In Progress:** 60  
+**Total Remaining:** 753
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 19  
+**Last Run:** 2025-08-17T08:31:47.878157  
+**TODOs Resolved:** 37  
+**TODOs In Progress:** 63  
+**Total Remaining:** 748
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 20  
+**Last Run:** 2025-08-17T08:36:02.047580  
+**TODOs Resolved:** 38  
+**TODOs In Progress:** 66  
+**Total Remaining:** 744
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 21  
+**Last Run:** 2025-08-17T08:37:34.016490  
+**TODOs Resolved:** 38  
+**TODOs In Progress:** 69  
+**Total Remaining:** 741
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 22  
+**Last Run:** 2025-08-17T08:38:28.111959  
+**TODOs Resolved:** 38  
+**TODOs In Progress:** 73  
+**Total Remaining:** 737
 
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 
