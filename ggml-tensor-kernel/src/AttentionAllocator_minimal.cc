@@ -15,11 +15,7 @@
 
 #include "ggml.h"
 #include "ggml-cpu.h"
-#include <opencog/atoms/base/Atom.h>
-#include <opencog/atoms/base/Handle.h>
-#include <opencog/atoms/base/Link.h>
-#include <opencog/atoms/base/Node.h>
-#include <opencog/atoms/truthvalue/TruthValue.h>
+#include "atomspace_stub.h"
 
 namespace opencog {
 

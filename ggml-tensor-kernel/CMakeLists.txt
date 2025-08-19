@@ -40,6 +40,21 @@ file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/atomspace_stub.h "
 
 namespace opencog {
     typedef uint64_t Type;
+    
+    // Atom types for cognitive primitives
+    static const Type NODE_TYPE = 1;
+    static const Type LINK_TYPE = 2;
+    static const Type CONCEPT_NODE = 3;
+    static const Type PREDICATE_NODE = 4; 
+    static const Type NUMBER_NODE = 5;
+    static const Type EVALUATION_LINK = 6;
+    static const Type LIST_LINK = 7;
+    static const Type INHERITANCE_LINK = 8;
+    static const Type SIMILARITY_LINK = 9;
+    static const Type AND_LINK = 10;
+    static const Type OR_LINK = 11;
+    static const Type SET_LINK = 12;
+    
     class Handle {
     public:
         static const Handle UNDEFINED;
@@ -56,6 +71,18 @@ namespace opencog {
     public:
         AtomSpace() = default;
         virtual ~AtomSpace() = default;
+        
+        // Stub methods for cognitive primitive integration
+        Handle add_node(Type type, const std::string& name) {
+            return Handle(++next_uuid_);
+        }
+        
+        Handle add_link(Type type, const std::vector<Handle>& outgoing) {
+            return Handle(++next_uuid_);
+        }
+        
+    private:
+        static uint64_t next_uuid_;
     };
 }
 
@@ -75,6 +102,7 @@ file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/atomspace_stub.cc "
 
 namespace opencog {
     const Handle Handle::UNDEFINED = Handle(0);
+    uint64_t AtomSpace::next_uuid_ = 100;
 }
 ")
 
@@ -85,6 +113,7 @@ add_library(ggml-tensor-kernel-minimal SHARED
     src/TensorKernel_minimal.cc
     src/AtomSpaceTensorMapper_minimal.cc
     src/AttentionAllocator_minimal.cc
+    src/CognitivePrimitive.cc
     ${CMAKE_CURRENT_BINARY_DIR}/atomspace_stub.cc
 )
 
@@ -96,8 +125,12 @@ target_link_libraries(ggml-tensor-kernel-minimal
 add_executable(test-tensor-kernel-minimal test_tensor_kernel_minimal.cc)
 target_link_libraries(test-tensor-kernel-minimal ggml-tensor-kernel-minimal ${GGML_LIBRARIES})
 
+# Create cognitive primitive test
+add_executable(test-cognitive-primitive test_cognitive_primitive_implementation.cc)
+target_link_libraries(test-cognitive-primitive ggml-tensor-kernel-minimal ${GGML_LIBRARIES})
+
 # Install targets
-install(TARGETS ggml-tensor-kernel-minimal test-tensor-kernel-minimal
+install(TARGETS ggml-tensor-kernel-minimal test-tensor-kernel-minimal test-cognitive-primitive
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
 )

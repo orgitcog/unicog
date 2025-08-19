@@ -15,28 +15,12 @@
 
 #include "ggml.h"
 #include "ggml-cpu.h"
-#include <opencog/atoms/base/Atom.h>
-#include <opencog/atoms/base/Handle.h>
-#include <opencog/atoms/base/Link.h>
-#include <opencog/atoms/base/Node.h>
-#include <opencog/atoms/truthvalue/TruthValue.h>
+#include "atomspace_stub.h"
 
 namespace opencog {
 
-// Advanced Atom Types for comprehensive mapping
-enum AtomTypeEnum {
-    NODE_TYPE = 1,
-    LINK_TYPE = 2,
-    CONCEPT_NODE = 3,
-    PREDICATE_NODE = 4,
-    EVALUATION_LINK = 5,
-    INHERITANCE_LINK = 6,
-    SIMILARITY_LINK = 7,
-    AND_LINK = 8,
-    OR_LINK = 9,
-    LIST_LINK = 10,
-    SET_LINK = 11
-};
+// Advanced Atom Types for comprehensive mapping  
+// (Note: These are for documentation only - actual types come from atomspace_stub.h)
 
 // Serialization format for Atoms and tensors
 struct AtomSerializationData {
