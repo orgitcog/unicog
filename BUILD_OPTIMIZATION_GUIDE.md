@@ -2,6 +2,8 @@
 
 This guide explains how to use the comprehensive dependency analysis and build optimization system implemented for OpenCog Unified.
 
+**!!! ADD DEPENDENCY BUILD SEQUENCE: cogutil > atomspace > atomspace-storage > atomspace-rocks > cogserver > ...
+
 ## Quick Start
 
 ### 1. Run Dependency Analysis
