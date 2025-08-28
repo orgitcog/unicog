@@ -28,7 +28,7 @@ env:
   # CircleCI Compatibility Layer
   CIRCLE_PROJECT_USERNAME: "opencog"
   CCACHE_DIR: "/ws/ccache"
-  MAKEFLAGS: "-j2"
+  MAKEFLAGS: "-j$(nproc)"
 
 jobs:
   # =================================================================
