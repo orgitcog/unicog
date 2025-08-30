@@ -90,6 +90,16 @@ ELSE (ATOMSPACE_STORAGE_FOUND)
 	MESSAGE(FATAL_ERROR "AtomSpace Storage missing: it is needed!")
 ENDIF (ATOMSPACE_STORAGE_FOUND)
 
+# AtomSpace Rocks (optional) - provides RocksDB storage backend
+FIND_PACKAGE(AtomSpaceRocks CONFIG)
+IF (ATOMSPACE_ROCKS_FOUND)
+	MESSAGE(STATUS "AtomSpace Rocks found.")
+	ADD_DEFINITIONS(-DHAVE_ATOMSPACE_ROCKS)
+	SET(HAVE_ATOMSPACE_ROCKS 1)
+ELSE (ATOMSPACE_ROCKS_FOUND)
+	MESSAGE(STATUS "AtomSpace Rocks missing: needed for RocksDB storage backend tests.")
+ENDIF (ATOMSPACE_ROCKS_FOUND)
+
 # ----------------------------------------------------------
 # Check for boost. We need dynamic-linked, threaded libs by default.
 SET(Boost_USE_STATIC_LIBS OFF)
@@ -271,6 +281,7 @@ FIND_PACKAGE(Doxygen)
 # Show a summary of what we found, what we will do.
 
 SUMMARY_ADD("CogServer"    "CogServer network server" HAVE_SERVER)
+SUMMARY_ADD("AtomSpace Rocks" "RocksDB storage backend" HAVE_ATOMSPACE_ROCKS)
 SUMMARY_ADD("WebSockets"   "WebSockets network server" HAVE_OPENSSL)
 SUMMARY_ADD("Cython"       "Cython (python) bindings" HAVE_CYTHON)
 SUMMARY_ADD("Doxygen"      "Code documentation" DOXYGEN_FOUND)

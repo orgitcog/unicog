@@ -71,6 +71,10 @@ endif()
 if(TARGET atomspace-rocks)
     add_dependencies(atomspace-rocks atomspace)
 endif()
+# cogserver optionally depends on atomspace-rocks for RocksDB storage tests
+if(TARGET atomspace-rocks)
+    add_dependencies(cogserver atomspace-rocks)
+endif()
 # moses depends on cogutil
 if(TARGET moses)
     add_dependencies(moses cogutil)
