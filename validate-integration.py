@@ -28,6 +28,7 @@ class IntegrationValidator:
         
         # Component dependency map
         self.dependency_map = {
+            "atomspace-storage": ["atomspace"],
             "atomspace-rocks": ["atomspace"],
             "atomspace-restful": ["atomspace"],
             "unify": ["atomspace"],
@@ -46,7 +47,7 @@ class IntegrationValidator:
         
         # Phase organization
         self.phases = {
-            1: ["atomspace-rocks", "atomspace-restful", "moses"],
+            1: ["atomspace-storage", "atomspace-rocks", "atomspace-restful", "moses"],
             2: ["unify", "ure", "language-learning"],
             3: ["attention", "spacetime"],
             4: ["pln", "miner", "asmoses"],

@@ -44,6 +44,11 @@ add_subdirectory(atomspace)
 add_subdirectory(cogserver)
 
 # Phase I: Core Extensions (Week 1)
+# Add atomspace-storage if it exists and has CMakeLists.txt
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atomspace-storage/CMakeLists.txt")
+    add_subdirectory(atomspace-storage)
+endif()
+
 # Add atomspace-rocks if it exists and has CMakeLists.txt
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atomspace-rocks/CMakeLists.txt")
     add_subdirectory(atomspace-rocks)
@@ -58,6 +63,10 @@ endif()
 # Define inter-module dependencies explicitly
 add_dependencies(atomspace cogutil)
 add_dependencies(cogserver atomspace)
+# atomspace-storage depends on atomspace
+if(TARGET atomspace-storage)
+    add_dependencies(atomspace-storage atomspace)
+endif()
 # atomspace-rocks depends on atomspace
 if(TARGET atomspace-rocks)
     add_dependencies(atomspace-rocks atomspace)
