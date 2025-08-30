@@ -1,5 +1,5 @@
 {
-  "timestamp": 1755431219.0069838,
+  "timestamp": 1756565031.2846074,
   "validations": {
     "directory_structure": {
       "status": "invalid"
@@ -426,7 +426,7 @@
       "build_successful": false,
       "cmake_successful": false,
       "errors": [
-        "CMake failed: CMake Warning (dev) at cogutil/CMakeLists.txt:98 (FIND_PACKAGE):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\n\nBuilding for Ubuntu 24.04.2 LTS\n\nThe following components WILL NOT be built:\n-----------------------------------------------\n   Boost       - Components requiring Boost.\n   Doxygen     - Code documentation.\n   StackPrint  - Pretty printing of stack traces.\n   Unit tests  - Unit tests.\n   Util        - General utility library.\n\nCMake Error at cmake/OpenCogFindGuile.cmake:16 (MESSAGE):\n  Guile was not found; the scheme bindings will not be built.\n\n  To over-ride, make sure GUILE_LIBRARIES and GUILE_INCLUDE_DIRS are set.\nCall Stack (most recent call first):\n  atomspace/CMakeLists.txt:130 (include)\n\n\n"
+        "CMake failed: CMake Warning (dev) at cogutil/CMakeLists.txt:98 (FIND_PACKAGE):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\n\nBuilding for Ubuntu 24.04.3 LTS\n\nThe following components WILL NOT be built:\n-----------------------------------------------\n   Boost       - Components requiring Boost.\n   Doxygen     - Code documentation.\n   StackPrint  - Pretty printing of stack traces.\n   Unit tests  - Unit tests.\n   Util        - General utility library.\n\nCMake Error at cmake/OpenCogFindGuile.cmake:16 (MESSAGE):\n  Guile was not found; the scheme bindings will not be built.\n\n  To over-ride, make sure GUILE_LIBRARIES and GUILE_INCLUDE_DIRS are set.\nCall Stack (most recent call first):\n  atomspace/CMakeLists.txt:130 (include)\n\n\n"
       ],
       "status": "cmake_failed"
     },
