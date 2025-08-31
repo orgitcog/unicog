@@ -4,6 +4,7 @@
 
 #include "MinerConfig.h"
 #include <opencog/util/Logger.h>
+#include <opencog/ure/Rule.h>
 
 namespace opencog {
 namespace miner {
@@ -43,6 +44,17 @@ void MinerConfig::setMinSupport(double min_support)
 void MinerConfig::setMaxPatterns(int max_patterns)
 {
     this->max_patterns = max_patterns;
+}
+
+bool MinerConfig::validateRuleBasedMining(const opencog::ure::Rule& rule) const
+{
+    // Demonstrate URE dependency usage - validate if rule is suitable for mining
+    if (rule.is_valid()) {
+        logger().info("Miner: URE rule validation passed for pattern mining");
+        return true;
+    }
+    logger().warn("Miner: URE rule validation failed");
+    return false;
 }
 
 } // namespace miner

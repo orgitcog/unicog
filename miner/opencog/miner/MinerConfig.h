@@ -9,6 +9,7 @@
 
 #include <opencog/util/Config.h>
 #include <opencog/atomspace/AtomSpace.h>
+#include <opencog/ure/Rule.h>
 
 namespace opencog {
 namespace miner {
@@ -31,6 +32,9 @@ public:
     void loadConfig(const std::string& config_path = "");
     void setMinSupport(double min_support);
     void setMaxPatterns(int max_patterns);
+    
+    // URE integration for pattern mining
+    bool validateRuleBasedMining(const opencog::ure::Rule& rule) const;
     
     // Getters
     double getMinSupport() const { return min_support; }
