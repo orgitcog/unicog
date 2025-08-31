@@ -242,6 +242,7 @@ SET(DEPENDENCY_LIST
 	"libstdc++6 (>= 7.0)"
 	"libcogutil-dev (>= 2.0.2)"
 	"atomspace-dev (>= 5.0.3)"
+	"atomspace-storage-dev (>= 1.0.0)"
 )
 
 STRING(REPLACE ";" ", " MAIN_DEPENDENCIES "${DEPENDENCY_LIST}")

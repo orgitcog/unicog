@@ -1,5 +1,5 @@
 {
-  "timestamp": 1756565031.2846074,
+  "timestamp": 1756575050.065666,
   "validations": {
     "directory_structure": {
       "status": "invalid"
@@ -7,11 +7,34 @@
     "phase_1": {
       "phase": 1,
       "components": [
+        "atomspace-storage",
         "atomspace-rocks",
         "atomspace-restful",
         "moses"
       ],
       "validations": {
+        "atomspace-storage": {
+          "dependencies": {
+            "component": "atomspace-storage",
+            "dependencies": [
+              "atomspace"
+            ],
+            "satisfied": [
+              {
+                "dependency": "atomspace",
+                "path": "/home/runner/work/opencog-unified/opencog-unified/atomspace"
+              }
+            ],
+            "missing": [],
+            "status": "satisfied"
+          },
+          "cmake": {
+            "component": "atomspace-storage",
+            "cmake_file_exists": true,
+            "integrated_in_main": true,
+            "status": "integrated"
+          }
+        },
         "atomspace-rocks": {
           "dependencies": {
             "component": "atomspace-rocks",
