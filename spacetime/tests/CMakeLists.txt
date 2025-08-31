@@ -11,7 +11,7 @@ add_executable(spacetime_tests
 # Link with spacetime library and dependencies
 target_link_libraries(spacetime_tests 
     spacetime
-    ${ATOMSPACE_LIBRARIES}
+    atomspace
 )
 
 # Include test headers
