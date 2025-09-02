@@ -1,0 +1,70 @@
+{
+  "name": "🧠 Cognitive Cities Multi-Membrane Workspace",
+  "image": "mcr.microsoft.com/devcontainers/universal:linux",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.copilot",
+        "github.vscode-pull-request-github",
+        "ms-python.python",
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python3",
+        "cmake.configureOnOpen": true,
+        "files.associations": {
+          "*.scm": "scheme",
+          "*.ggml": "json"
+        },
+        "workbench.colorTheme": "GitHub Dark",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  
+  "postCreateCommand": "bash .devcontainer/setup-cognitive-membrane.sh",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  
+  "forwardPorts": [3000, 8080, 8000, 5000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Cognitive Visualization UI",
+      "onAutoForward": "notify"
+    },
+    "8080": {
+      "label": "CogServer API",
+      "onAutoForward": "silent"
+    },
+    "8000": {
+      "label": "AtomSpace REST API",
+      "onAutoForward": "silent"
+    },
+    "5000": {
+      "label": "Membrane Sync Interface",
+      "onAutoForward": "notify"
+    }
+  },
+  
+  "workspaceFolder": "/workspaces/cognitive-membrane",
+  
+  "shutdownAction": "stopCompose"
+}
