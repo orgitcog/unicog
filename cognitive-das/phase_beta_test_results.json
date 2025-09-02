@@ -1,0 +1,10 @@
+{
+  "tensor_coordinates": {
+    "coordinates_generated": 110,
+    "state_indices_generated": 110,
+    "min_state_index": 0,
+    "max_state_index": 109,
+    "reverse_mapping_unique": true,
+    "passed": true
+  }
+}
