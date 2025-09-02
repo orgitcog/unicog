@@ -8,7 +8,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from cognitive_membrane_sync.membrane_bridge import CognitiveMembraneBridge
+from membrane_bridge import CognitiveMembraneBridge
 
 def main():
     parser = argparse.ArgumentParser(
