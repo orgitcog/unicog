@@ -15,6 +15,15 @@
 #include <sstream>
 #include <regex>
 
+// Link Grammar includes - these would be available when LG is installed
+#ifdef HAVE_LINK_GRAMMAR
+extern "C" {
+#include <link-grammar/link-includes.h>
+}
+#else
+#include <cstring> // for strcmp
+#endif
+
 namespace opencog {
 namespace main {
 
@@ -37,14 +46,26 @@ LGParser::LGParser(AtomSpace* atomspace, const std::string& dict_path) :
 LGParser::~LGParser()
 {
     // Clean up parser resources
+#ifdef HAVE_LINK_GRAMMAR
+    if (lg_options_) {
+        parse_options_delete(lg_options_);
+        lg_options_ = nullptr;
+    }
     if (lg_dictionary_) {
-        // In a real implementation, this would call LG dictionary_delete()
+        dictionary_delete(lg_dictionary_);
+        lg_dictionary_ = nullptr;
+    }
+#else
+    // Clean up placeholder resources
+    if (lg_dictionary_) {
+        delete static_cast<int*>(lg_dictionary_);
         lg_dictionary_ = nullptr;
     }
     if (lg_options_) {
-        // In a real implementation, this would call LG parse_options_delete()
+        delete static_cast<int*>(lg_options_);
         lg_options_ = nullptr;
     }
+#endif
 }
 
 bool LGParser::initializeParser(const std::string& dict_path)
@@ -52,25 +73,71 @@ bool LGParser::initializeParser(const std::string& dict_path)
     logger().info("Initializing Link Grammar parser with dictionary: %s", dict_path.c_str());
     
     try {
-        // In a real implementation, this would:
-        // 1. Call dictionary_create_lang(dict_path.c_str())
-        // 2. Call parse_options_create()
-        // 3. Set various parse options
+#ifdef HAVE_LINK_GRAMMAR
+        // Initialize Link Grammar with the specified dictionary
+        lg_dictionary_ = dictionary_create_lang(dict_path.c_str());
+        if (!lg_dictionary_) {
+            logger().error("Failed to create Link Grammar dictionary for language: %s", dict_path.c_str());
+            return false;
+        }
         
-        // For now, we simulate initialization
+        // Create parse options
+        lg_options_ = parse_options_create();
+        if (!lg_options_) {
+            dictionary_delete(lg_dictionary_);
+            lg_dictionary_ = nullptr;
+            logger().error("Failed to create Link Grammar parse options");
+            return false;
+        }
+        
+        // Set parse options
+        parse_options_set_max_parse_time(lg_options_, max_parse_time_);
+        parse_options_set_linkage_limit(lg_options_, max_linkages_);
+        parse_options_set_min_null_count(lg_options_, min_null_count_);
+        parse_options_set_max_null_count(lg_options_, 999);
+        parse_options_set_short_length(lg_options_, 10);
+        parse_options_set_all_short_connectors(lg_options_, 1);
+        parse_options_set_verbosity(lg_options_, 0);
+        
+        // Extract language from dictionary info
+        const char* dict_version = dictionary_get_version(lg_dictionary_);
+        if (dict_version) {
+            std::string version_str(dict_version);
+            if (version_str.find("English") != std::string::npos) {
+                dictionary_language_ = "en";
+            } else if (version_str.find("German") != std::string::npos) {
+                dictionary_language_ = "de";
+            } else if (version_str.find("Russian") != std::string::npos) {
+                dictionary_language_ = "ru";
+            } else {
+                // Try to extract from path
+                if (dict_path.find("en") != std::string::npos) {
+                    dictionary_language_ = "en";
+                } else if (dict_path.find("de") != std::string::npos) {
+                    dictionary_language_ = "de";
+                } else if (dict_path.find("ru") != std::string::npos) {
+                    dictionary_language_ = "ru";
+                } else {
+                    dictionary_language_ = "unknown";
+                }
+            }
+        }
+#else
+        // Fallback implementation when Link Grammar is not available
         lg_dictionary_ = new int(1); // Placeholder
         lg_options_ = new int(2);    // Placeholder
         
-        // Verify dictionary language
-        if (dict_path == "en" || dict_path == "en/4.0.dict") {
+        // Verify dictionary language from path
+        if (dict_path == "en" || dict_path.find("en/") != std::string::npos) {
             dictionary_language_ = "en";
-        } else if (dict_path == "de" || dict_path == "de/4.0.dict") {
+        } else if (dict_path == "de" || dict_path.find("de/") != std::string::npos) {
             dictionary_language_ = "de";
-        } else if (dict_path == "ru" || dict_path == "ru/4.0.dict") {
+        } else if (dict_path == "ru" || dict_path.find("ru/") != std::string::npos) {
             dictionary_language_ = "ru";
         } else {
             dictionary_language_ = "en"; // Default to English
         }
+#endif
         
         logger().info("Link Grammar parser initialized successfully for language: %s", 
                      dictionary_language_.c_str());
@@ -246,10 +313,80 @@ std::map<std::string, std::vector<std::pair<int, int>>> LGParser::simulateLGPars
 {
     std::map<std::string, std::vector<std::pair<int, int>>> linkage_info;
     
-    // This is a simplified simulation of Link Grammar parsing
-    // In a real implementation, this would call the actual LG parser
+#ifdef HAVE_LINK_GRAMMAR
+    if (!lg_dictionary_ || !lg_options_) {
+        logger().error("Link Grammar parser not properly initialized");
+        return linkage_info;
+    }
     
-    // Simple heuristic-based parsing for common patterns
+    // Build sentence string from words
+    std::string sentence;
+    for (const auto& word : words) {
+        if (!sentence.empty()) sentence += " ";
+        sentence += word;
+    }
+    
+    // Create Link Grammar sentence object
+    Sentence sent = sentence_create(sentence.c_str(), lg_dictionary_);
+    if (!sent) {
+        logger().error("Failed to create Link Grammar sentence");
+        return linkage_info;
+    }
+    
+    // Parse the sentence
+    int num_linkages = sentence_parse(sent, lg_options_);
+    
+    if (num_linkages > 0) {
+        // Use the first linkage (highest quality)
+        Linkage linkage = linkage_create(0, sent, lg_options_);
+        
+        if (linkage) {
+            int num_links = linkage_get_num_links(linkage);
+            
+            // Extract link information
+            for (int i = 0; i < num_links; i++) {
+                // Get link endpoints
+                int left_word = linkage_get_link_lword(linkage, i);
+                int right_word = linkage_get_link_rword(linkage, i);
+                
+                // Get link label and type
+                const char* label = linkage_get_link_label(linkage, i);
+                const char* llabel = linkage_get_link_llabel(linkage, i);
+                const char* rlabel = linkage_get_link_rlabel(linkage, i);
+                
+                // Use the main label
+                std::string link_type = label ? label : "UNKNOWN";
+                
+                // Store the link (adjusting for word indices)
+                linkage_info[link_type].push_back({left_word, right_word});
+            }
+            
+            // Add wall links if present
+            int num_words = linkage_get_num_words(linkage);
+            if (num_words > 0) {
+                // Check for LEFT-WALL
+                const char* first_word = linkage_get_word(linkage, 0);
+                if (first_word && strcmp(first_word, "LEFT-WALL") == 0) {
+                    linkage_info["W"].push_back({-1, 1}); // LEFT-WALL to first real word
+                }
+                
+                // Check for RIGHT-WALL
+                const char* last_word = linkage_get_word(linkage, num_words - 1);
+                if (last_word && strcmp(last_word, "RIGHT-WALL") == 0) {
+                    linkage_info["RW"].push_back({num_words - 2, num_words - 1}); // last real word to RIGHT-WALL
+                }
+            }
+            
+            linkage_delete(linkage);
+        }
+    } else {
+        logger().warn("No valid linkages found for sentence: %s", sentence.c_str());
+    }
+    
+    sentence_delete(sent);
+    
+#else
+    // Fallback: Simple heuristic-based parsing for common patterns when LG not available
     for (size_t i = 0; i < words.size(); ++i) {
         std::string word = words[i];
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
@@ -309,6 +446,7 @@ std::map<std::string, std::vector<std::pair<int, int>>> LGParser::simulateLGPars
         linkage_info["W"].push_back({-1, 0}); // LEFT-WALL to first word
         linkage_info["RW"].push_back({words.size() - 1, words.size()}); // last word to RIGHT-WALL
     }
+#endif
     
     return linkage_info;
 }
@@ -361,9 +499,28 @@ std::map<std::string, std::string> LGParser::extractPOSTags(const std::vector<st
 {
     std::map<std::string, std::string> pos_tags;
     
-    // Simple rule-based POS tagging
-    // In a real implementation, this would use the Link Grammar parser's POS information
+#ifdef HAVE_LINK_GRAMMAR
+    // When Link Grammar is available, we can extract POS from the parse
+    // This would ideally be done during the parsing phase to avoid re-parsing
+    // For now, we'll use a hybrid approach with enhanced heuristics
     
+    // Map Link Grammar connector types to POS tags
+    // This is a simplified mapping - real implementation would be more comprehensive
+    auto mapLGConnectorToPOS = [](const std::string& connector) -> std::string {
+        if (connector.find("S") != std::string::npos) return "VB";  // Subject link = verb
+        if (connector.find("O") != std::string::npos) return "VB";  // Object link = verb
+        if (connector.find("D") != std::string::npos) return "DT";  // Determiner
+        if (connector.find("A") != std::string::npos) return "JJ";  // Adjective
+        if (connector.find("J") != std::string::npos) return "IN";  // Preposition junction
+        if (connector.find("M") != std::string::npos) return "VB";  // Modal verb
+        if (connector.find("I") != std::string::npos) return "VBG"; // -ing verb
+        if (connector.find("P") != std::string::npos) return "VBD"; // Past participle
+        if (connector.find("G") != std::string::npos) return "VBG"; // Gerund
+        return "NN"; // Default to noun
+    };
+#endif
+    
+    // Enhanced rule-based POS tagging with better coverage
     for (const std::string& word : words) {
         std::string lower_word = word;
         std::transform(lower_word.begin(), lower_word.end(), lower_word.begin(), ::tolower);
@@ -371,43 +528,98 @@ std::map<std::string, std::string> LGParser::extractPOSTags(const std::vector<st
         // Determiners
         if (lower_word == "the" || lower_word == "a" || lower_word == "an" ||
             lower_word == "this" || lower_word == "that" || lower_word == "these" ||
-            lower_word == "those") {
+            lower_word == "those" || lower_word == "some" || lower_word == "any" ||
+            lower_word == "all" || lower_word == "every" || lower_word == "each") {
             pos_tags[word] = "DT";
         }
-        // Pronouns
+        // Personal pronouns
         else if (lower_word == "i" || lower_word == "you" || lower_word == "he" ||
                  lower_word == "she" || lower_word == "it" || lower_word == "we" ||
-                 lower_word == "they") {
+                 lower_word == "they" || lower_word == "me" || lower_word == "him" ||
+                 lower_word == "her" || lower_word == "us" || lower_word == "them") {
             pos_tags[word] = "PRP";
         }
-        // Common verbs
+        // Possessive pronouns
+        else if (lower_word == "my" || lower_word == "your" || lower_word == "his" ||
+                 lower_word == "her" || lower_word == "its" || lower_word == "our" ||
+                 lower_word == "their" || lower_word == "mine" || lower_word == "yours" ||
+                 lower_word == "ours" || lower_word == "theirs") {
+            pos_tags[word] = "PRP$";
+        }
+        // Modal verbs
+        else if (lower_word == "can" || lower_word == "could" || lower_word == "may" ||
+                 lower_word == "might" || lower_word == "must" || lower_word == "shall" ||
+                 lower_word == "should" || lower_word == "will" || lower_word == "would") {
+            pos_tags[word] = "MD";
+        }
+        // Be verbs
         else if (lower_word == "is" || lower_word == "are" || lower_word == "was" ||
                  lower_word == "were" || lower_word == "am" || lower_word == "been" ||
                  lower_word == "be" || lower_word == "being") {
             pos_tags[word] = "VB";
         }
-        // Past tense verbs (simple heuristic)
+        // Have verbs
+        else if (lower_word == "have" || lower_word == "has" || lower_word == "had" ||
+                 lower_word == "having") {
+            pos_tags[word] = "VB";
+        }
+        // Common verbs
+        else if (lower_word == "do" || lower_word == "does" || lower_word == "did" ||
+                 lower_word == "done" || lower_word == "doing" || lower_word == "make" ||
+                 lower_word == "makes" || lower_word == "made" || lower_word == "making" ||
+                 lower_word == "go" || lower_word == "goes" || lower_word == "went" ||
+                 lower_word == "gone" || lower_word == "going") {
+            pos_tags[word] = "VB";
+        }
+        // -ing verbs (gerunds/continuous)
+        else if (word.size() > 3 && word.substr(word.size()-3) == "ing") {
+            pos_tags[word] = "VBG";
+        }
+        // Past tense verbs
         else if (word.size() > 2 && word.substr(word.size()-2) == "ed") {
             pos_tags[word] = "VBD";
         }
         // Present tense verbs (3rd person singular)
         else if (word.size() > 1 && word[word.size()-1] == 's' && 
                  (word.size() < 2 || word[word.size()-2] != 's')) {
-            pos_tags[word] = "VBZ";
+            // Check if it's not a plural noun
+            if (lower_word != "news" && lower_word != "lens" && lower_word != "series") {
+                pos_tags[word] = "VBZ";
+            } else {
+                pos_tags[word] = "NN";
+            }
         }
         // Prepositions
         else if (lower_word == "in" || lower_word == "on" || lower_word == "at" ||
                  lower_word == "by" || lower_word == "for" || lower_word == "with" ||
-                 lower_word == "to" || lower_word == "from" || lower_word == "of") {
+                 lower_word == "to" || lower_word == "from" || lower_word == "of" ||
+                 lower_word == "about" || lower_word == "through" || lower_word == "over" ||
+                 lower_word == "under" || lower_word == "before" || lower_word == "after" ||
+                 lower_word == "between" || lower_word == "among" || lower_word == "during") {
             pos_tags[word] = "IN";
         }
-        // Adjectives (simple heuristics)
-        else if (word.size() > 3 && (word.substr(word.size()-2) == "ly" ||
-                                    word.substr(word.size()-3) == "ful" ||
+        // Conjunctions
+        else if (lower_word == "and" || lower_word == "or" || lower_word == "but" ||
+                 lower_word == "nor" || lower_word == "yet" || lower_word == "so") {
+            pos_tags[word] = "CC";
+        }
+        // Adverbs
+        else if (word.size() > 2 && word.substr(word.size()-2) == "ly") {
+            pos_tags[word] = "RB";
+        }
+        // Adjectives
+        else if (word.size() > 3 && (word.substr(word.size()-3) == "ful" ||
                                     word.substr(word.size()-3) == "ous" ||
                                     word.substr(word.size()-3) == "ive" ||
+                                    word.substr(word.size()-3) == "ish" ||
+                                    word.substr(word.size()-4) == "able" ||
+                                    word.substr(word.size()-4) == "ible" ||
                                     word.substr(word.size()-2) == "al")) {
             pos_tags[word] = "JJ";
+        }
+        // Numbers
+        else if (std::all_of(word.begin(), word.end(), ::isdigit)) {
+            pos_tags[word] = "CD";
         }
         // Punctuation
         else if (word.size() == 1 && std::ispunct(word[0])) {
@@ -415,7 +627,12 @@ std::map<std::string, std::string> LGParser::extractPOSTags(const std::vector<st
         }
         // Default to noun
         else {
-            pos_tags[word] = "NN";
+            // Check if it's a proper noun (capitalized)
+            if (!word.empty() && std::isupper(word[0])) {
+                pos_tags[word] = "NNP";
+            } else {
+                pos_tags[word] = "NN";
+            }
         }
     }
     

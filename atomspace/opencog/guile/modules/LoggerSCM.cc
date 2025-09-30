@@ -1,7 +1,7 @@
 /*
  * LoggerSCM.cc
  *
- * Copyright (C) 2015 OpenCog Foundation
+ * Copyright (C) 2015, 2017 OpenCog Foundation
  *
  * Author: Nil Geisweiller
  *
@@ -21,50 +21,24 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include <cstddef>
+#include <cstdio>
+
+#include "LoggerSCM.h"
+
 #include <opencog/util/Logger.h>
-#include <opencog/guile/SchemeModule.h>
+#include <opencog/util/oc_assert.h>
+#include <opencog/guile/SchemeSmob.h>
 #include "../SchemePrimitive.h"
 
 using namespace opencog;
 namespace opencog {
 
-/**
- * Expose the Logger singleton to Scheme
- */
-
-class LoggerSCM : public ModuleWrap
-{
-protected:
-	virtual void init();
-
-	Logger* do_default_logger();
-	Logger* do_new_logger();
-	std::string do_logger_set_level(Logger*, const std::string& level);
-	std::string do_logger_get_level(const Logger*);
-	std::string do_logger_set_filename(Logger*, const std::string& filename);
-	std::string do_logger_get_filename(const Logger*);
-	std::string do_logger_set_component(Logger*, const std::string& component);
-	std::string do_logger_get_component(const Logger*);
-	bool do_logger_set_stdout(Logger*, bool);
-	bool do_logger_set_sync(Logger*, bool);
-	bool do_logger_set_timestamp(Logger*, bool);
-	bool do_logger_is_error_enabled(Logger*);
-	bool do_logger_is_warn_enabled(Logger*);
-	bool do_logger_is_info_enabled(Logger*);
-	bool do_logger_is_debug_enabled(Logger*);
-	bool do_logger_is_fine_enabled(Logger*);
-	void do_logger_error(Logger*, const std::string& msg);
-	void do_logger_warn(Logger*, const std::string& msg);
-	void do_logger_info(Logger*, const std::string& msg);
-	void do_logger_debug(Logger*, const std::string& msg);
-	void do_logger_fine(Logger*, const std::string& msg);
-	void do_flush(Logger*);
-
-	bool is_logger(SCM);
-
-public:
-	LoggerSCM();
-};
+// Static member initialization
+std::mutex LoggerSCM::lgr_mtx;
+std::set<Logger*> LoggerSCM::deleteable_lgr;
+scm_t_bits LoggerSCM::cog_logger_tag = 0;
+bool LoggerSCM::logger_smob_inited = false;
 
 /// Get the default logger.
 Logger* LoggerSCM::do_default_logger()
@@ -75,7 +49,7 @@ Logger* LoggerSCM::do_default_logger()
 /// Create a new logger.
 Logger* LoggerSCM::do_new_logger()
 {
-	return SchemeSmob::new_logger();
+	return LoggerSCM::new_logger();
 }
 
 /// Set level, return previous level.
@@ -201,8 +175,114 @@ void LoggerSCM::do_flush(Logger* lg)
 
 bool LoggerSCM::is_logger(SCM s)
 {
-	return SCM_SMOB_PREDICATE(SchemeSmob::cog_misc_tag, s)
-		and SCM_SMOB_FLAGS(s) == SchemeSmob::COG_LOGGER;
+	if (!logger_smob_inited) return false;
+	return SCM_SMOB_PREDICATE(cog_logger_tag, s);
+}
+
+/* ============================================================== */
+// Logger SMOB functions - moved from SchemeSmob
+
+std::string LoggerSCM::logger_to_string(const Logger *l)
+{
+#define BUFLEN 120
+	char buff[BUFLEN];
+
+	snprintf(buff, BUFLEN, "#<logger %p>", l);
+	return buff;
+}
+
+SCM LoggerSCM::logger_to_scm(Logger* lg)
+{
+	if (!logger_smob_inited) init_logger_smob_type();
+	
+	SCM smob;
+	SCM_NEWSMOB (smob, cog_logger_tag, lg);
+	return smob;
+}
+
+/* ============================================================== */
+/* Cast SCM to logger */
+
+Logger* LoggerSCM::ss_to_logger(SCM sl)
+{
+	if (!logger_smob_inited) return nullptr;
+	
+	if (not SCM_SMOB_PREDICATE(cog_logger_tag, sl))
+		return nullptr;
+
+	Logger* l = (Logger *) SCM_SMOB_DATA(sl);
+	scm_remember_upto_here_1(sl);
+	return l;
+}
+
+/* ============================================================== */
+
+void LoggerSCM::release_logger (Logger* lgr)
+{
+	std::unique_lock<std::mutex> lck(lgr_mtx);
+	auto it = deleteable_lgr.find(lgr);
+	if (it != deleteable_lgr.end())
+	{
+		deleteable_lgr.erase(it);
+		lck.unlock();
+		delete lgr;
+	}
+}
+
+/* ============================================================== */
+
+Logger* LoggerSCM::new_logger()
+{
+	Logger* lgr = new Logger();
+	scm_gc_register_allocation(sizeof(*lgr));
+
+	// Only the internally-created logger are deleteable.
+	std::lock_guard<std::mutex> lck(lgr_mtx);
+	deleteable_lgr.insert(lgr);
+
+	return lgr;
+}
+
+/* ============================================================== */
+
+Logger* LoggerSCM::verify_logger(SCM sl, const char * subrname, int pos)
+{
+	Logger* l = ss_to_logger(sl);
+	if (nullptr == l)
+		scm_wrong_type_arg_msg(subrname, pos, sl, "opencog logger");
+
+	return l;
+}
+
+/* ============================================================== */
+// SMOB print and GC functions
+
+int LoggerSCM::print_logger(SCM node, SCM port, scm_print_state *ps)
+{
+	std::string str = logger_to_string((Logger*) SCM_SMOB_DATA(node));
+	scm_puts (str.c_str(), port);
+	return 1;
+}
+
+size_t LoggerSCM::free_logger(SCM node)
+{
+	Logger* lgr = (Logger*) SCM_SMOB_DATA(node);
+	release_logger(lgr);
+	return 0;
+}
+
+/* ============================================================== */
+// Logger SMOB type initialization
+
+void LoggerSCM::init_logger_smob_type(void)
+{
+	if (logger_smob_inited) return;
+	
+	cog_logger_tag = scm_make_smob_type("opencog-logger", sizeof(Logger*));
+	scm_set_smob_print(cog_logger_tag, print_logger);
+	scm_set_smob_free(cog_logger_tag, free_logger);
+	
+	logger_smob_inited = true;
 }
 
 } /*end of namespace opencog*/
@@ -213,6 +293,9 @@ LoggerSCM::LoggerSCM() : ModuleWrap("opencog logger") {}
 /// Thus, all the definitions below happen in that module.
 void LoggerSCM::init(void)
 {
+	// Initialize the logger SMOB type if not already done
+	init_logger_smob_type();
+	
 	define_scheme_primitive("cog-default-logger",
 		&LoggerSCM::do_default_logger, this, "logger");
 	define_scheme_primitive("cog-new-logger",

@@ -33,6 +33,7 @@
 #include <opencog/atoms/base/Atom.h>
 #include <opencog/atoms/atom_types/NameServer.h>
 #include <opencog/guile/SchemeSmob.h>
+#include <opencog/guile/ValueFactory.h>
 
 #include <opencog/atoms/value/ValueFactory.h>
 
@@ -239,94 +240,12 @@ SchemeSmob::scm_to_string_list (SCM svalue_list)
 /* ============================================================== */
 /**
  * Create a new value, of named type stype, and value vector svect
- * XXX FIXME Clearly, a factory for values is called for.
+ * Uses the ValueFactory for cleaner, more extensible value creation.
  */
 ValuePtr SchemeSmob::make_value (Type t, SCM svalue_list)
 {
-	if (RANDOM_STREAM == t)
-	{
-		if (!scm_is_pair(svalue_list) and !scm_is_null(svalue_list))
-			scm_wrong_type_arg_msg("cog-new-value", 1,
-				svalue_list, "an optional dimension");
-		int dim = 1;
-
-		if (!scm_is_null(svalue_list))
-		{
-			SCM svalue = SCM_CAR(svalue_list);
-			dim = verify_int(svalue, "cog-new-value", 2);
-		}
-		return valueserver().create(t, dim);
-	}
-
-	if (nameserver().isA(t, FUTURE_STREAM) or
-	    nameserver().isA(t, FORMULA_STREAM))
-	{
-		HandleSeq oset(verify_handle_list(svalue_list, "cog-new-value", 2));
-		return valueserver().create(t, std::move(oset));
-	}
-
-	// Catch and handle generic FloatValues not named above.
-	if (nameserver().isA(t, FLOAT_VALUE))
-	{
-		std::vector<double> valist;
-		valist = verify_float_list(svalue_list, "cog-new-value", 2);
-		return valueserver().create(t, valist);
-	}
-
-	if (nameserver().isA(t, BOOL_VALUE))
-	{
-		// Special case -- if it is a single integer, then its
-		// a mask.
-		SCM sval = SCM_CAR(svalue_list);
-		SCM srest = SCM_CDR(svalue_list);
-		if (scm_is_null(srest) and scm_is_integer(sval))
-		{
-			size_t mask = verify_size_t(sval, "cog-new-value", 2);
-			return valueserver().create(t, mask);
-		}
-		std::vector<bool> valist;
-		valist = verify_bool_list(svalue_list, "cog-new-value", 2);
-		return valueserver().create(t, valist);
-	}
-
-	if (nameserver().isA(t, LINK_VALUE))
-	{
-		std::vector<ValuePtr> valist;
-		valist = verify_protom_list(svalue_list, "cog-new-value", 2);
-		return valueserver().create(t, valist);
-	}
-
-	if (nameserver().isA(t, STRING_VALUE))
-	{
-		std::vector<std::string> valist;
-		valist = verify_string_list(svalue_list, "cog-new-value", 2);
-		return valueserver().create(t, valist);
-	}
-
-	if (nameserver().isA(t, VOID_VALUE))
-	{
-		return valueserver().create(t);
-	}
-
-	if (nameserver().isA(t, NODE))
-	{
-		// XXX FIXME... at this time, nodes have a single name.
-		SCM sname = SCM_CAR(svalue_list);
-		std::string name = verify_string(sname, "cog-new-value", 2);
-		const AtomSpacePtr& asp = ss_get_env_as("cog-new-value");
-		return asp->add_node(t, std::move(name));
-	}
-
-	if (nameserver().isA(t, LINK))
-	{
-		HandleSeq oset = verify_handle_list(svalue_list, "cog-new-value", 2);
-		const AtomSpacePtr& asp = ss_get_env_as("cog-new-value");
-		return asp->add_link(t, std::move(oset));
-	}
-
-	scm_wrong_type_arg_msg("cog-new-value", 1, svalue_list, "value type");
-
-	return nullptr;
+	const AtomSpacePtr& asp = ss_get_env_as("cog-new-value");
+	return ValueFactory::getInstance().createValue(t, svalue_list, asp);
 }
 
 SCM SchemeSmob::ss_new_value (SCM stype, SCM svalue_list)

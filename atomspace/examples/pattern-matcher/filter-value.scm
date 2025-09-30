@@ -26,26 +26,87 @@
 ; Begin by creating a mockup of a complicated data stream. What makes
 ; this "complicated" is that it will consist of nested LinkValues,
 ; a tree of LinkValues, with different kinds of data in the tree.
+; This simulates a multi-modal sensor stream with different data types:
+; - Natural language sentences with parse trees
+; - Sensor readings with timestamps
+; - Emotional/sentiment annotations
+; - Confidence scores and metadata
 
+; Define some sample sentences with richer linguistic features
 (define word-list-a
 	(LinkValue (Concept "this") (Concept "is") (Concept "a") (Concept "test")))
 (define word-list-b
 	(LinkValue (Concept "moar") (Concept "stuffs") (Concept "ok")))
+(define word-list-c
+	(LinkValue (Concept "the") (Concept "robot") (Concept "sees") (Concept "red") (Concept "ball")))
+(define word-list-d
+	(LinkValue (Concept "sensor") (Concept "detects") (Concept "motion")))
 
+; Define linguistic edges with grammatical relations
 (define edge-a1 (Edge (Bond "pair") (List (Concept "this") (Concept "is"))))
 (define edge-a2 (Edge (Bond "pair") (List (Concept "is") (Concept "test"))))
 (define edge-a3 (Edge (Bond "pair") (List (Concept "a") (Concept "test"))))
 (define edge-b1 (Edge (Bond "pear") (List (Concept "moar") (Concept "stuffs"))))
 (define edge-b2 (Edge (Bond "pear") (List (Concept "moar") (Concept "ok"))))
+(define edge-c1 (Edge (Bond "subj") (List (Concept "robot") (Concept "sees"))))
+(define edge-c2 (Edge (Bond "obj") (List (Concept "sees") (Concept "ball"))))
+(define edge-c3 (Edge (Bond "mod") (List (Concept "red") (Concept "ball"))))
+(define edge-d1 (Edge (Bond "subj") (List (Concept "sensor") (Concept "detects"))))
+(define edge-d2 (Edge (Bond "obj") (List (Concept "detects") (Concept "motion"))))
 
+; Add sensor data stream components
+(define sensor-reading-1
+	(LinkValue
+		(NumberValue 25.3)    ; temperature
+		(NumberValue 65.0)    ; humidity
+		(NumberValue 1013.25) ; pressure
+		(NumberValue 1234567890))) ; timestamp
+
+(define sensor-reading-2
+	(LinkValue
+		(NumberValue 26.1)
+		(NumberValue 62.5)
+		(NumberValue 1013.0)
+		(NumberValue 1234567900)))
+
+; Add emotional/sentiment annotations
+(define sentiment-a (LinkValue (StringValue "neutral") (NumberValue 0.85)))
+(define sentiment-b (LinkValue (StringValue "positive") (NumberValue 0.65)))
+(define sentiment-c (LinkValue (StringValue "curious") (NumberValue 0.92)))
+(define sentiment-d (LinkValue (StringValue "alert") (NumberValue 0.78)))
+
+; Create a complex nested structure representing multi-modal data
 (define tree-list
 	(LinkValue
+		; First data packet
 		(LinkValue
 			(LinkValue (Concept "sentence") word-list-a)
-			(LinkValue (Concept "parse") edge-a1 edge-a2 edge-a3))
+			(LinkValue (Concept "parse") edge-a1 edge-a2 edge-a3)
+			(LinkValue (Concept "sentiment") sentiment-a)
+			(LinkValue (Concept "sensor") sensor-reading-1))
+		; Second data packet
 		(LinkValue
 			(LinkValue (Concept "sentence") word-list-b)
-			(LinkValue (Concept "parse") edge-b1 edge-b2))))
+			(LinkValue (Concept "parse") edge-b1 edge-b2)
+			(LinkValue (Concept "sentiment") sentiment-b))
+		; Third data packet - visual perception
+		(LinkValue
+			(LinkValue (Concept "sentence") word-list-c)
+			(LinkValue (Concept "parse") edge-c1 edge-c2 edge-c3)
+			(LinkValue (Concept "sentiment") sentiment-c)
+			(LinkValue (Concept "visual-data")
+				(LinkValue (StringValue "object") (StringValue "ball"))
+				(LinkValue (StringValue "color") (StringValue "red"))
+				(LinkValue (StringValue "position") (NumberValue 10.5) (NumberValue 20.3) (NumberValue 5.0))))
+		; Fourth data packet - motion detection
+		(LinkValue
+			(LinkValue (Concept "sentence") word-list-d)
+			(LinkValue (Concept "parse") edge-d1 edge-d2)
+			(LinkValue (Concept "sentiment") sentiment-d)
+			(LinkValue (Concept "sensor") sensor-reading-2)
+			(LinkValue (Concept "motion-data")
+				(LinkValue (StringValue "velocity") (NumberValue 2.5))
+				(LinkValue (StringValue "direction") (NumberValue 45.0))))))
 
 ; Place the tree-list in a well-known location, where we can find it.
 (cog-set-value!
@@ -227,5 +288,126 @@
 (cog-execute! increment-parse-edges)
 ; Verify that the count went up.
 (cog-value e (Predicate "count"))
+
+; -----------
+; Additional filter demonstrations for multi-modal data processing
+
+; Extract sensor readings from the data stream
+(define get-sensor-data
+	(Filter
+		(Lambda
+			(Variable "$sensor")
+			(LinkSignature
+				(Type 'LinkValue)
+				(Type 'LinkValue)
+				(LinkSignature
+					(Type 'LinkValue) 
+					(Concept "sensor")
+					(Variable "$sensor"))))
+		(ValueOf (Node "some place") (Predicate "some key"))))
+
+; Execute to see sensor readings
+(cog-execute! get-sensor-data)
+
+; Extract sentiment annotations with high confidence (> 0.8)
+(define get-high-confidence-sentiments
+	(Filter
+		(Rule
+			(VariableList
+				(Variable "$type")
+				(Variable "$conf"))
+			(And
+				(LinkSignature
+					(Type 'LinkValue)
+					(Type 'LinkValue)
+					(LinkSignature
+						(Type 'LinkValue)
+						(Concept "sentiment")
+						(LinkSignature
+							(Type 'LinkValue)
+							(Variable "$type")
+							(Variable "$conf"))))
+				(GreaterThan
+					(Variable "$conf")
+					(Number 0.8)))
+			(List (Variable "$type") (Variable "$conf")))
+		(ValueOf (Node "some place") (Predicate "some key"))))
+
+; Extract visual perception data
+(define get-visual-data
+	(Filter
+		(Lambda
+			(Glob "$visual")
+			(LinkSignature
+				(Type 'LinkValue)
+				(Type 'LinkValue)
+				(LinkSignature
+					(Type 'LinkValue)
+					(Concept "visual-data")
+					(Glob "$visual"))))
+		(ValueOf (Node "some place") (Predicate "some key"))))
+
+; This should return visual perception information
+(cog-execute! get-visual-data)
+
+; Process motion detection events and trigger alerts
+(define process-motion-alerts
+	(Filter
+		(Rule
+			(VariableList
+				(Variable "$velocity")
+				(Variable "$direction"))
+			(LinkSignature
+				(Type 'LinkValue)
+				(Type 'LinkValue)
+				(LinkSignature
+					(Type 'LinkValue)
+					(Concept "motion-data")
+					(LinkSignature
+						(Type 'LinkValue)
+						(StringOf (Type 'StringValue) (Node "velocity"))
+						(Variable "$velocity"))
+					(LinkSignature
+						(Type 'LinkValue)
+						(StringOf (Type 'StringValue) (Node "direction"))
+						(Variable "$direction"))))
+			; Create alert if velocity > 2.0
+			(Evaluation
+				(Predicate "motion-alert")
+				(List
+					(Number (current-time))
+					(Variable "$velocity")
+					(Variable "$direction"))))
+		(ValueOf (Node "some place") (Predicate "some key"))))
+
+; Helper function to get current timestamp
+(define (current-time)
+	(inexact->exact (current-seconds)))
+
+; Count occurrences of specific words across all sentences
+(define word-counter
+	(Filter
+		(Rule
+			(Variable "$word")
+			(LinkSignature
+				(Type 'LinkValue)
+				(LinkSignature
+					(Type 'LinkValue)
+					(Concept "sentence")
+					(LinkSignature
+						(Type 'LinkValue)
+						(Variable "$word"))))
+			(SetValue (Variable "$word") (Predicate "occurrence-count")
+				(Plus (Number 1)
+					(FloatValueOf (Variable "$word") (Predicate "occurrence-count")
+						(FloatValueOf (Number 0))))))
+		(ValueOf (Node "some place") (Predicate "some key"))))
+
+; Execute word counter
+(cog-execute! word-counter)
+
+; Check counts for specific words
+(cog-value (Concept "robot") (Predicate "occurrence-count"))
+(cog-value (Concept "sensor") (Predicate "occurrence-count"))
 
 ; THE END. That's all folks!

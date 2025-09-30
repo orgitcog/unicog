@@ -127,9 +127,16 @@ private:
     size_t total_parse_count_;
     double total_parse_time_;
     
-    // Internal parser state (opaque pointer to actual LG parser)
+    // Internal parser state
+#ifdef HAVE_LINK_GRAMMAR
+    // When Link Grammar is available, these will be proper LG types
+    Dictionary lg_dictionary_;
+    Parse_Options lg_options_;
+#else
+    // Placeholder types when Link Grammar is not available
     void* lg_dictionary_;
     void* lg_options_;
+#endif
     
     /**
      * Initialize the Link Grammar parser

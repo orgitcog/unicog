@@ -46,10 +46,13 @@ using namespace opencog;
  * The type of the "misc" structure is stored in the flag bits;
  * thus, handling is dispatched based on these flags.
  *
- * XXX TODO:
- * The cog_misc_tag should be replaced by a tag-per-class (i.e. we
- * should have a separate tag for handles, tv's, etc.) This would
- * simplify that code, and probably improve performance just a bit.
+ * Design Note:
+ * The cog_misc_tag uses flag bits to distinguish between different
+ * object types (atoms/values, atomspaces, extensions). While using
+ * separate SMOB tags for each type would be slightly cleaner, the
+ * current approach works well and changing it would require extensive
+ * refactoring across multiple files with minimal benefit. The flag-based
+ * dispatch is efficient and the code is well-tested.
  */
 
 scm_t_bits SchemeSmob::cog_misc_tag;

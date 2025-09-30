@@ -112,12 +112,11 @@ void SchemeEval::capture_port(void)
 	if (_in_server) return;
 
 	// Lock to prevent racey setting of the output port.
-	// XXX FIXME This lock is not needed, because in guile-2.2,
-	// at least, every thread has its own output port, and so its
-	// impossible for two different threads to compete to set the
-	// same outport.  Not too sure about guile-2.0, though... so
-	// I'm leaving the lock in, for now. Its harmless.
+	// In Guile 2.2+, every thread has its own output port,
+	// so the lock is not needed. We keep it only for older versions.
+#if SCM_MAJOR_VERSION < 2 || (SCM_MAJOR_VERSION == 2 && SCM_MINOR_VERSION < 2)
 	std::lock_guard<std::mutex> lck(init_mtx);
+#endif
 
 	// Try again, under the lock this time.
 	if (_in_server) return;
@@ -1088,11 +1087,18 @@ ValuePtr SchemeEval::apply_v(const std::string &func, ValuePtr varargs)
 		SCM smob = do_apply_scm(func, varargs);
 		if (eval_error())
 		{
-			// Rethrow.  It would be better to just allow exceptions
-			// to pass on through, but thus breaks some unit tests.
-			// XXX FIXME -- idealy we should avoid catch-and-rethrow.
-			// At any rate, we must not return a TV of any sort, here.
-			throw RuntimeException(TRACE_INFO, "%s", _error_msg.c_str());
+			// Store error details before clearing state
+			std::string error_msg = _error_msg;
+			
+			// Clear error state to avoid double-reporting
+			_error_msg.clear();
+			_caught_error = false;
+			
+			// Re-throw with preserved error information.
+			// Note: Ideally, we should allow exceptions to pass through
+			// without catching, but this would require updating unit tests
+			// that depend on the current error handling behavior.
+			throw RuntimeException(TRACE_INFO, "%s", error_msg.c_str());
 		}
 		return SchemeSmob::scm_to_protom(smob);
 	}
@@ -1260,8 +1266,10 @@ void SchemeEval::set_scheme_as(const AtomSpacePtr& as)
 
 void SchemeEval::init_scheme(void)
 {
-	// XXX FIXME only a subset is needed.
-	SchemeEval sch;
+	// Only perform the one-time initialization needed for Scheme.
+	// This avoids creating a full SchemeEval instance when we just
+	// need to ensure the Scheme subsystem is initialized.
+	init_only_once();
 }
 
 extern "C" {
