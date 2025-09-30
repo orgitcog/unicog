@@ -33,6 +33,9 @@ void PLNConfig::loadConfig(const std::string& config_path)
     // Load configuration from file if it exists
     logger().info("PLN configuration loaded with confidence threshold: %f, max steps: %d",
                   confidence_threshold, max_inference_steps);
+    logger().info("PLN dependencies: URE support=%s, SpaceTime support=%s", 
+                  hasURESupport() ? "enabled" : "disabled",
+                  hasSpaceTimeSupport() ? "enabled" : "disabled");
 }
 
 void PLNConfig::setConfidenceThreshold(double threshold)
