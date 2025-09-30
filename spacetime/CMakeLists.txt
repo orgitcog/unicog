@@ -37,7 +37,7 @@ add_library(spacetime SHARED ${SPACETIME_SOURCES})
 
 # Link dependencies  
 target_link_libraries(spacetime
-    ${ATOMSPACE_LIBRARIES}
+    atomspace
 )
 
 # Install targets
