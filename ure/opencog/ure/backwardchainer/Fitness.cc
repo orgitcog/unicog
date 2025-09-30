@@ -39,7 +39,13 @@ BITNodeFitness::BITNodeFitness(FitnessType ft) : type(ft)
 		upper = 1;
 		break;
 	default:
-		ure_logger().error() << "Not implemented";
+		ure_logger().error() << "BITNodeFitness: Unknown fitness type: " << type;
+		// Default to confidence-based fitness
+		function = [](const BITNode& bitnode) {
+			return bitnode.body->getTruthValue()->get_confidence();
+		};
+		lower = 0;
+		upper = 1;
 	}
 }
 
@@ -64,7 +70,11 @@ AndBITFitness::AndBITFitness(FitnessType ft, const std::set<ContentHash>& tr)
 		upper = 1.0;
 		break;
 	default:
-		ure_logger().error() << "Not implemented";
+		ure_logger().error() << "AndBITFitness: Unknown fitness type: " << type;
+		// Default to uniform fitness
+		function = [](const AndBIT&) { return 1.0; };
+		lower = 1.0;
+		upper = 1.0;
 	}
 }
 

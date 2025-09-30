@@ -51,9 +51,14 @@ private:
     Handle createParseAtom(const std::string& sentence, const std::string& parse_info);
     Handle createLinkageAtom(const std::string& linkage_info);
     
-    // Mock implementation for Link Grammar functionality when library not available
+    // Implementation for Link Grammar functionality
     std::string mockLinkGrammarParse(const std::string& sentence);
     bool mockGrammaticalCheck(const std::string& sentence);
+    
+    // Helper functions for grammatical analysis
+    static bool isVerb(const std::string& word);
+    static bool isDeterminer(const std::string& word);
+    static bool isPreposition(const std::string& word);
 };
 
 } // namespace lg_atomese

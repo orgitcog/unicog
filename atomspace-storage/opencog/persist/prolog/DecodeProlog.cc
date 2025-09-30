@@ -63,6 +63,9 @@ static Handle make_tok(const std::string& tok)
 	return HandleCast(createNode(CONCEPT_NODE, tok));
 }
 
+// Forward declaration
+static Handle replace_wildcards_with_vars(const Handle& h, HandleSeq& vars);
+
 // Parse factual assertions such as
 // likes(john, mary) or food(pizza)
 // but also fragments of clauses, such as
@@ -124,31 +127,130 @@ static Handle get_fact(const std::string& sexpr, size_t& l, size_t &r)
 
 // ---------------------------------------------------------------
 //
-// Stub for handling queries.
+// Handle Prolog queries.
 // There are several basic types:
 // 1) ?- likes(alice,john).
-//    Return true of false; tests for presence. (SatisfactionLink) Awkward!
+//    Return true of false; tests for presence. (SatisfactionLink)
 // 2) ?- likes(alice, _).
-//    Return true of false;, alice likes someone, but its indeterminate.
+//    Return true of false; alice likes someone, but its indeterminate.
 // 3) ?- likes(alice, Who).
 //    Return grounding of Who. Standard GetLink.
-//    Caution: this may require chaining to solve. Ugh.
+//    Caution: this may require chaining to solve.
 // 4) Unification, chaining, ... etc.
 
 static Handle formulate_query(const std::string& sexpr, size_t& l, size_t &r)
 {
-#if 0
 	// Skip past the ?- at the start.
 	l = sexpr.find_first_not_of(" \t\n", l+2);
 	if (std::string::npos == l)
 		throw SyntaxException(TRACE_INFO, "Unexpected blank line");
 
-	// Lets see if we can come up with one of the simple cases.
-	// Looking for case 3.
+	// Get the query fact
 	Handle fac = get_fact(sexpr, l, r);
-#endif
+	
+	// Extract all variables from the fact
+	HandleSet vars;
+	std::function<void(const Handle&)> extract_vars = [&](const Handle& h) {
+		if (h->is_type(VARIABLE_NODE))
+		{
+			vars.insert(h);
+		}
+		else if (h->is_link())
+		{
+			for (const Handle& ho : h->getOutgoingSet())
+				extract_vars(ho);
+		}
+	};
+	extract_vars(fac);
+	
+	// Case 1: No variables - simple presence test (SatisfactionLink)
+	if (vars.empty())
+	{
+		// Check if there are wildcards (underscores)
+		bool has_wildcards = false;
+		std::function<bool(const Handle&)> check_wildcards = [&](const Handle& h) -> bool {
+			if (h->is_node() && h->get_name() == "_")
+			{
+				has_wildcards = true;
+				return true;
+			}
+			if (h->is_link())
+			{
+				for (const Handle& ho : h->getOutgoingSet())
+					if (check_wildcards(ho)) return true;
+			}
+			return false;
+		};
+		check_wildcards(fac);
+		
+		if (has_wildcards)
+		{
+			// Case 2: Has wildcards - convert to pattern with anonymous variables
+			HandleSeq pattern_vars;
+			Handle pattern = replace_wildcards_with_vars(fac, pattern_vars);
+			
+			// Create a SatisfactionLink with anonymous variables
+			Handle varlist = createLink(std::move(pattern_vars), VARIABLE_LIST);
+			return createLink(SATISFACTION_LINK, varlist, pattern);
+		}
+		else
+		{
+			// Simple presence test
+			return createLink(SATISFACTION_LINK, fac);
+		}
+	}
+	else
+	{
+		// Case 3: Has variables - create GetLink
+		HandleSeq varlist(vars.begin(), vars.end());
+		Handle vardecl;
+		
+		if (varlist.size() == 1)
+			vardecl = varlist[0];
+		else
+			vardecl = createLink(std::move(varlist), VARIABLE_LIST);
+		
+		return createLink(GET_LINK, vardecl, fac);
+	}
+}
 
-	throw SyntaxException(TRACE_INFO, "Queries are not (yet) supported!");
+// Helper function to replace wildcards with anonymous variables
+static Handle replace_wildcards_with_vars(const Handle& h, HandleSeq& vars)
+{
+	static int anon_var_counter = 0;
+	
+	if (h->is_node())
+	{
+		if (h->get_name() == "_")
+		{
+			// Create anonymous variable
+			std::string varname = "$anon_" + std::to_string(anon_var_counter++);
+			Handle var = createNode(VARIABLE_NODE, varname);
+			vars.push_back(var);
+			return var;
+		}
+		return h;
+	}
+	
+	if (h->is_link())
+	{
+		HandleSeq new_outgoing;
+		bool changed = false;
+		
+		for (const Handle& ho : h->getOutgoingSet())
+		{
+			Handle new_ho = replace_wildcards_with_vars(ho, vars);
+			new_outgoing.push_back(new_ho);
+			if (new_ho != ho) changed = true;
+		}
+		
+		if (changed)
+			return createLink(std::move(new_outgoing), h->get_type());
+		else
+			return h;
+	}
+	
+	return h;
 }
 
 // ---------------------------------------------------------------
