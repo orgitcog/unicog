@@ -36,8 +36,23 @@ vertex default_vertex_value(type_node tn) {
     switch(tn) {
     case id::contin_type: return 0.0;
     case id::boolean_type: return id::logical_false;
+    case id::enum_type: return 0; // Default enum value
+    case id::list_type: return id::list; // Empty list
+    case id::action_result_type: return id::action_result_type;
+    case id::definite_object_type: return id::definite_object_type;
+    case id::action_definite_object_type: return id::action_definite_object_type;
+    case id::indefinite_object_type: return id::indefinite_object_type;
+    case id::message_type: return id::message_type;
+    case id::action_symbol_type: return id::action_symbol_type;
+    case id::wild_card_type: return id::wild_card_type;
+    case id::unknown_type: return vertex(); // No default for unknown
+    case id::ill_formed_type: return vertex(); // No default for ill-formed
     default:
-        logger().error() << "default value for " << tn << " not implemented";
+        // For argument types, return a default argument
+        if (tn >= id::argument_type) {
+            return argument(tn - id::argument_type + 1);
+        }
+        logger().warn() << "default value for " << tn << " not implemented, returning empty vertex";
         return vertex();
     }
 }

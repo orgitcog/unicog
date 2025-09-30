@@ -508,23 +508,56 @@ combo_tree eval_throws_tree(const vertex_seq& bmap,
             return tr;
         }
 
-        // The apply() operator is a sensible thing to have, but this code is bad so I disabled it.
-        // It shouldn't use set_bindings; if we want lambda functions then we should use scopes properly -- Jade
+        // The apply() operator applies a lambda function to a list of arguments
         case id::apply : {
-            OC_ASSERT(false, "apply() is not implemented");
-            combo_tree tr(it);
-            sib_it tr_it = tr.begin().begin();
-            sib_it lambda_it = tr_it.end();
-            lambda_it --;
-            combo_tree exp_tr(lambda_it);
-
-            vector<vertex> al; // list of arguments
-            ++tr_it;
-            for(; tr_it!=tr.begin().end(); ++tr_it){
-                al.push_back(*tr_it);
+            if (it.number_of_children() < 2) {
+                throw ComboException(TRACE_INFO, "apply() requires at least 2 arguments: function and arguments");
             }
-            //set_bindings(exp_tr, exp_tr.begin(), al, explicit_arity(exp_tr));
-            return eval_throws_tree(bmap, exp_tr);
+            
+            sib_it lambda_it = it.begin();
+            combo_tree lambda_tree = eval_throws_tree(bmap, lambda_it);
+            
+            // Check if the first argument is a lambda
+            if (*lambda_tree.begin() != id::lambda) {
+                throw ComboException(TRACE_INFO, "apply() first argument must be a lambda function");
+            }
+            
+            // Extract the lambda body and parameter list
+            sib_it lambda_body = lambda_tree.begin();
+            sib_it lambda_params = lambda_body.begin();
+            sib_it lambda_expr = lambda_body.end();
+            --lambda_expr;
+            
+            // Create new binding map for the lambda parameters
+            vertex_seq new_bmap = bmap;
+            
+            // Evaluate arguments and bind them to lambda parameters
+            sib_it arg_it = it.begin();
+            ++arg_it; // Skip the lambda function
+            sib_it param_it = lambda_params;
+            
+            while (arg_it != it.end() && param_it != lambda_expr) {
+                // Evaluate the argument
+                combo_tree arg_result = eval_throws_tree(bmap, arg_it);
+                vertex arg_value = *arg_result.begin();
+                
+                // Bind the argument to the parameter
+                if (is_argument(*param_it)) {
+                    argument param = get_argument(*param_it);
+                    arity_t param_idx = param.idx;
+                    if (param_idx > 0 && param_idx <= new_bmap.size()) {
+                        new_bmap[param_idx - 1] = arg_value;
+                    } else if (param_idx < 0 && -param_idx <= new_bmap.size()) {
+                        new_bmap[-param_idx - 1] = negate_vertex(arg_value);
+                    }
+                }
+                
+                ++arg_it;
+                ++param_it;
+            }
+            
+            // Evaluate the lambda body with the new bindings
+            return eval_throws_tree(new_bmap, lambda_expr);
         }
 
         // XXX TODO: contin_if should go away.

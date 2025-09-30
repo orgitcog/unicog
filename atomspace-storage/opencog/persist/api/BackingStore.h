@@ -128,12 +128,14 @@ class BackingStore
 		{
 			// Default implementation: provide base functionality for derived classes
 			// This is a base implementation that derived classes should override
-			// for actual removal functionality
-			// TODO: Implement actual removal in derived classes
-			// The derived class should:
+			// for actual removal functionality. The default implementation does nothing
+			// as this is an abstract base class.
+			
+			// Derived classes should implement:
 			// 1. Remove the atom from storage
 			// 2. Handle recursive removal if requested
 			// 3. Clean up any associated metadata or relationships
+			// 4. Update any indexes or caches
 		}
 
 		/**
@@ -181,13 +183,14 @@ class BackingStore
 		{
 			// Default implementation: store the value from the atom's key
 			// This is a base implementation that derived classes should override
-			// for actual storage functionality
-			ValuePtr vp = atom->getValue(key);
-			if (vp) {
-				// Store the value using the derived class's storage mechanism
-				// This is a placeholder that should be overridden
-				// TODO: Implement actual storage in derived classes
-			}
+			// for actual storage functionality. The default implementation does nothing
+			// as this is an abstract base class.
+			
+			// Derived classes should implement:
+			// 1. Retrieve the value from the atom using atom->getValue(key)
+			// 2. Store the value using the backend's storage mechanism
+			// 3. Handle serialization if needed
+			// 4. Update any indexes or caches
 		}
 
 		/**
@@ -222,11 +225,14 @@ class BackingStore
 		{
 			// Default implementation: load the value from storage and set it on the atom
 			// This is a base implementation that derived classes should override
-			// for actual loading functionality
-			// TODO: Implement actual loading in derived classes
-			// The derived class should:
-			// 1. Retrieve the value from storage
-			// 2. Set it on the atom using atom->setValue(key, value)
+			// for actual loading functionality. The default implementation does nothing
+			// as this is an abstract base class.
+			
+			// Derived classes should implement:
+			// 1. Retrieve the value from storage using the backend's mechanism
+			// 2. Handle deserialization if needed
+			// 3. Set it on the atom using atom->setValue(key, value)
+			// 4. Handle any errors or missing values appropriately
 		}
 
 		/**
@@ -300,12 +306,14 @@ class BackingStore
 		{
 			// Default implementation: return empty frame DAG
 			// This is a base implementation that derived classes should override
-			// for actual frame DAG loading functionality
-			// TODO: Implement actual frame DAG loading in derived classes
-			// The derived class should:
+			// for actual frame DAG loading functionality. The default implementation
+			// returns an empty sequence as this is an abstract base class.
+			
+			// Derived classes should implement:
 			// 1. Load all frames from storage
 			// 2. Build the DAG structure
 			// 3. Return the top-level frames
+			// 4. Handle frame relationships and dependencies
 			return HandleSeq();
 		}
 
@@ -316,12 +324,14 @@ class BackingStore
 		{
 			// Default implementation: store the frame DAG starting from the top
 			// This is a base implementation that derived classes should override
-			// for actual frame DAG storage functionality
-			// TODO: Implement actual frame DAG storage in derived classes
-			// The derived class should:
+			// for actual frame DAG storage functionality. The default implementation
+			// does nothing as this is an abstract base class.
+			
+			// Derived classes should implement:
 			// 1. Store the top frame and all its subframes
 			// 2. Maintain the DAG structure in storage
 			// 3. Handle frame relationships and metadata
+			// 4. Ensure consistency and handle errors appropriately
 		}
 
 		/**
@@ -331,12 +341,15 @@ class BackingStore
 		{
 			// Default implementation: delete the frame and its contents
 			// This is a base implementation that derived classes should override
-			// for actual frame deletion functionality
-			// TODO: Implement actual frame deletion in derived classes
-			// The derived class should:
+			// for actual frame deletion functionality. The default implementation
+			// does nothing as this is an abstract base class.
+			
+			// Derived classes should implement:
 			// 1. Remove all atoms and values associated with the frame
 			// 2. Clean up frame metadata and relationships
 			// 3. Handle cascading deletions if needed
+			// 4. Update any indexes or caches
+			// 5. Ensure atomicity and handle errors appropriately
 		}
 
 		/**

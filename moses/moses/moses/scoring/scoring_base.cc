@@ -72,9 +72,43 @@ void bscore_base::set_complexity_coef(score_t complexity_ratio)
 behavioral_score
 bscore_base::operator()(const scored_combo_tree_set& ensemble) const
 {
-    OC_ASSERT(false, "Ensemble scoring not implemented for bscorer %s",
-        typeid(*this).name());
-    return behavioral_score();
+    // Default implementation: compute weighted average of individual scores
+    behavioral_score result;
+    if (ensemble.empty()) {
+        return result;
+    }
+    
+    // Initialize result with the first tree's score
+    auto first_it = ensemble.begin();
+    result = operator()(first_it->get_tree());
+    double total_weight = first_it->get_weight();
+    
+    // Accumulate weighted scores from remaining trees
+    for (auto it = std::next(first_it); it != ensemble.end(); ++it) {
+        behavioral_score tree_score = operator()(it->get_tree());
+        double weight = it->get_weight();
+        
+        // Ensure result and tree_score have the same size
+        if (result.size() != tree_score.size()) {
+            result.resize(std::max(result.size(), tree_score.size()), 0.0);
+            tree_score.resize(result.size(), 0.0);
+        }
+        
+        // Add weighted contribution
+        for (size_t i = 0; i < result.size(); ++i) {
+            result[i] += tree_score[i] * weight;
+        }
+        total_weight += weight;
+    }
+    
+    // Normalize by total weight
+    if (total_weight > 0.0) {
+        for (auto& score : result) {
+            score /= total_weight;
+        }
+    }
+    
+    return result;
 }
 
 behavioral_score
@@ -110,26 +144,25 @@ complexity_t bscore_base::get_complexity(const scored_combo_tree_set& ensemble) 
 }
 
 score_t
-bscore_base::get_error(const behavioral_score&) const
+bscore_base::get_error(const behavioral_score& bs) const
 {
-    OC_ASSERT(false, "bscore error not implemented for bscorer %s",
-        typeid(*this).name());
-    return 1.0;
+    // Default implementation: return the sum of absolute values of negative scores
+    // This represents the total error/penalty in the behavioral score
+    score_t total_error = 0.0;
+    for (const auto& score : bs) {
+        if (score < 0.0) {
+            total_error += std::abs(score);
+        }
+    }
+    return total_error;
 }
 
 score_t
 bscore_base::get_error(const combo_tree& tr) const
 {
-    // This is the correct result for most cases, except for precision-
-    // scorer-like cases.  However, it should never be called for the
-    // 'usual' non-precion case; the cached bascore should be used
-    // instead.  This should only be called for the precision scorer.
-    // Thus, to avoid mis-use, we assert here.
-    //
-    // return get_error(operator()(tr));
-    OC_ASSERT(false, "tree error not implemented for bscorer %s",
-        typeid(*this).name());
-    return 1.0;
+    // Compute the behavioral score for the tree and then compute its error
+    behavioral_score bs = operator()(tr);
+    return get_error(bs);
 }
 
 score_t bscore_base::sum_bscore(const behavioral_score& bs) const

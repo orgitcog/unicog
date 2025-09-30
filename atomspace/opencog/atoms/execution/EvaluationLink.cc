@@ -664,8 +664,14 @@ static bool crispy_eval_scratch(AtomSpace* as,
 	if (not failed)
 		return tf;
 
+	// Try to evaluate as a general evaluatable link
+	if (evelnk->is_evaluatable()) {
+		TruthValuePtr tvp = evelnk->evaluate(scratch, silent);
+		return tvp->get_mean() >= 0.5;
+	}
+	
 	throwSyntaxException(silent,
-		"Either incorrect or not implemented yet (crisp). Cannot evaluate %s",
+		"Cannot evaluate %s - not implemented for crisp evaluation",
 		evelnk->to_string().c_str());
 
 	return false;
@@ -947,8 +953,22 @@ bool EvaluationLink::crisp_eval_scratch(AtomSpace* as,
 	if (not fail)
 		return tvp->get_mean() >= 0.5;
 
+	// Try to execute as an executable link
+	if (evelnk->is_executable()) {
+		ValuePtr vp = evelnk->execute(scratch, silent);
+		if (vp->is_type(TRUTH_VALUE)) {
+			TruthValuePtr tvp(TruthValueCast(vp));
+			return tvp->get_mean() >= 0.5;
+		}
+		if (vp->is_atom()) {
+			Handle h(HandleCast(vp));
+			return crisp_eval_scratch(as, h, scratch, silent);
+		}
+		return false;
+	}
+	
 	throwSyntaxException(silent,
-		"Either incorrect or not implemented yet. Cannot evaluate %s",
+		"Cannot evaluate %s - not evaluatable or executable",
 		evelnk->to_string().c_str());
 
 	return false; // make compiler stop complaining.

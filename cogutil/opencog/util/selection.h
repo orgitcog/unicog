@@ -29,6 +29,9 @@
 #include <opencog/util/dorepeat.h>
 #include <opencog/util/RandGen.h>
 #include <opencog/util/mt19937ar.h>
+#include <vector>
+#include <algorithm>
+#include <functional>
 
 namespace opencog
 {
@@ -70,6 +73,56 @@ struct tournament_selection
                     res = tmp;
             }
             *dst++ = *res;
+        }
+    }
+};
+
+struct truncation_selection
+{
+    truncation_selection(double selection_ratio_, RandGen& _rng = randGen())
+    : selection_ratio(selection_ratio_), rng(_rng)
+    {
+        OC_ASSERT(selection_ratio > 0.0 && selection_ratio <= 1.0);
+    }
+
+    double selection_ratio;
+    RandGen& rng;
+
+    /**
+     * Truncation selection: sorts the population and selects the top
+     * selection_ratio fraction of individuals. This is a deterministic
+     * selection method that always selects the best individuals.
+     *
+     * The selected elements are appended to dst.
+     */
+    template<typename In, typename Out>
+    void operator()(In from, In to, Out dst, unsigned int n_select) const
+    {
+        typedef typename std::iterator_traits<In>::value_type value_type;
+        std::vector<value_type> sorted_population(from, to);
+        
+        // Sort in descending order (best first)
+        std::sort(sorted_population.begin(), sorted_population.end(),
+                  std::greater<value_type>());
+        
+        // Calculate how many individuals to select based on selection ratio
+        unsigned int total_size = sorted_population.size();
+        unsigned int num_to_select = std::min(n_select, 
+            static_cast<unsigned int>(total_size * selection_ratio));
+        
+        // Select the top individuals
+        for (unsigned int i = 0; i < num_to_select; ++i) {
+            *dst++ = sorted_population[i];
+        }
+        
+        // If we need more individuals and have fewer than n_select,
+        // fill the rest with random selection from the top fraction
+        if (num_to_select < n_select) {
+            unsigned int remaining = n_select - num_to_select;
+            for (unsigned int i = 0; i < remaining; ++i) {
+                unsigned int idx = rng.randint(num_to_select);
+                *dst++ = sorted_population[idx];
+            }
         }
     }
 };

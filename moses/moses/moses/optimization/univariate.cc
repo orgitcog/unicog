@@ -85,17 +85,18 @@ void univariate_optimization::operator()(deme_t& deme,
              replace_the_worst(),
              logger);
     } else { //truncation selection
-        OC_ASSERT(false,
-                  "Trunction selection not implemented."
-                  " Tournament should be used instead.");
-        /*
-        return optimize(deme,n_select,n_generate,args.max_gens,score,
-          terminate_if_gte_or_no_improv(opt_params.terminate_if_gte,
-                   max_gens_improv),
-          //truncation selection goes here
-          univariate(),local_structure_probs_learning(),
-          replace_the_worst(),cout_log_best_and_gen());
-        */
+        cout_log_best_and_gen logger;
+        deme.n_evals = optimize
+            (deme, n_select, n_generate, max_gens_total, iscorer,
+             terminate_if_gte_or_no_improv<composite_score>
+             (composite_score(opt_params.terminate_if_gte,
+                              worst_composite_score.get_complexity(),
+                              0),
+              max_gens_improv),
+             truncation_selection(eda_params.selection_ratio),
+             univariate(), local_structure_probs_learning(),
+             replace_the_worst(),
+             logger);
     }
 }
 

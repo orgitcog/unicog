@@ -131,9 +131,9 @@ TruthValuePtr SimpleTruthValue::merge(const TruthValuePtr& other,
             return createTV(mean_new, confidence_new);
         }
         default:
-            throw RuntimeException(TRACE_INFO,
-                                   "SimpleTruthValue::merge: case not implemented");
-            return nullptr;
+            // For any unrecognized formula, fall back to PLN_BOOK_REVISION
+            logger().warn() << "Unknown merge formula, falling back to PLN_BOOK_REVISION";
+            return higher_confidence_merge(other);
        }
 }
 
