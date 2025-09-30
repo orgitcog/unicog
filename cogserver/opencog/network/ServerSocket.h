@@ -78,6 +78,8 @@ protected:
     bool _is_websocket;
     bool _got_websock_header;
     std::string _url;
+    std::string _http_method;
+    bool _is_http_only;
 
     /**
      * Connection callback: called whenever a new connection arrives
@@ -105,6 +107,8 @@ public:
     ServerSocket(void);
     virtual ~ServerSocket();
     void act_as_websocket(void) { _is_websocket = true; }
+    bool is_http_only(void) const { return _is_http_only; }
+    const std::string& get_http_method(void) const { return _http_method; }
 
     void set_connection(boost::asio::ip::tcp::socket*);
     void handle_connection(void);

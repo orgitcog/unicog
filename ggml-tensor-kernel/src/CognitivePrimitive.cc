@@ -13,22 +13,7 @@
 
 #include "../include/opencog/tensor/CognitivePrimitive.h"
 
-// Logger stub for minimal implementation
-namespace opencog {
-    class Logger {
-    public:
-        static Logger& getInstance() {
-            static Logger instance;
-            return instance;
-        }
-        void info(const char* fmt, ...) { printf("[INFO] "); printf(fmt, ""); printf("\n"); }
-        void error(const char* fmt, ...) { printf("[ERROR] "); printf(fmt, ""); printf("\n"); }
-        void warn(const char* fmt, ...) { printf("[WARN] "); printf(fmt, ""); printf("\n"); }
-        void debug(const char* fmt, ...) { printf("[DEBUG] "); printf(fmt, ""); printf("\n"); }
-    };
-    
-    Logger& logger() { return Logger::getInstance(); }
-}
+// Use logger from atomspace_stub.h
 
 using namespace opencog;
 
@@ -337,18 +322,138 @@ Handle CognitivePrimitiveTensor::to_atomspace_node(AtomSpace* as) const
 std::unique_ptr<CognitivePrimitiveTensor> CognitivePrimitiveTensor::from_atomspace_node(
     ggml_context* ctx, const Handle& handle)
 {
-    // Stub implementation for minimal build
-    if (!ctx) {
+    if (!ctx || handle == Handle::UNDEFINED) {
         return nullptr;
     }
     
-    // Create a default primitive for testing
-    auto primitive = std::make_unique<CognitivePrimitiveTensor>(ctx, "recovered-primitive");
-    primitive->set_modality(ModalityType::SYMBOLIC);
-    primitive->set_depth(DepthType::SEMANTIC);
-    primitive->set_context(ContextType::LOCAL);
-    primitive->set_salience(0.5f);
-    primitive->set_autonomy_index(0.5f);
+    // Get atom from handle
+    auto atom = handle.atom();
+    if (!atom) {
+        return nullptr;
+    }
+    
+    // Extract name from atom
+    std::string name = "cognitive-primitive";
+    if (atom->is_node()) {
+        auto node = std::dynamic_pointer_cast<Node>(atom);
+        if (node) {
+            name = node->get_name();
+        }
+    }
+    
+    // Create cognitive primitive tensor
+    auto primitive = std::make_unique<CognitivePrimitiveTensor>(ctx, name);
+    
+    // Extract properties from atom's outgoing links
+    if (atom->is_link()) {
+        auto link = std::dynamic_pointer_cast<Link>(atom);
+        if (link) {
+            HandleSeq outgoing = link->getOutgoingSet();
+            
+            // Parse evaluation links for properties
+            for (size_t i = 0; i < outgoing.size(); i += 3) {
+                if (i + 2 >= outgoing.size()) break;
+                
+                auto predicate = outgoing[i].atom();
+                auto value = outgoing[i + 2].atom();
+                
+                if (predicate && predicate->is_node() && value && value->is_node()) {
+                    auto pred_node = std::dynamic_pointer_cast<Node>(predicate);
+                    auto val_node = std::dynamic_pointer_cast<Node>(value);
+                    
+                    if (pred_node && val_node) {
+                        std::string pred_name = pred_node->get_name();
+                        std::string val_name = val_node->get_name();
+                        
+                        // Set modality
+                        if (pred_name == "modality") {
+                            if (val_name == "visual") {
+                                primitive->set_modality(ModalityType::VISUAL);
+                            } else if (val_name == "auditory") {
+                                primitive->set_modality(ModalityType::AUDITORY);
+                            } else if (val_name == "textual") {
+                                primitive->set_modality(ModalityType::TEXTUAL);
+                            } else if (val_name == "symbolic") {
+                                primitive->set_modality(ModalityType::SYMBOLIC);
+                            }
+                        }
+                        // Set depth
+                        else if (pred_name == "depth") {
+                            if (val_name == "surface") {
+                                primitive->set_depth(DepthType::SURFACE);
+                            } else if (val_name == "semantic") {
+                                primitive->set_depth(DepthType::SEMANTIC);
+                            } else if (val_name == "pragmatic") {
+                                primitive->set_depth(DepthType::PRAGMATIC);
+                            }
+                        }
+                        // Set context
+                        else if (pred_name == "context") {
+                            if (val_name == "local") {
+                                primitive->set_context(ContextType::LOCAL);
+                            } else if (val_name == "global") {
+                                primitive->set_context(ContextType::GLOBAL);
+                            } else if (val_name == "temporal") {
+                                primitive->set_context(ContextType::TEMPORAL);
+                            }
+                        }
+                        // Set numerical values
+                        else if (pred_name == "salience") {
+                            try {
+                                float salience = std::stof(val_name);
+                                primitive->set_salience(salience);
+                            } catch (...) {
+                                // Keep default value
+                            }
+                        } else if (pred_name == "autonomy_index") {
+                            try {
+                                float autonomy = std::stof(val_name);
+                                primitive->set_autonomy_index(autonomy);
+                            } catch (...) {
+                                // Keep default value
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        // For simple nodes, set defaults based on type
+        Type atom_type = atom->get_type();
+        
+        // Set defaults based on atom type
+        if (atom_type == CONCEPT_NODE) {
+            primitive->set_modality(ModalityType::SYMBOLIC);
+            primitive->set_depth(DepthType::SEMANTIC);
+            primitive->set_context(ContextType::GLOBAL);
+            primitive->set_salience(0.7f);
+            primitive->set_autonomy_index(0.6f);
+        } else if (atom_type == PREDICATE_NODE) {
+            primitive->set_modality(ModalityType::SYMBOLIC);
+            primitive->set_depth(DepthType::PRAGMATIC);
+            primitive->set_context(ContextType::LOCAL);
+            primitive->set_salience(0.8f);
+            primitive->set_autonomy_index(0.4f);
+        } else {
+            // Default values
+            primitive->set_modality(ModalityType::SYMBOLIC);
+            primitive->set_depth(DepthType::SURFACE);
+            primitive->set_context(ContextType::LOCAL);
+            primitive->set_salience(0.5f);
+            primitive->set_autonomy_index(0.5f);
+        }
+    }
+    
+    // Extract and apply truth value if available
+    auto tv = atom->getTruthValue();
+    if (tv) {
+        float strength = tv->get_mean();
+        float confidence = tv->get_confidence();
+        
+        // Map truth value to salience and autonomy
+        primitive->set_salience(strength);
+        primitive->set_autonomy_index(confidence);
+    }
     
     return primitive;
 }

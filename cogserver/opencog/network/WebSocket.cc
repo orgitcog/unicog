@@ -230,14 +230,47 @@ void ServerSocket::HandshakeLine(const std::string& line)
 	{
 		_got_first_line = true;
 
-		if (0 != line.compare(0, 4, "GET "))
+		// Parse HTTP method
+		std::string method;
+		size_t method_end = line.find(' ');
+		if (method_end != std::string::npos)
 		{
-			Send("HTTP/1.1 501 Not Implemented\r\n"
+			method = line.substr(0, method_end);
+			size_t url_start = method_end + 1;
+			size_t url_end = line.find(' ', url_start);
+			if (url_end != std::string::npos)
+			{
+				_url = line.substr(url_start, url_end - url_start);
+			}
+		}
+		
+		// Store the HTTP method for later use
+		_http_method = method;
+		
+		// WebSocket upgrades must use GET method
+		if (method == "GET")
+		{
+			// Continue with WebSocket handshake
+			return;
+		}
+		else if (method == "POST" || method == "PUT" || method == "DELETE" || 
+		         method == "HEAD" || method == "OPTIONS" || method == "PATCH")
+		{
+			// These methods are allowed but not for WebSocket upgrade
+			// The actual handling will be done in OnConnection()
+			_is_http_only = true;
+			return;
+		}
+		else
+		{
+			// Unsupported method
+			Send("HTTP/1.1 405 Method Not Allowed\r\n"
 				"Server: CogServer\r\n"
+				"Allow: GET, POST, PUT, DELETE, HEAD, OPTIONS, PATCH\r\n"
+				"Content-Length: 0\r\n"
 				"\r\n");
 			throw SilentException();
 		}
-		_url = line.substr(4, line.find(" ", 4) - 4);
 		return;
 	}
 
@@ -275,7 +308,8 @@ void ServerSocket::HandshakeLine(const std::string& line)
 	OnConnection();
 
 	// In case the user blew it above, we close the sock.
-	if (not _got_websock_header)
+	// Unless this is an HTTP-only connection (no WebSocket upgrade)
+	if (not _got_websock_header and not _is_http_only)
 		throw SilentException();
 
 	// If we are here, we've received an HTTP header, and it
