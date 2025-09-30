@@ -45,7 +45,8 @@ class Valuation
 protected:
 	Handle _key;
 	Handle _atom;
-	ValuePtr _value;  // XXX TODO should this be  vector?
+	ValuePtr _value;  // Single value per key-atom pair. For multiple values,
+	                  // use LinkValue or create separate Valuation instances.
 
 public:
 	Valuation(const Handle& k, const Handle& a, const ValuePtr& v)

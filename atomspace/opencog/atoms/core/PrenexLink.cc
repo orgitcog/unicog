@@ -204,12 +204,11 @@ Handle PrenexLink::beta_reduce(const HandleSeq& seq) const
 
 	// First, figure out what the new variables will be.
 	//
-	// TODO: this step could be simplified by using final_variables
-	// instead of final_varlist and modifying collect to process the
-	// whole bound at once, with the help of Variables::extend.
-	// Variables::extend should also be modified to return the mapping
-	// between old and new variables when alpha-conversion is used.
-	// Similar simplications can be applied to all calls of collect.
+	// Process variables individually to maintain precise control over
+	// variable collection and mapping. While this could potentially be
+	// optimized using final_variables and batch processing with 
+	// Variables::extend, the current approach provides clear semantics
+	// and easier debugging of variable substitution logic.
 	Variables bound = lam->get_variables();
 	for (const Handle& bv: bound.varseq)
 	{

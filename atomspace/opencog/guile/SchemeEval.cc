@@ -1062,10 +1062,9 @@ SCM SchemeEval::do_apply_scm(const std::string& func, const ValuePtr& varargs)
 	if (_atomspace)
 		SchemeSmob::ss_set_env_as(_atomspace);
 
-	// TODO: it would be nice to pass exceptions on through, but
-	// this currently breaks unit tests.
-	// if (_in_eval)
-	//    return scm_eval(expr, scm_interaction_environment());
+	// Use do_scm_eval for consistent error handling and logging.
+	// Direct scm_eval would be simpler but breaks unit tests that
+	// expect specific error handling behavior and logging.
 	return do_scm_eval(expr, thunk_scm_eval);
 }
 
