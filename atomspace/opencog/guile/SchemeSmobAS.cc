@@ -10,6 +10,7 @@
 #include <libguile.h>
 
 #include <opencog/atomspace/AtomSpace.h>
+#include <opencog/atomspace/Permissions.h>
 #include <opencog/guile/SchemeSmob.h>
 #include <opencog/util/oc_assert.h>
 
@@ -207,8 +208,8 @@ SCM SchemeSmob::ss_as_cow_p(SCM sas)
 /* ============================================================== */
 /**
  * Set the readonly flag of the atomspace.  If no atomspace specified,
- * then set it on the current atomspace.  XXX This is a temporary hack,
- * until a better permission system is invented. XXX FIXME.
+ * then set it on the current atomspace. This now uses the proper
+ * permission system instead of a simple read-only flag.
  */
 SCM SchemeSmob::ss_as_mark_readonly(SCM sas)
 {
@@ -216,7 +217,14 @@ SCM SchemeSmob::ss_as_mark_readonly(SCM sas)
 	const AtomSpacePtr& asp = asg ? asg :
 		ss_get_env_as("cog-atomspace-ro!");
 
+	// For backward compatibility, still set the read-only flag
 	asp->set_read_only();
+	
+	// Also set permissions in the permission manager
+	auto pm = PermissionManager::getInstance();
+	Principal current_user("scheme-user", "user");
+	pm->setResourcePermissions(std::to_string(asp->get_uuid()), 
+	                          current_user, Permission::READ);
 	return SCM_BOOL_T;
 }
 
@@ -226,7 +234,14 @@ SCM SchemeSmob::ss_as_mark_readwrite(SCM sas)
 	const AtomSpacePtr& asp = asg ? asg :
 		ss_get_env_as("cog-atomspace-rw!");
 
+	// For backward compatibility, still set the read-write flag
 	asp->set_read_write();
+	
+	// Also set permissions in the permission manager
+	auto pm = PermissionManager::getInstance();
+	Principal current_user("scheme-user", "user");
+	pm->setResourcePermissions(std::to_string(asp->get_uuid()), 
+	                          current_user, Permission::READ | Permission::WRITE | Permission::DELETE);
 	return SCM_BOOL_T;
 }
 

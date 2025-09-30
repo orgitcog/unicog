@@ -26,6 +26,7 @@
 #include <vector>
 #include <opencog/atoms/value/StreamValue.h>
 #include <opencog/atoms/base/Handle.h>
+#include <mutex>
 #include <opencog/atomspace/AtomSpace.h>
 
 namespace opencog
@@ -49,6 +50,7 @@ protected:
 	virtual void update() const;
 	HandleSeq _formula;
 	AtomSpace* _as;
+	mutable std::mutex _update_mutex;
 
 public:
 	FormulaStream(const Handle&);
