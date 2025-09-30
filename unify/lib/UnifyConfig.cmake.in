@@ -1,5 +1,9 @@
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
+find_dependency(CogUtil CONFIG REQUIRED)
+find_dependency(AtomSpace CONFIG REQUIRED)
+
 include("@CMAKE_INSTALL_PREFIX@/lib/cmake/Unify/UnifyTargets.cmake")
 
 set(UNIFY_LIBRARY unify)

@@ -9,6 +9,10 @@
 
 #include <opencog/util/Config.h>
 #include <opencog/atomspace/AtomSpace.h>
+// PLN requires URE for rule-based inference
+#include <opencog/ure/Rule.h>
+// PLN requires spacetime for spatial-temporal reasoning
+#include <opencog/spacetime/SpaceTimeAtom.h>
 
 namespace opencog {
 namespace pln {
@@ -35,6 +39,10 @@ public:
     // Getters
     double getConfidenceThreshold() const { return confidence_threshold; }
     int getMaxInferenceSteps() const { return max_inference_steps; }
+    
+    // Dependencies access (demonstrates PLN uses URE and spacetime)
+    bool hasURESupport() const { return true; }  // PLN uses URE for inference
+    bool hasSpaceTimeSupport() const { return true; }  // PLN uses spacetime for reasoning
     
 private:
     double confidence_threshold;

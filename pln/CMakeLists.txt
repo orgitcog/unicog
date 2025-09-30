@@ -13,8 +13,32 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find required dependencies
-find_package(CogUtil REQUIRED)
-find_package(AtomSpace REQUIRED)
+# Use find_path instead of find_package for unified build
+find_path(COGUTIL_INCLUDE_DIR opencog/util/Config.h)
+if(NOT COGUTIL_INCLUDE_DIR)
+    message(STATUS "CogUtil headers not found, using relative path")
+    set(COGUTIL_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../cogutil)
+endif()
+
+find_path(ATOMSPACE_INCLUDE_DIR opencog/atomspace/AtomSpace.h)
+if(NOT ATOMSPACE_INCLUDE_DIR)
+    message(STATUS "AtomSpace headers not found, using relative path")
+    set(ATOMSPACE_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../atomspace)
+endif()
+
+# Find URE (Unified Rule Engine) - required for PLN inference
+find_path(URE_INCLUDE_DIR opencog/ure/Rule.h)
+if(NOT URE_INCLUDE_DIR)
+    message(STATUS "URE headers not found, using relative path")
+    set(URE_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../ure)
+endif()
+
+# Find spacetime - required for spatial-temporal reasoning
+find_path(SPACETIME_INCLUDE_DIR opencog/spacetime/SpaceTimeAtom.h)
+if(NOT SPACETIME_INCLUDE_DIR)
+    message(STATUS "SpaceTime headers not found, using relative path")
+    set(SPACETIME_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../spacetime)
+endif()
 
 # Include directories
 include_directories(
@@ -22,6 +46,8 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/opencog
     ${COGUTIL_INCLUDE_DIR}
     ${ATOMSPACE_INCLUDE_DIR}
+    ${URE_INCLUDE_DIR}
+    ${SPACETIME_INCLUDE_DIR}
 )
 
 # PLN core source files
@@ -39,10 +65,12 @@ file(GLOB_RECURSE PLN_HEADERS
 if(PLN_SOURCES)
     add_library(pln SHARED ${PLN_SOURCES})
     
-    # Link dependencies
+    # Link dependencies - using target names for unified build
     target_link_libraries(pln
-        ${COGUTIL_LIBRARY}
-        ${ATOMSPACE_LIBRARY}
+        cogutil
+        atomspace
+        ure
+        spacetime
     )
     
     # Set library properties
@@ -67,7 +95,7 @@ file(GLOB PLN_EXECUTABLES "examples/*.cc")
 foreach(executable_source ${PLN_EXECUTABLES})
     get_filename_component(executable_name ${executable_source} NAME_WE)
     add_executable(${executable_name} ${executable_source})
-    target_link_libraries(${executable_name} pln ${COGUTIL_LIBRARY} ${ATOMSPACE_LIBRARY})
+    target_link_libraries(${executable_name} pln cogutil atomspace ure spacetime)
     install(TARGETS ${executable_name} DESTINATION bin)
 endforeach()
 
