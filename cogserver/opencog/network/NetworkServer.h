@@ -13,6 +13,9 @@
 #include <queue>
 #include <string>
 #include <thread>
+#ifdef __cpp_lib_jthread
+#include <thread>  // For std::jthread
+#endif
 
 #include <boost/asio.hpp>
 #include <opencog/network/ServerSocket.h>
@@ -46,7 +49,11 @@ protected:
     std::atomic_bool _running;
     boost::asio::io_service _io_service;
     boost::asio::ip::tcp::acceptor _acceptor;
+#ifdef __cpp_lib_jthread
+    std::jthread* _listener_thread;
+#else
     std::thread* _listener_thread;
+#endif
 
     /** The network server's main listener thread.  */
     void listen();

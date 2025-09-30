@@ -59,6 +59,14 @@ private:
     static bool isVerb(const std::string& word);
     static bool isDeterminer(const std::string& word);
     static bool isPreposition(const std::string& word);
+    static bool isAdjective(const std::string& word);
+    static bool isAdverb(const std::string& word);
+    
+    // Additional helper methods
+    Handle createDetailedLinkageAtom(const std::vector<std::string>& words, 
+                                   const std::string& linkage_info, 
+                                   int linkage_num);
+    std::string generateAlternativeParse(const std::vector<std::string>& words);
 };
 
 } // namespace lg_atomese

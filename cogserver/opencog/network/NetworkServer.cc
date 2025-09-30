@@ -15,6 +15,10 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <time.h>
+#include <thread>
+#ifdef __cpp_lib_jthread
+#include <thread>  // For std::jthread
+#endif
 
 #include <boost/asio/ip/tcp.hpp>
 #include <opencog/util/Logger.h>
@@ -109,7 +113,13 @@ void NetworkServer::listen(void)
         // too many.
         ServerSocket* ss = _getServer();
         ss->set_connection(sock);
+#ifdef __cpp_lib_jthread
+        // Use std::jthread if available (C++20)
+        std::jthread(&ServerSocket::handle_connection, ss).detach();
+#else
+        // Fall back to std::thread for older compilers
         std::thread(&ServerSocket::handle_connection, ss).detach();
+#endif
     }
 }
 
@@ -125,7 +135,13 @@ void NetworkServer::run(ServerSocket* (*handler)(void))
         logger().error("Error in boost::asio io_service::run() => %s", e.what());
     }
 
+#ifdef __cpp_lib_jthread
+    // Use std::jthread if available (C++20)
+    _listener_thread = new std::jthread(&NetworkServer::listen, this);
+#else
+    // Fall back to std::thread for older compilers
     _listener_thread = new std::thread(&NetworkServer::listen, this);
+#endif
 }
 
 // ==================================================================

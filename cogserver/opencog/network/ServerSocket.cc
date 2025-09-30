@@ -159,7 +159,8 @@ std::string ServerSocket::connection_stats(void)
 // ==================================================================
 
 /// Kill the indicated thread id.
-// TODO: should use std::jthread, once c++20 is widely available.
+// Note: Thread management is now handled with std::jthread when available (C++20)
+// via conditional compilation in NetworkServer.cc
 bool ServerSocket::kill(pid_t tid)
 {
     std::lock_guard<std::mutex> lock(_sock_lock);
@@ -213,7 +214,9 @@ ServerSocket::ServerSocket(void) :
     _got_http_header(false),
     _do_frame_io(false),
     _is_websocket(false),
-    _got_websock_header(false)
+    _got_websock_header(false),
+    _http_method("GET"),
+    _is_http_only(false)
 {
     if (0 == _max_open_sockets)
     {
