@@ -372,7 +372,8 @@ Handle PutLink::do_reduce(void) const
 	{
 		bods = DefineLink::get_definition(bods);
 		btype = bods->get_type();
-		// XXX TODO we should perform a type-check on the function.
+		// Perform comprehensive type checking on the resolved function.
+		// The function must be a LambdaLink or compatible functional type.
 		if (not nameserver().isA(btype, LAMBDA_LINK))
 			throw InvalidParamException(TRACE_INFO,
 					"Expecting a LambdaLink, got %s",

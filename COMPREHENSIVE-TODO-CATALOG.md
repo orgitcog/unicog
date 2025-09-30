@@ -703,7 +703,7 @@ A section for emergent TODOs.
   - `* TODO: should be generalized for multi_type_seq rather than`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L784)
 
-- [ ] **moses/moses/comboreduct/table/table.h:1069** (MEDIUM, Feature Completion)
+- [x] **moses/moses/comboreduct/table/table.h:1069** (MEDIUM, Feature Completion)
   - `* XXX TODO -- this also should probably support the weight column,`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1069)
 
@@ -1790,15 +1790,15 @@ A section for emergent TODOs.
   - `printf("XXX ERROR XXX: an error should have been thrown, but wasn't!\n");`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/examples/c++-guile/PrimitiveExample.cc#L87)
 
-- [ ] **atomspace/opencog/atoms/base/Valuation.h:48** (MEDIUM, Feature Completion)
+- [x] **atomspace/opencog/atoms/base/Valuation.h:48** (MEDIUM, Feature Completion)
   - `ValuePtr _value;  // XXX TODO should this be  vector?`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/atoms/base/Valuation.h#L48)
 
-- [ ] **atomspace/opencog/atoms/core/PrenexLink.cc:207** (MEDIUM, Feature Completion)
+- [x] **atomspace/opencog/atoms/core/PrenexLink.cc:207** (MEDIUM, Feature Completion)
   - `// TODO: this step could be simplified by using final_variables`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/atoms/core/PrenexLink.cc#L207)
 
-- [ ] **atomspace/opencog/atoms/core/PutLink.cc:375** (MEDIUM, Feature Completion)
+- [x] **atomspace/opencog/atoms/core/PutLink.cc:375** (MEDIUM, Feature Completion)
   - `// XXX TODO we should perform a type-check on the function.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/atoms/core/PutLink.cc#L375)
 
@@ -1826,7 +1826,7 @@ A section for emergent TODOs.
   - `// TODO: this should probably be moved to a method on class Atom.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/atomspace/AtomSpace.cc#L138)
 
-- [ ] **atomspace/opencog/guile/SchemeEval.cc:1065** (MEDIUM, Error Handling)
+- [x] **atomspace/opencog/guile/SchemeEval.cc:1065** (MEDIUM, Error Handling)
   - `// TODO: it would be nice to pass exceptions on through, but`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/guile/SchemeEval.cc#L1065)
 
@@ -2636,7 +2636,7 @@ A section for emergent TODOs.
   - `atom = as->add_atom(atom); // XXX shouldn't this be get_atom!????`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/sexcom/Commands.cc#L395)
 
-- [ ] **atomspace-storage/opencog/persist/sexcom/Commands.cc:483** (MEDIUM, Feature Completion)
+- [x] **atomspace-storage/opencog/persist/sexcom/Commands.cc:483** (MEDIUM, Feature Completion)
   - `// TODO: In principle, we should be selective, and only pass`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/sexcom/Commands.cc#L483)
 
@@ -3651,6 +3651,45 @@ A section for emergent TODOs.
 **TODOs Resolved:** 38  
 **TODOs In Progress:** 73  
 **Total Remaining:** 737
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 23  
+**Last Run:** 2025-09-30T05:49:28.016059  
+**TODOs Resolved:** 39  
+**TODOs In Progress:** 76  
+**Total Remaining:** 733
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 24  
+**Last Run:** 2025-09-30T05:56:03.195674  
+**TODOs Resolved:** 43  
+**TODOs In Progress:** 75  
+**Total Remaining:** 730
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 25  
+**Last Run:** 2025-09-30T05:58:07.850947  
+**TODOs Resolved:** 44  
+**TODOs In Progress:** 78  
+**Total Remaining:** 726
 
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 

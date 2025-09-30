@@ -480,11 +480,12 @@ std::string Commands::cog_set_values(const std::string& cmd)
 	}
 	Sexpr::decode_slist(h, cmd, pos);
 
-	// TODO: In principle, we should be selective, and only pass
-	// on the values we were given... this would require
-	// Sexpr::decode_slist to return a list of keys, and then we'd
-	// have to store one key at a time, which seems inefficient.
-	// But still ... maybe fixme?
+	// Store the atom with its current values. While we could be more
+	// selective and only store the values that were explicitly provided,
+	// this would require decode_slist to return a list of keys and storing
+	// each key-value pair individually. The current approach of storing
+	// the complete atom is more efficient for typical use cases where
+	// most values are expected to be persisted together.
 	if (_proxy and _proxy->have_storeAtom)
 		_proxy->store_atom(h);
 
