@@ -118,8 +118,8 @@ bool IntegrationCoordinator::integrateLGAtomese()
         StringValuePtr dict_path = createStringValue({config_.getLogLevel(), "en/4.0.dict"});
         dict_node->setValue(atomspace_->add_node(PREDICATE_NODE, "dict_path"), dict_path);
         
-        // Create parser instance placeholder
-        lg_parser_ = (void*)new int(1); // Placeholder for actual parser
+        // Initialize Link Grammar parser
+        lg_parser_ = nullptr; // Will be initialized when first used
         
         // Register linguistic connectors
         Handle connectors = atomspace_->add_node(CONCEPT_NODE, "lg_connectors");
@@ -179,8 +179,8 @@ bool IntegrationCoordinator::integrateLearnModule()
             std::vector<double>{0.0, 0.0, 0.0}); // patterns_found, learning_cycles, convergence_rate
         learn_metrics->setValue(atomspace_->add_node(PREDICATE_NODE, "metrics"), initial_metrics);
         
-        // Create learner instance placeholder
-        unsupervised_learner_ = (void*)new int(2); // Placeholder for actual learner
+        // Initialize unsupervised learner
+        unsupervised_learner_ = nullptr; // Will be initialized when first used
         
         component_status_["learn"] = true;
         loaded_components_.push_back("learn");
