@@ -3,6 +3,8 @@
  */
 
 #include "IntegrationCoordinator.h"
+#include "LGParser.h"
+#include "UnsupervisedLearner.h"
 #include <opencog/util/Logger.h>
 #include <opencog/atoms/base/Node.h>
 #include <opencog/atoms/base/Link.h>
@@ -80,8 +82,14 @@ void IntegrationCoordinator::shutdownSystem()
     logger().info("Shutting down OpenCog unified system...");
     
     // Cleanup components
-    lg_parser_ = nullptr;
-    unsupervised_learner_ = nullptr;
+    if (lg_parser_) {
+        delete static_cast<LGParser*>(lg_parser_);
+        lg_parser_ = nullptr;
+    }
+    if (unsupervised_learner_) {
+        delete static_cast<UnsupervisedLearner*>(unsupervised_learner_);
+        unsupervised_learner_ = nullptr;
+    }
     
     components_initialized_ = false;
     stats_.system_ready = false;
@@ -119,7 +127,8 @@ bool IntegrationCoordinator::integrateLGAtomese()
         dict_node->setValue(atomspace_->add_node(PREDICATE_NODE, "dict_path"), dict_path);
         
         // Initialize Link Grammar parser
-        lg_parser_ = nullptr; // Will be initialized when first used
+        LGParser* parser = new LGParser(atomspace_, "en");
+        lg_parser_ = static_cast<void*>(parser);
         
         // Register linguistic connectors
         Handle connectors = atomspace_->add_node(CONCEPT_NODE, "lg_connectors");
@@ -180,7 +189,8 @@ bool IntegrationCoordinator::integrateLearnModule()
         learn_metrics->setValue(atomspace_->add_node(PREDICATE_NODE, "metrics"), initial_metrics);
         
         // Initialize unsupervised learner
-        unsupervised_learner_ = nullptr; // Will be initialized when first used
+        UnsupervisedLearner* learner = new UnsupervisedLearner(atomspace_);
+        unsupervised_learner_ = static_cast<void*>(learner);
         
         component_status_["learn"] = true;
         loaded_components_.push_back("learn");
@@ -692,96 +702,22 @@ void IntegrationCoordinator::setupIntegrationPipeline()
 
 Handle IntegrationCoordinator::parseAndIntegrateText(const std::string& text)
 {
-    if (!atomspace_) {
+    if (!atomspace_ || !lg_parser_) {
         return Handle::UNDEFINED;
     }
     
-    // Create sentence node
-    Handle sentence_node = atomspace_->add_node(SENTENCE_NODE, text);
+    // Use the actual LGParser
+    LGParser* parser = static_cast<LGParser*>(lg_parser_);
+    ParseResult parse_result = parser->parseSentence(text);
     
-    // Tokenize text
-    std::vector<std::string> words;
-    std::string current_word;
-    for (char c : text) {
-        if (std::isspace(c) || c == '.' || c == ',' || c == '!' || c == '?') {
-            if (!current_word.empty()) {
-                words.push_back(current_word);
-                current_word.clear();
-            }
-            if (c != ' ') {
-                words.push_back(std::string(1, c));
-            }
-        } else {
-            current_word += c;
-        }
-    }
-    if (!current_word.empty()) {
-        words.push_back(current_word);
+    if (parse_result.parse_node == Handle::UNDEFINED) {
+        logger().warning("Failed to parse text: %s", text.c_str());
+        return Handle::UNDEFINED;
     }
     
-    // Create word instance nodes
-    HandleSeq word_instances;
-    for (size_t i = 0; i < words.size(); ++i) {
-        Handle word_node = atomspace_->add_node(WORD_NODE, words[i]);
-        Handle word_instance = atomspace_->add_node(WORD_INSTANCE_NODE, 
-            words[i] + "@" + std::to_string(std::hash<std::string>{}(text)) + "-" + std::to_string(i));
-        
-        // Link word to its instance
-        atomspace_->add_link(REFERENCE_LINK, HandleSeq{word_instance, word_node});
-        
-        // Add word order
-        Handle word_seq = atomspace_->add_link(WORD_SEQUENCE_LINK, HandleSeq{
-            word_instance,
-            atomspace_->add_node(NUMBER_NODE, std::to_string(i))
-        });
-        
-        word_instances.push_back(word_instance);
-    }
-    
-    // Create parse node
-    Handle parse_node = atomspace_->add_node(PARSE_NODE, 
-        "parse_" + std::to_string(std::hash<std::string>{}(text)));
-    
-    // Link parse to sentence
-    Handle parse_link = atomspace_->add_link(PARSE_LINK, HandleSeq{sentence_node, parse_node});
-    
-    // Add word instances to parse
-    for (const auto& wi : word_instances) {
-        atomspace_->add_link(EVALUATION_LINK, HandleSeq{
-            atomspace_->add_node(PREDICATE_NODE, "_word_instance"),
-            parse_node,
-            wi
-        });
-    }
-    
-    // Add linguistic relations (simplified)
-    if (words.size() >= 2) {
-        // Subject-verb relation
-        if (word_instances.size() >= 2) {
-            atomspace_->add_link(EVALUATION_LINK, HandleSeq{
-                atomspace_->add_node(PREDICATE_NODE, "_subj"),
-                word_instances[1], // verb
-                word_instances[0]  // subject
-            });
-        }
-        
-        // Object relation
-        if (word_instances.size() >= 3) {
-            atomspace_->add_link(EVALUATION_LINK, HandleSeq{
-                atomspace_->add_node(PREDICATE_NODE, "_obj"),
-                word_instances[1], // verb
-                word_instances[2]  // object
-            });
-        }
-    }
-    
-    // Add parse metadata
-    StringValuePtr parse_data = createStringValue({
-        "parse_complete",
-        "word_count:" + std::to_string(words.size()),
-        "language:en"
-    });
-    parse_result->setValue(atomspace_->add_node(PREDICATE_NODE, "parse_metadata"), parse_data);
+    // Return the parse link
+    Handle parse_link = atomspace_->get_link(PARSE_LINK, 
+        HandleSeq{parse_result.sentence_node, parse_result.parse_node});
     
     return parse_link;
 }
@@ -904,107 +840,18 @@ void IntegrationCoordinator::feedLearningAlgorithms(const std::vector<Handle>& d
 {
     logger().debug("Feeding %zu data points to learning algorithms", data.size());
     
-    if (data.empty() || !atomspace_) {
+    if (data.empty() || !atomspace_ || !unsupervised_learner_) {
         return;
     }
     
-    // Get learning algorithms
-    Handle algo_set = atomspace_->get_node(CONCEPT_NODE, "learning_algorithms");
-    if (!algo_set) {
-        logger().warning("Learning algorithms not initialized");
-        return;
-    }
+    // Use the actual UnsupervisedLearner
+    UnsupervisedLearner* learner = static_cast<UnsupervisedLearner*>(unsupervised_learner_);
     
-    // Pattern mining - find frequent patterns
-    std::map<std::string, int> pattern_counts;
-    std::map<HandlePair, int> co_occurrence_counts;
+    // Run the learning pipeline
+    LearningResult result = learner->runLearningPipeline(data);
     
-    for (const auto& data_point : data) {
-        // Extract type patterns
-        Type t = data_point->get_type();
-        std::string type_pattern = nameserver().getTypeName(t);
-        pattern_counts[type_pattern]++;
-        
-        // Extract co-occurrence patterns
-        if (data_point->is_link()) {
-            HandleSeq outgoing = data_point->getOutgoingSet();
-            for (size_t i = 0; i < outgoing.size(); ++i) {
-                for (size_t j = i + 1; j < outgoing.size(); ++j) {
-                    HandlePair pair = std::make_pair(
-                        std::min(outgoing[i], outgoing[j]),
-                        std::max(outgoing[i], outgoing[j])
-                    );
-                    co_occurrence_counts[pair]++;
-                }
-            }
-        }
-        
-        // Create learning input record
-        Handle learning_input = atomspace_->add_node(CONCEPT_NODE, 
-            "learning_input_" + std::to_string(data_point->get_hash()));
-        
-        // Associate with data point
-        Handle assoc = atomspace_->add_link(ASSOCIATIVE_LINK, 
-            HandleSeq{data_point, learning_input});
-        
-        // Add timestamp
-        auto now = std::chrono::system_clock::now();
-        auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(
-            now.time_since_epoch()).count();
-        assoc->setValue(atomspace_->add_node(PREDICATE_NODE, "timestamp"),
-                       createFloatValue(std::vector<double>{(double)timestamp}));
-    }
-    
-    // Store discovered patterns
-    Handle pattern_space = atomspace_->get_node(CONCEPT_NODE, "discovered_patterns");
-    if (pattern_space) {
-        // Store frequent type patterns
-        for (const auto& [pattern, count] : pattern_counts) {
-            if (count >= 2) { // Minimum support threshold
-                Handle pattern_node = atomspace_->add_node(CONCEPT_NODE, 
-                    "type_pattern_" + pattern);
-                
-                pattern_node->setValue(atomspace_->add_node(PREDICATE_NODE, "frequency"),
-                                     createFloatValue(std::vector<double>{(double)count}));
-                
-                atomspace_->add_link(MEMBER_LINK, HandleSeq{pattern_node, pattern_space});
-            }
-        }
-        
-        // Store frequent co-occurrence patterns
-        for (const auto& [pair, count] : co_occurrence_counts) {
-            if (count >= 2) { // Minimum support threshold
-                Handle pattern_link = atomspace_->add_link(SIMILARITY_LINK,
-                    HandleSeq{pair.first, pair.second});
-                
-                pattern_link->setValue(atomspace_->add_node(PREDICATE_NODE, "co_occurrence_count"),
-                                     createFloatValue(std::vector<double>{(double)count}));
-                
-                atomspace_->add_link(MEMBER_LINK, HandleSeq{pattern_link, pattern_space});
-            }
-        }
-    }
-    
-    // Update learning metrics
-    Handle learn_metrics = atomspace_->get_node(CONCEPT_NODE, "learning_metrics");
-    if (learn_metrics) {
-        ValuePtr current_metrics = learn_metrics->getValue(
-            atomspace_->add_node(PREDICATE_NODE, "metrics"));
-        
-        if (current_metrics && current_metrics->get_type() == FLOAT_VALUE) {
-            FloatValuePtr fv = FloatValueCast(current_metrics);
-            std::vector<double> metrics = fv->value();
-            if (metrics.size() >= 3) {
-                metrics[0] += pattern_counts.size(); // patterns_found
-                metrics[1] += 1.0; // learning_cycles
-                learn_metrics->setValue(atomspace_->add_node(PREDICATE_NODE, "metrics"),
-                                      createFloatValue(metrics));
-            }
-        }
-    }
-    
-    logger().debug("Fed data to learning algorithms, discovered %zu type patterns, %zu co-occurrences",
-                   pattern_counts.size(), co_occurrence_counts.size());
+    logger().debug("Fed data to learning algorithms, discovered %zu patterns, formed %zu clusters",
+                   result.discovered_patterns.size(), result.formed_clusters.size());
 }
 
 std::vector<Handle> IntegrationCoordinator::retrieveLearnedKnowledge()
@@ -1015,102 +862,36 @@ std::vector<Handle> IntegrationCoordinator::retrieveLearnedKnowledge()
         return knowledge;
     }
     
-    // Retrieve discovered patterns
+    // Retrieve discovered patterns from AtomSpace
     Handle pattern_space = atomspace_->get_node(CONCEPT_NODE, "discovered_patterns");
     if (pattern_space) {
         IncomingSet pattern_members = pattern_space->getIncomingSetByType(MEMBER_LINK);
         
-        // Filter and rank patterns by frequency/importance
-        std::vector<std::pair<Handle, double>> ranked_patterns;
-        
         for (const Handle& member : pattern_members) {
             HandleSeq member_out = member->getOutgoingSet();
-            if (member_out.size() >= 2 && member_out[0] != pattern_space) {
+            if (member_out.size() >= 2) {
                 Handle pattern = (member_out[0] == pattern_space) ? member_out[1] : member_out[0];
-                
-                // Get pattern frequency or score
-                double score = 1.0;
-                ValuePtr freq_val = pattern->getValue(
-                    atomspace_->add_node(PREDICATE_NODE, "frequency"));
-                if (freq_val && freq_val->get_type() == FLOAT_VALUE) {
-                    FloatValuePtr fv = FloatValueCast(freq_val);
-                    if (!fv->value().empty()) {
-                        score = fv->value()[0];
-                    }
-                }
-                
-                // Get co-occurrence count for similarity links
-                if (pattern->get_type() == SIMILARITY_LINK) {
-                    ValuePtr co_val = pattern->getValue(
-                        atomspace_->add_node(PREDICATE_NODE, "co_occurrence_count"));
-                    if (co_val && co_val->get_type() == FLOAT_VALUE) {
-                        FloatValuePtr fv = FloatValueCast(co_val);
-                        if (!fv->value().empty()) {
-                            score = fv->value()[0];
-                        }
-                    }
-                }
-                
-                ranked_patterns.push_back(std::make_pair(pattern, score));
+                knowledge.push_back(pattern);
             }
         }
-        
-        // Sort by score
-        std::sort(ranked_patterns.begin(), ranked_patterns.end(),
-                  [](const auto& a, const auto& b) { return a.second > b.second; });
-        
-        // Return top patterns as learned knowledge
-        size_t max_patterns = 10;
-        for (size_t i = 0; i < std::min(max_patterns, ranked_patterns.size()); ++i) {
-            knowledge.push_back(ranked_patterns[i].first);
+    }
+    
+    // Retrieve concepts from hierarchy
+    HandleSeq concepts;
+    atomspace_->get_handles_by_type(std::back_inserter(concepts), CONCEPT_NODE);
+    
+    for (const Handle& concept : concepts) {
+        std::string name = concept->get_name();
+        if (name.find("_concept_") != std::string::npos || 
+            name.find("cluster_") != std::string::npos ||
+            name.find("abstract_concept_") != std::string::npos) {
+            knowledge.push_back(concept);
         }
     }
     
-    // Create conceptual abstractions from patterns
-    if (knowledge.size() >= 2) {
-        // Create higher-level concept from frequent patterns
-        Handle abstract_concept = atomspace_->add_node(CONCEPT_NODE,
-            "abstract_concept_" + std::to_string(stats_.processing_cycles));
-        
-        // Link to source patterns
-        for (size_t i = 0; i < std::min(size_t(3), knowledge.size()); ++i) {
-            atomspace_->add_link(INHERITANCE_LINK, 
-                HandleSeq{knowledge[i], abstract_concept});
-        }
-        
-        knowledge.push_back(abstract_concept);
-    }
-    
-    // Retrieve learned associations
-    HandleSeq assoc_links;
-    atomspace_->get_handles_by_type(std::back_inserter(assoc_links), ASSOCIATIVE_LINK);
-    
-    // Find strong associations
-    std::map<HandlePair, int> association_strengths;
-    for (const Handle& assoc : assoc_links) {
-        HandleSeq assoc_out = assoc->getOutgoingSet();
-        if (assoc_out.size() == 2) {
-            HandlePair pair = std::make_pair(
-                std::min(assoc_out[0], assoc_out[1]),
-                std::max(assoc_out[0], assoc_out[1])
-            );
-            association_strengths[pair]++;
-        }
-    }
-    
-    // Create knowledge from strong associations
-    for (const auto& [pair, strength] : association_strengths) {
-        if (strength >= 3) { // Threshold for strong association
-            Handle strong_assoc = atomspace_->add_link(SIMILARITY_LINK,
-                HandleSeq{pair.first, pair.second});
-            
-            strong_assoc->setTruthValue(SimpleTruthValue::createTV(
-                std::min(1.0, strength / 10.0), // strength
-                std::min(1.0, strength / 5.0)   // confidence
-            ));
-            
-            knowledge.push_back(strong_assoc);
-        }
+    // Limit returned knowledge
+    if (knowledge.size() > 20) {
+        knowledge.resize(20);
     }
     
     logger().debug("Retrieved %zu pieces of learned knowledge", knowledge.size());

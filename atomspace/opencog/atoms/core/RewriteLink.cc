@@ -229,9 +229,29 @@ Handle RewriteLink::substitute_vardecl(const Handle& vardecl,
 		else
 			return Handle::UNDEFINED;
 	}
+	else if (t == VARIABLE_SET)
+	{
+		// Handle VariableSet similar to VariableList
+		for (const Handle& h : vardecl->getOutgoingSet())
+		{
+			Handle nh = substitute_vardecl(h, vm);
+			if (nh)
+				oset.push_back(nh);
+		}
+		if (oset.empty())
+			return Handle::UNDEFINED;
+	}
 	else
 	{
-		OC_ASSERT(false, "Not implemented");
+		// For other types, just perform substitution on all outgoing atoms
+		for (const Handle& h : vardecl->getOutgoingSet())
+		{
+			Handle nh = substitute_vardecl(h, vm);
+			if (nh)
+				oset.push_back(nh);
+			else
+				oset.push_back(h); // Keep original if no substitution
+		}
 	}
 	return createLink(std::move(oset), t);
 }

@@ -96,9 +96,11 @@ void FormulaTruthValue::init(void)
 	}
 }
 
-// XXX FIXME This update is not thread-safe.
+// Thread-safe update using mutex
 void FormulaTruthValue::update(void) const
 {
+	std::lock_guard<std::mutex> lock(_update_mutex);
+	
 	if (1 == _formula.size())
 	{
 		const Handle& fut = _formula[0];

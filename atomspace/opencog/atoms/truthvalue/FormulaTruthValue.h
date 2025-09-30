@@ -26,6 +26,7 @@
 #include <opencog/atoms/base/Handle.h>
 #include <opencog/atomspace/AtomSpace.h>
 #include <opencog/atoms/truthvalue/SimpleTruthValue.h>
+#include <mutex>
 
 namespace opencog
 {
@@ -43,6 +44,7 @@ protected:
 	virtual void update(void) const;
 	HandleSeq _formula;
 	AtomSpace* _as;
+	mutable std::mutex _update_mutex;
 
 public:
 	FormulaTruthValue(const Handle&);

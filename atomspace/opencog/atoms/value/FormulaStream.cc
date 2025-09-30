@@ -97,9 +97,11 @@ void FormulaStream::init(void)
 
 // ==============================================================
 
-// XXX FIXME The update here is not thread-safe...
+// Thread-safe update using mutex
 void FormulaStream::update() const
 {
+	std::lock_guard<std::mutex> lock(_update_mutex);
+	
 	if (1 == _formula.size())
 	{
 		if (_formula[0]->is_executable())
