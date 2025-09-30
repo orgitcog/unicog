@@ -703,7 +703,7 @@ A section for emergent TODOs.
   - `* TODO: should be generalized for multi_type_seq rather than`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L784)
 
-- [ ] **moses/moses/comboreduct/table/table.h:1069** (MEDIUM, Feature Completion)
+- [x] **moses/moses/comboreduct/table/table.h:1069** (MEDIUM, Feature Completion)
   - `* XXX TODO -- this also should probably support the weight column,`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1069)
 
@@ -3651,6 +3651,19 @@ A section for emergent TODOs.
 **TODOs Resolved:** 38  
 **TODOs In Progress:** 73  
 **Total Remaining:** 737
+
+*Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
+
+---
+
+
+## 🔄 Recursive Resolution Progress
+
+**Current Iteration:** 23  
+**Last Run:** 2025-09-30T05:49:28.016059  
+**TODOs Resolved:** 39  
+**TODOs In Progress:** 76  
+**Total Remaining:** 733
 
 *Use `python scripts/recursive_todo_resolver.py --next-batch` to continue resolution*
 

@@ -1,5 +1,5 @@
 {
-  "current_iteration": 22,
+  "current_iteration": 23,
   "completed_todos": [
     "atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82",
     "atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc:59",
@@ -113,9 +113,13 @@
     "atomspace-storage/opencog/persist/sexcom/Commands.cc:257",
     "atomspace-storage/opencog/persist/sexcom/Commands.cc:302",
     "atomspace-storage/opencog/persist/sexcom/Commands.cc:395",
-    "atomspace/opencog/atoms/reduct/AccumulateLink.cc:71"
+    "atomspace/opencog/atoms/reduct/AccumulateLink.cc:71",
+    "atomspace-storage/opencog/persist/sexcom/Commands.cc:483",
+    "atomspace/opencog/atoms/base/Valuation.h:48",
+    "atomspace/opencog/atoms/core/PrenexLink.cc:207",
+    "atomspace/opencog/guile/SchemeEval.cc:1065"
   ],
-  "last_run": "2025-08-17T08:38:28.249763",
+  "last_run": "2025-09-30T05:49:28.016059",
   "total_resolved": 36,
   "session_summary": {
     "todos_completed_this_session": 22,
