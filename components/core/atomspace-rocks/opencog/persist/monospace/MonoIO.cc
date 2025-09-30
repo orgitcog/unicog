@@ -988,6 +988,31 @@ void MonoStorage::kill_data(void)
 	write_aid();
 }
 
+/// Delete all data and the database files themselves
+void MonoStorage::destroy(void)
+{
+	// First, clear all data
+	kill_data();
+	
+	// Close the database if it's open
+	if (_rfile)
+	{
+		// Get the database path before closing
+		std::string db_path = _uri.substr(URIX_LEN);
+		
+		close();
+		
+		// Delete the database directory and all its files
+		rocksdb::Status status = rocksdb::DestroyDB(db_path, rocksdb::Options());
+		if (!status.ok())
+		{
+			throw IOException(TRACE_INFO,
+				"Failed to destroy database at %s: %s",
+				db_path.c_str(), status.ToString().c_str());
+		}
+	}
+}
+
 /// Dump database contents to stdout.
 void MonoStorage::print_range(const std::string& pfx)
 {

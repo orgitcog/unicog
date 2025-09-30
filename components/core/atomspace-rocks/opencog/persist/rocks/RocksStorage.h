@@ -134,7 +134,7 @@ class RocksStorage : public StorageNode
 		bool connected(void); // connection to DB is alive
 
 		void create(void) {}
-		void destroy(void) { kill_data(); /* TODO also delete the db */ }
+		void destroy(void);
 		void erase(void) { kill_data(); }
 
 		void kill_data(void); // destroy DB contents

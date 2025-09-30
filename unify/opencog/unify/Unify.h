@@ -413,20 +413,18 @@ public:
 	                                 const HandleMap& var2val);
 
 	/**
-	 * Given a pattern term (a conjunction of clauses) and a variable
-	 * declaration, remove the constant clauses. If all clauses are
-	 * constants then return an empty AndLink.
+	 * Given a pattern term (a conjunction of clauses) and Variables,
+	 * remove the constant clauses. If all clauses are constants then
+	 * return an empty AndLink.
 	 *
 	 * If an atomspace is provided then check that the constant is in
 	 * the atomspace as well, otherwise do not remove it.
 	 *
-	 * The variable declaration is assumed defined. That is if there
-	 * are no variable, rather than Handle::UNDEFINED the vardecl will
-	 * have to be a empty VariableList. That is because an undefined
-	 * variable declaration is ambiguous as we don't know what whether
-	 * it means empty or containing all free variables.
+	 * The Variables object should be used instead of a Handle vardecl
+	 * for better type safety. If there are no variables, pass an empty
+	 * Variables object rather than Handle::UNDEFINED to avoid ambiguity.
 	 */
-	static Handle remove_constant_clauses(const Handle& vardecl,
+	static Handle remove_constant_clauses(const Variables& variables,
 	                                      const Handle& clauses,
 	                                      const AtomSpace* queried_as=nullptr);
 

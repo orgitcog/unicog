@@ -472,7 +472,7 @@ Handle Unify::substitute(BindLinkPtr bl, const HandleMap& var2val,
 	clauses = RewriteLink::consume_quotations(tmpv, clauses,
                              Quotation(), needless_quotation, true);
 	if (queried_as)
-		clauses = remove_constant_clauses(vardecl, clauses, queried_as);
+		clauses = remove_constant_clauses(tmpv, clauses, queried_as);
 	hs.push_back(clauses);
 
 	// Perform substitution over the rewrite terms
@@ -600,13 +600,11 @@ static bool not_constant(const HandleSet& vars,
 }
 
 // Handles clauses connected by various link types (AND, OR, NOT, etc.)
-// TODO: maybe replace Handle vardecl by Variables variables.
-Handle Unify::remove_constant_clauses(const Handle& vardecl,
+Handle Unify::remove_constant_clauses(const Variables& variables,
                                       const Handle& clauses,
                                       const AtomSpace* as)
 {
-	VariableListPtr vl = createVariableList(vardecl);
-	HandleSet vars = vl->get_variables().varset;
+	HandleSet vars = variables.varset;
 
 	// Remove constant clauses
 	Type t = clauses->get_type();
@@ -647,7 +645,7 @@ Handle Unify::remove_constant_clauses(const Handle& vardecl,
 	} else if (is_pm_connector(t)) {
 		// For other pattern matcher connectors, process recursively
 		for (const Handle& clause : clauses->getOutgoingSet()) {
-			Handle processed = remove_constant_clauses(vardecl, clause, as);
+			Handle processed = remove_constant_clauses(variables, clause, as);
 			if (processed->get_arity() > 0 || processed->get_type() != AND_LINK) {
 				hs.push_back(processed);
 			}
