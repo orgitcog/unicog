@@ -24,6 +24,7 @@
 #define _DISPATCHER_H
 
 #include <functional>
+#include <memory>
 #include <string>
 
 #include <opencog/persist/sexcom/Commands.h>
@@ -36,20 +37,45 @@ namespace opencog
 
 class AtomSpace;
 
+// Command handler interface for performance optimization
+class CommandHandler
+{
+public:
+	virtual ~CommandHandler() {}
+	virtual std::string execute(const std::string& args) = 0;
+};
+
+// Template for command handler implementations
+template<typename T>
+class CommandHandlerImpl : public CommandHandler
+{
+private:
+	T* _target;
+	std::string (T::*_method)(const std::string&);
+	
+public:
+	CommandHandlerImpl(T* target, std::string (T::*method)(const std::string&))
+		: _target(target), _method(method) {}
+	
+	std::string execute(const std::string& args) override
+	{
+		return (_target->*_method)(args);
+	}
+};
+
 class Dispatcher
 {
 public:
-	// XXX FIXME: This is a terrible design for performance.
-	// The std::bind call turns into seven!! stack frames of
-	// unwraps before the actual method is called. This is ...
-	// horrific. We can replace with with a conventional
-	// class of virtual methods.
+	// Legacy typedef for compatibility
 	typedef std::function<std::string (const std::string&)> Meth;
 
 protected:
 	Commands _default;
 
-	/// Map to dispatch table
+	/// Optimized dispatch table using direct command handlers
+	std::unordered_map<size_t, std::unique_ptr<CommandHandler>> _handler_map;
+	
+	/// Legacy dispatch map for custom handlers
 	std::unordered_map<size_t, Meth> _dispatch_map;
 
 public:

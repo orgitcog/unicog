@@ -46,39 +46,37 @@ using namespace opencog;
 
 Dispatcher::Dispatcher(void)
 {
-	using namespace std::placeholders;  // for _1, _2, _3...
-
-	// Fast dispatch. There should be zero hash collisions
-	// here. If there are, we are in trouble. (Well, if there
-	// are collisions, pre-pend the paren, post-pend the space.)
-#define MASH(HSH,STR,CB) \
+	// Optimized dispatch using direct method pointers
+	// This avoids the overhead of std::bind and std::function
+#define REGISTER_HANDLER(HSH,STR,CB) \
    static const size_t HSH = std::hash<std::string>{}(STR); \
-   _dispatch_map.insert({HSH, std::bind(&Commands::CB, &_default, _1)});
+   _handler_map[HSH] = std::make_unique<CommandHandlerImpl<Commands>>(&_default, &Commands::CB);
 
-	MASH(space, "cog-atomspace)",         cog_atomspace);
-	MASH(clear, "cog-atomspace-clear)",   cog_atomspace_clear);
-	MASH(proxy, "cog-set-proxy!",         cog_set_proxy);
-	MASH(popen, "cog-proxy-open)",        cog_proxy_open);
-	MASH(pclos, "cog-proxy-close)",       cog_proxy_close);
-	MASH(cache, "cog-execute-cache!",     cog_execute_cache);
+	REGISTER_HANDLER(space, "cog-atomspace)",         cog_atomspace);
+	REGISTER_HANDLER(clear, "cog-atomspace-clear)",   cog_atomspace_clear);
+	REGISTER_HANDLER(proxy, "cog-set-proxy!",         cog_set_proxy);
+	REGISTER_HANDLER(popen, "cog-proxy-open)",        cog_proxy_open);
+	REGISTER_HANDLER(pclos, "cog-proxy-close)",       cog_proxy_close);
+	REGISTER_HANDLER(cache, "cog-execute-cache!",     cog_execute_cache);
 
-	MASH(gtatm, "cog-get-atoms",          cog_get_atoms);
-	MASH(incty, "cog-incoming-by-type",   cog_incoming_by_type);
-	MASH(incom, "cog-incoming-set",       cog_incoming_set);
-	MASH(keys,  "cog-keys->alist",        cog_keys_alist);
-	MASH(link,  "cog-link",               cog_link);
-	MASH(node,  "cog-node",               cog_node);
-	MASH(value, "cog-value",              cog_value);
+	REGISTER_HANDLER(gtatm, "cog-get-atoms",          cog_get_atoms);
+	REGISTER_HANDLER(incty, "cog-incoming-by-type",   cog_incoming_by_type);
+	REGISTER_HANDLER(incom, "cog-incoming-set",       cog_incoming_set);
+	REGISTER_HANDLER(keys,  "cog-keys->alist",        cog_keys_alist);
+	REGISTER_HANDLER(link,  "cog-link",               cog_link);
+	REGISTER_HANDLER(node,  "cog-node",               cog_node);
+	REGISTER_HANDLER(value, "cog-value",              cog_value);
 
-	MASH(extra, "cog-extract!",           cog_extract);
-	MASH(recur, "cog-extract-recursive!", cog_extract_recursive);
-	MASH(stval, "cog-set-value!",         cog_set_value);
-	MASH(svals, "cog-set-values!",        cog_set_values);
-	MASH(settv, "cog-set-tv!",            cog_set_tv);
+	REGISTER_HANDLER(extra, "cog-extract!",           cog_extract);
+	REGISTER_HANDLER(recur, "cog-extract-recursive!", cog_extract_recursive);
+	REGISTER_HANDLER(stval, "cog-set-value!",         cog_set_value);
+	REGISTER_HANDLER(svals, "cog-set-values!",        cog_set_values);
+	REGISTER_HANDLER(settv, "cog-set-tv!",            cog_set_tv);
+	REGISTER_HANDLER(updval, "cog-update-value!",     cog_update_value);
 
-	MASH(dfine, "define",                 cog_define);
-	MASH(ping,  "ping)",                  cog_ping);
-	MASH(versn, "cog-version)",           cog_version);
+	REGISTER_HANDLER(dfine, "define",                 cog_define);
+	REGISTER_HANDLER(ping,  "ping)",                  cog_ping);
+	REGISTER_HANDLER(versn, "cog-version)",           cog_version);
 }
 
 Dispatcher::~Dispatcher()
@@ -115,8 +113,19 @@ std::string Dispatcher::interpret_command(const std::string& cmd)
 
 	// Look up the method to call, based on the hash of the command string.
 	size_t action = std::hash<std::string>{}(cmd.substr(pos, epos-pos));
+	
+	// First try the optimized handler map
+	const auto& handler = _handler_map.find(action);
+	if (_handler_map.end() != handler)
+	{
+		pos = cmd.find_first_not_of(" \n\t", epos);
+		if (cmd.npos != pos)
+			return handler->second->execute(cmd.substr(pos));
+		return handler->second->execute(""); // no arguments available.
+	}
+	
+	// Fall back to legacy dispatch map for custom handlers
 	const auto& disp = _dispatch_map.find(action);
-
 	if (_dispatch_map.end() != disp)
 	{
 		Meth f = disp->second;

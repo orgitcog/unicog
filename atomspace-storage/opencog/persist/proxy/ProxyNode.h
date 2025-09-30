@@ -72,14 +72,11 @@ public:
 
 protected:
 	// ----------------------------------------------------------------
-	// XXX FIXME Unimplemented BackingStore virtuals.
-	// These need to go into the assorted implementations,
-	// But its all very confusing and tedious, so punt.
+	// BackingStore virtual implementations
 
 	virtual HandleSeq loadFrameDAG(void);
-	virtual void storeFrameDAG(AtomSpace*) {}
-
-	virtual void deleteFrame(AtomSpace*) {}
+	virtual void storeFrameDAG(AtomSpace*);
+	virtual void deleteFrame(AtomSpace*);
 	virtual Handle getLink(Type, const HandleSeq&);
 };
 

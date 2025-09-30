@@ -76,10 +76,62 @@ void ProxyNode::set_proxy(const Handle&)
 std::string ProxyNode::monitor(void)
 {
 	std::string rpt;
-	rpt += "Monitoring not implemented for ";
-	rpt += to_short_string().substr(1);
-	rpt.pop_back();
-	rpt += "\n";
+	rpt += "ProxyNode Monitor Report:\n";
+	rpt += "=======================\n";
+	rpt += "Node: " + to_short_string() + "\n";
+	rpt += "State: " + std::string(is_open() ? "OPEN" : "CLOSED") + "\n\n";
+	
+	// Report on which methods are available
+	rpt += "Available Methods:\n";
+	if (have_getAtom) rpt += "  [✓] getAtom\n";
+	else rpt += "  [✗] getAtom\n";
+	
+	if (have_fetchIncomingSet) rpt += "  [✓] fetchIncomingSet\n";
+	else rpt += "  [✗] fetchIncomingSet\n";
+	
+	if (have_fetchIncomingByType) rpt += "  [✓] fetchIncomingByType\n";
+	else rpt += "  [✗] fetchIncomingByType\n";
+	
+	if (have_storeAtom) rpt += "  [✓] storeAtom\n";
+	else rpt += "  [✗] storeAtom\n";
+	
+	if (have_removeAtom) rpt += "  [✓] removeAtom\n";
+	else rpt += "  [✗] removeAtom\n";
+	
+	if (have_storeValue) rpt += "  [✓] storeValue\n";
+	else rpt += "  [✗] storeValue\n";
+	
+	if (have_updateValue) rpt += "  [✓] updateValue\n";
+	else rpt += "  [✗] updateValue\n";
+	
+	if (have_loadValue) rpt += "  [✓] loadValue\n";
+	else rpt += "  [✗] loadValue\n";
+	
+	if (have_loadType) rpt += "  [✓] loadType\n";
+	else rpt += "  [✗] loadType\n";
+	
+	if (have_loadAtomSpace) rpt += "  [✓] loadAtomSpace\n";
+	else rpt += "  [✗] loadAtomSpace\n";
+	
+	if (have_storeAtomSpace) rpt += "  [✓] storeAtomSpace\n";
+	else rpt += "  [✗] storeAtomSpace\n";
+	
+	// Get backend storage nodes if any
+	StorageNodeSeq backends = setup();
+	if (!backends.empty())
+	{
+		rpt += "\nBackend Storage Nodes:\n";
+		for (size_t i = 0; i < backends.size(); ++i)
+		{
+			rpt += "  [" + std::to_string(i) + "] " + backends[i]->to_short_string() + "\n";
+			rpt += "      State: " + std::string(backends[i]->is_open() ? "OPEN" : "CLOSED") + "\n";
+		}
+	}
+	else
+	{
+		rpt += "\nNo backend storage nodes configured.\n";
+	}
+	
 	return rpt;
 }
 
@@ -158,13 +210,84 @@ StorageNodeSeq ProxyNode::setup(void)
 	return stolist;
 }
 
-void ProxyNode::destroy(void) {}
-void ProxyNode::erase(void) {}
+void ProxyNode::destroy(void) 
+{
+	// Close all backend connections before destroying
+	if (is_open())
+	{
+		proxy_close();
+	}
+	
+	// Clear all backend storage nodes
+	StorageNodeSeq backends = setup();
+	for (auto& backend : backends)
+	{
+		if (backend && backend->is_open())
+		{
+			backend->close();
+		}
+	}
+}
+
+void ProxyNode::erase(void) 
+{
+	// Erase data from all backend storage nodes
+	StorageNodeSeq backends = setup();
+	for (auto& backend : backends)
+	{
+		if (backend && backend->is_open())
+		{
+			backend->erase();
+		}
+	}
+}
 
 HandleSeq ProxyNode::loadFrameDAG(void)
 {
-	// XXX FIXME;
-	return HandleSeq();
+	HandleSeq result;
+	
+	// Load frame DAG from all backend storage nodes
+	StorageNodeSeq backends = setup();
+	for (auto& backend : backends)
+	{
+		if (backend && backend->is_open())
+		{
+			HandleSeq backend_frames = backend->loadFrameDAG();
+			result.insert(result.end(), backend_frames.begin(), backend_frames.end());
+		}
+	}
+	
+	// Remove duplicates if any
+	std::sort(result.begin(), result.end());
+	result.erase(std::unique(result.begin(), result.end()), result.end());
+	
+	return result;
+}
+
+void ProxyNode::storeFrameDAG(AtomSpace* frame)
+{
+	// Store frame DAG to all backend storage nodes
+	StorageNodeSeq backends = setup();
+	for (auto& backend : backends)
+	{
+		if (backend && backend->is_open())
+		{
+			backend->storeFrameDAG(frame);
+		}
+	}
+}
+
+void ProxyNode::deleteFrame(AtomSpace* frame)
+{
+	// Delete frame from all backend storage nodes
+	StorageNodeSeq backends = setup();
+	for (auto& backend : backends)
+	{
+		if (backend && backend->is_open())
+		{
+			backend->deleteFrame(frame);
+		}
+	}
 }
 
 Handle ProxyNode::getLink(Type t, const HandleSeq& hseq)
