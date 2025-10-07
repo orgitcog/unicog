@@ -15,6 +15,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find required dependencies
 find_package(CogUtil REQUIRED)
 find_package(AtomSpace REQUIRED)
+find_package(CogServer CONFIG)
+find_package(AttentionModule CONFIG)
+find_package(URE CONFIG)
+find_package(LGAtomese CONFIG)
 
 # Include directories
 include_directories(
@@ -23,6 +27,31 @@ include_directories(
     ${COGUTIL_INCLUDE_DIR}
     ${ATOMSPACE_INCLUDE_DIR}
 )
+
+# Add conditional include directories for optional dependencies
+if(CogServer_FOUND)
+    include_directories(${COGSERVER_INCLUDE_DIR})
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../cogserver")
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../cogserver)
+endif()
+
+if(AttentionModule_FOUND)
+    include_directories(${ATTENTION_INCLUDE_DIR})
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../attention")
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../attention)
+endif()
+
+if(URE_FOUND)
+    include_directories(${URE_INCLUDE_DIR})
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../ure")
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../ure)
+endif()
+
+if(LGAtomese_FOUND)
+    include_directories(${LGATOMESE_INCLUDE_DIR})
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../lg-atomese")
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../lg-atomese)
+endif()
 
 # OpenCog main integration source files
 file(GLOB_RECURSE OPENCOG_MAIN_SOURCES
@@ -40,10 +69,37 @@ if(OPENCOG_MAIN_SOURCES)
     add_library(opencog-main SHARED ${OPENCOG_MAIN_SOURCES})
     
     # Link dependencies
-    target_link_libraries(opencog-main
+    set(OPENCOG_LINK_LIBRARIES
         ${COGUTIL_LIBRARY}
         ${ATOMSPACE_LIBRARY}
     )
+    
+    # Add conditional dependencies based on availability
+    if(TARGET cogserver)
+        list(APPEND OPENCOG_LINK_LIBRARIES cogserver)
+    elseif(COGSERVER_LIBRARIES)
+        list(APPEND OPENCOG_LINK_LIBRARIES ${COGSERVER_LIBRARIES})
+    endif()
+    
+    if(TARGET attention)
+        list(APPEND OPENCOG_LINK_LIBRARIES attention)
+    elseif(ATTENTION_LIBRARIES)
+        list(APPEND OPENCOG_LINK_LIBRARIES ${ATTENTION_LIBRARIES})
+    endif()
+    
+    if(TARGET ure)
+        list(APPEND OPENCOG_LINK_LIBRARIES ure)
+    elseif(URE_LIBRARIES)
+        list(APPEND OPENCOG_LINK_LIBRARIES ${URE_LIBRARIES})
+    endif()
+    
+    if(TARGET lg-atomese)
+        list(APPEND OPENCOG_LINK_LIBRARIES lg-atomese)
+    elseif(LGATOMESE_LIBRARIES)
+        list(APPEND OPENCOG_LINK_LIBRARIES ${LGATOMESE_LIBRARIES})
+    endif()
+    
+    target_link_libraries(opencog-main ${OPENCOG_LINK_LIBRARIES})
     
     # Set library properties
     set_target_properties(opencog-main PROPERTIES
@@ -60,6 +116,9 @@ if(OPENCOG_MAIN_SOURCES)
     install(FILES ${OPENCOG_MAIN_HEADERS}
         DESTINATION include/opencog/main
     )
+    
+    # Create alias for consistency with dependency system
+    add_library(opencog ALIAS opencog-main)
 endif()
 
 # OpenCog main executables
@@ -82,4 +141,18 @@ add_custom_target(opencog-main-all
     COMMENT "Building OpenCog main integration component"
 )
 
+# Explicit dependency declarations for documentation and validation
+# The opencog module requires:
+# - atomspace: For knowledge representation and atom management (REQUIRED)
+# - cogutil: For core utilities (REQUIRED)
+# - cogserver: For distributed server integration and management (OPTIONAL)
+# - attention: For ECAN attention allocation system (OPTIONAL)
+# - ure: For unified rule engine and reasoning (OPTIONAL)
+# - lg-atomese: For Link Grammar parsing integration (OPTIONAL)
+
 MESSAGE(STATUS "OpenCog main integration component configured")
+MESSAGE(STATUS "  - Required dependencies: CogUtil, AtomSpace")
+MESSAGE(STATUS "  - Optional dependencies: CogServer, Attention, URE, LG-Atomese")
+if(OPENCOG_LINK_LIBRARIES)
+    MESSAGE(STATUS "  - Link libraries: ${OPENCOG_LINK_LIBRARIES}")
+endif()
