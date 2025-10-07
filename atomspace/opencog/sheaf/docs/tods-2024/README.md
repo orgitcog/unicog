@@ -89,6 +89,6 @@ Edit above change to unicode=true and copy into place.
      \renewcommand{\rmdefault}{ptm}
 
 
-TODO:
+Notes:
 -----
-* rename file to todssubmission.pdf
+* PDF exported as `todssubmission.pdf`
