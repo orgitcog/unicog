@@ -20,6 +20,8 @@
 #include <sstream>
 #include <functional>
 #include <cstdint>
+#include <cstdarg>
+#include <unordered_set>
 
 namespace opencog {
 
@@ -132,7 +134,7 @@ public:
     
     Handle() : uuid_(0), atom_ptr_(nullptr) {}
     Handle(uint64_t id) : uuid_(id), atom_ptr_(nullptr) {}
-    Handle(const AtomPtr& ptr) : uuid_(0), atom_ptr_(ptr) {}
+    Handle(const AtomPtr& ptr);  // Defined after Atom class
     
     static const Handle UNDEFINED;
     
@@ -159,6 +161,11 @@ public:
     Atom* get() const {
         return atom_ptr_.get();
     }
+    
+    // Additional accessor method
+    AtomPtr atom() const {
+        return atom_ptr_;
+    }
 };
 
 // Static member initialization
@@ -183,6 +190,43 @@ typedef std::set<Handle> HandleSet;
 typedef std::unordered_set<Handle> HandleUSet;
 
 // ============================================================================
+// Forward declarations
+// ============================================================================
+class TruthValue;
+typedef std::shared_ptr<TruthValue> TruthValuePtr;
+
+// ============================================================================
+// TruthValue Class
+// ============================================================================
+
+class TruthValue {
+private:
+    float mean_;
+    float confidence_;
+    
+public:
+    TruthValue(float mean = 0.5f, float confidence = 0.5f) 
+        : mean_(mean), confidence_(confidence) {}
+    
+    float get_mean() const { return mean_; }
+    float get_confidence() const { return confidence_; }
+    
+    void set_mean(float mean) { mean_ = mean; }
+    void set_confidence(float confidence) { confidence_ = confidence; }
+    
+    std::string to_string() const {
+        std::ostringstream oss;
+        oss << "(stv " << mean_ << " " << confidence_ << ")";
+        return oss.str();
+    }
+};
+
+// ============================================================================
+// Atom Type Definition
+// ============================================================================
+typedef uint32_t Type;
+
+// ============================================================================
 // Atom Class Stub
 // ============================================================================
 
@@ -191,20 +235,31 @@ protected:
     uint32_t type_;
     std::string name_;
     uint64_t uuid_;
+    TruthValuePtr truth_value_;
     static uint64_t next_uuid_;
     
 public:
     Atom(uint32_t type, const std::string& name = "") 
-        : type_(type), name_(name), uuid_(next_uuid_++) {}
+        : type_(type), name_(name), uuid_(next_uuid_++), 
+          truth_value_(std::make_shared<TruthValue>()) {}
     
     virtual ~Atom() {}
     
     uint32_t get_type() const { return type_; }
+    Type get_type_as_type() const { return type_; }
     std::string get_name() const { return name_; }
     uint64_t get_uuid() const { return uuid_; }
     
+    TruthValuePtr getTruthValue() const { return truth_value_; }
+    void setTruthValue(const TruthValuePtr& tv) { truth_value_ = tv; }
+    
     virtual bool is_node() const { return type_ >= NODE_TYPE && type_ < LINK_TYPE; }
     virtual bool is_link() const { return type_ >= LINK_TYPE; }
+    
+    virtual const HandleSeq& getOutgoingSet() const {
+        static HandleSeq empty;
+        return empty;
+    }
     
     virtual std::string to_string() const {
         std::ostringstream oss;
@@ -221,6 +276,29 @@ public:
 inline uint64_t Atom::next_uuid_ = 1;
 
 // ============================================================================
+// Handle constructor implementation (after Atom definition)
+// ============================================================================
+
+inline Handle::Handle(const AtomPtr& ptr) : uuid_(0), atom_ptr_(ptr) {
+    if (ptr) uuid_ = ptr->get_uuid();
+}
+
+// ============================================================================
+// Node Class Stub
+// ============================================================================
+
+class Node : public Atom {
+public:
+    Node(uint32_t type, const std::string& name) 
+        : Atom(type, name) {}
+    
+    virtual ~Node() {}
+    
+    bool is_node() const override { return true; }
+    bool is_link() const override { return false; }
+};
+
+// ============================================================================
 // Link Class Stub
 // ============================================================================
 
@@ -234,7 +312,7 @@ public:
     
     virtual ~Link() {}
     
-    const HandleSeq& getOutgoingSet() const { return outgoing_; }
+    const HandleSeq& getOutgoingSet() const override { return outgoing_; }
     size_t get_arity() const { return outgoing_.size(); }
     
     Handle getOutgoingAtom(size_t index) const {
@@ -271,6 +349,7 @@ class AtomSpace {
 private:
     std::map<uint64_t, Handle> atom_table_;
     std::map<std::pair<uint32_t, std::string>, Handle> node_index_;
+    std::map<Handle, HandleSeq> incoming_index_; // Track incoming edges
     uint64_t next_uuid_;
     
 public:
@@ -279,6 +358,7 @@ public:
     ~AtomSpace() {
         atom_table_.clear();
         node_index_.clear();
+        incoming_index_.clear();
     }
     
     // Add a node to the AtomSpace
@@ -289,10 +369,8 @@ public:
             return it->second;
         }
         
-        auto atom_ptr = std::make_shared<Atom>(type, name);
-        Handle h(next_uuid_++);
-        h.atom_ptr_ = atom_ptr;
-        h.uuid_ = atom_ptr->get_uuid();
+        auto atom_ptr = std::make_shared<Node>(type, name);
+        Handle h(atom_ptr);
         
         atom_table_[h.uuid_] = h;
         node_index_[key] = h;
@@ -303,11 +381,16 @@ public:
     // Add a link to the AtomSpace
     Handle add_link(uint32_t type, const HandleSeq& outgoing) {
         auto link_ptr = std::make_shared<Link>(type, outgoing);
-        Handle h(next_uuid_++);
-        h.atom_ptr_ = link_ptr;
-        h.uuid_ = link_ptr->get_uuid();
+        Handle h(link_ptr);
         
         atom_table_[h.uuid_] = h;
+        
+        // Update incoming index for all outgoing atoms
+        for (const Handle& out_h : outgoing) {
+            if (out_h != Handle::UNDEFINED) {
+                incoming_index_[out_h].push_back(h);
+            }
+        }
         
         return h;
     }
@@ -335,7 +418,18 @@ public:
         return result;
     }
     
-    // Get atoms by type
+    // Get atoms by type (returns HandleSeq for compatibility)
+    HandleSeq get_handles_by_type(uint32_t type, bool subclass = false) const {
+        HandleSeq result;
+        for (const auto& pair : atom_table_) {
+            if (pair.second.get() && pair.second->get_type() == type) {
+                result.push_back(pair.second);
+            }
+        }
+        return result;
+    }
+    
+    // Get atoms by type (returns HandleSet)
     HandleSet get_atoms_by_type(uint32_t type) const {
         HandleSet result;
         for (const auto& pair : atom_table_) {
@@ -346,6 +440,15 @@ public:
         return result;
     }
     
+    // Get incoming set (atoms that reference this atom)
+    HandleSeq get_incoming(const Handle& h) const {
+        auto it = incoming_index_.find(h);
+        if (it != incoming_index_.end()) {
+            return it->second;
+        }
+        return HandleSeq();
+    }
+    
     // Remove atom
     bool remove_atom(const Handle& h) {
         auto it = atom_table_.find(h.uuid_);
@@ -354,6 +457,8 @@ public:
                 auto key = std::make_pair(it->second->get_type(), it->second->get_name());
                 node_index_.erase(key);
             }
+            // Remove from incoming index
+            incoming_index_.erase(it->second);
             atom_table_.erase(it);
             return true;
         }
@@ -369,7 +474,93 @@ public:
     void clear() {
         atom_table_.clear();
         node_index_.clear();
+        incoming_index_.clear();
         next_uuid_ = 1;
+    }
+};
+
+// ============================================================================
+// NameServer Stub for type name lookup
+// ============================================================================
+
+class NameServer {
+private:
+    std::map<Type, std::string> type_names_;
+    
+public:
+    NameServer() {
+        // Initialize common type names
+        type_names_[CONCEPT_NODE] = "ConceptNode";
+        type_names_[PREDICATE_NODE] = "PredicateNode";
+        type_names_[NUMBER_NODE] = "NumberNode";
+        type_names_[VARIABLE_NODE] = "VariableNode";
+        type_names_[TYPE_NODE] = "TypeNode";
+        type_names_[SCHEMA_NODE] = "SchemaNode";
+        type_names_[EVALUATION_LINK] = "EvaluationLink";
+        type_names_[INHERITANCE_LINK] = "InheritanceLink";
+        type_names_[SIMILARITY_LINK] = "SimilarityLink";
+        type_names_[AND_LINK] = "AndLink";
+        type_names_[OR_LINK] = "OrLink";
+        type_names_[NOT_LINK] = "NotLink";
+        type_names_[LIST_LINK] = "ListLink";
+        type_names_[SET_LINK] = "SetLink";
+        type_names_[MEMBER_LINK] = "MemberLink";
+    }
+    
+    std::string getTypeName(Type type) const {
+        auto it = type_names_.find(type);
+        if (it != type_names_.end()) {
+            return it->second;
+        }
+        return "UnknownType";
+    }
+    
+    Type getType(const std::string& name) const {
+        for (const auto& pair : type_names_) {
+            if (pair.second == name) {
+                return pair.first;
+            }
+        }
+        return 0;
+    }
+};
+
+// Global nameserver instance
+inline NameServer& nameserver() {
+    static NameServer ns;
+    return ns;
+}
+
+// ============================================================================
+// SchemeEval Stub for Scheme integration
+// ============================================================================
+
+class SchemeEval {
+private:
+    AtomSpace* atomspace_;
+    
+public:
+    SchemeEval(AtomSpace* as) : atomspace_(as) {}
+    
+    static SchemeEval* get_evaluator(AtomSpace* as) {
+        return new SchemeEval(as);
+    }
+    
+    void eval(const std::string& expression) {
+        // Stub: just log the evaluation
+        logger().debug("SchemeEval: %s", expression.c_str());
+    }
+    
+    Handle eval_h(const std::string& expression) {
+        // Stub: return undefined handle
+        logger().debug("SchemeEval eval_h: %s", expression.c_str());
+        return Handle::UNDEFINED;
+    }
+    
+    std::string eval_str(const std::string& expression) {
+        // Stub: return empty string
+        logger().debug("SchemeEval eval_str: %s", expression.c_str());
+        return "";
     }
 };
 
