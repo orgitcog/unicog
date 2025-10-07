@@ -61,25 +61,48 @@ ENDIF (CMAKE_BUILD_TYPE STREQUAL "Profile")
 # Add the 'lib' dir to cmake's module search path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/lib/")
 
-# Cogutil
-FIND_PACKAGE(CogUtil CONFIG)
-IF (COGUTIL_FOUND)
-	MESSAGE(STATUS "CogUtil version ${COGUTIL_VERSION} found.")
+# Cogutil - Use internal target in unified build
+IF(TARGET cogutil)
+	MESSAGE(STATUS "CogUtil found as internal target.")
 	ADD_DEFINITIONS(-DHAVE_COGUTIL)
 	SET(HAVE_COGUTIL 1)
-ELSE (COGUTIL_FOUND)
-	MESSAGE(FATAL_ERROR "CogUtil missing: it is needed!")
-ENDIF (COGUTIL_FOUND)
+	# Use cogutil cmake modules from source
+	list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cogutil/cmake")
+	# Set variables that would normally come from CogUtilConfig.cmake
+	set(COGUTIL_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/cogutil/opencog")
+	set(COGUTIL_DATA_DIR "${CMAKE_SOURCE_DIR}/cogutil")
+ELSE()
+	# Fallback to external package for standalone builds
+	FIND_PACKAGE(CogUtil CONFIG)
+	IF (COGUTIL_FOUND)
+		MESSAGE(STATUS "CogUtil version ${COGUTIL_VERSION} found as external package.")
+		ADD_DEFINITIONS(-DHAVE_COGUTIL)
+		SET(HAVE_COGUTIL 1)
+		list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)
+	ELSE (COGUTIL_FOUND)
+		MESSAGE(FATAL_ERROR "CogUtil missing: it is needed!")
+	ENDIF (COGUTIL_FOUND)
+ENDIF()
 
-# AtomSpace
-FIND_PACKAGE(AtomSpace 5.0.3 CONFIG REQUIRED)
-IF (ATOMSPACE_FOUND)
-	MESSAGE(STATUS "AtomSpace found.")
+# AtomSpace - Use internal target in unified build
+IF(TARGET atomspace)
+	MESSAGE(STATUS "AtomSpace found as internal target.")
 	ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
 	SET(HAVE_ATOMSPACE 1)
-ELSE (ATOMSPACE_FOUND)
-	MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
-ENDIF (ATOMSPACE_FOUND)
+	# Set variables that would normally come from AtomSpaceConfig.cmake
+	set(ATOMSPACE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/atomspace/opencog")
+	set(ATOMSPACE_DATA_DIR "${CMAKE_SOURCE_DIR}/atomspace")
+ELSE()
+	# Fallback to external package for standalone builds
+	FIND_PACKAGE(AtomSpace 5.0.3 CONFIG REQUIRED)
+	IF (ATOMSPACE_FOUND)
+		MESSAGE(STATUS "AtomSpace found as external package.")
+		ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
+		SET(HAVE_ATOMSPACE 1)
+	ELSE (ATOMSPACE_FOUND)
+		MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
+	ENDIF (ATOMSPACE_FOUND)
+ENDIF()
 
 # add the 'cmake' directory from cogutil to search path
 list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)
