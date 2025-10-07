@@ -13,10 +13,7 @@
 #include <string>
 #include <functional>
 
-#include <opencog/atomspace/AtomSpace.h>
-#include <opencog/atoms/base/Handle.h>
-#include <opencog/guile/SchemeEval.h>
-
+#include "atomspace_stub.h"
 #include "ggml.h"
 
 namespace opencog {
@@ -31,6 +28,7 @@ struct TransformationRule {
     std::function<ggml_tensor*(ggml_tensor*)> tensor_transform;
     std::function<Handle(const Handle&)> symbolic_transform;
     
+    TransformationRule() = default;
     TransformationRule(const std::string& rule_name, const std::string& desc)
         : name(rule_name), description(desc) {}
 };
