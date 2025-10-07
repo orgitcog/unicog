@@ -14,7 +14,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find required dependencies
 find_package(CogUtil REQUIRED)
-find_package(AtomSpace REQUIRED)
+
+# AtomSpace is a critical dependency for lg-atomese
+find_package(AtomSpace 5.0.3 CONFIG REQUIRED)
+if(AtomSpace_FOUND)
+    message(STATUS "AtomSpace found.")
+    add_definitions(-DHAVE_ATOMSPACE)
+    set(HAVE_ATOMSPACE 1)
+else()
+    message(FATAL_ERROR "AtomSpace missing: it is needed for lg-atomese!")
+endif()
 
 # Try to find Link Grammar
 find_package(PkgConfig)
@@ -45,8 +54,8 @@ file(GLOB_RECURSE LG_ATOMESE_HEADERS
     "opencog/lg-atomese/*.hpp"
 )
 
-# Create lg-atomese library
-if(LG_ATOMESE_SOURCES)
+# Create lg-atomese library - only if we have AtomSpace and sources
+if(LG_ATOMESE_SOURCES AND HAVE_ATOMSPACE)
     add_library(lg-atomese SHARED ${LG_ATOMESE_SOURCES})
     
     # Link dependencies
@@ -96,4 +105,11 @@ add_custom_target(lg-atomese-all
     COMMENT "Building lg-atomese (Link Grammar to AtomSpace) component"
 )
 
-MESSAGE(STATUS "lg-atomese (Link Grammar to AtomSpace) component configured")
+# Print configuration summary
+if(HAVE_ATOMSPACE)
+    MESSAGE(STATUS "lg-atomese (Link Grammar to AtomSpace) component configured")
+    MESSAGE(STATUS "  AtomSpace dependency: SATISFIED")
+    MESSAGE(STATUS "  lg-atomese requires: atomspace")
+else()
+    MESSAGE(WARNING "lg-atomese component NOT configured - missing required AtomSpace dependency")
+endif()
