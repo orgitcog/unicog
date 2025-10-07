@@ -15,6 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find required dependencies
 find_package(CogUtil REQUIRED)
 find_package(AtomSpace REQUIRED)
+find_package(URE REQUIRED)
 
 # Include directories
 include_directories(
@@ -22,6 +23,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/opencog
     ${COGUTIL_INCLUDE_DIR}
     ${ATOMSPACE_INCLUDE_DIR}
+    ${URE_INCLUDE_DIR}
 )
 
 # ASMoses core source files
@@ -43,6 +45,7 @@ if(ASMOSES_SOURCES)
     target_link_libraries(asmoses
         ${COGUTIL_LIBRARY}
         ${ATOMSPACE_LIBRARY}
+        ${URE_LIBRARY}
     )
     
     # Set library properties
@@ -67,7 +70,7 @@ file(GLOB ASMOSES_EXECUTABLES "examples/*.cc")
 foreach(executable_source ${ASMOSES_EXECUTABLES})
     get_filename_component(executable_name ${executable_source} NAME_WE)
     add_executable(${executable_name} ${executable_source})
-    target_link_libraries(${executable_name} asmoses ${COGUTIL_LIBRARY} ${ATOMSPACE_LIBRARY})
+    target_link_libraries(${executable_name} asmoses ${COGUTIL_LIBRARY} ${ATOMSPACE_LIBRARY} ${URE_LIBRARY})
     install(TARGETS ${executable_name} DESTINATION bin)
 endforeach()
 
