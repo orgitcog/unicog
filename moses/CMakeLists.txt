@@ -66,17 +66,29 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/lib/")
 # various FindXXX macros.
 
 # ----------------------------------------------------------
-# Cogutil
-FIND_PACKAGE(CogUtil CONFIG)
-IF (COGUTIL_FOUND)
-	MESSAGE(STATUS "CogUtil found.")
+# Cogutil - Use internal target in unified build
+IF(TARGET cogutil)
+	MESSAGE(STATUS "CogUtil found as internal target.")
 	ADD_DEFINITIONS(-DHAVE_COGUTIL)
 	SET(HAVE_COGUTIL 1)
-ELSE (COGUTIL_FOUND)
-	MESSAGE(FATAL_ERROR "CogUtil missing: it is needed!")
-ENDIF (COGUTIL_FOUND)
+	# Use cogutil cmake modules from source
+	list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cogutil/cmake")
+	# Set variables that would normally come from CogUtilConfig.cmake
+	set(COGUTIL_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/cogutil/opencog")
+	set(COGUTIL_DATA_DIR "${CMAKE_SOURCE_DIR}/cogutil")
+ELSE()
+	# Fallback to external package for standalone builds
+	FIND_PACKAGE(CogUtil CONFIG)
+	IF (COGUTIL_FOUND)
+		MESSAGE(STATUS "CogUtil found as external package.")
+		ADD_DEFINITIONS(-DHAVE_COGUTIL)
+		SET(HAVE_COGUTIL 1)
+		list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)
+	ELSE (COGUTIL_FOUND)
+		MESSAGE(FATAL_ERROR "CogUtil missing: it is needed!")
+	ENDIF (COGUTIL_FOUND)
+ENDIF()
 
-list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)
 include(OpenCogGccOptions)
 include(OpenCogLibOptions)
 include(OpenCogInstallOptions)
@@ -279,11 +291,11 @@ IF (NOT WIN32)
 ENDIF (NOT WIN32)
 
 
-ADD_CUSTOM_TARGET(cscope
-	COMMAND find moses tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' > ${CMAKE_SOURCE_DIR}/cscope.files
-	COMMAND cscope -b
+ADD_CUSTOM_TARGET(moses-cscope
+	COMMAND find moses tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' > ${CMAKE_SOURCE_DIR}/moses-cscope.files
+	COMMAND cscope -b -f ${CMAKE_SOURCE_DIR}/moses-cscope.out -i ${CMAKE_SOURCE_DIR}/moses-cscope.files
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-	COMMENT "Generating CScope database"
+	COMMENT "Generating MOSES CScope database"
 )
 
 # ===================================================================
