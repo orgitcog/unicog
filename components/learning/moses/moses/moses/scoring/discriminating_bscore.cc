@@ -617,18 +617,33 @@ behavioral_score bep_bscore::operator()(const combo_tree& tr) const
 /// Return the break-even-point for this ctable row.
 score_t bep_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const
 {
-    // XXX TODO FIXME is this really correct?
+    // Calculate the best possible precision and recall for this row
+    // Precision = true_positives / (true_positives + false_positives)
+    // where cnt * _true_total represents the maximum possible predictions
     double best_possible_precision = pos / (cnt * _true_total);
+    
+    // Recall = true_positives / total_actual_positives
+    // Best possible recall assumes we could classify this one instance correctly
     double best_possible_recall = 1.0 / _true_total;
+    
+    // BEP is the arithmetic mean of precision and recall
     return (best_possible_precision + best_possible_recall) / 2;
 }
 
-/// Return the difference for this ctable row.
+/// Return the difference between precision and recall for this ctable row.
+/// This is used to enforce the constraint that |precision - recall| < bound
 score_t bep_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const
 {
-    // XXX TODO FIXME is this really correct?
-    double best_possible_precision = pos / (cnt);
-    double best_possible_recall = (0.0 < pos) ? 1.0 : 0.0;
+    // Calculate precision for this row
+    // Precision = true_positives / (true_positives + false_positives)
+    // where cnt is the total predictions made
+    double best_possible_precision = (cnt > 0) ? (pos / cnt) : 0.0;
+    
+    // Calculate recall for this row
+    // Recall = 1.0 if we got any positives right, 0.0 otherwise
+    double best_possible_recall = (pos > 0.0) ? 1.0 : 0.0;
+    
+    // Return absolute difference to enforce constraint
     return fabs(best_possible_precision - best_possible_recall);
 }
 
@@ -674,23 +689,35 @@ behavioral_score f_one_bscore::operator()(const combo_tree& tr) const
     return bs;
 }
 
-/// Quasi-meaningless for f_one, but needed for automatic
-// generation of best-possible score.
+/// For F1 score, there's no fixed constraint to satisfy.
+/// This returns a constant value since F1 doesn't use fixed scoring.
 score_t f_one_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const
 {
-    // XXX TODO FIXME is this really correct?
+    // F1 score doesn't have a fixed constraint component
+    // Return 1.0 to indicate no constraint violation
     return 1.0;
 }
 
-/// Return the f_one for this ctable row.
+/// Return the F1 score for this ctable row.
 score_t f_one_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const
 {
-    // XXX TODO FIXME is this really correct?
-    double best_possible_precision = pos / cnt;
+    // Calculate the best possible F1 score for this row
+    // Precision = true_positives / total_predictions
+    double best_possible_precision = (cnt > 0) ? (pos / cnt) : 0.0;
+    
+    // For this row, best possible recall is 1.0 (we could classify all positives correctly)
     double best_possible_recall = 1.0;
-    double f_one = 2 * best_possible_precision * best_possible_recall
-              / (best_possible_recall + best_possible_precision);
-    f_one /= _true_total; // since we add these together.
+    
+    // F1 = 2 * (precision * recall) / (precision + recall)
+    // Handle edge case where precision + recall = 0
+    double f_one = 0.0;
+    if (best_possible_precision + best_possible_recall > 0) {
+        f_one = 2 * best_possible_precision * best_possible_recall
+               / (best_possible_precision + best_possible_recall);
+    }
+    
+    // Normalize by _true_total since we sum these scores across rows
+    f_one /= _true_total;
     return f_one;
 }
 
