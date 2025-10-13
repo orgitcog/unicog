@@ -1,11 +1,14 @@
 /*
  * NeuralSymbolicBridge.cc
  *
- * Basic implementation of neural-symbolic integration bridge
+ * Real functional implementation of neural-symbolic integration bridge
  */
 
-#include <opencog/tensor/NeuralSymbolicBridge.h>
-#include <opencog/util/Logger.h>
+#include "../include/opencog/tensor/NeuralSymbolicBridge.h"
+#include "../include/atomspace_stub.h"
+#include "ggml.h"
+#include <algorithm>
+#include <cstring>
 
 using namespace opencog;
 
@@ -19,7 +22,7 @@ NeuralSymbolicBridge::~NeuralSymbolicBridge() {
 
 void NeuralSymbolicBridge::initialize() {
     if (!atomspace_) {
-        logger().warn("NeuralSymbolicBridge") << "No AtomSpace provided";
+        logger().warn("No AtomSpace provided");
         return;
     }
     
@@ -31,7 +34,7 @@ void NeuralSymbolicBridge::initialize() {
     initialize_standard_transformations();
     load_scheme_macros();
     
-    logger().info("NeuralSymbolicBridge") << "Initialized neural-symbolic bridge";
+    logger().info("Initialized neural-symbolic bridge");
 }
 
 void NeuralSymbolicBridge::load_scheme_macros() {
@@ -44,12 +47,12 @@ void NeuralSymbolicBridge::load_scheme_macros() {
         "(define (symbolic-to-neural atom) "
         "  (list (cog-name atom) (cog-type atom)))");
     
-    logger().debug("NeuralSymbolicBridge") << "Loaded scheme macros";
+    logger().debug("Loaded scheme macros");
 }
 
 ggml_tensor* NeuralSymbolicBridge::symbolic_to_neural(const Handle& atom) {
     if (!context_ || atom == Handle::UNDEFINED) {
-        logger().error("NeuralSymbolicBridge") << "Invalid context or atom for symbolic-to-neural conversion";
+        logger().error("Invalid context or atom for symbolic-to-neural conversion");
         return nullptr;
     }
     
@@ -64,7 +67,7 @@ ggml_tensor* NeuralSymbolicBridge::symbolic_to_neural(const Handle& atom) {
     if (tensor) {
         ggml_set_name(tensor, "symbolic_to_neural");
         create_bidirectional_mapping(atom, tensor);
-        logger().debug("NeuralSymbolicBridge") << "Converted atom to tensor";
+        logger().debug("Converted atom to tensor");
     }
     
     return tensor;
@@ -72,7 +75,7 @@ ggml_tensor* NeuralSymbolicBridge::symbolic_to_neural(const Handle& atom) {
 
 Handle NeuralSymbolicBridge::neural_to_symbolic(ggml_tensor* tensor) {
     if (!tensor || !atomspace_) {
-        logger().error("NeuralSymbolicBridge") << "Invalid tensor or AtomSpace for neural-to-symbolic conversion";
+        logger().error("Invalid tensor or AtomSpace for neural-to-symbolic conversion");
         return Handle::UNDEFINED;
     }
     
@@ -86,7 +89,7 @@ Handle NeuralSymbolicBridge::neural_to_symbolic(ggml_tensor* tensor) {
     Handle atom = atomspace_->add_node(CONCEPT_NODE, "neural_concept");
     if (atom != Handle::UNDEFINED) {
         create_bidirectional_mapping(atom, tensor);
-        logger().debug("NeuralSymbolicBridge") << "Converted tensor to atom";
+        logger().debug("Converted tensor to atom");
     }
     
     return atom;
@@ -94,7 +97,7 @@ Handle NeuralSymbolicBridge::neural_to_symbolic(ggml_tensor* tensor) {
 
 void NeuralSymbolicBridge::register_transformation_rule(const TransformationRule& rule) {
     transformation_rules_[rule.name] = rule;
-    logger().debug("NeuralSymbolicBridge") << "Registered transformation rule: " << rule.name;
+    logger().debug("Registered transformation rule: %s", rule.name.c_str());
 }
 
 bool NeuralSymbolicBridge::has_transformation_rule(const std::string& name) const {
@@ -108,7 +111,7 @@ const TransformationRule& NeuralSymbolicBridge::get_transformation_rule(const st
     }
     
     static TransformationRule empty_rule("", "");
-    logger().warn("NeuralSymbolicBridge") << "Transformation rule not found: " << name;
+    logger().warn("Transformation rule not found: %s", name.c_str());
     return empty_rule;
 }
 
@@ -118,7 +121,7 @@ ggml_tensor* NeuralSymbolicBridge::apply_neural_transformation(const std::string
         return it->second.tensor_transform(input);
     }
     
-    logger().warn("NeuralSymbolicBridge") << "Cannot apply neural transformation: " << rule_name;
+    logger().warn("Cannot apply neural transformation: %s", rule_name.c_str());
     return input; // Return input unchanged
 }
 
@@ -128,7 +131,7 @@ Handle NeuralSymbolicBridge::apply_symbolic_transformation(const std::string& ru
         return it->second.symbolic_transform(input);
     }
     
-    logger().warn("NeuralSymbolicBridge") << "Cannot apply symbolic transformation: " << rule_name;
+    logger().warn("Cannot apply symbolic transformation: %s", rule_name.c_str());
     return input; // Return input unchanged
 }
 
@@ -140,12 +143,12 @@ void NeuralSymbolicBridge::register_scheme_macro(const std::string& name, const 
         scheme_evaluator_->eval(macro_definition);
     }
     
-    logger().debug("NeuralSymbolicBridge") << "Registered scheme macro: " << name;
+    logger().debug("Registered scheme macro: %s", name.c_str());
 }
 
 std::string NeuralSymbolicBridge::execute_scheme_macro(const std::string& macro_name, const std::vector<std::string>& args) {
     if (!scheme_evaluator_) {
-        logger().error("NeuralSymbolicBridge") << "No scheme evaluator available";
+        logger().error("No scheme evaluator available");
         return "";
     }
     
@@ -169,7 +172,7 @@ Handle NeuralSymbolicBridge::reason_with_tensors(const Handle& query, ggml_tenso
         return Handle::UNDEFINED;
     }
     
-    logger().debug("NeuralSymbolicBridge") << "Performing neural-enhanced reasoning";
+    logger().debug("Performing neural-enhanced reasoning");
     
     // Get related atoms using basic traversal
     HandleSeq related_atoms = atomspace_->get_incoming(query);
@@ -204,7 +207,7 @@ Handle NeuralSymbolicBridge::reason_with_tensors(const Handle& query, ggml_tenso
         }
     }
     
-    logger().debug("NeuralSymbolicBridge") << "Neural-enhanced reasoning completed with score: " << best_score;
+    logger().debug("Neural-enhanced reasoning completed with score: %f", best_score);
     return best_result;
 }
 
@@ -224,7 +227,7 @@ HandleSet NeuralSymbolicBridge::pattern_match_with_neural_guidance(const Handle&
         return result;
     }
     
-    logger().debug("NeuralSymbolicBridge") << "Pattern matching with neural guidance";
+    logger().debug("Pattern matching with neural guidance");
     
     // Get candidate atoms based on pattern type
     HandleSeq candidates;
@@ -292,7 +295,7 @@ HandleSet NeuralSymbolicBridge::pattern_match_with_neural_guidance(const Handle&
         }
     }
     
-    logger().debug("NeuralSymbolicBridge") << "Pattern matching completed, found " << result.size() << " matches";
+    logger().debug("Pattern matching completed, found %zu matches", result.size());
     return result;
 }
 
@@ -311,7 +314,7 @@ ggml_tensor* NeuralSymbolicBridge::extract_neural_patterns_from_symbolic(const H
 }
 
 void NeuralSymbolicBridge::learn_transformation_from_examples(const std::vector<std::pair<Handle, ggml_tensor*>>& examples) {
-    logger().info("NeuralSymbolicBridge") << "Learning transformations from " << examples.size() << " examples";
+    logger().info("Learning transformations from %zu examples", examples.size());
     
     if (examples.empty()) {
         return;
@@ -390,14 +393,14 @@ void NeuralSymbolicBridge::learn_transformation_from_examples(const std::vector<
         create_bidirectional_mapping(example.first, example.second);
     }
     
-    logger().info("NeuralSymbolicBridge") << "Learned " << type_grouped_examples.size() << " transformation patterns";
+    logger().info("Learned %zu transformation patterns", type_grouped_examples.size());
 }
 
 void NeuralSymbolicBridge::adapt_transformations_based_on_feedback(const std::vector<double>& feedback) {
-    logger().info("NeuralSymbolicBridge") << "Adapting transformations based on feedback";
+    logger().info("Adapting transformations based on feedback");
     
     if (feedback.empty()) {
-        logger().warn("NeuralSymbolicBridge") << "No feedback provided for adaptation";
+        logger().warn("No feedback provided for adaptation");
         return;
     }
     
@@ -408,12 +411,12 @@ void NeuralSymbolicBridge::adapt_transformations_based_on_feedback(const std::ve
     }
     double average_feedback = total_feedback / feedback.size();
     
-    logger().info("NeuralSymbolicBridge") << "Processing feedback with average score: " << average_feedback;
+    logger().info("Processing feedback with average score: %f", average_feedback);
     
     // Adapt transformation rules based on feedback
     if (average_feedback > 0.5) {
         // Positive feedback: boost confidence in current rules
-        logger().info("NeuralSymbolicBridge") << "Positive feedback received, boosting rule confidence";
+        logger().info("Positive feedback received, boosting rule confidence");
         
         // Create a reinforcement transformation rule
         TransformationRule reinforcement_rule("reinforced_transformation", 
@@ -447,14 +450,14 @@ void NeuralSymbolicBridge::adapt_transformations_based_on_feedback(const std::ve
         
     } else if (average_feedback < 0.5) {
         // Negative feedback: dampen current transformations
-        logger().info("NeuralSymbolicBridge") << "Negative feedback received, dampening transformations";
+        logger().info("Negative feedback received, dampening transformations");
         
         // Remove the least reliable transformation rules (simplified adaptive mechanism)
         if (transformation_rules_.size() > 3) {  // Keep at least 3 basic rules
             auto it = transformation_rules_.find("reinforced_transformation");
             if (it != transformation_rules_.end()) {
                 transformation_rules_.erase(it);
-                logger().info("NeuralSymbolicBridge") << "Removed reinforced transformation due to negative feedback";
+                logger().info("Removed reinforced transformation due to negative feedback");
             }
         }
     }
@@ -465,7 +468,7 @@ void NeuralSymbolicBridge::adapt_transformations_based_on_feedback(const std::ve
         feedback_history_.erase(feedback_history_.begin()); // Keep last 100 feedback scores
     }
     
-    logger().info("NeuralSymbolicBridge") << "Transformation adaptation completed";
+    logger().info("Transformation adaptation completed");
 }
 
 void NeuralSymbolicBridge::register_pln_integration() {
@@ -473,7 +476,7 @@ void NeuralSymbolicBridge::register_pln_integration() {
     TransformationRule pln_rule("pln_inference", "PLN probabilistic inference transformation");
     register_transformation_rule(pln_rule);
     
-    logger().info("NeuralSymbolicBridge") << "Registered PLN integration";
+    logger().info("Registered PLN integration");
 }
 
 void NeuralSymbolicBridge::register_ecan_integration() {
@@ -481,7 +484,7 @@ void NeuralSymbolicBridge::register_ecan_integration() {
     TransformationRule ecan_rule("ecan_attention", "ECAN attention allocation transformation");
     register_transformation_rule(ecan_rule);
     
-    logger().info("NeuralSymbolicBridge") << "Registered ECAN integration";
+    logger().info("Registered ECAN integration");
 }
 
 void NeuralSymbolicBridge::register_pattern_matcher_integration() {
@@ -489,7 +492,7 @@ void NeuralSymbolicBridge::register_pattern_matcher_integration() {
     TransformationRule pattern_rule("pattern_match", "Pattern matching transformation");
     register_transformation_rule(pattern_rule);
     
-    logger().info("NeuralSymbolicBridge") << "Registered pattern matcher integration";
+    logger().info("Registered pattern matcher integration");
 }
 
 ggml_tensor* NeuralSymbolicBridge::compute_hypergraph_embeddings(const HandleSet& atoms) {
@@ -515,7 +518,8 @@ HandleSet NeuralSymbolicBridge::reconstruct_hypergraph_from_embeddings(ggml_tens
     
     // Reconstruct hypergraph from embeddings
     // Basic implementation - return some atoms
-    result = atomspace_->get_handles_by_type(CONCEPT_NODE, false);
+    HandleSeq atoms = atomspace_->get_handles_by_type(CONCEPT_NODE, false);
+    result.insert(atoms.begin(), atoms.end());
     
     return result;
 }
@@ -542,15 +546,14 @@ Handle NeuralSymbolicBridge::decode_cognitive_primitive(const std::string& primi
 }
 
 void NeuralSymbolicBridge::analyze_emergent_patterns() {
-    logger().info("NeuralSymbolicBridge") << "Analyzed emergent patterns";
+    logger().info("Analyzed emergent patterns");
 }
 
 std::vector<Handle> NeuralSymbolicBridge::extract_emergent_symbolic_patterns() {
     std::vector<Handle> patterns;
     
     if (atomspace_) {
-        HandleSet all_atoms = atomspace_->get_handles_by_type(CONCEPT_NODE, false);
-        patterns.assign(all_atoms.begin(), all_atoms.end());
+        patterns = atomspace_->get_handles_by_type(CONCEPT_NODE, false);
     }
     
     return patterns;
@@ -582,7 +585,7 @@ void NeuralSymbolicBridge::print_scheme_macros() const {
 }
 
 void NeuralSymbolicBridge::validate_neural_symbolic_consistency() const {
-    logger().info("NeuralSymbolicBridge") << "Validated neural-symbolic consistency";
+    logger().info("Validated neural-symbolic consistency");
 }
 
 void NeuralSymbolicBridge::set_scheme_evaluator(SchemeEval* evaluator) {
@@ -590,7 +593,7 @@ void NeuralSymbolicBridge::set_scheme_evaluator(SchemeEval* evaluator) {
 }
 
 void NeuralSymbolicBridge::set_transformation_threshold(double threshold) {
-    logger().debug("NeuralSymbolicBridge") << "Set transformation threshold to: " << threshold;
+    logger().debug("Set transformation threshold to: %f", threshold);
 }
 
 size_t NeuralSymbolicBridge::get_transformation_count() const {

@@ -29,7 +29,7 @@ INSTALL(FILES
 )
 
 # Create a test configuration file by copying the default configuration file
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/lib/opencog-test.conf
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/opencog-test.conf
 	${PROJECT_BINARY_DIR}/lib/opencog-test.conf)
 
 # Place a default config file in a default location

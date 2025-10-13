@@ -168,8 +168,10 @@ ENDIF (VALGRIND_FOUND)
 # NOTE: This is the official semantic-version, as it is derived from
 # a version-control independent means of declaring versioning.
 #
-# TODO: Once CMAKE_MINIMUM_REQUIRED >= 3.0.2 check use of policy
-# CMP0048.
+# NOTE: Policy CMP0048 (project VERSION command) requires CMake >= 3.0.2
+# but we currently require only 2.8.12.2 for compatibility reasons.
+# When minimum version is updated to 3.0.2+, we can use:
+# PROJECT(AtomSpace VERSION ${SEMANTIC_VERSION})
 #
 FILE(READ "${CMAKE_SOURCE_DIR}/opencog/ure/version.h" _URE_H_CONTENTS)
 STRING(REGEX MATCH
@@ -207,12 +209,18 @@ IF (CXXTEST_FOUND)
 	ADD_SUBDIRECTORY(tests EXCLUDE_FROM_ALL)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Coverage")
 		# doing coverage stuff while running tests if this is the Coverage build
+		# Find lcov for coverage reporting
+		FIND_PROGRAM(LCOV_EXECUTABLE lcov)
+		FIND_PROGRAM(GENHTML_EXECUTABLE genhtml)
+		
+		IF(NOT LCOV_EXECUTABLE)
+			MESSAGE(WARNING "lcov not found! Coverage reports will not be generated.")
+		ENDIF()
+		
+		# Option to run coverage per test or combined
+		OPTION(COVERAGE_PER_TEST "Run coverage analysis per test (slower but more detailed)" OFF)
+		
 		ADD_CUSTOM_TARGET(covtest
-			# TODO lcov should be found by cmake first
-			# TODO set it up so that we can pick to run coverage per test, or
-			# combined across all tests (the latter is MUCH faster). Use a define?
-			# There is coverage specific stuff in AddCxxTest.cmake now...
-			# -
 			WORKING_DIRECTORY tests
 			COMMAND ${CMAKE_CTEST_COMMAND} --force-new-ctest-process $(ARGS)
 			COMMENT "Running tests with coverage..."
@@ -277,10 +285,32 @@ ADD_CUSTOM_TARGET(cscope
 # ===============================================================
 # Packaging
 ## Architecture the package is for.
-## TODO: Will give error on non debian distros, fix it.
-EXECUTE_PROCESS(COMMAND  dpkg --print-architecture
-	OUTPUT_VARIABLE PACKAGE_ARCHITECTURE
-	OUTPUT_STRIP_TRAILING_WHITESPACE)
+## Detect architecture in a cross-platform way
+IF(UNIX AND NOT APPLE)
+	# Try dpkg first (Debian/Ubuntu)
+	EXECUTE_PROCESS(COMMAND dpkg --print-architecture
+		OUTPUT_VARIABLE PACKAGE_ARCHITECTURE
+		OUTPUT_STRIP_TRAILING_WHITESPACE
+		ERROR_QUIET
+		RESULT_VARIABLE DPKG_RESULT)
+	
+	# If dpkg fails, use uname
+	IF(NOT DPKG_RESULT EQUAL 0)
+		EXECUTE_PROCESS(COMMAND uname -m
+			OUTPUT_VARIABLE PACKAGE_ARCHITECTURE
+			OUTPUT_STRIP_TRAILING_WHITESPACE)
+		# Convert common uname outputs to Debian equivalents
+		IF(PACKAGE_ARCHITECTURE STREQUAL "x86_64")
+			SET(PACKAGE_ARCHITECTURE "amd64")
+		ELSEIF(PACKAGE_ARCHITECTURE STREQUAL "i686")
+			SET(PACKAGE_ARCHITECTURE "i386")
+		ENDIF()
+	ENDIF()
+ELSEIF(APPLE)
+	SET(PACKAGE_ARCHITECTURE "darwin")
+ELSE()
+	SET(PACKAGE_ARCHITECTURE "unknown")
+ENDIF()
 STRING(TIMESTAMP UTC_DATE %Y%m%d UTC)
 # If 'sudo make install' is run before 'make package', then install_manifest.txt
 # will be owned by root. Creating the file during configuration stage ensures

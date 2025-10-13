@@ -49,46 +49,74 @@ ADD_DEFINITIONS(-DPROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}"
 # Add the 'lib' dir to cmake's module search path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/lib/")
 
-# Cogutil
-FIND_PACKAGE(CogUtil 2.0.1 CONFIG REQUIRED)
-IF (COGUTIL_FOUND)
-    MESSAGE(STATUS "CogUtil found.")
+# Cogutil - Use internal target in unified build
+IF(TARGET cogutil)
+    MESSAGE(STATUS "CogUtil found as internal target.")
     ADD_DEFINITIONS(-DHAVE_COGUTIL)
     SET(HAVE_COGUTIL 1)
-ELSE (COGUTIL_FOUND)
-    MESSAGE(FATAL_ERROR "CogUtil missing: it is needed!")
-ENDIF (COGUTIL_FOUND)
+    # Use cogutil cmake modules from source
+    list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cogutil/cmake")
+    # Set variables that would normally come from CogUtilConfig.cmake
+    set(COGUTIL_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/cogutil/opencog")
+    set(COGUTIL_DATA_DIR "${CMAKE_SOURCE_DIR}/cogutil")
+ELSE()
+    # Fallback to external package for standalone builds
+    FIND_PACKAGE(CogUtil 2.0.1 CONFIG REQUIRED)
+    IF (COGUTIL_FOUND)
+        MESSAGE(STATUS "CogUtil found as external package.")
+        ADD_DEFINITIONS(-DHAVE_COGUTIL)
+        SET(HAVE_COGUTIL 1)
+        list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)
+    ELSE (COGUTIL_FOUND)
+        MESSAGE(FATAL_ERROR "CogUtil missing: it is needed!")
+    ENDIF (COGUTIL_FOUND)
+ENDIF()
 
-# add the 'cmake' directory from cogutil to search path
-list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)
-
-include(${COGUTIL_DATA_DIR}/cmake/OpenCogGccOptions.cmake)
-include(${COGUTIL_DATA_DIR}/cmake/OpenCogLibOptions.cmake)
-include(${COGUTIL_DATA_DIR}/cmake/OpenCogInstallOptions.cmake)
-include(${COGUTIL_DATA_DIR}/cmake/Summary.cmake)
+include(OpenCogGccOptions)
+include(OpenCogLibOptions)
+include(OpenCogInstallOptions)
+include(Summary)
 
 # ===================================================================
 # Check for existance of various required, optional packages.
 
-# AtomSpace
-FIND_PACKAGE(AtomSpace 5.0.3 CONFIG REQUIRED)
-IF (ATOMSPACE_FOUND)
-	MESSAGE(STATUS "AtomSpace found.")
+# AtomSpace - Use internal target in unified build
+IF(TARGET atomspace)
+	MESSAGE(STATUS "AtomSpace found as internal target.")
 	ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
 	SET(HAVE_ATOMSPACE 1)
-ELSE (ATOMSPACE_FOUND)
-	MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
-ENDIF (ATOMSPACE_FOUND)
+	# Set variables that would normally come from AtomSpaceConfig.cmake
+	set(ATOMSPACE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/atomspace/opencog")
+	set(ATOMSPACE_DATA_DIR "${CMAKE_SOURCE_DIR}/atomspace")
+ELSE()
+	# Fallback to external package for standalone builds
+	FIND_PACKAGE(AtomSpace 5.0.3 CONFIG REQUIRED)
+	IF (ATOMSPACE_FOUND)
+		MESSAGE(STATUS "AtomSpace found as external package.")
+		ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
+		SET(HAVE_ATOMSPACE 1)
+	ELSE (ATOMSPACE_FOUND)
+		MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
+	ENDIF (ATOMSPACE_FOUND)
+ENDIF()
 
-# AtomSpace Storage proves s-expression parsing
-FIND_PACKAGE(AtomSpaceStorage CONFIG REQUIRED)
-IF (ATOMSPACE_STORAGE_FOUND)
-	MESSAGE(STATUS "AtomSpace Storage found.")
+# AtomSpace Storage - Use internal target if available
+IF(TARGET atomspace-storage) 
+	MESSAGE(STATUS "AtomSpace Storage found as internal target.")
 	ADD_DEFINITIONS(-DHAVE_ATOMSPACE_STORAGE)
 	SET(HAVE_ATOMSPACE_STORAGE 1)
-ELSE (ATOMSPACE_STORAGE_FOUND)
-	MESSAGE(FATAL_ERROR "AtomSpace Storage missing: it is needed!")
-ENDIF (ATOMSPACE_STORAGE_FOUND)
+ELSE()
+	# Fallback to external package for standalone builds
+	FIND_PACKAGE(AtomSpaceStorage CONFIG)
+	IF (ATOMSPACE_STORAGE_FOUND)
+		MESSAGE(STATUS "AtomSpace Storage found as external package.")
+		ADD_DEFINITIONS(-DHAVE_ATOMSPACE_STORAGE)
+		SET(HAVE_ATOMSPACE_STORAGE 1)
+	ELSE (ATOMSPACE_STORAGE_FOUND)
+		MESSAGE(STATUS "AtomSpace Storage not found, continuing without it.")
+		SET(HAVE_ATOMSPACE_STORAGE 0)
+	ENDIF (ATOMSPACE_STORAGE_FOUND)
+ENDIF()
 
 # AtomSpace Rocks (optional) - provides RocksDB storage backend
 FIND_PACKAGE(AtomSpaceRocks CONFIG)
@@ -218,11 +246,11 @@ IF (CXXTEST_FOUND AND HAVE_SERVER)
 	ENDIF (CMAKE_BUILD_TYPE STREQUAL "Coverage")
 ENDIF (CXXTEST_FOUND AND HAVE_SERVER)
 
-ADD_CUSTOM_TARGET(cscope
-	COMMAND find opencog examples tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' -o -name '*.scm' > ${CMAKE_SOURCE_DIR}/cscope.files
-	COMMAND cscope -b
+ADD_CUSTOM_TARGET(cogserver-cscope
+	COMMAND find opencog examples tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' -o -name '*.scm' > ${CMAKE_SOURCE_DIR}/cogserver-cscope.files
+	COMMAND cscope -b -f ${CMAKE_SOURCE_DIR}/cogserver-cscope.out -i ${CMAKE_SOURCE_DIR}/cogserver-cscope.files
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-	COMMENT "Generating CScope database"
+	COMMENT "Generating CogServer CScope database"
 )
 
 # ===================================================================

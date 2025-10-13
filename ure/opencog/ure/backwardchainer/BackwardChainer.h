@@ -113,11 +113,10 @@ public:
 	                const Handle& target,
 	                const Handle& vardecl=Handle::UNDEFINED,
 	                AtomSpace* trace_as=nullptr,
-	                // TODO: maybe move the control and focus set to
-	                // the rbs configuration
+	                // Control atomspace parameter
 	                AtomSpace* control_as=nullptr,
 	                const Handle& focus_set=Handle::UNDEFINED,
-	                // TODO: maybe wrap all fitnesses in a Fitness class
+	                // Fitness parameters
 	                const BITNodeFitness& bitnode_fitness=BITNodeFitness(),
 	                const AndBITFitness& andbit_fitness=AndBITFitness());
 
@@ -130,11 +129,10 @@ public:
 	                const Handle& target,
 	                const Handle& vardecl=Handle::UNDEFINED,
 	                AtomSpace* trace_as=nullptr,
-	                // TODO: maybe move the control and focus set to
-	                // the rbs configuration
+	                // Control atomspace parameter
 	                AtomSpace* control_as=nullptr,
 	                const Handle& focus_set=Handle::UNDEFINED,
-	                // TODO: maybe wrap all fitnesses in a Fitness class
+	                // Fitness parameters
 	                const BITNodeFitness& bitnode_fitness=BITNodeFitness(),
 	                const AndBITFitness& andbit_fitness=AndBITFitness());
 
@@ -206,6 +204,9 @@ private:
 	// been selected.
 	const AndBIT* select_fulfillment_andbit() const;
 
+	// Check if an atom is in the focus set (or if no focus set is defined)
+	bool is_in_focus_set(const Handle& atom) const;
+
 	// Return the complexity factor of an andbit. The formula is
 	//
 	// exp(-complexity_penalty * andbit.complexity())
@@ -233,6 +234,9 @@ private:
 
 	// In charge of recording the inference traces
 	TraceRecorder _trace_recorder;
+
+	// Focus set to restrict the search space (optional)
+	Handle _focus_set;
 
 	// Inference Control Policy. Determine how to expand the BIT.
 	ControlPolicy _control;

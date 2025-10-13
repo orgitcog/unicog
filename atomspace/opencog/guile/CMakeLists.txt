@@ -45,7 +45,7 @@ TARGET_LINK_LIBRARIES(smob
 	${COGUTIL_LIBRARY}
 )
 
-ADD_GUILE_EXTENSION(SCM_CONFIG smob "opencog-ext-path-smob")
+ADD_GUILE_EXTENSION(ATOMSPACE_SCM_CONFIG smob "opencog-ext-path-smob")
 
 INSTALL (TARGETS smob
 	EXPORT AtomSpaceTargets

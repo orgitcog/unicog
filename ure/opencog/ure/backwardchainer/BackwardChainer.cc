@@ -39,9 +39,7 @@ BackwardChainer::BackwardChainer(AtomSpace& kb_as,
                                  const Handle& vardecl,
                                  AtomSpace* trace_as,
                                  AtomSpace* control_as,
-                                 const Handle& focus_set, // TODO:
-                                                          // support
-                                                          // focus_set
+                                 const Handle& focus_set,
                                  const BITNodeFitness& bitnode_fitness,
                                  const AndBITFitness& andbit_fitness)
 	: _kb_as(kb_as),
@@ -50,6 +48,7 @@ BackwardChainer::BackwardChainer(AtomSpace& kb_as,
 	  _bit(kb_as, target, vardecl, bitnode_fitness),
 	  _andbit_fitness(andbit_fitness),
 	  _trace_recorder(trace_as),
+	  _focus_set(focus_set),
 	  _control(_config, _bit, target, control_as),
 	  _rules(_control.rules),
 	  _iteration(0),
@@ -57,6 +56,12 @@ BackwardChainer::BackwardChainer(AtomSpace& kb_as,
 {
 	// Record the target in the trace atomspace
 	_trace_recorder.target(target);
+	
+	// Log focus set initialization if provided
+	if (_focus_set != Handle::UNDEFINED) {
+		logger().debug() << "BackwardChainer initialized with focus set: " 
+		                 << _focus_set->to_string();
+	}
 }
 
 BackwardChainer::BackwardChainer(AtomSpace& kb_as,
@@ -284,14 +289,36 @@ void BackwardChainer::fulfill_fcs(const Handle& fcs)
 	// capabilities of the AtomSpace.
 	Handle hresult = HandleCast(fcs->execute(tmp_as.get()));
 	HandleSeq results;
-	for (const Handle& result : hresult->getOutgoingSet())
-		results.push_back(_kb_as.add_atom(result));
+	for (const Handle& result : hresult->getOutgoingSet()) {
+		Handle kb_result = _kb_as.add_atom(result);
+		// Filter by focus set if provided
+		if (_focus_set == Handle::UNDEFINED || is_in_focus_set(kb_result)) {
+			results.push_back(kb_result);
+		}
+	}
 	LAZY_URE_LOG_DEBUG << "Results:" << std::endl << results;
 	_results.insert(results.begin(), results.end());
 
 	// Record the results in _trace_as
 	for (const Handle& result : results)
 		_trace_recorder.proof(fcs, result);
+}
+
+bool BackwardChainer::is_in_focus_set(const Handle& atom) const
+{
+	// If no focus set is defined, all atoms are considered in focus
+	if (_focus_set == Handle::UNDEFINED)
+		return true;
+	
+	// Check if the atom is in the focus set
+	// The focus set is expected to be a SetLink containing the atoms in focus
+	if (_focus_set->get_type() == SET_LINK) {
+		HandleSeq focus_atoms = _focus_set->getOutgoingSet();
+		return std::find(focus_atoms.begin(), focus_atoms.end(), atom) != focus_atoms.end();
+	}
+	
+	// If focus set is a single atom, check direct equality
+	return atom == _focus_set;
 }
 
 std::vector<double> BackwardChainer::expansion_andbit_weights()

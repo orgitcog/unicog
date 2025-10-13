@@ -71,7 +71,7 @@ IF(HAVE_GUILE)
 		PythonEval
 		smob
 	)
-	ADD_GUILE_EXTENSION(SCM_CONFIG PythonSCM "opencog-ext-path-python-scm")
+	ADD_GUILE_EXTENSION(ATOMSPACE_SCM_CONFIG PythonSCM "opencog-ext-path-python-scm")
 
 	ADD_GUILE_MODULE (FILES
 		opencog/python.scm

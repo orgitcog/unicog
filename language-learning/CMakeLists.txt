@@ -7,6 +7,12 @@ project(language-learning)
 # Find Python
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
+# Require CogUtil as a dependency
+find_package(CogUtil REQUIRED)
+if(NOT COGUTIL_FOUND)
+    message(FATAL_ERROR "CogUtil is required but not found. Please install CogUtil first.")
+endif()
+
 # Define installation target
 add_custom_target(language-learning ALL
     COMMAND ${Python3_EXECUTABLE} setup.py build

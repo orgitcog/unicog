@@ -305,11 +305,11 @@ ADD_CUSTOM_TARGET (examples
 	COMMENT "Building examples"
 )
 
-ADD_CUSTOM_TARGET(cscope
-	COMMAND find opencog examples tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' -o -name '*.scm' > ${CMAKE_SOURCE_DIR}/cscope.files
-	COMMAND cscope -b
+ADD_CUSTOM_TARGET(atomspace-cscope
+	COMMAND find opencog examples tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' -o -name '*.scm' > ${CMAKE_SOURCE_DIR}/atomspace-cscope.files
+	COMMAND cscope -b -f ${CMAKE_SOURCE_DIR}/atomspace-cscope.out -i ${CMAKE_SOURCE_DIR}/atomspace-cscope.files
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-	COMMENT "Generating CScope database"
+	COMMENT "Generating AtomSpace CScope database"
 )
 
 # ===============================================================

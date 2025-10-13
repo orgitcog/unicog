@@ -97,7 +97,8 @@ def pqa_meter(dict_path, op, cp, rp, **kwargs):   # TODO: restore previous
         output_path = kwargs['out_path'] if 'out_path' in kwargs \
             else kwargs['output_grammar']
 
-    template_path = handle_path_string("tests/test-data/dict/poc-turtle") # FIXME:WTF?
+    # Use default template path if not provided
+    template_path = kwargs.get('template_path', handle_path_string("tests/test-data/dict/poc-turtle"))
     linkage_limit = kwargs['linkage_limit'] if 'linkage_limit' in kwargs else 1000
     if 'linkage_limit' == 0:
         return 0.0, 0.0, 0.0, 0.0  # table_rows: get grammar for further tests
