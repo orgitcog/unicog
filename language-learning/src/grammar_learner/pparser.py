@@ -85,10 +85,9 @@ def mst2disjuncts(lines, **kwargs):
                 if len(x) in [4, 5] and x[0].isdigit() and x[2].isdigit() \
                         and x[1] in tokens and x[3] in tokens:          # 190417
                     if x[1] == '###LEFT-WALL###': x[1] = lw             # 190424
-                    try:  # FIXME: overkill? already checked by .isdigit lin3 85
-                        i = int(x[0])
-                        j = int(x[2])
-                    except: continue
+                    # Already validated that x[0] and x[2] are digits above
+                    i = int(x[0])
+                    j = int(x[2])
                     words[i] = x[1]
                     words[j] = x[3]
                     if i in links:
@@ -172,13 +171,13 @@ def files2links(**kwargs):  # 2018 legacy, 2019-02: » filter_lines, lines2links
         terms = 'connectors'
     else:
         df = mst2words(lines, **kwargs)
-        terms = 'words'  # legacy, not used  # FIXME:DEL?
+        terms = 'words'
 
-    if group:  # Always True?  # FIXME:DEL?
-        df = df.groupby(['word','link'], as_index=False).sum() \
-            .sort_values(by=['count', 'word', 'link'],
-                         ascending=[False, True, True]) \
-            .reset_index(drop=True)
+    # Always group to aggregate counts for duplicate word-link pairs
+    df = df.groupby(['word','link'], as_index=False).sum() \
+        .sort_values(by=['count', 'word', 'link'],
+                     ascending=[False, True, True]) \
+        .reset_index(drop=True)
 
     response.update({
         'terms': terms,
@@ -232,7 +231,6 @@ def filter_lines(lines, **kwargs):                                      # 90216
 def lines2links(lines, **kwargs):                                       # 190410
     logger = logging.getLogger(__name__ + "lines2links")
     context = kwa(2, 'context', **kwargs)
-    group = True  # always? » kwa(True, 'group', **kwargs)? FIXME:DEL?
 
     lines, re = filter_lines(lines, **kwargs)
     if len(lines) < 1:                                                  # 190410
@@ -288,11 +286,11 @@ def lines2links(lines, **kwargs):                                       # 190410
         ['Unique seeds number', len(unique_seeds)],
         ['Average seed count ', avg_seed_count]])
 
-    if group:  # Always True?  # FIXME:DEL?
-        df = df.groupby(['word', 'link'], as_index=False).sum() \
-            .sort_values(by=['count', 'word', 'link'],
-                         ascending=[False, True, True]) \
-            .reset_index(drop=True)
+    # Always group to aggregate counts for duplicate word-link pairs
+    df = df.groupby(['word', 'link'], as_index=False).sum() \
+        .sort_values(by=['count', 'word', 'link'],
+                     ascending=[False, True, True]) \
+        .reset_index(drop=True)
 
     return df, re
 
