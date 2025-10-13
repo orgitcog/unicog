@@ -109,15 +109,25 @@ ENDIF (Boost_FOUND)
 # HAVE_CYTHON will not be set and the libraries will be calculated
 # incorrectly
 
-# AtomSpace
-FIND_PACKAGE(AtomSpace CONFIG REQUIRED)
-IF (ATOMSPACE_FOUND)
-	MESSAGE(STATUS "AtomSpace found.")
+# AtomSpace - Use internal target in unified build
+IF(TARGET atomspace)
+	MESSAGE(STATUS "AtomSpace found as internal target.")
 	ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
 	SET(HAVE_ATOMSPACE 1)
-ELSE (ATOMSPACE_FOUND)
-	MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
-ENDIF (ATOMSPACE_FOUND)
+	# Set variables that would normally come from AtomSpaceConfig.cmake
+	set(ATOMSPACE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/atomspace/opencog")
+	set(ATOMSPACE_DATA_DIR "${CMAKE_SOURCE_DIR}/atomspace")
+ELSE()
+	# Fallback to external package for standalone builds
+	FIND_PACKAGE(AtomSpace CONFIG REQUIRED)
+	IF (ATOMSPACE_FOUND)
+		MESSAGE(STATUS "AtomSpace found as external package.")
+		ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
+		SET(HAVE_ATOMSPACE 1)
+	ELSE (ATOMSPACE_FOUND)
+		MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
+	ENDIF (ATOMSPACE_FOUND)
+ENDIF()
 
 # ===================================================================
 # Include configuration.
