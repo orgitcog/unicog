@@ -245,8 +245,24 @@ if(TARGET opencog-main)
     add_dependencies(opencog-main atomspace cogserver attention ure lg-atomese)
 endif()
 
+# Phase 4: Distributed Cognitive Mesh API & Embodiment Layer
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/distributed-cognitive-mesh/CMakeLists.txt")
+    add_subdirectory(distributed-cognitive-mesh)
+endif()
+
+# Add Phase 4 distributed cognitive mesh target
+add_custom_target(distributed-cognitive-mesh-phase4
+    COMMENT "Building Phase 4: Distributed Cognitive Mesh API & Embodiment Layer"
+)
+
+# Add dependencies for distributed cognitive mesh if targets exist
+if(TARGET distributed-cognitive-mesh)
+    add_dependencies(distributed-cognitive-mesh-phase4 distributed-cognitive-mesh)
+    add_dependencies(distributed-cognitive-mesh distributed-cognition cognitive-visualization)
+endif()
+
 # Add comprehensive target that includes all phases
 add_custom_target(cognitive-complete 
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration
-    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, and language systems"
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration distributed-cognitive-mesh-phase4
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language systems, and distributed cognitive mesh"
 )

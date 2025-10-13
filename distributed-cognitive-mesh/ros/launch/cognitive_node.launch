@@ -1,0 +1,75 @@
+<!-- 
+  cognitive_node.launch
+  
+  ROS launch file for OpenCog Cognitive Node
+-->
+<launch>
+  <!-- Node configuration -->
+  <arg name="node_name" default="opencog_cognitive_node" />
+  <arg name="robot_namespace" default="robot" />
+  <arg name="config_file" default="$(find distributed-cognitive-mesh)/config/cognitive_node_config.yaml" />
+  
+  <!-- Cognitive processing parameters -->
+  <arg name="cognitive_frequency" default="10.0" />
+  <arg name="enable_learning" default="true" />
+  <arg name="enable_attention" default="true" />
+  <arg name="tensor_update_rate" default="20.0" />
+  
+  <!-- Communication parameters -->
+  <arg name="cognitive_api_host" default="localhost" />
+  <arg name="cognitive_api_port" default="8080" />
+  <arg name="websocket_port" default="8081" />
+  
+  <!-- Main cognitive node -->
+  <node name="$(arg node_name)" pkg="distributed_cognitive_mesh" type="ros_cognitive_node"
+        ns="$(arg robot_namespace)" output="screen">
+    
+    <!-- Configuration parameters -->
+    <param name="config_file" value="$(arg config_file)" />
+    <param name="cognitive_frequency" value="$(arg cognitive_frequency)" />
+    <param name="enable_learning" value="$(arg enable_learning)" />
+    <param name="enable_attention" value="$(arg enable_attention)" />
+    <param name="tensor_update_rate" value="$(arg tensor_update_rate)" />
+    
+    <!-- Communication parameters -->
+    <param name="cognitive_api_host" value="$(arg cognitive_api_host)" />
+    <param name="cognitive_api_port" value="$(arg cognitive_api_port)" />
+    <param name="websocket_port" value="$(arg websocket_port)" />
+    
+    <!-- Sensor topic mappings -->
+    <remap from="/laser_scan" to="/$(arg robot_namespace)/laser_scan" />
+    <remap from="/camera/image_raw" to="/$(arg robot_namespace)/camera/image_raw" />
+    <remap from="/imu/data" to="/$(arg robot_namespace)/imu/data" />
+    <remap from="/gps/fix" to="/$(arg robot_namespace)/gps/fix" />
+    
+    <!-- Actuator topic mappings -->
+    <remap from="/cmd_vel" to="/$(arg robot_namespace)/cmd_vel" />
+    <remap from="/joint_states" to="/$(arg robot_namespace)/joint_states" />
+    <remap from="/gripper_command" to="/$(arg robot_namespace)/gripper_command" />
+  </node>
+  
+  <!-- Cognitive visualization node -->
+  <node name="cognitive_visualizer" pkg="distributed_cognitive_mesh" type="cognitive_visualization_node"
+        ns="$(arg robot_namespace)" output="screen">
+    <param name="cognitive_node_name" value="$(arg node_name)" />
+    <param name="update_frequency" value="5.0" />
+    <param name="enable_web_interface" value="true" />
+    <param name="web_port" value="8082" />
+  </node>
+  
+  <!-- Optional: Bridge to existing Eva system if available -->
+  <group if="$(eval arg('robot_namespace') == 'eva')">
+    <include file="$(find opencog_eva)/launch/eva_cognitive_bridge.launch">
+      <arg name="cognitive_node_name" value="$(arg node_name)" />
+    </include>
+  </group>
+  
+  <!-- Optional: Unity3D bridge -->
+  <node name="unity3d_bridge" pkg="distributed_cognitive_mesh" type="unity3d_bridge_node"
+        ns="$(arg robot_namespace)" output="screen" if="$(optenv ENABLE_UNITY3D_BRIDGE false)">
+    <param name="unity_host" value="$(optenv UNITY3D_HOST localhost)" />
+    <param name="unity_port" value="$(optenv UNITY3D_PORT 9090)" />
+    <param name="cognitive_node_name" value="$(arg node_name)" />
+  </node>
+  
+</launch>
