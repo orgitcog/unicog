@@ -16,16 +16,18 @@ include_directories(${CMAKE_SOURCE_DIR}/cogutil/opencog)
 include_directories(${CMAKE_SOURCE_DIR}/atomspace/opencog)
 include_directories(${CMAKE_SOURCE_DIR}/cogserver/opencog)
 
-# Source files for pattern encoding
+# APRFE Integration: Enhanced cognitive-patterns with Adaptive Fusion Engine
 set(PATTERN_SOURCES
+    src/AdaptivePatternRecognitionFusionEngine.cc
     src/PerceptualInputProcessor.cc
     src/RecursivePatternEncoder.cc
     src/HypergraphPatternExtractor.cc
     src/CognitiveObjectEncoder.cc
 )
 
-# Header files
+# Enhanced header files including APRFE
 set(PATTERN_HEADERS
+    include/AdaptivePatternRecognitionFusionEngine.h
     include/PerceptualInputProcessor.h
     include/RecursivePatternEncoder.h
     include/HypergraphPatternExtractor.h
@@ -37,7 +39,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/scheme)
 
-# Create the cognitive patterns library
+# Create the enhanced cognitive patterns library with APRFE
 add_library(cognitive-patterns SHARED ${PATTERN_SOURCES})
 
 # Link with parent modules (when they're available)
