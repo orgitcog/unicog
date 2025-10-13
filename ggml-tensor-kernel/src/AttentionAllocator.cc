@@ -36,14 +36,42 @@ void AttentionAllocator::initialize(size_t num_atoms, double budget) {
 }
 
 ggml_tensor* AttentionAllocator::allocate_attention(const HandleSet& atoms) {
-    if (!attention_weights_) {
+    if (!attention_weights_ || !context_) {
         logger().error("AttentionAllocator") << "Attention system not initialized";
         return nullptr;
     }
     
-    // For now, return a copy of attention weights
-    logger().debug("AttentionAllocator") << "Allocated attention for " << atoms.size() << " atoms";
-    return attention_weights_;
+    // Create allocation tensor based on ECAN principles
+    ggml_tensor* allocation = ggml_new_tensor_1d(context_, GGML_TYPE_F32, atoms.size());
+    if (!allocation) {
+        logger().error("AttentionAllocator") << "Failed to create allocation tensor";
+        return nullptr;
+    }
+    
+    float* allocation_data = (float*)allocation->data;
+    size_t idx = 0;
+    
+    // Allocate attention based on economic value and urgency
+    for (const Handle& atom : atoms) {
+        double economic_value = 0.5; // Default value
+        
+        // In a real implementation, we would get the ECAN tensor from the atom
+        // For now, simulate economic allocation
+        double urgency_factor = 0.7 + (idx % 10) * 0.03; // Simulate varying urgency
+        double confidence_factor = 0.6 + (idx % 7) * 0.05; // Simulate confidence
+        
+        // ECAN economic allocation formula
+        economic_value = (urgency_factor * 0.4 + confidence_factor * 0.3 + 0.3 * 0.5);
+        
+        // Apply budget constraints
+        economic_value = std::min(economic_value, total_attention_budget_ / atoms.size());
+        
+        allocation_data[idx] = static_cast<float>(economic_value);
+        idx++;
+    }
+    
+    logger().debug("AttentionAllocator") << "Allocated attention for " << atoms.size() << " atoms using ECAN principles";
+    return allocation;
 }
 
 ggml_tensor* AttentionAllocator::compute_attention_mask(const std::string& context_name) {
@@ -71,7 +99,31 @@ void AttentionAllocator::update_attention_weights(const std::vector<double>& fee
 }
 
 void AttentionAllocator::simulate_economic_flow(const HandleSet& atoms) {
-    logger().debug("AttentionAllocator") << "Simulated economic flow for " << atoms.size() << " atoms";
+    if (!economic_flow_ || atoms.empty()) {
+        logger().debug("AttentionAllocator") << "Cannot simulate economic flow - no tensor or empty atoms";
+        return;
+    }
+    
+    // Simulate ECAN economic flow between atoms
+    float* flow_data = (float*)economic_flow_->data;
+    size_t n_atoms = atoms.size();
+    
+    // Initialize flow matrix with economic relationships
+    for (size_t i = 0; i < n_atoms; i++) {
+        for (size_t j = 0; j < n_atoms; j++) {
+            size_t idx = i * n_atoms + j;
+            
+            if (i == j) {
+                flow_data[idx] = 1.0f; // Self-flow (retention)
+            } else {
+                // Simulate attention flow based on relationship strength
+                double flow_strength = rent_collection_rate_ * (1.0 + std::sin(i + j)) * 0.5;
+                flow_data[idx] = static_cast<float>(flow_strength);
+            }
+        }
+    }
+    
+    logger().debug("AttentionAllocator") << "Simulated economic flow matrix for " << atoms.size() << " atoms";
 }
 
 ggml_tensor* AttentionAllocator::get_economic_flow_tensor() {
@@ -79,7 +131,24 @@ ggml_tensor* AttentionAllocator::get_economic_flow_tensor() {
 }
 
 void AttentionAllocator::apply_rent_collection() {
-    logger().debug("AttentionAllocator") << "Applied rent collection with rate: " << rent_collection_rate_;
+    if (!attention_weights_) {
+        logger().debug("AttentionAllocator") << "Cannot apply rent collection - no attention weights";
+        return;
+    }
+    
+    // Apply ECAN rent collection: reduce attention values by rent rate
+    float* weights_data = (float*)attention_weights_->data;
+    size_t n_elements = ggml_nelements(attention_weights_);
+    
+    for (size_t i = 0; i < n_elements; i++) {
+        // Rent collection reduces attention by rent rate
+        weights_data[i] *= (1.0f - static_cast<float>(rent_collection_rate_));
+        // Ensure non-negative values
+        weights_data[i] = std::max(0.0f, weights_data[i]);
+    }
+    
+    logger().debug("AttentionAllocator") << "Applied rent collection with rate: " << rent_collection_rate_ 
+                                        << " to " << n_elements << " attention values";
 }
 
 void AttentionAllocator::register_context(const std::string& name, const AttentionContext& context) {

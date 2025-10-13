@@ -12,13 +12,24 @@
 using namespace opencog;
 
 AttentionValue::AttentionValue(short sti, short lti, short vlti)
-    : sti(sti), lti(lti), vlti(vlti)
+    : sti(sti), lti(lti), vlti(vlti),
+      ecan_tensor(sti / 100.0, lti / 100.0)
 {
+    ecan_tensor.normalize();
 }
 
 AttentionValue::AttentionValue(const AttentionValue& av)
-    : sti(av.sti), lti(av.lti), vlti(av.vlti)
+    : sti(av.sti), lti(av.lti), vlti(av.vlti), ecan_tensor(av.ecan_tensor)
 {
+}
+
+AttentionValue::AttentionValue(const ECANAttentionTensor& tensor)
+    : ecan_tensor(tensor)
+{
+    ecan_tensor.normalize();
+    sti = static_cast<short>(tensor.short_term_importance * 100);
+    lti = static_cast<short>(tensor.long_term_importance * 100);
+    vlti = 0;
 }
 
 AttentionValue& AttentionValue::operator=(const AttentionValue& av)
@@ -27,6 +38,7 @@ AttentionValue& AttentionValue::operator=(const AttentionValue& av)
         sti = av.sti;
         lti = av.lti;
         vlti = av.vlti;
+        ecan_tensor = av.ecan_tensor;
     }
     return *this;
 }
@@ -82,4 +94,9 @@ bool AttentionValue::isZero() const
 AttentionValue AttentionValue::factory(short sti, short lti, short vlti)
 {
     return AttentionValue(sti, lti, vlti);
+}
+
+AttentionValue AttentionValue::fromECANTensor(const ECANAttentionTensor& tensor)
+{
+    return AttentionValue(tensor);
 }

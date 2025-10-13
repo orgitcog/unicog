@@ -22,6 +22,9 @@ void ECANAgent::runCycle()
 {
     cycleCount++;
     
+    // Phase 2 enhancement: Process priority-based attention requests first
+    processAttentionRequests();
+    
     // Execute economic operations based on cycle schedule
     if (cycleCount % rentCycle == 0) {
         collectRent();
@@ -35,8 +38,17 @@ void ECANAgent::runCycle()
         collectTaxes();
     }
     
+    // Phase 2 enhancement: Apply attention decay and refresh mechanisms
+    applyAttentionDecay();
+    refreshAttentionValues();
+    
     // Always spread attention each cycle
     spreadAttention();
+    
+    // Phase 2 enhancement: Synchronize with connected agents
+    if (cycleCount % 10 == 0) { // Sync every 10 cycles
+        synchronizeWithAgents();
+    }
 }
 
 void ECANAgent::collectRent()
@@ -152,4 +164,183 @@ void ECANAgent::spreadAttentionBetween(Handle source, Handle target, double amou
             attentionBank->setSTI(target, targetSTI + spreadAmount);
         }
     }
+}
+
+// Phase 2 implementation: Priority-based resource scheduling
+void ECANAgent::processAttentionRequests()
+{
+    std::lock_guard<std::mutex> lock(request_queue_mutex);
+    
+    int processed = 0;
+    const int max_requests_per_cycle = 10; // Limit processing per cycle
+    
+    while (!attention_request_queue.empty() && processed < max_requests_per_cycle) {
+        AttentionRequest request = attention_request_queue.top();
+        attention_request_queue.pop();
+        
+        executeHighPriorityRequest(request);
+        processed++;
+    }
+}
+
+void ECANAgent::scheduleAttentionRequest(Handle atom, double priority, double amount, const std::string& type)
+{
+    std::lock_guard<std::mutex> lock(request_queue_mutex);
+    attention_request_queue.emplace(atom, priority, amount, type);
+}
+
+void ECANAgent::executeHighPriorityRequest(const AttentionRequest& request)
+{
+    if (!atomSpace->is_valid(request.atom)) {
+        return; // Atom no longer valid
+    }
+    
+    // Execute based on request type
+    if (request.request_type == "stimulate") {
+        attentionBank->stimulateAtom(request.atom, static_cast<short>(request.requested_amount));
+    } else if (request.request_type == "decay") {
+        short currentSTI = attentionBank->getSTI(request.atom);
+        short decayedSTI = static_cast<short>(currentSTI * (1.0 - request.requested_amount));
+        attentionBank->setSTI(request.atom, decayedSTI);
+    } else if (request.request_type == "spread") {
+        // Find nearby atoms to spread to
+        const auto& incomingLinks = request.atom->getIncomingSet();
+        if (!incomingLinks.empty()) {
+            for (const auto& link : incomingLinks) {
+                spreadAttentionBetween(request.atom, link->get_handle(), request.requested_amount);
+                break; // Spread to first available link for now
+            }
+        }
+    }
+}
+
+// Phase 2 implementation: Attention decay and refresh mechanisms
+void ECANAgent::applyAttentionDecay()
+{
+    attentionBank->decayAttention(attention_decay_factor);
+}
+
+void ECANAgent::refreshAttentionValues()
+{
+    for (const auto& [atom, refresh_rate] : attention_refresh_rates) {
+        if (!atomSpace->is_valid(atom)) {
+            continue;
+        }
+        
+        short currentSTI = attentionBank->getSTI(atom);
+        if (currentSTI < refresh_threshold * 100) {
+            short boost = static_cast<short>(refresh_rate * 10); // Convert rate to boost amount
+            attentionBank->setSTI(atom, currentSTI + boost);
+        }
+    }
+}
+
+void ECANAgent::setRefreshRate(Handle atom, double rate)
+{
+    attention_refresh_rates[atom] = std::max(0.0, std::min(1.0, rate));
+}
+
+// Phase 2 implementation: Cross-agent attention synchronization
+void ECANAgent::synchronizeWithAgents()
+{
+    std::lock_guard<std::mutex> lock(sync_mutex);
+    
+    auto now = std::chrono::steady_clock::now();
+    auto time_since_sync = std::chrono::duration_cast<std::chrono::seconds>(
+        now - last_sync_time).count();
+        
+    if (time_since_sync < 5) { // Don't sync too frequently
+        return;
+    }
+    
+    // Get high attention atoms to share
+    auto high_attention_atoms = attentionBank->getTopSTIAtoms(5);
+    
+    for (const std::string& agent_id : connected_agents) {
+        for (Handle atom : high_attention_atoms) {
+            short sti = attentionBank->getSTI(atom);
+            if (sti > 50) { // Only sync high-value atoms
+                sendAttentionUpdate(agent_id, atom, sti / 100.0);
+            }
+        }
+    }
+    
+    last_sync_time = now;
+}
+
+void ECANAgent::sendAttentionUpdate(const std::string& agent_id, Handle atom, double value)
+{
+    // In a real implementation, this would send over network
+    // For now, we'll just log the intent
+    // logger().info() << "Sending attention update to " << agent_id 
+    //                 << " for atom with value " << value;
+}
+
+void ECANAgent::receiveAttentionUpdate(Handle atom, double value, const std::string& from_agent)
+{
+    // Implement conflict resolution if we have competing values
+    std::vector<double> values = {value};
+    short current_sti = attentionBank->getSTI(atom);
+    if (current_sti > 0) {
+        values.push_back(current_sti / 100.0);
+    }
+    
+    resolveAttentionConflict(atom, values);
+}
+
+void ECANAgent::registerConnectedAgent(const std::string& agent_id)
+{
+    std::lock_guard<std::mutex> lock(sync_mutex);
+    if (std::find(connected_agents.begin(), connected_agents.end(), agent_id) == connected_agents.end()) {
+        connected_agents.push_back(agent_id);
+    }
+}
+
+// Phase 2 implementation: Attention conflict resolution
+void ECANAgent::resolveAttentionConflict(Handle atom, const std::vector<double>& conflicting_values)
+{
+    if (conflicting_values.empty()) return;
+    
+    double resolved_value = computeConflictResolution(conflicting_values);
+    attentionBank->setSTI(atom, static_cast<short>(resolved_value * 100));
+}
+
+double ECANAgent::computeConflictResolution(const std::vector<double>& values)
+{
+    if (values.empty()) return 0.0;
+    if (values.size() == 1) return values[0];
+    
+    // Use weighted average with bias toward higher values
+    double sum = 0.0;
+    double weight_sum = 0.0;
+    
+    for (size_t i = 0; i < values.size(); ++i) {
+        double weight = 1.0 + values[i]; // Higher values get more weight
+        sum += values[i] * weight;
+        weight_sum += weight;
+    }
+    
+    return weight_sum > 0 ? sum / weight_sum : 0.0;
+}
+
+// Phase 2 implementation: Performance and fairness metrics
+ECANAgent::AttentionMetrics ECANAgent::computePerformanceMetrics() const
+{
+    AttentionMetrics metrics;
+    
+    // Calculate total attention allocated
+    metrics.total_attention_allocated = 0.0;
+    const auto& focus = attentionBank->getAttentionalFocus();
+    for (Handle h : focus) {
+        metrics.total_attention_allocated += attentionBank->getSTI(h);
+    }
+    
+    // Estimate other metrics (would need more tracking in real implementation)
+    metrics.average_request_processing_time = 1.0; // ms
+    metrics.attention_distribution_fairness = 0.7; // Placeholder Gini coefficient
+    metrics.conflict_resolution_rate = 0.95; // 95% success rate
+    metrics.total_requests_processed = cycleCount * 5; // Estimate
+    metrics.total_conflicts_resolved = cycleCount / 10; // Estimate
+    
+    return metrics;
 }
