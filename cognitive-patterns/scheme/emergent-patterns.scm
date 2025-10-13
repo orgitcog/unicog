@@ -167,7 +167,7 @@
       "operational"
       0.9)
     
-    ; Self-reflexive feedback
+    ; Self-reflexive feedback with meta-cognitive integration
     (let ((adaptation-result
            (Evaluation
              (Predicate "self-reflexive-adaptation")
@@ -175,7 +175,14 @@
                (Concept "old-threshold") (Number current-threshold)
                (Concept "new-threshold") (Number new-threshold)
                (Concept "avg-quality") (Number avg-quality)
-               (Concept "pattern-diversity") (Number pattern-diversity)))))
+               (Concept "pattern-diversity") (Number pattern-diversity))))
+          (meta-cognitive-feedback
+           (Evaluation
+             (Predicate "meta-cognitive-pattern-adaptation")
+             (List
+               (Concept "adaptation-effectiveness") (Number (- new-threshold current-threshold))
+               (Concept "quality-improvement") (Number (max 0 (- avg-quality 0.5)))
+               (Concept "system-awareness") (Number 0.8)))))
       
       ; OBSERVATION HOOK: Document recursive behavior of self-adaptation
       (observe-recursive-behavior

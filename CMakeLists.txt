@@ -245,6 +245,29 @@ if(TARGET opencog-main)
     add_dependencies(opencog-main atomspace cogserver attention ure lg-atomese)
 endif()
 
+# Phase V Extended: Recursive Meta-Cognition & Evolutionary Optimization
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/meta-cognition/CMakeLists.txt")
+    add_subdirectory(meta-cognition)
+endif()
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/evolutionary-optimization/CMakeLists.txt")
+    add_subdirectory(evolutionary-optimization)
+endif()
+
+# Add Phase V meta-cognitive optimization target
+add_custom_target(meta-cognitive-optimization
+    COMMENT "Building Phase V meta-cognitive and evolutionary optimization systems"
+)
+
+# Add dependencies for meta-cognitive optimization if targets exist
+if(TARGET meta-cognition)
+    add_dependencies(meta-cognitive-optimization meta-cognition)
+endif()
+if(TARGET evolutionary-optimization)
+    add_dependencies(meta-cognitive-optimization evolutionary-optimization)
+    if(TARGET meta-cognition)
+        add_dependencies(evolutionary-optimization meta-cognition)
+    endif()
 # Phase 4: Distributed Cognitive Mesh API & Embodiment Layer
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/distributed-cognitive-mesh/CMakeLists.txt")
     add_subdirectory(distributed-cognitive-mesh)
@@ -263,6 +286,8 @@ endif()
 
 # Add comprehensive target that includes all phases
 add_custom_target(cognitive-complete 
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, and language systems"
     DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration distributed-cognitive-mesh-phase4
     COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language systems, and distributed cognitive mesh"
 )
