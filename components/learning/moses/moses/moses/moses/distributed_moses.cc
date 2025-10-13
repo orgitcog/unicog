@@ -191,20 +191,37 @@ proc_map::value_type launch_cmd(string cmd, unsigned n_jobs)
 
 bool is_being_written(const string& file_name, int pid)
 {
-    // Arghhh FIXME. fuser might not be installed, or it may not be in
-    // the default search path.  RedHat/CentOS puts it into /sbin/fuser
-    // which is not in the default searchpath.
-    FILE* fp = popen(string("fuser ").append(file_name).append(" 2> /dev/null").c_str(), "r");
-    while (!feof(fp)) {
-        int p;
-        int count_matches = fscanf(fp, "%u", &p);
-        OC_ASSERT(count_matches == 1, "The fuser command failed; is it installed?");
-        if (pid == p) {
-            pclose(fp);
-            return true;
+    // Try multiple possible paths for fuser command
+    const char* fuser_paths[] = {
+        "fuser",           // Default PATH
+        "/sbin/fuser",     // RedHat/CentOS location
+        "/usr/sbin/fuser", // Alternative location
+        NULL
+    };
+    
+    for (int i = 0; fuser_paths[i] != NULL; i++) {
+        string cmd = string(fuser_paths[i]).append(" ").append(file_name).append(" 2> /dev/null");
+        FILE* fp = popen(cmd.c_str(), "r");
+        if (fp == NULL) continue;
+        
+        bool found = false;
+        while (!feof(fp)) {
+            int p;
+            int count_matches = fscanf(fp, "%u", &p);
+            if (count_matches == 1 && pid == p) {
+                found = true;
+                break;
+            }
+        }
+        int status = pclose(fp);
+        
+        // If command succeeded (status 0 or 256 for no processes found)
+        if (WIFEXITED(status) && (WEXITSTATUS(status) == 0 || WEXITSTATUS(status) == 1)) {
+            return found;
         }
     }
-    pclose(fp);
+    
+    OC_ASSERT(false, "The fuser command could not be found in any standard location");
     return false;
 }
 

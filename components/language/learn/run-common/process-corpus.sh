@@ -14,17 +14,29 @@
 # Assorted environment variables will be fetched from the <config> file.
 # An example config file is in `~/run-config/2-pair-conf.sh`
 #
-# XXX TODO Why are we using a config file here? Why aren't we just
-# grabbing everything we need from the env?
+# Configuration can be provided either via:
+# 1. Config file (for backward compatibility)
+# 2. Environment variables (preferred method)
 # ---------
 
-CONF_FILE=$1
-
-if [ -r $CONF_FILE ]; then
-	. $CONF_FILE
+# If config file is provided, use it; otherwise rely on environment variables
+if [ -n "$1" ]; then
+	CONF_FILE=$1
+	if [ -r "$CONF_FILE" ]; then
+		echo "Loading configuration from file: $CONF_FILE"
+		. "$CONF_FILE"
+	else
+		echo "Error: Cannot read configuration file: $CONF_FILE"
+		exit 1
+	fi
 else
-	echo "Cannot find configuration file!"
-	exit -1
+	# Check if essential environment variables are set
+	if [ -z "$CORPUS_DIR" ] || [ -z "$STORAGE_NODE" ]; then
+		echo "Error: Required environment variables not set."
+		echo "Either provide a config file or set CORPUS_DIR and STORAGE_NODE environment variables."
+		exit 1
+	fi
+	echo "Using configuration from environment variables"
 fi
 
 export HOSTNAME
