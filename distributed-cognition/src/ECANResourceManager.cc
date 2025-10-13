@@ -10,6 +10,7 @@
 #include <numeric>
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 
 namespace opencog {
 
@@ -157,6 +158,14 @@ void ECANResourceManager::perform_economic_cycle() {
     // Update resource demands
     update_resource_demands();
     
+    // Phase 2 enhancement: Dynamic strategy selection based on system state
+    double inequality = calculate_resource_inequality();
+    if (inequality > economic_fairness_threshold_) {
+        current_strategy_ = FAIRNESS_BALANCED;
+    } else if (economic_cycle_count_ % 10 == 0) {
+        current_strategy_ = ADAPTIVE_HYBRID; // Periodic rebalancing
+    }
+    
     // Apply selected allocation strategy
     switch (current_strategy_) {
         case PERFORMANCE_BASED:
@@ -174,7 +183,9 @@ void ECANResourceManager::perform_economic_cycle() {
     }
     
     std::cout << "ECAN: Completed economic cycle " << economic_cycle_count_ 
-              << " with " << agent_profiles_.size() << " agents" << std::endl;
+              << " with " << agent_profiles_.size() << " agents"
+              << ", inequality: " << std::fixed << std::setprecision(3) << inequality
+              << ", strategy: " << static_cast<int>(current_strategy_) << std::endl;
 }
 
 double ECANResourceManager::get_agent_resource_allocation(const std::string& agent_id,

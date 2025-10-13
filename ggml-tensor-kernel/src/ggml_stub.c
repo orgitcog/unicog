@@ -177,3 +177,244 @@ size_t ggml_nelements(const struct ggml_tensor* tensor) {
     }
     return n;
 }
+
+// Custom neural-symbolic kernels implementation
+
+struct ggml_tensor* ggml_scale(struct ggml_context* ctx, struct ggml_tensor* a, float scale) {
+    if (!ctx || !a) return NULL;
+    
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, a);
+    if (!result || !result->data) return NULL;
+    
+    float* data = ggml_get_data_f32(result);
+    size_t n_elements = ggml_nelements(result);
+    
+    for (size_t i = 0; i < n_elements; i++) {
+        data[i] *= scale;
+    }
+    
+    return result;
+}
+
+struct ggml_tensor* ggml_sum_rows(struct ggml_context* ctx, struct ggml_tensor* a) {
+    if (!ctx || !a || a->n_dims < 2) return NULL;
+    
+    // Create result tensor with dimensions [n_rows, 1]
+    struct ggml_tensor* result = ggml_new_tensor_1d(ctx, GGML_TYPE_F32, a->ne[1]);
+    if (!result || !result->data) return NULL;
+    
+    float* input_data = ggml_get_data_f32(a);
+    float* output_data = ggml_get_data_f32(result);
+    
+    int64_t n_cols = a->ne[0];
+    int64_t n_rows = a->ne[1];
+    
+    // Sum each row
+    for (int64_t row = 0; row < n_rows; row++) {
+        float sum = 0.0f;
+        for (int64_t col = 0; col < n_cols; col++) {
+            sum += input_data[row * n_cols + col];
+        }
+        output_data[row] = sum;
+    }
+    
+    return result;
+}
+
+struct ggml_tensor* ggml_hypergraph_conv(struct ggml_context* ctx, struct ggml_tensor* nodes, struct ggml_tensor* hyperedges) {
+    if (!ctx || !nodes || !hyperedges) return NULL;
+    
+    // Simple hypergraph convolution: aggregate node features through hyperedges
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, nodes);
+    if (!result) return NULL;
+    
+    float* node_data = ggml_get_data_f32(nodes);
+    float* edge_data = ggml_get_data_f32(hyperedges);
+    float* result_data = ggml_get_data_f32(result);
+    
+    size_t n_nodes = nodes->ne[0];
+    size_t node_dim = nodes->n_dims > 1 ? nodes->ne[1] : 1;
+    size_t n_edges = hyperedges->ne[0];
+    
+    // Apply hypergraph convolution transformation
+    for (size_t i = 0; i < n_nodes * node_dim; i++) {
+        float aggregation = 0.0f;
+        for (size_t j = 0; j < n_edges && j < n_nodes; j++) {
+            aggregation += node_data[i] * edge_data[j] / (float)(n_edges + 1);
+        }
+        result_data[i] = node_data[i] + 0.1f * aggregation; // Residual connection
+    }
+    
+    return result;
+}
+
+struct ggml_tensor* ggml_symbolic_attention(struct ggml_context* ctx, struct ggml_tensor* query, struct ggml_tensor* key, struct ggml_tensor* value) {
+    if (!ctx || !query || !key || !value) return NULL;
+    
+    // Simplified symbolic attention mechanism
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, value);
+    if (!result) return NULL;
+    
+    float* q_data = ggml_get_data_f32(query);
+    float* k_data = ggml_get_data_f32(key);
+    float* v_data = ggml_get_data_f32(value);
+    float* result_data = ggml_get_data_f32(result);
+    
+    size_t seq_len = query->ne[0];
+    size_t d_model = query->n_dims > 1 ? query->ne[1] : 1;
+    
+    // Compute attention scores and apply to values
+    for (size_t i = 0; i < seq_len; i++) {
+        float attention_sum = 0.0f;
+        for (size_t j = 0; j < seq_len; j++) {
+            float score = 0.0f;
+            for (size_t k = 0; k < d_model; k++) {
+                score += q_data[i * d_model + k] * k_data[j * d_model + k];
+            }
+            attention_sum += expf(score / sqrtf((float)d_model));
+        }
+        
+        for (size_t k = 0; k < d_model; k++) {
+            float weighted_value = 0.0f;
+            for (size_t j = 0; j < seq_len; j++) {
+                float score = 0.0f;
+                for (size_t l = 0; l < d_model; l++) {
+                    score += q_data[i * d_model + l] * k_data[j * d_model + l];
+                }
+                float attention_weight = expf(score / sqrtf((float)d_model)) / attention_sum;
+                weighted_value += attention_weight * v_data[j * d_model + k];
+            }
+            result_data[i * d_model + k] = weighted_value;
+        }
+    }
+    
+    return result;
+}
+
+struct ggml_tensor* ggml_cognitive_fusion(struct ggml_context* ctx, struct ggml_tensor* neural, struct ggml_tensor* symbolic, float fusion_weight) {
+    if (!ctx || !neural || !symbolic) return NULL;
+    
+    // Ensure tensors have compatible dimensions
+    size_t n_elements = ggml_nelements(neural);
+    if (n_elements != ggml_nelements(symbolic)) {
+        return ggml_dup_tensor(ctx, neural); // Return neural unchanged if incompatible
+    }
+    
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, neural);
+    if (!result) return NULL;
+    
+    float* neural_data = ggml_get_data_f32(neural);
+    float* symbolic_data = ggml_get_data_f32(symbolic);
+    float* result_data = ggml_get_data_f32(result);
+    
+    // Weighted fusion of neural and symbolic representations
+    for (size_t i = 0; i < n_elements; i++) {
+        result_data[i] = (1.0f - fusion_weight) * neural_data[i] + fusion_weight * symbolic_data[i];
+    }
+    
+    return result;
+}
+
+// Neural-symbolic utility functions
+
+struct ggml_tensor* ggml_compute_graph_embeddings(struct ggml_context* ctx, const struct ggml_tensor* adjacency) {
+    if (!ctx || !adjacency) return NULL;
+    
+    // Simple graph embedding via spectral methods approximation
+    size_t n_nodes = adjacency->ne[0];
+    struct ggml_tensor* embeddings = ggml_new_tensor_2d(ctx, GGML_TYPE_F32, n_nodes, 64); // 64-dim embeddings
+    if (!embeddings) return NULL;
+    
+    float* adj_data = ggml_get_data_f32(adjacency);
+    float* emb_data = ggml_get_data_f32(embeddings);
+    
+    // Initialize with random-like values based on node connectivity
+    for (size_t i = 0; i < n_nodes; i++) {
+        float degree = 0.0f;
+        for (size_t j = 0; j < n_nodes; j++) {
+            degree += adj_data[i * n_nodes + j];
+        }
+        
+        for (size_t k = 0; k < 64; k++) {
+            // Create embedding based on degree and position
+            emb_data[i * 64 + k] = sinf((float)(i * k) * 0.1f) * (1.0f + degree * 0.1f);
+        }
+    }
+    
+    return embeddings;
+}
+
+struct ggml_tensor* ggml_gradient_symbolic(struct ggml_context* ctx, struct ggml_tensor* loss, struct ggml_tensor* parameters) {
+    if (!ctx || !loss || !parameters) return NULL;
+    
+    // Simplified gradient computation for symbolic tensors
+    struct ggml_tensor* gradients = ggml_dup_tensor(ctx, parameters);
+    if (!gradients) return NULL;
+    
+    float* loss_data = ggml_get_data_f32(loss);
+    float* param_data = ggml_get_data_f32(parameters);
+    float* grad_data = ggml_get_data_f32(gradients);
+    
+    size_t n_params = ggml_nelements(parameters);
+    float loss_val = loss_data ? loss_data[0] : 1.0f;
+    
+    // Compute approximate gradients using finite differences
+    for (size_t i = 0; i < n_params; i++) {
+        grad_data[i] = loss_val * param_data[i] * 0.01f; // Simplified gradient
+    }
+    
+    return gradients;
+}
+
+struct ggml_tensor* ggml_truth_value_encode(struct ggml_context* ctx, float strength, float confidence) {
+    if (!ctx) return NULL;
+    
+    // Encode truth value as 2D vector
+    struct ggml_tensor* tv_tensor = ggml_new_tensor_1d(ctx, GGML_TYPE_F32, 2);
+    if (!tv_tensor) return NULL;
+    
+    float* data = ggml_get_data_f32(tv_tensor);
+    data[0] = strength;
+    data[1] = confidence;
+    
+    return tv_tensor;
+}
+
+struct ggml_tensor* ggml_pattern_match_score(struct ggml_context* ctx, struct ggml_tensor* pattern, struct ggml_tensor* target) {
+    if (!ctx || !pattern || !target) return NULL;
+    
+    // Compute pattern matching score as cosine similarity
+    struct ggml_tensor* score = ggml_new_tensor_1d(ctx, GGML_TYPE_F32, 1);
+    if (!score) return NULL;
+    
+    float* pattern_data = ggml_get_data_f32(pattern);
+    float* target_data = ggml_get_data_f32(target);
+    float* score_data = ggml_get_data_f32(score);
+    
+    size_t n_elements = ggml_nelements(pattern);
+    if (n_elements != ggml_nelements(target)) {
+        score_data[0] = 0.0f;
+        return score;
+    }
+    
+    float dot_product = 0.0f;
+    float pattern_norm = 0.0f;
+    float target_norm = 0.0f;
+    
+    for (size_t i = 0; i < n_elements; i++) {
+        dot_product += pattern_data[i] * target_data[i];
+        pattern_norm += pattern_data[i] * pattern_data[i];
+        target_norm += target_data[i] * target_data[i];
+    }
+    
+    pattern_norm = sqrtf(pattern_norm);
+    target_norm = sqrtf(target_norm);
+    
+    if (pattern_norm > 0.0f && target_norm > 0.0f) {
+        score_data[0] = dot_product / (pattern_norm * target_norm);
+    } else {
+        score_data[0] = 0.0f;
+    }
+    
+    return score;
+}

@@ -31,6 +31,9 @@ namespace opencog {
 class SatisfyMixin:
 	public virtual PatternMatchCallback
 {
+	// Performance optimization flag for cartesian product evaluation
+	static constexpr bool ENABLE_CARTESIAN_OPTIMIZATION = true;
+	
 	bool cartesian_product(const HandleSeq& virtuals,
 	                       const PatternTermSeq& absents,
 	                       const GroundingMap& var_gnds,
@@ -38,6 +41,19 @@ class SatisfyMixin:
 	                       // copies, NOT references!
 	                       GroundingMapSeqSeq comp_var_gnds,
 	                       GroundingMapSeqSeq comp_term_gnds);
+	
+	// Optimized cartesian product with early virtual clause evaluation
+	bool cartesian_product_optimized(const HandleSeq& virtuals,
+	                                const PatternTermSeq& absents,
+	                                const GroundingMap& var_gnds,
+	                                const GroundingMap& term_gnds,
+	                                GroundingMapSeqSeq comp_var_gnds,
+	                                GroundingMapSeqSeq comp_term_gnds);
+	
+	// Helper method to evaluate virtual clauses early
+	bool eval_virtual_clause(const Handle& virt,
+	                        const GroundingMap& var_gnds,
+	                        const GroundingMap& term_gnds);
 
 	public:
 		virtual bool satisfy(const PatternLinkPtr&);
