@@ -73,6 +73,13 @@ struct ggml_tensor* ggml_mul_mat(struct ggml_context* ctx, struct ggml_tensor* a
 struct ggml_tensor* ggml_soft_max(struct ggml_context* ctx, struct ggml_tensor* a);
 struct ggml_tensor* ggml_relu(struct ggml_context* ctx, struct ggml_tensor* a);
 
+// Custom neural-symbolic kernels
+struct ggml_tensor* ggml_scale(struct ggml_context* ctx, struct ggml_tensor* a, float scale);
+struct ggml_tensor* ggml_sum_rows(struct ggml_context* ctx, struct ggml_tensor* a);
+struct ggml_tensor* ggml_hypergraph_conv(struct ggml_context* ctx, struct ggml_tensor* nodes, struct ggml_tensor* hyperedges);
+struct ggml_tensor* ggml_symbolic_attention(struct ggml_context* ctx, struct ggml_tensor* query, struct ggml_tensor* key, struct ggml_tensor* value);
+struct ggml_tensor* ggml_cognitive_fusion(struct ggml_context* ctx, struct ggml_tensor* neural, struct ggml_tensor* symbolic, float fusion_weight);
+
 // Scalar tensor creation
 struct ggml_tensor* ggml_new_f32(struct ggml_context* ctx, float value);
 
@@ -80,6 +87,12 @@ struct ggml_tensor* ggml_new_f32(struct ggml_context* ctx, float value);
 float* ggml_get_data_f32(const struct ggml_tensor* tensor);
 int ggml_n_dims(const struct ggml_tensor* tensor);
 size_t ggml_nelements(const struct ggml_tensor* tensor);
+
+// Neural-symbolic utility functions
+struct ggml_tensor* ggml_compute_graph_embeddings(struct ggml_context* ctx, const struct ggml_tensor* adjacency);
+struct ggml_tensor* ggml_gradient_symbolic(struct ggml_context* ctx, struct ggml_tensor* loss, struct ggml_tensor* parameters);
+struct ggml_tensor* ggml_truth_value_encode(struct ggml_context* ctx, float strength, float confidence);
+struct ggml_tensor* ggml_pattern_match_score(struct ggml_context* ctx, struct ggml_tensor* pattern, struct ggml_tensor* target);
 
 #ifdef __cplusplus
 }
