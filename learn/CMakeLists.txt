@@ -16,6 +16,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(CogUtil REQUIRED)
 find_package(AtomSpace REQUIRED)
 
+# Find CogServer (required for learn module integration)
+find_package(CogServer CONFIG)
+if(CogServer_FOUND)
+    message(STATUS "CogServer found.")
+    set(HAVE_COGSERVER 1)
+    add_definitions(-DHAVE_COGSERVER)
+else()
+    message(STATUS "CogServer not found, using relative path")
+    set(COGSERVER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../cogserver)
+endif()
+
 # Include directories
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -23,6 +34,13 @@ include_directories(
     ${COGUTIL_INCLUDE_DIR}
     ${ATOMSPACE_INCLUDE_DIR}
 )
+
+# Add include directories based on what was found
+if(HAVE_COGSERVER)
+    include_directories(${COGSERVER_INCLUDE_DIR})
+else()
+    include_directories(${COGSERVER_INCLUDE_DIR})
+endif()
 
 # Learn core source files
 file(GLOB_RECURSE LEARN_SOURCES
@@ -40,9 +58,20 @@ if(LEARN_SOURCES)
     add_library(learn SHARED ${LEARN_SOURCES})
     
     # Link dependencies
+    set(LEARN_LINK_LIBRARIES "")
+    
+    # Link with proper targets or fallback libraries
+    list(APPEND LEARN_LINK_LIBRARIES ${COGUTIL_LIBRARY})
+    list(APPEND LEARN_LINK_LIBRARIES ${ATOMSPACE_LIBRARY})
+    
+    if(HAVE_COGSERVER AND TARGET cogserver)
+        list(APPEND LEARN_LINK_LIBRARIES cogserver)
+    elseif(COGSERVER_LIBRARIES)
+        list(APPEND LEARN_LINK_LIBRARIES ${COGSERVER_LIBRARIES})
+    endif()
+    
     target_link_libraries(learn
-        ${COGUTIL_LIBRARY}
-        ${ATOMSPACE_LIBRARY}
+        ${LEARN_LINK_LIBRARIES}
     )
     
     # Set library properties
@@ -67,7 +96,7 @@ file(GLOB LEARN_EXECUTABLES "examples/*.cc")
 foreach(executable_source ${LEARN_EXECUTABLES})
     get_filename_component(executable_name ${executable_source} NAME_WE)
     add_executable(${executable_name} ${executable_source})
-    target_link_libraries(${executable_name} learn ${COGUTIL_LIBRARY} ${ATOMSPACE_LIBRARY})
+    target_link_libraries(${executable_name} learn ${LEARN_LINK_LIBRARIES})
     install(TARGETS ${executable_name} DESTINATION bin)
 endforeach()
 
@@ -82,4 +111,21 @@ add_custom_target(learn-all
     COMMENT "Building learn (Unsupervised Learning) component"
 )
 
+# Explicit dependency declarations for documentation and validation
+# The learn module requires:
+# - atomspace: For knowledge representation and atom management  
+# - cogserver: For distributed server integration and module loading
+set(HAVE_ATOMSPACE 1)  # AtomSpace is REQUIRED so always present
+set(HAVE_COGUTIL 1)    # CogUtil is REQUIRED so always present
+
+if(NOT HAVE_COGSERVER)
+    message(WARNING "CogServer is required for learn module but was not found using CONFIG. Using fallback include path.")
+endif()
+
+# Summary
+message(STATUS "Learn module configuration:")
+message(STATUS "  - AtomSpace dependency: ${HAVE_ATOMSPACE}")
+message(STATUS "  - CogServer dependency: ${HAVE_COGSERVER}")
+message(STATUS "  - CogUtil dependency: ${HAVE_COGUTIL}")
+message(STATUS "  - Link libraries: ${LEARN_LINK_LIBRARIES}")
 MESSAGE(STATUS "learn (Unsupervised Learning) component configured")
