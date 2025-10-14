@@ -3,8 +3,8 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-10-13 09:14:36 UTC  
-**Total Items**: 1887  
+**Generated**: 2025-10-14 15:06:36 UTC  
+**Total Items**: 1825  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
 ---
@@ -3375,7 +3375,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/tests/scm/typedefs.scm#L5)
 
 ### Other
-*Total items: 868*
+*Total items: 806*
 
 - [ ] **analyze_issue_examples.py:14** (HIGH, Performance)
   - `"./atomspace/opencog/atomspace/Transient.cc:/// XXX FIXME. Performance has not been recently measure...`
@@ -5393,22 +5393,6 @@ A section for emergent TODOs.
   - `; XXX This includes some ad-hoc constants. See the Sept 2021 diary entry`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/attic/run-v3/run-common/trim-pair.scm#L22)
 
-- [ ] **components/language/learn/attic/run-v3/run-config/1-dict-conf.scm:97** (LOW, Feature Completion)
-  - `; XXX FIXME: The LG dictionary complains about multiply defined words.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/attic/run-v3/run-config/1-dict-conf.scm#L97)
-
-- [ ] **components/language/learn/fake/random-dict.scm:24** (LOW, Feature Completion)
-  - `; This file has some TODO's to expand the kinds and varieties`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/fake/random-dict.scm#L24)
-
-- [ ] **components/language/learn/fake/random-dict.scm:111** (LOW, Feature Completion)
-  - `; TODO: Implement a mode with head and tail indicators, so that`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/fake/random-dict.scm#L111)
-
-- [ ] **components/language/learn/fake/random-dict.scm:117** (LOW, Feature Completion)
-  - `; TODO: use bi-directional directions, for order-independent languages.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/fake/random-dict.scm#L117)
-
 - [ ] **components/language/learn/fake/zipf.scm:7** (LOW, Feature Completion)
   - `; srfi-194 random number generator. This is a hack. This is only`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/fake/zipf.scm#L7)
@@ -5925,29 +5909,9 @@ A section for emergent TODOs.
   - `# 81231 cleanup after upstream merge and conflicts resolution (FIXME: 2nd check)`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/category_learner.py#L170)
 
-- [ ] **language-learning/src/grammar_learner/clustering.py:82** (LOW, Feature Completion)
-  - `#    max_clusters = min(cluster_range[1], len(vdf))  # FIXME: hack 80420!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/clustering.py#L82)
-
-- [ ] **language-learning/src/grammar_learner/clustering.py:84** (LOW, Feature Completion)
-  - `return 4  # FIXME: hack Turtle 80420!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/clustering.py#L84)
-
-- [ ] **language-learning/src/grammar_learner/clustering.py:125** (LOW, Error Handling)
-  - `n3 = mode(lst)  # FIXME: Might get error?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/clustering.py#L125)
-
-- [ ] **language-learning/src/grammar_learner/clustering.py:213** (LOW, Feature Completion)
-  - `max_clusters = 4  # FIXME: hack 80420: 2D word space ⇒ 4 clusters`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/clustering.py#L213)
-
-- [ ] **language-learning/src/grammar_learner/clustering.py:232** (LOW, Feature Completion)
-  - `else:  # check min clusters, find min viable # FIXME: overkill?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/clustering.py#L232)
-
-- [ ] **language-learning/src/grammar_learner/clustering.py:349** (LOW, Feature Completion)
+- [ ] **language-learning/src/grammar_learner/clustering.py:361** (LOW, Feature Completion)
   - `# TODO: n_clusters ⇒ best_clusters: return best clusters (word lists), centroids`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/clustering.py#L349)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/clustering.py#L361)
 
 - [ ] **language-learning/src/grammar_learner/corpus_stats.py:14** (LOW, Feature Completion)
   - `nlw = Counter()     # non-linked words  # FIXME: not used » DEL?`
@@ -6033,34 +5997,6 @@ A section for emergent TODOs.
   - `# 81217 FIXME? generalize_categories [F] with new reorder (Turtle tests)`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/generalization.py#L417)
 
-- [ ] **language-learning/src/grammar_learner/grammar_inducer.py:12** (LOW, Feature Completion)
-  - `# TODO?: add top disjuncts only + prune disjuncts  after clusters?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/grammar_inducer.py#L12)
-
-- [ ] **language-learning/src/grammar_learner/grammar_inducer.py:37** (LOW, Feature Completion)
-  - `# TODO?: dj_counts = Counter()`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/grammar_inducer.py#L37)
-
-- [ ] **language-learning/src/grammar_learner/grammar_inducer.py:126** (LOW, Feature Completion)
-  - `# TODO: move this code to prune_cats and call it before induce_grammar`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/grammar_inducer.py#L126)
-
-- [ ] **language-learning/src/grammar_learner/grammar_inducer.py:137** (LOW, Feature Completion)
-  - `# FIXME: add only rules with checked len(disjuncts) > 0`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/grammar_inducer.py#L137)
-
-- [ ] **language-learning/src/grammar_learner/grammar_inducer.py:141** (LOW, Feature Completion)
-  - `else:  # TODO: pop rules[...][i]`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/grammar_inducer.py#L141)
-
-- [ ] **language-learning/src/grammar_learner/grammar_inducer.py:147** (LOW, Error Handling)
-  - `# TODO: remove entire row -- needs further disjuncts cleanup (errors in write_files.py)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/grammar_inducer.py#L147)
-
-- [ ] **language-learning/src/grammar_learner/grammar_inducer.py:155** (LOW, Feature Completion)
-  - `# TODO?: iterate: prune clusters ⇒ disjuncts ⇒ clusters ... ⇒ renumber & rename :(`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/grammar_inducer.py#L155)
-
 - [ ] **language-learning/src/grammar_learner/hyperwords.py:1** (LOW, Feature Completion)
   - `## Unstructured mess of files from 2017 - TODO: restore the file structure?`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/hyperwords.py#L1)
@@ -6085,185 +6021,13 @@ A section for emergent TODOs.
   - `# TODO: refactor, control disk writes, ... PPMI ⇒ +frequency?`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/hyperwords.py#L466)
 
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:212** (LOW, Feature Completion)
-  - `rulez, re03 = learn(**kwargs)   # rulez: dict FIXME: return`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L212)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:218** (LOW, Feature Completion)
-  - `d: list = f.read().splitlines()  # TODO? split at dict2list?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L218)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:222** (LOW, Feature Completion)
-  - `kd: list = f.read().splitlines()  # TODO? split at dict2list?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L222)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:226** (LOW, Feature Completion)
-  - `# TODO: single def to decode dict, input -- 2*strings:`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L226)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:236** (LOW, Feature Completion)
-  - `# TODO: decode cat_tree.txt`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L236)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:245** (LOW, Feature Completion)
-  - `# TODO: Test Grammar with decoded .dict`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L245)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:249** (LOW, Feature Completion)
-  - `# TODO: log.update(a, f1, p, q)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L249)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:251** (LOW, Feature Completion)
-  - `# TODO: replace pqa_meter with a local function: re = pqa(**kwargs)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L251)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:253** (LOW, Feature Completion)
-  - `# TODO: decode & return rulez? return .dict converted to a string?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L253)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:254** (LOW, Feature Completion)
-  - `# TODO: return line []?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L254)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:275** (LOW, Feature Completion)
-  - `input_path = kwa(None, 'input_path', **kwargs)   # TODO: check paths?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L275)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:292** (LOW, Feature Completion)
-  - `responses = {}  # FIXME: DEL or return?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L292)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:309** (LOW, Feature Completion)
-  - `elif n == np:           # TODO '>=' ⇒ '==' 80209`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L309)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:313** (LOW, Feature Completion)
-  - `# TODO: copy last valid grammar to root dir`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L313)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:322** (LOW, Feature Completion)
-  - `def new_pqa_meter(dict_path, op, cp, rp, **kwargs):  # TODO`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L322)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:338** (LOW, Error Handling)
-  - `template_path = handle_path_string("tests/test-data/dict/poc-turtle") #FIXME:WTF?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L338)
-
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:357** (LOW, Feature Completion)
+- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:366** (LOW, Feature Completion)
   - `'''ATTN: This is still a stub result of 2 days idea check'''`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L357)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L366)
 
-- [ ] **language-learning/src/grammar_learner/incremental_clustering.py:358** (LOW, Feature Completion)
-  - `# FIXME: There is an issue somewhere in tagging or filtering or input parses`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/incremental_clustering.py#L358)
-
-- [ ] **language-learning/src/grammar_learner/kmeans.py:61** (LOW, Feature Completion)
-  - `#?    max_clusters = min(cluster_range[1], len(vdf))  #FIXME: hack 80420!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/kmeans.py#L61)
-
-- [ ] **language-learning/src/grammar_learner/kmeans.py:65** (LOW, Feature Completion)
-  - `return 4  #FIXME: hack 80420!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/kmeans.py#L65)
-
-- [ ] **language-learning/src/grammar_learner/kmeans.py:73** (LOW, Feature Completion)
-  - `#FIXME: unstable number of clusters #80422`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/kmeans.py#L73)
-
-- [ ] **language-learning/src/grammar_learner/kmeans.py:119** (LOW, Feature Completion)
-  - `#this file left for POC.0.5 legacy FIXME:DEL (wait)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/kmeans.py#L119)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:56** (LOW, Feature Completion)
-  - `temp_dir = kwa('', 'temp_dir', **kwargs)  # FIXME: temp_dir/tmpath  # 90221`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L56)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:63** (LOW, Feature Completion)
-  - `elif tmpath == '':                              # FIXME: stub!      # 90221`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L63)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:73** (LOW, Feature Completion)
-  - `clustering = kwa('kmeans', 'clustering', **kwargs)  # TODO: update`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L73)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:80** (LOW, Error Handling)
-  - `if 'error' in re01:  # FIXME: assert ?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L80)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:103** (LOW, Error Handling)
-  - `else:  # FIXME: raise error / assert ?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L103)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:116** (LOW, Feature Completion)
-  - `'''Generalize word categories'''  # FIXME: issues with add_upper_level`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L116)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:215** (LOW, Feature Completion)
-  - `return rules, log  # 81126 + rules to count clusters in .ipynb tests  FIXME:DEL?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L215)
-
-- [ ] **language-learning/src/grammar_learner/learner.py:232** (LOW, Feature Completion)
-  - `# 190221 tweak temp_dir, tmpath for Grammar Learner tutorial - FIXME line 56...`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/learner.py#L232)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:5** (LOW, Feature Completion)
-  - `# TODO: refactor 81217 wide_rows (archived) and ppln.py (make independent)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L5)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:88** (LOW, Feature Completion)
-  - `def pqa_meter(dict_path, op, cp, rp, **kwargs):   # TODO: restore previous`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L88)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:309** (LOW, Feature Completion)
-  - `elif clustering == 'group':  # TODO: call ILE clustering?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L309)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:311** (LOW, Feature Completion)
-  - `elif clustering == 'random':  # TODO: call random clustering?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L311)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:326** (LOW, Feature Completion)
-  - `linkage = clustering[0]             # FIXME: all options...`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L326)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:389** (LOW, Feature Completion)
-  - `# Averaging ::  FIXME: stop averaging?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L389)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:428** (LOW, Feature Completion)
+- [ ] **language-learning/src/grammar_learner/pqa_table.py:641** (LOW, Feature Completion)
   - `continue  # FIXME: check case`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L428)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:496** (LOW, Feature Completion)
-  - `return average, details, header, re, rulez  # 81120 tmp FIXME:DEL rulez?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L496)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:499** (LOW, Feature Completion)
-  - `def wide_table(lines, out_dir, cp, rp, **kwargs):           # 81222 FIXME: [»]`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L499)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:501** (LOW, Feature Completion)
-  - `# runs = (1,1) (...rows) unused ⇒ FIXME:DEL from calls! [»]`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L501)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:524** (LOW, Feature Completion)
-  - `elif clustering == 'group':  # TODO: call ILE clustering?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L524)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:526** (LOW, Feature Completion)
-  - `elif clustering == 'random':  # TODO: call random clustering?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L526)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:540** (LOW, Feature Completion)
-  - `linkage = clustering[0]             # FIXME: all options...`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L540)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:622** (LOW, Feature Completion)
-  - `continue  # FIXME: check case`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L622)
-
-- [ ] **language-learning/src/grammar_learner/pqa_table.py:668** (LOW, Feature Completion)
-  - `# 81220 wide_table ⇒ FIXME in 2019, replace wide_row in 2019 .ipynb tests.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L668)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/pqa_table.py#L641)
 
 - [ ] **language-learning/src/grammar_learner/preprocessing.py:33** (LOW, Feature Completion)
   - `# TODO: cleanup here or in a separate constructor?`
@@ -6329,29 +6093,17 @@ A section for emergent TODOs.
   - `# 80817 corpus_histograms ⇒ ? FIXME:DEL?`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/widgets.py#L143)
 
-- [ ] **language-learning/src/grammar_learner/write_files.py:77** (LOW, Feature Completion)
-  - `header = '', footer = ''):  # legacy FIXME:DEL?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L77)
-
-- [ ] **language-learning/src/grammar_learner/write_files.py:106** (LOW, Feature Completion)
-  - `line_list.sort()  # FIXME: overkill?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L106)
-
-- [ ] **language-learning/src/grammar_learner/write_files.py:129** (LOW, Feature Completion)
+- [ ] **language-learning/src/grammar_learner/write_files.py:130** (LOW, Feature Completion)
   - `unknown_word = '<UNKNOWN-WORD>: XXX+;'`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L129)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L130)
 
-- [ ] **language-learning/src/grammar_learner/write_files.py:131** (LOW, Feature Completion)
+- [ ] **language-learning/src/grammar_learner/write_files.py:132** (LOW, Feature Completion)
   - `unknown_word = 'UNKNOWN-WORD: XXX+;'`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L131)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L132)
 
-- [ ] **language-learning/src/grammar_learner/write_files.py:204** (LOW, Feature Completion)
-  - `category.append(wordz)  # 80704+06 tmp hack FIXME`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L204)
-
-- [ ] **language-learning/src/grammar_learner/write_files.py:224** (LOW, Feature Completion)
+- [ ] **language-learning/src/grammar_learner/write_files.py:226** (LOW, Feature Completion)
   - `# 90128 restore Link Grammar 5.4.4 'UNKNOWN-WORD: XXX+;' option`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L224)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/language-learning/src/grammar_learner/write_files.py#L226)
 
 - [ ] **language-learning/src/grammar_tester/artificialparser.py:15** (LOW, Testing)
   - `Parser stub for random and sequential parsers`
@@ -7621,7 +7373,7 @@ A section for emergent TODOs.
 - **Core Utilities**: 19 items
 - **MOSES Representation/Scoring**: 287 items
 - **Memory System**: 108 items
-- **Other**: 868 items
+- **Other**: 806 items
 - **Persistence Subsystem**: 144 items
 - **Task System**: 4 items
 - **Testing Framework**: 40 items
@@ -7629,8 +7381,8 @@ A section for emergent TODOs.
 ### By Category
 - **Distributed Systems**: 3 items
 - **Documentation**: 24 items
-- **Error Handling**: 70 items
-- **Feature Completion**: 1488 items
+- **Error Handling**: 65 items
+- **Feature Completion**: 1431 items
 - **Pattern Matching**: 35 items
 - **Performance**: 26 items
 - **Testing**: 223 items
@@ -7640,7 +7392,7 @@ A section for emergent TODOs.
 - **CRITICAL**: 6 items
 - **HIGH**: 30 items
 - **MEDIUM**: 166 items
-- **LOW**: 1685 items
+- **LOW**: 1623 items
 
 ---
 
@@ -7682,4 +7434,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-10-13 09:14:36 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-10-14 15:06:36 UTC*
