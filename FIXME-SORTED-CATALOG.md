@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-This document provides a comprehensive categorization of all **390 FIXME instances** found in the OpenCog Unified repository, sorted by implementation difficulty to guide development priorities and resource allocation.
+This document provides a comprehensive categorization of all **605 FIXME instances** found in the OpenCog Unified repository, sorted by implementation difficulty to guide development priorities and resource allocation.
 
 ### Summary Statistics
 
 | Difficulty Level | Count | Percentage | Estimated Total Effort |
 |-----------------|-------|------------|------------------------|
-| **VERY_HARD** | 25 | 6.4% | 6-18 months |
-| **HARD** | 30 | 7.7% | 2-8 months |  
-| **MEDIUM** | 310 | 79.5% | 3-12 months |
-| **EASY** | 25 | 6.4% | 1-4 weeks |
+| **VERY_HARD** | 32 | 5.3% | 6-18 months |
+| **HARD** | 55 | 9.1% | 2-8 months |  
+| **MEDIUM** | 479 | 79.2% | 3-12 months |
+| **EASY** | 39 | 6.4% | 1-4 weeks |
 
-**Total files affected**: 227
+**Total files affected**: 288
 
 ---
 
@@ -34,7 +34,7 @@ Quick fixes suitable for new contributors or as warm-up tasks.
 ---
 
 
-## 🚨 Very Hard Priority (25 items)
+## 🚨 Very Hard Priority (32 items)
 
 ### Atomspace Component (9 items)
 
@@ -273,7 +273,7 @@ StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);
 </details>
 
 
-### Components Component (13 items)
+### Components Component (18 items)
 
 
 **1.** `components/integration/opencog/opencog/eva/chatbot-eva/model-query.scm:51`
@@ -423,7 +423,28 @@ StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);
 </details>
 
 
-**8.** `components/integration/opencog/opencog/nlp/scm/oc/relex-utils.scm:176`
+**8.** `components/integration/opencog/opencog/nlp/sureal/SuRealSCM.cc:171`
+
+**Issue:** XXX perhaps it's better to write a eval_q in SchemeEval to convert
+
+**Category:** Distributed Systems/Research  
+**Effort:** 2-6 months  
+**Reasoning:** Requires distributed systems expertise or research-level work
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// get all the nodes to be treated as variable in the Pattern Matcher
+// XXX perhaps it's better to write a eval_q in SchemeEval to convert
+//     a scm list to HandleSeq, so can just use the scheme utilities?
+UnorderedHandleSet allNodes;
+```
+</details>
+
+
+**9.** `components/integration/opencog/opencog/nlp/scm/oc/relex-utils.scm:176`
 
 **Issue:** FIXME: this is a dumb way to get other type
 
@@ -444,7 +465,7 @@ StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);
 </details>
 
 
-**9.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rule-tools.scm:211`
+**10.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rule-tools.scm:211`
 
 **Issue:** XXX FIXME: really, if a or b are vars, then they are WordInstanceNodes.
 
@@ -465,7 +486,49 @@ StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);
 </details>
 
 
-**10.** `components/language/learn/learn-lang-diary/utils/ortho-compute.scm:57`
+**11.** `components/integration/opencog/opencog/nlp/chatbot-old/wordnet-import/wni.c:340`
+
+**Issue:** XXX ?? is there some reason these are not "DefinedLinguisticConceptNode" ??
+
+**Category:** Distributed Systems/Research  
+**Effort:** 2-6 months  
+**Reasoning:** Requires distributed systems expertise or research-level work
+
+<details>
+<summary>View Code Context</summary>
+
+```
+#endif
+
+// XXX ?? is there some reason these are not "DefinedLinguisticConceptNode" ??
+// I'd think they should be, right ... ? Is this a bug ??
+printf("scm\n");
+```
+</details>
+
+
+**12.** `components/integration/opencog/opencog/nlp/chatbot-old/question/WordRelQuery.cc:361`
+
+**Issue:** XXX this needs to be replaced in the end, for now its just a cheesy
+
+**Category:** Distributed Systems/Research  
+**Effort:** 2-6 months  
+**Reasoning:** Requires distributed systems expertise or research-level work
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// And now for a cheesy hack to report the solution
+// XXX this needs to be replaced in the end, for now its just a cheesy
+// hack to pass data back to scheme.
+Handle hq = atom_space->addNode(ANCHOR_NODE, "# QUERY SOLUTION");
+```
+</details>
+
+
+**13.** `components/language/learn/learn-lang-diary/utils/ortho-compute.scm:57`
 
 **Issue:** XXX todo store mean-rms on any-node.
 
@@ -486,7 +549,7 @@ StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);
 </details>
 
 
-**11.** `components/language/learn/scm/gram-class/goe-similarity.scm:57`
+**14.** `components/language/learn/scm/gram-class/goe-similarity.scm:57`
 
 **Issue:** XXX todo store mean-rms on any-node.
 
@@ -507,7 +570,7 @@ StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);
 </details>
 
 
-**12.** `components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc:229`
+**15.** `components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc:229`
 
 **Issue:** XXX FIXME. This should be part of the LgDictNode but since
 
@@ -528,7 +591,7 @@ StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);
 </details>
 
 
-**13.** `components/learning/moses/moses/moses/scoring/bscores.cc:930`
+**16.** `components/learning/moses/moses/moses/scoring/bscores.cc:930`
 
 **Issue:** /XXX this should probably be removed! TODO FIXME
 
@@ -549,7 +612,49 @@ cluster_bscore::cluster_bscore(const ITable& itable)
 </details>
 
 
-### Moses Component (1 items)
+**17.** `components/learning/moses/moses/moses/moses/mpi_moses.cc:420`
+
+**Issue:** XXX is mp.best_score thread safe !???? since another thread might be updating this as we
+
+**Category:** Distributed Systems/Research  
+**Effort:** 2-6 months  
+**Reasoning:** Requires distributed systems expertise or research-level work
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// If we are here, then we are the root node.  The root will act
+// as a dispatcher to all of the worker nodes.
+// XXX is mp.best_score thread safe !???? since another thread might be updating this as we
+// come around ...
+
+```
+</details>
+
+
+**18.** `components/learning/moses/moses/comboreduct/combo/iostream_combo.cc:130`
+
+**Issue:** //* $Nxxx are ann_nodes and $Ixxx are ann_inputs
+
+**Category:** Distributed Systems/Research  
+**Effort:** 2-6 months  
+**Reasoning:** Requires distributed systems expertise or research-level work
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//*
+//* ANN strings must begin with $N or $I
+//* $Nxxx are ann_nodes and $Ixxx are ann_inputs
+//
+bool ann_str_to_vertex(const std::string& str, vertex& v)
+```
+</details>
+
+
+### Moses Component (3 items)
 
 
 **1.** `moses/moses/moses/scoring/bscores.cc:930`
@@ -573,13 +678,97 @@ cluster_bscore::cluster_bscore(const ITable& itable)
 </details>
 
 
+**2.** `moses/moses/moses/moses/mpi_moses.cc:417`
 
-## ⚡ Hard Priority (30 items)
+**Issue:** XXX is mp.best_score thread safe !???? since another thread might be updating this as we
 
-### Atomspace Component (6 items)
+**Category:** Distributed Systems/Research  
+**Effort:** 2-6 months  
+**Reasoning:** Requires distributed systems expertise or research-level work
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// If we are here, then we are the root node.  The root will act
+// as a dispatcher to all of the worker nodes.
+// XXX is mp.best_score thread safe !???? since another thread might be updating this as we
+// come around ...
+
+```
+</details>
 
 
-**1.** `atomspace/opencog/query/PatternMatchEngine.cc:2047`
+**3.** `moses/moses/comboreduct/combo/iostream_combo.cc:130`
+
+**Issue:** //* $Nxxx are ann_nodes and $Ixxx are ann_inputs
+
+**Category:** Distributed Systems/Research  
+**Effort:** 2-6 months  
+**Reasoning:** Requires distributed systems expertise or research-level work
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//*
+//* ANN strings must begin with $N or $I
+//* $Nxxx are ann_nodes and $Ixxx are ann_inputs
+//
+bool ann_str_to_vertex(const std::string& str, vertex& v)
+```
+</details>
+
+
+
+## ⚡ Hard Priority (55 items)
+
+### Atomspace Component (10 items)
+
+
+**1.** `atomspace/opencog/query/TermMatchMixin.cc:197`
+
+**Issue:** XXX The assert below -- if we hit this, then we have nested
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if (ptm->isQuoted()) return true;
+
+// XXX The assert below -- if we hit this, then we have nested
+// scoped links. The correct fix would be to push these onto a
+// stack, and then alter scope_match() to walk the stack,
+```
+</details>
+
+
+**2.** `atomspace/opencog/query/PatternMatchEngine.cc:1116`
+
+**Issue:** XXX The current implementation is a brute-force search, and is highly
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// "sparse".)
+//
+// XXX The current implementation is a brute-force search, and is highly
+// inefficient for truly sparse searches. A (vastly) superior search
+// woudld be to obtain the connected components in the search set, and
+```
+</details>
+
+
+**3.** `atomspace/opencog/query/PatternMatchEngine.cc:2047`
 
 **Issue:** /XXX FIXME: Right now, this code handles graphs that have only one
 
@@ -600,7 +789,7 @@ cluster_bscore::cluster_bscore(const ITable& itable)
 </details>
 
 
-**2.** `atomspace/opencog/query/PatternMatchEngine.cc:2739`
+**4.** `atomspace/opencog/query/PatternMatchEngine.cc:2739`
 
 **Issue:** * XXX TODO -- if the algo is working correctly, then all
 
@@ -621,7 +810,7 @@ cluster_bscore::cluster_bscore(const ITable& itable)
 </details>
 
 
-**3.** `atomspace/opencog/atomspace/AtomSpace.cc:283`
+**5.** `atomspace/opencog/atomspace/AtomSpace.cc:283`
 
 **Issue:** XXX FIXME -- The recursive design of the depth() routine below makes
 
@@ -642,7 +831,7 @@ cluster_bscore::cluster_bscore(const ITable& itable)
 </details>
 
 
-**4.** `atomspace/opencog/atomspace/Transient.cc:43`
+**6.** `atomspace/opencog/atomspace/Transient.cc:43`
 
 **Issue:** /XXX FIXME. Performance has not been recently measuredthere
 
@@ -663,7 +852,7 @@ cluster_bscore::cluster_bscore(const ITable& itable)
 </details>
 
 
-**5.** `atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc:59`
+**7.** `atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc:59`
 
 **Issue:** /XXX TODO: We could have a non-blocking version of this atom. We
 
@@ -684,7 +873,49 @@ cluster_bscore::cluster_bscore(const ITable& itable)
 </details>
 
 
-**6.** `atomspace/opencog/atoms/base/Valuation.cc:50`
+**8.** `atomspace/opencog/atoms/pattern/PatternJit.cc:47`
+
+**Issue:** as well.  XXX Except that this is wrong, if any of the
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Now is the time to look up the definitions!
+// We loop here, so that all recursive definitions are expanded
+// as well.  XXX Except that this is wrong, if any of the
+// definitions are actually recursive. That is, this will be
+// an infinite loop if a definition is self-referencing; so
+```
+</details>
+
+
+**9.** `atomspace/opencog/atoms/execution/EvaluationLink.cc:824`
+
+**Issue:** XXX Is there a more efficient way to do this copy?
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+{
+// Copy all but the first.
+// XXX Is there a more efficient way to do this copy?
+size_t sz = sna.size();
+for (size_t i=1; i<sz; i++) args.push_back(sna[i]);
+```
+</details>
+
+
+**10.** `atomspace/opencog/atoms/base/Valuation.cc:50`
 
 **Issue:** XXX TODO -- C++ smart pointers are not atomicwe really
 
@@ -701,6 +932,30 @@ void Valuation::setValue(const ValuePtr& v)
 // XXX TODO -- C++ smart pointers are not atomic; we really
 // need to use a lock here, to avoid thread-races.
 _value = v;
+```
+</details>
+
+
+### Atomspace-Storage Component (1 items)
+
+
+**1.** `atomspace-storage/opencog/persist/sexcom/Commands.cc:164`
+
+**Issue:** XXX this should be nuked, and replaced by appropriate kind of proxy.
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// (cog-execute-cache! (GetLink ...) (Predicate "key") ...)
+// This is complicated, and subject to change...
+// XXX this should be nuked, and replaced by appropriate kind of proxy.
+// FIXME read above comment.
+std::string Commands::cog_execute_cache(const std::string& cmd)
 ```
 </details>
 
@@ -729,7 +984,7 @@ snp->store_atom(atom);
 </details>
 
 
-### Components Component (16 items)
+### Components Component (27 items)
 
 
 **1.** `components/integration/opencog/opencog/openpsi/rule.scm:211`
@@ -774,7 +1029,49 @@ snp->store_atom(atom);
 </details>
 
 
-**3.** `components/integration/opencog/opencog/nlp/sureal/SuRealCache.h:38`
+**3.** `components/integration/opencog/opencog/nlp/wsd/MihalceaEdge.cc:248`
+
+**Issue:** cache (if it exists). XXX This appears to be a loosing strategy,
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+#ifdef USE_LOCAL_CACHE
+// Get the similarity between the two word senses out of the
+// cache (if it exists). XXX This appears to be a loosing strategy,
+// See the README file for details.  The core problem is that the
+// cache is using the atomspace in a very inefficient way. XXX
+```
+</details>
+
+
+**4.** `components/integration/opencog/opencog/nlp/wsd/MihalceaEdge.cc:250`
+
+**Issue:** cache is using the atomspace in a very inefficient way. XXX
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// cache (if it exists). XXX This appears to be a loosing strategy,
+// See the README file for details.  The core problem is that the
+// cache is using the atomspace in a very inefficient way. XXX
+SimpleTruthValue stv(0.5,0.5);
+stv = sense_cache.similarity(first_word_sense, second_word_sense_h);
+```
+</details>
+
+
+**5.** `components/integration/opencog/opencog/nlp/sureal/SuRealCache.h:38`
 
 **Issue:** * XXX THIS IS A BROKEN DESIGN! -- FIXME! (The fix is easy) The cache
 
@@ -795,7 +1092,7 @@ snp->store_atom(atom);
 </details>
 
 
-**4.** `components/integration/opencog/opencog/nlp/sureal/SuRealCache.h:43`
+**6.** `components/integration/opencog/opencog/nlp/sureal/SuRealCache.h:43`
 
 **Issue:** * FIXME by getting rid of this class!!!
 
@@ -816,7 +1113,7 @@ snp->store_atom(atom);
 </details>
 
 
-**5.** `components/language/learn/scm/utils/utilities.scm:377`
+**7.** `components/language/learn/scm/utils/utilities.scm:377`
 
 **Issue:** FIXME: use a thread-safe test-n-set instead.
 
@@ -837,7 +1134,7 @@ snp->store_atom(atom);
 </details>
 
 
-**6.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:592`
+**8.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:592`
 
 **Issue:** XXX TODO once make-merge-majority is done, this can be reimplemented
 
@@ -858,7 +1155,7 @@ snp->store_atom(atom);
 </details>
 
 
-**7.** `components/language/learn/attic/run-ull-2019/SchemeEval.cc:93`
+**9.** `components/language/learn/attic/run-ull-2019/SchemeEval.cc:93`
 
 **Issue:** XXX FIXME This lock is not needed, because in guile-2.2,
 
@@ -879,7 +1176,7 @@ snp->store_atom(atom);
 </details>
 
 
-**8.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc:268`
+**10.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc:268`
 
 **Issue:** XXX FIXME ... using an std::map would be more efficient.
 
@@ -900,7 +1197,7 @@ outgoing.erase(std::unique(outgoing.begin(),
 </details>
 
 
-**9.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksDAG.cc:240`
+**11.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksDAG.cc:240`
 
 **Issue:** XXX TODO: we should probably cache the results, instead of
 
@@ -921,7 +1218,7 @@ std::map<uint64_t, Handle>& order)
 </details>
 
 
-**10.** `components/learning/moses/moses/moses/metapopulation/metapopulation.h:195`
+**12.** `components/learning/moses/moses/moses/metapopulation/metapopulation.h:195`
 
 **Issue:** /minor though in terms of performance gain. FIXME.
 
@@ -942,7 +1239,28 @@ void merge_candidates(scored_combo_tree_set& candidates);
 </details>
 
 
-**11.** `components/learning/moses/moses/moses/scoring/scoring_base.cc:108`
+**13.** `components/learning/moses/moses/moses/metapopulation/merging.cc:579`
+
+**Issue:** XXX this lock probably doesn't have to be the same one
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Make this routine thread-safe.
+// XXX this lock probably doesn't have to be the same one
+// that merge uses.  I think.
+std::lock_guard<std::mutex> lock(_merge_mutex);
+```
+</details>
+
+
+**14.** `components/learning/moses/moses/moses/scoring/scoring_base.cc:108`
 
 **Issue:** XXX FIXME complexity_t should be a double not an int ...
 
@@ -963,7 +1281,7 @@ return (complexity_t) floor (cpxy / norm + 0.5);
 </details>
 
 
-**12.** `components/learning/moses/moses/moses/moses/neighborhood_sampling.h:249`
+**15.** `components/learning/moses/moses/moses/moses/neighborhood_sampling.h:249`
 
 **Issue:** * XXX TODO: the current algo could be speeded up a fair bit, cutting
 
@@ -984,7 +1302,7 @@ return (complexity_t) floor (cpxy / norm + 0.5);
 </details>
 
 
-**13.** `components/learning/moses/moses/moses/moses/neighborhood_sampling.h:494`
+**16.** `components/learning/moses/moses/moses/moses/neighborhood_sampling.h:494`
 
 **Issue:** * XXX/TODO: the performance of this thing can be strongly improved
 
@@ -1005,7 +1323,154 @@ return (complexity_t) floor (cpxy / norm + 0.5);
 </details>
 
 
-**14.** `components/learning/moses/moses/comboreduct/table/table.h:98`
+**17.** `components/learning/moses/moses/moses/moses/complexity.cc:37`
+
+**Issue:** if we did decide to count the operators.  (XXX But why  not count
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// and, in that case, the complexity is "almost" a linear function
+// of the number of arguments -- well, at least, its sub-quadratic,
+// if we did decide to count the operators.  (XXX But why  not count
+// the operators?  For ENF (elegant normal form) there should be even
+// fewer operators than either CNF or DNF, so counting operators
+```
+</details>
+
+
+**18.** `components/learning/moses/moses/moses/moses/complexity.cc:42`
+
+**Issue:** XXX What is the complexity of contin expressions?
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// doesn't seem wrong to me ...)
+//
+// XXX What is the complexity of contin expressions?
+// Expressions containining greater_than_zero, impulse, cond?  I'm
+// somwhat confused about how thigs are being measured.   Note that
+```
+</details>
+
+
+**19.** `components/learning/moses/moses/moses/representation/build_knobs.cc:312`
+
+**Issue:** /XXX There's a deep problem here: this probing and complexity measuring
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// knob will be discarded.
+///
+/// XXX There's a deep problem here: this probing and complexity measuring
+/// can be rather incredibly costly, especially when the exemplars start
+/// getting large.  So the real question is: is the performance cost of
+```
+</details>
+
+
+**20.** `components/learning/moses/moses/moses/representation/build_knobs.cc:343`
+
+**Issue:** /_exemplar simpler (??? XXX ??? huh?)
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// there is a strange thing with kb.complexity_bound()
+/// because apparently when it is 0 it actually makes
+/// _exemplar simpler (??? XXX ??? huh?)
+
+// We halt complexity searches underneath contins, since anything
+```
+</details>
+
+
+**21.** `components/learning/moses/moses/moses/representation/knobs.h:123`
+
+**Issue:** /turned to.   XXX This method is never called by anyone, at this
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+/// Expected complexity based on whatever the knob is currently
+/// turned to.   XXX This method is never called by anyone, at this
+/// time ...
+virtual complexity_t complexity_bound() const = 0;
+```
+</details>
+
+
+**22.** `components/learning/moses/moses/feature-selection/algo/simple.cc:43`
+
+**Issue:** XXX: fsc(all_features) is skipped because that algorithm is
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Nothing happened, return all features by default
+
+// XXX: fsc(all_features) is skipped because that algorithm is
+// used in combination with contin MI in
+// feature_selectionUTest.cxxtest and contin MI does not
+```
+</details>
+
+
+**23.** `components/learning/moses/moses/feature-selection/algo/simple.cc:55`
+
+**Issue:** XXX: fsc(all_features) is skipped because that algorithm is
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+fs_params.exp_distrib,
+fs_params.threshold);
+// XXX: fsc(all_features) is skipped because that algorithm is
+// used in combination with contin MI in
+// feature_selectionUTest.cxxtest and contin MI does not support
+```
+</details>
+
+
+**24.** `components/learning/moses/moses/comboreduct/table/table.h:98`
 
 **Issue:** XXX FIXME TODO: change the implementation, per the above note.
 
@@ -1026,7 +1491,7 @@ typedef std::vector<builtin> builtin_seq;
 </details>
 
 
-**15.** `components/learning/moses/moses/comboreduct/table/table.h:1075`
+**25.** `components/learning/moses/moses/comboreduct/table/table.h:1075`
 
 **Issue:** XXX TODO to implement enum support, cut-n-paste from CTable
 
@@ -1047,7 +1512,7 @@ type_node otype = ot.get_type();
 </details>
 
 
-**16.** `components/learning/moses/moses/comboreduct/table/table.h:1287`
+**26.** `components/learning/moses/moses/comboreduct/table/table.h:1287`
 
 **Issue:** XXX TODO remove this print, for better performance.
 
@@ -1068,7 +1533,28 @@ logger().debug() <<"Contin MI for feat=" << idx << " ic=" << ic;
 </details>
 
 
-### Moses Component (7 items)
+**27.** `components/learning/moses/moses/comboreduct/reduct/logical_reduction.cc:115`
+
+**Issue:** Arghh .. XXX should use reduct_effort==3 for the complexe rule.
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+downwards(reduce_ors(), id::boolean_type));
+
+// Arghh .. XXX should use reduct_effort==3 for the complexe rule.
+int reduct_effort = 2;
+
+```
+</details>
+
+
+### Moses Component (16 items)
 
 
 **1.** `moses/moses/moses/metapopulation/metapopulation.h:195`
@@ -1092,7 +1578,28 @@ void merge_candidates(scored_combo_tree_set& candidates);
 </details>
 
 
-**2.** `moses/moses/moses/scoring/scoring_base.cc:142`
+**2.** `moses/moses/moses/metapopulation/merging.cc:579`
+
+**Issue:** XXX this lock probably doesn't have to be the same one
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Make this routine thread-safe.
+// XXX this lock probably doesn't have to be the same one
+// that merge uses.  I think.
+std::lock_guard<std::mutex> lock(_merge_mutex);
+```
+</details>
+
+
+**3.** `moses/moses/moses/scoring/scoring_base.cc:142`
 
 **Issue:** XXX FIXME complexity_t should be a double not an int ...
 
@@ -1113,7 +1620,7 @@ return (complexity_t) floor (cpxy / norm + 0.5);
 </details>
 
 
-**3.** `moses/moses/moses/moses/neighborhood_sampling.h:249`
+**4.** `moses/moses/moses/moses/neighborhood_sampling.h:249`
 
 **Issue:** * XXX TODO: the current algo could be speeded up a fair bit, cutting
 
@@ -1134,7 +1641,7 @@ return (complexity_t) floor (cpxy / norm + 0.5);
 </details>
 
 
-**4.** `moses/moses/moses/moses/neighborhood_sampling.h:477`
+**5.** `moses/moses/moses/moses/neighborhood_sampling.h:477`
 
 **Issue:** * XXX/TODO: the performance of this thing can be strongly improved
 
@@ -1155,7 +1662,154 @@ return (complexity_t) floor (cpxy / norm + 0.5);
 </details>
 
 
-**5.** `moses/moses/comboreduct/table/table.h:99`
+**6.** `moses/moses/moses/moses/complexity.cc:37`
+
+**Issue:** if we did decide to count the operators.  (XXX But why  not count
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// and, in that case, the complexity is "almost" a linear function
+// of the number of arguments -- well, at least, its sub-quadratic,
+// if we did decide to count the operators.  (XXX But why  not count
+// the operators?  For ENF (elegant normal form) there should be even
+// fewer operators than either CNF or DNF, so counting operators
+```
+</details>
+
+
+**7.** `moses/moses/moses/moses/complexity.cc:42`
+
+**Issue:** XXX What is the complexity of contin expressions?
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// doesn't seem wrong to me ...)
+//
+// XXX What is the complexity of contin expressions?
+// Expressions containining greater_than_zero, impulse, cond?  I'm
+// somwhat confused about how thigs are being measured.   Note that
+```
+</details>
+
+
+**8.** `moses/moses/moses/representation/build_knobs.cc:312`
+
+**Issue:** /XXX There's a deep problem here: this probing and complexity measuring
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// knob will be discarded.
+///
+/// XXX There's a deep problem here: this probing and complexity measuring
+/// can be rather incredibly costly, especially when the exemplars start
+/// getting large.  So the real question is: is the performance cost of
+```
+</details>
+
+
+**9.** `moses/moses/moses/representation/build_knobs.cc:343`
+
+**Issue:** /_exemplar simpler (??? XXX ??? huh?)
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// there is a strange thing with kb.complexity_bound()
+/// because apparently when it is 0 it actually makes
+/// _exemplar simpler (??? XXX ??? huh?)
+
+// We halt complexity searches underneath contins, since anything
+```
+</details>
+
+
+**10.** `moses/moses/moses/representation/knobs.h:123`
+
+**Issue:** /turned to.   XXX This method is never called by anyone, at this
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+/// Expected complexity based on whatever the knob is currently
+/// turned to.   XXX This method is never called by anyone, at this
+/// time ...
+virtual complexity_t complexity_bound() const = 0;
+```
+</details>
+
+
+**11.** `moses/moses/feature-selection/algo/simple.cc:43`
+
+**Issue:** XXX: fsc(all_features) is skipped because that algorithm is
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Nothing happened, return all features by default
+
+// XXX: fsc(all_features) is skipped because that algorithm is
+// used in combination with contin MI in
+// feature_selectionUTest.cxxtest and contin MI does not
+```
+</details>
+
+
+**12.** `moses/moses/feature-selection/algo/simple.cc:55`
+
+**Issue:** XXX: fsc(all_features) is skipped because that algorithm is
+
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+fs_params.exp_distrib,
+fs_params.threshold);
+// XXX: fsc(all_features) is skipped because that algorithm is
+// used in combination with contin MI in
+// feature_selectionUTest.cxxtest and contin MI does not support
+```
+</details>
+
+
+**13.** `moses/moses/comboreduct/table/table.h:99`
 
 **Issue:** XXX FIXME TODO: change the implementation, per the above note.
 
@@ -1176,7 +1830,7 @@ typedef std::vector<builtin> builtin_seq;
 </details>
 
 
-**6.** `moses/moses/comboreduct/table/table.h:1076`
+**14.** `moses/moses/comboreduct/table/table.h:1076`
 
 **Issue:** XXX TODO to implement enum support, cut-n-paste from CTable
 
@@ -1197,7 +1851,7 @@ type_node otype = ot.get_type();
 </details>
 
 
-**7.** `moses/moses/comboreduct/table/table.h:1288`
+**15.** `moses/moses/comboreduct/table/table.h:1288`
 
 **Issue:** XXX TODO remove this print, for better performance.
 
@@ -1218,10 +1872,31 @@ logger().debug() <<"Contin MI for feat=" << idx << " ic=" << ic;
 </details>
 
 
+**16.** `moses/moses/comboreduct/reduct/logical_reduction.cc:115`
 
-## 📋 Medium Priority (310 items)
+**Issue:** Arghh .. XXX should use reduct_effort==3 for the complexe rule.
 
-### Atomspace Component (64 items)
+**Category:** Performance/Threading/Complex Algorithm  
+**Effort:** 2-8 weeks  
+**Reasoning:** Requires deep technical expertise and careful implementation
+
+<details>
+<summary>View Code Context</summary>
+
+```
+downwards(reduce_ors(), id::boolean_type));
+
+// Arghh .. XXX should use reduct_effort==3 for the complexe rule.
+int reduct_effort = 2;
+
+```
+</details>
+
+
+
+## 📋 Medium Priority (479 items)
+
+### Atomspace Component (97 items)
 
 
 **1.** `atomspace/examples/pattern-matcher/deduction-engine.scm:9`
@@ -1245,7 +1920,91 @@ logger().debug() <<"Contin MI for feat=" << idx << " ic=" << ic;
 </details>
 
 
-**2.** `atomspace/opencog/guile/SchemeSmobAtom.cc:84`
+**2.** `atomspace/opencog/guile/SchemeModule.cc:60`
+
+**Issue:** XXX we should also allow opt-args to be a list of handles
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+Handle FunctionWrap::as_wrapper_h_h(Handle h)
+{
+// XXX we should also allow opt-args to be a list of handles
+const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
+AtomSpace* as = asp.get();
+```
+</details>
+
+
+**3.** `atomspace/opencog/guile/SchemeModule.cc:68`
+
+**Issue:** XXX we should also allow opt-args to be a list of handles
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+Handle FunctionWrap::as_wrapper_h_hz(Handle h, size_t sz)
+{
+// XXX we should also allow opt-args to be a list of handles
+const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
+AtomSpace* as = asp.get();
+```
+</details>
+
+
+**4.** `atomspace/opencog/guile/SchemeModule.cc:76`
+
+**Issue:** XXX we should also allow opt-args to be a list of handles
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+TruthValuePtr FunctionWrap::as_wrapper_p_h(Handle h)
+{
+// XXX we should also allow opt-args to be a list of handles
+const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
+AtomSpace* as = asp.get();
+```
+</details>
+
+
+**5.** `atomspace/opencog/guile/SchemeModule.cc:84`
+
+**Issue:** XXX we should also allow opt-args to be a list of handles
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+ValuePtr FunctionWrap::as_wrapper_v_h(Handle h)
+{
+// XXX we should also allow opt-args to be a list of handles
+const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
+AtomSpace* as = asp.get();
+```
+</details>
+
+
+**6.** `atomspace/opencog/guile/SchemeSmobAtom.cc:84`
 
 **Issue:** XXX FIXME. Work around the despicable, horrible guile UTF8 handling.
 
@@ -1266,7 +2025,7 @@ logger().debug() <<"Contin MI for feat=" << idx << " ic=" << ic;
 </details>
 
 
-**3.** `atomspace/opencog/ocaml/CamlWrap.cc:57`
+**7.** `atomspace/opencog/ocaml/CamlWrap.cc:57`
 
 **Issue:** XXX FIXME
 
@@ -1287,7 +2046,7 @@ opstbl.hash = custom_hash_default;
 </details>
 
 
-**4.** `atomspace/opencog/ocaml/CamlWrap.cc:206`
+**8.** `atomspace/opencog/ocaml/CamlWrap.cc:206`
 
 **Issue:** XXX FIXME
 
@@ -1308,7 +2067,7 @@ return vp->to_short_string();
 </details>
 
 
-**5.** `atomspace/opencog/query/InitiateSearchMixin.cc:169`
+**9.** `atomspace/opencog/query/InitiateSearchMixin.cc:169`
 
 **Issue:** XXX TODO We could start inside an evaluatable, but it would
 
@@ -1329,7 +2088,7 @@ if (ptm->hasEvaluatable() and not ptm->isIdentical())
 </details>
 
 
-**6.** `atomspace/opencog/query/InitiateSearchMixin.cc:268`
+**10.** `atomspace/opencog/query/InitiateSearchMixin.cc:268`
 
 **Issue:** So we are good to go. XXX FIXME -- we could try again, to find
 
@@ -1350,7 +2109,28 @@ if (0 < _start_choices.size()) break;
 </details>
 
 
-**7.** `atomspace/opencog/query/InitiateSearchMixin.cc:730`
+**11.** `atomspace/opencog/query/InitiateSearchMixin.cc:368`
+
+**Issue:** XXX ?? Why incoming set ???
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if (_starter_term->getHandle()->is_link())
+{
+// XXX ?? Why incoming set ???
+ch.search_set = get_incoming_set(best_start,
+_starter_term->getHandle()->get_type());
+```
+</details>
+
+
+**12.** `atomspace/opencog/query/InitiateSearchMixin.cc:730`
 
 **Issue:** no unit test triggers this, but its not clear why. XXX FIXME??
 
@@ -1371,7 +2151,7 @@ PatternTermPtr InitiateSearchMixin::term_of_handle(const Handle& h,
 </details>
 
 
-**8.** `atomspace/opencog/query/NextSearchMixin.cc:167`
+**13.** `atomspace/opencog/query/NextSearchMixin.cc:167`
 
 **Issue:** XXX TODO ... Rather than counting the number of variables, we
 
@@ -1392,7 +2172,7 @@ PatternTermPtr InitiateSearchMixin::term_of_handle(const Handle& h,
 </details>
 
 
-**9.** `atomspace/opencog/query/SatisfyMixin.cc:583`
+**14.** `atomspace/opencog/query/SatisfyMixin.cc:583`
 
 **Issue:** XXX FIXME terrible hack.
 
@@ -1413,7 +2193,7 @@ dynamic_cast<TermMatchMixin*>(this);
 </details>
 
 
-**10.** `atomspace/opencog/query/PatternMatchEngine.h:189`
+**15.** `atomspace/opencog/query/PatternMatchEngine.h:189`
 
 **Issue:** with it. XXX Needs to move to the Mixin class... XXX FIXME.
 
@@ -1434,7 +2214,7 @@ bool next_untried_present(const PatternTermPtr&,
 </details>
 
 
-**11.** `atomspace/opencog/query/TermMatchMixin.cc:551`
+**16.** `atomspace/opencog/query/TermMatchMixin.cc:551`
 
 **Issue:** XXX TODO as discussed on the mailing list, we should perhaps first
 
@@ -1455,7 +2235,28 @@ bool next_untried_present(const PatternTermPtr&,
 </details>
 
 
-**12.** `atomspace/opencog/query/TermMatchMixin.cc:710`
+**17.** `atomspace/opencog/query/TermMatchMixin.cc:702`
+
+**Issue:** XXX ... This might be buggyI'm confused. Deep in the bowels
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// must be present" is implemented by PresentLink.
+//
+// XXX ... This might be buggy; I'm confused. Deep in the bowels
+// of the pattern matcher, we make an explicit promise to explore
+// all possible choices.  Here, we are making no such promise;
+```
+</details>
+
+
+**18.** `atomspace/opencog/query/TermMatchMixin.cc:710`
 
 **Issue:** XXX FIXME: worse: this cannot possibly be right when
 
@@ -1476,7 +2277,7 @@ for (const Handle& h : oset)
 </details>
 
 
-**13.** `atomspace/opencog/query/RewriteMixin.cc:118`
+**19.** `atomspace/opencog/query/RewriteMixin.cc:118`
 
 **Issue:** See issue #950 and pull req #962. XXX FIXME later.
 
@@ -1497,7 +2298,7 @@ for (const Handle& h : oset)
 </details>
 
 
-**14.** `atomspace/opencog/query/RewriteMixin.cc:164`
+**20.** `atomspace/opencog/query/RewriteMixin.cc:164`
 
 **Issue:** /XXX FIXME now I see how it can be done. The groupings should
 
@@ -1518,7 +2319,7 @@ for (const Handle& h : oset)
 </details>
 
 
-**15.** `atomspace/opencog/query/PatternMatchEngine.cc:284`
+**21.** `atomspace/opencog/query/PatternMatchEngine.cc:284`
 
 **Issue:** /XXX FIXME: this is currently a weak stop-gap measure to handle
 
@@ -1539,7 +2340,91 @@ for (const Handle& h : oset)
 </details>
 
 
-**16.** `atomspace/opencog/query/PatternMatchEngine.cc:1159`
+**22.** `atomspace/opencog/query/PatternMatchEngine.cc:335`
+
+**Issue:** XXX This is almost surely wrong... if there are two
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+<< ", choose_next=" << _choose_next;})
+
+// XXX This is almost surely wrong... if there are two
+// nested choice links, then this will hog the steps,
+// and the deeper choice will fail.
+```
+</details>
+
+
+**23.** `atomspace/opencog/query/PatternMatchEngine.cc:805`
+
+**Issue:** XXX should we be clearing ... or popping this flag?
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+POPSTK(_perm_breakout_stack, _perm_breakout);
+
+// XXX should we be clearing ... or popping this flag?
+_perm_go_around = false;
+
+```
+</details>
+
+
+**24.** `atomspace/opencog/query/PatternMatchEngine.cc:956`
+
+**Issue:** XXX why are we not doing any checks to see if the
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+else
+{
+// XXX why are we not doing any checks to see if the
+// grounding meets the variable constraints?
+glob_pos_stack.push({glob, {ip, jg}});
+```
+</details>
+
+
+**25.** `atomspace/opencog/query/PatternMatchEngine.cc:1005`
+
+**Issue:** XXX Huh ???
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Just in case, if the upper bound is zero...
+// XXX Huh ???
+if (not _variables->is_upper_bound(ohp, 1))
+{
+```
+</details>
+
+
+**26.** `atomspace/opencog/query/PatternMatchEngine.cc:1159`
 
 **Issue:** XXX TODO The logic here should be updated to resemble that
 
@@ -1560,7 +2445,28 @@ for (const Handle& h : oset)
 </details>
 
 
-**17.** `atomspace/opencog/query/PatternMatchEngine.cc:1533`
+**27.** `atomspace/opencog/query/PatternMatchEngine.cc:1355`
+
+**Issue:** I think this is correct. But it's untested! XXX verify!
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+else if (pto->hasChoice())
+{
+// I think this is correct. But it's untested! XXX verify!
+_choose_next = true;
+if (-1 ==  ig) ig++;
+```
+</details>
+
+
+**28.** `atomspace/opencog/query/PatternMatchEngine.cc:1533`
 
 **Issue:** XXX FIXME - this is not very elegant. We should probably
 
@@ -1581,7 +2487,28 @@ for (const Handle& h : oset)
 </details>
 
 
-**18.** `atomspace/opencog/query/PatternMatchEngine.cc:1980`
+**29.** `atomspace/opencog/query/PatternMatchEngine.cc:1628`
+
+**Issue:** XXX I'm not convinced this is right, if there are mixtures
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Check if the pattern has globs in it.
+// XXX I'm not convinced this is right, if there are mixtures
+// of unordered and globby links in different places...
+if (parent->hasAnyGlobbyVar())
+```
+</details>
+
+
+**30.** `atomspace/opencog/query/PatternMatchEngine.cc:1980`
 
 **Issue:** XXX FIXME: Issue #3016 - Unification with unordered AndLinks
 
@@ -1602,7 +2529,7 @@ for (const Handle& h : oset)
 </details>
 
 
-**19.** `atomspace/opencog/query/PatternMatchEngine.cc:2063`
+**31.** `atomspace/opencog/query/PatternMatchEngine.cc:2063`
 
 **Issue:** XXX TODO FIXME. The ptm needs to be decomposed into connected
 
@@ -1623,7 +2550,28 @@ logmsg("Explore sparse: Start exploration");
 </details>
 
 
-**20.** `atomspace/opencog/query/PatternMatchEngine.cc:2221`
+**32.** `atomspace/opencog/query/PatternMatchEngine.cc:2173`
+
+**Issue:** XXX This `need_choice_push` thing is probably wrongit probably
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+logmsg("Begin choice branchpoint iteration loop");
+do {
+// XXX This `need_choice_push` thing is probably wrong; it probably
+// should resemble the perm_push() used for unordered links.
+// However, currently, no test case trips this up. so .. OK.
+```
+</details>
+
+
+**33.** `atomspace/opencog/query/PatternMatchEngine.cc:2221`
 
 **Issue:** /XXX FIXME -- do the above.
 
@@ -1644,7 +2592,7 @@ bool PatternMatchEngine::next_untried_present(const PatternTermPtr& parent,
 </details>
 
 
-**21.** `atomspace/opencog/query/PatternMatchEngine.cc:2440`
+**34.** `atomspace/opencog/query/PatternMatchEngine.cc:2440`
 
 **Issue:** XXX TODO make sure that all variables in the clause have
 
@@ -1665,7 +2613,7 @@ logmsg("Term inside evaluatable, move up to it's top:",
 </details>
 
 
-**22.** `atomspace/opencog/cython/PythonEval.cc:1427`
+**35.** `atomspace/opencog/cython/PythonEval.cc:1427`
 
 **Issue:** XXX FIXME this does a lot of wasteful string copying.
 
@@ -1686,7 +2634,28 @@ size_t nl = expr.find_first_of("\n\r");
 </details>
 
 
-**23.** `atomspace/opencog/cython/PyIncludeWrapper.h:6`
+**36.** `atomspace/opencog/cython/PyIncludeWrapper.h:4`
+
+**Issue:** XXX Cython currently conflicts with standard C library definitions.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+#ifdef HAVE_CYTHON
+
+// XXX Cython currently conflicts with standard C library definitions.
+// The push/pop below should hush it, for now. (needed for cython
+// 0.15.1 and maybe other versions)  FIXME someday...
+```
+</details>
+
+
+**37.** `atomspace/opencog/cython/PyIncludeWrapper.h:6`
 
 **Issue:** 0.15.1 and maybe other versions)  FIXME someday...
 
@@ -1707,7 +2676,7 @@ size_t nl = expr.find_first_of("\n\r");
 </details>
 
 
-**24.** `atomspace/opencog/atomspace/AtomSpace.cc:272`
+**38.** `atomspace/opencog/atomspace/AtomSpace.cc:272`
 
 **Issue:** Fixme maybe later someday, if/when this is needed.
 
@@ -1728,7 +2697,7 @@ throw RuntimeException(TRACE_INFO,
 </details>
 
 
-**25.** `atomspace/opencog/atomspace/AtomTable.cc:782`
+**39.** `atomspace/opencog/atomspace/AtomTable.cc:782`
 
 **Issue:** atom in the parent. What??? XXX NOT TRUE FIXME
 
@@ -1749,7 +2718,28 @@ for (const AtomSpacePtr& base : _environ)
 </details>
 
 
-**26.** `atomspace/opencog/haskell/AtomSpace_CWrapper.h:112`
+**40.** `atomspace/opencog/atomspace/TypeIndex.h:54`
+
+**Issue:** #if HAVE_FOLLY_XXX
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//    one failure is enough to say "not recommended." I don't need
+//    to be chasing obscure bugs.
+#if HAVE_FOLLY_XXX
+typedef folly::F14ValueSet<Handle> AtomSet;
+#else
+```
+</details>
+
+
+**41.** `atomspace/opencog/haskell/AtomSpace_CWrapper.h:112`
 
 **Issue:** * XXX FIXME no one should be using Handle's to work with atoms,
 
@@ -1770,7 +2760,7 @@ for (const AtomSpacePtr& base : _environ)
 </details>
 
 
-**27.** `atomspace/opencog/haskell/PatternMatcher_CWrapper.h:8`
+**42.** `atomspace/opencog/haskell/PatternMatcher_CWrapper.h:8`
 
 **Issue:** * XXX FIXME: atoms must never be accessed by UUID except by the
 
@@ -1791,7 +2781,49 @@ for (const AtomSpacePtr& base : _environ)
 </details>
 
 
-**28.** `atomspace/opencog/guile/modules/ExecSCM.cc:73`
+**43.** `atomspace/opencog/guile/modules/TypeUtilsSCM.cc:58`
+
+**Issue:** XXX HACK ALERT This needs to be static, in order for python to
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// ========================================================
+
+// XXX HACK ALERT This needs to be static, in order for python to
+// work correctly.  The problem is that python keeps creating and
+// destroying this class, but it expects things to stick around.
+```
+</details>
+
+
+**44.** `atomspace/opencog/guile/modules/ExecSCM.cc:70`
+
+**Issue:** XXX HACK ALERT This needs to be static, in order for python to
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// ========================================================
+
+// XXX HACK ALERT This needs to be static, in order for python to
+// work correctly.  The problem is that python keeps creating and
+// destroying this class, but it expects things to stick around.
+```
+</details>
+
+
+**45.** `atomspace/opencog/guile/modules/ExecSCM.cc:73`
 
 **Issue:** XXX FIXME: can we fix cython to not do this, already?
 
@@ -1812,7 +2844,7 @@ for (const AtomSpacePtr& base : _environ)
 </details>
 
 
-**29.** `atomspace/opencog/cython/opencog/load-file.cc:86`
+**46.** `atomspace/opencog/cython/opencog/load-file.cc:86`
 
 **Issue:** XXX This is fairly tacky/broken, and needs a better fix.
 
@@ -1833,7 +2865,7 @@ search_paths.push_back(p);
 </details>
 
 
-**30.** `atomspace/opencog/atoms/flow/FormulaPredicateLink.cc:41`
+**47.** `atomspace/opencog/atoms/flow/FormulaPredicateLink.cc:41`
 
 **Issue:** /XXX FIXME - in the future, some user is going to want to include
 
@@ -1854,7 +2886,49 @@ search_paths.push_back(p);
 </details>
 
 
-**31.** `atomspace/opencog/atoms/flow/StringOfLink.cc:120`
+**48.** `atomspace/opencog/atoms/flow/FormulaPredicateLink.cc:72`
+
+**Issue:** XXX This is buggy. If the formula contains a VariableList,
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// and a CountTruthVaue, if there are three.
+//
+// XXX This is buggy. If the formula contains a VariableList,
+// and any of the two sub-parts of it use only some of the variables,
+// but not all of them, then the reduction will go wrong. The solution
+```
+</details>
+
+
+**49.** `atomspace/opencog/atoms/flow/StringOfLink.cc:118`
+
+**Issue:** a stream or something dynamic ... XXX ???
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Recase to an explicit (concrete) StringValue,
+// to handle the case where the from-value is
+// a stream or something dynamic ... XXX ???
+// Or maybe we want to cast *to* something dynamic?
+// XXX FIXME this is unclear, under-specified and
+```
+</details>
+
+
+**50.** `atomspace/opencog/atoms/flow/StringOfLink.cc:120`
 
 **Issue:** XXX FIXME this is unclear, under-specified and
 
@@ -1875,7 +2949,28 @@ return createStringValue(
 </details>
 
 
-**32.** `atomspace/opencog/atoms/flow/FilterLink.cc:615`
+**51.** `atomspace/opencog/atoms/flow/FilterLink.cc:278`
+
+**Issue:** /XXX Is executing the ground a good design choice? I dunno. It's the
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+///
+/// Any executable terms in `ground` are executed prior to comparison.
+/// XXX Is executing the ground a good design choice? I dunno. It's the
+/// historical choice. So it goes.
+///
+```
+</details>
+
+
+**52.** `atomspace/opencog/atoms/flow/FilterLink.cc:615`
 
 **Issue:** XXX TODO FIXME -- if vex is a stream, e.g. a QueueValue,
 
@@ -1896,7 +2991,28 @@ vex = _outgoing[1]->execute(as, silent);
 </details>
 
 
-**33.** `atomspace/opencog/atoms/flow/ValueOfLink.cc:84`
+**53.** `atomspace/opencog/atoms/flow/TruthValueOfLink.cc:30`
+
+**Issue:** XXX why isn't this centralized somewhere?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+using namespace opencog;
+
+// XXX why isn't this centralized somewhere?
+// Why am I writing this again, from scratch?
+static TruthValuePtr get_the_tv(AtomSpace* as, const Handle& h, bool silent)
+```
+</details>
+
+
+**54.** `atomspace/opencog/atoms/flow/ValueOfLink.cc:84`
 
 **Issue:** XXX TODO FIXME ... if either of these are executable, then
 
@@ -1917,7 +3033,7 @@ vex = _outgoing[1]->execute(as, silent);
 </details>
 
 
-**34.** `atomspace/opencog/atoms/join/JoinLink.cc:550`
+**55.** `atomspace/opencog/atoms/join/JoinLink.cc:550`
 
 **Issue:** /i.e. to use UnorderedHandleSet instead of HandleSet. XXX FIXME.
 
@@ -1938,7 +3054,7 @@ Traverse& trav) const
 </details>
 
 
-**35.** `atomspace/opencog/atoms/join/JoinLink.cc:721`
+**56.** `atomspace/opencog/atoms/join/JoinLink.cc:721`
 
 **Issue:** XXX FIXME this is really dumb, using a queue and then
 
@@ -1959,7 +3075,28 @@ QueueValuePtr qvp(createQueueValue());
 </details>
 
 
-**36.** `atomspace/opencog/atoms/pattern/PatternLink.cc:146`
+**57.** `atomspace/opencog/atoms/parallel/PureExecLink.cc:64`
+
+**Issue:** XXX Note that this leaks, if the execute throws.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// No AtomSpace provided. Use a temporary.
+// XXX Note that this leaks, if the execute throws.
+// The transient code will catch the leak, and complain.
+// (There's no actual memleak; just a complaint about counting.)
+```
+</details>
+
+
+**58.** `atomspace/opencog/atoms/pattern/PatternLink.cc:146`
 
 **Issue:** XXX FIXME, more correct would be to loop over
 
@@ -1980,7 +3117,7 @@ QueueValuePtr qvp(createQueueValue());
 </details>
 
 
-**37.** `atomspace/opencog/atoms/pattern/PatternLink.cc:165`
+**59.** `atomspace/opencog/atoms/pattern/PatternLink.cc:165`
 
 **Issue:** XXX FIXME, this handles `absents`, `always` and `grouping`
 
@@ -2001,7 +3138,28 @@ HandleSeq clseq;
 </details>
 
 
-**38.** `atomspace/opencog/atoms/pattern/PatternLink.cc:721`
+**60.** `atomspace/opencog/atoms/pattern/PatternLink.cc:407`
+
+**Issue:** /XXX No one, except unit tests, use these deprecated API's. These
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// since no variable type restricions are possible, and no optionals,
+/// either.  This is used only for backwards-compatibility API's.
+/// XXX No one, except unit tests, use these deprecated API's. These
+/// old unit tests should be removed.
+PatternLink::PatternLink(const HandleSet& vars,
+```
+</details>
+
+
+**61.** `atomspace/opencog/atoms/pattern/PatternLink.cc:721`
 
 **Issue:** BUG - XXX FIXME. This extracts PresentLink's from the
 
@@ -2022,7 +3180,7 @@ OR_LINK, SEQUENTIAL_OR_LINK, NOT_LINK});
 </details>
 
 
-**39.** `atomspace/opencog/atoms/pattern/PatternLink.cc:980`
+**62.** `atomspace/opencog/atoms/pattern/PatternLink.cc:980`
 
 **Issue:** XXX Shouldn't we be adding this to _fixed, too?
 
@@ -2043,7 +3201,7 @@ return true;
 </details>
 
 
-**40.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1003`
+**63.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1003`
 
 **Issue:** XXX Shouldn't we be adding this to _fixed, too?
 
@@ -2064,7 +3222,7 @@ return true;
 </details>
 
 
-**41.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1039`
+**64.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1039`
 
 **Issue:** /XXX FIXME: the code here assumes that the situation is indeed
 
@@ -2085,7 +3243,28 @@ return true;
 </details>
 
 
-**42.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1255`
+**65.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1044`
+
+**Issue:** /XXX The situation here is also very dangerous: without any
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// contents of the left and right side of the IdenticalLink... ugh.
+///
+/// XXX The situation here is also very dangerous: without any
+/// type constraints, we risk searching atoms created in the scratch
+/// atomspace, resulting in infinite recursion and a blown stack.
+```
+</details>
+
+
+**66.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1255`
 
 **Issue:** XXX FIXME -- this is wrong. What we really want is to
 
@@ -2106,7 +3285,28 @@ ptm->addEvaluatable();
 </details>
 
 
-**43.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1465`
+**67.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1259`
+
+**Issue:** identify the bridging clauses... XXX Wait, maybe this
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// components... not everything here does so. The
+// get_bridged_components() should be modified to
+// identify the bridging clauses... XXX Wait, maybe this
+// does not need to be fixed, since the component splitter
+// will not split these. So we're good, I think ...
+```
+</details>
+
+
+**68.** `atomspace/opencog/atoms/pattern/PatternLink.cc:1465`
 
 **Issue:** XXX FIXME: debug_log() above is more readable than the below.
 
@@ -2127,7 +3327,7 @@ std::string PatternLink::to_long_string(const std::string& indent) const
 </details>
 
 
-**44.** `atomspace/opencog/atoms/pattern/BindLink.cc:79`
+**69.** `atomspace/opencog/atoms/pattern/BindLink.cc:79`
 
 **Issue:** Shoot. XXX FIXME. Most of the unit tests require that the atom
 
@@ -2148,7 +3348,7 @@ std::string PatternLink::to_long_string(const std::string& indent) const
 </details>
 
 
-**45.** `atomspace/opencog/atoms/pattern/GetLink.cc:62`
+**70.** `atomspace/opencog/atoms/pattern/GetLink.cc:62`
 
 **Issue:** Shoot. XXX FIXME. Most of the unit tests require that the atom
 
@@ -2169,7 +3369,28 @@ std::string PatternLink::to_long_string(const std::string& indent) const
 </details>
 
 
-**46.** `atomspace/opencog/atoms/truthvalue/CountTruthValue.h:73`
+**71.** `atomspace/opencog/atoms/truthvalue/CountTruthValue.cc:168`
+
+**Issue:** XXX This is not the correct way to handle confidence ...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+oc->get_mean() * oc->get_count()) / cnt;
+
+// XXX This is not the correct way to handle confidence ...
+// The confidence will typically hold the log probability,
+// where the probability is the normalized count.  Thus
+```
+</details>
+
+
+**72.** `atomspace/opencog/atoms/truthvalue/CountTruthValue.h:73`
 
 **Issue:** XXX FIXME Are all of these really needed?
 
@@ -2190,7 +3411,49 @@ static TruthValuePtr createTV(strength_t s, confidence_t f, count_t c)
 </details>
 
 
-**47.** `atomspace/opencog/atoms/execution/Instantiator.cc:196`
+**73.** `atomspace/opencog/atoms/execution/ExecutionOutputLink.cc:155`
+
+**Issue:** XXX should be be unwrapping SetLinks here?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if (not h->is_executable())
+{
+// XXX should be be unwrapping SetLinks here?
+exargs.push_back(h);
+continue;
+```
+</details>
+
+
+**74.** `atomspace/opencog/atoms/execution/ExecutionOutputLink.cc:227`
+
+**Issue:** pipeline. (XXX Is there a better way of doing this?)
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// the case where GetLink returns a set of multiple results;
+// we want to emulate that set passing through the processing
+// pipeline. (XXX Is there a better way of doing this?)
+// If there is more than one SetLink, then this won't work,
+// and we need to make a Cartesian product of them, instead.
+```
+</details>
+
+
+**75.** `atomspace/opencog/atoms/execution/Instantiator.cc:196`
 
 **Issue:** /cleanly separated from each other. (XXX FIXME, these need to be
 
@@ -2211,7 +3474,91 @@ static TruthValuePtr createTV(strength_t s, confidence_t f, count_t c)
 </details>
 
 
-**48.** `atomspace/opencog/atoms/execution/Instantiator.cc:598`
+**76.** `atomspace/opencog/atoms/execution/Instantiator.cc:488`
+
+**Issue:** walk_tree cannot grok.  XXX This is all very kind-of hacky.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// to the instantiated tree). However, special-case the handling
+// of expr being a FunctionLink - this can return a Value, which
+// walk_tree cannot grok.  XXX This is all very kind-of hacky.
+// A proper solution would convert walk_tree to return ValuePtr's
+// instead of Handles. However, it seems this would require lots
+```
+</details>
+
+
+**77.** `atomspace/opencog/atoms/execution/Instantiator.cc:542`
+
+**Issue:** XXX Don't we need to plug in the vars, first!?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if (nameserver().isA(t, EXECUTION_OUTPUT_LINK))
+{
+// XXX Don't we need to plug in the vars, first!?
+// Maybe this is just not tested?
+Handle eolh = reduce_exout(expr, ist);
+```
+</details>
+
+
+**78.** `atomspace/opencog/atoms/execution/Instantiator.cc:553`
+
+**Issue:** XXX Don't we need to plug in the vars, first!?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if (nameserver().isA(t, PARALLEL_LINK))
+{
+// XXX Don't we need to plug in the vars, first!?
+// Yes, we do, but this is just not tested, right now.
+return ValueCast(EvaluationLink::do_evaluate(_as, expr, silent));
+```
+</details>
+
+
+**79.** `atomspace/opencog/atoms/execution/Instantiator.cc:561`
+
+**Issue:** XXX Don't we need to plug in the vars, first!?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if (nameserver().isA(t, DEFINED_PREDICATE_NODE))
+{
+// XXX Don't we need to plug in the vars, first!?
+// Maybe this is just not tested?
+return ValueCast(EvaluationLink::do_evaluate(_as, expr, silent));
+```
+</details>
+
+
+**80.** `atomspace/opencog/atoms/execution/Instantiator.cc:598`
 
 **Issue:** XXX FIXME Can we defer the addition to the atomspace to an even
 
@@ -2232,7 +3579,7 @@ if (_as) return _as->add_atom(grounded);
 </details>
 
 
-**49.** `atomspace/opencog/atoms/execution/Instantiator.cc:642`
+**81.** `atomspace/opencog/atoms/execution/Instantiator.cc:642`
 
 **Issue:** XXX FIXME, we need to get rid of this call entirely, and just
 
@@ -2253,7 +3600,7 @@ return expr->execute(_as, silent);
 </details>
 
 
-**50.** `atomspace/opencog/atoms/core/Variables.cc:109`
+**82.** `atomspace/opencog/atoms/core/Variables.cc:109`
 
 **Issue:** XXX FIXME URE calls us with broken handle!!
 
@@ -2274,7 +3621,7 @@ if (nullptr == hdecls) return;
 </details>
 
 
-**51.** `atomspace/opencog/atoms/core/Variables.cc:284`
+**83.** `atomspace/opencog/atoms/core/Variables.cc:284`
 
 **Issue:** * XXX TODO this does not currently handle type equations, as outlined
 
@@ -2295,7 +3642,7 @@ if (nullptr == hdecls) return;
 </details>
 
 
-**52.** `atomspace/opencog/atoms/core/Variables.cc:437`
+**84.** `atomspace/opencog/atoms/core/Variables.cc:437`
 
 **Issue:** XXX TODO type-checking could be lazyif the function is not
 
@@ -2316,7 +3663,7 @@ varseq.size(), args.size());
 </details>
 
 
-**53.** `atomspace/opencog/atoms/core/RandomChoice.cc:110`
+**85.** `atomspace/opencog/atoms/core/RandomChoice.cc:110`
 
 **Issue:** XXX FIXME - fix this so it can also choose a single value
 
@@ -2337,7 +3684,7 @@ ValuePtr RandomChoiceLink::execute(AtomSpace* as, bool silent)
 </details>
 
 
-**54.** `atomspace/opencog/atoms/core/RandomChoice.cc:179`
+**86.** `atomspace/opencog/atoms/core/RandomChoice.cc:179`
 
 **Issue:** XXX FIXME, also allow a FloatValue!!
 
@@ -2358,7 +3705,7 @@ h = HandleCast(h->execute(as, silent));
 </details>
 
 
-**55.** `atomspace/opencog/atoms/core/TypeNode.h:90`
+**87.** `atomspace/opencog/atoms/core/TypeNode.h:90`
 
 **Issue:** XXX TODO ... Some types are defined. In this case,
 
@@ -2379,7 +3726,7 @@ Type t = nameserver().getType(str);
 </details>
 
 
-**56.** `atomspace/opencog/atoms/core/TypeUtils.cc:421`
+**88.** `atomspace/opencog/atoms/core/TypeUtils.cc:421`
 
 **Issue:** returned. XXX FIXME -- surely this should be a throw, instead!!!
 
@@ -2400,7 +3747,7 @@ return Handle::UNDEFINED;
 </details>
 
 
-**57.** `atomspace/opencog/atoms/core/TypeChoice.cc:254`
+**89.** `atomspace/opencog/atoms/core/TypeChoice.cc:254`
 
 **Issue:** For now, just avoid throwing an exception. XXX FIXME.
 
@@ -2421,7 +3768,28 @@ return;
 </details>
 
 
-**58.** `atomspace/opencog/atoms/core/FindUtils.h:146`
+**90.** `atomspace/opencog/atoms/core/PrenexLink.cc:325`
+
+**Issue:** Last one wins.  XXX This is actually ambiguous, if there
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+vm[pare->first] = body;
+
+// Last one wins.  XXX This is actually ambiguous, if there
+// were multiple variables, and they weren's all LambdaLinks,
+// for example. In that case, things are borked, and there's
+```
+</details>
+
+
+**91.** `atomspace/opencog/atoms/core/FindUtils.h:146`
 
 **Issue:** * XXX FIXME: what if it appears quoted in one place, and unquoted
 
@@ -2442,7 +3810,7 @@ return;
 </details>
 
 
-**59.** `atomspace/opencog/atoms/core/Checkers.cc:42`
+**92.** `atomspace/opencog/atoms/core/Checkers.cc:42`
 
 **Issue:** XXX FIXME Much of the onfusion below is due to a bug: if the
 
@@ -2463,7 +3831,7 @@ return;
 </details>
 
 
-**60.** `atomspace/opencog/atoms/core/Checkers.cc:93`
+**93.** `atomspace/opencog/atoms/core/Checkers.cc:93`
 
 **Issue:** XXX FIXME ... Perhaps IntersectionLink, UnionLink will
 
@@ -2484,7 +3852,7 @@ if (h->is_type(SIMILARITY_LINK) or
 </details>
 
 
-**61.** `atomspace/opencog/atoms/reduct/AccumulateLink.cc:71`
+**94.** `atomspace/opencog/atoms/reduct/AccumulateLink.cc:71`
 
 **Issue:** XXX TODO -- we could also handle vectors of strings, by
 
@@ -2505,7 +3873,7 @@ if (h->is_type(SIMILARITY_LINK) or
 </details>
 
 
-**62.** `atomspace/tests/query/seq-absence.scm:70`
+**95.** `atomspace/tests/query/seq-absence.scm:70`
 
 **Issue:** ;and right now, I'm not gonna fix it... XXX FIXME.
 
@@ -2526,7 +3894,7 @@ if (h->is_type(SIMILARITY_LINK) or
 </details>
 
 
-**63.** `atomspace/tests/query/seq-absence.scm:86`
+**96.** `atomspace/tests/query/seq-absence.scm:86`
 
 **Issue:** ;XXX FIXME ... this and the above need to get done right.
 
@@ -2547,7 +3915,7 @@ if (h->is_type(SIMILARITY_LINK) or
 </details>
 
 
-**64.** `atomspace/tests/atoms/execution/defined-schema.scm:239`
+**97.** `atomspace/tests/atoms/execution/defined-schema.scm:239`
 
 **Issue:** XXX FIXME, this does not quite work as one might naively expect,
 
@@ -2568,7 +3936,7 @@ if (h->is_type(SIMILARITY_LINK) or
 </details>
 
 
-### Atomspace-Restful Component (2 items)
+### Atomspace-Restful Component (4 items)
 
 
 **1.** `atomspace-restful/opencog/python/web/api/apiatomcollection.py:10`
@@ -2592,7 +3960,28 @@ from opencog.bank import AttentionBank
 </details>
 
 
-**2.** `atomspace-restful/opencog/python/web/api/utilities.py:17`
+**2.** `atomspace-restful/opencog/python/web/api/apiatomcollection.py:377`
+
+**Issue:** xxxxxxxxxxxx here add atoms
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if dot_format not in ['True', 'true', '1']:
+atom_list = AtomListResponse(atoms)
+# xxxxxxxxxxxx here add atoms
+json_data = {'result': atom_list.format()}
+
+```
+</details>
+
+
+**3.** `atomspace-restful/opencog/python/web/api/utilities.py:17`
 
 **Issue:** FIXME: Should this moved to the atomspace repo and be part
 
@@ -2609,6 +3998,27 @@ from opencog.bank import AttentionBank
 # FIXME: Should this moved to the atomspace repo and be part
 # of opencog.atomspace module?
 def get_atoms_by_name(z_type, name, atomspace):
+```
+</details>
+
+
+**4.** `atomspace-restful/tests/python/restapi/test_restapi.py:449`
+
+**Issue:** XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+# Test an arbitrary Scheme command to ensure the binding is working
+# properly
+# XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.
+pass
+def test_n_dot_export(self):
 ```
 </details>
 
@@ -2658,7 +4068,7 @@ convertForFrames(HandleCast(getAtomSpace()));
 </details>
 
 
-### Atomspace-Storage Component (9 items)
+### Atomspace-Storage Component (14 items)
 
 
 **1.** `atomspace-storage/opencog/persist/sexcom/Commands.cc:165`
@@ -2682,7 +4092,112 @@ std::string Commands::cog_execute_cache(const std::string& cmd)
 </details>
 
 
-**2.** `atomspace-storage/opencog/persist/proxy/DynamicDataProxy.cc:77`
+**2.** `atomspace-storage/opencog/persist/sexcom/Commands.cc:181`
+
+**Issue:** XXX Hacky .. store time in float value...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+meta = _base_space->add_atom(meta);
+
+// XXX Hacky .. store time in float value...
+_base_space->set_value(query, meta, createFloatValue((double)time(0)));
+if (std::string::npos != cmd.find("#t", pos))
+```
+</details>
+
+
+**3.** `atomspace-storage/opencog/persist/sexcom/Commands.cc:200`
+
+**Issue:** XXX is this correct???
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+_base_space->set_value(query, key, rslt);
+
+// XXX is this correct???
+// _proxy->store_value(query, key);
+
+```
+</details>
+
+
+**4.** `atomspace-storage/opencog/persist/sexcom/Commands.cc:334`
+
+**Issue:** ?????? XXX Is this right? Needs review
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+Handle h = createNode(t, std::move(nam));
+
+// ?????? XXX Is this right? Needs review
+if (_proxy and _proxy->have_getAtom)
+{
+```
+</details>
+
+
+**5.** `atomspace-storage/opencog/persist/sexcom/Commands.cc:372`
+
+**Issue:** ?????? XXX Is this right? Needs review
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+Handle h = createLink(std::move(oset), t);
+
+// ?????? XXX Is this right? Needs review
+if (_proxy and _proxy->have_getAtom)
+{
+```
+</details>
+
+
+**6.** `atomspace-storage/opencog/persist/sexcom/Commands.cc:545`
+
+**Issue:** Return the new value. XXX Why? This just wastes CPU?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+_proxy->update_value(atom, key, vp);
+
+// Return the new value. XXX Why? This just wastes CPU?
+// ValuePtr vp = atom->getValue(key);
+// return Sexpr::encode_value(vp);
+```
+</details>
+
+
+**7.** `atomspace-storage/opencog/persist/proxy/DynamicDataProxy.cc:77`
 
 **Issue:** XXX TODO ... create this in some temp atomspace...
 
@@ -2703,7 +4218,7 @@ HandleCast(rawvp),
 </details>
 
 
-**3.** `atomspace-storage/opencog/persist/proxy/CachingProxy.cc:48`
+**8.** `atomspace-storage/opencog/persist/proxy/CachingProxy.cc:48`
 
 **Issue:** XXX TODO Add support for expiration times, limited AtomSpace
 
@@ -2724,7 +4239,7 @@ void CachingProxy::open(void)
 </details>
 
 
-**4.** `atomspace-storage/opencog/persist/proxy/ProxyNode.cc:141`
+**9.** `atomspace-storage/opencog/persist/proxy/ProxyNode.cc:141`
 
 **Issue:** XXX FIXME. Using this ProxyParametersLink thing is a kind of
 
@@ -2745,7 +4260,7 @@ void CachingProxy::open(void)
 </details>
 
 
-**5.** `atomspace-storage/opencog/persist/proxy/WriteBufferProxy.cc:195`
+**10.** `atomspace-storage/opencog/persist/proxy/WriteBufferProxy.cc:195`
 
 **Issue:** XXX FIXME. Buffering these naively, like this, voilates the
 
@@ -2766,7 +4281,7 @@ const ValuePtr& delta)
 </details>
 
 
-**6.** `atomspace-storage/opencog/persist/proxy/ProxyNode.h:62`
+**11.** `atomspace-storage/opencog/persist/proxy/ProxyNode.h:62`
 
 **Issue:** updated at some later date. XXX FIXME.
 
@@ -2787,7 +4302,7 @@ virtual void create(void) {} // stop-gap. FIXME
 </details>
 
 
-**7.** `atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82`
+**12.** `atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82`
 
 **Issue:** * XXX FIXME This needs to be fuzzedit is very likely to crash
 
@@ -2808,7 +4323,7 @@ virtual void create(void) {} // stop-gap. FIXME
 </details>
 
 
-**8.** `atomspace-storage/opencog/persist/tlb/UuidSCM.cc:83`
+**13.** `atomspace-storage/opencog/persist/tlb/UuidSCM.cc:83`
 
 **Issue:** what the heck. I'm gonna punt. XXX FIXME.
 
@@ -2829,7 +4344,7 @@ _tlb.set_resolver(asp.get());
 </details>
 
 
-**9.** `atomspace-storage/opencog/persist/api/cython/PersistCython.cc:31`
+**14.** `atomspace-storage/opencog/persist/api/cython/PersistCython.cc:31`
 
 **Issue:** XXX FIXME: except for the error messages, most of this code is
 
@@ -2916,7 +4431,7 @@ runLoopStep();
 </details>
 
 
-### Cogutil Component (2 items)
+### Cogutil Component (3 items)
 
 
 **1.** `cogutil/opencog/util/tree.cc:101`
@@ -2961,7 +4476,28 @@ runLoopStep();
 </details>
 
 
-### Components Component (167 items)
+**3.** `cogutil/opencog/util/sigslot.h:74`
+
+**Issue:** XXX Something like this should work, but I can't get it to go.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+#if BORKEN_FOR_SOME_REASON
+// Connect member of a given object.
+// XXX Something like this should work, but I can't get it to go.
+//
+// class Bar { public:
+```
+</details>
+
+
+### Components Component (233 items)
 
 
 **1.** `components/integration/opencog/opencog/openpsi/rule.scm:294`
@@ -4202,7 +5738,28 @@ usleep(50*1000);
 </details>
 
 
-**60.** `components/integration/opencog/opencog/nlp/microplanning/main.scm:83`
+**60.** `components/integration/opencog/opencog/nlp/wsd/SenseSimilaritySQL.cc:151`
+
+**Issue:** XXX however, what we should really do is to not that we have no
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// If no data, return similarity of zero!
+// XXX however, what we should really do is to not that we have no
+// data, and maybe try to gather some.
+if (!rp.have_data)
+```
+</details>
+
+
+**61.** `components/integration/opencog/opencog/nlp/microplanning/main.scm:83`
 
 **Issue:** XXX FIXME utterance-type should be an atom, not a string!
 
@@ -4223,7 +5780,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**61.** `components/integration/opencog/opencog/nlp/chatbot/bot-api.scm:41`
+**62.** `components/integration/opencog/opencog/nlp/chatbot/bot-api.scm:41`
 
 **Issue:** ;XXX FIXME -- remove the IRC debug response below.
 
@@ -4244,7 +5801,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**62.** `components/integration/opencog/opencog/nlp/chatbot/bot-api.scm:108`
+**63.** `components/integration/opencog/opencog/nlp/chatbot/bot-api.scm:108`
 
 **Issue:** XXX FIXME This also definitely requires change after the backward
 
@@ -4265,7 +5822,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**63.** `components/integration/opencog/opencog/nlp/chatbot/chat-utils.scm:34`
+**64.** `components/integration/opencog/opencog/nlp/chatbot/chat-utils.scm:34`
 
 **Issue:** FIXME: maybe opencog's internal time octime should
 
@@ -4286,7 +5843,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**64.** `components/integration/opencog/opencog/nlp/relex2logic/relex2logic.scm:63`
+**65.** `components/integration/opencog/opencog/nlp/relex2logic/relex2logic.scm:63`
 
 **Issue:** FIXME: Presently, only a single interpretation is created for
 
@@ -4307,7 +5864,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**65.** `components/integration/opencog/opencog/nlp/relex2logic/post-processing.scm:53`
+**66.** `components/integration/opencog/opencog/nlp/relex2logic/post-processing.scm:53`
 
 **Issue:** XXX FIXME except that we can have (EvaluationLink "not" "run@1234") which
 
@@ -4328,7 +5885,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**66.** `components/integration/opencog/opencog/nlp/relex2logic/post-processing.scm:140`
+**67.** `components/integration/opencog/opencog/nlp/relex2logic/post-processing.scm:140`
 
 **Issue:** XXX FIXME should be changed to just use sha-256 -- that would make it
 
@@ -4349,7 +5906,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**67.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:516`
+**68.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:516`
 
 **Issue:** FIXME: this is bad because in SV, SVO type rules the same word is
 
@@ -4370,7 +5927,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**68.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:634`
+**69.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:634`
 
 **Issue:** ;XXX FIXME: right now, this says ImplicationScopeLink
 
@@ -4391,7 +5948,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**69.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:725`
+**70.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:725`
 
 **Issue:** XXX FIXME these two are not returned ???
 
@@ -4412,7 +5969,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**70.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:793`
+**71.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:793`
 
 **Issue:** second clause. XXX FIXME
 
@@ -4433,7 +5990,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**71.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:1652`
+**72.** `components/integration/opencog/opencog/nlp/relex2logic/rule-helpers.scm:1652`
 
 **Issue:** XXX FIXME: there is no such thing as a "TruthValueGreaterThanLink",
 
@@ -4454,7 +6011,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**72.** `components/integration/opencog/opencog/nlp/sureal/surface-realization.scm:291`
+**73.** `components/integration/opencog/opencog/nlp/sureal/surface-realization.scm:291`
 
 **Issue:** FIXME: This results in 'result' being 'Invalid handle' sometimes.
 
@@ -4475,7 +6032,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**73.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rule-tools.scm:212`
+**74.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rule-tools.scm:212`
 
 **Issue:** XXX However, to fix this, we will need to modify the varscope code to
 
@@ -4496,7 +6053,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**74.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rules.scm:394`
+**75.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rules.scm:394`
 
 **Issue:** XXX FIXME (this is same, similar problem to the other XXX above.)
 
@@ -4517,7 +6074,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**75.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rules.scm:469`
+**76.** `components/integration/opencog/opencog/nlp/chatbot-old/triples/rules.scm:469`
 
 **Issue:** XXX FIXME, rule below is just rule above, but without the prep check.
 
@@ -4538,7 +6095,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**76.** `components/integration/opencog/opencog/nlp/chatbot-old/question/FrameQuery.cc:11`
+**77.** `components/integration/opencog/opencog/nlp/chatbot-old/question/FrameQuery.cc:11`
 
 **Issue:** * XXX todo-- should have is_query look for
 
@@ -4559,7 +6116,49 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**77.** `components/integration/opencog/opencog/nlp/chatbot-old/chatbot/chat-interface.scm:242`
+**78.** `components/integration/opencog/opencog/nlp/chatbot-old/question/WordRelQuery.cc:279`
+
+**Issue:** and that's all good.  Err.. XXX bad if not a question, but whatever.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// If we got to here then we matched isa to isa or hypothetical_isa,
+// and that's all good.  Err.. XXX bad if not a question, but whatever.
+return true;
+}
+```
+</details>
+
+
+**79.** `components/integration/opencog/opencog/nlp/chatbot-old/question/WordRelQuery.cc:293`
+
+**Issue:** XXX This code is never reached !!!???
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX This code is never reached !!!???
+// This is a bit of dead code, which may need to be revived for more
+// proper relex matching ... or maybe not ...
+```
+</details>
+
+
+**80.** `components/integration/opencog/opencog/nlp/chatbot-old/chatbot/chat-interface.scm:242`
 
 **Issue:** threads listening on the scheme port.  FIXME XXX This should be fixed,
 
@@ -4580,7 +6179,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**78.** `components/integration/opencog/opencog/nlp/wsd-post/collect-stats/disjunct-list.scm:48`
+**81.** `components/integration/opencog/opencog/nlp/wsd-post/collect-stats/disjunct-list.scm:48`
 
 **Issue:** word order. XXX FIXME -- instead of doing the below, it would be
 
@@ -4601,7 +6200,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**79.** `components/integration/opencog/opencog/nlp/relex2logic/rules/passive.scm:2`
+**82.** `components/integration/opencog/opencog/nlp/relex2logic/rules/passive.scm:2`
 
 **Issue:** XXX Fix relex so that we don't have to make such string searches!
 
@@ -4621,7 +6220,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**80.** `components/integration/opencog/opencog/ghost/procedures/pln-actions.scm:140`
+**83.** `components/integration/opencog/opencog/ghost/procedures/pln-actions.scm:140`
 
 **Issue:** FIXME Why doesn't the first call of (update-inferences) work?
 
@@ -4642,7 +6241,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**81.** `components/integration/opencog/opencog/ghost/procedures/pln-reasoner.scm:195`
+**84.** `components/integration/opencog/opencog/ghost/procedures/pln-reasoner.scm:195`
 
 **Issue:** FIXME: This only works for trail-3
 
@@ -4663,7 +6262,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**82.** `components/integration/opencog/opencog/ghost/procedures/pln-trail-1.scm:7`
+**85.** `components/integration/opencog/opencog/ghost/procedures/pln-trail-1.scm:7`
 
 **Issue:** FIXME: Doesn't return anything when confidence is low, don't use for now
 
@@ -4684,7 +6283,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**83.** `components/integration/opencog/tests/openpsi/psi-implicator.scm:39`
+**86.** `components/integration/opencog/tests/openpsi/psi-implicator.scm:39`
 
 **Issue:** FIXME: Using psi-goal results in the failure of OpenPsiRulesUTest
 
@@ -4705,7 +6304,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**84.** `components/language/learn/scm/common.scm:14`
+**87.** `components/language/learn/scm/common.scm:14`
 
 **Issue:** XXX TODO FIXME All users of the three functions below need to be
 
@@ -4726,7 +6325,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**85.** `components/language/learn/learn-lang-diary/utils/disjunct-stats.scm:39`
+**88.** `components/language/learn/learn-lang-diary/utils/disjunct-stats.scm:39`
 
 **Issue:** XXX FIXME add-pair-count-api is obsoleteuse add-support-api instead.
 
@@ -4747,7 +6346,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**86.** `components/language/learn/learn-lang-diary/utils/disjunct-cross.scm:32`
+**89.** `components/language/learn/learn-lang-diary/utils/disjunct-cross.scm:32`
 
 **Issue:** XXX FIXME add-pair-count-api is obsoleteuse add-support-api instead.
 
@@ -4768,7 +6367,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**87.** `components/language/learn/learn-lang-diary/utils/word-cosines.scm:31`
+**90.** `components/language/learn/learn-lang-diary/utils/word-cosines.scm:31`
 
 **Issue:** XXX FIXME add-pair-count-api is osoleteuse add-support-api instead.
 
@@ -4789,7 +6388,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**88.** `components/language/learn/learn-lang-diary/utils/word-cosines.scm:51`
+**91.** `components/language/learn/learn-lang-diary/utils/word-cosines.scm:51`
 
 **Issue:** Should be this: XXX FIXME later
 
@@ -4810,7 +6409,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**89.** `components/language/learn/scm/parse/lg-pipe-parser.scm:17`
+**92.** `components/language/learn/scm/parse/lg-pipe-parser.scm:17`
 
 **Issue:** XXX FIXME. The next 30 lines of code are a cut-n-paste of the
 
@@ -4831,7 +6430,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**90.** `components/language/learn/scm/parse/lg-pipe-parser.scm:26`
+**93.** `components/language/learn/scm/parse/lg-pipe-parser.scm:26`
 
 **Issue:** uncertain, so for now, assume only one global. FIXME someday, if
 
@@ -4852,7 +6451,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**91.** `components/language/learn/scm/attic/summary.scm:51`
+**94.** `components/language/learn/scm/attic/summary.scm:51`
 
 **Issue:** XXX FIXME work on the singletons API so that we don't
 
@@ -4873,7 +6472,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**92.** `components/language/learn/scm/gram-class/gram-majority.scm:205`
+**95.** `components/language/learn/scm/gram-class/gram-majority.scm:205`
 
 **Issue:** XXX TODO this should be either
 
@@ -4894,7 +6493,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**93.** `components/language/learn/scm/gram-class/shape-vec.scm:583`
+**96.** `components/language/learn/scm/gram-class/shape-vec.scm:583`
 
 **Issue:** XXX FIXME: we should give the star-wild a unique name,
 
@@ -4915,7 +6514,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**94.** `components/language/learn/scm/gram-class/gram-class-api.scm:65`
+**97.** `components/language/learn/scm/gram-class/gram-class-api.scm:65`
 
 **Issue:** XXX FIXME: this won't work for some classes, which store
 
@@ -4936,7 +6535,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**95.** `components/language/learn/scm/gram-class/gram-class-api.scm:133`
+**98.** `components/language/learn/scm/gram-class/gram-class-api.scm:133`
 
 **Issue:** XXX FIXME the semantics of this thing is ugly, and should be
 
@@ -4957,7 +6556,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**96.** `components/language/learn/scm/gram-class/shape-project.scm:307`
+**99.** `components/language/learn/scm/gram-class/shape-project.scm:307`
 
 **Issue:** XXX TODO -- generic deletion should be moved to a method
 
@@ -4978,7 +6577,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**97.** `components/language/learn/scm/gram-class/shape-project.scm:369`
+**100.** `components/language/learn/scm/gram-class/shape-project.scm:369`
 
 **Issue:** FIXME but how?
 
@@ -4999,7 +6598,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**98.** `components/language/learn/scm/pair-count/word-pair-pipe.scm:38`
+**101.** `components/language/learn/scm/pair-count/word-pair-pipe.scm:38`
 
 **Issue:** uncertain, so for now, assume only one global. FIXME someday, if
 
@@ -5020,7 +6619,7 @@ ANAPHORA can be #t or #f.
 </details>
 
 
-**99.** `components/language/learn/scm/attic/mpg-parse/lg-parser.scm:72`
+**102.** `components/language/learn/scm/attic/mpg-parse/lg-parser.scm:72`
 
 **Issue:** XXX FIXME Both of these are global and stateful in LG and
 
@@ -5041,7 +6640,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**100.** `components/language/learn/scm/attic/lg-export/export-disjuncts.scm:454`
+**103.** `components/language/learn/scm/attic/lg-export/export-disjuncts.scm:454`
 
 **Issue:** anything. XXX FIXME is this really needed ??
 
@@ -5062,7 +6661,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**101.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:381`
+**104.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:381`
 
 **Issue:** XXX FIXME: The DONE-LIST should be scrubbed for short junk. That is,
 
@@ -5083,7 +6682,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**102.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:385`
+**105.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:385`
 
 **Issue:** XXX Maybe-FIXME: There's some amount of pointless recomputation of
 
@@ -5104,7 +6703,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**103.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:487`
+**106.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:487`
 
 **Issue:** handle this. XXX TODO.
 
@@ -5125,7 +6724,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**104.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:667`
+**107.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:667`
 
 **Issue:** XXX FIXME ... at the conclusion of this, we have a done list,
 
@@ -5146,7 +6745,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**105.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:680`
+**108.** `components/language/learn/scm/attic/cluster/agglo-loops.scm:680`
 
 **Issue:** XXX FIXME, should probably use
 
@@ -5167,7 +6766,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**106.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:313`
+**109.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:313`
 
 **Issue:** XXX TODO this should not be exported, not really.
 
@@ -5188,7 +6787,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**107.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:409`
+**110.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:409`
 
 **Issue:** XXX TODO this should not be exported, not really.
 
@@ -5209,7 +6808,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**108.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:494`
+**111.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:494`
 
 **Issue:** XXX TODO this should not be exported, not really.
 
@@ -5230,7 +6829,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**109.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:576`
+**112.** `components/language/learn/scm/attic/cluster/gram-pairwise.scm:576`
 
 **Issue:** that. XXX FIXME These need to be cleaned up!
 
@@ -5251,7 +6850,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**110.** `components/language/learn/scm/attic/pair-count-new/word-pair-count.scm:121`
+**113.** `components/language/learn/scm/attic/pair-count-new/word-pair-count.scm:121`
 
 **Issue:** XXX TODO: this should probably be converted to an 1xN matrix
 
@@ -5272,7 +6871,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**111.** `components/language/learn/scm/attic/pair-count/clique-pair-count.scm:22`
+**114.** `components/language/learn/scm/attic/pair-count/clique-pair-count.scm:22`
 
 **Issue:** XXX FIXME we should probably not store this way. We should probably
 
@@ -5293,7 +6892,7 @@ XXX TODO Make above configurable.
 </details>
 
 
-**112.** `components/language/learn/attic/run-ull-2019/SchemeEval.cc:1057`
+**115.** `components/language/learn/attic/run-ull-2019/SchemeEval.cc:1057`
 
 **Issue:** XXX FIXME -- idealy we should avoid catch-and-rethrow.
 
@@ -5314,7 +6913,7 @@ throw RuntimeException(TRACE_INFO, "%s", _error_msg.c_str());
 </details>
 
 
-**113.** `components/language/learn/attic/run-ull-2019/SchemeEval.cc:1180`
+**116.** `components/language/learn/attic/run-ull-2019/SchemeEval.cc:1180`
 
 **Issue:** XXX FIXME only a subset is needed.
 
@@ -5335,7 +6934,7 @@ SchemeEval sch;
 </details>
 
 
-**114.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc:239`
+**117.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc:239`
 
 **Issue:** XXX FIXME this does not smell rightoptionals should get
 
@@ -5356,7 +6955,7 @@ if (m_string == "OPTIONAL") return { optnl };
 </details>
 
 
-**115.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc:46`
+**118.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc:46`
 
 **Issue:** FIXME XXX -- Optionals are handled incorrectly here;
 
@@ -5377,7 +6976,7 @@ std::vector<LGDictExpContainer> subcontainers;
 </details>
 
 
-**116.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc:87`
+**119.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc:87`
 
 **Issue:** * XXX FIXME -- this gives incorrect results if the word has non-trivial
 
@@ -5398,7 +6997,7 @@ std::vector<LGDictExpContainer> subcontainers;
 </details>
 
 
-**117.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc:103`
+**120.** `components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc:103`
 
 **Issue:** XXX FIXME -- if dn_head is null, then we should check regexes.
 
@@ -5419,7 +7018,7 @@ HandleSeq outgoing;
 </details>
 
 
-**118.** `components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc:338`
+**121.** `components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc:338`
 
 **Issue:** XXX FIXME -- We should fish parse options out of the atomspace.
 
@@ -5440,7 +7039,7 @@ HandleSeq outgoing;
 </details>
 
 
-**119.** `components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc:920`
+**122.** `components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc:920`
 
 **Issue:** XXX TODO - maybe load links depth-order...
 
@@ -5461,7 +7060,7 @@ loadAtoms(table, "l@");
 </details>
 
 
-**120.** `components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc:944`
+**123.** `components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc:944`
 
 **Issue:** XXX FIXME. We would like to call
 
@@ -5482,7 +7081,28 @@ void MonoStorage::storeAtomSpace(const AtomSpace* table)
 </details>
 
 
-**121.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc:697`
+**124.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc:525`
+
+**Issue:** XXX this is adding to wrong atomspace!?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+ValuePtr vp = getValue("k@" + sid + fid + ":" + kid);
+// XXX this is adding to wrong atomspace!?
+if (as and vp) vp = as->add_atoms(vp);
+h->setValue(key, vp);
+```
+</details>
+
+
+**125.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc:697`
 
 **Issue:** /Note: currently broken for multi-space usage, XXX FIXME.
 
@@ -5503,7 +7123,7 @@ Handle RocksStorage::getLink(Type t, const HandleSeq& hs)
 </details>
 
 
-**122.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc:1286`
+**126.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc:1286`
 
 **Issue:** XXX FIXME. We would like to call
 
@@ -5524,7 +7144,7 @@ convertForFrames(HandleCast(getAtomSpace()));
 </details>
 
 
-**123.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksPersistSCM.cc:82`
+**127.** `components/core/atomspace-rocks/opencog/persist/rocks/RocksPersistSCM.cc:82`
 
 **Issue:** XXX FIXME -- are open and close actually needed for anything?
 
@@ -5545,7 +7165,7 @@ void RocksPersistSCM::do_open(const std::string& uri)
 </details>
 
 
-**124.** `components/core/atomspace-restful/opencog/python/web/api/apiatomcollection.py:10`
+**128.** `components/core/atomspace-restful/opencog/python/web/api/apiatomcollection.py:10`
 
 **Issue:** I can't find swagger on ubuntu .. wtf!? FIXME
 
@@ -5566,7 +7186,28 @@ from opencog.bank import AttentionBank
 </details>
 
 
-**125.** `components/core/atomspace-restful/opencog/python/web/api/utilities.py:17`
+**129.** `components/core/atomspace-restful/opencog/python/web/api/apiatomcollection.py:377`
+
+**Issue:** xxxxxxxxxxxx here add atoms
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+if dot_format not in ['True', 'true', '1']:
+atom_list = AtomListResponse(atoms)
+# xxxxxxxxxxxx here add atoms
+json_data = {'result': atom_list.format()}
+
+```
+</details>
+
+
+**130.** `components/core/atomspace-restful/opencog/python/web/api/utilities.py:17`
 
 **Issue:** FIXME: Should this moved to the atomspace repo and be part
 
@@ -5587,7 +7228,133 @@ def get_atoms_by_name(z_type, name, atomspace):
 </details>
 
 
-**126.** `components/learning/moses/examples/example-progs/ontomax.cc:36`
+**131.** `components/core/atomspace-restful/tests/python/restapi/test_restapi.py:449`
+
+**Issue:** XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+# Test an arbitrary Scheme command to ensure the binding is working
+# properly
+# XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.
+pass
+def test_n_dot_export(self):
+```
+</details>
+
+
+**132.** `components/learning/moses/examples/example-progs/trap-bit.cc:26`
+
+**Issue:** XXX under construction XXX
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+using boost::lexical_cast;
+
+// XXX under construction XXX
+
+// XXX this example is broken, and will remain so until "multivariate"
+```
+</details>
+
+
+**133.** `components/learning/moses/examples/example-progs/trap-bit.cc:28`
+
+**Issue:** XXX this example is broken, and will remain so until "multivariate"
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// XXX under construction XXX
+
+// XXX this example is broken, and will remain so until "multivariate"
+// is ported over/re-implemented. Basically, there is no structure
+// learning at this time.
+```
+</details>
+
+
+**134.** `components/learning/moses/examples/example-progs/trap-bit.cc:31`
+
+**Issue:** XXX some of the documentation below may be misleading.
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// is ported over/re-implemented. Basically, there is no structure
+// learning at this time.
+// XXX some of the documentation below may be misleading.
+//
+// Demonstration program for the "bit-trap" optimization problem.
+```
+</details>
+
+
+**135.** `components/learning/moses/examples/example-progs/trap-bit.cc:42`
+
+**Issue:** XXX which is why we need to put structure leanring back in the code XXX
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// the optimal solution cannot be found without structure learning; the
+// MOSES univariate() learner is a no-op, and so cannot solve this problem.
+// XXX which is why we need to put structure leanring back in the code XXX
+//
+// The correlation between variables is accomplished by using a
+```
+</details>
+
+
+**136.** `components/learning/moses/examples/example-progs/nmax.cc:38`
+
+**Issue:** XXX setting n=2 currently fails due to a bug, see
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// This is a generalization of the "onemax" problem, which is nmax with n=2.
+//
+// XXX setting n=2 currently fails due to a bug, see
+// https://bugs.launchpad.net/moses/+bug/908230
+//
+```
+</details>
+
+
+**137.** `components/learning/moses/examples/example-progs/ontomax.cc:36`
 
 **Issue:** XXX Someday, fix all of this!
 
@@ -5608,7 +7375,28 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**127.** `components/learning/moses/moses/moses/optimization/star-anneal.cc:42`
+**138.** `components/learning/moses/examples/example-progs/continmax.cc:46`
+
+**Issue:** XXX Currently, this doesn't really work well, or maybe at all, in
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// is how the problem becomes easy when applying calculus).
+//
+// XXX Currently, this doesn't really work well, or maybe at all, in
+// part because the contin implementation in the field set is incomplete
+// or broken or maybe both; there is a confusion between depth and arity
+```
+</details>
+
+
+**139.** `components/learning/moses/moses/moses/optimization/star-anneal.cc:42`
 
 **Issue:** XXX TODO the annealing temperature control code should be ported over
 
@@ -5629,7 +7417,301 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**128.** `components/learning/moses/moses/moses/optimization/hill-climbing.h:110`
+**140.** `components/learning/moses/moses/moses/optimization/optimization.h:82`
+
+**Issue:** XXX Why n^1.05 ??? This is going to have a significant effect
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// N = p.popsize_ratio * n^1.05
+// XXX Why n^1.05 ??? This is going to have a significant effect
+// (as compared to n^1.00) only when n is many thousands or bigger...
+unsigned pop_size(const field_set& fs) const;
+```
+</details>
+
+
+**141.** `components/learning/moses/moses/moses/optimization/optimization.h:116`
+
+**Issue:** problem size in info-theoretic bits.  (XXX Why 1.05 ???)
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Populations are sized at N = popsize_ratio*n^1.05 where n is
+// problem size in info-theoretic bits.  (XXX Why 1.05 ???)
+double pop_size_ratio;
+
+```
+</details>
+
+
+**142.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:45`
+
+**Issue:** XXX PSO parameters hardcoded just for now.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Particle Swarm parameters
+// XXX PSO parameters hardcoded just for now.
+struct ps_parameters
+{
+```
+</details>
+
+
+**143.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:82`
+
+**Issue:** XXX I have to find the best values for bit and disc.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// For continuous problems, 0.7 and 1.43 are good values.
+// XXX I have to find the best values for bit and disc.
+// Information from: M. Clerc, L’optimisation par essaim particulaire: versions
+// paramétriques et adaptatives, Hermes Science Publications, Lavoisier, Paris, 2005.
+```
+</details>
+
+
+**144.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:103`
+
+**Issue:** Use rounding off for now XXX it isn't so effective, but for now is easier
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//
+// For discrete:
+// Use rounding off for now XXX it isn't so effective, but for now is easier
+// to implement. I'll use MVPSO, JPSO or IMVPSO later.
+// In the transformation i'll use min value of 0 and 1 for max in the continuous
+```
+</details>
+
+
+**145.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:133`
+
+**Issue:** XXX If i have time, i'll put some variation here to get a better global search.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// with Artificial Intelligence IEEE-ICTAI, vol. 1, Arras, France, 27–29 October 2010,
+// 2010, pp. 87–93.
+// XXX If i have time, i'll put some variation here to get a better global search.
+double bit_min_value, bit_max_value, // [0,1] <- XXX these two aren't used yet.
+disc_min_value, disc_max_value, // [0,1] in rounding off
+```
+</details>
+
+
+**146.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:253`
+
+**Issue:** XXX Explanation
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX Explanation
+bool new_bit_value(const double& vel){
+return (randGen().randdouble() < // Sigmoid
+```
+</details>
+
+
+**147.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:281`
+
+**Issue:** XXX Explanation
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX Explanation
+disc_t new_disc_value(double& cvalue,
+const double& vel, const unsigned max_dvalue){
+```
+</details>
+
+
+**148.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:303`
+
+**Issue:** XXX Explanation
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX Explanation
+contin_t new_cont_value(const contin_t& value, const double& vel){
+// Wind dispersion enter here.
+```
+</details>
+
+
+**149.** `components/learning/moses/moses/moses/optimization/particle-swarm.h:340`
+
+**Issue:** XXX This could help PSO if we maintain the best particle.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// In fact, all of the current code uses this entry point, no one
+// bothers to supply an initial instance.
+// XXX This could help PSO if we maintain the best particle.
+void operator()(deme_t& deme,
+const iscorer_base& iscorer,
+```
+</details>
+
+
+**150.** `components/learning/moses/moses/moses/optimization/hill-climbing.h:80`
+
+**Issue:** scan is that much better than a random sampling.  XXX Or is it?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// nearest neighbor scan for such cases will eat up a huge amount of
+// RAM in the instance_set, and its not currently obvious that a full
+// scan is that much better than a random sampling.  XXX Or is it?
+//
+// XXX This parameter should probably be automatically adjusted with
+```
+</details>
+
+
+**151.** `components/learning/moses/moses/moses/optimization/hill-climbing.h:82`
+
+**Issue:** XXX This parameter should probably be automatically adjusted with
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// scan is that much better than a random sampling.  XXX Or is it?
+//
+// XXX This parameter should probably be automatically adjusted with
+// free RAM availability!?  Or something like that !?
+//
+```
+</details>
+
+
+**152.** `components/learning/moses/moses/moses/optimization/hill-climbing.h:97`
+
+**Issue:** XXX I don't understand what the below is saying.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// improved.
+//
+// XXX I don't understand what the below is saying.
+// One should probably try first to tweak pop_size_ratio to
+// control the allocation of resources. However in some cases (for
+```
+</details>
+
+
+**153.** `components/learning/moses/moses/moses/optimization/hill-climbing.h:103`
+
+**Issue:** XXX pop_size_ratio disabled in hill-climbing, since its definition
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// there is only one deme to explore and tweaking that parameter
+// can make a difference (breadth vs depth)
+// XXX pop_size_ratio disabled in hill-climbing, since its definition
+// was insane/non-sensical.  I can't figure out how it was supposed
+// to work.
+```
+</details>
+
+
+**154.** `components/learning/moses/moses/moses/optimization/hill-climbing.h:110`
 
 **Issue:** XXX TODO make sure this value is appropriately updated.
 
@@ -5650,7 +7732,91 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**129.** `components/learning/moses/moses/moses/metapopulation/ensemble.h:55`
+**155.** `components/learning/moses/moses/moses/optimization/hill-climbing.h:281`
+
+**Issue:** XXX In fact, all of the current code uses this entry point, no one
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Like above but assumes that init_inst is null (backward compatibility)
+// XXX In fact, all of the current code uses this entry point, no one
+// bothers to supply an initial instance.
+void operator()(deme_t& deme,
+```
+</details>
+
+
+**156.** `components/learning/moses/moses/moses/optimization/hill-climbing.cc:732`
+
+**Issue:** /the vector.  But this ixsn't know ... XXX experiment with this!?
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// regions of low scores, in one go.  It is possible that a faster
+/// algorithm would be to sort first, and then delete the tail-end of
+/// the vector.  But this ixsn't know ... XXX experiment with this!?
+/// ... err, but right now, trimming takes a small fraction of a second,
+/// so there is no rush to fis this.
+```
+</details>
+
+
+**157.** `components/learning/moses/moses/moses/optimization/optimization.cc:79`
+
+**Issue:** XXX Why n^1.05 ??? This is going to have a significant effect
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// N = p.popsize_ratio * n^1.05
+// XXX Why n^1.05 ??? This is going to have a significant effect
+// (as compared to n^1.00) only when n is many thousands or bigger...
+unsigned optim_parameters::pop_size(const field_set& fs) const
+```
+</details>
+
+
+**158.** `components/learning/moses/moses/moses/optimization/particle-swarm.cc:122`
+
+**Issue:** XXX What score do i use?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+current_number_of_evals += swarm_size;
+
+// XXX What score do i use?
+// I'll use best_score for now.
+bool has_improved = false;
+```
+</details>
+
+
+**159.** `components/learning/moses/moses/moses/metapopulation/ensemble.h:55`
 
 **Issue:** * XXX FIXME: right now, the ensemble is attached to the metapop, its
 
@@ -5671,7 +7837,7 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**130.** `components/learning/moses/moses/moses/metapopulation/metapopulation.h:90`
+**160.** `components/learning/moses/moses/moses/metapopulation/metapopulation.h:90`
 
 **Issue:** * XXX FIXME: right now, the ensemble is attached to the metapop, its
 
@@ -5692,7 +7858,7 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**131.** `components/learning/moses/moses/moses/metapopulation/merging.cc:261`
+**161.** `components/learning/moses/moses/moses/metapopulation/merging.cc:261`
 
 **Issue:** XXX FIXME: we should use a pointer set for scored_combo_tree_set
 
@@ -5713,7 +7879,7 @@ candidates.size());
 </details>
 
 
-**132.** `components/learning/moses/moses/moses/metapopulation/merging.cc:554`
+**162.** `components/learning/moses/moses/moses/metapopulation/merging.cc:554`
 
 **Issue:** XXX FIXME looks to me like it++ can often be collaed twice within this loop!
 
@@ -5734,7 +7900,7 @@ prev_it = it++;
 </details>
 
 
-**133.** `components/learning/moses/moses/moses/metapopulation/metapopulation.cc:222`
+**163.** `components/learning/moses/moses/moses/metapopulation/metapopulation.cc:222`
 
 **Issue:** XXX FIXME should probably not recompute every time ...
 
@@ -5755,7 +7921,49 @@ return _cscorer.get_cscore(_ensemble.get_ensemble());
 </details>
 
 
-**134.** `components/learning/moses/moses/moses/scoring/scoring_base.h:124`
+**164.** `components/learning/moses/moses/moses/metapopulation/ensemble.cc:235`
+
+**Issue:** if we are here, its the in-exact experts code.  XXX currently broken ...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+} else {
+// if we are here, its the in-exact experts code.  XXX currently broken ...
+// Any score worse than half is terrible. Half gives a weight of zero.
+// More than half gives negative weights, which wreaks things.
+```
+</details>
+
+
+**165.** `components/learning/moses/moses/moses/metapopulation/ensemble.cc:259`
+
+**Issue:** XXX the logic below is probably wrong.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+size_t bslen = _bscorer.size();
+
+// XXX the logic below is probably wrong.
+OC_ASSERT(false, "this doesn't work right now.");
+// Now, look to see where this scorer was wrong, and bump the
+```
+</details>
+
+
+**166.** `components/learning/moses/moses/moses/scoring/scoring_base.h:124`
 
 **Issue:** XXX TODO should be a std::valarray not a vector.
 
@@ -5776,7 +7984,70 @@ virtual void update_weights(const std::vector<double>&);
 </details>
 
 
-**135.** `components/learning/moses/moses/moses/scoring/discriminating_bscore.cc:486`
+**167.** `components/learning/moses/moses/moses/scoring/discriminating_bscore.cc:213`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+_full_bscore(true)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 2;
+
+```
+</details>
+
+
+**168.** `components/learning/moses/moses/moses/scoring/discriminating_bscore.cc:394`
+
+**Issue:** umm XXX I think the normalization here should be the
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// because the precision is normalized as well.  So e.g.
+// max precision for boolean problems is 1.0.  However...
+// umm XXX I think the normalization here should be the
+// best-possible activation, not the usize, right?
+//
+```
+</details>
+
+
+**169.** `components/learning/moses/moses/moses/scoring/discriminating_bscore.cc:417`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+: discriminating_bscore(ct, min_precision, max_precision, hardness)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 2;
+}
+```
+</details>
+
+
+**170.** `components/learning/moses/moses/moses/scoring/discriminating_bscore.cc:486`
 
 **Issue:** XXX TODO -- should not return the penalties as part of the bscore,
 
@@ -5797,7 +8068,49 @@ _size = ct.size() + 2;
 </details>
 
 
-**136.** `components/learning/moses/moses/moses/moses/mpi_moses.h:51`
+**171.** `components/learning/moses/moses/moses/scoring/discriminating_bscore.cc:586`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+: discriminating_bscore(ct, min_diff, max_diff, hardness)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 2;
+}
+```
+</details>
+
+
+**172.** `components/learning/moses/moses/moses/scoring/discriminating_bscore.cc:663`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+: discriminating_bscore(ct, 0.0, 1.0, 1.0e-20)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 1;
+}
+```
+</details>
+
+
+**173.** `components/learning/moses/moses/moses/moses/mpi_moses.h:51`
 
 **Issue:** this just right now. XXX TODO: do this, someday.
 
@@ -5818,7 +8131,70 @@ class moses_mpi_comm
 </details>
 
 
-**137.** `components/learning/moses/moses/moses/moses/neighborhood_sampling.h:295`
+**174.** `components/learning/moses/moses/moses/moses/local_moses.cc:56`
+
+**Issue:** XXX When would one never expand?  Wouldn't that be a bug?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Attempt to create a non-empty representation, by looping
+// over exemplars until we find one that expands.
+// XXX When would one never expand?  Wouldn't that be a bug?
+while (1) {
+scored_combo_tree_ptr_set_cit exemplar = mp.select_exemplar();
+```
+</details>
+
+
+**175.** `components/learning/moses/moses/moses/moses/partial.cc:264`
+
+**Issue:** XXX is this correct? I think we need to ask the cscorer for the total ...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+behavioral_score bs = _bscore->operator()(cand);
+
+// XXX is this correct? I think we need to ask the cscorer for the total ...
+score_t total_score = 0.0;
+for (const score_t& sc : bs)
+```
+</details>
+
+
+**176.** `components/learning/moses/moses/moses/moses/partial.cc:304`
+
+**Issue:** XXX Ineffective predicates may be due to enums that have been
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+effective(predicate, good_count, fail_count);
+
+// XXX Ineffective predicates may be due to enums that have been
+// completely accounted for ... not sure what to do about that...
+if ((0 < good_count) || (0 < fail_count))
+```
+</details>
+
+
+**177.** `components/learning/moses/moses/moses/moses/neighborhood_sampling.h:295`
 
 **Issue:** @todo: handle term algebras XXX
 
@@ -5839,7 +8215,7 @@ starting_index + fs.end_term_raw_idx(),
 </details>
 
 
-**138.** `components/learning/moses/moses/moses/moses/mpi_moses.cc:201`
+**178.** `components/learning/moses/moses/moses/moses/mpi_moses.cc:201`
 
 **Issue:** XXX TODO -- trim the deme down, before sending, by using the worst acceptable score.
 
@@ -5860,7 +8236,49 @@ void moses_mpi_comm::send_deme(const metapopulation& mp, int n_evals)
 </details>
 
 
-**139.** `components/learning/moses/moses/moses/deme/deme_expander.cc:356`
+**179.** `components/learning/moses/moses/moses/moses/mpi_moses.cc:307`
+
+**Issue:** XXX replace this with appropriate message back to root!
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+right expansion
+count */)) {
+// XXX replace this with appropriate message back to root!
+OC_ASSERT(false, "Exemplar failed to expand!\n");
+}
+```
+</details>
+
+
+**180.** `components/learning/moses/moses/moses/moses/types.h:189`
+
+**Issue:** XXX wouldn't it be better to store ints here ??
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// comes from demeID "0".
+//
+// XXX wouldn't it be better to store ints here ??
+struct demeID_t : public std::string
+{
+```
+</details>
+
+
+**181.** `components/learning/moses/moses/moses/deme/deme_expander.cc:356`
 
 **Issue:** * XXX TODO I honestly just don't see the utility of this multi-deme
 
@@ -5881,7 +8299,7 @@ void moses_mpi_comm::send_deme(const metapopulation& mp, int n_evals)
 </details>
 
 
-**140.** `components/learning/moses/moses/moses/deme/deme_expander.cc:502`
+**182.** `components/learning/moses/moses/moses/deme/deme_expander.cc:502`
 
 **Issue:** XXX FIXME this is a bug .. the user may have specified that
 
@@ -5902,7 +8320,49 @@ void moses_mpi_comm::send_deme(const metapopulation& mp, int n_evals)
 </details>
 
 
-**141.** `components/learning/moses/moses/moses/representation/representation.cc:51`
+**183.** `components/learning/moses/moses/moses/eda/local_structure.h:262`
+
+**Issue:** XXX ??? Huh? More details, please...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Now that we have created all of the dtrees, construct a
+// feasible order that respects the initial dependencies
+// XXX ??? Huh? More details, please...
+randomized_topological_sort(_initial_deps, _ordering.begin());
+}
+```
+</details>
+
+
+**184.** `components/learning/moses/moses/moses/eda/local_structure.h:271`
+
+**Issue:** themselves shouldn't change (XXX why would we want to do this ??)
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//
+// instance_set is not const so that we can reorder it - the instances
+// themselves shouldn't change (XXX why would we want to do this ??)
+//
+// For univariate(), the dtree for each field will be empty.
+```
+</details>
+
+
+**185.** `components/learning/moses/moses/moses/representation/representation.cc:51`
 
 **Issue:** XXX TODO: One might think that varying the stepsize, i.e. shrinking
 
@@ -5923,7 +8383,7 @@ void moses_mpi_comm::send_deme(const metapopulation& mp, int n_evals)
 </details>
 
 
-**142.** `components/learning/moses/moses/moses/representation/representation.cc:236`
+**186.** `components/learning/moses/moses/moses/representation/representation.cc:236`
 
 **Issue:** XXX TODO need to add support for "term algebra" knobs
 
@@ -5944,7 +8404,133 @@ contin_map_it ckb = contin.begin();
 </details>
 
 
-**143.** `components/learning/moses/moses/moses/representation/instance_scorer.h:89`
+**187.** `components/learning/moses/moses/moses/representation/representation.cc:391`
+
+**Issue:** XXX This is dead code, no one uses it, and looking at the below, it
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+#ifdef EXEMPLAR_INST_IS_UNDEAD
+// XXX This is dead code, no one uses it, and looking at the below, it
+// looks inconsistent to me. I'm going to leave it here for a while, but
+// it should be removed by 2013 or 2014 if not sooner...
+```
+</details>
+
+
+**188.** `components/learning/moses/moses/moses/representation/representation.cc:395`
+
+**Issue:** XXX why are we clearing this, instead of setting it back to the
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// it should be removed by 2013 or 2014 if not sooner...
+
+// XXX why are we clearing this, instead of setting it back to the
+// _exemplar_inst ??? XXX is this broken??
+//
+```
+</details>
+
+
+**189.** `components/learning/moses/moses/moses/representation/representation.cc:396`
+
+**Issue:** _exemplar_inst ??? XXX is this broken??
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// XXX why are we clearing this, instead of setting it back to the
+// _exemplar_inst ??? XXX is this broken??
+//
+// XXX Note that the clear_exemplar() methods on the knobs are probably
+```
+</details>
+
+
+**190.** `components/learning/moses/moses/moses/representation/representation.cc:398`
+
+**Issue:** XXX Note that the clear_exemplar() methods on the knobs are probably
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// _exemplar_inst ??? XXX is this broken??
+//
+// XXX Note that the clear_exemplar() methods on the knobs are probably
+//  not needed either!?
+void representation::clear_exemplar()
+```
+</details>
+
+
+**191.** `components/learning/moses/moses/moses/representation/representation.cc:409`
+
+**Issue:** XXX that, and contin seems to be handled inconsistently with disc...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// What is this doing ? seems to be clearing things out, why do we need this?
+// XXX that, and contin seems to be handled inconsistently with disc...
+// I mean, shouldn't we be setting the exemplar_inst fields so that
+// they match the exmplar?  Do we even need the exemplar_inst for anything?
+```
+</details>
+
+
+**192.** `components/learning/moses/moses/moses/representation/field_set.h:213`
+
+**Issue:** XXX should be enum ...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX should be enum ...
+static const disc_t Stop;  // 0
+static const disc_t Left;  // 1
+```
+</details>
+
+
+**193.** `components/learning/moses/moses/moses/representation/instance_scorer.h:89`
 
 **Issue:** XXX FIXME, calling score_tree above does not throw the exceptionthis should be done
 
@@ -5965,7 +8551,49 @@ return _cscorer.get_cscore(tr);
 </details>
 
 
-**144.** `components/learning/moses/moses/moses/representation/build_knobs.cc:211`
+**194.** `components/learning/moses/moses/moses/representation/build_knobs.cc:115`
+
+**Issue:** Petbrain  XXX does this call code that actually works??
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+else if (output_type == id::action_result_type) {
+// Petbrain  XXX does this call code that actually works??
+action_canonize(_exemplar.begin());
+build_action(_exemplar.begin());
+```
+</details>
+
+
+**195.** `components/learning/moses/moses/moses/representation/build_knobs.cc:121`
+
+**Issue:** ANN  XXX This is calling unfinished, broken code, below.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+else if (output_type == id::ann_type) {
+// ANN  XXX This is calling unfinished, broken code, below.
+ann_canonize(_exemplar.begin());
+build_contin(_exemplar.begin());
+```
+</details>
+
+
+**196.** `components/learning/moses/moses/moses/representation/build_knobs.cc:211`
 
 **Issue:** * XXX TODO: see comments on disc_probe() below.  This method is a real
 
@@ -5986,7 +8614,7 @@ return _cscorer.get_cscore(tr);
 </details>
 
 
-**145.** `components/learning/moses/moses/moses/representation/build_knobs.cc:690`
+**197.** `components/learning/moses/moses/moses/representation/build_knobs.cc:690`
 
 **Issue:** XXX TODO: Is this really optimal?  The below adds an entire copy
 
@@ -6007,7 +8635,28 @@ return _cscorer.get_cscore(tr);
 </details>
 
 
-**146.** `components/learning/moses/moses/moses/representation/build_knobs.cc:1283`
+**198.** `components/learning/moses/moses/moses/representation/build_knobs.cc:917`
+
+**Issue:** This may not be desirable...!?  XXX some experimental validation
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+#ifdef LATER
+// The canonization used here raises the degree of polynomials.
+// This may not be desirable...!?  XXX some experimental validation
+// that this speeds convergence is needed.
+for (sib_it sib = it.begin(); sib != it.end(); ++sib) {
+```
+</details>
+
+
+**199.** `components/learning/moses/moses/moses/representation/build_knobs.cc:1283`
 
 **Issue:** XXX TODO this below is clearly unfinished, broken, etc.
 
@@ -6028,7 +8677,7 @@ void build_knobs::ann_canonize(pre_it it)
 </details>
 
 
-**147.** `components/learning/moses/moses/moses/representation/build_knobs.cc:1342`
+**200.** `components/learning/moses/moses/moses/representation/build_knobs.cc:1342`
 
 **Issue:** //FIXME: now just attaches to the first output
 
@@ -6049,7 +8698,70 @@ sib_it first_hidden = it.begin();
 </details>
 
 
-**148.** `components/learning/moses/moses/moses/main/problem-params.h:46`
+**201.** `components/learning/moses/moses/moses/representation/knobs.h:225`
+
+**Issue:** XXX This uses reduct::logical_reduction rulesit is not clear if those
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// tree underneath it.
+//
+// XXX This uses reduct::logical_reduction rules; it is not clear if those
+// rules tolerate predicates.
+//
+```
+</details>
+
+
+**202.** `components/learning/moses/moses/moses/representation/knobs.h:228`
+
+**Issue:** XXX what is the difference between "present" and "absent" ??? A
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// rules tolerate predicates.
+//
+// XXX what is the difference between "present" and "absent" ??? A
+// knob that is "absent" from a logical "or" is the same as "present
+// and false".  while one that is absent from a logical "and" is the
+```
+</details>
+
+
+**203.** `components/learning/moses/moses/moses/representation/knobs.h:237`
+
+**Issue:** XXX Also -- I think I want to rename this to "logical unary knob",
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// justification.
+//
+// XXX Also -- I think I want to rename this to "logical unary knob",
+// or something like that, as it is a unary logical function ... err...
+// well, I guess all combo opers are unary, due to Currying.
+```
+</details>
+
+
+**204.** `components/learning/moses/moses/moses/main/problem-params.h:46`
 
 **Issue:** XXX FIXME TODO The structure below should be split into multiple
 
@@ -6070,7 +8782,7 @@ namespace opencog { namespace moses {
 </details>
 
 
-**149.** `components/learning/moses/moses/moses/main/table-problems.cc:138`
+**205.** `components/learning/moses/moses/moses/main/table-problems.cc:138`
 
 **Issue:** XXX FIXME -- the multiple tables should be merged into one.
 
@@ -6091,7 +8803,7 @@ table = _tables.front();
 </details>
 
 
-**150.** `components/learning/moses/moses/moses/main/table-problems.cc:150`
+**206.** `components/learning/moses/moses/moses/main/table-problems.cc:150`
 
 **Issue:** XXX FIXME .. check that they all have the same signature.
 
@@ -6112,7 +8824,28 @@ for (size_t i = 1; i < _tables.size(); ++i) {
 </details>
 
 
-**151.** `components/learning/moses/moses/moses/main/problem-params.cc:166`
+**207.** `components/learning/moses/moses/moses/main/table-problems.cc:487`
+
+**Issue:** XXX Eh ??? for precision/recall scorers,
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// For enum targets, like boolean targets, the score
+// can never exceed zero (perfect score).
+// XXX Eh ??? for precision/recall scorers,
+// the score range is 0.0 to 1.0 so this is wrong...
+if (0.0 < pms.moses_params.max_score) {
+```
+</details>
+
+
+**208.** `components/learning/moses/moses/moses/main/problem-params.cc:166`
 
 **Issue:** XXX TODO: make this print correctly, instead of using brackets.
 
@@ -6133,7 +8866,28 @@ desc.add_options()
 </details>
 
 
-**152.** `components/learning/moses/moses/comboreduct/type_checker/type_tree.cc:599`
+**209.** `components/learning/moses/moses/feature-selection/algo/simple.h:150`
+
+**Issue:** XXX or use partial_sort, as mentioned above...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+} else {
+// stair-step distribution: keep the top num_desired only.
+//  XXX or use partial_sort, as mentioned above...
+for (auto pr = sorted_flist.begin(); pr != sorted_flist.end(); pr++) {
+final.insert(*pr->second.begin());
+```
+</details>
+
+
+**210.** `components/learning/moses/moses/comboreduct/type_checker/type_tree.cc:599`
 
 **Issue:** XXX TODO the code below was modified to allow arg lists of
 
@@ -6154,7 +8908,7 @@ desc.add_options()
 </details>
 
 
-**153.** `components/learning/moses/moses/comboreduct/interpreter/interpreter.cc:336`
+**211.** `components/learning/moses/moses/comboreduct/interpreter/interpreter.cc:336`
 
 **Issue:** XXX TODO: contin_if should go away.
 
@@ -6175,7 +8929,7 @@ case id::cond : {
 </details>
 
 
-**154.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:313`
+**212.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:313`
 
 **Issue:** @todo FIXME there should be a general way to distinguish between
 
@@ -6196,7 +8950,7 @@ const vertex& v = *it;
 </details>
 
 
-**155.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:530`
+**213.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:530`
 
 **Issue:** XXX TODO: contin_if should go away.
 
@@ -6217,7 +8971,7 @@ case id::cond : {
 </details>
 
 
-**156.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:573`
+**214.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:573`
 
 **Issue:** /@todo FIXME avoid copying !?
 
@@ -6238,7 +8992,7 @@ return ret;
 </details>
 
 
-**157.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:579`
+**215.** `components/learning/moses/moses/comboreduct/interpreter/eval.cc:579`
 
 **Issue:** /@todo FIXME avoid copying !?
 
@@ -6259,7 +9013,49 @@ return ret;
 </details>
 
 
-**158.** `components/learning/moses/moses/comboreduct/combo/descriptions.cc:94`
+**216.** `components/learning/moses/moses/comboreduct/combo/descriptions.cc:85`
+
+**Issue:** XXX Should probably be "union", yeah?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//
+// The 'value' is marked unknown, as it can be of any type.
+// XXX Should probably be "union", yeah?
+{ id::cond,               "->(arg_list(boolean unknown) unknown unknown)" },
+
+```
+</details>
+
+
+**217.** `components/learning/moses/moses/comboreduct/combo/descriptions.cc:91`
+
+**Issue:** Tests for equality. XXX Someday, we should also allow equality
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+{ id::contin_if,            "->(boolean contin contin contin)" },
+
+// Tests for equality. XXX Someday, we should also allow equality
+// testing for booleans, contin as well, but not today.
+// Fixing this will require work in typechecker, and use of union
+```
+</details>
+
+
+**218.** `components/learning/moses/moses/comboreduct/combo/descriptions.cc:94`
 
 **Issue:** type. XXX FIXME...
 
@@ -6280,7 +9076,91 @@ return ret;
 </details>
 
 
-**159.** `components/learning/moses/moses/comboreduct/table/table.h:633`
+**219.** `components/learning/moses/moses/comboreduct/combo/vertex.h:94`
+
+**Issue:** be generalized soon.  XXX do this...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Generic functions
+// Currently take enum as arg or return enum, but should
+// be generalized soon.  XXX do this...
+cond,
+equ,
+```
+</details>
+
+
+**220.** `components/learning/moses/moses/comboreduct/combo/vertex.h:101`
+
+**Issue:** XXX This should be obsoleted by cond, at some point.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+apply,
+
+// XXX This should be obsoleted by cond, at some point.
+// Maybe action_boolean_if too, I guess?
+contin_if,
+```
+</details>
+
+
+**221.** `components/learning/moses/moses/comboreduct/combo/vertex.h:418`
+
+**Issue:** inequality XXX Huh? but its not in namespace boost !?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// don't know why this is needed *in namespace boost*, but it is, for
+// e.g. calling a generic stl function that compares vertices for
+// inequality XXX Huh? but its not in namespace boost !?
+inline bool operator!=(const vertex& v1, const vertex& v2)
+{
+```
+</details>
+
+
+**222.** `components/learning/moses/moses/comboreduct/combo/iostream_combo.cc:440`
+
+**Issue:** XXX ?? Ahem, won't calling out<<(*m) just lead to infinite
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+return out << m->getContent();
+
+// XXX ?? Ahem, won't calling out<<(*m) just lead to infinite
+// recursion ??
+if (const ann_type* z = get<ann_type>(&v))
+```
+</details>
+
+
+**223.** `components/learning/moses/moses/comboreduct/table/table.h:633`
 
 **Issue:** XXX TODO WARNING ERROR: builtin hardcoded shit!!!
 
@@ -6301,7 +9181,7 @@ res.push_back(seq.get_at<builtin>(i));
 </details>
 
 
-**160.** `components/learning/moses/moses/comboreduct/table/table.h:637`
+**224.** `components/learning/moses/moses/comboreduct/table/table.h:637`
 
 **Issue:** XXX TODO WARNING ERROR: builtin hardcoded shit!!!
 
@@ -6322,7 +9202,7 @@ res.push_back(id::null_vertex);
 </details>
 
 
-**161.** `components/learning/moses/moses/comboreduct/table/table.h:1068`
+**225.** `components/learning/moses/moses/comboreduct/table/table.h:1068`
 
 **Issue:** * XXX TODO -- this also should probably support the weight column,
 
@@ -6343,7 +9223,7 @@ res.push_back(id::null_vertex);
 </details>
 
 
-**162.** `components/learning/moses/moses/comboreduct/table/table.h:1273`
+**226.** `components/learning/moses/moses/comboreduct/table/table.h:1273`
 
 **Issue:** XXX TODO, it would be easier if KLD took a sorted list
 
@@ -6364,7 +9244,28 @@ std::vector<contin_t> p, q;
 </details>
 
 
-**163.** `components/learning/moses/moses/comboreduct/table/table.cc:403`
+**227.** `components/learning/moses/moses/comboreduct/table/table.h:1282`
+
+**Issue:** XXX review this, is this really correct?  At any rate,
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// KLD is negative; we want the IC to be postive.
+// XXX review this, is this really correct?  At any rate,
+// feature selection utterly fails with negative IC.
+// Also a problem, this is returning values greater than 1.0;
+```
+</details>
+
+
+**228.** `components/learning/moses/moses/comboreduct/table/table.cc:403`
 
 **Issue:** XXX TODO replace this by the util p_norm function.
 
@@ -6385,7 +9286,7 @@ contin_t OTable::abs_distance(const OTable& ot) const
 </details>
 
 
-**164.** `components/learning/moses/moses/comboreduct/table/table.cc:428`
+**229.** `components/learning/moses/moses/comboreduct/table/table.cc:428`
 
 **Issue:** XXX TODO replace this by the util p_norm function.
 
@@ -6406,7 +9307,28 @@ contin_t OTable::sum_squared_error(const OTable& ot) const
 </details>
 
 
-**165.** `components/learning/moses/moses/comboreduct/table/table.cc:842`
+**230.** `components/learning/moses/moses/comboreduct/table/table.cc:661`
+
+**Issue:** XXX this cannot possibly be correct, the total count is in general
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+row_it != end() and idx_it != idxs.end();) {
+auto& outputs = row_it->second;
+// XXX this cannot possibly be correct, the total count is in general
+// a fraction, not an integer; it is merely the sum of the weights
+// of the rows. It is NOT equal to the toal number of rows!
+```
+</details>
+
+
+**231.** `components/learning/moses/moses/comboreduct/table/table.cc:842`
 
 **Issue:** XXX TODO replace this by the util p_norm function.
 
@@ -6427,7 +9349,7 @@ complete_truth_table::hamming_distance(const complete_truth_table& other) const
 </details>
 
 
-**166.** `components/learning/moses/moses/comboreduct/reduct/logical_rules.cc:100`
+**232.** `components/learning/moses/moses/comboreduct/reduct/logical_rules.cc:100`
 
 **Issue:** XXX TODO: I don't understand why this is not damaging contin_if  !??
 
@@ -6448,7 +9370,7 @@ complete_truth_table::hamming_distance(const complete_truth_table& other) const
 </details>
 
 
-**167.** `components/learning/moses/moses/comboreduct/main/eval-table.cc:147`
+**233.** `components/learning/moses/moses/comboreduct/main/eval-table.cc:147`
 
 **Issue:** XXX FIXME
 
@@ -6469,7 +9391,7 @@ vector<string> header = get_header(pa.input_table_file);
 </details>
 
 
-### Language-Learning Component (8 items)
+### Language-Learning Component (9 items)
 
 
 **1.** `language-learning/tests/test_grammar_learner.py:65`
@@ -6556,7 +9478,27 @@ re.update({'corpus_stats_file': corpus_stats_file})
 </details>
 
 
-**5.** `language-learning/src/grammar_learner/widgets.py:142`
+**5.** `language-learning/src/grammar_learner/write_files.py:226`
+
+**Issue:** 90128 restore Link Grammar 5.4.4 'UNKNOWN-WORD: XXX+;' option
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+# 90110 remove filename
+# 90119 remove Link Grammar 5.4.4 options (v.0.6)
+# 90128 restore Link Grammar 5.4.4 'UNKNOWN-WORD: XXX+;' option
+# 190428 WSD ⇒ learner: optional, configurable
+```
+</details>
+
+
+**6.** `language-learning/src/grammar_learner/widgets.py:142`
 
 **Issue:** 80627 display_tree  FIXME:DEL?
 
@@ -6577,7 +9519,7 @@ re.update({'corpus_stats_file': corpus_stats_file})
 </details>
 
 
-**6.** `language-learning/src/grammar_learner/widgets.py:143`
+**7.** `language-learning/src/grammar_learner/widgets.py:143`
 
 **Issue:** 80817 corpus_histograms ⇒ ? FIXME:DEL?
 
@@ -6597,7 +9539,7 @@ re.update({'corpus_stats_file': corpus_stats_file})
 </details>
 
 
-**7.** `language-learning/src/grammar_learner/generalization.py:417`
+**8.** `language-learning/src/grammar_learner/generalization.py:417`
 
 **Issue:** 81217 FIXME? generalize_categories [F] with new reorder (Turtle tests)
 
@@ -6618,7 +9560,7 @@ re.update({'corpus_stats_file': corpus_stats_file})
 </details>
 
 
-**8.** `language-learning/src/grammar_learner/skl_clustering.py:208`
+**9.** `language-learning/src/grammar_learner/skl_clustering.py:208`
 
 **Issue:** FIXME: try...except
 
@@ -6637,10 +9579,115 @@ re.update({'corpus_stats_file': corpus_stats_file})
 </details>
 
 
-### Moses Component (52 items)
+### Moses Component (113 items)
 
 
-**1.** `moses/examples/example-progs/ontomax.cc:36`
+**1.** `moses/examples/example-progs/trap-bit.cc:26`
+
+**Issue:** XXX under construction XXX
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+using boost::lexical_cast;
+
+// XXX under construction XXX
+
+// XXX this example is broken, and will remain so until "multivariate"
+```
+</details>
+
+
+**2.** `moses/examples/example-progs/trap-bit.cc:28`
+
+**Issue:** XXX this example is broken, and will remain so until "multivariate"
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// XXX under construction XXX
+
+// XXX this example is broken, and will remain so until "multivariate"
+// is ported over/re-implemented. Basically, there is no structure
+// learning at this time.
+```
+</details>
+
+
+**3.** `moses/examples/example-progs/trap-bit.cc:31`
+
+**Issue:** XXX some of the documentation below may be misleading.
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// is ported over/re-implemented. Basically, there is no structure
+// learning at this time.
+// XXX some of the documentation below may be misleading.
+//
+// Demonstration program for the "bit-trap" optimization problem.
+```
+</details>
+
+
+**4.** `moses/examples/example-progs/trap-bit.cc:42`
+
+**Issue:** XXX which is why we need to put structure leanring back in the code XXX
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// the optimal solution cannot be found without structure learning; the
+// MOSES univariate() learner is a no-op, and so cannot solve this problem.
+// XXX which is why we need to put structure leanring back in the code XXX
+//
+// The correlation between variables is accomplished by using a
+```
+</details>
+
+
+**5.** `moses/examples/example-progs/nmax.cc:38`
+
+**Issue:** XXX setting n=2 currently fails due to a bug, see
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// This is a generalization of the "onemax" problem, which is nmax with n=2.
+//
+// XXX setting n=2 currently fails due to a bug, see
+// https://bugs.launchpad.net/moses/+bug/908230
+//
+```
+</details>
+
+
+**6.** `moses/examples/example-progs/ontomax.cc:36`
 
 **Issue:** XXX Someday, fix all of this!
 
@@ -6661,7 +9708,28 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**2.** `moses/moses/moses/optimization/star-anneal.cc:42`
+**7.** `moses/examples/example-progs/continmax.cc:46`
+
+**Issue:** XXX Currently, this doesn't really work well, or maybe at all, in
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// is how the problem becomes easy when applying calculus).
+//
+// XXX Currently, this doesn't really work well, or maybe at all, in
+// part because the contin implementation in the field set is incomplete
+// or broken or maybe both; there is a confusion between depth and arity
+```
+</details>
+
+
+**8.** `moses/moses/moses/optimization/star-anneal.cc:42`
 
 **Issue:** XXX TODO the annealing temperature control code should be ported over
 
@@ -6682,7 +9750,301 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**3.** `moses/moses/moses/optimization/hill-climbing.h:110`
+**9.** `moses/moses/moses/optimization/optimization.h:82`
+
+**Issue:** XXX Why n^1.05 ??? This is going to have a significant effect
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// N = p.popsize_ratio * n^1.05
+// XXX Why n^1.05 ??? This is going to have a significant effect
+// (as compared to n^1.00) only when n is many thousands or bigger...
+unsigned pop_size(const field_set& fs) const;
+```
+</details>
+
+
+**10.** `moses/moses/moses/optimization/optimization.h:116`
+
+**Issue:** problem size in info-theoretic bits.  (XXX Why 1.05 ???)
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Populations are sized at N = popsize_ratio*n^1.05 where n is
+// problem size in info-theoretic bits.  (XXX Why 1.05 ???)
+double pop_size_ratio;
+
+```
+</details>
+
+
+**11.** `moses/moses/moses/optimization/particle-swarm.h:45`
+
+**Issue:** XXX PSO parameters hardcoded just for now.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Particle Swarm parameters
+// XXX PSO parameters hardcoded just for now.
+struct ps_parameters
+{
+```
+</details>
+
+
+**12.** `moses/moses/moses/optimization/particle-swarm.h:82`
+
+**Issue:** XXX I have to find the best values for bit and disc.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// For continuous problems, 0.7 and 1.43 are good values.
+// XXX I have to find the best values for bit and disc.
+// Information from: M. Clerc, L’optimisation par essaim particulaire: versions
+// paramétriques et adaptatives, Hermes Science Publications, Lavoisier, Paris, 2005.
+```
+</details>
+
+
+**13.** `moses/moses/moses/optimization/particle-swarm.h:103`
+
+**Issue:** Use rounding off for now XXX it isn't so effective, but for now is easier
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//
+// For discrete:
+// Use rounding off for now XXX it isn't so effective, but for now is easier
+// to implement. I'll use MVPSO, JPSO or IMVPSO later.
+// In the transformation i'll use min value of 0 and 1 for max in the continuous
+```
+</details>
+
+
+**14.** `moses/moses/moses/optimization/particle-swarm.h:133`
+
+**Issue:** XXX If i have time, i'll put some variation here to get a better global search.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// with Artificial Intelligence IEEE-ICTAI, vol. 1, Arras, France, 27–29 October 2010,
+// 2010, pp. 87–93.
+// XXX If i have time, i'll put some variation here to get a better global search.
+double bit_min_value, bit_max_value, // [0,1] <- XXX these two aren't used yet.
+disc_min_value, disc_max_value, // [0,1] in rounding off
+```
+</details>
+
+
+**15.** `moses/moses/moses/optimization/particle-swarm.h:253`
+
+**Issue:** XXX Explanation
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX Explanation
+bool new_bit_value(const double& vel){
+return (randGen().randdouble() < // Sigmoid
+```
+</details>
+
+
+**16.** `moses/moses/moses/optimization/particle-swarm.h:281`
+
+**Issue:** XXX Explanation
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX Explanation
+disc_t new_disc_value(double& cvalue,
+const double& vel, const unsigned max_dvalue){
+```
+</details>
+
+
+**17.** `moses/moses/moses/optimization/particle-swarm.h:303`
+
+**Issue:** XXX Explanation
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX Explanation
+contin_t new_cont_value(const contin_t& value, const double& vel){
+// Wind dispersion enter here.
+```
+</details>
+
+
+**18.** `moses/moses/moses/optimization/particle-swarm.h:340`
+
+**Issue:** XXX This could help PSO if we maintain the best particle.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// In fact, all of the current code uses this entry point, no one
+// bothers to supply an initial instance.
+// XXX This could help PSO if we maintain the best particle.
+void operator()(deme_t& deme,
+const iscorer_base& iscorer,
+```
+</details>
+
+
+**19.** `moses/moses/moses/optimization/hill-climbing.h:80`
+
+**Issue:** scan is that much better than a random sampling.  XXX Or is it?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// nearest neighbor scan for such cases will eat up a huge amount of
+// RAM in the instance_set, and its not currently obvious that a full
+// scan is that much better than a random sampling.  XXX Or is it?
+//
+// XXX This parameter should probably be automatically adjusted with
+```
+</details>
+
+
+**20.** `moses/moses/moses/optimization/hill-climbing.h:82`
+
+**Issue:** XXX This parameter should probably be automatically adjusted with
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// scan is that much better than a random sampling.  XXX Or is it?
+//
+// XXX This parameter should probably be automatically adjusted with
+// free RAM availability!?  Or something like that !?
+//
+```
+</details>
+
+
+**21.** `moses/moses/moses/optimization/hill-climbing.h:97`
+
+**Issue:** XXX I don't understand what the below is saying.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// improved.
+//
+// XXX I don't understand what the below is saying.
+// One should probably try first to tweak pop_size_ratio to
+// control the allocation of resources. However in some cases (for
+```
+</details>
+
+
+**22.** `moses/moses/moses/optimization/hill-climbing.h:103`
+
+**Issue:** XXX pop_size_ratio disabled in hill-climbing, since its definition
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// there is only one deme to explore and tweaking that parameter
+// can make a difference (breadth vs depth)
+// XXX pop_size_ratio disabled in hill-climbing, since its definition
+// was insane/non-sensical.  I can't figure out how it was supposed
+// to work.
+```
+</details>
+
+
+**23.** `moses/moses/moses/optimization/hill-climbing.h:110`
 
 **Issue:** XXX TODO make sure this value is appropriately updated.
 
@@ -6703,7 +10065,91 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**4.** `moses/moses/moses/metapopulation/ensemble.h:55`
+**24.** `moses/moses/moses/optimization/hill-climbing.h:281`
+
+**Issue:** XXX In fact, all of the current code uses this entry point, no one
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Like above but assumes that init_inst is null (backward compatibility)
+// XXX In fact, all of the current code uses this entry point, no one
+// bothers to supply an initial instance.
+void operator()(deme_t& deme,
+```
+</details>
+
+
+**25.** `moses/moses/moses/optimization/hill-climbing.cc:732`
+
+**Issue:** /the vector.  But this ixsn't know ... XXX experiment with this!?
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// regions of low scores, in one go.  It is possible that a faster
+/// algorithm would be to sort first, and then delete the tail-end of
+/// the vector.  But this ixsn't know ... XXX experiment with this!?
+/// ... err, but right now, trimming takes a small fraction of a second,
+/// so there is no rush to fis this.
+```
+</details>
+
+
+**26.** `moses/moses/moses/optimization/optimization.cc:79`
+
+**Issue:** XXX Why n^1.05 ??? This is going to have a significant effect
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// N = p.popsize_ratio * n^1.05
+// XXX Why n^1.05 ??? This is going to have a significant effect
+// (as compared to n^1.00) only when n is many thousands or bigger...
+unsigned optim_parameters::pop_size(const field_set& fs) const
+```
+</details>
+
+
+**27.** `moses/moses/moses/optimization/particle-swarm.cc:122`
+
+**Issue:** XXX What score do i use?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+current_number_of_evals += swarm_size;
+
+// XXX What score do i use?
+// I'll use best_score for now.
+bool has_improved = false;
+```
+</details>
+
+
+**28.** `moses/moses/moses/metapopulation/ensemble.h:55`
 
 **Issue:** * XXX FIXME: right now, the ensemble is attached to the metapop, its
 
@@ -6724,7 +10170,7 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**5.** `moses/moses/moses/metapopulation/metapopulation.h:90`
+**29.** `moses/moses/moses/metapopulation/metapopulation.h:90`
 
 **Issue:** * XXX FIXME: right now, the ensemble is attached to the metapop, its
 
@@ -6745,7 +10191,7 @@ void recbuild(term_tree& tr, term_tree::iterator it,
 </details>
 
 
-**6.** `moses/moses/moses/metapopulation/merging.cc:261`
+**30.** `moses/moses/moses/metapopulation/merging.cc:261`
 
 **Issue:** XXX FIXME: we should use a pointer set for scored_combo_tree_set
 
@@ -6766,7 +10212,7 @@ candidates.size());
 </details>
 
 
-**7.** `moses/moses/moses/metapopulation/merging.cc:554`
+**31.** `moses/moses/moses/metapopulation/merging.cc:554`
 
 **Issue:** XXX FIXME looks to me like it++ can often be collaed twice within this loop!
 
@@ -6787,7 +10233,7 @@ prev_it = it++;
 </details>
 
 
-**8.** `moses/moses/moses/metapopulation/metapopulation.cc:222`
+**32.** `moses/moses/moses/metapopulation/metapopulation.cc:222`
 
 **Issue:** XXX FIXME should probably not recompute every time ...
 
@@ -6808,7 +10254,49 @@ return _cscorer.get_cscore(_ensemble.get_ensemble());
 </details>
 
 
-**9.** `moses/moses/moses/scoring/scoring_base.h:124`
+**33.** `moses/moses/moses/metapopulation/ensemble.cc:235`
+
+**Issue:** if we are here, its the in-exact experts code.  XXX currently broken ...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+} else {
+// if we are here, its the in-exact experts code.  XXX currently broken ...
+// Any score worse than half is terrible. Half gives a weight of zero.
+// More than half gives negative weights, which wreaks things.
+```
+</details>
+
+
+**34.** `moses/moses/moses/metapopulation/ensemble.cc:259`
+
+**Issue:** XXX the logic below is probably wrong.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+size_t bslen = _bscorer.size();
+
+// XXX the logic below is probably wrong.
+OC_ASSERT(false, "this doesn't work right now.");
+// Now, look to see where this scorer was wrong, and bump the
+```
+</details>
+
+
+**35.** `moses/moses/moses/scoring/scoring_base.h:124`
 
 **Issue:** XXX TODO should be a std::valarray not a vector.
 
@@ -6829,7 +10317,70 @@ virtual void update_weights(const std::vector<double>&);
 </details>
 
 
-**10.** `moses/moses/moses/scoring/discriminating_bscore.cc:486`
+**36.** `moses/moses/moses/scoring/discriminating_bscore.cc:213`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+_full_bscore(true)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 2;
+
+```
+</details>
+
+
+**37.** `moses/moses/moses/scoring/discriminating_bscore.cc:394`
+
+**Issue:** umm XXX I think the normalization here should be the
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// because the precision is normalized as well.  So e.g.
+// max precision for boolean problems is 1.0.  However...
+// umm XXX I think the normalization here should be the
+// best-possible activation, not the usize, right?
+//
+```
+</details>
+
+
+**38.** `moses/moses/moses/scoring/discriminating_bscore.cc:417`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+: discriminating_bscore(ct, min_precision, max_precision, hardness)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 2;
+}
+```
+</details>
+
+
+**39.** `moses/moses/moses/scoring/discriminating_bscore.cc:486`
 
 **Issue:** XXX TODO -- should not return the penalties as part of the bscore,
 
@@ -6850,7 +10401,28 @@ _size = ct.size() + 2;
 </details>
 
 
-**11.** `moses/moses/moses/scoring/discriminating_bscore.cc:620`
+**40.** `moses/moses/moses/scoring/discriminating_bscore.cc:586`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+: discriminating_bscore(ct, min_diff, max_diff, hardness)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 2;
+}
+```
+</details>
+
+
+**41.** `moses/moses/moses/scoring/discriminating_bscore.cc:620`
 
 **Issue:** XXX TODO FIXME is this really correct?
 
@@ -6871,7 +10443,7 @@ double best_possible_recall = 1.0 / _true_total;
 </details>
 
 
-**12.** `moses/moses/moses/scoring/discriminating_bscore.cc:629`
+**42.** `moses/moses/moses/scoring/discriminating_bscore.cc:629`
 
 **Issue:** XXX TODO FIXME is this really correct?
 
@@ -6892,7 +10464,28 @@ double best_possible_recall = (0.0 < pos) ? 1.0 : 0.0;
 </details>
 
 
-**13.** `moses/moses/moses/scoring/discriminating_bscore.cc:681`
+**43.** `moses/moses/moses/scoring/discriminating_bscore.cc:648`
+
+**Issue:** XXX Currently, this scorer does not return a true behavioral score
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+: discriminating_bscore(ct, 0.0, 1.0, 1.0e-20)
+{
+// XXX Currently, this scorer does not return a true behavioral score
+_size = 1;
+}
+```
+</details>
+
+
+**44.** `moses/moses/moses/scoring/discriminating_bscore.cc:681`
 
 **Issue:** XXX TODO FIXME is this really correct?
 
@@ -6913,7 +10506,7 @@ return 1.0;
 </details>
 
 
-**14.** `moses/moses/moses/scoring/discriminating_bscore.cc:688`
+**45.** `moses/moses/moses/scoring/discriminating_bscore.cc:688`
 
 **Issue:** XXX TODO FIXME is this really correct?
 
@@ -6934,7 +10527,7 @@ double best_possible_recall = 1.0;
 </details>
 
 
-**15.** `moses/moses/moses/moses/mpi_moses.h:51`
+**46.** `moses/moses/moses/moses/mpi_moses.h:51`
 
 **Issue:** this just right now. XXX TODO: do this, someday.
 
@@ -6955,7 +10548,70 @@ class moses_mpi_comm
 </details>
 
 
-**16.** `moses/moses/moses/moses/neighborhood_sampling.h:284`
+**47.** `moses/moses/moses/moses/local_moses.cc:56`
+
+**Issue:** XXX When would one never expand?  Wouldn't that be a bug?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Attempt to create a non-empty representation, by looping
+// over exemplars until we find one that expands.
+// XXX When would one never expand?  Wouldn't that be a bug?
+while (1) {
+scored_combo_tree_ptr_set_cit exemplar = mp.select_exemplar();
+```
+</details>
+
+
+**48.** `moses/moses/moses/moses/partial.cc:264`
+
+**Issue:** XXX is this correct? I think we need to ask the cscorer for the total ...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+behavioral_score bs = _bscore->operator()(cand);
+
+// XXX is this correct? I think we need to ask the cscorer for the total ...
+score_t total_score = 0.0;
+for (const score_t& sc : bs)
+```
+</details>
+
+
+**49.** `moses/moses/moses/moses/partial.cc:304`
+
+**Issue:** XXX Ineffective predicates may be due to enums that have been
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+effective(predicate, good_count, fail_count);
+
+// XXX Ineffective predicates may be due to enums that have been
+// completely accounted for ... not sure what to do about that...
+if ((0 < good_count) || (0 < fail_count))
+```
+</details>
+
+
+**50.** `moses/moses/moses/moses/neighborhood_sampling.h:284`
 
 **Issue:** @todo: handle term algebras XXX
 
@@ -6976,7 +10632,7 @@ starting_index + fs.end_term_raw_idx(),
 </details>
 
 
-**17.** `moses/moses/moses/moses/neighborhood_sampling.h:327`
+**51.** `moses/moses/moses/moses/neighborhood_sampling.h:327`
 
 **Issue:** XXX TODO, unroll the last tail call, just like the single-bit
 
@@ -6997,7 +10653,7 @@ out = vary_n_knobs(fs, tmp_inst, dist, starting_index + 1, out, end);
 </details>
 
 
-**18.** `moses/moses/moses/moses/moses_main.h:102`
+**52.** `moses/moses/moses/moses/moses_main.h:102`
 
 **Issue:** XXX TODO this should be fixed, someday...
 
@@ -7018,7 +10674,7 @@ return;
 </details>
 
 
-**19.** `moses/moses/moses/moses/distributed_moses.cc:194`
+**53.** `moses/moses/moses/moses/distributed_moses.cc:194`
 
 **Issue:** Arghhh FIXME. fuser might not be installed, or it may not be in
 
@@ -7039,7 +10695,7 @@ bool is_being_written(const string& file_name, int pid)
 </details>
 
 
-**20.** `moses/moses/moses/moses/mpi_moses.cc:201`
+**54.** `moses/moses/moses/moses/mpi_moses.cc:201`
 
 **Issue:** XXX TODO -- trim the deme down, before sending, by using the worst acceptable score.
 
@@ -7060,7 +10716,28 @@ void moses_mpi_comm::send_deme(const metapopulation& mp, int n_evals)
 </details>
 
 
-**21.** `moses/moses/moses/moses/mpi_moses.cc:311`
+**55.** `moses/moses/moses/moses/mpi_moses.cc:307`
+
+**Issue:** XXX replace this with appropriate message back to root!
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+right expansion
+count */)) {
+// XXX replace this with appropriate message back to root!
+OC_ASSERT(false, "Exemplar failed to expand!\n");
+}
+```
+</details>
+
+
+**56.** `moses/moses/moses/moses/mpi_moses.cc:311`
 
 **Issue:** XXX TODO should probably fetch max_time from somewhere...
 
@@ -7081,7 +10758,7 @@ dex.optimize_demes(max_evals, max_time);
 </details>
 
 
-**22.** `moses/moses/moses/moses/mpi_moses.cc:608`
+**57.** `moses/moses/moses/moses/mpi_moses.cc:608`
 
 **Issue:** XXX TODO instead of overwritting the demeID it should be
 
@@ -7102,7 +10779,28 @@ stats.n_expansions ++;
 </details>
 
 
-**23.** `moses/moses/moses/deme/deme_expander.cc:356`
+**58.** `moses/moses/moses/moses/types.h:189`
+
+**Issue:** XXX wouldn't it be better to store ints here ??
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// comes from demeID "0".
+//
+// XXX wouldn't it be better to store ints here ??
+struct demeID_t : public std::string
+{
+```
+</details>
+
+
+**59.** `moses/moses/moses/deme/deme_expander.cc:356`
 
 **Issue:** * XXX TODO I honestly just don't see the utility of this multi-deme
 
@@ -7123,7 +10821,7 @@ stats.n_expansions ++;
 </details>
 
 
-**24.** `moses/moses/moses/deme/deme_expander.cc:502`
+**60.** `moses/moses/moses/deme/deme_expander.cc:502`
 
 **Issue:** XXX FIXME this is a bug .. the user may have specified that
 
@@ -7144,7 +10842,49 @@ stats.n_expansions ++;
 </details>
 
 
-**25.** `moses/moses/moses/representation/representation.cc:51`
+**61.** `moses/moses/moses/eda/local_structure.h:262`
+
+**Issue:** XXX ??? Huh? More details, please...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Now that we have created all of the dtrees, construct a
+// feasible order that respects the initial dependencies
+// XXX ??? Huh? More details, please...
+randomized_topological_sort(_initial_deps, _ordering.begin());
+}
+```
+</details>
+
+
+**62.** `moses/moses/moses/eda/local_structure.h:271`
+
+**Issue:** themselves shouldn't change (XXX why would we want to do this ??)
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//
+// instance_set is not const so that we can reorder it - the instances
+// themselves shouldn't change (XXX why would we want to do this ??)
+//
+// For univariate(), the dtree for each field will be empty.
+```
+</details>
+
+
+**63.** `moses/moses/moses/representation/representation.cc:51`
 
 **Issue:** XXX TODO: One might think that varying the stepsize, i.e. shrinking
 
@@ -7165,7 +10905,7 @@ stats.n_expansions ++;
 </details>
 
 
-**26.** `moses/moses/moses/representation/representation.cc:236`
+**64.** `moses/moses/moses/representation/representation.cc:236`
 
 **Issue:** XXX TODO need to add support for "term algebra" knobs
 
@@ -7186,7 +10926,133 @@ contin_map_it ckb = contin.begin();
 </details>
 
 
-**27.** `moses/moses/moses/representation/instance_scorer.h:89`
+**65.** `moses/moses/moses/representation/representation.cc:391`
+
+**Issue:** XXX This is dead code, no one uses it, and looking at the below, it
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+#ifdef EXEMPLAR_INST_IS_UNDEAD
+// XXX This is dead code, no one uses it, and looking at the below, it
+// looks inconsistent to me. I'm going to leave it here for a while, but
+// it should be removed by 2013 or 2014 if not sooner...
+```
+</details>
+
+
+**66.** `moses/moses/moses/representation/representation.cc:395`
+
+**Issue:** XXX why are we clearing this, instead of setting it back to the
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// it should be removed by 2013 or 2014 if not sooner...
+
+// XXX why are we clearing this, instead of setting it back to the
+// _exemplar_inst ??? XXX is this broken??
+//
+```
+</details>
+
+
+**67.** `moses/moses/moses/representation/representation.cc:396`
+
+**Issue:** _exemplar_inst ??? XXX is this broken??
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// XXX why are we clearing this, instead of setting it back to the
+// _exemplar_inst ??? XXX is this broken??
+//
+// XXX Note that the clear_exemplar() methods on the knobs are probably
+```
+</details>
+
+
+**68.** `moses/moses/moses/representation/representation.cc:398`
+
+**Issue:** XXX Note that the clear_exemplar() methods on the knobs are probably
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// _exemplar_inst ??? XXX is this broken??
+//
+// XXX Note that the clear_exemplar() methods on the knobs are probably
+//  not needed either!?
+void representation::clear_exemplar()
+```
+</details>
+
+
+**69.** `moses/moses/moses/representation/representation.cc:409`
+
+**Issue:** XXX that, and contin seems to be handled inconsistently with disc...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// What is this doing ? seems to be clearing things out, why do we need this?
+// XXX that, and contin seems to be handled inconsistently with disc...
+// I mean, shouldn't we be setting the exemplar_inst fields so that
+// they match the exmplar?  Do we even need the exemplar_inst for anything?
+```
+</details>
+
+
+**70.** `moses/moses/moses/representation/field_set.h:213`
+
+**Issue:** XXX should be enum ...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX should be enum ...
+static const disc_t Stop;  // 0
+static const disc_t Left;  // 1
+```
+</details>
+
+
+**71.** `moses/moses/moses/representation/instance_scorer.h:89`
 
 **Issue:** XXX FIXME, calling score_tree above does not throw the exceptionthis should be done
 
@@ -7207,7 +11073,49 @@ return _cscorer.get_cscore(tr);
 </details>
 
 
-**28.** `moses/moses/moses/representation/build_knobs.cc:211`
+**72.** `moses/moses/moses/representation/build_knobs.cc:115`
+
+**Issue:** Petbrain  XXX does this call code that actually works??
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+else if (output_type == id::action_result_type) {
+// Petbrain  XXX does this call code that actually works??
+action_canonize(_exemplar.begin());
+build_action(_exemplar.begin());
+```
+</details>
+
+
+**73.** `moses/moses/moses/representation/build_knobs.cc:121`
+
+**Issue:** ANN  XXX This is calling unfinished, broken code, below.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+else if (output_type == id::ann_type) {
+// ANN  XXX This is calling unfinished, broken code, below.
+ann_canonize(_exemplar.begin());
+build_contin(_exemplar.begin());
+```
+</details>
+
+
+**74.** `moses/moses/moses/representation/build_knobs.cc:211`
 
 **Issue:** * XXX TODO: see comments on disc_probe() below.  This method is a real
 
@@ -7228,7 +11136,7 @@ return _cscorer.get_cscore(tr);
 </details>
 
 
-**29.** `moses/moses/moses/representation/build_knobs.cc:690`
+**75.** `moses/moses/moses/representation/build_knobs.cc:690`
 
 **Issue:** XXX TODO: Is this really optimal?  The below adds an entire copy
 
@@ -7249,7 +11157,28 @@ return _cscorer.get_cscore(tr);
 </details>
 
 
-**30.** `moses/moses/moses/representation/build_knobs.cc:1283`
+**76.** `moses/moses/moses/representation/build_knobs.cc:917`
+
+**Issue:** This may not be desirable...!?  XXX some experimental validation
+
+**Category:** Feature Implementation/Algorithm  
+**Effort:** 1-4 weeks  
+**Reasoning:** Requires moderate technical knowledge and implementation effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+#ifdef LATER
+// The canonization used here raises the degree of polynomials.
+// This may not be desirable...!?  XXX some experimental validation
+// that this speeds convergence is needed.
+for (sib_it sib = it.begin(); sib != it.end(); ++sib) {
+```
+</details>
+
+
+**77.** `moses/moses/moses/representation/build_knobs.cc:1283`
 
 **Issue:** XXX TODO this below is clearly unfinished, broken, etc.
 
@@ -7270,7 +11199,7 @@ void build_knobs::ann_canonize(pre_it it)
 </details>
 
 
-**31.** `moses/moses/moses/representation/build_knobs.cc:1342`
+**78.** `moses/moses/moses/representation/build_knobs.cc:1342`
 
 **Issue:** //FIXME: now just attaches to the first output
 
@@ -7291,7 +11220,28 @@ sib_it first_hidden = it.begin();
 </details>
 
 
-**32.** `moses/moses/moses/representation/knobs.h:204`
+**79.** `moses/moses/moses/representation/knobs.h:200`
+
+**Issue:** XXX Huh?? what does this do?? Why does shifting matter,
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+int _current;   // The current knob setting.
+
+// XXX Huh?? what does this do?? Why does shifting matter,
+// if the only thing done is to count the number of bits set ??
+// WTF ??  I think the shift is n the  wrong direction, yeah?
+```
+</details>
+
+
+**80.** `moses/moses/moses/representation/knobs.h:204`
 
 **Issue:** the shift is definitely in the wrong direction!! FIXME.
 
@@ -7312,7 +11262,70 @@ int map_idx(int idx) const
 </details>
 
 
-**33.** `moses/moses/moses/main/problem-params.h:46`
+**81.** `moses/moses/moses/representation/knobs.h:218`
+
+**Issue:** XXX This uses reduct::logical_reduction rulesit is not clear if those
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// tree underneath it.
+//
+// XXX This uses reduct::logical_reduction rules; it is not clear if those
+// rules tolerate predicates.
+//
+```
+</details>
+
+
+**82.** `moses/moses/moses/representation/knobs.h:221`
+
+**Issue:** XXX what is the difference between "present" and "absent" ??? A
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// rules tolerate predicates.
+//
+// XXX what is the difference between "present" and "absent" ??? A
+// knob that is "absent" from a logical "or" is the same as "present
+// and false".  while one that is absent from a logical "and" is the
+```
+</details>
+
+
+**83.** `moses/moses/moses/representation/knobs.h:230`
+
+**Issue:** XXX Also -- I think I want to rename this to "logical unary knob",
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// justification.
+//
+// XXX Also -- I think I want to rename this to "logical unary knob",
+// or something like that, as it is a unary logical function ... err...
+// well, I guess all combo opers are unary, due to Currying.
+```
+</details>
+
+
+**84.** `moses/moses/moses/main/problem-params.h:46`
 
 **Issue:** XXX FIXME TODO The structure below should be split into multiple
 
@@ -7333,7 +11346,7 @@ namespace opencog { namespace moses {
 </details>
 
 
-**34.** `moses/moses/moses/main/table-problems.cc:138`
+**85.** `moses/moses/moses/main/table-problems.cc:138`
 
 **Issue:** XXX FIXME -- the multiple tables should be merged into one.
 
@@ -7354,7 +11367,7 @@ table = _tables.front();
 </details>
 
 
-**35.** `moses/moses/moses/main/table-problems.cc:150`
+**86.** `moses/moses/moses/main/table-problems.cc:150`
 
 **Issue:** XXX FIXME .. check that they all have the same signature.
 
@@ -7375,7 +11388,28 @@ for (size_t i = 1; i < _tables.size(); ++i) {
 </details>
 
 
-**36.** `moses/moses/moses/main/problem-params.cc:166`
+**87.** `moses/moses/moses/main/table-problems.cc:487`
+
+**Issue:** XXX Eh ??? for precision/recall scorers,
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// For enum targets, like boolean targets, the score
+// can never exceed zero (perfect score).
+// XXX Eh ??? for precision/recall scorers,
+// the score range is 0.0 to 1.0 so this is wrong...
+if (0.0 < pms.moses_params.max_score) {
+```
+</details>
+
+
+**88.** `moses/moses/moses/main/problem-params.cc:166`
 
 **Issue:** XXX TODO: make this print correctly, instead of using brackets.
 
@@ -7396,7 +11430,28 @@ desc.add_options()
 </details>
 
 
-**37.** `moses/moses/comboreduct/type_checker/type_tree.cc:614`
+**89.** `moses/moses/feature-selection/algo/simple.h:150`
+
+**Issue:** XXX or use partial_sort, as mentioned above...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+} else {
+// stair-step distribution: keep the top num_desired only.
+//  XXX or use partial_sort, as mentioned above...
+for (auto pr = sorted_flist.begin(); pr != sorted_flist.end(); pr++) {
+final.insert(*pr->second.begin());
+```
+</details>
+
+
+**90.** `moses/moses/comboreduct/type_checker/type_tree.cc:614`
 
 **Issue:** XXX TODO the code below was modified to allow arg lists of
 
@@ -7417,7 +11472,7 @@ desc.add_options()
 </details>
 
 
-**38.** `moses/moses/comboreduct/interpreter/interpreter.cc:336`
+**91.** `moses/moses/comboreduct/interpreter/interpreter.cc:336`
 
 **Issue:** XXX TODO: contin_if should go away.
 
@@ -7438,7 +11493,7 @@ case id::cond : {
 </details>
 
 
-**39.** `moses/moses/comboreduct/interpreter/eval.cc:313`
+**92.** `moses/moses/comboreduct/interpreter/eval.cc:313`
 
 **Issue:** @todo FIXME there should be a general way to distinguish between
 
@@ -7459,7 +11514,7 @@ const vertex& v = *it;
 </details>
 
 
-**40.** `moses/moses/comboreduct/interpreter/eval.cc:563`
+**93.** `moses/moses/comboreduct/interpreter/eval.cc:563`
 
 **Issue:** XXX TODO: contin_if should go away.
 
@@ -7480,7 +11535,7 @@ case id::cond : {
 </details>
 
 
-**41.** `moses/moses/comboreduct/interpreter/eval.cc:606`
+**94.** `moses/moses/comboreduct/interpreter/eval.cc:606`
 
 **Issue:** /@todo FIXME avoid copying !?
 
@@ -7501,7 +11556,7 @@ return ret;
 </details>
 
 
-**42.** `moses/moses/comboreduct/interpreter/eval.cc:612`
+**95.** `moses/moses/comboreduct/interpreter/eval.cc:612`
 
 **Issue:** /@todo FIXME avoid copying !?
 
@@ -7522,7 +11577,49 @@ return ret;
 </details>
 
 
-**43.** `moses/moses/comboreduct/combo/descriptions.cc:94`
+**96.** `moses/moses/comboreduct/combo/descriptions.cc:85`
+
+**Issue:** XXX Should probably be "union", yeah?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+//
+// The 'value' is marked unknown, as it can be of any type.
+// XXX Should probably be "union", yeah?
+{ id::cond,               "->(arg_list(boolean unknown) unknown unknown)" },
+
+```
+</details>
+
+
+**97.** `moses/moses/comboreduct/combo/descriptions.cc:91`
+
+**Issue:** Tests for equality. XXX Someday, we should also allow equality
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+{ id::contin_if,            "->(boolean contin contin contin)" },
+
+// Tests for equality. XXX Someday, we should also allow equality
+// testing for booleans, contin as well, but not today.
+// Fixing this will require work in typechecker, and use of union
+```
+</details>
+
+
+**98.** `moses/moses/comboreduct/combo/descriptions.cc:94`
 
 **Issue:** type. XXX FIXME...
 
@@ -7543,7 +11640,91 @@ return ret;
 </details>
 
 
-**44.** `moses/moses/comboreduct/table/table.h:634`
+**99.** `moses/moses/comboreduct/combo/vertex.h:94`
+
+**Issue:** be generalized soon.  XXX do this...
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Generic functions
+// Currently take enum as arg or return enum, but should
+// be generalized soon.  XXX do this...
+cond,
+equ,
+```
+</details>
+
+
+**100.** `moses/moses/comboreduct/combo/vertex.h:101`
+
+**Issue:** XXX This should be obsoleted by cond, at some point.
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+apply,
+
+// XXX This should be obsoleted by cond, at some point.
+// Maybe action_boolean_if too, I guess?
+contin_if,
+```
+</details>
+
+
+**101.** `moses/moses/comboreduct/combo/vertex.h:418`
+
+**Issue:** inequality XXX Huh? but its not in namespace boost !?
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// don't know why this is needed *in namespace boost*, but it is, for
+// e.g. calling a generic stl function that compares vertices for
+// inequality XXX Huh? but its not in namespace boost !?
+inline bool operator!=(const vertex& v1, const vertex& v2)
+{
+```
+</details>
+
+
+**102.** `moses/moses/comboreduct/combo/iostream_combo.cc:440`
+
+**Issue:** XXX ?? Ahem, won't calling out<<(*m) just lead to infinite
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+return out << m->getContent();
+
+// XXX ?? Ahem, won't calling out<<(*m) just lead to infinite
+// recursion ??
+if (const ann_type* z = get<ann_type>(&v))
+```
+</details>
+
+
+**103.** `moses/moses/comboreduct/table/table.h:634`
 
 **Issue:** XXX TODO WARNING ERROR: builtin hardcoded shit!!!
 
@@ -7564,7 +11745,7 @@ res.push_back(seq.get_at<builtin>(i));
 </details>
 
 
-**45.** `moses/moses/comboreduct/table/table.h:638`
+**104.** `moses/moses/comboreduct/table/table.h:638`
 
 **Issue:** XXX TODO WARNING ERROR: builtin hardcoded shit!!!
 
@@ -7585,7 +11766,7 @@ res.push_back(id::null_vertex);
 </details>
 
 
-**46.** `moses/moses/comboreduct/table/table.h:1069`
+**105.** `moses/moses/comboreduct/table/table.h:1069`
 
 **Issue:** * XXX TODO -- this also should probably support the weight column,
 
@@ -7606,7 +11787,7 @@ res.push_back(id::null_vertex);
 </details>
 
 
-**47.** `moses/moses/comboreduct/table/table.h:1274`
+**106.** `moses/moses/comboreduct/table/table.h:1274`
 
 **Issue:** XXX TODO, it would be easier if KLD took a sorted list
 
@@ -7627,7 +11808,28 @@ std::vector<contin_t> p, q;
 </details>
 
 
-**48.** `moses/moses/comboreduct/table/table.cc:403`
+**107.** `moses/moses/comboreduct/table/table.h:1283`
+
+**Issue:** XXX review this, is this really correct?  At any rate,
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// KLD is negative; we want the IC to be postive.
+// XXX review this, is this really correct?  At any rate,
+// feature selection utterly fails with negative IC.
+// Also a problem, this is returning values greater than 1.0;
+```
+</details>
+
+
+**108.** `moses/moses/comboreduct/table/table.cc:403`
 
 **Issue:** XXX TODO replace this by the util p_norm function.
 
@@ -7648,7 +11850,7 @@ contin_t OTable::abs_distance(const OTable& ot) const
 </details>
 
 
-**49.** `moses/moses/comboreduct/table/table.cc:428`
+**109.** `moses/moses/comboreduct/table/table.cc:428`
 
 **Issue:** XXX TODO replace this by the util p_norm function.
 
@@ -7669,7 +11871,28 @@ contin_t OTable::sum_squared_error(const OTable& ot) const
 </details>
 
 
-**50.** `moses/moses/comboreduct/table/table.cc:842`
+**110.** `moses/moses/comboreduct/table/table.cc:661`
+
+**Issue:** XXX this cannot possibly be correct, the total count is in general
+
+**Category:** General Implementation  
+**Effort:** 1-2 weeks  
+**Reasoning:** General implementation task requiring moderate effort
+
+<details>
+<summary>View Code Context</summary>
+
+```
+row_it != end() and idx_it != idxs.end();) {
+auto& outputs = row_it->second;
+// XXX this cannot possibly be correct, the total count is in general
+// a fraction, not an integer; it is merely the sum of the weights
+// of the rows. It is NOT equal to the toal number of rows!
+```
+</details>
+
+
+**111.** `moses/moses/comboreduct/table/table.cc:842`
 
 **Issue:** XXX TODO replace this by the util p_norm function.
 
@@ -7690,7 +11913,7 @@ complete_truth_table::hamming_distance(const complete_truth_table& other) const
 </details>
 
 
-**51.** `moses/moses/comboreduct/reduct/logical_rules.cc:100`
+**112.** `moses/moses/comboreduct/reduct/logical_rules.cc:100`
 
 **Issue:** XXX TODO: I don't understand why this is not damaging contin_if  !??
 
@@ -7711,7 +11934,7 @@ complete_truth_table::hamming_distance(const complete_truth_table& other) const
 </details>
 
 
-**52.** `moses/moses/comboreduct/main/eval-table.cc:147`
+**113.** `moses/moses/comboreduct/main/eval-table.cc:147`
 
 **Issue:** XXX FIXME
 
@@ -7757,7 +11980,7 @@ vector<string> header = get_header(pa.input_table_file);
 
 
 
-## ✅ Easy Priority (25 items)
+## ✅ Easy Priority (39 items)
 
 ### Analyze_Fixme_Instances.Py Component (2 items)
 
@@ -7799,12 +12022,12 @@ return False
 
 # Look for actual FIXME patterns in comments
 return (('fixme' in line_lower) or
-('xxx' in line_lower and ('fix' in line_lower or 'todo' in line_lower)) or
+('xxx' in line_lower and (line_lower.strip().startswith('#') or line_lower.strip().startswith('//'))) or  # XXX comments
 ```
 </details>
 
 
-### Atomspace Component (6 items)
+### Atomspace Component (8 items)
 
 
 **1.** `atomspace/opencog/scm/opencog.scm:122`
@@ -7849,7 +12072,49 @@ std::multimap<std::size_t, Handle> thick_vars;
 </details>
 
 
-**3.** `atomspace/opencog/scm/opencog/base/atom-docs.scm:41`
+**3.** `atomspace/opencog/query/Satisfier.cc:41`
+
+**Issue:** XXX Temp hack alert. When Continuations finally terminate, they
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+_result = true;
+
+// XXX Temp hack alert. When Continuations finally terminate, they
+// supply us with empty groundings. This probably needs to be fixed
+// someday. For now, for the simple examples, its good enough.
+```
+</details>
+
+
+**4.** `atomspace/opencog/atomspace/AtomTable.cc:623`
+
+**Issue:** XXX Also, a minor bug, not sure if it matters: if parent is set
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// frames.
+//
+// XXX Also, a minor bug, not sure if it matters: if parent is set
+// to true, then any UniqueLinks appearing here and in the parent
+// will be duplicated repeatedly in the result. Might be nice to
+```
+</details>
+
+
+**5.** `atomspace/opencog/scm/opencog/base/atom-docs.scm:41`
 
 **Issue:** XXX FIXME replace below by real docs.
 
@@ -7870,7 +12135,7 @@ std::multimap<std::size_t, Handle> thick_vars;
 </details>
 
 
-**4.** `atomspace/opencog/atoms/flow/CollectionOfLink.cc:69`
+**6.** `atomspace/opencog/atoms/flow/CollectionOfLink.cc:69`
 
 **Issue:** FIXME: _outoging[0] could be executable, in which case
 
@@ -7891,7 +12156,7 @@ _have_typespec = true;
 </details>
 
 
-**5.** `atomspace/opencog/atoms/truthvalue/SimpleTruthValue.h:77`
+**7.** `atomspace/opencog/atoms/truthvalue/SimpleTruthValue.h:77`
 
 **Issue:** XXX FIXME Are all of these really needed?
 
@@ -7912,7 +12177,7 @@ static SimpleTruthValuePtr createSTV(strength_t mean, confidence_t conf)
 </details>
 
 
-**6.** `atomspace/opencog/atoms/reduct/BoolOpLink.cc:44`
+**8.** `atomspace/opencog/atoms/reduct/BoolOpLink.cc:44`
 
 **Issue:** XXX TODO we can relax this, and accept simple truth values, too.
 
@@ -7933,7 +12198,7 @@ throw InvalidParamException(TRACE_INFO, "Expecting a BoolBalue");
 </details>
 
 
-### Components Component (10 items)
+### Components Component (15 items)
 
 
 **1.** `components/language/learn/scm/attic/cluster/cset-class.scm:148`
@@ -8041,7 +12306,49 @@ TruthQuerySpeechAct, etc...
 </details>
 
 
-**6.** `components/learning/moses/moses/moses/moses/partial.cc:96`
+**6.** `components/learning/moses/moses/moses/scoring/precision_bscore.cc:111`
+
+**Issue:** /set to false.  TBD XXX document that someday.
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// The above only descirbes the "precision_full_bscore" (default)
+/// scoring; something else is done when precision_full_bscore is
+/// set to false.  TBD XXX document that someday.
+
+
+```
+</details>
+
+
+**7.** `components/learning/moses/moses/moses/scoring/select_bscore.cc:314`
+
+**Issue:** XXX This is not quite right, for weighted rows.  A row with a small
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX This is not quite right, for weighted rows.  A row with a small
+// weight could result in a much smaller min-improv.
+// (But I think boosting should not affect min-improv, right?)
+```
+</details>
+
+
+**8.** `components/learning/moses/moses/moses/moses/partial.cc:96`
 
 **Issue:** XXX TODO: we need to get the actual number of gens run, back
 
@@ -8062,7 +12369,49 @@ _moses_params.max_evals -= _num_evals;
 </details>
 
 
-**7.** `components/learning/moses/moses/moses/deme/feature_selector.cc:117`
+**9.** `components/learning/moses/moses/moses/moses/mpi_moses.cc:482`
+
+**Issue:** XXX should print stats less often...
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+});
+
+// XXX should print stats less often...
+// Print stats in a way that makes them easy to graph.
+// (columns of tab-seprated numbers)
+```
+</details>
+
+
+**10.** `components/learning/moses/moses/moses/moses/mpi_moses.cc:641`
+
+**Issue:** XXX this is kind-of buggy, since the following data is not
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Print stats in a way that makes them easy to graph.
+// (columns of tab-seprated numbers)
+// XXX this is kind-of buggy, since the following data is not
+// updated and collected atomically... other threads may be
+// merging and updating as this print happens. Yuck. Oh well.
+```
+</details>
+
+
+**11.** `components/learning/moses/moses/moses/deme/feature_selector.cc:117`
 
 **Issue:** /XXX TODO Explain what this function does. Why does it create a second
 
@@ -8083,7 +12432,7 @@ _moses_params.max_evals -= _num_evals;
 </details>
 
 
-**8.** `components/learning/moses/moses/moses/eda/local_structure.h:145`
+**12.** `components/learning/moses/moses/moses/eda/local_structure.h:145`
 
 **Issue:** XXX TODO document what this does...
 
@@ -8104,7 +12453,7 @@ struct local_structure_probs_learning
 </details>
 
 
-**9.** `components/learning/moses/moses/moses/eda/local_structure.h:279`
+**13.** `components/learning/moses/moses/moses/eda/local_structure.h:279`
 
 **Issue:** XXX TODO this is unclear, explain what is being accumulated where.
 
@@ -8125,7 +12474,7 @@ void local_structure_probs_learning::operator()(const field_set& fs,
 </details>
 
 
-**10.** `components/learning/moses/moses/moses/representation/build_knobs.cc:581`
+**14.** `components/learning/moses/moses/moses/representation/build_knobs.cc:581`
 
 **Issue:** XXX TODO clarify actual breakeven on range of problems...
 
@@ -8142,6 +12491,27 @@ void local_structure_probs_learning::operator()(const field_set& fs,
 // XXX TODO clarify actual breakeven on range of problems...
 #define BREAKEVEN 30000
 size_t np = perms.size();
+```
+</details>
+
+
+**15.** `components/learning/moses/moses/moses/representation/knobs.h:283`
+
+**Issue:** XXX what does the above comment mean ???
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Note - children aren't canonized when parents are called.
+// XXX what does the above comment mean ???
+struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>
+{
 ```
 </details>
 
@@ -8170,7 +12540,7 @@ re = learn_grammar(**kwargs)
 </details>
 
 
-### Moses Component (6 items)
+### Moses Component (11 items)
 
 
 **1.** `moses/moses/moses/metapopulation/merging.cc:404`
@@ -8194,7 +12564,49 @@ re = learn_grammar(**kwargs)
 </details>
 
 
-**2.** `moses/moses/moses/moses/partial.cc:96`
+**2.** `moses/moses/moses/scoring/precision_bscore.cc:111`
+
+**Issue:** /set to false.  TBD XXX document that someday.
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+/// The above only descirbes the "precision_full_bscore" (default)
+/// scoring; something else is done when precision_full_bscore is
+/// set to false.  TBD XXX document that someday.
+
+
+```
+</details>
+
+
+**3.** `moses/moses/moses/scoring/select_bscore.cc:314`
+
+**Issue:** XXX This is not quite right, for weighted rows.  A row with a small
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+}
+
+// XXX This is not quite right, for weighted rows.  A row with a small
+// weight could result in a much smaller min-improv.
+// (But I think boosting should not affect min-improv, right?)
+```
+</details>
+
+
+**4.** `moses/moses/moses/moses/partial.cc:96`
 
 **Issue:** XXX TODO: we need to get the actual number of gens run, back
 
@@ -8215,7 +12627,49 @@ _moses_params.max_evals -= _num_evals;
 </details>
 
 
-**3.** `moses/moses/moses/deme/feature_selector.cc:117`
+**5.** `moses/moses/moses/moses/mpi_moses.cc:479`
+
+**Issue:** XXX should print stats less often...
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+});
+
+// XXX should print stats less often...
+// Print stats in a way that makes them easy to graph.
+// (columns of tab-seprated numbers)
+```
+</details>
+
+
+**6.** `moses/moses/moses/moses/mpi_moses.cc:639`
+
+**Issue:** XXX this is kind-of buggy, since the following data is not
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+// Print stats in a way that makes them easy to graph.
+// (columns of tab-seprated numbers)
+// XXX this is kind-of buggy, since the following data is not
+// updated and collected atomically... other threads may be
+// merging and updating as this print happens. Yuck. Oh well.
+```
+</details>
+
+
+**7.** `moses/moses/moses/deme/feature_selector.cc:117`
 
 **Issue:** /XXX TODO Explain what this function does. Why does it create a second
 
@@ -8236,7 +12690,7 @@ _moses_params.max_evals -= _num_evals;
 </details>
 
 
-**4.** `moses/moses/moses/eda/local_structure.h:145`
+**8.** `moses/moses/moses/eda/local_structure.h:145`
 
 **Issue:** XXX TODO document what this does...
 
@@ -8257,7 +12711,7 @@ struct local_structure_probs_learning
 </details>
 
 
-**5.** `moses/moses/moses/eda/local_structure.h:279`
+**9.** `moses/moses/moses/eda/local_structure.h:279`
 
 **Issue:** XXX TODO this is unclear, explain what is being accumulated where.
 
@@ -8278,7 +12732,7 @@ void local_structure_probs_learning::operator()(const field_set& fs,
 </details>
 
 
-**6.** `moses/moses/moses/representation/build_knobs.cc:581`
+**10.** `moses/moses/moses/representation/build_knobs.cc:581`
 
 **Issue:** XXX TODO clarify actual breakeven on range of problems...
 
@@ -8295,6 +12749,72 @@ void local_structure_probs_learning::operator()(const field_set& fs,
 // XXX TODO clarify actual breakeven on range of problems...
 #define BREAKEVEN 30000
 size_t np = perms.size();
+```
+</details>
+
+
+**11.** `moses/moses/moses/representation/knobs.h:276`
+
+**Issue:** XXX what does the above comment mean ???
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// Note - children aren't canonized when parents are called.
+// XXX what does the above comment mean ???
+struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>
+{
+```
+</details>
+
+
+### Ure Component (2 items)
+
+
+**1.** `ure/opencog/ure/Rule.cc:535`
+
+**Issue:** as any variable in the source. XXX This is only a stochastic
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// To guarantee that the rule variable does not have the same name
+// as any variable in the source. XXX This is only a stochastic
+// guarantee, there is a small chance that the new random name
+// will still collide.
+```
+</details>
+
+
+**2.** `ure/opencog/ure/Rule.cc:572`
+
+**Issue:** as any variable in the target. XXX This is only a stochastic
+
+**Category:** Documentation/Simple Fix  
+**Effort:** 1-3 days  
+**Reasoning:** Simple documentation updates or minor code changes
+
+<details>
+<summary>View Code Context</summary>
+
+```
+
+// To guarantee that the rule variable does not have the same name
+// as any variable in the target. XXX This is only a stochastic
+// guarantee, there is a small chance that the new random name
+// will still collide.
 ```
 </details>
 
@@ -8367,16 +12887,17 @@ size_t np = perms.size();
 | Component | VERY_HARD | HARD | MEDIUM | EASY | Total |
 |-----------|-----------|------|--------|------|-------|
 | analyze_fixme_instances.py | 0 | 0 | 0 | 2 | 2 |
-| atomspace | 9 | 6 | 64 | 6 | 85 |
-| atomspace-restful | 0 | 0 | 2 | 0 | 2 |
+| atomspace | 9 | 10 | 97 | 8 | 124 |
+| atomspace-restful | 0 | 0 | 4 | 0 | 4 |
 | atomspace-rocks | 0 | 0 | 2 | 0 | 2 |
-| atomspace-storage | 2 | 0 | 9 | 0 | 11 |
+| atomspace-storage | 2 | 1 | 14 | 0 | 17 |
 | cogserver | 0 | 1 | 3 | 0 | 4 |
-| cogutil | 0 | 0 | 2 | 0 | 2 |
-| components | 13 | 16 | 167 | 10 | 206 |
-| language-learning | 0 | 0 | 8 | 1 | 9 |
-| moses | 1 | 7 | 52 | 6 | 66 |
+| cogutil | 0 | 0 | 3 | 0 | 3 |
+| components | 18 | 27 | 233 | 15 | 293 |
+| language-learning | 0 | 0 | 9 | 1 | 10 |
+| moses | 3 | 16 | 113 | 11 | 143 |
 | unify | 0 | 0 | 1 | 0 | 1 |
+| ure | 0 | 0 | 0 | 2 | 2 |
 
 ---
 
@@ -8404,4 +12925,4 @@ size_t np = perms.size();
 
 ---
 
-*This catalog was generated automatically by analyzing 390 FIXME instances across 227 files in the OpenCog Unified repository.*
+*This catalog was generated automatically by analyzing 605 FIXME instances across 288 files in the OpenCog Unified repository.*

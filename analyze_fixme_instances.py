@@ -128,8 +128,9 @@ class FIXMEAnalyzer:
            ('metadata about fixme' in line_lower):
             return False
             
-        # Look for actual FIXME patterns in comments
+        # Look for actual FIXME patterns in comments  
         return (('fixme' in line_lower) or 
+                ('xxx' in line_lower and (line_lower.strip().startswith('#') or line_lower.strip().startswith('//'))) or  # XXX comments
                 ('xxx' in line_lower and ('fix' in line_lower or 'todo' in line_lower)) or
                 ('todo' in line_lower and 'fixme' in line_lower))
     
