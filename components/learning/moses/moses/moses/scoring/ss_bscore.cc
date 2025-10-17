@@ -142,12 +142,14 @@ void ss_bscore::ignore_cols(const std::set<arity_t>& idxs) const {
     _bscorer.ignore_cols(idxs);
 }
 
-void ss_bscore::ignore_rows(const std::set<unsigned>&) const {
-    OC_ASSERT(false, "Not implemented yet");
+void ss_bscore::ignore_rows(const std::set<unsigned>& idxs) const {
+    // Delegate to the underlying bscorer for row ignoring
+    _bscorer.ignore_rows(idxs);
 }
 
-void ss_bscore::ignore_rows_at_times(const std::set<TTable::value_type>&) const {
-    OC_ASSERT(false, "Not implemented yet");
+void ss_bscore::ignore_rows_at_times(const std::set<TTable::value_type>& timestamps) const {
+    // Delegate to the underlying bscorer for timestamp-based row ignoring
+    _bscorer.ignore_rows_at_times(timestamps);
 }
 
 unsigned ss_bscore::get_ctable_usize() const {

@@ -30,7 +30,7 @@ namespace opencog { namespace moses {
 
 using combo::CTableTime;
 
-enum class TemporalGranularity {day, month};
+enum class TemporalGranularity {day, month, year, hour, week};
 
 /**
  * WARNING: that class does not support dynamical subsampling. That is

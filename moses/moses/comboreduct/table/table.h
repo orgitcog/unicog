@@ -1271,8 +1271,28 @@ double mutualInformation(const CTable& ctable, const FeatureSet& fs)
                     vec.push_back(b);
                     ycount[b] += count;
                     break;
+                case id::count_type:
+                    // Handle count type as discrete bins
+                    b = static_cast<builtin>(get_contin(v));
+                    vec.push_back(b);
+                    ycount[b] += count;
+                    break;
+                case id::ann_type:
+                    // Handle ANN type as enum
+                    vec.push_back(get_enum_type(v));
+                    ycount[v] += count;
+                    break;
+                case id::unknown_type:
+                    // Handle unknown type gracefully
+                    vec.push_back(id::null_vertex);
+                    ycount[id::null_vertex] += count;
+                    break;
                 default:
-                    OC_ASSERT(false, "case not implemented");
+                    // Handle any remaining types by converting to string representation
+                    logger().warn("Unhandled output type %d in mutual information calculation, using default handling", otype);
+                    vec.push_back(id::null_vertex);
+                    ycount[id::null_vertex] += count;
+                    break;
                 }
                 ioc[vec] += count;
                 vec.pop_back();

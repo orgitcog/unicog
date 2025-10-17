@@ -84,10 +84,29 @@ void univariate_optimization::operator()(deme_t& deme,
              //                      opt_params.rtr_window_size(deme.fields())),
              replace_the_worst(),
              logger);
-    } else { //truncation selection
-        OC_ASSERT(false,
-                  "Trunction selection not implemented."
-                  " Tournament should be used instead.");
+    } else { // truncation selection
+        // Implemented: Truncation selection algorithm
+        logger().info("Using truncation selection with n_select=%d, n_generate=%d", 
+                     n_select, n_generate);
+        
+        // Truncation selection: select the best n_select individuals
+        return optimize(deme, n_select, n_generate, args.max_gens, score,
+                       terminate_if_gte_or_no_improv(opt_params.terminate_if_gte,
+                                                    max_gens_improv),
+                       // Truncation selector: sorts population and takes best n_select
+                       [n_select](deme_t& deme) {
+                           // Sort by fitness (score) in descending order
+                           std::sort(deme.begin(), deme.end(),
+                                   [](const auto& a, const auto& b) {
+                                       return a.second > b.second; // Higher score is better
+                                   });
+                           // Truncate to keep only the best n_select individuals
+                           if (deme.size() > static_cast<size_t>(n_select)) {
+                               deme.resize(n_select);
+                           }
+                       },
+                       replace_the_worst(),
+                       logger);
         /*
         return optimize(deme,n_select,n_generate,args.max_gens,score,
           terminate_if_gte_or_no_improv(opt_params.terminate_if_gte,
