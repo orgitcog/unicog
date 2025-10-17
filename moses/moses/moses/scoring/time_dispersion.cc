@@ -67,8 +67,7 @@ TTable::value_type bscore_ctable_time_dispersion::get_timestamp_class(const TTab
     default: {
         std::stringstream ss;
         ss << "Case " << static_cast<size_t>(_granularity) << " not implemented";
-        OC_ASSERT(false, ss.str());
-        return TTable::value_type();
+        throw RuntimeException(TRACE_INFO, ss.str());
     }
     }
 }

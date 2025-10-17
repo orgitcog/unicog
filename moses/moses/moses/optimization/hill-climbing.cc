@@ -161,8 +161,14 @@ void hill_climbing::operator()(deme_t& deme,
                           << xover_min_neighbors;
             else if (last_chance)
                 why_xover << "last chance";
-            else
-                OC_ASSERT(false, "There must be a bug");
+            else {
+                logger().error() << "Crossover enable logic error: unexpected condition reached. "
+                                 << "iteration=" << iteration 
+                                 << " already_xover=" << already_xover
+                                 << " current_instances=" << current_number_of_instances
+                                 << " large_nbh=" << large_nbh;
+                throw RuntimeException(TRACE_INFO, "Internal crossover enable logic error");
+            }
             logger().debug() << "Crossover enabled ("
                              << why_xover.str() << ")";
 
@@ -185,8 +191,14 @@ void hill_climbing::operator()(deme_t& deme,
                 whynot_xover << "not enough instances to cross";
             else if (!large_nbh)
                 whynot_xover << "small enough neighborhood for full search";
-            else
-                OC_ASSERT(false, "There must be a bug");
+            else {
+                logger().error() << "Crossover disable logic error: unexpected condition reached. "
+                                 << "iteration=" << iteration 
+                                 << " already_xover=" << already_xover
+                                 << " current_instances=" << current_number_of_instances
+                                 << " large_nbh=" << large_nbh;
+                throw RuntimeException(TRACE_INFO, "Internal crossover disable logic error");
+            }
             logger().debug() << "Crossover disabled ("
                              << whynot_xover.str() << ")";
 

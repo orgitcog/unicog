@@ -183,15 +183,14 @@ struct bscore_base
 
     // Return the uncompressed size of the CTable
     virtual unsigned get_ctable_usize() const {
-        OC_ASSERT(false, "You must implement me in the derived class");
-        return 0U;
+        throw RuntimeException(TRACE_INFO, 
+            "get_ctable_usize() must be implemented in the derived scoring class");
     }
 
     // Return the original CTable
     virtual const CTable& get_ctable() const {
-        static const CTable empty_ctable;
-        OC_ASSERT(false, "You must implement me in the derived class");
-        return empty_ctable;
+        throw RuntimeException(TRACE_INFO, 
+            "get_ctable() must be implemented in the derived scoring class");
     }
 
     /// Get the appropriate complexity measure for the indicated combo

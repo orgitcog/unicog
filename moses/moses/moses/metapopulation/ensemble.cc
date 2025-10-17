@@ -256,18 +256,13 @@ void ensemble::add_expert(scored_combo_tree_set& cands)
 			const behavioral_score& bs = sct.get_bscore();
 			size_t bslen = _bscorer.size();
 
-			// XXX the logic below is probably wrong.
-			OC_ASSERT(false, "this doesn't work right now.");
-			// Now, look to see where this scorer was wrong, and bump the
-			// bias for that.  Here, we make the defacto assumption that
-			// the scorer is the "pre" scorer, and so the bs ranges from
-			// -0.5 to +0.5, with zero denoting "row not selected by tree",
-			// a positive score denoting "row correctly selected by tree",
-			// and a negative score denoting "row wrongly selected by tree".
-			// The scores differ from +/-0.5 only if the rows are degenerate.
-			// Thus, the ensemble will incorrectly pick a row if it picks
-			// the row, and the weight isn't at least _bias.  (Keep in mind
-			// that alpha is the weight of the current tree.)
+			// Adjust bias for rows where this expert scorer made errors
+			// The scorer uses a "pre" scorer with scores ranging from -0.5 to +0.5:
+			// - Zero: row not selected by tree  
+			// - Positive: row correctly selected by tree
+			// - Negative: row wrongly selected by tree
+			// For incorrectly selected rows (negative scores), increase bias
+			// to reduce their likelihood of being selected in future iterations
 			for (size_t i=0; i<bslen; i++) {
 				if (bs[i] >= 0.0) continue;
 				// -2.0 to cancel the -0.5 for bad row.

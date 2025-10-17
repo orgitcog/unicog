@@ -55,8 +55,11 @@ void diversity_parameters::set_dst(diversity_parameters::dst_enum_t de,
             return angular_distance<std::vector<score_t>, dp_t>(lhs, rhs);
         };
         break;
-    default:
-        OC_ASSERT(false);
+    default: {
+        std::stringstream ss;
+        ss << "diversity_parameters::set_dst error: no case for distance type " << de;
+        throw RuntimeException(TRACE_INFO, ss.str());
+    }
     }
 }
 
@@ -76,7 +79,7 @@ void diversity_parameters::set_dst2dp(diversity_parameters::dst2dp_enum_t d2de)
     default: {
         std::stringstream ss;
         ss << "diversity_parameters::set_dst2dp error: no case for " << d2de;
-        OC_ASSERT(false, ss.str());
+        throw RuntimeException(TRACE_INFO, ss.str());
     }
     }
 }
