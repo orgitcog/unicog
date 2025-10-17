@@ -86,8 +86,34 @@ discriminator::discriminator(const CTable& ct)
                 res += std::min(0.0, get_contin(cv.first.value) * cv.second);
             return res;
         };
+    } else if (_output_type == id::enum_type) {
+        // For enum tables, treat first enum value as 'false', others as 'true'
+        sum_true = [](const CTable::counter_t& c)->score_t
+        {
+            score_t res = 0.0;
+            for (const CTable::counter_t::value_type& cv : c) {
+                // Count all enum values except the first one as 'true'
+                if (cv.first.value.which() != 0 || get_enum(cv.first.value) != 0)
+                    res += cv.second;
+            }
+            return res;
+        };
+        sum_false = [](const CTable::counter_t& c)->score_t
+        {
+            score_t res = 0.0;
+            for (const CTable::counter_t::value_type& cv : c) {
+                // Count first enum value (0) as 'false'
+                if (cv.first.value.which() == 0 && get_enum(cv.first.value) == 0)
+                    res += cv.second;
+            }
+            return res;
+        };
     } else {
-        OC_ASSERT(false, "Discriminator, unsupported output type");
+        // For unsupported types, log error and use default behavior
+        logger().error() << "Discriminator: unsupported output type " << _output_type 
+                         << ", treating as binary classification";
+        sum_true = [](const CTable::counter_t& c)->score_t { return c.size() > 0 ? 1.0 : 0.0; };
+        sum_false = [](const CTable::counter_t& c)->score_t { return 0.0; };
         return;
     }
 

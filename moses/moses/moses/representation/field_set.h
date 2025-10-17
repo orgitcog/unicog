@@ -224,8 +224,8 @@ struct field_set
             else if (lr == Right)
                 return Left;
             else {
-                OC_ASSERT(false);
-                return disc_t(); // to keep the compiler quiet
+                throw RuntimeException(TRACE_INFO, 
+                    "switchLR: invalid disc_t value, expected Left or Right");
             }
         }
     };
@@ -609,8 +609,12 @@ struct field_set
             contin_offset -= _contin[i].depth;
             if (contin_offset < 0) return i;
         }
-        OC_ASSERT(false, "Impossible case");
-        return size_t(); // to make the compiler quiet
+        // This should never be reached if assertions are correct
+        logger().error() << "raw_to_contin_idx: impossible case reached. "
+                         << "raw_idx=" << raw_idx 
+                         << " begin_contin_idx=" << begin_contin_idx
+                         << " end_contin_idx=" << end_contin_idx;
+        throw RuntimeException(TRACE_INFO, "raw_to_contin_idx: index computation error");
     }
 
     /// Given an index into the term_spec array, this returns an

@@ -1612,8 +1612,11 @@ bool PatternMatchEngine::explore_up_branches(const PatternTermPtr& ptm,
 {
 	const PatternTermPtr& parent(ptm->getParent());
 
-	if (clause == parent and clause->hasEvaluatable())
-		OC_ASSERT(false, "Error: Unexpected situation!\n");
+	if (clause == parent and clause->hasEvaluatable()) {
+		logger().error() << "Unexpected pattern matching situation: clause equals parent and has evaluatable. "
+		                 << "Clause: " << clause->getQuote()->to_string();
+		throw RuntimeException(TRACE_INFO, "Unexpected pattern matching situation");
+	}
 
 	// We may have walked up to the top of an evaluatable term.
 	// At this time, we only handle IdenticalLinks.
@@ -2436,7 +2439,10 @@ bool PatternMatchEngine::do_term_up(const PatternTermPtr& ptm,
 
 	if (parent->hasAnyEvaluatable())
 	{
-		OC_ASSERT(false, "Hit some dead code!");
+		logger().error() << "Reached supposedly dead code path in pattern matching. "
+		                 << "Parent has evaluatable but code path was expected to be unreachable. "
+		                 << "Clause: " << clause->getQuote()->to_string();
+		// Continue with the evaluation anyway, but log the issue
 		// XXX TODO make sure that all variables in the clause have
 		// been grounded!  If they're not, something is badly wrong!
 		logmsg("Term inside evaluatable, move up to it's top:",

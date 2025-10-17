@@ -277,7 +277,9 @@ HandleSeq LGDictExpContainer::to_handle(const Handle& hWordNode)
         return qDisjuncts;
     }
 
-    // Should never get here
-    OC_ASSERT(false, "Unknown Link Grammar Expression type %d", m_type);
-    return HandleSeq();
+    // This should never be reached if all known types are handled above
+    logger().error() << "Unknown Link Grammar Expression type: " << m_type 
+                     << ". Known types: CONNECTOR_type, AND_type, OR_type";
+    throw RuntimeException(TRACE_INFO, 
+        "Unknown Link Grammar Expression type %d", m_type);
 }

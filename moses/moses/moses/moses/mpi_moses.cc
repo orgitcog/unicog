@@ -60,7 +60,8 @@ moses_mpi_comm::moses_mpi_comm() :
     if (MPI_THREAD_MULTIPLE != have_thread_support) {
         MPI::Finalize();
         logger().error() << "This MPI implementation lacks threading support!";
-        OC_ASSERT(false, "This MPI implementation lacks threading support!");
+        throw RuntimeException(TRACE_INFO, 
+            "MPI implementation lacks required threading support (MPI_THREAD_MULTIPLE)");
     }
 #endif
     
@@ -304,8 +305,14 @@ void mpi_moses_worker(metapopulation& mp,
         if (!dex.create_demes(exemplar, 0 /* TODO replace with the
                                                  right expansion
                                                  count */)) {
-            // XXX replace this with appropriate message back to root!
-            OC_ASSERT(false, "Exemplar failed to expand!\n");
+            // Notify root of failure and continue processing
+            logger().error() << "Exemplar failed to expand: " << exemplar 
+                             << " - sending empty result to root";
+            // Send empty metapopulation to indicate failure
+            metapopulation empty_mp(*sm);
+            unsigned zero_evals = 0;
+            mompi.send_deme(empty_mp, zero_evals);
+            continue; // Continue to next exemplar
         }
 
         // XXX TODO should probably fetch max_time from somewhere...

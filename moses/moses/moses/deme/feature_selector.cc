@@ -194,8 +194,13 @@ CTable feature_selector::build_fs_ctable(const combo_tree& xmplr) const
                     inputs.push_back(get_builtin(predicted_out));
                 else if (cto == id::contin_type)
                     inputs.push_back(get_contin(predicted_out));
-                else
-                    OC_ASSERT(false, "Not implemented");
+                else if (cto == id::enum_type)
+                    inputs.push_back(get_enum(predicted_out));
+                else {
+                    logger().error() << "Feature selector: unsupported output type " << cto
+                                     << " for exemplar feature, skipping";
+                    // Don't append the feature for unsupported types
+                }
             }
 
             fs_ctable[inputs] += vct.second;

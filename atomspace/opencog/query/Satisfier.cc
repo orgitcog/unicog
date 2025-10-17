@@ -158,10 +158,13 @@ ValuePtr SatisfyingSet::wrap_result(const GroundingMap& var_soln)
 				(*it).second->add(gvp);
 			return gvp;
 		}
-		catch (...)
+		catch (const std::exception& ex)
 		{
-			OC_ASSERT(false,
-				"Internal error: ungrounded variable %s\n",
+			logger().error() << "Internal error: ungrounded variable " 
+			                 << _varseq[0]->to_string() 
+			                 << " Exception: " << ex.what();
+			throw RuntimeException(TRACE_INFO,
+				"Internal error: ungrounded variable %s",
 				_varseq[0]->to_string().c_str());
 		}
 	}

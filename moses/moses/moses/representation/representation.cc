@@ -90,14 +90,16 @@ combo_tree type_to_exemplar(type_node type)
         tr.append_child(tr.begin(), enum_t::get_random_enum());
         return tr;
     }
-    case id::ill_formed_type:
-        OC_ASSERT(false, "Error: the data type is incorrect, "
-                  "perhaps it has not been possible to infer it from the "
-                  "input table.");
+    case id::ill_formed_type: {
+        logger().error() << "Cannot generate exemplar from ill-formed type. "
+                         << "Input table type inference may have failed.";
+        throw RuntimeException(TRACE_INFO, 
+            "Cannot generate exemplar from ill-formed type - input table type inference failed");
+    }
     default: {
         std::stringstream ss;
-        ss << "Error: type \"" << type << "\" not supported";
-        OC_ASSERT(false, ss.str());
+        ss << "Error: type \"" << type << "\" not supported for exemplar generation";
+        throw RuntimeException(TRACE_INFO, ss.str());
     }
     }
     return combo_tree();

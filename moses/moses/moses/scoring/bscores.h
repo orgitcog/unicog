@@ -194,8 +194,11 @@ struct contin_bscore : public bscore_base
         case abs_error:
             err_func = [](contin_t y1, contin_t y2) { return std::abs(y1 - y2); };
             break;
-        default:
-            OC_ASSERT(false);
+        default: {
+            std::stringstream ss;
+            ss << "contin_bscore::init error: unknown error function type " << eft;
+            throw RuntimeException(TRACE_INFO, ss.str());
+        }
         }
     };
 

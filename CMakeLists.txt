@@ -268,6 +268,7 @@ if(TARGET evolutionary-optimization)
     if(TARGET meta-cognition)
         add_dependencies(evolutionary-optimization meta-cognition)
     endif()
+endif()
 # Phase 4: Distributed Cognitive Mesh API & Embodiment Layer
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/distributed-cognitive-mesh/CMakeLists.txt")
     add_subdirectory(distributed-cognitive-mesh)
