@@ -69,7 +69,51 @@ void eval_constants::operator()(combo_tree& tr, combo_tree::iterator it) const
             }
         }
         else {
-            OC_ASSERT(false, "Not implemented yet");
+            // Handle non-commutative associative operators
+            // For these, we can still evaluate constant sub-expressions in order
+            // but we need to be careful about maintaining operator order
+            
+            // Find consecutive constant sequences from left to right
+            auto start_const = it.begin();
+            while (start_const != it.end()) {
+                if (is_constant(*start_const)) {
+                    auto end_const = start_const;
+                    ++end_const;
+                    
+                    // Find the end of this constant sequence
+                    while (end_const != it.end() && is_constant(*end_const)) {
+                        ++end_const;
+                    }
+                    
+                    // If we have at least 2 constants in sequence, evaluate them
+                    if (std::distance(start_const, end_const) >= 2) {
+                        // Create a sub-expression with the operator and constants
+                        combo_tree sub_tree;
+                        auto sub_root = sub_tree.set_head(*it);
+                        
+                        // Copy constants to sub-tree
+                        for (auto const_it = start_const; const_it != end_const; ++const_it) {
+                            sub_tree.append_child(sub_root, *const_it);
+                        }
+                        
+                        // Evaluate the sub-expression
+                        vertex_seq empty;
+                        vertex result = eval_throws_binding(empty, sub_root);
+                        
+                        // Replace the constant sequence with the result
+                        auto replacement = tr.replace(start_const, result);
+                        tr.erase(++replacement, end_const);
+                        
+                        // Continue from after the replacement
+                        start_const = replacement;
+                        ++start_const;
+                    } else {
+                        ++start_const;
+                    }
+                } else {
+                    ++start_const;
+                }
+            }
         }
     }
     else {

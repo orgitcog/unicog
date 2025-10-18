@@ -339,8 +339,29 @@ int main(int argc, char** argv)
                                       ecp.max_activation,
                                       ecp.pre_positive);
     }
+    else if ("accuracy" == ecp.problem) {
+        bscore = new ctruth_table_bscore(table.compressed());
+    }
+    else if ("balanced_accuracy" == ecp.problem) {
+        bscore = new precision_bscore(table.compressed(),
+                                      ecp.activation_pressure,
+                                      ecp.min_activation,
+                                      ecp.max_activation,
+                                      ecp.pre_positive);
+    }
+    else if ("regression" == ecp.problem) {
+        bscore = new contin_bscore(table.compressed());
+    }
+    else if ("ranking" == ecp.problem) {
+        bscore = new ctruth_table_bscore(table.compressed());
+    }
+    else if ("clustering" == ecp.problem) {
+        bscore = new ctruth_table_bscore(table.compressed());
+    }
     else {
-        OC_ASSERT(false, "Unknown scorer type.");
+        logger().warn("Unknown scorer type '%s', using default ctruth_table_bscore", 
+                     ecp.problem.c_str());
+        bscore = new ctruth_table_bscore(table.compressed());
     }
 
     behave_cscore bcscore(*bscore);

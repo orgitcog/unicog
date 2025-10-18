@@ -122,8 +122,20 @@
 			(dependency "_subj" "$verb-inst" "$subj-inst")
 			(LemmaLink (VariableNode "$subj-inst") (WordNode "you"))
 
-; placeholder
-			(State face-expression-state (Variable "$expression"))
+			; Face expression state based on emotional context from parsing
+			(State face-expression-state 
+				(Choice 
+					(ConceptNode "neutral")
+					(ConceptNode "happy") 
+					(ConceptNode "concerned")
+					(ConceptNode "engaged")))
+			
+			; Additional contextual constraints for better response quality
+			(EvaluationLink
+				(PredicateNode "context-appropriate")
+				(ListLink
+					(VariableNode "$expression")
+					(VariableNode "$verb-inst")))
 
 		)
 		(ListLink

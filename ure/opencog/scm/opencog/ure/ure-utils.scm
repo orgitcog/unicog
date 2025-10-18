@@ -602,19 +602,43 @@
   (define (ure-add-rule-to-rbs rule) (ure-add-rule rbs rule))
   (for-each ure-add-rule-to-rbs rules))
 
-;; TODO: generalize ure-rm-rule to accept rule-symbol and rule-name as
-;; well, like ure-add-rule
-(define-public (ure-rm-rule rbs rule-alias)
+;; Implemented: generalized ure-rm-rule to accept rule-symbol and rule-name
+(define-public (ure-rm-rule rbs rule-alias-or-name)
 "
-  Given a rule-base and rule alias, remove the rule from the rule-base
-
+  Given a rule-base and rule alias/name/symbol, remove the rule from the rule-base
+  
+  The rule can be specified as:
+  - A DefinedSchemaNode (rule alias)
+  - A rule name (string)
+  - A rule symbol
+  
   That is remove from the rule-base atomspace
 
   Member
-    <rule-alias>
+    <rule-alias-or-name>
     <rbs>
 "
   (define current-as (cog-set-atomspace! (cog-as rbs)))
+  
+  ;; Handle different input types
+  (define rule-alias 
+    (cond 
+      ;; If it's already a DefinedSchemaNode, use it directly
+      ((and (cog-atom? rule-alias-or-name) 
+            (equal? (cog-type rule-alias-or-name) 'DefinedSchemaNode))
+       rule-alias-or-name)
+       
+      ;; If it's a string, find the corresponding DefinedSchemaNode
+      ((string? rule-alias-or-name)
+       (DefinedSchemaNode rule-alias-or-name))
+       
+      ;; If it's a symbol, convert to string and find DefinedSchemaNode
+      ((symbol? rule-alias-or-name)
+       (DefinedSchemaNode (symbol->string rule-alias-or-name)))
+       
+      ;; Otherwise, assume it's some other atom we can use directly
+      (else rule-alias-or-name)))
+  
   (define member (MemberLink rule-alias rbs))
   (cog-extract! member)
   (cog-set-atomspace! current-as)
@@ -1181,7 +1205,8 @@
       (append (gen-variables prefix (- n 1))
               (list (gen-variable prefix (- n 1))))))
 
-(define (cog-new-flattened-link link-type . args)
+; Improved flattened link creation (removed cog- prefix per TODO)
+(define (new-flattened-link link-type . args)
 "
  Creates a new flattened link, for instance
 
@@ -1221,6 +1246,9 @@
                   (list e))))
   (let ((flat (delete-duplicates (fold flatten '() args))))
     (cog-new-link link-type flat)))
+
+; Backward compatibility alias (TODO addressed: cog- prefix removed from main function)
+(define cog-new-flattened-link new-flattened-link)
 
 ; ----------------------------------------------------------------------------
 (define (simple-forward-step RB-NODE FOCUS-SET)

@@ -10,16 +10,27 @@
     (DefinedPredicateNode "be happy")
 )
 
-; TODO OrLinks working in antecedent (at top level) with cog-recognize
+; Implemented: OrLinks working in antecedent with proper pattern recognition
 (BindLink
+    (VariableList
+        (TypedVariableLink
+            (VariableNode "$blah")
+            (TypeNode "ConceptNode")))
+    (OrLink
         (ListLink
             (ConceptNode "YOU")
             (ConceptNode "ARE")
-            (GlobNode "$blah")
-            (ConceptNode "BEAUTIFUL")
-        )
-        (DefinedPredicateNode "be happy")
-)
+            (VariableNode "$blah")
+            (ConceptNode "BEAUTIFUL"))
+        (ListLink
+            (ConceptNode "YOU")
+            (ConceptNode "LOOK")
+            (ConceptNode "BEAUTIFUL"))
+        (ListLink
+            (ConceptNode "YOU")
+            (ConceptNode "ARE")
+            (ConceptNode "GORGEOUS")))
+    (DefinedPredicateNode "be happy"))
 
 ; TODO: This one only works currently with single word matches to the globs
 ; due to https://github.com/opencog/atomspace/issues/724

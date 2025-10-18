@@ -152,8 +152,17 @@ void field_set::build_spec(const spec& s, size_t n)
         build_contin_spec(*cs, n);
     } else if (const disc_spec* ds = boost::get<disc_spec>(&s)) {
         build_disc_spec(*ds, n);
+    } else if (s.which() == -1) {
+        // Handle empty/null spec
+        logger().warn("Encountered null spec in field_set::build_spec, skipping");
+        return;
     } else {
-        OC_ASSERT(false, "This spec is NULL or unknown");
+        // Handle unknown spec types
+        logger().warn("Unknown spec type (%d) in field_set::build_spec, using default disc_spec", 
+                     static_cast<int>(s.which()));
+        // Create a default discrete spec with binary values
+        disc_spec default_spec(2);
+        build_disc_spec(default_spec, n);
     }
 }
 

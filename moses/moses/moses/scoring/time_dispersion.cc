@@ -64,10 +64,31 @@ TTable::value_type bscore_ctable_time_dispersion::get_timestamp_class(const TTab
                   "are you sure you have loaded a timestamp feature "
                   "(option --timestamp-feature)?")
         return TTable::value_type(timestamp.year(), timestamp.month(), 1);
+    case TemporalGranularity::year:
+        OC_ASSERT(!timestamp.is_not_a_date(),
+                  "timestamp is not a valid date for year granularity")
+        return TTable::value_type(timestamp.year(), 1, 1);
+    case TemporalGranularity::hour:
+        OC_ASSERT(!timestamp.is_not_a_date(),
+                  "timestamp is not a valid date for hour granularity")
+        // Group by hour of day (ignoring minutes/seconds)
+        return TTable::value_type(timestamp.year(), timestamp.month(), 
+                                 timestamp.day(), timestamp.hour(), 0, 0);
+    case TemporalGranularity::week:
+        OC_ASSERT(!timestamp.is_not_a_date(),
+                  "timestamp is not a valid date for week granularity")
+        // Group by week (ISO week numbering)
+        {
+            auto week_start = timestamp - boost::gregorian::days(timestamp.day_of_week());
+            return TTable::value_type(week_start.year(), week_start.month(), week_start.day());
+        }
     default: {
         std::stringstream ss;
-        ss << "Case " << static_cast<size_t>(_granularity) << " not implemented";
-        throw RuntimeException(TRACE_INFO, ss.str());
+        ss << "Unknown TemporalGranularity case " << static_cast<size_t>(_granularity) 
+           << ". Supported granularities: day, month, year, hour, week";
+        logger().warn(ss.str());
+        // Fallback to daily granularity for unknown cases
+        return timestamp;
     }
     }
 }

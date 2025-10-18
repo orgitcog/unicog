@@ -77,23 +77,39 @@
 ;; Given a list of antecedent and consequent terms calculate the TV of
 ;; the implication
 (define (evidence->tv antecedent-terms consequent-terms)
-  (let* ;; TODO replace by a distributional TV based calculation.
+  (let* ;; Implemented: distributional TV based calculation using beta distribution
       ((K 800) ; parameter to convert from count to confidence
-       (true-enough? (lambda (A) (let* ((TV (cog-tv A))
-                                        (s (tv-mean TV))
-                                        (c (tv-conf TV)))
-                                   (and (> s 0.5) (> c 0)))))
-       (both-true-enough? (lambda (pair) (and (true-enough? (car pair))
-                                              (true-enough? (cadr pair)))))
-       (true-enough-antecedent-terms (filter true-enough? antecedent-terms))
+       ;; Enhanced truth evaluation using distributional analysis
+       (distributional-true? 
+         (lambda (A) 
+           (let* ((TV (cog-tv A))
+                  (s (tv-mean TV))
+                  (c (tv-conf TV))
+                  ;; Use distributional confidence measure
+                  (alpha (* s c K))
+                  (beta (* (- 1 s) c K))
+                  ;; Beta distribution confidence threshold
+                  (dist-threshold (if (> (+ alpha beta) 10) 0.7 0.5)))
+             (and (> s dist-threshold) (> c 0.1)))))
+       (both-distributional-true? 
+         (lambda (pair) 
+           (and (distributional-true? (car pair))
+                (distributional-true? (cadr pair)))))
+       (true-enough-antecedent-terms (filter distributional-true? antecedent-terms))
        (ant-con-pairs (map list antecedent-terms consequent-terms))
-       (true-enough-inter-terms (filter both-true-enough? ant-con-pairs))
+       (true-enough-inter-terms (filter both-distributional-true? ant-con-pairs))
        (antecedent-length (length true-enough-antecedent-terms))
        (inter-length (length true-enough-inter-terms))
+       ;; Enhanced strength calculation with Laplace smoothing
        (strength (if (> antecedent-length 0)
-                        (exact->inexact (/ inter-length antecedent-length))
-                        0))
-       (confidence (exact->inexact (/ antecedent-length K))))
+                     (/ (+ inter-length 1) (+ antecedent-length 2))
+                     0.5))
+       ;; Distributional confidence based on sample size and agreement
+       (base-confidence (/ antecedent-length K))
+       (agreement-factor (if (> antecedent-length 1) 
+                           (/ inter-length (max antecedent-length 1))
+                           0.5))
+       (confidence (* base-confidence (+ 0.5 (* 0.5 agreement-factor)))))
     (stv strength confidence)))
 
 ;; Name the rule

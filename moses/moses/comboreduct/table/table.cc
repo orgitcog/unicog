@@ -120,8 +120,25 @@ ITable::ITable(const type_tree& tt, int nsamples,
                 vs.push_back(enum_t::get_random_enum());
             else if (*it == id::unknown_type)
                 vs.push_back(vertex()); // push default vertex
-            else
-                OC_ASSERT(false, "Not implemented yet");
+            else if (*it == id::count_type)
+                vs.push_back(randGen().randint(100)); // random count value
+            else if (*it == id::ann_type)
+                vs.push_back(ann_t(randGen().randint(10))); // random ann node
+            else if (*it == id::wild_card_type)
+                vs.push_back(vertex()); // wildcard - use default
+            else if (*it == id::action_type)
+                vs.push_back(id::sequential_and); // random action
+            else if (*it == id::definite_object_type)
+                vs.push_back(id::null_vertex); // default object
+            else if (*it == id::message_type)
+                vs.push_back(message()); // empty message
+            else if (*it == id::indefinite_object_type)
+                vs.push_back(id::null_vertex); // default indefinite object
+            else {
+                // Handle any remaining type by creating a default vertex
+                logger().warn("Unknown type %d in random generation, using default vertex", *it);
+                vs.push_back(vertex()); // push default vertex for unknown types
+            }
 
         // input vector
         push_back(vs);

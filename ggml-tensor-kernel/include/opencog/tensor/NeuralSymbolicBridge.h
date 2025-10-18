@@ -13,7 +13,12 @@
 #include <string>
 #include <functional>
 
-#include "atomspace_stub.h"
+#include <opencog/atoms/base/Atom.h>
+#include <opencog/atoms/base/Handle.h>
+#include <opencog/atoms/base/Node.h>
+#include <opencog/atoms/base/Link.h>
+#include <opencog/atomspace/AtomSpace.h>
+#include <opencog/util/Logger.h>
 #include "ggml.h"
 
 namespace opencog {

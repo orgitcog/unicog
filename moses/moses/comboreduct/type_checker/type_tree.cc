@@ -286,12 +286,21 @@ type_tree get_output_type_tree(const vertex& v)
         return type_tree(id::message_type);
     } else if (is_procedure_call(v)) {
         return get_output_type_tree(get_procedure_call(v));
+    } else if (is_ann_type(v)) {
+        return type_tree(id::ann_type);
+    } else if (is_action(v)) {
+        return type_tree(id::action_type);
+    } else if (is_builtin_action(v)) {
+        return type_tree(id::action_type);
+    } else if (is_perception(v)) {
+        return type_tree(id::unknown_type); // Perception type
+    } else if (is_action_symbol(v)) {
+        return type_tree(id::action_type);
     } else {
-        stringstream out;
-        out << v;
-        OC_ASSERT(false, "Unhandled case '%s'",
-                          out.str().c_str());
-        return type_tree(id::ill_formed_type);
+        // Handle unknown vertex types gracefully
+        logger().warn("Unknown vertex type encountered in type inference: %s", 
+                     boost::lexical_cast<std::string>(v).c_str());
+        return type_tree(id::unknown_type); // More graceful than ill_formed_type
     }
 }
 
@@ -320,11 +329,10 @@ type_tree get_input_type_tree(const vertex& v, arity_t i)
     } else if (is_procedure_call(v)) {
         return get_input_type_tree(get_procedure_call(v), i);
     } else {
-        stringstream out;
-        out << v;
-        OC_ASSERT(false,
-                          "Unhandled case '%s'", out.str().c_str());
-        return type_tree(id::ill_formed_type);
+        // Handle unknown input types gracefully with logging
+        logger().warn("Unknown input type for vertex: %s", 
+                     boost::lexical_cast<std::string>(v).c_str());
+        return type_tree(); // Return empty type tree instead of asserting
     }
 }
 

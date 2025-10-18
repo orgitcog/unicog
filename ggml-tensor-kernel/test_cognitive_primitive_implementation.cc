@@ -9,7 +9,12 @@
 #include <iostream>
 #include <memory>
 #include <cassert>
-#include "atomspace_stub.h"
+#include <opencog/atoms/base/Atom.h>
+#include <opencog/atoms/base/Handle.h>
+#include <opencog/atoms/base/Node.h>
+#include <opencog/atoms/base/Link.h>
+#include <opencog/atomspace/AtomSpace.h>
+#include <opencog/util/Logger.h>
 #include "../include/opencog/tensor/CognitivePrimitive.h"
 
 using namespace opencog;

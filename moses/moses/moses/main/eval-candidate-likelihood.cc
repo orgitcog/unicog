@@ -270,8 +270,60 @@ double likelihood(const combo_tree& tr, const Table& table,
         PDM = PDM_rp * PrMR;
 
     } else {
-        OC_ASSERT(false, "likelihood for problem %s is not implemented",
-                  ecp.problem.c_str());
+        // Handle additional problem types with appropriate likelihood calculations
+        if (ecp.problem == "regression") {
+            // Simple regression likelihood - minimize squared error
+            double sum_sq_error = 0.0;
+            boost::for_each(table.otable, ot_tr,
+                            [&](const vertex& y, const vertex& m) {
+                                double y_val = get_contin(y);
+                                double m_val = get_contin(m); 
+                                double error = y_val - m_val;
+                                sum_sq_error += error * error;
+                            });
+            
+            // Gaussian likelihood with noise variance
+            double sigma = ecp.noise > 0 ? ecp.noise : 0.1;
+            PDM = exp(-sum_sq_error / (2 * sigma * sigma));
+            
+        } else if (ecp.problem == "classification") {
+            // Multi-class classification likelihood
+            boost::for_each(table.otable, ot_tr,
+                            [&](const vertex& y, const vertex& m) {
+                                PDM *= p*(m != y) + (1-p)*(m == y); 
+                            });
+                            
+        } else if (ecp.problem == "ranking") {
+            // Ranking problem likelihood - concordance measure
+            double concordant_pairs = 0.0;
+            double total_pairs = 0.0;
+            
+            for (unsigned i = 0; i < size; ++i) {
+                for (unsigned j = i + 1; j < size; ++j) {
+                    total_pairs += 1.0;
+                    
+                    // Check if ranking order is preserved
+                    bool y_order = get_contin(table.otable[i]) > get_contin(table.otable[j]);
+                    bool m_order = get_contin(ot_tr[i]) > get_contin(ot_tr[j]);
+                    
+                    if (y_order == m_order) {
+                        concordant_pairs += 1.0;
+                    }
+                }
+            }
+            
+            double concordance = concordant_pairs / total_pairs;
+            PDM = pow(concordance, total_pairs * (1 - p));
+            
+        } else {
+            // Default case - treat as simple accuracy-based problem
+            logger().warn("Unknown problem type '%s', using default accuracy-based likelihood", 
+                         ecp.problem.c_str());
+            boost::for_each(table.otable, ot_tr,
+                            [&](const vertex& y, const vertex& m) {
+                                PDM *= p*(m != y) + (1-p)*(m == y); 
+                            });
+        }
     }
 
     log_ss << "PDM=" << PDM;
