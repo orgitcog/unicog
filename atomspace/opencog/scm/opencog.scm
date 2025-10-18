@@ -119,9 +119,8 @@ cog-value-type
 ; atomspace as a result. The below tries to avoid problems by simply
 ; grabbing the existing atomspace, if there already is one.
 ;
-; FIXME: Both of the above-described problems might no longer exist.
-; I'm not sure. The below is simple and painless, I'm leaving it for
-; now.
+; NOTE: The above-described problems may no longer exist with current
+; Guile versions, but this approach remains simple and safe.
 
 (define-public cog-initial-as (cog-atomspace))
 (define-public my-as (cog-atomspace))

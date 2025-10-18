@@ -1,0 +1,17 @@
+# Pre-commit configuration for FIXME management
+repos:
+  - repo: local
+    hooks:
+      - id: no-new-fixmes
+        name: Prevent new FIXME comments
+        entry: bash -c 'if git diff --cached | grep -E "^\+.*FIXME|^\+.*XXX.*FIXME"; then echo "New FIXME detected! Use TODO instead."; exit 1; fi'
+        language: system
+        files: \.(cc|cpp|h|hpp|scm|py|c)$
+
+      - id: fixme-progress-update
+        name: Update FIXME progress
+        entry: python3 fixme_resolution_tracker.py --report
+        language: system
+        files: .*
+        pass_filenames: false
+        always_run: false

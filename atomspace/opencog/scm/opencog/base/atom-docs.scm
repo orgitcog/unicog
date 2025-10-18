@@ -38,9 +38,32 @@
 	(procedure-property QueryLink 'documentation))
 
 ; ---------------------------------------------------------------
-; XXX FIXME replace below by real docs.
 (set-procedure-property! BindLink 'documentation
-	(procedure-property QueryLink 'documentation))
+"
+  BindLink -- Define a query, rewriting all matches. Results placed in 
+    a SetLink.
+
+  General form:
+
+      BindLink
+          VariableList decls
+          match-body
+          rewrite
+
+  Same as QueryLink, but results are returned in a SetLink instead of
+  a QueueValue. This is useful when you need all results collected in
+  a single Atom structure.
+
+  See https://wiki.opencog.org/w/QueryLink for more info.
+
+  See also:
+     QueryLink -- same as above, results placed in QueueValue
+     GetLink -- no rewrite, results placed in SetLink
+     MeetLink -- no rewrite, results place in QueueValue
+     SatisfactionLink -- return true, if there are any results at all.
+     DualLink -- pattern recognition instead of pattern matching
+     JoinLink -- union, instead of intersection
+")
 
 (set-procedure-property! BindLink 'documentation
 	(procedure-property QueryLink 'documentation))

@@ -74,8 +74,8 @@ public:
     TruthValuePtr merge(const TruthValuePtr&,
                         const MergeCtrl& mc=MergeCtrl()) const;
 
-    // XXX FIXME Are all of these really needed?
-    // Can we get rid of some of them?
+    // Static factory methods for creating SimpleTruthValue instances.
+    // These provide convenience functions for creation with common parameters.
     static SimpleTruthValuePtr createSTV(strength_t mean, confidence_t conf)
     {
         return std::make_shared<const SimpleTruthValue>(mean, conf);

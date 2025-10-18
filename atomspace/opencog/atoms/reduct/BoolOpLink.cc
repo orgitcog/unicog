@@ -41,7 +41,8 @@ ValuePtr BoolOpLink::execute(AtomSpace* as, bool silent)
 	ValuePtr vp = _outgoing[0]->execute(as, silent);
 	if (1 == sz and BOOL_NOT_LINK != get_type()) return vp;
 
-	// XXX TODO we can relax this, and accept simple truth values, too.
+	// Currently only accepts BoolValue. Could be extended to accept
+	// SimpleTruthValue as well, which would require conversion logic.
 	if (not nameserver().isA(vp->get_type(), BOOL_VALUE))
 		throw InvalidParamException(TRACE_INFO, "Expecting a BoolBalue");
 
