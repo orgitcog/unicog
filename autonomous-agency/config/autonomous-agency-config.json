@@ -1,0 +1,153 @@
+{
+  "autonomous_agency_config": {
+    "version": "1.0.0",
+    "stage": 1,
+    "description": "Bootstrap mechanisms for autonomous agency",
+    
+    "entropic_drift_detector": {
+      "enabled": true,
+      "measurement_interval_ms": 15000,
+      "baseline_update_interval_ms": 300000,
+      "thresholds": {
+        "fragmentation_threshold": 0.15,
+        "decay_threshold": 0.20,
+        "reasoning_threshold": 0.10
+      },
+      "metrics": {
+        "system_entropy": {
+          "enabled": true,
+          "threshold": 0.10
+        },
+        "coherence_measure": {
+          "enabled": true,
+          "threshold": 0.15
+        },
+        "attention_distribution": {
+          "enabled": true,
+          "threshold": 0.12
+        }
+      }
+    },
+    
+    "self_healing_atomspace": {
+      "enabled": true,
+      "background_maintenance": true,
+      "backup_interval_minutes": 30,
+      "integrity_check_interval_minutes": 15,
+      "max_backups": 10,
+      "repair_strategy": "ADAPTIVE",
+      "emergency_mode_threshold": 0.3,
+      "strategies": {
+        "conservative": {
+          "enabled": true,
+          "success_rate": 0.8
+        },
+        "aggressive": {
+          "enabled": true,
+          "success_rate": 0.6
+        },
+        "adaptive": {
+          "enabled": true,
+          "success_rate": 0.9
+        },
+        "emergency": {
+          "enabled": true,
+          "success_rate": 0.7
+        }
+      }
+    },
+    
+    "bootstrap_resource_manager": {
+      "enabled": true,
+      "background_management": true,
+      "resource_check_interval_seconds": 5,
+      "emergency_threshold": 0.1,
+      "resource_pools": {
+        "computational": {
+          "total_capacity": 1000,
+          "reserved_percentage": 10
+        },
+        "memory": {
+          "total_capacity": 2048,
+          "reserved_percentage": 10
+        },
+        "attention": {
+          "total_capacity": 100,
+          "reserved_percentage": 10
+        },
+        "storage": {
+          "total_capacity": 10240,
+          "reserved_percentage": 10
+        },
+        "network": {
+          "total_capacity": 100,
+          "reserved_percentage": 10
+        }
+      },
+      "task_priorities": {
+        "critical": 0,
+        "high": 1,
+        "medium": 2,
+        "low": 3,
+        "deferred": 4
+      }
+    },
+    
+    "integration": {
+      "atomspace_integration": true,
+      "attention_bank_integration": true,
+      "ure_integration": false,
+      "pln_integration": false,
+      "ecan_integration": true
+    },
+    
+    "monitoring": {
+      "performance_tracking": true,
+      "health_monitoring": true,
+      "emergency_response": true,
+      "audit_logging": true,
+      "metrics_reporting": true
+    },
+    
+    "safety": {
+      "fail_safe_defaults": true,
+      "gradual_adaptation": true,
+      "backup_protection": true,
+      "emergency_protocols": true,
+      "resource_limits": true
+    },
+    
+    "future_stages": {
+      "stage_2_agentic_loops": {
+        "planned": true,
+        "dependencies": ["stage_1_bootstrap"],
+        "integration_points": ["resource_management", "health_monitoring", "emergency_response"]
+      },
+      "stage_3_virtual_engine": {
+        "planned": true,
+        "dependencies": ["stage_1_bootstrap", "stage_2_agentic_loops"],
+        "integration_points": ["homeostatic_control", "feedback_loops"]
+      },
+      "stage_4_autopoiesis": {
+        "planned": true,
+        "dependencies": ["stage_1_bootstrap", "stage_2_agentic_loops", "stage_3_virtual_engine"],
+        "integration_points": ["self_making", "self_maintaining"]
+      },
+      "stage_5_autognosis": {
+        "planned": true,
+        "dependencies": ["stage_1_bootstrap", "stage_2_agentic_loops", "stage_3_virtual_engine", "stage_4_autopoiesis"],
+        "integration_points": ["introspection", "self_awareness"]
+      },
+      "stage_6_metacycles": {
+        "planned": true,
+        "dependencies": ["stage_1_bootstrap", "stage_2_agentic_loops", "stage_3_virtual_engine", "stage_4_autopoiesis", "stage_5_autognosis"],
+        "integration_points": ["self_reference", "world_projection"]
+      },
+      "stage_7_autogenesis": {
+        "planned": true,
+        "dependencies": ["stage_1_bootstrap", "stage_2_agentic_loops", "stage_3_virtual_engine", "stage_4_autopoiesis", "stage_5_autognosis", "stage_6_metacycles"],
+        "integration_points": ["morphogenetic_vortex", "emergence", "transcendence"]
+      }
+    }
+  }
+}

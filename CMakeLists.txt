@@ -111,6 +111,14 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/agentic-kernels-catalog/CMakeLists.txt")
     add_subdirectory(agentic-kernels-catalog)
 endif()
 
+# Add autonomous agency module
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/autonomous-agency/CMakeLists.txt")
+    add_subdirectory(autonomous-agency)
+    message(STATUS "Autonomous Agency module: ENABLED")
+else()
+    message(STATUS "Autonomous Agency module: NOT FOUND")
+endif()
+
 # Phase II: Logic Systems Integration (Weeks 5-8)
 # Add unify if it exists and has CMakeLists.txt (depends on atomspace)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unify/CMakeLists.txt")
