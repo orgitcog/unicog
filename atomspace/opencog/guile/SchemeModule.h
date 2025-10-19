@@ -29,6 +29,7 @@
 
 namespace opencog {
 
+// Forward declarations  
 class AtomSpace;
 
 /// Wrapper class, to invoke misc extension code from guile.
@@ -42,16 +43,25 @@ class FunctionWrap
 		// These wrappers abstract the atomspace away.
 		Handle (*_func_h_ah)(AtomSpace*, const Handle&);
 		Handle (*_func_h_ahz)(AtomSpace*, const Handle&, size_t);
+		// XXX Extended to support optional arguments as list of handles
+		Handle (*_func_h_ah_seq)(AtomSpace*, const Handle&, const HandleSeq&);
 		Handle as_wrapper_h_h(Handle);
 		Handle as_wrapper_h_hz(Handle, size_t);
+		Handle as_wrapper_h_h_seq(Handle, const HandleSeq&);
 
 		// These wrappers return a TruthValuePtr and abstract the
 		// atomspace away.
 		TruthValuePtr (*_pred_ah)(AtomSpace*, const Handle&);
+		// XXX Extended to support optional arguments as list of handles
+		TruthValuePtr (*_pred_ah_seq)(AtomSpace*, const Handle&, const HandleSeq&);
 		TruthValuePtr as_wrapper_p_h(Handle);
+		TruthValuePtr as_wrapper_p_h_seq(Handle, const HandleSeq&);
 
 		ValuePtr (*_proto_ah)(AtomSpace*, const Handle&);
+		// XXX Extended to support optional arguments as list of handles
+		ValuePtr (*_proto_ah_seq)(AtomSpace*, const Handle&, const HandleSeq&);
 		ValuePtr as_wrapper_v_h(Handle);
+		ValuePtr as_wrapper_v_h_seq(Handle, const HandleSeq&);
 
 		const char *_name;  // scheme name of the c++ function.
 	public:
@@ -59,9 +69,18 @@ class FunctionWrap
 		             const char*, const char*);
 		FunctionWrap(Handle (*)(AtomSpace*, const Handle&, size_t),
 		             const char*, const char*);
+		// XXX Added support for optional arguments as list of handles
+		FunctionWrap(Handle (*)(AtomSpace*, const Handle&, const HandleSeq&),
+		             const char*, const char*);
 		FunctionWrap(TruthValuePtr (*)(AtomSpace*, const Handle&),
 		             const char*, const char*);
+		// XXX Added support for optional arguments as list of handles
+		FunctionWrap(TruthValuePtr (*)(AtomSpace*, const Handle&, const HandleSeq&),
+		             const char*, const char*);
 		FunctionWrap(ValuePtr (*)(AtomSpace*, const Handle&),
+		             const char*, const char*);
+		// XXX Added support for optional arguments as list of handles
+		FunctionWrap(ValuePtr (*)(AtomSpace*, const Handle&, const HandleSeq&),
 		             const char*, const char*);
 };
 

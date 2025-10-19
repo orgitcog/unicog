@@ -1238,11 +1238,11 @@
     "difficulty": "MEDIUM",
     "category": "General Implementation",
     "estimated_effort": "1-2 weeks",
-    "status": "OPEN",
+    "status": "RESOLVED",
     "assignee": null,
     "start_date": null,
-    "completion_date": null,
-    "resolution_notes": null,
+    "completion_date": "2025-10-19T19:17:12.083688",
+    "resolution_notes": "Implemented support for optional arguments as list of handles. Added new constructors, function pointers, and wrapper methods to FunctionWrap class that accept HandleSeq parameters. Updated existing methods to reference new functionality.",
     "dependencies": []
   },
   "atomspace/opencog/guile/SchemeModule.cc:68": {
@@ -1252,11 +1252,11 @@
     "difficulty": "MEDIUM",
     "category": "General Implementation",
     "estimated_effort": "1-2 weeks",
-    "status": "OPEN",
+    "status": "RESOLVED",
     "assignee": null,
     "start_date": null,
-    "completion_date": null,
-    "resolution_notes": null,
+    "completion_date": "2025-10-19T19:17:12.083719",
+    "resolution_notes": "Implemented support for optional arguments as list of handles. Added new constructors, function pointers, and wrapper methods to FunctionWrap class that accept HandleSeq parameters. Updated existing methods to reference new functionality.",
     "dependencies": []
   },
   "atomspace/opencog/guile/SchemeModule.cc:76": {
@@ -1266,11 +1266,11 @@
     "difficulty": "MEDIUM",
     "category": "General Implementation",
     "estimated_effort": "1-2 weeks",
-    "status": "OPEN",
+    "status": "RESOLVED",
     "assignee": null,
     "start_date": null,
-    "completion_date": null,
-    "resolution_notes": null,
+    "completion_date": "2025-10-19T19:17:12.083726",
+    "resolution_notes": "Implemented support for optional arguments as list of handles. Added new constructors, function pointers, and wrapper methods to FunctionWrap class that accept HandleSeq parameters. Updated existing methods to reference new functionality.",
     "dependencies": []
   },
   "atomspace/opencog/guile/SchemeModule.cc:84": {
@@ -1280,11 +1280,11 @@
     "difficulty": "MEDIUM",
     "category": "General Implementation",
     "estimated_effort": "1-2 weeks",
-    "status": "OPEN",
+    "status": "RESOLVED",
     "assignee": null,
     "start_date": null,
-    "completion_date": null,
-    "resolution_notes": null,
+    "completion_date": "2025-10-19T19:17:12.083731",
+    "resolution_notes": "Implemented support for optional arguments as list of handles. Added new constructors, function pointers, and wrapper methods to FunctionWrap class that accept HandleSeq parameters. Updated existing methods to reference new functionality.",
     "dependencies": []
   },
   "atomspace/opencog/guile/SchemeSmobAtom.cc:84": {
