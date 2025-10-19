@@ -104,13 +104,12 @@
 		)))
 
 ; ---------------------------------------------------------------------
-;; Below creates say atom for face if sound came from it
-;; XXX FIXME huh? this needs documentation.
-;; XXX FIXME elminiate the use of cog-execute! -- that is not how
-;; this should be designed -- these need to be learnable; and
-;; cog-execute prevents learning.
-;; XX This also bypasses the regular decision-making process
-;; in the behvaior tree. So this is wrong in a bunch iof different ways.
+;; Creates association between speech events and their spatial sources.
+;; This function determines which face (if any) was likely speaking
+;; based on sound direction and timing correlation.
+;; NOTE: This implementation uses cog-execute! which bypasses the
+;; normal behavior tree decision process. This should be refactored
+;; to use learnable psi-rules for proper cognitive integration.
 (define (who-said? sent)
 	;;request eye contact
 

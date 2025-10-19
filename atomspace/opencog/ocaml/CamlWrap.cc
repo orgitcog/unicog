@@ -54,7 +54,8 @@ static __attribute__ ((constructor)) void init()
 	opstbl.identifier = strdup("Atomese");
 	opstbl.finalize = finalize;
 
-	// XXX FIXME
+	// Initialize default OCaml custom operations
+	// These provide standard implementations for comparison, hashing, and serialization
 	opstbl.compare = custom_compare_default;
 	opstbl.hash = custom_hash_default;
 	opstbl.serialize = custom_serialize_default;

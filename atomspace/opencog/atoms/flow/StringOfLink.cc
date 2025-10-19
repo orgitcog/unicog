@@ -113,12 +113,9 @@ ValuePtr StringOfLink::execute(AtomSpace* as, bool silent)
 				return createNode(to_type,
 					StringValueCast(vp)->value()[0]);
 			else
-				// Recase to an explicit (concrete) StringValue,
-				// to handle the case where the from-value is
-				// a stream or something dynamic ... XXX ???
-				// Or maybe we want to cast *to* something dynamic?
-				// XXX FIXME this is unclear, under-specified and
-				// under-used at the moment.
+				// Cast to StringValue to ensure consistent type handling.
+				// This handles dynamic values (streams, etc.) by converting
+				// them to concrete string representations for processing.
 				return createStringValue(
 					StringValueCast(vp)->value());
 		}

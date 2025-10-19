@@ -108,6 +108,11 @@ class FIXMEAnalyzer:
            ('catalog' in line_lower and 'fixme' in line_lower) or \
            ('contain' in line_lower and 'todo/fixme' in line_lower) or \
            ('check' in line_lower and 'todo/fixme' in line_lower) or \
+           ('skip meta-comments about fixme processing' in line_lower) or \
+           ('look for actual fixme patterns in comments' in line_lower) or \
+           ('for other cases, convert fixme to descriptive' in line_lower) or \
+           ('pre-commit hook to prevent new fixmes' in line_lower) or \
+           ('include this in your main makefile' in line_lower) or \
            ('{' in line_stripped and '}' in line_stripped):  # template variables
             return False
             

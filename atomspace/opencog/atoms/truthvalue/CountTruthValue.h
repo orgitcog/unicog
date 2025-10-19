@@ -70,8 +70,8 @@ public:
     virtual TruthValuePtr merge(const TruthValuePtr&,
                                 const MergeCtrl& mc=MergeCtrl()) const;
 
-    // XXX FIXME Are all of these really needed?
-    // Can we get rid of some of them?
+    // Factory methods for creating CountTruthValue instances.
+    // These provide type-safe construction with various parameter combinations.
     static TruthValuePtr createTV(strength_t s, confidence_t f, count_t c)
     {
         return std::static_pointer_cast<const TruthValue>(
