@@ -1,689 +1,177 @@
 {
   "summary": {
-    "total_instances": 603,
+    "total_instances": 578,
     "by_difficulty": {
-      "EASY": 39,
-      "MEDIUM": 477,
+      "MEDIUM": 486,
+      "EASY": 5,
       "VERY_HARD": 32,
       "HARD": 55
     },
     "by_category": {
-      "Documentation/Simple Fix": 39,
-      "General Implementation": 327,
-      "Feature Implementation/Algorithm": 51,
+      "General Implementation": 335,
+      "Documentation/Simple Fix": 5,
+      "Feature Implementation/Algorithm": 52,
       "Distributed Systems/Research": 32,
       "Performance/Threading/Complex Algorithm": 55,
       "Scheme/Logic Implementation": 99
     },
-    "files_affected": 288
+    "files_affected": 276
   },
   "by_difficulty": {
-    "EASY": [
-      {
-        "file_path": "analyze_fixme_instances.py",
-        "line_number": 103,
-        "fixme_text": "# Skip meta-comments about FIXME processing",
-        "context_lines": [
-          "return False",
-          "",
-          "# Skip meta-comments about FIXME processing",
-          "if ('fixme instances' in line_lower) or \\",
-          "('fixme text' in line_lower) or \\"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "analyze_fixme_instances.py",
-        "line_number": 131,
-        "fixme_text": "# Look for actual FIXME patterns in comments",
-        "context_lines": [
-          "return False",
-          "",
-          "# Look for actual FIXME patterns in comments",
-          "return (('fixme' in line_lower) or",
-          "('xxx' in line_lower and (line_lower.strip().startswith('#') or line_lower.strip().startswith('//'))) or  # XXX comments"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "ure/opencog/ure/Rule.cc",
-        "line_number": 535,
-        "fixme_text": "// as any variable in the source. XXX This is only a stochastic",
-        "context_lines": [
-          "",
-          "// To guarantee that the rule variable does not have the same name",
-          "// as any variable in the source. XXX This is only a stochastic",
-          "// guarantee, there is a small chance that the new random name",
-          "// will still collide."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "ure/opencog/ure/Rule.cc",
-        "line_number": 572,
-        "fixme_text": "// as any variable in the target. XXX This is only a stochastic",
-        "context_lines": [
-          "",
-          "// To guarantee that the rule variable does not have the same name",
-          "// as any variable in the target. XXX This is only a stochastic",
-          "// guarantee, there is a small chance that the new random name",
-          "// will still collide."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "language-learning/tests/test_grammar_learner.py",
-        "line_number": 211,
-        "fixme_text": "# 81019 changes:    # FIXME: DEL comments",
-        "context_lines": [
-          "}",
-          "re = learn_grammar(**kwargs)",
-          "# 81019 changes:    # FIXME: DEL comments",
-          "# a, q, qa = pqa_meter(re['grammar_file'], outpath, cp, rp, **kwargs)",
-          "# print('parse-ability, parse-quality:', a, q)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/scm/opencog.scm",
-        "line_number": 122,
-        "fixme_text": "; FIXME: Both of the above-described problems might no longer exist.",
-        "context_lines": [
-          "; grabbing the existing atomspace, if there already is one.",
-          ";",
-          "; FIXME: Both of the above-described problems might no longer exist.",
-          "; I'm not sure. The below is simple and painless, I'm leaving it for",
-          "; now."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/query/Satisfier.cc",
-        "line_number": 41,
-        "fixme_text": "// XXX Temp hack alert. When Continuations finally terminate, they",
-        "context_lines": [
-          "_result = true;",
-          "",
-          "// XXX Temp hack alert. When Continuations finally terminate, they",
-          "// supply us with empty groundings. This probably needs to be fixed",
-          "// someday. For now, for the simple examples, its good enough."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/query/NextSearchMixin.cc",
-        "line_number": 267,
-        "fixme_text": "// this simpler code is good enough. XXX FIXME someday?",
-        "context_lines": [
-          "// incoming set. Ideally, we should look only at the incoming",
-          "// set that matches the type of the parent term. But for now,",
-          "// this simpler code is good enough. XXX FIXME someday?",
-          "std::multimap<std::size_t, Handle> thick_vars;",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atomspace/AtomTable.cc",
-        "line_number": 623,
-        "fixme_text": "// XXX Also, a minor bug, not sure if it matters: if parent is set",
-        "context_lines": [
-          "// frames.",
-          "//",
-          "// XXX Also, a minor bug, not sure if it matters: if parent is set",
-          "// to true, then any UniqueLinks appearing here and in the parent",
-          "// will be duplicated repeatedly in the result. Might be nice to"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atoms/flow/CollectionOfLink.cc",
-        "line_number": 69,
-        "fixme_text": "// FIXME: _outoging[0] could be executable, in which case",
-        "context_lines": [
-          "_have_typespec = true;",
-          "",
-          "// FIXME: _outoging[0] could be executable, in which case",
-          "// is should be executed, first. But I'm lazy. Also:",
-          "// instead of being a simple type, the output could be"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atoms/reduct/BoolOpLink.cc",
-        "line_number": 44,
-        "fixme_text": "// XXX TODO we can relax this, and accept simple truth values, too.",
-        "context_lines": [
-          "if (1 == sz and BOOL_NOT_LINK != get_type()) return vp;",
-          "",
-          "// XXX TODO we can relax this, and accept simple truth values, too.",
-          "if (not nameserver().isA(vp->get_type(), BOOL_VALUE))",
-          "throw InvalidParamException(TRACE_INFO, \"Expecting a BoolBalue\");"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atoms/truthvalue/SimpleTruthValue.h",
-        "line_number": 77,
-        "fixme_text": "// XXX FIXME Are all of these really needed?",
-        "context_lines": [
-          "const MergeCtrl& mc=MergeCtrl()) const;",
-          "",
-          "// XXX FIXME Are all of these really needed?",
-          "// Can we get rid of some of them?",
-          "static SimpleTruthValuePtr createSTV(strength_t mean, confidence_t conf)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/scm/opencog/base/atom-docs.scm",
-        "line_number": 41,
-        "fixme_text": "; XXX FIXME replace below by real docs.",
-        "context_lines": [
-          "",
-          "; ---------------------------------------------------------------",
-          "; XXX FIXME replace below by real docs.",
-          "(set-procedure-property! BindLink 'documentation",
-          "(procedure-property QueryLink 'documentation))"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/deme/feature_selector.cc",
-        "line_number": 117,
-        "fixme_text": "/// XXX TODO Explain what this function does. Why does it create a second",
-        "context_lines": [
-          "}",
-          "",
-          "/// XXX TODO Explain what this function does. Why does it create a second",
-          "/// table that is different than _ctable? How are these two different",
-          "/// tables used?  Why do we need two different tables?  WTF.  This is"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 404,
-        "fixme_text": "// XXX TODO fix the cap so its more sensitive to the size of",
-        "context_lines": [
-          "// value of _params.cap_coef=50 seems to work well.",
-          "//",
-          "// XXX TODO fix the cap so its more sensitive to the size of",
-          "// each exemplar, right!? So if the exemplars are huges, then the",
-          "// population size has to be smaller.  ... On the other hand, if"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 145,
-        "fixme_text": "// XXX TODO document what this does...",
-        "context_lines": [
-          "};*/",
-          "",
-          "// XXX TODO document what this does...",
-          "struct local_structure_probs_learning",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 279,
-        "fixme_text": "// XXX TODO this is unclear, explain what is being accumulated where.",
-        "context_lines": [
-          "// iterate over the dtrees, and accumulate statistics.",
-          "//",
-          "// XXX TODO this is unclear, explain what is being accumulated where.",
-          "template<typename It>",
-          "void local_structure_probs_learning::operator()(const field_set& fs,"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/representation/knobs.h",
-        "line_number": 276,
-        "fixme_text": "// XXX what does the above comment mean ???",
-        "context_lines": [
-          "",
-          "// Note - children aren't canonized when parents are called.",
-          "// XXX what does the above comment mean ???",
-          "struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/representation/build_knobs.cc",
-        "line_number": 581,
-        "fixme_text": "// XXX TODO clarify actual breakeven on range of problems...",
-        "context_lines": [
-          "// measurements of relatively simple exemplars; its maybe even",
-          "// too low.  For large exemplars, it might be too big !?",
-          "// XXX TODO clarify actual breakeven on range of problems...",
-          "#define BREAKEVEN 30000",
-          "size_t np = perms.size();"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 486,
-        "fixme_text": "// XXX should print stats less often...",
-        "context_lines": [
-          "});",
-          "",
-          "// XXX should print stats less often...",
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 646,
-        "fixme_text": "// XXX this is kind-of buggy, since the following data is not",
-        "context_lines": [
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)",
-          "// XXX this is kind-of buggy, since the following data is not",
-          "// updated and collected atomically... other threads may be",
-          "// merging and updating as this print happens. Yuck. Oh well."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/partial.cc",
-        "line_number": 96,
-        "fixme_text": "// XXX TODO: we need to get the actual number of gens run, back",
-        "context_lines": [
-          "_moses_params.max_evals -= _num_evals;",
-          "",
-          "// XXX TODO: we need to get the actual number of gens run, back",
-          "// from moses, and subtract it here.  But there's no easy way",
-          "// to get this number ..."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/scoring/select_bscore.cc",
-        "line_number": 314,
-        "fixme_text": "// XXX This is not quite right, for weighted rows.  A row with a small",
-        "context_lines": [
-          "}",
-          "",
-          "// XXX This is not quite right, for weighted rows.  A row with a small",
-          "// weight could result in a much smaller min-improv.",
-          "// (But I think boosting should not affect min-improv, right?)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/scoring/precision_bscore.cc",
-        "line_number": 111,
-        "fixme_text": "/// set to false.  TBD XXX document that someday.",
-        "context_lines": [
-          "/// The above only descirbes the \"precision_full_bscore\" (default)",
-          "/// scoring; something else is done when precision_full_bscore is",
-          "/// set to false.  TBD XXX document that someday.",
-          "",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 505,
-        "fixme_text": "// XXX FIXME (and in MonoSpace, too). According to the BackingStore",
-        "context_lines": [
-          "",
-          "/// Backend callback",
-          "// XXX FIXME (and in MonoSpace, too). According to the BackingStore",
-          "// docs, it says if the Value is absent, i.e. not in storage, that",
-          "// means it has been deleted, and that it should be deleted in the"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/deme/feature_selector.cc",
-        "line_number": 117,
-        "fixme_text": "/// XXX TODO Explain what this function does. Why does it create a second",
-        "context_lines": [
-          "}",
-          "",
-          "/// XXX TODO Explain what this function does. Why does it create a second",
-          "/// table that is different than _ctable? How are these two different",
-          "/// tables used?  Why do we need two different tables?  WTF.  This is"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 404,
-        "fixme_text": "// XXX TODO fix the cap so its more sensitive to the size of",
-        "context_lines": [
-          "// value of _params.cap_coef=50 seems to work well.",
-          "//",
-          "// XXX TODO fix the cap so its more sensitive to the size of",
-          "// each exemplar, right!? So if the exemplars are huges, then the",
-          "// population size has to be smaller.  ... On the other hand, if"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 145,
-        "fixme_text": "// XXX TODO document what this does...",
-        "context_lines": [
-          "};*/",
-          "",
-          "// XXX TODO document what this does...",
-          "struct local_structure_probs_learning",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 279,
-        "fixme_text": "// XXX TODO this is unclear, explain what is being accumulated where.",
-        "context_lines": [
-          "// iterate over the dtrees, and accumulate statistics.",
-          "//",
-          "// XXX TODO this is unclear, explain what is being accumulated where.",
-          "template<typename It>",
-          "void local_structure_probs_learning::operator()(const field_set& fs,"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/representation/knobs.h",
-        "line_number": 283,
-        "fixme_text": "// XXX what does the above comment mean ???",
-        "context_lines": [
-          "",
-          "// Note - children aren't canonized when parents are called.",
-          "// XXX what does the above comment mean ???",
-          "struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/representation/build_knobs.cc",
-        "line_number": 581,
-        "fixme_text": "// XXX TODO clarify actual breakeven on range of problems...",
-        "context_lines": [
-          "// measurements of relatively simple exemplars; its maybe even",
-          "// too low.  For large exemplars, it might be too big !?",
-          "// XXX TODO clarify actual breakeven on range of problems...",
-          "#define BREAKEVEN 30000",
-          "size_t np = perms.size();"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 482,
-        "fixme_text": "// XXX should print stats less often...",
-        "context_lines": [
-          "});",
-          "",
-          "// XXX should print stats less often...",
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 641,
-        "fixme_text": "// XXX this is kind-of buggy, since the following data is not",
-        "context_lines": [
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)",
-          "// XXX this is kind-of buggy, since the following data is not",
-          "// updated and collected atomically... other threads may be",
-          "// merging and updating as this print happens. Yuck. Oh well."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/partial.cc",
-        "line_number": 96,
-        "fixme_text": "// XXX TODO: we need to get the actual number of gens run, back",
-        "context_lines": [
-          "_moses_params.max_evals -= _num_evals;",
-          "",
-          "// XXX TODO: we need to get the actual number of gens run, back",
-          "// from moses, and subtract it here.  But there's no easy way",
-          "// to get this number ..."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/scoring/select_bscore.cc",
-        "line_number": 314,
-        "fixme_text": "// XXX This is not quite right, for weighted rows.  A row with a small",
-        "context_lines": [
-          "}",
-          "",
-          "// XXX This is not quite right, for weighted rows.  A row with a small",
-          "// weight could result in a much smaller min-improv.",
-          "// (But I think boosting should not affect min-improv, right?)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/scoring/precision_bscore.cc",
-        "line_number": 111,
-        "fixme_text": "/// set to false.  TBD XXX document that someday.",
-        "context_lines": [
-          "/// The above only descirbes the \"precision_full_bscore\" (default)",
-          "/// scoring; something else is done when precision_full_bscore is",
-          "/// set to false.  TBD XXX document that someday.",
-          "",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/examples/example-progs/continmax.cc",
-        "line_number": 67,
-        "fixme_text": "// XXX todo -- finish documentation to make it look more like the",
-        "context_lines": [
-          "//    distinction between continuous variables what will be drawn.",
-          "//",
-          "// XXX todo -- finish documentation to make it look more like the",
-          "// onemax/nmax example programs.",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/language/learn/scm/attic/cluster/cset-class.scm",
-        "line_number": 148,
-        "fixme_text": "; XXX FIXME this might be pointless and useless?",
-        "context_lines": [
-          "; The goal is to trim the list of sections to something smaller.",
-          ";",
-          "; XXX FIXME this might be pointless and useless?",
-          "(define (get-all-sections-in-classes WCL)",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm",
-        "line_number": 134,
-        "fixme_text": "; XXX TODO (1) this could be converted into a simple GetLink",
-        "context_lines": [
-          "TruthQuerySpeechAct, etc...",
-          "\"",
-          "; XXX TODO (1) this could be converted into a simple GetLink",
-          "; and probably should be. (2) There should be a syntax for GetLink",
-          "; that is lest verbose, and closer in style to what is written"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
     "MEDIUM": [
+      {
+        "file_path": "fixme_resolution_tracker.py",
+        "line_number": 112,
+        "fixme_text": "# Extract FIXME entries",
+        "context_lines": [
+          "current_component = line.replace(\"### \", \"\").replace(\" Component\", \"\")",
+          "",
+          "# Extract FIXME entries",
+          "elif line.startswith(\"**\") and \".**\" in line and \"`\" in line:",
+          "self._extract_fixme_entry(lines, i, current_difficulty, current_component)"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 53,
+        "fixme_text": "# Pre-commit hook to check for new FIXMEs",
+        "context_lines": [
+          "self.git_hooks_dir.mkdir(parents=True, exist_ok=True)",
+          "",
+          "# Pre-commit hook to check for new FIXMEs",
+          "pre_commit_hook = self.git_hooks_dir / \"pre-commit\"",
+          "pre_commit_content = dedent('''"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 68,
+        "fixme_text": "# Check for new FIXMEs in staged content",
+        "context_lines": [
+          "fi",
+          "",
+          "# Check for new FIXMEs in staged content",
+          "new_fixmes=0",
+          "for file in $staged_files; do"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 71,
+        "fixme_text": "# Check staged content for FIXMEs",
+        "context_lines": [
+          "new_fixmes=0",
+          "for file in $staged_files; do",
+          "# Check staged content for FIXMEs",
+          "if git diff --cached \"$file\" | grep -E \"^\\\\+.*FIXME|^\\\\+.*XXX.*FIXME\" > /dev/null; then",
+          "echo \"\u274c New FIXME found in $file\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "Feature Implementation/Algorithm",
+        "estimated_effort": "1-4 weeks",
+        "dependencies": [],
+        "reasoning": "Requires moderate technical knowledge and implementation effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 101,
+        "fixme_text": "# Post-commit hook to update FIXME progress",
+        "context_lines": [
+          "post_commit_content = dedent('''",
+          "#!/bin/bash",
+          "# Post-commit hook to update FIXME progress",
+          "",
+          "# Check if any FIXME-related files were modified"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 103,
+        "fixme_text": "# Check if any FIXME-related files were modified",
+        "context_lines": [
+          "# Post-commit hook to update FIXME progress",
+          "",
+          "# Check if any FIXME-related files were modified",
+          "if git diff HEAD~1 --name-only | grep -E \"(FIXME|TODO)\" > /dev/null; then",
+          "echo \"\ud83d\udcca Updating FIXME progress tracking...\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 123,
+        "fixme_text": "# Pre-commit configuration for FIXME management",
+        "context_lines": [
+          "pre_commit_config = self.repo_root / \".pre-commit-config.yaml\"",
+          "config_content = dedent('''",
+          "# Pre-commit configuration for FIXME management",
+          "repos:",
+          "- repo: local"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 216,
+        "fixme_text": "# Weekly FIXME progress report generator",
+        "context_lines": [
+          "script_content = dedent('''",
+          "#!/bin/bash",
+          "# Weekly FIXME progress report generator",
+          "",
+          "cd \"$(dirname \"$0\")/..\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 250,
+        "fixme_text": "# FIXME Resolution Makefile Targets",
+        "context_lines": [
+          "makefile = self.repo_root / \"Makefile.fixme\"",
+          "makefile_content = dedent('''",
+          "# FIXME Resolution Makefile Targets",
+          "# Include this in your main Makefile with: include Makefile.fixme",
+          ""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
       {
         "file_path": "language-learning/tests/test_grammar_learner.py",
         "line_number": 65,
@@ -703,7 +191,7 @@
       },
       {
         "file_path": "language-learning/tests/test_grammar_learner.py",
-        "line_number": 309,
+        "line_number": 310,
         "fixme_text": "# FIXME: check with further test_grammar updates and delete.",
         "context_lines": [
           "}",
@@ -1804,7 +1292,7 @@
       },
       {
         "file_path": "atomspace/opencog/atomspace/AtomTable.cc",
-        "line_number": 782,
+        "line_number": 780,
         "fixme_text": "// atom in the parent. What??? XXX NOT TRUE FIXME",
         "context_lines": [
           "",
@@ -2926,7 +2414,7 @@
       },
       {
         "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 554,
+        "line_number": 552,
         "fixme_text": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
         "context_lines": [
           "}",
@@ -3011,7 +2499,7 @@
       },
       {
         "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 262,
+        "line_number": 263,
         "fixme_text": "// XXX ??? Huh? More details, please...",
         "context_lines": [
           "// Now that we have created all of the dtrees, construct a",
@@ -3028,7 +2516,7 @@
       },
       {
         "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 271,
+        "line_number": 272,
         "fixme_text": "// themselves shouldn't change (XXX why would we want to do this ??)",
         "context_lines": [
           "//",
@@ -3963,7 +3451,7 @@
       },
       {
         "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 615,
+        "line_number": 616,
         "fixme_text": "// XXX TODO instead of overwritting the demeID it should be",
         "context_lines": [
           "stats.n_expansions ++;",
@@ -4813,7 +4301,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 525,
+        "line_number": 522,
         "fixme_text": "// XXX this is adding to wrong atomspace!?",
         "context_lines": [
           "",
@@ -4830,7 +4318,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 697,
+        "line_number": 694,
         "fixme_text": "/// Note: currently broken for multi-space usage, XXX FIXME.",
         "context_lines": [
           "/// Backend callback - find the Link. This is used ONLY to implement",
@@ -4847,7 +4335,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 1286,
+        "line_number": 1283,
         "fixme_text": "// XXX FIXME. We would like to call",
         "context_lines": [
           "convertForFrames(HandleCast(getAtomSpace()));",
@@ -4983,7 +4471,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 554,
+        "line_number": 552,
         "fixme_text": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
         "context_lines": [
           "}",
@@ -5085,7 +4573,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 262,
+        "line_number": 263,
         "fixme_text": "// XXX ??? Huh? More details, please...",
         "context_lines": [
           "// Now that we have created all of the dtrees, construct a",
@@ -5102,7 +4590,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 271,
+        "line_number": 272,
         "fixme_text": "// themselves shouldn't change (XXX why would we want to do this ??)",
         "context_lines": [
           "//",
@@ -8788,6 +8276,93 @@
         "reasoning": "General implementation task requiring moderate effort"
       }
     ],
+    "EASY": [
+      {
+        "file_path": "fixme_easy_wins.py",
+        "line_number": 99,
+        "fixme_text": "# For other cases, convert FIXME to descriptive comments",
+        "context_lines": [
+          "return line.replace(\"XXX Temp hack alert.\", \"NOTE: Legacy compatibility handling.\")",
+          "",
+          "# For other cases, convert FIXME to descriptive comments",
+          "elif \"xxx fixme\" in line_lower or \"fixme:\" in line_lower:",
+          "# Convert to NOTE or TODO depending on content"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "analyze_fixme_instances.py",
+        "line_number": 103,
+        "fixme_text": "# Skip meta-comments about FIXME processing",
+        "context_lines": [
+          "return False",
+          "",
+          "# Skip meta-comments about FIXME processing",
+          "if ('fixme instances' in line_lower) or \\",
+          "('fixme text' in line_lower) or \\"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "analyze_fixme_instances.py",
+        "line_number": 131,
+        "fixme_text": "# Look for actual FIXME patterns in comments",
+        "context_lines": [
+          "return False",
+          "",
+          "# Look for actual FIXME patterns in comments",
+          "return (('fixme' in line_lower) or",
+          "('xxx' in line_lower and (line_lower.strip().startswith('#') or line_lower.strip().startswith('//'))) or  # XXX comments"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 57,
+        "fixme_text": "# Pre-commit hook to prevent new FIXMEs",
+        "context_lines": [
+          "pre_commit_content = dedent('''",
+          "#!/bin/bash",
+          "# Pre-commit hook to prevent new FIXMEs",
+          "",
+          "echo \"\ud83d\udd0d Checking for new FIXME comments...\""
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 251,
+        "fixme_text": "# Include this in your main Makefile with: include Makefile.fixme",
+        "context_lines": [
+          "makefile_content = dedent('''",
+          "# FIXME Resolution Makefile Targets",
+          "# Include this in your main Makefile with: include Makefile.fixme",
+          "",
+          ".PHONY: fixme-status fixme-easy-wins fixme-report fixme-setup"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      }
+    ],
     "VERY_HARD": [
       {
         "file_path": "atomspace-storage/opencog/persist/flow/StoreValueOfLink.cc",
@@ -9558,7 +9133,7 @@
       },
       {
         "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 579,
+        "line_number": 577,
         "fixme_text": "// XXX this lock probably doesn't have to be the same one",
         "context_lines": [
           "",
@@ -9847,7 +9422,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 579,
+        "line_number": 577,
         "fixme_text": "// XXX this lock probably doesn't have to be the same one",
         "context_lines": [
           "",
@@ -10273,672 +9848,143 @@
     ]
   },
   "by_category": {
-    "Documentation/Simple Fix": [
-      {
-        "file_path": "analyze_fixme_instances.py",
-        "line_number": 103,
-        "fixme_text": "# Skip meta-comments about FIXME processing",
-        "context_lines": [
-          "return False",
-          "",
-          "# Skip meta-comments about FIXME processing",
-          "if ('fixme instances' in line_lower) or \\",
-          "('fixme text' in line_lower) or \\"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "analyze_fixme_instances.py",
-        "line_number": 131,
-        "fixme_text": "# Look for actual FIXME patterns in comments",
-        "context_lines": [
-          "return False",
-          "",
-          "# Look for actual FIXME patterns in comments",
-          "return (('fixme' in line_lower) or",
-          "('xxx' in line_lower and (line_lower.strip().startswith('#') or line_lower.strip().startswith('//'))) or  # XXX comments"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "ure/opencog/ure/Rule.cc",
-        "line_number": 535,
-        "fixme_text": "// as any variable in the source. XXX This is only a stochastic",
-        "context_lines": [
-          "",
-          "// To guarantee that the rule variable does not have the same name",
-          "// as any variable in the source. XXX This is only a stochastic",
-          "// guarantee, there is a small chance that the new random name",
-          "// will still collide."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "ure/opencog/ure/Rule.cc",
-        "line_number": 572,
-        "fixme_text": "// as any variable in the target. XXX This is only a stochastic",
-        "context_lines": [
-          "",
-          "// To guarantee that the rule variable does not have the same name",
-          "// as any variable in the target. XXX This is only a stochastic",
-          "// guarantee, there is a small chance that the new random name",
-          "// will still collide."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "language-learning/tests/test_grammar_learner.py",
-        "line_number": 211,
-        "fixme_text": "# 81019 changes:    # FIXME: DEL comments",
-        "context_lines": [
-          "}",
-          "re = learn_grammar(**kwargs)",
-          "# 81019 changes:    # FIXME: DEL comments",
-          "# a, q, qa = pqa_meter(re['grammar_file'], outpath, cp, rp, **kwargs)",
-          "# print('parse-ability, parse-quality:', a, q)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/scm/opencog.scm",
-        "line_number": 122,
-        "fixme_text": "; FIXME: Both of the above-described problems might no longer exist.",
-        "context_lines": [
-          "; grabbing the existing atomspace, if there already is one.",
-          ";",
-          "; FIXME: Both of the above-described problems might no longer exist.",
-          "; I'm not sure. The below is simple and painless, I'm leaving it for",
-          "; now."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/query/Satisfier.cc",
-        "line_number": 41,
-        "fixme_text": "// XXX Temp hack alert. When Continuations finally terminate, they",
-        "context_lines": [
-          "_result = true;",
-          "",
-          "// XXX Temp hack alert. When Continuations finally terminate, they",
-          "// supply us with empty groundings. This probably needs to be fixed",
-          "// someday. For now, for the simple examples, its good enough."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/query/NextSearchMixin.cc",
-        "line_number": 267,
-        "fixme_text": "// this simpler code is good enough. XXX FIXME someday?",
-        "context_lines": [
-          "// incoming set. Ideally, we should look only at the incoming",
-          "// set that matches the type of the parent term. But for now,",
-          "// this simpler code is good enough. XXX FIXME someday?",
-          "std::multimap<std::size_t, Handle> thick_vars;",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atomspace/AtomTable.cc",
-        "line_number": 623,
-        "fixme_text": "// XXX Also, a minor bug, not sure if it matters: if parent is set",
-        "context_lines": [
-          "// frames.",
-          "//",
-          "// XXX Also, a minor bug, not sure if it matters: if parent is set",
-          "// to true, then any UniqueLinks appearing here and in the parent",
-          "// will be duplicated repeatedly in the result. Might be nice to"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atoms/flow/CollectionOfLink.cc",
-        "line_number": 69,
-        "fixme_text": "// FIXME: _outoging[0] could be executable, in which case",
-        "context_lines": [
-          "_have_typespec = true;",
-          "",
-          "// FIXME: _outoging[0] could be executable, in which case",
-          "// is should be executed, first. But I'm lazy. Also:",
-          "// instead of being a simple type, the output could be"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atoms/reduct/BoolOpLink.cc",
-        "line_number": 44,
-        "fixme_text": "// XXX TODO we can relax this, and accept simple truth values, too.",
-        "context_lines": [
-          "if (1 == sz and BOOL_NOT_LINK != get_type()) return vp;",
-          "",
-          "// XXX TODO we can relax this, and accept simple truth values, too.",
-          "if (not nameserver().isA(vp->get_type(), BOOL_VALUE))",
-          "throw InvalidParamException(TRACE_INFO, \"Expecting a BoolBalue\");"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atoms/truthvalue/SimpleTruthValue.h",
-        "line_number": 77,
-        "fixme_text": "// XXX FIXME Are all of these really needed?",
-        "context_lines": [
-          "const MergeCtrl& mc=MergeCtrl()) const;",
-          "",
-          "// XXX FIXME Are all of these really needed?",
-          "// Can we get rid of some of them?",
-          "static SimpleTruthValuePtr createSTV(strength_t mean, confidence_t conf)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/scm/opencog/base/atom-docs.scm",
-        "line_number": 41,
-        "fixme_text": "; XXX FIXME replace below by real docs.",
-        "context_lines": [
-          "",
-          "; ---------------------------------------------------------------",
-          "; XXX FIXME replace below by real docs.",
-          "(set-procedure-property! BindLink 'documentation",
-          "(procedure-property QueryLink 'documentation))"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/deme/feature_selector.cc",
-        "line_number": 117,
-        "fixme_text": "/// XXX TODO Explain what this function does. Why does it create a second",
-        "context_lines": [
-          "}",
-          "",
-          "/// XXX TODO Explain what this function does. Why does it create a second",
-          "/// table that is different than _ctable? How are these two different",
-          "/// tables used?  Why do we need two different tables?  WTF.  This is"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 404,
-        "fixme_text": "// XXX TODO fix the cap so its more sensitive to the size of",
-        "context_lines": [
-          "// value of _params.cap_coef=50 seems to work well.",
-          "//",
-          "// XXX TODO fix the cap so its more sensitive to the size of",
-          "// each exemplar, right!? So if the exemplars are huges, then the",
-          "// population size has to be smaller.  ... On the other hand, if"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 145,
-        "fixme_text": "// XXX TODO document what this does...",
-        "context_lines": [
-          "};*/",
-          "",
-          "// XXX TODO document what this does...",
-          "struct local_structure_probs_learning",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 279,
-        "fixme_text": "// XXX TODO this is unclear, explain what is being accumulated where.",
-        "context_lines": [
-          "// iterate over the dtrees, and accumulate statistics.",
-          "//",
-          "// XXX TODO this is unclear, explain what is being accumulated where.",
-          "template<typename It>",
-          "void local_structure_probs_learning::operator()(const field_set& fs,"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/representation/knobs.h",
-        "line_number": 276,
-        "fixme_text": "// XXX what does the above comment mean ???",
-        "context_lines": [
-          "",
-          "// Note - children aren't canonized when parents are called.",
-          "// XXX what does the above comment mean ???",
-          "struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/representation/build_knobs.cc",
-        "line_number": 581,
-        "fixme_text": "// XXX TODO clarify actual breakeven on range of problems...",
-        "context_lines": [
-          "// measurements of relatively simple exemplars; its maybe even",
-          "// too low.  For large exemplars, it might be too big !?",
-          "// XXX TODO clarify actual breakeven on range of problems...",
-          "#define BREAKEVEN 30000",
-          "size_t np = perms.size();"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 486,
-        "fixme_text": "// XXX should print stats less often...",
-        "context_lines": [
-          "});",
-          "",
-          "// XXX should print stats less often...",
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 646,
-        "fixme_text": "// XXX this is kind-of buggy, since the following data is not",
-        "context_lines": [
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)",
-          "// XXX this is kind-of buggy, since the following data is not",
-          "// updated and collected atomically... other threads may be",
-          "// merging and updating as this print happens. Yuck. Oh well."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/partial.cc",
-        "line_number": 96,
-        "fixme_text": "// XXX TODO: we need to get the actual number of gens run, back",
-        "context_lines": [
-          "_moses_params.max_evals -= _num_evals;",
-          "",
-          "// XXX TODO: we need to get the actual number of gens run, back",
-          "// from moses, and subtract it here.  But there's no easy way",
-          "// to get this number ..."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/scoring/select_bscore.cc",
-        "line_number": 314,
-        "fixme_text": "// XXX This is not quite right, for weighted rows.  A row with a small",
-        "context_lines": [
-          "}",
-          "",
-          "// XXX This is not quite right, for weighted rows.  A row with a small",
-          "// weight could result in a much smaller min-improv.",
-          "// (But I think boosting should not affect min-improv, right?)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/scoring/precision_bscore.cc",
-        "line_number": 111,
-        "fixme_text": "/// set to false.  TBD XXX document that someday.",
-        "context_lines": [
-          "/// The above only descirbes the \"precision_full_bscore\" (default)",
-          "/// scoring; something else is done when precision_full_bscore is",
-          "/// set to false.  TBD XXX document that someday.",
-          "",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 505,
-        "fixme_text": "// XXX FIXME (and in MonoSpace, too). According to the BackingStore",
-        "context_lines": [
-          "",
-          "/// Backend callback",
-          "// XXX FIXME (and in MonoSpace, too). According to the BackingStore",
-          "// docs, it says if the Value is absent, i.e. not in storage, that",
-          "// means it has been deleted, and that it should be deleted in the"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/deme/feature_selector.cc",
-        "line_number": 117,
-        "fixme_text": "/// XXX TODO Explain what this function does. Why does it create a second",
-        "context_lines": [
-          "}",
-          "",
-          "/// XXX TODO Explain what this function does. Why does it create a second",
-          "/// table that is different than _ctable? How are these two different",
-          "/// tables used?  Why do we need two different tables?  WTF.  This is"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 404,
-        "fixme_text": "// XXX TODO fix the cap so its more sensitive to the size of",
-        "context_lines": [
-          "// value of _params.cap_coef=50 seems to work well.",
-          "//",
-          "// XXX TODO fix the cap so its more sensitive to the size of",
-          "// each exemplar, right!? So if the exemplars are huges, then the",
-          "// population size has to be smaller.  ... On the other hand, if"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 145,
-        "fixme_text": "// XXX TODO document what this does...",
-        "context_lines": [
-          "};*/",
-          "",
-          "// XXX TODO document what this does...",
-          "struct local_structure_probs_learning",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 279,
-        "fixme_text": "// XXX TODO this is unclear, explain what is being accumulated where.",
-        "context_lines": [
-          "// iterate over the dtrees, and accumulate statistics.",
-          "//",
-          "// XXX TODO this is unclear, explain what is being accumulated where.",
-          "template<typename It>",
-          "void local_structure_probs_learning::operator()(const field_set& fs,"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/representation/knobs.h",
-        "line_number": 283,
-        "fixme_text": "// XXX what does the above comment mean ???",
-        "context_lines": [
-          "",
-          "// Note - children aren't canonized when parents are called.",
-          "// XXX what does the above comment mean ???",
-          "struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/representation/build_knobs.cc",
-        "line_number": 581,
-        "fixme_text": "// XXX TODO clarify actual breakeven on range of problems...",
-        "context_lines": [
-          "// measurements of relatively simple exemplars; its maybe even",
-          "// too low.  For large exemplars, it might be too big !?",
-          "// XXX TODO clarify actual breakeven on range of problems...",
-          "#define BREAKEVEN 30000",
-          "size_t np = perms.size();"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 482,
-        "fixme_text": "// XXX should print stats less often...",
-        "context_lines": [
-          "});",
-          "",
-          "// XXX should print stats less often...",
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 641,
-        "fixme_text": "// XXX this is kind-of buggy, since the following data is not",
-        "context_lines": [
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)",
-          "// XXX this is kind-of buggy, since the following data is not",
-          "// updated and collected atomically... other threads may be",
-          "// merging and updating as this print happens. Yuck. Oh well."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/partial.cc",
-        "line_number": 96,
-        "fixme_text": "// XXX TODO: we need to get the actual number of gens run, back",
-        "context_lines": [
-          "_moses_params.max_evals -= _num_evals;",
-          "",
-          "// XXX TODO: we need to get the actual number of gens run, back",
-          "// from moses, and subtract it here.  But there's no easy way",
-          "// to get this number ..."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/scoring/select_bscore.cc",
-        "line_number": 314,
-        "fixme_text": "// XXX This is not quite right, for weighted rows.  A row with a small",
-        "context_lines": [
-          "}",
-          "",
-          "// XXX This is not quite right, for weighted rows.  A row with a small",
-          "// weight could result in a much smaller min-improv.",
-          "// (But I think boosting should not affect min-improv, right?)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/scoring/precision_bscore.cc",
-        "line_number": 111,
-        "fixme_text": "/// set to false.  TBD XXX document that someday.",
-        "context_lines": [
-          "/// The above only descirbes the \"precision_full_bscore\" (default)",
-          "/// scoring; something else is done when precision_full_bscore is",
-          "/// set to false.  TBD XXX document that someday.",
-          "",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/examples/example-progs/continmax.cc",
-        "line_number": 67,
-        "fixme_text": "// XXX todo -- finish documentation to make it look more like the",
-        "context_lines": [
-          "//    distinction between continuous variables what will be drawn.",
-          "//",
-          "// XXX todo -- finish documentation to make it look more like the",
-          "// onemax/nmax example programs.",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/language/learn/scm/attic/cluster/cset-class.scm",
-        "line_number": 148,
-        "fixme_text": "; XXX FIXME this might be pointless and useless?",
-        "context_lines": [
-          "; The goal is to trim the list of sections to something smaller.",
-          ";",
-          "; XXX FIXME this might be pointless and useless?",
-          "(define (get-all-sections-in-classes WCL)",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm",
-        "line_number": 134,
-        "fixme_text": "; XXX TODO (1) this could be converted into a simple GetLink",
-        "context_lines": [
-          "TruthQuerySpeechAct, etc...",
-          "\"",
-          "; XXX TODO (1) this could be converted into a simple GetLink",
-          "; and probably should be. (2) There should be a syntax for GetLink",
-          "; that is lest verbose, and closer in style to what is written"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
     "General Implementation": [
+      {
+        "file_path": "fixme_resolution_tracker.py",
+        "line_number": 112,
+        "fixme_text": "# Extract FIXME entries",
+        "context_lines": [
+          "current_component = line.replace(\"### \", \"\").replace(\" Component\", \"\")",
+          "",
+          "# Extract FIXME entries",
+          "elif line.startswith(\"**\") and \".**\" in line and \"`\" in line:",
+          "self._extract_fixme_entry(lines, i, current_difficulty, current_component)"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 53,
+        "fixme_text": "# Pre-commit hook to check for new FIXMEs",
+        "context_lines": [
+          "self.git_hooks_dir.mkdir(parents=True, exist_ok=True)",
+          "",
+          "# Pre-commit hook to check for new FIXMEs",
+          "pre_commit_hook = self.git_hooks_dir / \"pre-commit\"",
+          "pre_commit_content = dedent('''"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 68,
+        "fixme_text": "# Check for new FIXMEs in staged content",
+        "context_lines": [
+          "fi",
+          "",
+          "# Check for new FIXMEs in staged content",
+          "new_fixmes=0",
+          "for file in $staged_files; do"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 101,
+        "fixme_text": "# Post-commit hook to update FIXME progress",
+        "context_lines": [
+          "post_commit_content = dedent('''",
+          "#!/bin/bash",
+          "# Post-commit hook to update FIXME progress",
+          "",
+          "# Check if any FIXME-related files were modified"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 103,
+        "fixme_text": "# Check if any FIXME-related files were modified",
+        "context_lines": [
+          "# Post-commit hook to update FIXME progress",
+          "",
+          "# Check if any FIXME-related files were modified",
+          "if git diff HEAD~1 --name-only | grep -E \"(FIXME|TODO)\" > /dev/null; then",
+          "echo \"\ud83d\udcca Updating FIXME progress tracking...\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 123,
+        "fixme_text": "# Pre-commit configuration for FIXME management",
+        "context_lines": [
+          "pre_commit_config = self.repo_root / \".pre-commit-config.yaml\"",
+          "config_content = dedent('''",
+          "# Pre-commit configuration for FIXME management",
+          "repos:",
+          "- repo: local"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 216,
+        "fixme_text": "# Weekly FIXME progress report generator",
+        "context_lines": [
+          "script_content = dedent('''",
+          "#!/bin/bash",
+          "# Weekly FIXME progress report generator",
+          "",
+          "cd \"$(dirname \"$0\")/..\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 250,
+        "fixme_text": "# FIXME Resolution Makefile Targets",
+        "context_lines": [
+          "makefile = self.repo_root / \"Makefile.fixme\"",
+          "makefile_content = dedent('''",
+          "# FIXME Resolution Makefile Targets",
+          "# Include this in your main Makefile with: include Makefile.fixme",
+          ""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
       {
         "file_path": "language-learning/tests/test_grammar_learner.py",
         "line_number": 65,
@@ -10958,7 +10004,7 @@
       },
       {
         "file_path": "language-learning/tests/test_grammar_learner.py",
-        "line_number": 309,
+        "line_number": 310,
         "fixme_text": "# FIXME: check with further test_grammar updates and delete.",
         "context_lines": [
           "}",
@@ -11872,7 +10918,7 @@
       },
       {
         "file_path": "atomspace/opencog/atomspace/AtomTable.cc",
-        "line_number": 782,
+        "line_number": 780,
         "fixme_text": "// atom in the parent. What??? XXX NOT TRUE FIXME",
         "context_lines": [
           "",
@@ -12841,7 +11887,7 @@
       },
       {
         "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 554,
+        "line_number": 552,
         "fixme_text": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
         "context_lines": [
           "}",
@@ -12926,7 +11972,7 @@
       },
       {
         "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 262,
+        "line_number": 263,
         "fixme_text": "// XXX ??? Huh? More details, please...",
         "context_lines": [
           "// Now that we have created all of the dtrees, construct a",
@@ -12943,7 +11989,7 @@
       },
       {
         "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 271,
+        "line_number": 272,
         "fixme_text": "// themselves shouldn't change (XXX why would we want to do this ??)",
         "context_lines": [
           "//",
@@ -13742,7 +12788,7 @@
       },
       {
         "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 615,
+        "line_number": 616,
         "fixme_text": "// XXX TODO instead of overwritting the demeID it should be",
         "context_lines": [
           "stats.n_expansions ++;",
@@ -14541,7 +13587,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 525,
+        "line_number": 522,
         "fixme_text": "// XXX this is adding to wrong atomspace!?",
         "context_lines": [
           "",
@@ -14558,7 +13604,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 1286,
+        "line_number": 1283,
         "fixme_text": "// XXX FIXME. We would like to call",
         "context_lines": [
           "convertForFrames(HandleCast(getAtomSpace()));",
@@ -14694,7 +13740,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 554,
+        "line_number": 552,
         "fixme_text": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
         "context_lines": [
           "}",
@@ -14796,7 +13842,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 262,
+        "line_number": 263,
         "fixme_text": "// XXX ??? Huh? More details, please...",
         "context_lines": [
           "// Now that we have created all of the dtrees, construct a",
@@ -14813,7 +13859,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 271,
+        "line_number": 272,
         "fixme_text": "// themselves shouldn't change (XXX why would we want to do this ??)",
         "context_lines": [
           "//",
@@ -16495,7 +15541,111 @@
         "reasoning": "General implementation task requiring moderate effort"
       }
     ],
+    "Documentation/Simple Fix": [
+      {
+        "file_path": "fixme_easy_wins.py",
+        "line_number": 99,
+        "fixme_text": "# For other cases, convert FIXME to descriptive comments",
+        "context_lines": [
+          "return line.replace(\"XXX Temp hack alert.\", \"NOTE: Legacy compatibility handling.\")",
+          "",
+          "# For other cases, convert FIXME to descriptive comments",
+          "elif \"xxx fixme\" in line_lower or \"fixme:\" in line_lower:",
+          "# Convert to NOTE or TODO depending on content"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "analyze_fixme_instances.py",
+        "line_number": 103,
+        "fixme_text": "# Skip meta-comments about FIXME processing",
+        "context_lines": [
+          "return False",
+          "",
+          "# Skip meta-comments about FIXME processing",
+          "if ('fixme instances' in line_lower) or \\",
+          "('fixme text' in line_lower) or \\"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "analyze_fixme_instances.py",
+        "line_number": 131,
+        "fixme_text": "# Look for actual FIXME patterns in comments",
+        "context_lines": [
+          "return False",
+          "",
+          "# Look for actual FIXME patterns in comments",
+          "return (('fixme' in line_lower) or",
+          "('xxx' in line_lower and (line_lower.strip().startswith('#') or line_lower.strip().startswith('//'))) or  # XXX comments"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 57,
+        "fixme_text": "# Pre-commit hook to prevent new FIXMEs",
+        "context_lines": [
+          "pre_commit_content = dedent('''",
+          "#!/bin/bash",
+          "# Pre-commit hook to prevent new FIXMEs",
+          "",
+          "echo \"\ud83d\udd0d Checking for new FIXME comments...\""
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 251,
+        "fixme_text": "# Include this in your main Makefile with: include Makefile.fixme",
+        "context_lines": [
+          "makefile_content = dedent('''",
+          "# FIXME Resolution Makefile Targets",
+          "# Include this in your main Makefile with: include Makefile.fixme",
+          "",
+          ".PHONY: fixme-status fixme-easy-wins fixme-report fixme-setup"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      }
+    ],
     "Feature Implementation/Algorithm": [
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 71,
+        "fixme_text": "# Check staged content for FIXMEs",
+        "context_lines": [
+          "new_fixmes=0",
+          "for file in $staged_files; do",
+          "# Check staged content for FIXMEs",
+          "if git diff --cached \"$file\" | grep -E \"^\\\\+.*FIXME|^\\\\+.*XXX.*FIXME\" > /dev/null; then",
+          "echo \"\u274c New FIXME found in $file\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "Feature Implementation/Algorithm",
+        "estimated_effort": "1-4 weeks",
+        "dependencies": [],
+        "reasoning": "Requires moderate technical knowledge and implementation effort"
+      },
       {
         "file_path": "language-learning/src/grammar_learner/generalization.py",
         "line_number": 417,
@@ -16974,7 +16124,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 697,
+        "line_number": 694,
         "fixme_text": "/// Note: currently broken for multi-space usage, XXX FIXME.",
         "context_lines": [
           "/// Backend callback - find the Link. This is used ONLY to implement",
@@ -18134,7 +17284,7 @@
       },
       {
         "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 579,
+        "line_number": 577,
         "fixme_text": "// XXX this lock probably doesn't have to be the same one",
         "context_lines": [
           "",
@@ -18423,7 +17573,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 579,
+        "line_number": 577,
         "fixme_text": "// XXX this lock probably doesn't have to be the same one",
         "context_lines": [
           "",
@@ -20532,6 +19682,44 @@
     ]
   },
   "by_file": {
+    "fixme_resolution_tracker.py": [
+      {
+        "file_path": "fixme_resolution_tracker.py",
+        "line_number": 112,
+        "fixme_text": "# Extract FIXME entries",
+        "context_lines": [
+          "current_component = line.replace(\"### \", \"\").replace(\" Component\", \"\")",
+          "",
+          "# Extract FIXME entries",
+          "elif line.startswith(\"**\") and \".**\" in line and \"`\" in line:",
+          "self._extract_fixme_entry(lines, i, current_difficulty, current_component)"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      }
+    ],
+    "fixme_easy_wins.py": [
+      {
+        "file_path": "fixme_easy_wins.py",
+        "line_number": 99,
+        "fixme_text": "# For other cases, convert FIXME to descriptive comments",
+        "context_lines": [
+          "return line.replace(\"XXX Temp hack alert.\", \"NOTE: Legacy compatibility handling.\")",
+          "",
+          "# For other cases, convert FIXME to descriptive comments",
+          "elif \"xxx fixme\" in line_lower or \"fixme:\" in line_lower:",
+          "# Convert to NOTE or TODO depending on content"
+        ],
+        "difficulty": "EASY",
+        "category": "Documentation/Simple Fix",
+        "estimated_effort": "1-3 days",
+        "dependencies": [],
+        "reasoning": "Simple documentation updates or minor code changes"
+      }
+    ],
     "analyze_fixme_instances.py": [
       {
         "file_path": "analyze_fixme_instances.py",
@@ -20568,17 +19756,34 @@
         "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
-    "ure/opencog/ure/Rule.cc": [
+    "setup_fixme_environment.py": [
       {
-        "file_path": "ure/opencog/ure/Rule.cc",
-        "line_number": 535,
-        "fixme_text": "// as any variable in the source. XXX This is only a stochastic",
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 53,
+        "fixme_text": "# Pre-commit hook to check for new FIXMEs",
         "context_lines": [
+          "self.git_hooks_dir.mkdir(parents=True, exist_ok=True)",
           "",
-          "// To guarantee that the rule variable does not have the same name",
-          "// as any variable in the source. XXX This is only a stochastic",
-          "// guarantee, there is a small chance that the new random name",
-          "// will still collide."
+          "# Pre-commit hook to check for new FIXMEs",
+          "pre_commit_hook = self.git_hooks_dir / \"pre-commit\"",
+          "pre_commit_content = dedent('''"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 57,
+        "fixme_text": "# Pre-commit hook to prevent new FIXMEs",
+        "context_lines": [
+          "pre_commit_content = dedent('''",
+          "#!/bin/bash",
+          "# Pre-commit hook to prevent new FIXMEs",
+          "",
+          "echo \"\ud83d\udd0d Checking for new FIXME comments...\""
         ],
         "difficulty": "EASY",
         "category": "Documentation/Simple Fix",
@@ -20587,15 +19792,134 @@
         "reasoning": "Simple documentation updates or minor code changes"
       },
       {
-        "file_path": "ure/opencog/ure/Rule.cc",
-        "line_number": 572,
-        "fixme_text": "// as any variable in the target. XXX This is only a stochastic",
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 68,
+        "fixme_text": "# Check for new FIXMEs in staged content",
         "context_lines": [
+          "fi",
           "",
-          "// To guarantee that the rule variable does not have the same name",
-          "// as any variable in the target. XXX This is only a stochastic",
-          "// guarantee, there is a small chance that the new random name",
-          "// will still collide."
+          "# Check for new FIXMEs in staged content",
+          "new_fixmes=0",
+          "for file in $staged_files; do"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 71,
+        "fixme_text": "# Check staged content for FIXMEs",
+        "context_lines": [
+          "new_fixmes=0",
+          "for file in $staged_files; do",
+          "# Check staged content for FIXMEs",
+          "if git diff --cached \"$file\" | grep -E \"^\\\\+.*FIXME|^\\\\+.*XXX.*FIXME\" > /dev/null; then",
+          "echo \"\u274c New FIXME found in $file\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "Feature Implementation/Algorithm",
+        "estimated_effort": "1-4 weeks",
+        "dependencies": [],
+        "reasoning": "Requires moderate technical knowledge and implementation effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 101,
+        "fixme_text": "# Post-commit hook to update FIXME progress",
+        "context_lines": [
+          "post_commit_content = dedent('''",
+          "#!/bin/bash",
+          "# Post-commit hook to update FIXME progress",
+          "",
+          "# Check if any FIXME-related files were modified"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 103,
+        "fixme_text": "# Check if any FIXME-related files were modified",
+        "context_lines": [
+          "# Post-commit hook to update FIXME progress",
+          "",
+          "# Check if any FIXME-related files were modified",
+          "if git diff HEAD~1 --name-only | grep -E \"(FIXME|TODO)\" > /dev/null; then",
+          "echo \"\ud83d\udcca Updating FIXME progress tracking...\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 123,
+        "fixme_text": "# Pre-commit configuration for FIXME management",
+        "context_lines": [
+          "pre_commit_config = self.repo_root / \".pre-commit-config.yaml\"",
+          "config_content = dedent('''",
+          "# Pre-commit configuration for FIXME management",
+          "repos:",
+          "- repo: local"
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 216,
+        "fixme_text": "# Weekly FIXME progress report generator",
+        "context_lines": [
+          "script_content = dedent('''",
+          "#!/bin/bash",
+          "# Weekly FIXME progress report generator",
+          "",
+          "cd \"$(dirname \"$0\")/..\""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 250,
+        "fixme_text": "# FIXME Resolution Makefile Targets",
+        "context_lines": [
+          "makefile = self.repo_root / \"Makefile.fixme\"",
+          "makefile_content = dedent('''",
+          "# FIXME Resolution Makefile Targets",
+          "# Include this in your main Makefile with: include Makefile.fixme",
+          ""
+        ],
+        "difficulty": "MEDIUM",
+        "category": "General Implementation",
+        "estimated_effort": "1-2 weeks",
+        "dependencies": [],
+        "reasoning": "General implementation task requiring moderate effort"
+      },
+      {
+        "file_path": "setup_fixme_environment.py",
+        "line_number": 251,
+        "fixme_text": "# Include this in your main Makefile with: include Makefile.fixme",
+        "context_lines": [
+          "makefile_content = dedent('''",
+          "# FIXME Resolution Makefile Targets",
+          "# Include this in your main Makefile with: include Makefile.fixme",
+          "",
+          ".PHONY: fixme-status fixme-easy-wins fixme-report fixme-setup"
         ],
         "difficulty": "EASY",
         "category": "Documentation/Simple Fix",
@@ -20624,24 +19948,7 @@
       },
       {
         "file_path": "language-learning/tests/test_grammar_learner.py",
-        "line_number": 211,
-        "fixme_text": "# 81019 changes:    # FIXME: DEL comments",
-        "context_lines": [
-          "}",
-          "re = learn_grammar(**kwargs)",
-          "# 81019 changes:    # FIXME: DEL comments",
-          "# a, q, qa = pqa_meter(re['grammar_file'], outpath, cp, rp, **kwargs)",
-          "# print('parse-ability, parse-quality:', a, q)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "language-learning/tests/test_grammar_learner.py",
-        "line_number": 309,
+        "line_number": 310,
         "fixme_text": "# FIXME: check with further test_grammar updates and delete.",
         "context_lines": [
           "}",
@@ -21281,25 +20588,6 @@
         "reasoning": "General implementation task requiring moderate effort"
       }
     ],
-    "atomspace/opencog/scm/opencog.scm": [
-      {
-        "file_path": "atomspace/opencog/scm/opencog.scm",
-        "line_number": 122,
-        "fixme_text": "; FIXME: Both of the above-described problems might no longer exist.",
-        "context_lines": [
-          "; grabbing the existing atomspace, if there already is one.",
-          ";",
-          "; FIXME: Both of the above-described problems might no longer exist.",
-          "; I'm not sure. The below is simple and painless, I'm leaving it for",
-          "; now."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
     "atomspace/opencog/ocaml/CamlWrap.cc": [
       {
         "file_path": "atomspace/opencog/ocaml/CamlWrap.cc",
@@ -21423,25 +20711,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      }
-    ],
-    "atomspace/opencog/query/Satisfier.cc": [
-      {
-        "file_path": "atomspace/opencog/query/Satisfier.cc",
-        "line_number": 41,
-        "fixme_text": "// XXX Temp hack alert. When Continuations finally terminate, they",
-        "context_lines": [
-          "_result = true;",
-          "",
-          "// XXX Temp hack alert. When Continuations finally terminate, they",
-          "// supply us with empty groundings. This probably needs to be fixed",
-          "// someday. For now, for the simple examples, its good enough."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "atomspace/opencog/query/PatternMatchEngine.cc": [
@@ -21824,23 +21093,6 @@
         "estimated_effort": "1-4 weeks",
         "dependencies": [],
         "reasoning": "Requires moderate technical knowledge and implementation effort"
-      },
-      {
-        "file_path": "atomspace/opencog/query/NextSearchMixin.cc",
-        "line_number": 267,
-        "fixme_text": "// this simpler code is good enough. XXX FIXME someday?",
-        "context_lines": [
-          "// incoming set. Ideally, we should look only at the incoming",
-          "// set that matches the type of the parent term. But for now,",
-          "// this simpler code is good enough. XXX FIXME someday?",
-          "std::multimap<std::size_t, Handle> thick_vars;",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "atomspace/opencog/query/InitiateSearchMixin.cc": [
@@ -22022,24 +21274,7 @@
     "atomspace/opencog/atomspace/AtomTable.cc": [
       {
         "file_path": "atomspace/opencog/atomspace/AtomTable.cc",
-        "line_number": 623,
-        "fixme_text": "// XXX Also, a minor bug, not sure if it matters: if parent is set",
-        "context_lines": [
-          "// frames.",
-          "//",
-          "// XXX Also, a minor bug, not sure if it matters: if parent is set",
-          "// to true, then any UniqueLinks appearing here and in the parent",
-          "// will be duplicated repeatedly in the result. Might be nice to"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "atomspace/opencog/atomspace/AtomTable.cc",
-        "line_number": 782,
+        "line_number": 780,
         "fixme_text": "// atom in the parent. What??? XXX NOT TRUE FIXME",
         "context_lines": [
           "",
@@ -22275,25 +21510,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      }
-    ],
-    "atomspace/opencog/atoms/flow/CollectionOfLink.cc": [
-      {
-        "file_path": "atomspace/opencog/atoms/flow/CollectionOfLink.cc",
-        "line_number": 69,
-        "fixme_text": "// FIXME: _outoging[0] could be executable, in which case",
-        "context_lines": [
-          "_have_typespec = true;",
-          "",
-          "// FIXME: _outoging[0] could be executable, in which case",
-          "// is should be executed, first. But I'm lazy. Also:",
-          "// instead of being a simple type, the output could be"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "atomspace/opencog/atoms/flow/TruthValueOfLink.cc": [
@@ -22753,25 +21969,6 @@
         "estimated_effort": "2-6 months",
         "dependencies": [],
         "reasoning": "Requires distributed systems expertise or research-level work"
-      }
-    ],
-    "atomspace/opencog/atoms/reduct/BoolOpLink.cc": [
-      {
-        "file_path": "atomspace/opencog/atoms/reduct/BoolOpLink.cc",
-        "line_number": 44,
-        "fixme_text": "// XXX TODO we can relax this, and accept simple truth values, too.",
-        "context_lines": [
-          "if (1 == sz and BOOL_NOT_LINK != get_type()) return vp;",
-          "",
-          "// XXX TODO we can relax this, and accept simple truth values, too.",
-          "if (not nameserver().isA(vp->get_type(), BOOL_VALUE))",
-          "throw InvalidParamException(TRACE_INFO, \"Expecting a BoolBalue\");"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "atomspace/opencog/atoms/reduct/AccumulateLink.cc": [
@@ -23253,25 +22450,6 @@
         "reasoning": "General implementation task requiring moderate effort"
       }
     ],
-    "atomspace/opencog/atoms/truthvalue/SimpleTruthValue.h": [
-      {
-        "file_path": "atomspace/opencog/atoms/truthvalue/SimpleTruthValue.h",
-        "line_number": 77,
-        "fixme_text": "// XXX FIXME Are all of these really needed?",
-        "context_lines": [
-          "const MergeCtrl& mc=MergeCtrl()) const;",
-          "",
-          "// XXX FIXME Are all of these really needed?",
-          "// Can we get rid of some of them?",
-          "static SimpleTruthValuePtr createSTV(strength_t mean, confidence_t conf)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
     "atomspace/opencog/atoms/truthvalue/CountTruthValue.cc": [
       {
         "file_path": "atomspace/opencog/atoms/truthvalue/CountTruthValue.cc",
@@ -23289,25 +22467,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      }
-    ],
-    "atomspace/opencog/scm/opencog/base/atom-docs.scm": [
-      {
-        "file_path": "atomspace/opencog/scm/opencog/base/atom-docs.scm",
-        "line_number": 41,
-        "fixme_text": "; XXX FIXME replace below by real docs.",
-        "context_lines": [
-          "",
-          "; ---------------------------------------------------------------",
-          "; XXX FIXME replace below by real docs.",
-          "(set-procedure-property! BindLink 'documentation",
-          "(procedure-property QueryLink 'documentation))"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "atomspace/opencog/guile/modules/ExecSCM.cc": [
@@ -23568,25 +22727,6 @@
         "reasoning": "General implementation task requiring moderate effort"
       }
     ],
-    "moses/moses/moses/deme/feature_selector.cc": [
-      {
-        "file_path": "moses/moses/moses/deme/feature_selector.cc",
-        "line_number": 117,
-        "fixme_text": "/// XXX TODO Explain what this function does. Why does it create a second",
-        "context_lines": [
-          "}",
-          "",
-          "/// XXX TODO Explain what this function does. Why does it create a second",
-          "/// table that is different than _ctable? How are these two different",
-          "/// tables used?  Why do we need two different tables?  WTF.  This is"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
     "moses/moses/moses/metapopulation/merging.cc": [
       {
         "file_path": "moses/moses/moses/metapopulation/merging.cc",
@@ -23607,24 +22747,7 @@
       },
       {
         "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 404,
-        "fixme_text": "// XXX TODO fix the cap so its more sensitive to the size of",
-        "context_lines": [
-          "// value of _params.cap_coef=50 seems to work well.",
-          "//",
-          "// XXX TODO fix the cap so its more sensitive to the size of",
-          "// each exemplar, right!? So if the exemplars are huges, then the",
-          "// population size has to be smaller.  ... On the other hand, if"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 554,
+        "line_number": 552,
         "fixme_text": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
         "context_lines": [
           "}",
@@ -23641,7 +22764,7 @@
       },
       {
         "file_path": "moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 579,
+        "line_number": 577,
         "fixme_text": "// XXX this lock probably doesn't have to be the same one",
         "context_lines": [
           "",
@@ -23753,24 +22876,7 @@
     "moses/moses/moses/eda/local_structure.h": [
       {
         "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 145,
-        "fixme_text": "// XXX TODO document what this does...",
-        "context_lines": [
-          "};*/",
-          "",
-          "// XXX TODO document what this does...",
-          "struct local_structure_probs_learning",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 262,
+        "line_number": 263,
         "fixme_text": "// XXX ??? Huh? More details, please...",
         "context_lines": [
           "// Now that we have created all of the dtrees, construct a",
@@ -23787,7 +22893,7 @@
       },
       {
         "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 271,
+        "line_number": 272,
         "fixme_text": "// themselves shouldn't change (XXX why would we want to do this ??)",
         "context_lines": [
           "//",
@@ -23801,23 +22907,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      },
-      {
-        "file_path": "moses/moses/moses/eda/local_structure.h",
-        "line_number": 279,
-        "fixme_text": "// XXX TODO this is unclear, explain what is being accumulated where.",
-        "context_lines": [
-          "// iterate over the dtrees, and accumulate statistics.",
-          "//",
-          "// XXX TODO this is unclear, explain what is being accumulated where.",
-          "template<typename It>",
-          "void local_structure_probs_learning::operator()(const field_set& fs,"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "moses/moses/moses/main/table-problems.cc": [
@@ -24013,23 +23102,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      },
-      {
-        "file_path": "moses/moses/moses/representation/knobs.h",
-        "line_number": 276,
-        "fixme_text": "// XXX what does the above comment mean ???",
-        "context_lines": [
-          "",
-          "// Note - children aren't canonized when parents are called.",
-          "// XXX what does the above comment mean ???",
-          "struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "moses/moses/moses/representation/instance_scorer.h": [
@@ -24155,23 +23227,6 @@
         "estimated_effort": "2-8 weeks",
         "dependencies": [],
         "reasoning": "Requires deep technical expertise and careful implementation"
-      },
-      {
-        "file_path": "moses/moses/moses/representation/build_knobs.cc",
-        "line_number": 581,
-        "fixme_text": "// XXX TODO clarify actual breakeven on range of problems...",
-        "context_lines": [
-          "// measurements of relatively simple exemplars; its maybe even",
-          "// too low.  For large exemplars, it might be too big !?",
-          "// XXX TODO clarify actual breakeven on range of problems...",
-          "#define BREAKEVEN 30000",
-          "size_t np = perms.size();"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       },
       {
         "file_path": "moses/moses/moses/representation/build_knobs.cc",
@@ -24917,24 +23972,7 @@
       },
       {
         "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 486,
-        "fixme_text": "// XXX should print stats less often...",
-        "context_lines": [
-          "});",
-          "",
-          "// XXX should print stats less often...",
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 615,
+        "line_number": 616,
         "fixme_text": "// XXX TODO instead of overwritting the demeID it should be",
         "context_lines": [
           "stats.n_expansions ++;",
@@ -24948,23 +23986,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      },
-      {
-        "file_path": "moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 646,
-        "fixme_text": "// XXX this is kind-of buggy, since the following data is not",
-        "context_lines": [
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)",
-          "// XXX this is kind-of buggy, since the following data is not",
-          "// updated and collected atomically... other threads may be",
-          "// merging and updating as this print happens. Yuck. Oh well."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "moses/moses/moses/moses/complexity.cc": [
@@ -25004,23 +24025,6 @@
       }
     ],
     "moses/moses/moses/moses/partial.cc": [
-      {
-        "file_path": "moses/moses/moses/moses/partial.cc",
-        "line_number": 96,
-        "fixme_text": "// XXX TODO: we need to get the actual number of gens run, back",
-        "context_lines": [
-          "_moses_params.max_evals -= _num_evals;",
-          "",
-          "// XXX TODO: we need to get the actual number of gens run, back",
-          "// from moses, and subtract it here.  But there's no easy way",
-          "// to get this number ..."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
       {
         "file_path": "moses/moses/moses/moses/partial.cc",
         "line_number": 264,
@@ -25073,44 +24077,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      }
-    ],
-    "moses/moses/moses/scoring/select_bscore.cc": [
-      {
-        "file_path": "moses/moses/moses/scoring/select_bscore.cc",
-        "line_number": 314,
-        "fixme_text": "// XXX This is not quite right, for weighted rows.  A row with a small",
-        "context_lines": [
-          "}",
-          "",
-          "// XXX This is not quite right, for weighted rows.  A row with a small",
-          "// weight could result in a much smaller min-improv.",
-          "// (But I think boosting should not affect min-improv, right?)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
-    "moses/moses/moses/scoring/precision_bscore.cc": [
-      {
-        "file_path": "moses/moses/moses/scoring/precision_bscore.cc",
-        "line_number": 111,
-        "fixme_text": "/// set to false.  TBD XXX document that someday.",
-        "context_lines": [
-          "/// The above only descirbes the \"precision_full_bscore\" (default)",
-          "/// scoring; something else is done when precision_full_bscore is",
-          "/// set to false.  TBD XXX document that someday.",
-          "",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "moses/moses/moses/scoring/scoring_base.cc": [
@@ -26061,24 +25027,7 @@
     "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc": [
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 505,
-        "fixme_text": "// XXX FIXME (and in MonoSpace, too). According to the BackingStore",
-        "context_lines": [
-          "",
-          "/// Backend callback",
-          "// XXX FIXME (and in MonoSpace, too). According to the BackingStore",
-          "// docs, it says if the Value is absent, i.e. not in storage, that",
-          "// means it has been deleted, and that it should be deleted in the"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 525,
+        "line_number": 522,
         "fixme_text": "// XXX this is adding to wrong atomspace!?",
         "context_lines": [
           "",
@@ -26095,7 +25044,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 697,
+        "line_number": 694,
         "fixme_text": "/// Note: currently broken for multi-space usage, XXX FIXME.",
         "context_lines": [
           "/// Backend callback - find the Link. This is used ONLY to implement",
@@ -26112,7 +25061,7 @@
       },
       {
         "file_path": "components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
-        "line_number": 1286,
+        "line_number": 1283,
         "fixme_text": "// XXX FIXME. We would like to call",
         "context_lines": [
           "convertForFrames(HandleCast(getAtomSpace()));",
@@ -26293,25 +25242,6 @@
         "reasoning": "General implementation task requiring moderate effort"
       }
     ],
-    "components/learning/moses/moses/moses/deme/feature_selector.cc": [
-      {
-        "file_path": "components/learning/moses/moses/moses/deme/feature_selector.cc",
-        "line_number": 117,
-        "fixme_text": "/// XXX TODO Explain what this function does. Why does it create a second",
-        "context_lines": [
-          "}",
-          "",
-          "/// XXX TODO Explain what this function does. Why does it create a second",
-          "/// table that is different than _ctable? How are these two different",
-          "/// tables used?  Why do we need two different tables?  WTF.  This is"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
     "components/learning/moses/moses/moses/metapopulation/merging.cc": [
       {
         "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
@@ -26332,24 +25262,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 404,
-        "fixme_text": "// XXX TODO fix the cap so its more sensitive to the size of",
-        "context_lines": [
-          "// value of _params.cap_coef=50 seems to work well.",
-          "//",
-          "// XXX TODO fix the cap so its more sensitive to the size of",
-          "// each exemplar, right!? So if the exemplars are huges, then the",
-          "// population size has to be smaller.  ... On the other hand, if"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 554,
+        "line_number": 552,
         "fixme_text": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
         "context_lines": [
           "}",
@@ -26366,7 +25279,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/metapopulation/merging.cc",
-        "line_number": 579,
+        "line_number": 577,
         "fixme_text": "// XXX this lock probably doesn't have to be the same one",
         "context_lines": [
           "",
@@ -26495,24 +25408,7 @@
     "components/learning/moses/moses/moses/eda/local_structure.h": [
       {
         "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 145,
-        "fixme_text": "// XXX TODO document what this does...",
-        "context_lines": [
-          "};*/",
-          "",
-          "// XXX TODO document what this does...",
-          "struct local_structure_probs_learning",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 262,
+        "line_number": 263,
         "fixme_text": "// XXX ??? Huh? More details, please...",
         "context_lines": [
           "// Now that we have created all of the dtrees, construct a",
@@ -26529,7 +25425,7 @@
       },
       {
         "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 271,
+        "line_number": 272,
         "fixme_text": "// themselves shouldn't change (XXX why would we want to do this ??)",
         "context_lines": [
           "//",
@@ -26543,23 +25439,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/eda/local_structure.h",
-        "line_number": 279,
-        "fixme_text": "// XXX TODO this is unclear, explain what is being accumulated where.",
-        "context_lines": [
-          "// iterate over the dtrees, and accumulate statistics.",
-          "//",
-          "// XXX TODO this is unclear, explain what is being accumulated where.",
-          "template<typename It>",
-          "void local_structure_probs_learning::operator()(const field_set& fs,"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "components/learning/moses/moses/moses/main/table-problems.cc": [
@@ -26721,23 +25600,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/representation/knobs.h",
-        "line_number": 283,
-        "fixme_text": "// XXX what does the above comment mean ???",
-        "context_lines": [
-          "",
-          "// Note - children aren't canonized when parents are called.",
-          "// XXX what does the above comment mean ???",
-          "struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>",
-          "{"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "components/learning/moses/moses/moses/representation/instance_scorer.h": [
@@ -26863,23 +25725,6 @@
         "estimated_effort": "2-8 weeks",
         "dependencies": [],
         "reasoning": "Requires deep technical expertise and careful implementation"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/representation/build_knobs.cc",
-        "line_number": 581,
-        "fixme_text": "// XXX TODO clarify actual breakeven on range of problems...",
-        "context_lines": [
-          "// measurements of relatively simple exemplars; its maybe even",
-          "// too low.  For large exemplars, it might be too big !?",
-          "// XXX TODO clarify actual breakeven on range of problems...",
-          "#define BREAKEVEN 30000",
-          "size_t np = perms.size();"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       },
       {
         "file_path": "components/learning/moses/moses/moses/representation/build_knobs.cc",
@@ -27586,40 +26431,6 @@
         "estimated_effort": "2-6 months",
         "dependencies": [],
         "reasoning": "Requires distributed systems expertise or research-level work"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 482,
-        "fixme_text": "// XXX should print stats less often...",
-        "context_lines": [
-          "});",
-          "",
-          "// XXX should print stats less often...",
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/mpi_moses.cc",
-        "line_number": 641,
-        "fixme_text": "// XXX this is kind-of buggy, since the following data is not",
-        "context_lines": [
-          "// Print stats in a way that makes them easy to graph.",
-          "// (columns of tab-seprated numbers)",
-          "// XXX this is kind-of buggy, since the following data is not",
-          "// updated and collected atomically... other threads may be",
-          "// merging and updating as this print happens. Yuck. Oh well."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "components/learning/moses/moses/moses/moses/complexity.cc": [
@@ -27661,23 +26472,6 @@
     "components/learning/moses/moses/moses/moses/partial.cc": [
       {
         "file_path": "components/learning/moses/moses/moses/moses/partial.cc",
-        "line_number": 96,
-        "fixme_text": "// XXX TODO: we need to get the actual number of gens run, back",
-        "context_lines": [
-          "_moses_params.max_evals -= _num_evals;",
-          "",
-          "// XXX TODO: we need to get the actual number of gens run, back",
-          "// from moses, and subtract it here.  But there's no easy way",
-          "// to get this number ..."
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      },
-      {
-        "file_path": "components/learning/moses/moses/moses/moses/partial.cc",
         "line_number": 264,
         "fixme_text": "// XXX is this correct? I think we need to ask the cscorer for the total ...",
         "context_lines": [
@@ -27709,44 +26503,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      }
-    ],
-    "components/learning/moses/moses/moses/scoring/select_bscore.cc": [
-      {
-        "file_path": "components/learning/moses/moses/moses/scoring/select_bscore.cc",
-        "line_number": 314,
-        "fixme_text": "// XXX This is not quite right, for weighted rows.  A row with a small",
-        "context_lines": [
-          "}",
-          "",
-          "// XXX This is not quite right, for weighted rows.  A row with a small",
-          "// weight could result in a much smaller min-improv.",
-          "// (But I think boosting should not affect min-improv, right?)"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
-      }
-    ],
-    "components/learning/moses/moses/moses/scoring/precision_bscore.cc": [
-      {
-        "file_path": "components/learning/moses/moses/moses/scoring/precision_bscore.cc",
-        "line_number": 111,
-        "fixme_text": "/// set to false.  TBD XXX document that someday.",
-        "context_lines": [
-          "/// The above only descirbes the \"precision_full_bscore\" (default)",
-          "/// scoring; something else is done when precision_full_bscore is",
-          "/// set to false.  TBD XXX document that someday.",
-          "",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "components/learning/moses/moses/moses/scoring/scoring_base.cc": [
@@ -28442,23 +27198,6 @@
         "estimated_effort": "1-4 weeks",
         "dependencies": [],
         "reasoning": "Requires moderate technical knowledge and implementation effort"
-      },
-      {
-        "file_path": "components/learning/moses/examples/example-progs/continmax.cc",
-        "line_number": 67,
-        "fixme_text": "// XXX todo -- finish documentation to make it look more like the",
-        "context_lines": [
-          "//    distinction between continuous variables what will be drawn.",
-          "//",
-          "// XXX todo -- finish documentation to make it look more like the",
-          "// onemax/nmax example programs.",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "components/learning/moses/examples/example-progs/ontomax.cc": [
@@ -28808,25 +27547,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "Scheme code implementation or logic system update"
-      }
-    ],
-    "components/language/learn/scm/attic/cluster/cset-class.scm": [
-      {
-        "file_path": "components/language/learn/scm/attic/cluster/cset-class.scm",
-        "line_number": 148,
-        "fixme_text": "; XXX FIXME this might be pointless and useless?",
-        "context_lines": [
-          "; The goal is to trim the list of sections to something smaller.",
-          ";",
-          "; XXX FIXME this might be pointless and useless?",
-          "(define (get-all-sections-in-classes WCL)",
-          ""
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "components/language/learn/scm/attic/cluster/gram-pairwise.scm": [
@@ -29348,25 +28068,6 @@
         "estimated_effort": "1-2 weeks",
         "dependencies": [],
         "reasoning": "General implementation task requiring moderate effort"
-      }
-    ],
-    "components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm": [
-      {
-        "file_path": "components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm",
-        "line_number": 134,
-        "fixme_text": "; XXX TODO (1) this could be converted into a simple GetLink",
-        "context_lines": [
-          "TruthQuerySpeechAct, etc...",
-          "\"",
-          "; XXX TODO (1) this could be converted into a simple GetLink",
-          "; and probably should be. (2) There should be a syntax for GetLink",
-          "; that is lest verbose, and closer in style to what is written"
-        ],
-        "difficulty": "EASY",
-        "category": "Documentation/Simple Fix",
-        "estimated_effort": "1-3 days",
-        "dependencies": [],
-        "reasoning": "Simple documentation updates or minor code changes"
       }
     ],
     "components/integration/opencog/opencog/ghost/cs-parse.scm": [
