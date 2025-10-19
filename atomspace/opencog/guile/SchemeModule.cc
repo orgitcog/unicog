@@ -29,35 +29,78 @@ using namespace opencog;
 
 FunctionWrap::FunctionWrap(Handle (f)(AtomSpace*, const Handle&),
                            const char* funcname, const char* modname)
-	: _func_h_ah(f), _name(funcname)
+	: _func_h_ah(f), _func_h_ahz(nullptr), _func_h_ah_seq(nullptr),
+	  _pred_ah(nullptr), _pred_ah_seq(nullptr), 
+	  _proto_ah(nullptr), _proto_ah_seq(nullptr),
+	  _name(funcname)
 {
 	define_scheme_primitive(_name, &FunctionWrap::as_wrapper_h_h, this, modname);
 }
 
 FunctionWrap::FunctionWrap(Handle (f)(AtomSpace*, const Handle&, size_t),
                            const char* funcname, const char* modname)
-	: _func_h_ahz(f), _name(funcname)
+	: _func_h_ah(nullptr), _func_h_ahz(f), _func_h_ah_seq(nullptr),
+	  _pred_ah(nullptr), _pred_ah_seq(nullptr),
+	  _proto_ah(nullptr), _proto_ah_seq(nullptr),
+	  _name(funcname)
 {
 	define_scheme_primitive(_name, &FunctionWrap::as_wrapper_h_hz, this, modname);
 }
 
 FunctionWrap::FunctionWrap(TruthValuePtr (p)(AtomSpace*, const Handle&),
                            const char* funcname, const char* modname)
-	: _pred_ah(p), _name(funcname)
+	: _func_h_ah(nullptr), _func_h_ahz(nullptr), _func_h_ah_seq(nullptr),
+	  _pred_ah(p), _pred_ah_seq(nullptr),
+	  _proto_ah(nullptr), _proto_ah_seq(nullptr),
+	  _name(funcname)
 {
 	define_scheme_primitive(_name, &FunctionWrap::as_wrapper_p_h, this, modname);
 }
 
 FunctionWrap::FunctionWrap(ValuePtr (p)(AtomSpace*, const Handle&),
                            const char* funcname, const char* modname)
-	: _proto_ah(p), _name(funcname)
+	: _func_h_ah(nullptr), _func_h_ahz(nullptr), _func_h_ah_seq(nullptr),
+	  _pred_ah(nullptr), _pred_ah_seq(nullptr),
+	  _proto_ah(p), _proto_ah_seq(nullptr),
+	  _name(funcname)
 {
 	define_scheme_primitive(_name, &FunctionWrap::as_wrapper_v_h, this, modname);
 }
 
+//XXX New constructors supporting optional arguments as list of handles
+FunctionWrap::FunctionWrap(Handle (f)(AtomSpace*, const Handle&, const HandleSeq&),
+                           const char* funcname, const char* modname)
+	: _func_h_ah(nullptr), _func_h_ahz(nullptr), _func_h_ah_seq(f),
+	  _pred_ah(nullptr), _pred_ah_seq(nullptr),
+	  _proto_ah(nullptr), _proto_ah_seq(nullptr),
+	  _name(funcname)
+{
+	define_scheme_primitive(_name, &FunctionWrap::as_wrapper_h_h_seq, this, modname);
+}
+
+FunctionWrap::FunctionWrap(TruthValuePtr (p)(AtomSpace*, const Handle&, const HandleSeq&),
+                           const char* funcname, const char* modname)
+	: _func_h_ah(nullptr), _func_h_ahz(nullptr), _func_h_ah_seq(nullptr),
+	  _pred_ah(nullptr), _pred_ah_seq(p),
+	  _proto_ah(nullptr), _proto_ah_seq(nullptr),
+	  _name(funcname)
+{
+	define_scheme_primitive(_name, &FunctionWrap::as_wrapper_p_h_seq, this, modname);
+}
+
+FunctionWrap::FunctionWrap(ValuePtr (p)(AtomSpace*, const Handle&, const HandleSeq&),
+                           const char* funcname, const char* modname)
+	: _func_h_ah(nullptr), _func_h_ahz(nullptr), _func_h_ah_seq(nullptr),
+	  _pred_ah(nullptr), _pred_ah_seq(nullptr),
+	  _proto_ah(nullptr), _proto_ah_seq(p),
+	  _name(funcname)
+{
+	define_scheme_primitive(_name, &FunctionWrap::as_wrapper_v_h_seq, this, modname);
+}
+
 Handle FunctionWrap::as_wrapper_h_h(Handle h)
 {
-	// XXX we should also allow opt-args to be a list of handles
+	// Note: For optional arguments as list of handles, use as_wrapper_h_h_seq
 	const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
 	AtomSpace* as = asp.get();
 	return _func_h_ah(as, h);
@@ -65,7 +108,7 @@ Handle FunctionWrap::as_wrapper_h_h(Handle h)
 
 Handle FunctionWrap::as_wrapper_h_hz(Handle h, size_t sz)
 {
-	// XXX we should also allow opt-args to be a list of handles
+	// Note: For optional arguments as list of handles, use as_wrapper_h_h_seq
 	const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
 	AtomSpace* as = asp.get();
 	return _func_h_ahz(as, h, sz);
@@ -73,7 +116,7 @@ Handle FunctionWrap::as_wrapper_h_hz(Handle h, size_t sz)
 
 TruthValuePtr FunctionWrap::as_wrapper_p_h(Handle h)
 {
-	// XXX we should also allow opt-args to be a list of handles
+	// Note: For optional arguments as list of handles, use as_wrapper_p_h_seq
 	const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
 	AtomSpace* as = asp.get();
 	return _pred_ah(as, h);
@@ -81,10 +124,32 @@ TruthValuePtr FunctionWrap::as_wrapper_p_h(Handle h)
 
 ValuePtr FunctionWrap::as_wrapper_v_h(Handle h)
 {
-	// XXX we should also allow opt-args to be a list of handles
+	// Note: For optional arguments as list of handles, use as_wrapper_v_h_seq
 	const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
 	AtomSpace* as = asp.get();
 	return _proto_ah(as, h);
+}
+
+// XXX New wrapper methods supporting optional arguments as list of handles
+Handle FunctionWrap::as_wrapper_h_h_seq(Handle h, const HandleSeq& opt_args)
+{
+	const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
+	AtomSpace* as = asp.get();
+	return _func_h_ah_seq(as, h, opt_args);
+}
+
+TruthValuePtr FunctionWrap::as_wrapper_p_h_seq(Handle h, const HandleSeq& opt_args)
+{
+	const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
+	AtomSpace* as = asp.get();
+	return _pred_ah_seq(as, h, opt_args);
+}
+
+ValuePtr FunctionWrap::as_wrapper_v_h_seq(Handle h, const HandleSeq& opt_args)
+{
+	const AtomSpacePtr& asp = SchemeSmob::ss_get_env_as(_name);
+	AtomSpace* as = asp.get();
+	return _proto_ah_seq(as, h, opt_args);
 }
 
 // ========================================================
