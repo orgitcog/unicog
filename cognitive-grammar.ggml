@@ -1,7 +1,7 @@
 {
   "tensor_field": {
     "enterprise": "cosmos",
-    "timestamp": "2025-11-11T21:08:21.638566",
+    "timestamp": "2025-11-11T21:25:52.135873",
     "organizations": {
       "cogpilot": {
         "prime": 2,
@@ -42,7 +42,7 @@
             "membrane_permeability": "bidirectional"
           }
         },
-        "cognitive_weight": 0.04643866988971235
+        "cognitive_weight": 0.3069528906050061
       },
       "OzCog": {
         "prime": 3,
@@ -88,7 +88,7 @@
             "membrane_permeability": "bidirectional"
           }
         },
-        "cognitive_weight": 0.06766350731269344
+        "cognitive_weight": 0.6698390356246636
       },
       "cosmos": {
         "prime": 5,
@@ -129,7 +129,7 @@
             "membrane_permeability": "bidirectional"
           }
         },
-        "cognitive_weight": 0.6927045914496199
+        "cognitive_weight": 0.648079924715103
       }
     },
     "tensor_dimensions": [
