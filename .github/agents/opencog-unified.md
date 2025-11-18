@@ -4,10 +4,10 @@
 # To make this agent available, merge this file into the default repository branch.
 # For format details, see: https://gh.io/customagents/config
 
-name: a
-description: b
+name: opencog-unified
+description: opencog-unified
 ---
 
-# My Agent
+# OpenCog Unified
 
 Describe what your agent does here...
