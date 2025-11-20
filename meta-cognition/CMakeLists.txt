@@ -21,11 +21,13 @@ find_package(Threads REQUIRED)
 # Source files
 set(SOURCES
     src/MetaCognitiveMonitor.cc
+    src/CoreSelfAwareness.cc
 )
 
 # Header files
 set(HEADERS
     include/MetaCognitiveMonitor.h
+    include/CoreSelfAwareness.h
 )
 
 # Create the meta-cognition library
