@@ -1,5 +1,5 @@
 ---
-name: entelechy
+name: entelechy1
 description: Generalized vital actualization framework for cognitive systems
 ---
 
