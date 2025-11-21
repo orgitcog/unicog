@@ -960,38 +960,6 @@ Exploration of quantum computational actualization:
 - Quantum measurement collapse as actualization
 - Faster evolution through quantum parallelism
 
-## References
-
-**Philosophical Foundations:**
-- Aristotle. (350 BCE). Metaphysics (Books Θ-Ζ)
-- Leibniz, G.W. (1714). Monadology
-- Bergson, H. (1907). Creative Evolution
-- Whitehead, A.N. (1929). Process and Reality
-
-**Cognitive Architecture:**
-- Goertzel, B. (2014). Artificial General Intelligence
-- Laird, J.E. (2012). The SOAR Cognitive Architecture
-- Anderson, J.R. (2007). How Can the Human Mind Occur in the Physical Universe?
-
-**Self-Organization:**
-- Haken, H. (1983). Synergetics: An Introduction
-- Kauffman, S. (1995). At Home in the Universe
-- Prigogine, I. (1984). Order Out of Chaos
-
-**Developmental Systems:**
-- von Bertalanffy, L. (1968). General System Theory
-- Varela, F.J. (1979). Principles of Biological Autonomy
-- Maturana, H.R. (1980). Autopoiesis and Cognition
-
-**OpenCog Unified:**
-- Schwarz, E. Holistic Metamodel (organizational systems theory)
-- OpenCog Foundation. AUTOGNOSIS (hierarchical self-image building)
-- Universal Kernel Generator. ONTOGENESIS (self-generating kernels)
-
-## License
-
-AGPL3 License - see [LICENSE](../../LICENSE) for details.
-
 ---
 
 **Entelechy**: Where cognitive systems become living intelligence - self-actualizing, self-organizing, self-transcending minds that evolve toward their inherent perfection through the pure drive of vital purpose.
