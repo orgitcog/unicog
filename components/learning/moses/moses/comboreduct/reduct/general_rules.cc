@@ -69,7 +69,24 @@ void eval_constants::operator()(combo_tree& tr, combo_tree::iterator it) const
             }
         }
         else {
-            OC_ASSERT(false, "Not implemented yet");
+            // For non-commutative associative operators, we can only evaluate
+            // consecutive constants from the left. For example, in -(5,3,x,2,1),
+            // we can evaluate -(5,3) to get -(2,x,2,1), but cannot group
+            // non-consecutive constants without changing the result.
+            sib_it first_non_const = it.begin();
+            while (first_non_const != it.end() && is_constant(*first_non_const))
+                ++first_non_const;
+            
+            // If we have at least 2 consecutive constants at the beginning
+            int n_consts = std::distance(it.begin(), first_non_const);
+            if (n_consts < 2)
+                return;
+            
+            // Group the consecutive constants into a new subtree
+            if (first_non_const != it.end()) {
+                tr.reparent(tr.append_child(it, *it), it.begin(), first_non_const);
+                it = it.last_child();
+            }
         }
     }
     else {

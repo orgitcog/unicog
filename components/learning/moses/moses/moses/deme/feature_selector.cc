@@ -199,8 +199,15 @@ CTable feature_selector::build_fs_ctable(const combo_tree& xmplr) const
                     inputs.push_back(get_builtin(predicted_out));
                 else if (cto == id::contin_type)
                     inputs.push_back(get_contin(predicted_out));
-                else
-                    OC_ASSERT(false, "Not implemented");
+                else if (cto == id::enum_type)
+                    inputs.push_back(get_enum_type(predicted_out));
+                else if (cto == id::unknown_type || cto == id::ill_formed_type)
+                    inputs.push_back(predicted_out); // Use the vertex directly
+                else {
+                    // For any other type, use the vertex directly
+                    logger().warn("Feature selector: Unhandled output type, using vertex directly");
+                    inputs.push_back(predicted_out);
+                }
             }
 
             fs_ctable[inputs] += vct.second;

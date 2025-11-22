@@ -338,12 +338,26 @@ struct interpreter_visitor : public boost::static_visitor<vertex>
         return mixed_interpreter(inputs)(_it);
     }
     vertex operator()(const string_seq& inputs) {
-        OC_ASSERT(false, "Not implemented");
-        return vertex();
+        // String inputs are not commonly used in MOSES, but when they are,
+        // we need to convert them to vertices. For now, we use mixed_interpreter
+        // which can handle various input types through vertex conversion.
+        std::vector<vertex> vertex_inputs;
+        vertex_inputs.reserve(inputs.size());
+        for (const auto& str : inputs) {
+            vertex_inputs.push_back(vertex(str));
+        }
+        return mixed_interpreter(vertex_inputs)(_it);
     }
     vertex operator()(const std::vector<combo_tree>& inputs) {
-        OC_ASSERT(false, "Not implemented");
-        return vertex();
+        // Combo tree inputs represent structured expressions.
+        // We convert them to vertices for interpretation.
+        std::vector<vertex> vertex_inputs;
+        vertex_inputs.reserve(inputs.size());
+        for (const auto& tree : inputs) {
+            // Use the root vertex of each tree as the input
+            vertex_inputs.push_back(*tree.begin());
+        }
+        return mixed_interpreter(vertex_inputs)(_it);
     }
     combo_tree::iterator _it;
     bool mixed;

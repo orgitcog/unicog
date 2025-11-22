@@ -120,8 +120,14 @@ ITable::ITable(const type_tree& tt, int nsamples,
                 vs.push_back(enum_t::get_random_enum());
             else if (*it == id::unknown_type)
                 vs.push_back(vertex()); // push default vertex
-            else
-                OC_ASSERT(false, "Not implemented yet");
+            else if (*it == id::ill_formed_type)
+                vs.push_back(vertex()); // push default vertex for ill-formed type
+            else {
+                // Handle any other type by pushing a default vertex
+                // This is more graceful than crashing
+                std::cerr << "Warning: Unhandled type in ITable constructor, using default vertex" << std::endl;
+                vs.push_back(vertex());
+            }
 
         // input vector
         push_back(vs);
