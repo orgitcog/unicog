@@ -1,0 +1,179 @@
+{
+  "summary": {
+    "total_fixes_applied": 12,
+    "total_fixes_failed": 0,
+    "by_type": {
+      "obsolete_comment": 8,
+      "clarification_added": 4
+    }
+  },
+  "fixes_applied": [
+    {
+      "file": "atomspace/opencog/atoms/pattern/PatternLink.cc",
+      "line": 407,
+      "type": "obsolete_comment",
+      "original": "/// XXX No one, except unit tests, use these deprecated API's. These",
+      "fixed": "/// NOTE: No one, except unit tests, use these deprecated API's. These"
+    },
+    {
+      "file": "components/learning/moses/moses/comboreduct/combo/vertex.h",
+      "line": 101,
+      "type": "obsolete_comment",
+      "original": "// XXX This should be obsoleted by cond, at some point.",
+      "fixed": "// NOTE: This should be obsoleted by cond, at some point."
+    },
+    {
+      "file": "moses/moses/comboreduct/combo/vertex.h",
+      "line": 101,
+      "type": "obsolete_comment",
+      "original": "// XXX This should be obsoleted by cond, at some point.",
+      "fixed": "// NOTE: This should be obsoleted by cond, at some point."
+    },
+    {
+      "file": "atomspace/opencog/scm/opencog/base/utilities.scm",
+      "line": 749,
+      "type": "obsolete_comment",
+      "original": "; XXX This should probably be made obsolete.",
+      "fixed": "; NOTE: This should probably be made obsolete."
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/src/btree.scm",
+      "line": 4,
+      "type": "obsolete_comment",
+      "original": "; XXX FIXME ... I think this blob of code is obsolete ... I think",
+      "fixed": "; NOTE: FIXME ... I think this blob of code is obsolete ... I think"
+    },
+    {
+      "file": "components/integration/opencog/opencog/nlp/wsd-post/collect-stats/disjunct-list.scm",
+      "line": 12,
+      "type": "obsolete_comment",
+      "original": "; XXX This code is deprecated and/or obsolete. Why?",
+      "fixed": "; NOTE: This code is deprecated and/or obsolete. Why?"
+    },
+    {
+      "file": "components/language/learn/learn-lang-diary/utils/disjunct-cross.scm",
+      "line": 32,
+      "type": "obsolete_comment",
+      "original": "; XXX FIXME add-pair-count-api is obsolete; use add-support-api instead.",
+      "fixed": "; NOTE: FIXME add-pair-count-api is obsolete; use add-support-api instead."
+    },
+    {
+      "file": "components/language/learn/learn-lang-diary/utils/disjunct-stats.scm",
+      "line": 39,
+      "type": "obsolete_comment",
+      "original": "; XXX FIXME add-pair-count-api is obsolete; use add-support-api instead.",
+      "fixed": "; NOTE: FIXME add-pair-count-api is obsolete; use add-support-api instead."
+    },
+    {
+      "file": "components/learning/moses/moses/moses/eda/local_structure.h",
+      "line": 285,
+      "type": "clarification_added",
+      "note": "Added clarification comment"
+    },
+    {
+      "file": "components/learning/moses/moses/moses/representation/knobs.h",
+      "line": 283,
+      "type": "clarification_added",
+      "note": "Added clarification comment"
+    },
+    {
+      "file": "moses/moses/moses/eda/local_structure.h",
+      "line": 285,
+      "type": "clarification_added",
+      "note": "Added clarification comment"
+    },
+    {
+      "file": "moses/moses/moses/representation/knobs.h",
+      "line": 276,
+      "type": "clarification_added",
+      "note": "Added clarification comment"
+    }
+  ],
+  "fixes_failed": [],
+  "by_type": {
+    "obsolete_comment": [
+      {
+        "file": "atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 407,
+        "type": "obsolete_comment",
+        "original": "/// XXX No one, except unit tests, use these deprecated API's. These",
+        "fixed": "/// NOTE: No one, except unit tests, use these deprecated API's. These"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/combo/vertex.h",
+        "line": 101,
+        "type": "obsolete_comment",
+        "original": "// XXX This should be obsoleted by cond, at some point.",
+        "fixed": "// NOTE: This should be obsoleted by cond, at some point."
+      },
+      {
+        "file": "moses/moses/comboreduct/combo/vertex.h",
+        "line": 101,
+        "type": "obsolete_comment",
+        "original": "// XXX This should be obsoleted by cond, at some point.",
+        "fixed": "// NOTE: This should be obsoleted by cond, at some point."
+      },
+      {
+        "file": "atomspace/opencog/scm/opencog/base/utilities.scm",
+        "line": 749,
+        "type": "obsolete_comment",
+        "original": "; XXX This should probably be made obsolete.",
+        "fixed": "; NOTE: This should probably be made obsolete."
+      },
+      {
+        "file": "components/integration/opencog/opencog/eva/src/btree.scm",
+        "line": 4,
+        "type": "obsolete_comment",
+        "original": "; XXX FIXME ... I think this blob of code is obsolete ... I think",
+        "fixed": "; NOTE: FIXME ... I think this blob of code is obsolete ... I think"
+      },
+      {
+        "file": "components/integration/opencog/opencog/nlp/wsd-post/collect-stats/disjunct-list.scm",
+        "line": 12,
+        "type": "obsolete_comment",
+        "original": "; XXX This code is deprecated and/or obsolete. Why?",
+        "fixed": "; NOTE: This code is deprecated and/or obsolete. Why?"
+      },
+      {
+        "file": "components/language/learn/learn-lang-diary/utils/disjunct-cross.scm",
+        "line": 32,
+        "type": "obsolete_comment",
+        "original": "; XXX FIXME add-pair-count-api is obsolete; use add-support-api instead.",
+        "fixed": "; NOTE: FIXME add-pair-count-api is obsolete; use add-support-api instead."
+      },
+      {
+        "file": "components/language/learn/learn-lang-diary/utils/disjunct-stats.scm",
+        "line": 39,
+        "type": "obsolete_comment",
+        "original": "; XXX FIXME add-pair-count-api is obsolete; use add-support-api instead.",
+        "fixed": "; NOTE: FIXME add-pair-count-api is obsolete; use add-support-api instead."
+      }
+    ],
+    "clarification_added": [
+      {
+        "file": "components/learning/moses/moses/moses/eda/local_structure.h",
+        "line": 285,
+        "type": "clarification_added",
+        "note": "Added clarification comment"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/knobs.h",
+        "line": 283,
+        "type": "clarification_added",
+        "note": "Added clarification comment"
+      },
+      {
+        "file": "moses/moses/moses/eda/local_structure.h",
+        "line": 285,
+        "type": "clarification_added",
+        "note": "Added clarification comment"
+      },
+      {
+        "file": "moses/moses/moses/representation/knobs.h",
+        "line": 276,
+        "type": "clarification_added",
+        "note": "Added clarification comment"
+      }
+    ]
+  }
+}

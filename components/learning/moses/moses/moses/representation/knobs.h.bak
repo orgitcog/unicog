@@ -197,18 +197,25 @@ protected:
     int _default;
     int _current;   // The current knob setting.
 
-    // XXX Huh?? what does this do?? Why does shifting matter,
-    // if the only thing done is to count the number of bits set ??
-    // WTF ??  I think the shift is n the  wrong direction, yeah?
-    // If the goal is to skip over index values that are disallowed, then
-    // the shift is definitely in the wrong direction!! FIXME.
+    // Maps a logical index to a physical index, skipping over disallowed values.
+    // The logical index represents the nth allowed value, while the physical
+    // index is the actual value in the range [0, Multiplicity).
     int map_idx(int idx) const
     {
         if (idx == _default)
-            idx = 0;  // interpreted as "absent", as used below. XXX
+            idx = 0;  // interpreted as "absent", as used below.
         else if (idx == 0)
             idx = _default;
-        return idx + (_disallowed << (Multiplicity - idx)).count();
+        
+        // Count how many disallowed indices come before idx
+        // to adjust the physical index accordingly
+        int disallowed_before = 0;
+        for (int i = 0; i < idx && i < Multiplicity; ++i) {
+            if (_disallowed[i]) {
+                disallowed_before++;
+            }
+        }
+        return idx + disallowed_before;
     }
 };
 
@@ -274,7 +281,6 @@ private:
 
 // Note - children aren't canonized when parents are called.
 // TODO: Clarify the canonization behavior for parent-child relationships.
-// Clarification needed: Review and document the intended behavior
 struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>
 {
     typedef combo_tree::pre_order_iterator pre_it;

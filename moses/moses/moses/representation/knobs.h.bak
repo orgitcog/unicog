@@ -274,7 +274,6 @@ private:
 
 // Note - children aren't canonized when parents are called.
 // TODO: Clarify the canonization behavior for parent-child relationships.
-// Clarification needed: Review and document the intended behavior
 struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>
 {
     typedef combo_tree::pre_order_iterator pre_it;

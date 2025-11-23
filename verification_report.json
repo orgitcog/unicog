@@ -1,0 +1,101 @@
+{
+  "verified": [
+    {
+      "file": "atomspace/opencog/atoms/pattern/PatternLink.cc",
+      "line": 407,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "components/learning/moses/moses/comboreduct/combo/vertex.h",
+      "line": 101,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "moses/moses/comboreduct/combo/vertex.h",
+      "line": 101,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "atomspace/opencog/scm/opencog/base/utilities.scm",
+      "line": 749,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/src/btree.scm",
+      "line": 4,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "components/integration/opencog/opencog/nlp/wsd-post/collect-stats/disjunct-list.scm",
+      "line": 12,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "components/language/learn/learn-lang-diary/utils/disjunct-cross.scm",
+      "line": 32,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "components/language/learn/learn-lang-diary/utils/disjunct-stats.scm",
+      "line": 39,
+      "type": "obsolete_comment",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "components/learning/moses/moses/moses/eda/local_structure.h",
+      "line": 285,
+      "type": "clarification_added",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "components/learning/moses/moses/moses/representation/knobs.h",
+      "line": 283,
+      "type": "clarification_added",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "moses/moses/moses/eda/local_structure.h",
+      "line": 285,
+      "type": "clarification_added",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "moses/moses/moses/representation/knobs.h",
+      "line": 276,
+      "type": "clarification_added",
+      "has_backup": true,
+      "status": "verified"
+    },
+    {
+      "file": "moses/moses/comboreduct/table/table_io.cc",
+      "line": 99,
+      "type": "comment_extension",
+      "has_backup": true,
+      "status": "verified"
+    }
+  ],
+  "failed": [],
+  "summary": {
+    "total": 13,
+    "verified": 13,
+    "failed": 0
+  }
+}

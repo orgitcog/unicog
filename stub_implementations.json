@@ -1,0 +1,26 @@
+[
+  {
+    "file": "language-learning/src/common/absclient.py",
+    "line": 81,
+    "function": "set_total",
+    "params": "self, total: int",
+    "stub_type": "pass",
+    "context": "\n    @abstractmethod\n    def set_total(self, total: int) -> None:\n        pass\n\n\nclass AbstractGrammarTestClient(metaclass=ABCMeta):\n    \"\"\"\n    Base class responsible for induced grammar testing.\n    \"\"\""
+  },
+  {
+    "file": "language-learning/src/common/absclient.py",
+    "line": 110,
+    "function": "on_statistics",
+    "params": "self, nodes: list, metrics: ParseMetrics, quality: ParseQuality",
+    "stub_type": "pass",
+    "context": "    \"\"\"\n    @abstractmethod\n    def on_statistics(self, nodes: list, metrics: ParseMetrics, quality: ParseQuality) -> None:\n        pass\n\n\nclass AbstractPipelineComponent(metaclass=ABCMeta):\n    \"\"\"\n    Base class for pipe line components\n    \"\"\""
+  },
+  {
+    "file": "language-learning/src/observer/lgobserver.py",
+    "line": 42,
+    "function": "on_linkage_done",
+    "params": "self, sentence: PQSentenceParse, linkage: Linkage",
+    "stub_type": "pass",
+    "context": "            self._pairs.add(linkage.tokens[link[0]], linkage.tokens[link[1]])\n\n    def on_linkage_done(self, sentence: PQSentenceParse, linkage: Linkage):\n        pass\n"
+  }
+]

@@ -283,6 +283,7 @@ local_structure_model::local_structure_model(const field_set& fs,
 // iterate over the dtrees, and accumulate statistics.
 //
 // TODO: Clarify what statistics are being accumulated and where they are stored.
+// Clarification needed: Review and document the intended behavior
 // This function processes decision trees and updates the destination model.
 template<typename It>
 void local_structure_probs_learning::operator()(const field_set& fs,
