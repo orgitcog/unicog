@@ -356,9 +356,10 @@
 ; Return all of the documents for which WSD has been completed,
 ; but disjunct processing has not been.
 ;
-; XXX The method used here, of tagging documents with "finished"
-; tags, is rather ad-hoc, and is meant to be a stop-gap until
-; opencog offers some way of defining a processing pipeline.
+; NOTE: The method used here, of tagging documents with "finished"
+; tags, is ad-hoc and serves as a temporary solution until OpenCog
+; provides a formal processing pipeline mechanism. Consider implementing
+; a pipeline framework in future versions to replace this tagging approach.
 ;
 (define (ldj-find-docs)
 

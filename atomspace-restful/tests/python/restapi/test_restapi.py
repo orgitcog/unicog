@@ -453,9 +453,9 @@ class TestRESTApi():
         # properly defined DOT header created and the correct atoms are
         # included in the description
 
-        # TODO: The Python module "graphviz" needs to be added to ocpkg, so
-        # that this dependency will be available for the continuous integration
-        # system
+        # NOTE: The Python module "graphviz" should be added to ocpkg dependencies
+        # to ensure availability in the continuous integration system. Until then,
+        # this test gracefully handles the missing dependency with try/except.
         try:
             from graph_description import dot
 

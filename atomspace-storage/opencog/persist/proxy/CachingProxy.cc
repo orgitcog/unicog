@@ -45,8 +45,11 @@ void CachingProxy::init(void)
 }
 
 // Get our configuration from the ProxyParameterLink we live in.
-// XXX TODO Add support for expiration times, limited AtomSpace
-// size and whatever other whizzy caching ideas we might want.
+// NOTE: Future enhancements to consider:
+// - Add support for expiration times (TTL) for cached atoms
+// - Implement size limits for the AtomSpace cache (LRU eviction)
+// - Add configurable caching policies (write-through, write-back)
+// These should be configured via ProxyParameterLink parameters.
 void CachingProxy::open(void)
 {
 	_nhits = 0;
