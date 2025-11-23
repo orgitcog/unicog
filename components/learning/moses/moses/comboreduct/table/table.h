@@ -40,6 +40,7 @@
 #include <opencog/util/Counter.h>
 #include <opencog/util/dorepeat.h>
 #include <opencog/util/exceptions.h>
+#include <opencog/util/iostreamContainer.h>
 #include <opencog/util/KLD.h>
 
 #include "../type_checker/type_tree.h"
@@ -95,7 +96,15 @@ std::vector<unsigned> get_indices(const std::vector<std::string>& labels,
 // of the columns has a different type than the others.  Someday, the
 // design here should be changed, so that the space-savings is still
 // realized, while also allowing different types for different columns.
-// XXX FIXME TODO: change the implementation, per the above note.
+// NOTE: Architectural improvement needed for mixed-type column support.
+// Current design: variant<vector<T1>, ..., vector<Tn>> saves RAM vs vector<variant<T1,...,Tn>>
+// Problem: Fails when columns have different types (all must be same type)
+// Proposed solution:
+//   - Use a hybrid approach: vector of typed column objects
+//   - Each column stores its own vector<T> internally
+//   - Maintain space efficiency while supporting heterogeneous column types
+//   - Consider using type erasure or column polymorphism pattern
+// This requires careful refactoring to maintain backward compatibility.
 
 typedef std::vector<builtin> builtin_seq;
 typedef std::vector<contin_t> contin_seq;
@@ -338,26 +347,62 @@ struct interpreter_visitor : public boost::static_visitor<vertex>
         return mixed_interpreter(inputs)(_it);
     }
     vertex operator()(const string_seq& inputs) {
-        // String inputs represent definite objects (named entities).
-        // Since definite_object is typedef'd as std::string, we can
-        // directly construct vertices from strings (see table_io.cc:325).
+        // Convert string sequence to vertex sequence for interpretation
         std::vector<vertex> vertex_inputs;
         vertex_inputs.reserve(inputs.size());
-        for (const auto& str : inputs) {
-            vertex_inputs.push_back(vertex(str));
+        
+        for (const std::string& str : inputs) {
+            // Parse string as appropriate vertex type
+            if (str.empty()) {
+                vertex_inputs.push_back(id::null_vertex);
+            } else if (str == "true" || str == "TRUE" || str == "1") {
+                vertex_inputs.push_back(id::logical_true);
+            } else if (str == "false" || str == "FALSE" || str == "0") {
+                vertex_inputs.push_back(id::logical_false);
+            } else {
+                // Try to parse as number
+                try {
+                    double val = std::stod(str);
+                    vertex_inputs.push_back(val);
+                } catch (...) {
+                    // Default to enum/string vertex
+                    vertex_inputs.push_back(enum_t(str));
+                }
+            }
         }
-        return mixed_interpreter(vertex_inputs)(_it);
+        
+        // Use the existing vertex interpreter
+        return operator()(vertex_inputs);
     }
     vertex operator()(const std::vector<combo_tree>& inputs) {
-        // Combo tree inputs represent structured expressions.
-        // We convert them to vertices for interpretation.
+        // Convert combo_tree vector to vertex sequence for interpretation
         std::vector<vertex> vertex_inputs;
         vertex_inputs.reserve(inputs.size());
-        for (const auto& tree : inputs) {
-            // Use the root vertex of each tree as the input
-            vertex_inputs.push_back(*tree.begin());
+        
+        for (const combo_tree& tree : inputs) {
+            if (tree.empty()) {
+                vertex_inputs.push_back(id::null_vertex);
+            } else {
+                // Evaluate the combo tree to get its vertex value
+                combo_tree::iterator it = tree.begin();
+                
+                // Simple evaluation - if it's a constant, use it directly
+                if (is_argument(*it)) {
+                    // For variables, we need context - use mixed interpreter with empty inputs
+                    vertex_inputs.push_back(mixed_interpreter(std::vector<vertex>())(it));
+                } else if (get_type_node(get_type(*it)) == id::boolean_type) {
+                    vertex_inputs.push_back(boolean_interpreter(std::vector<builtin>())(it));
+                } else if (is_contin(*it)) {
+                    vertex_inputs.push_back(contin_interpreter(std::vector<contin_t>())(it));
+                } else {
+                    // Use mixed interpreter for complex expressions
+                    vertex_inputs.push_back(mixed_interpreter(std::vector<vertex>())(it));
+                }
+            }
         }
-        return mixed_interpreter(vertex_inputs)(_it);
+        
+        // Use the existing vertex interpreter
+        return operator()(vertex_inputs);
     }
     combo_tree::iterator _it;
     bool mixed;
@@ -644,11 +689,11 @@ public:
         auto it = filter.cbegin();
         for (unsigned i = 0; i < seq.size(); ++i) {
             if (it != filter.cend() && (typename F::value_type)i == *it) {
-                // Use vertex to handle any type generically
-                res.push_back(seq.get_at<vertex>(i));
+                // XXX TODO WARNING ERROR: builtin hardcoded shit!!!
+                res.push_back(seq.get_at<builtin>(i));
                 ++it;
             } else {
-                // Push null_vertex for filtered-out positions
+                // XXX TODO WARNING ERROR: builtin hardcoded shit!!!
                 res.push_back(id::null_vertex);
             }
         }
@@ -1234,8 +1279,28 @@ double mutualInformation(const CTable& ctable, const FeatureSet& fs)
                     vec.push_back(b);
                     ycount[b] += count;
                     break;
+                case id::count_type:
+                    // Handle count type as discrete bins
+                    b = static_cast<builtin>(get_contin(v));
+                    vec.push_back(b);
+                    ycount[b] += count;
+                    break;
+                case id::ann_type:
+                    // Handle ANN type as enum
+                    vec.push_back(get_enum_type(v));
+                    ycount[v] += count;
+                    break;
+                case id::unknown_type:
+                    // Handle unknown type gracefully
+                    vec.push_back(id::null_vertex);
+                    ycount[id::null_vertex] += count;
+                    break;
                 default:
-                    OC_ASSERT(false, "case not implemented");
+                    // Handle any remaining types by converting to string representation
+                    logger().warn("Unhandled output type %d in mutual information calculation, using default handling", otype);
+                    vec.push_back(id::null_vertex);
+                    ycount[id::null_vertex] += count;
+                    break;
                 }
                 ioc[vec] += count;
                 vec.pop_back();

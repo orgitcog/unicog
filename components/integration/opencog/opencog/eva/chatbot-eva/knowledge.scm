@@ -255,9 +255,12 @@
 		(ConceptNode "look-at-cmd")
 		(ConceptNode "schema-thing")))
 
-; XXX FIXME -- Implement-me, actually -- need to do the above, but for
-; the self-model, rather than the direct robot action.  The self-model
-; is not being updated by these imperatives.
+; NOTE: Self-model integration needed for imperative commands.
+; Currently, imperative commands (look-at, gaze-at) directly control robot actions
+; but do not update the self-model state. The self-model should reflect these
+; actions to maintain consistency between actual behavior and internal representation.
+; Implementation: Add StateLink updates to track self-model state changes when
+; imperative commands are executed.
 ;--------------------------------------------------------------------
 ;--------------------------------------------------------------------
 ; Emotional expression semantics (groundings) for robot control

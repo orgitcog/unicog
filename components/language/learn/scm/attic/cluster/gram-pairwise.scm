@@ -589,13 +589,15 @@
 
 ; ---------------------------------------------------------------
 
-; XXX TODO once make-merge-majority is done, this can be reimplemented
-; as a special case of that. That means that the above three functions
-; can be discarded. It also means that `gram-class-api` 'make-cluster
-; method can be discarded or refactored.
-;
-; This requires that `make-merge-majority` be modified to support
-; FRAC-FUN.
+; NOTE: Refactoring opportunity - consolidate merge implementations.
+; Once make-merge-majority is complete, make-merge-pair can be reimplemented
+; as a special case, allowing removal of redundant code:
+;   - The three preceding helper functions can be discarded
+;   - The `gram-class-api` 'make-cluster method can be simplified or removed
+; Prerequisites:
+;   - Modify `make-merge-majority` to support FRAC-FUN parameter
+;   - Ensure make-merge-majority handles all merge-pair use cases
+; This consolidation will improve maintainability and reduce code duplication.
 (define-public (make-merge-pair STARS FRAC-FN NOISE STORE FIN MRG-CON)
 "
   make-merger-pair STARS FRAC-FN NOISE STORE FIN MRG-CON --
