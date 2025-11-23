@@ -24,7 +24,6 @@
 #define OPENCOG_UTIL_GEOMETRIC_MEAN
 
 #include  <cmath>
-// Boost.Accumulators still binds custom tags through mpl placeholders.
 #include <boost/mpl/placeholders.hpp>
 #include <boost/accumulators/framework/accumulator_base.hpp>
 #include <boost/accumulators/framework/extractor.hpp>

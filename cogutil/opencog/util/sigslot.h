@@ -35,7 +35,9 @@
 // main () {
 //     Bar bell;
 //     SigSlot<int, std::vector<int>> siggy;
-//     // MODERN C++: Using std::placeholders instead of boost::placeholders
+//     // Connect member function directly:
+//     siggy.connect_member(&Bar::baz, &bell);
+//     // Or using std::bind:
 //     auto glub = std::bind(&Bar::baz, bell,
 //              std::placeholders::_1, std::placeholders::_2);
 //     siggy.connect(glub);
