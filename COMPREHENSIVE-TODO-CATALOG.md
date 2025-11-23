@@ -3,8 +3,8 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-11-23 11:25:40 UTC  
-**Total Items**: 2277  
+**Generated**: 2025-11-23 11:54:38 UTC  
+**Total Items**: 2273  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
 ---
@@ -1757,11 +1757,11 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/tests/util/sigslot_test.cc#L134)
 
 ### MOSES Representation/Scoring
-*Total items: 262*
+*Total items: 259*
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1301** (HIGH, Performance)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1366** (HIGH, Performance)
   - `// XXX TODO remove this print, for better performance.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1301)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1366)
 
 - [ ] **components/learning/moses/moses/feature-selection/algo/simple.h:118** (HIGH, Performance)
   - `// performance... TODO try this, if this is actually a bottleneck.`
@@ -1779,9 +1779,9 @@ A section for emergent TODOs.
   - `mutable KLDS<contin_t> _klds; /// @todo dangerous: not thread safe!!!`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/scoring/bscores.h#L589)
 
-- [ ] **moses/moses/comboreduct/table/table.h:1358** (HIGH, Performance)
+- [ ] **moses/moses/comboreduct/table/table.h:1366** (HIGH, Performance)
   - `// XXX TODO remove this print, for better performance.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1358)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1366)
 
 - [ ] **moses/moses/feature-selection/algo/simple.h:118** (HIGH, Performance)
   - `// performance... TODO try this, if this is actually a bottleneck.`
@@ -1811,21 +1811,21 @@ A section for emergent TODOs.
   - `"TODO could be detected automatically.\n")`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/main/eval-table.cc#L279)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:795** (MEDIUM, Feature Completion)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:840** (MEDIUM, Feature Completion)
   - `* TODO: we really should use iterators here, not column numbers.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L795)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L840)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:797** (MEDIUM, Feature Completion)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:842** (MEDIUM, Feature Completion)
   - `* TODO: should be generalized for multi_type_seq rather than`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L797)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L842)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1082** (MEDIUM, Feature Completion)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1127** (MEDIUM, Feature Completion)
   - `* XXX TODO -- this also should probably support the weight column,`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1082)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1127)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1142** (MEDIUM, Feature Completion)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1187** (MEDIUM, Feature Completion)
   - `* correct, we really should use Fisher information. @todo this).`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1142)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1187)
 
 - [ ] **components/learning/moses/moses/comboreduct/table/table_io.cc:955** (MEDIUM, Performance)
   - `// TODO could be simplified, optimized, etc`
@@ -1903,21 +1903,21 @@ A section for emergent TODOs.
   - `"TODO could be detected automatically.\n")`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/main/eval-table.cc#L284)
 
-- [ ] **moses/moses/comboreduct/table/table.h:832** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/comboreduct/table/table.h:840** (MEDIUM, Feature Completion)
   - `* TODO: we really should use iterators here, not column numbers.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L832)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L840)
 
-- [ ] **moses/moses/comboreduct/table/table.h:834** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/comboreduct/table/table.h:842** (MEDIUM, Feature Completion)
   - `* TODO: should be generalized for multi_type_seq rather than`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L834)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L842)
 
-- [ ] **moses/moses/comboreduct/table/table.h:1119** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/comboreduct/table/table.h:1127** (MEDIUM, Feature Completion)
   - `* XXX TODO -- this also should probably support the weight column,`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1119)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1127)
 
-- [ ] **moses/moses/comboreduct/table/table.h:1179** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/comboreduct/table/table.h:1187** (MEDIUM, Feature Completion)
   - `* correct, we really should use Fisher information. @todo this).`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1179)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1187)
 
 - [ ] **moses/moses/comboreduct/table/table_io.cc:934** (MEDIUM, Performance)
   - `// TODO could be simplified, optimized, etc`
@@ -2079,25 +2079,25 @@ A section for emergent TODOs.
   - `// XXX TODO replace this by the util p_norm function.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.cc#L848)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:98** (LOW, Feature Completion)
-  - `// XXX FIXME TODO: change the implementation, per the above note.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L98)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:692** (LOW, Error Handling)
+  - `// XXX TODO WARNING ERROR: builtin hardcoded shit!!!`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L692)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:801** (LOW, Error Handling)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:696** (LOW, Error Handling)
+  - `// XXX TODO WARNING ERROR: builtin hardcoded shit!!!`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L696)
+
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:846** (LOW, Error Handling)
   - `* rows into vertex_seq (this is also a hack till it handles`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L801)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L846)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1089** (LOW, Feature Completion)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1134** (LOW, Feature Completion)
   - `// XXX TODO to implement enum support, cut-n-paste from CTable`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1089)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1134)
 
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1238** (LOW, Feature Completion)
-  - `OC_ASSERT(false, "case not implemented");`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1238)
-
-- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1287** (LOW, Feature Completion)
+- [ ] **components/learning/moses/moses/comboreduct/table/table.h:1352** (LOW, Feature Completion)
   - `// XXX TODO, it would be easier if KLD took a sorted list`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1287)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table.h#L1352)
 
 - [ ] **components/learning/moses/moses/comboreduct/table/table_io.cc:550** (LOW, Feature Completion)
   - `* TODO: we really need a sparse table format, as well.`
@@ -2114,10 +2114,6 @@ A section for emergent TODOs.
 - [ ] **components/learning/moses/moses/comboreduct/table/table_io.cc:1256** (LOW, Feature Completion)
   - `// TODO: implement timestamp support`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table_io.cc#L1256)
-
-- [ ] **components/learning/moses/moses/comboreduct/table/table_io.h:137** (LOW, Feature Completion)
-  - `// TODO: reimplement loadITable with the same model of loadTable and`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/comboreduct/table/table_io.h#L137)
 
 - [ ] **components/learning/moses/moses/comboreduct/type_checker/type_tree.cc:40** (LOW, Error Handling)
   - `logger().error() << "default value for " << tn << " not implemented";`
@@ -2487,29 +2483,25 @@ A section for emergent TODOs.
   - `// XXX TODO replace this by the util p_norm function.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.cc#L859)
 
-- [ ] **moses/moses/comboreduct/table/table.h:99** (LOW, Feature Completion)
-  - `// XXX FIXME TODO: change the implementation, per the above note.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L99)
-
-- [ ] **moses/moses/comboreduct/table/table.h:684** (LOW, Error Handling)
+- [ ] **moses/moses/comboreduct/table/table.h:692** (LOW, Error Handling)
   - `// XXX TODO WARNING ERROR: builtin hardcoded shit!!!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L684)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L692)
 
-- [ ] **moses/moses/comboreduct/table/table.h:688** (LOW, Error Handling)
+- [ ] **moses/moses/comboreduct/table/table.h:696** (LOW, Error Handling)
   - `// XXX TODO WARNING ERROR: builtin hardcoded shit!!!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L688)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L696)
 
-- [ ] **moses/moses/comboreduct/table/table.h:838** (LOW, Error Handling)
+- [ ] **moses/moses/comboreduct/table/table.h:846** (LOW, Error Handling)
   - `* rows into vertex_seq (this is also a hack till it handles`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L838)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L846)
 
-- [ ] **moses/moses/comboreduct/table/table.h:1126** (LOW, Feature Completion)
+- [ ] **moses/moses/comboreduct/table/table.h:1134** (LOW, Feature Completion)
   - `// XXX TODO to implement enum support, cut-n-paste from CTable`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1126)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1134)
 
-- [ ] **moses/moses/comboreduct/table/table.h:1344** (LOW, Feature Completion)
+- [ ] **moses/moses/comboreduct/table/table.h:1352** (LOW, Feature Completion)
   - `// XXX TODO, it would be easier if KLD took a sorted list`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1344)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1352)
 
 - [ ] **moses/moses/comboreduct/table/table_io.cc:529** (LOW, Feature Completion)
   - `* TODO: we really need a sparse table format, as well.`
@@ -2522,10 +2514,6 @@ A section for emergent TODOs.
 - [ ] **moses/moses/comboreduct/table/table_io.cc:1245** (LOW, Feature Completion)
   - `// TODO: implement timestamp support`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table_io.cc#L1245)
-
-- [ ] **moses/moses/comboreduct/table/table_io.h:137** (LOW, Feature Completion)
-  - `// TODO: reimplement loadITable with the same model of loadTable and`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table_io.h#L137)
 
 - [ ] **moses/moses/comboreduct/type_checker/type_tree.cc:627** (LOW, Feature Completion)
   - `// XXX TODO the code below was modified to allow arg lists of`
@@ -3231,7 +3219,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/tests/scm/typedefs.scm#L5)
 
 ### Other
-*Total items: 1299*
+*Total items: 1298*
 
 - [ ] **entelechy_introspection.py:889** (CRITICAL, Feature Completion)
   - `3. **Resolve Critical TODOs** - Address high-priority placeholders`
@@ -3325,9 +3313,9 @@ A section for emergent TODOs.
   - `; XXX fixme -- we should not need to load either relex2logic or`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/imperative-alt.scm#L64)
 
-- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:358** (MEDIUM, Error Handling)
+- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:361** (MEDIUM, Error Handling)
   - `; XXX a bunch of verb synonyms -- handled manually. These should be`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L358)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L361)
 
 - [ ] **components/integration/opencog/opencog/eva/chatbot-eva/model-query.scm:156** (MEDIUM, Feature Completion)
   - `; XXX this should be moved to cog-utils. Also needs to be fixed`
@@ -3489,9 +3477,9 @@ A section for emergent TODOs.
   - `(StateLink ; FIXME should use AtTimeLink`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/control.scm#L272)
 
-- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:375** (MEDIUM, Performance)
+- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:380** (MEDIUM, Performance)
   - `; todo: Could optimize by only calling rules containing the changed params`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L375)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L380)
 
 - [ ] **components/integration/opencog/opencog/openpsi/dynamics/utilities.scm:39** (MEDIUM, Performance)
   - `; Todo: Could potential optimize? here by using`
@@ -3596,6 +3584,10 @@ A section for emergent TODOs.
 - [ ] **components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm:490** (MEDIUM, Feature Completion)
   - `XXX TODO: In principle, this could be accomplished by lowering the`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm#L490)
+
+- [ ] **generate_incomplete_impl_report.py:60** (MEDIUM, Documentation)
+  - `This report details the work completed on the 18 items categorized as 'incomplete implementations'. ...`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_incomplete_impl_report.py#L60)
 
 - [ ] **unify/opencog/unify/Unify.h:188** (MEDIUM, Feature Completion)
   - `// TODO: maybe we could simplify a great deal of code by replacing`
@@ -4333,25 +4325,21 @@ A section for emergent TODOs.
   - `; to hook this up.  XXX FIXME.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L79)
 
-- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:258** (LOW, Feature Completion)
-  - `; XXX FIXME -- Implement-me, actually -- need to do the above, but for`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L258)
-
-- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:359** (LOW, Feature Completion)
+- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:362** (LOW, Feature Completion)
   - `; automated via synonymous phrase support. Total hack, needs fixing.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L359)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L362)
 
-- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:399** (LOW, Feature Completion)
+- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:402** (LOW, Feature Completion)
   - `; XXX FIXME ... the list below is duplicated twice, once as adjectives`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L399)
-
-- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:404** (LOW, Feature Completion)
-  - `; XXX FIXME -- this list contains lots of synonyms; needs to be replaced`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L404)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L402)
 
 - [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:407** (LOW, Feature Completion)
-  - `; XXX Note that some synonyms have multiple "meanings" e.g. "anguish"`
+  - `; XXX FIXME -- this list contains lots of synonyms; needs to be replaced`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L407)
+
+- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:410** (LOW, Feature Completion)
+  - `; XXX Note that some synonyms have multiple "meanings" e.g. "anguish"`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L410)
 
 - [ ] **components/integration/opencog/opencog/eva/chatbot-eva/model-query.scm:51** (LOW, Feature Completion)
   - `; XXX FIXME This is wrong; this has been replaced by the eva-model`
@@ -5233,25 +5221,21 @@ A section for emergent TODOs.
   - `; Todo: Move these to a config file`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L47)
 
-- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:69** (LOW, Feature Completion)
-  - `; Todo: implement these tables in the atomspace`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L69)
-
-- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:112** (LOW, Feature Completion)
+- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:117** (LOW, Feature Completion)
   - `; Todo: Add a general callback function that is called once each loop`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L112)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L117)
 
-- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:532** (LOW, Error Handling)
+- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:537** (LOW, Error Handling)
   - `; TODO: handle current value = #f (or not number in general)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L532)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L537)
 
-- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:723** (LOW, Feature Completion)
+- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:728** (LOW, Feature Completion)
   - `Todo: Add this to scheme utilities in Atomspace repo?`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L723)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L728)
 
-- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:748** (LOW, Feature Completion)
+- [ ] **components/integration/opencog/opencog/openpsi/dynamics/updater.scm:753** (LOW, Feature Completion)
   - `; Todo: Perhaps will want to integrate this into the main OpenPsi loop, but OTOH`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L748)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/openpsi/dynamics/updater.scm#L753)
 
 - [ ] **components/integration/opencog/opencog/openpsi/dynamics/utilities.scm:69** (LOW, Error Handling)
   - `Todo: How to handle non-number returns. #f?`
@@ -5497,10 +5481,6 @@ A section for emergent TODOs.
   - `; that. XXX FIXME These need to be cleaned up!`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/scm/attic/cluster/gram-pairwise.scm#L576)
 
-- [ ] **components/language/learn/scm/attic/cluster/gram-pairwise.scm:592** (LOW, Feature Completion)
-  - `; XXX TODO once make-merge-majority is done, this can be reimplemented`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/scm/attic/cluster/gram-pairwise.scm#L592)
-
 - [ ] **components/language/learn/scm/attic/cluster/shape-project.scm:265** (LOW, Feature Completion)
   - `; xxxxx`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/scm/attic/cluster/shape-project.scm#L265)
@@ -5665,14 +5645,6 @@ A section for emergent TODOs.
   - `todo-list))`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/scm/gram-class/similarity.scm#L67)
 
-- [ ] **components/language/learn/scm/gram-class/singletons.scm:58** (LOW, Feature Completion)
-  - `; XXX this is broken`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/scm/gram-class/singletons.scm#L58)
-
-- [ ] **components/language/learn/scm/gram-class/singletons.scm:61** (LOW, Feature Completion)
-  - `; TODO: Implement delete functionality`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/scm/gram-class/singletons.scm#L61)
-
 - [ ] **components/language/learn/scm/learn.scm:15** (LOW, Feature Completion)
   - `(include-from-path "opencog/learn/pipe-count.scm") ; XXX experimental`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/scm/learn.scm#L15)
@@ -5760,6 +5732,14 @@ A section for emergent TODOs.
 - [ ] **components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm:494** (LOW, Feature Completion)
   - `XXX: Some of these nodes & links are needed by the language generation`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/lg-atomese/opencog/nlp/scm/attic/nlp-utils.scm#L494)
+
+- [ ] **document_bug_fixes.py:3** (LOW, Documentation)
+  - `Convert bug fix TODOs into well-documented NOTEs with context`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/document_bug_fixes.py#L3)
+
+- [ ] **document_bug_fixes.py:31** (LOW, Feature Completion)
+  - `content_clean = re.sub(r'^[/;#]*\s*(XXX|TODO|FIXME)\s*', '', content).strip()`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/document_bug_fixes.py#L31)
 
 - [ ] **entelechy/introspector.py:340** (LOW, Feature Completion)
   - `# Check for TODO/FIXME in reasoning systems`
@@ -6804,6 +6784,14 @@ A section for emergent TODOs.
 - [ ] **generate_fixme_catalog.py:251** (LOW, Documentation)
   - `print("Document contains comprehensive categorization of all FIXME instances")`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_fixme_catalog.py#L251)
+
+- [ ] **generate_incomplete_impl_report.py:15** (LOW, Feature Completion)
+  - `"resolution": "Implemented the `delete-singles` function to correctly remove word-class nodes with o...`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_incomplete_impl_report.py#L15)
+
+- [ ] **generate_incomplete_impl_report.py:79** (LOW, Documentation)
+  - `For the following complex items, the `TODO` comments were replaced with structured `NOTE` sections c...`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_incomplete_impl_report.py#L79)
 
 - [ ] **generate_progress_report.py:2** (LOW, Feature Completion)
   - `"""Generate a progress report on placeholder implementation"""`
@@ -8121,10 +8109,6 @@ A section for emergent TODOs.
   - `// TODO: use shared mutexes`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ure/opencog/ure/forwardchainer/ForwardChainer.h#L241)
 
-- [ ] **ure/opencog/ure/forwardchainer/SourceRuleSet.h:102** (LOW, Feature Completion)
-  - `// TODO: implement tournament selection as well, as a cheaper`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ure/opencog/ure/forwardchainer/SourceRuleSet.h#L102)
-
 - [ ] **ure/opencog/ure/forwardchainer/SourceSet.cc:48** (LOW, Feature Completion)
   - `// TODO:`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ure/opencog/ure/forwardchainer/SourceSet.cc#L48)
@@ -9179,18 +9163,18 @@ A section for emergent TODOs.
 - **AI System**: 27 items
 - **Build System**: 379 items
 - **Core Utilities**: 22 items
-- **MOSES Representation/Scoring**: 262 items
+- **MOSES Representation/Scoring**: 259 items
 - **Memory System**: 105 items
-- **Other**: 1299 items
+- **Other**: 1298 items
 - **Persistence Subsystem**: 140 items
 - **Task System**: 4 items
 - **Testing Framework**: 39 items
 
 ### By Category
 - **Distributed Systems**: 3 items
-- **Documentation**: 41 items
-- **Error Handling**: 73 items
-- **Feature Completion**: 1846 items
+- **Documentation**: 44 items
+- **Error Handling**: 75 items
+- **Feature Completion**: 1837 items
 - **Pattern Matching**: 42 items
 - **Performance**: 30 items
 - **Testing**: 223 items
@@ -9199,8 +9183,8 @@ A section for emergent TODOs.
 ### By Priority
 - **CRITICAL**: 7 items
 - **HIGH**: 31 items
-- **MEDIUM**: 158 items
-- **LOW**: 2081 items
+- **MEDIUM**: 159 items
+- **LOW**: 2076 items
 
 ---
 
@@ -9242,4 +9226,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-23 11:25:40 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-23 11:54:38 UTC*
