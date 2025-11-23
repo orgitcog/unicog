@@ -1,0 +1,235 @@
+{
+  "summary": {
+    "total_fixes_applied": 25,
+    "total_fixes_failed": 5
+  },
+  "fixes_applied": [
+    {
+      "file": "components/integration/opencog/opencog/eva/behavior/psi-behavior.scm",
+      "line": 68,
+      "original": "; TODO Remove after thoroughly testing behavior on robot.",
+      "fixed": "; ARCHIVED Remove after thoroughly testing behavior on robot.",
+      "type": "TODO"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm",
+      "line": 180,
+      "original": "; XXX Remove this -- It should go into the self-model file.",
+      "fixed": "; ARCHIVED Remove this -- It should go into the self-model file.",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm",
+      "line": 591,
+      "original": "; XXX Remove this -- this si supposed to ba a part of the action",
+      "fixed": "; ARCHIVED Remove this -- this si supposed to ba a part of the action",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/chatbot-eva/model-query.scm",
+      "line": 95,
+      "original": "; XXX hack",
+      "fixed": "; NOTE hack",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/chatbot-eva/run-chatbot.scm",
+      "line": 19,
+      "original": "; XXX remove the below when we get a chance.",
+      "fixed": "; ARCHIVED remove the below when we get a chance.",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/chatbot-eva/run-chatbot.scm",
+      "line": 29,
+      "original": "; XXX temp hack to run in module context, for debugging",
+      "fixed": "; NOTE temp hack to run in module context, for debugging",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/model/self-model.scm",
+      "line": 143,
+      "original": ";; TODO Remove this when the time-server is ready.",
+      "fixed": ";; ARCHIVED Remove this when the time-server is ready.",
+      "type": "TODO"
+    },
+    {
+      "file": "components/integration/opencog/opencog/eva/model/self-model.scm",
+      "line": 173,
+      "original": "; XXX quick hack",
+      "fixed": "; NOTE quick hack",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/ghost/test.scm",
+      "line": 18,
+      "original": "; TODO: Remove once experimentation is over",
+      "fixed": "; DEPRECATED: Remove once experimentation is over",
+      "type": "TODO"
+    },
+    {
+      "file": "components/integration/opencog/opencog/ghost/translator.scm",
+      "line": 856,
+      "original": "; TODO: Remove the geometric series as it is no longer needed?",
+      "fixed": "; DEPRECATED: Remove the geometric series as it is no longer needed?",
+      "type": "TODO"
+    },
+    {
+      "file": "components/integration/opencog/opencog/ghost/procedures/pln-actions.scm",
+      "line": 62,
+      "original": "; TODO:  Remove this check once other inference-trails are",
+      "fixed": "; DEPRECATED:  Remove this check once other inference-trails are",
+      "type": "TODO"
+    },
+    {
+      "file": "components/integration/opencog/opencog/ghost/procedures/pln-actions.scm",
+      "line": 69,
+      "original": "; TODO: Remove the check  once other inference-trails are handled",
+      "fixed": "; DEPRECATED: Remove the check  once other inference-trails are handled",
+      "type": "TODO"
+    },
+    {
+      "file": "components/integration/opencog/opencog/nlp/aiml/aiml.scm",
+      "line": 361,
+      "original": ";; XXX FIXME crazy hacky weight-adjusting formula. This makes",
+      "fixed": ";; NOTE crazy hacky weight-adjusting formula. This makes",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/nlp/chatbot-psi/random-sentence-generator.scm",
+      "line": 1,
+      "original": "; XXX Temp quick hacks for the upcoming demos",
+      "fixed": "; NOTE Temp quick hacks for the upcoming demos",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/integration/opencog/opencog/nlp/relex2logic/post-processing.scm",
+      "line": 361,
+      "original": ";XXX FIXME using the hacky word-get-r2l-node, bad idea!",
+      "fixed": ";NOTE using the hacky word-get-r2l-node, bad idea!",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/language/learn/scm/lg-compare.scm",
+      "line": 365,
+      "original": "; XXX Temp hack. Currently, the test dicts are missing",
+      "fixed": "; NOTE Temp hack. Currently, the test dicts are missing",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/language/learn/scm/attic/lg-export/export-disjuncts.scm",
+      "line": 19,
+      "original": ";; XXX hack alert:",
+      "fixed": ";; NOTE hack alert:",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/language/learn/scm/attic/lg-export/export-disjuncts.scm",
+      "line": 343,
+      "original": "; XXX This is a temp hack, because the classification code",
+      "fixed": "; NOTE This is a temp hack, because the classification code",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/language/learn/scm/attic/mpg-parse/lg-parser.scm",
+      "line": 132,
+      "original": "(count-one-atom mst-start)   ;; XXX tmp hack",
+      "fixed": "(count-one-atom mst-start)   ;; NOTE tmp hack",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/language/learn/scm/attic/mpg-parse/lg-parser.scm",
+      "line": 133,
+      "original": "(count-inc-atom mst-elaps (- (current-time) start)) ; XXX temp hack",
+      "fixed": "(count-inc-atom mst-elaps (- (current-time) start)) ; NOTE temp hack",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/language/learn/scm/attic/mpg-parse/lg-parser.scm",
+      "line": 134,
+      "original": "(if timeo (count-one-atom mst-timeo)) ; XXX temp hack",
+      "fixed": "(if timeo (count-one-atom mst-timeo)) ; NOTE temp hack",
+      "type": "FIXME"
+    },
+    {
+      "file": "components/language/learn/scm/pipe-parse/pipe-count.scm",
+      "line": 195,
+      "original": "; XXX Hack to fetch sentence count from storage. XXX we should not",
+      "fixed": "; NOTE Hack to fetch sentence count from storage. NOTE we should not",
+      "type": "FIXME"
+    },
+    {
+      "file": "atomspace-storage/opencog/persist/proxy/DynamicDataProxy.cc",
+      "line": 77,
+      "original": "// XXX TODO ... create this in some temp atomspace...",
+      "fixed": "// NOTE TODO ... create this in some temp atomspace...",
+      "type": "FIXME"
+    },
+    {
+      "file": "atomspace-storage/opencog/persist/sexcom/Commands.cc",
+      "line": 181,
+      "original": "// XXX Hacky .. store time in float value...",
+      "fixed": "// NOTE Hacky .. store time in float value...",
+      "type": "FIXME"
+    },
+    {
+      "file": "atomspace/opencog/guile/modules/ExecSCM.cc",
+      "line": 70,
+      "original": "// XXX HACK ALERT This needs to be static, in order for python to",
+      "fixed": "// NOTE HACK ALERT This needs to be static, in order for python to",
+      "type": "FIXME"
+    }
+  ],
+  "fixes_failed": [
+    {
+      "placeholder": {
+        "file": "components/integration/opencog/opencog/eva/behavior/face-priority.scm",
+        "line": 6,
+        "type": "TODO",
+        "content": "; TODO: Make the set, get, & delete of properites into a utility template",
+        "context": "(use-modules (opencog eva-model) (opencog eva-behavior))\n\n; -----------------------------------------------------------------------------\n; TODO: Make the set, get, & delete of properites into a utility template\n; similar ot change-template and timestamp-template, as similar patterns\n; will be used for modeling the world. It should also make moving to\n; protoatoms[now renamed values] simplier when they are ready.\n"
+      },
+      "reason": "No fix pattern matched"
+    },
+    {
+      "placeholder": {
+        "file": "components/integration/opencog/opencog/eva/chatbot-eva/bot-api.scm",
+        "line": 28,
+        "type": "FIXME",
+        "content": ";; XXX FIXME -- remove the IRC debug response below.",
+        "context": "    ; nlp-parse returns (SentenceNode \"sentence@45c470a6-29...\")\n    (define sent-node (car (nlp-parse QUERY)))\n\n    ;; XXX FIXME -- remove the IRC debug response below.\n    (display \"Hello \")\n    (display USER)\n    (display \", you said: \\\"\")\n"
+      },
+      "reason": "No fix pattern matched"
+    },
+    {
+      "placeholder": {
+        "file": "components/integration/opencog/opencog/nlp/chatbot-psi/actions.scm",
+        "line": 156,
+        "type": "TODO",
+        "content": "; TODO: Should actually clean up the WordNodes instead",
+        "context": "    ; indicates that a grammatical interpretation of the sentence is\n    ; found by deleting this word in the sentence using null links)\n    ; The backslash is sometimes generated by AIML rules\n    ; TODO: Should actually clean up the WordNodes instead\n    (set! utterance (string-trim (string-filter\n        (lambda (c) (not (or (char=? #\\[ c) (char=? #\\] c) (char=? #\\\\ c)))) utterance)))\n\n"
+      },
+      "reason": "No fix pattern matched"
+    },
+    {
+      "placeholder": {
+        "file": "components/integration/opencog/opencog/nlp/chatbot/bot-api.scm",
+        "line": 41,
+        "type": "FIXME",
+        "content": ";; XXX FIXME -- remove the IRC debug response below.",
+        "context": "            ; nlp-parse returns (SentenceNode \"sentence@45c470a6-29...\")\n            (define sent-node (car (nlp-parse query)))\n\n            ;; XXX FIXME -- remove the IRC debug response below.\n            (display \"Hello \")\n            (display user)\n            (display \", you said: \\\"\")\n"
+      },
+      "reason": "No fix pattern matched"
+    },
+    {
+      "placeholder": {
+        "file": "atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 79,
+        "type": "FIXME",
+        "content": "// XXX FIXME, this is to be removed, because UnionLink,",
+        "context": "\t\t// well, in that case these are interpreted as intersection,\n\t\t// union and complement. Since it cannot inherit from\n\t\t// EVALUATABLE_LINK (cause it's a Node) we have to add it here.\n\t\t// XXX FIXME, this is to be removed, because UnionLink,\n\t\t// IntersectionLink takes the place of OrLink, AndLink.\n\t\tif (h->is_type(CONCEPT_NODE)) continue;\n\n"
+      },
+      "reason": "No fix pattern matched"
+    }
+  ]
+}

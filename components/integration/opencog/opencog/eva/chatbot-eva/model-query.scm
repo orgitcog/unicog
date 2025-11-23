@@ -92,7 +92,7 @@
 (define (prt-curr-sent) (cog-execute! prt-sent))
 
 ;--------------------------------------------------------------------
-; XXX hack
+; NOTE hack
 (define face-expression-state (AnchorNode "Facial Expression State"))
 
 

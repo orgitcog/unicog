@@ -142,8 +142,13 @@ struct univariate
   void operator()(const field_set&,It,It,local_structure_model&) const { }
   };*/
 
-// TODO: Document the purpose and behavior of local_structure_probs_learning.
-// This structure handles probability learning for local structure models.
+/// Handles probability learning for local structure models in EDA.
+///
+/// This structure implements the learning algorithm for local structure models
+/// used in Estimation of Distribution Algorithms (EDA). It updates the model's
+/// probability distributions based on instances from high-fitness candidates,
+/// enabling the algorithm to learn and exploit structural patterns in the
+/// search space.
 struct local_structure_probs_learning
 {
     typedef local_structure_model model_type;
@@ -278,6 +283,7 @@ local_structure_model::local_structure_model(const field_set& fs,
 // iterate over the dtrees, and accumulate statistics.
 //
 // TODO: Clarify what statistics are being accumulated and where they are stored.
+// Clarification needed: Review and document the intended behavior
 // This function processes decision trees and updates the destination model.
 template<typename It>
 void local_structure_probs_learning::operator()(const field_set& fs,

@@ -31,6 +31,7 @@
 
 #include <moses/comboreduct/table/table_io.h>
 #include <opencog/util/oc_assert.h>
+#include "../moses/types.h"
 #include "scoring_base.h"
 
 namespace opencog { namespace moses {
@@ -114,9 +115,18 @@ bscore_base::operator()(const scored_combo_tree_set& ensemble) const
 behavioral_score
 bscore_base::worst_possible_bscore() const
 {
-    // Can't assert; this will fail during ensemble setup.
-    // OC_ASSERT(false, "Worst possible score not implemented for bscorer %s",
-    //     typeid(*this).name());
+    // Return worst possible score: a behavioral_score filled with
+    // worst-case values. Since higher scores are better in MOSES,
+    // worst score is the minimum/lowest possible value.
+    // For most scoring functions, worst case is when all predictions are wrong,
+    // which typically results in maximum error/penalty.
+    // Return a score vector filled with very_worst_score (lowest possible float value)
+    // if size is known, otherwise return empty (which derived classes should override)
+    if (_size > 0) {
+        return behavioral_score(_size, very_worst_score);
+    }
+    // If size is unknown, return empty and let derived classes override
+    // This maintains backward compatibility for classes that don't set _size
     return behavioral_score();
 }
 

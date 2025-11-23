@@ -368,7 +368,7 @@ public:
         }
 
         //select eligble hidden node
-        int selected = rand() % possible.size(); // @todo:replace this by RandGen
+        int selected = randGen().randint(possible.size());
         ann_node *hidden_neuron = possible[selected];
         hidden_neuron->memory_neurone = true;
 

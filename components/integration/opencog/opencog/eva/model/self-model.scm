@@ -140,7 +140,7 @@
 (StateLink interaction-state no-interaction)
 
 ;; Record with whome she was previously intracting with.
-;; TODO Remove this when the time-server is ready.
+;; ARCHIVED Remove this when the time-server is ready.
 (define-public prev-interaction-state (AnchorNode "Previous Interaction State"))
 (StateLink prev-interaction-state no-interaction)
 
@@ -170,7 +170,7 @@
 	(DefinedSchema "current-speaker")
    (Get (State last-speaker (Variable "$x"))))
 
-; XXX quick hack
+; NOTE quick hack
 (DefineLink
 	(DefinedSchema "other-speaker")
    (Get (State last-speaker (Variable "$x"))))

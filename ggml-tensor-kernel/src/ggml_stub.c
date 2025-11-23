@@ -131,25 +131,148 @@ void ggml_set_name(struct ggml_tensor* tensor, const char* name) {
     }
 }
 
-// Math operations (simplified stubs)
+// Math operations - actual implementations
 struct ggml_tensor* ggml_add(struct ggml_context* ctx, struct ggml_tensor* a, struct ggml_tensor* b) {
-    return ggml_dup_tensor(ctx, a); // Stub: just return copy of a
+    if (!ctx || !a || !b) return NULL;
+    
+    // Ensure compatible dimensions for element-wise addition
+    size_t n_elements_a = ggml_nelements(a);
+    size_t n_elements_b = ggml_nelements(b);
+    if (n_elements_a != n_elements_b) {
+        return NULL; // Dimension mismatch
+    }
+    
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, a);
+    if (!result || !result->data) return NULL;
+    
+    float* a_data = ggml_get_data_f32(a);
+    float* b_data = ggml_get_data_f32(b);
+    float* result_data = ggml_get_data_f32(result);
+    
+    // Element-wise addition
+    for (size_t i = 0; i < n_elements_a; i++) {
+        result_data[i] = a_data[i] + b_data[i];
+    }
+    
+    return result;
 }
 
 struct ggml_tensor* ggml_mul(struct ggml_context* ctx, struct ggml_tensor* a, struct ggml_tensor* b) {
-    return ggml_dup_tensor(ctx, a); // Stub: just return copy of a
+    if (!ctx || !a || !b) return NULL;
+    
+    // Ensure compatible dimensions for element-wise multiplication
+    size_t n_elements_a = ggml_nelements(a);
+    size_t n_elements_b = ggml_nelements(b);
+    if (n_elements_a != n_elements_b) {
+        return NULL; // Dimension mismatch
+    }
+    
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, a);
+    if (!result || !result->data) return NULL;
+    
+    float* a_data = ggml_get_data_f32(a);
+    float* b_data = ggml_get_data_f32(b);
+    float* result_data = ggml_get_data_f32(result);
+    
+    // Element-wise multiplication
+    for (size_t i = 0; i < n_elements_a; i++) {
+        result_data[i] = a_data[i] * b_data[i];
+    }
+    
+    return result;
 }
 
 struct ggml_tensor* ggml_mul_mat(struct ggml_context* ctx, struct ggml_tensor* a, struct ggml_tensor* b) {
-    return ggml_dup_tensor(ctx, a); // Stub: just return copy of a
+    if (!ctx || !a || !b) return NULL;
+    
+    // Matrix multiplication: result = a * b
+    // a: [m, k], b: [k, n] -> result: [m, n]
+    if (a->n_dims < 2 || b->n_dims < 2) {
+        return NULL; // Need at least 2D tensors
+    }
+    
+    int64_t m = a->ne[0];
+    int64_t k_a = a->ne[1];
+    int64_t k_b = b->ne[0];
+    int64_t n = b->ne[1];
+    
+    if (k_a != k_b) {
+        return NULL; // Inner dimensions must match
+    }
+    
+    // Create result tensor [m, n]
+    struct ggml_tensor* result = ggml_new_tensor_2d(ctx, GGML_TYPE_F32, m, n);
+    if (!result || !result->data) return NULL;
+    
+    float* a_data = ggml_get_data_f32(a);
+    float* b_data = ggml_get_data_f32(b);
+    float* result_data = ggml_get_data_f32(result);
+    
+    // Perform matrix multiplication
+    for (int64_t i = 0; i < m; i++) {
+        for (int64_t j = 0; j < n; j++) {
+            float sum = 0.0f;
+            for (int64_t k = 0; k < k_a; k++) {
+                sum += a_data[i * k_a + k] * b_data[k * n + j];
+            }
+            result_data[i * n + j] = sum;
+        }
+    }
+    
+    return result;
 }
 
 struct ggml_tensor* ggml_soft_max(struct ggml_context* ctx, struct ggml_tensor* a) {
-    return ggml_dup_tensor(ctx, a); // Stub: just return copy of a
+    if (!ctx || !a) return NULL;
+    
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, a);
+    if (!result || !result->data) return NULL;
+    
+    float* a_data = ggml_get_data_f32(a);
+    float* result_data = ggml_get_data_f32(result);
+    size_t n_elements = ggml_nelements(a);
+    
+    // Find maximum value for numerical stability
+    float max_val = a_data[0];
+    for (size_t i = 1; i < n_elements; i++) {
+        if (a_data[i] > max_val) {
+            max_val = a_data[i];
+        }
+    }
+    
+    // Compute exponentials and sum
+    float sum_exp = 0.0f;
+    for (size_t i = 0; i < n_elements; i++) {
+        result_data[i] = expf(a_data[i] - max_val);
+        sum_exp += result_data[i];
+    }
+    
+    // Normalize to get probabilities
+    if (sum_exp > 0.0f) {
+        for (size_t i = 0; i < n_elements; i++) {
+            result_data[i] /= sum_exp;
+        }
+    }
+    
+    return result;
 }
 
 struct ggml_tensor* ggml_relu(struct ggml_context* ctx, struct ggml_tensor* a) {
-    return ggml_dup_tensor(ctx, a); // Stub: just return copy of a
+    if (!ctx || !a) return NULL;
+    
+    struct ggml_tensor* result = ggml_dup_tensor(ctx, a);
+    if (!result || !result->data) return NULL;
+    
+    float* a_data = ggml_get_data_f32(a);
+    float* result_data = ggml_get_data_f32(result);
+    size_t n_elements = ggml_nelements(a);
+    
+    // ReLU: max(0, x)
+    for (size_t i = 0; i < n_elements; i++) {
+        result_data[i] = (a_data[i] > 0.0f) ? a_data[i] : 0.0f;
+    }
+    
+    return result;
 }
 
 struct ggml_tensor* ggml_new_f32(struct ggml_context* ctx, float value) {

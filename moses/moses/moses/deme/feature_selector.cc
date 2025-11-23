@@ -114,10 +114,15 @@ void feature_selector::preprocess_params(const combo::combo_tree& xmplr)
     }
 }
 
-/// TODO: Document the purpose and behavior of build_fs_ctable().
+/// Build a feature-selected contingency table from an exemplar.
+///
 /// This function creates a feature-selected version of the contingency table
-/// by applying the exemplar to filter features. The second table contains
-/// only the features selected by the feature selection process.
+/// by applying the given exemplar to filter features. The resulting table 
+/// contains only the features selected by the feature selection process,
+/// reducing dimensionality while preserving relevant information.
+///
+/// @param xmplr The exemplar combo tree used to guide feature selection
+/// @return A new CTable containing only the selected features
 CTable feature_selector::build_fs_ctable(const combo_tree& xmplr) const
 {
     // set labels and signature

@@ -56,6 +56,9 @@ static const string power_str = "power";
 // Time bscore granularity
 static const string day_str = "day";
 static const string month_str = "month";
+static const string hour_str = "hour";
+static const string week_str = "week";
+static const string year_str = "year";
 
 // focus types (which data points feature selection within moses
 // should focus on)
@@ -783,7 +786,7 @@ problem_params::add_options(boost::program_options::options_description& desc)
         ("time-bscore-granularity",
          po::value<string>(&time_bscore_granularity_str)->default_value(day_str),
          "Set the granularity of timestamp, in case the bscore is spread "
-         "across time. Options are 'day' and 'month'.\n")
+         "across time. Options are 'hour', 'day', 'week', 'month', and 'year'.\n")
 
         ("gen-best-tree",
          po::value<bool>(&gen_best_tree)->default_value(false),
@@ -1410,13 +1413,20 @@ void problem_params::parse_options(boost::program_options::variables_map& vm)
     meta_params.diversity.set_dst2dp(d2de);
 
     // Set time bscore granularity
-    if (time_bscore_granularity_str == day_str)
+    if (time_bscore_granularity_str == hour_str)
+        time_bscore_granularity = TemporalGranularity::hour;
+    else if (time_bscore_granularity_str == day_str)
         time_bscore_granularity = TemporalGranularity::day;
+    else if (time_bscore_granularity_str == week_str)
+        time_bscore_granularity = TemporalGranularity::week;
     else if (time_bscore_granularity_str == month_str)
         time_bscore_granularity = TemporalGranularity::month;
+    else if (time_bscore_granularity_str == year_str)
+        time_bscore_granularity = TemporalGranularity::year;
     else {
         stringstream ss;
-        ss << "Granularity " << time_bscore_granularity_str << " not implemented";
+        ss << "Granularity " << time_bscore_granularity_str << " not implemented. "
+           << "Supported options: hour, day, week, month, year";
         log_output_error_exit(ss.str());
     }
 

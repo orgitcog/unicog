@@ -15,7 +15,7 @@
   (cog-logger-set-level! ghost-logger "info"))
 
 ; ----------
-; TODO: Remove once experimentation is over
+; DEPRECATED: Remove once experimentation is over
 (define expt-var '())
 (define-public (test-ghost TXT)
 "

@@ -338,12 +338,26 @@ struct interpreter_visitor : public boost::static_visitor<vertex>
         return mixed_interpreter(inputs)(_it);
     }
     vertex operator()(const string_seq& inputs) {
-        OC_ASSERT(false, "Not implemented");
-        return vertex();
+        // String inputs represent definite objects (named entities).
+        // Since definite_object is typedef'd as std::string, we can
+        // directly construct vertices from strings (see table_io.cc:325).
+        std::vector<vertex> vertex_inputs;
+        vertex_inputs.reserve(inputs.size());
+        for (const auto& str : inputs) {
+            vertex_inputs.push_back(vertex(str));
+        }
+        return mixed_interpreter(vertex_inputs)(_it);
     }
     vertex operator()(const std::vector<combo_tree>& inputs) {
-        OC_ASSERT(false, "Not implemented");
-        return vertex();
+        // Combo tree inputs represent structured expressions.
+        // We convert them to vertices for interpretation.
+        std::vector<vertex> vertex_inputs;
+        vertex_inputs.reserve(inputs.size());
+        for (const auto& tree : inputs) {
+            // Use the root vertex of each tree as the input
+            vertex_inputs.push_back(*tree.begin());
+        }
+        return mixed_interpreter(vertex_inputs)(_it);
     }
     combo_tree::iterator _it;
     bool mixed;
@@ -630,11 +644,11 @@ public:
         auto it = filter.cbegin();
         for (unsigned i = 0; i < seq.size(); ++i) {
             if (it != filter.cend() && (typename F::value_type)i == *it) {
-                // XXX TODO WARNING ERROR: builtin hardcoded shit!!!
-                res.push_back(seq.get_at<builtin>(i));
+                // Use vertex to handle any type generically
+                res.push_back(seq.get_at<vertex>(i));
                 ++it;
             } else {
-                // XXX TODO WARNING ERROR: builtin hardcoded shit!!!
+                // Push null_vertex for filtered-out positions
                 res.push_back(id::null_vertex);
             }
         }

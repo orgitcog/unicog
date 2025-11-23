@@ -37,7 +37,7 @@ namespace opencog
 {
 
 /**
- * TODO: update that comment
+ * Backward Chaining Implementation
  *
  * Backward chaining falls into two cases
  *

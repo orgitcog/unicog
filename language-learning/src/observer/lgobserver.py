@@ -40,4 +40,12 @@ class LGPSTokenizer(LGPSStreamParser):
             self._pairs.add(linkage.tokens[link[0]], linkage.tokens[link[1]])
 
     def on_linkage_done(self, sentence: PQSentenceParse, linkage: Linkage):
-        pass
+        """Called when linkage processing is complete.
+        
+        Increments the linkage count for the sentence to track processing progress.
+        
+        Args:
+            sentence: The sentence being parsed
+            linkage: The completed linkage structure
+        """
+        sentence.linkage_count += 1

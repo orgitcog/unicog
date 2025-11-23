@@ -1,0 +1,250 @@
+{
+  "timestamp": "2025-11-18T00:40:29.891452Z",
+  "repository": "/home/runner/work/opencog-unified/opencog-unified",
+  "entelechy_assessment": {
+    "actualization_score": 0.7200000000000001,
+    "coherence_score": 0.65,
+    "vitality_score": 0.75,
+    "completeness_score": 0.7,
+    "alignment_score": 0.8
+  },
+  "dimensional_insights": {
+    "ontological": {
+      "foundation_layer": {
+        "components_expected": [
+          "cogutil"
+        ],
+        "components_present": 1,
+        "health": 1.0
+      },
+      "core_layer": {
+        "components_expected": [
+          "atomspace",
+          "cogserver",
+          "atomspace-rocks",
+          "atomspace-restful",
+          "atomspace-storage"
+        ],
+        "components_present": 5,
+        "health": 1.0
+      },
+      "specialized_layers": {
+        "logic": {
+          "components_expected": [
+            "unify",
+            "ure"
+          ],
+          "components_present": 2,
+          "health": 1.0
+        },
+        "cognitive": {
+          "components_expected": [
+            "attention",
+            "spacetime"
+          ],
+          "components_present": 2,
+          "health": 1.0
+        },
+        "advanced": {
+          "components_expected": [
+            "pln",
+            "miner",
+            "asmoses"
+          ],
+          "components_present": 3,
+          "health": 1.0
+        },
+        "learning": {
+          "components_expected": [
+            "moses"
+          ],
+          "components_present": 1,
+          "health": 1.0
+        },
+        "language": {
+          "components_expected": [
+            "lg-atomese",
+            "learn",
+            "language-learning"
+          ],
+          "components_present": 3,
+          "health": 1.0
+        },
+        "integration": {
+          "components_expected": [
+            "opencog"
+          ],
+          "components_present": 1,
+          "health": 1.0
+        }
+      },
+      "architectural_completeness": 1.2857142857142858
+    },
+    "teleological": {
+      "development_phases": {
+        "phase_1": {
+          "name": "Core Extensions",
+          "components_total": 3,
+          "components_present": 3,
+          "completion": 1.0,
+          "focus": "Storage backends, REST API, and basic learning"
+        },
+        "phase_2": {
+          "name": "Logic Systems",
+          "components_total": 3,
+          "components_present": 3,
+          "completion": 1.0,
+          "focus": "Pattern matching, rule engines, and language processing"
+        },
+        "phase_3": {
+          "name": "Cognitive Systems",
+          "components_total": 2,
+          "components_present": 2,
+          "completion": 1.0,
+          "focus": "Attention allocation and spatial-temporal reasoning"
+        },
+        "phase_4": {
+          "name": "Advanced & Learning",
+          "components_total": 3,
+          "components_present": 3,
+          "completion": 1.0,
+          "focus": "Probabilistic reasoning, pattern mining, program evolution"
+        },
+        "phase_5": {
+          "name": "Language & Integration",
+          "components_total": 3,
+          "components_present": 3,
+          "completion": 1.0,
+          "focus": "Language processing and final system integration"
+        }
+      },
+      "roadmap_alignment": {
+        "exists": true,
+        "documented": true,
+        "alignment_note": "Comprehensive 20-week roadmap documented"
+      },
+      "actualization_trajectory": 1.0
+    },
+    "cognitive": {
+      "reasoning_systems": {
+        "components": [
+          "ure",
+          "pln"
+        ],
+        "present": [
+          "ure",
+          "pln"
+        ],
+        "health": 1.0,
+        "todo_markers": 60
+      },
+      "pattern_systems": {
+        "components": [
+          "unify",
+          "miner"
+        ],
+        "present": [
+          "unify",
+          "miner"
+        ],
+        "health": 1.0
+      },
+      "attention_systems": {
+        "components": [
+          "attention"
+        ],
+        "present": [
+          "attention"
+        ],
+        "health": 1.0
+      },
+      "learning_systems": {
+        "components": [
+          "moses",
+          "asmoses",
+          "learn",
+          "language-learning"
+        ],
+        "present": [
+          "moses",
+          "asmoses",
+          "learn",
+          "language-learning"
+        ],
+        "health": 1.0
+      },
+      "cognitive_completeness": 1.0
+    },
+    "integrative": {
+      "dependency_graph": {
+        "total_dependencies": 27,
+        "satisfied_dependencies": 27,
+        "health": 1.0
+      },
+      "build_integration": {
+        "cmake_exists": true,
+        "subdirectories_added": 29,
+        "health": 1.0
+      },
+      "test_integration": {
+        "test_directories": 2,
+        "test_files": 13,
+        "health": 1.0
+      },
+      "integration_health": 1.0
+    },
+    "evolutionary": {
+      "code_health": {
+        "todo_count": 1704,
+        "fixme_count": 796,
+        "stub_count": 91,
+        "total_markers": 2591,
+        "health": 0.0
+      },
+      "implementation_depth": {
+        "total_implementation_files": 1704,
+        "small_stub_files": 12,
+        "health": 0.9929577464788732
+      },
+      "self_improvement_capacity": {
+        "meta_tools_present": 4,
+        "meta_tools_total": 4,
+        "has_autognosis": true,
+        "has_ontogenesis": true,
+        "health": 1.0
+      },
+      "evolutionary_potential": 0.6643192488262911
+    }
+  },
+  "fragmentation_analysis": {
+    "total_fragments": 0,
+    "by_dimension": {},
+    "by_type": {},
+    "critical_fragments": []
+  },
+  "repair_roadmap": {
+    "immediate_actions": [],
+    "short_term_actions": [],
+    "medium_term_actions": [],
+    "long_term_actions": []
+  },
+  "metrics": {
+    "actualization_score": 0.7200000000000001,
+    "coherence_score": 0.65,
+    "vitality_score": 0.75,
+    "completeness_score": 0.7,
+    "alignment_score": 0.8,
+    "total_components": 0,
+    "integrated_components": 0,
+    "fragmented_components": 0,
+    "total_code_markers": 2591,
+    "todo_count": 1704,
+    "fixme_count": 796,
+    "stub_count": 91,
+    "cognitive_layers_complete": 0,
+    "cognitive_layers_total": 0,
+    "dependency_satisfaction": 0.0,
+    "cmake_integration_health": 0.0,
+    "test_coverage_health": 0.0
+  }
+}

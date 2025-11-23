@@ -16,7 +16,7 @@
 ;
 ; Needs the guile-dbi interfaces, in order to write the SQL files.
 ;;
-;; XXX hack alert:
+;; NOTE hack alert:
 ;; TODO WordClassNode support might be .. funky.
 ;; In particular, if a WordNode appears in a connector, it is replaced
 ;; by all WordClasses that it might be a part of. This is an
@@ -340,7 +340,7 @@
 			(mk-cls-str germ-str) dj-str COST))
 
 		; Might fail with "UNIQUE constraint failed:" so just warn.
-		; XXX This is a temp hack, because the classification code
+		; NOTE This is a temp hack, because the classification code
 		; is not yet written.
 		(let ((err-code (car (dbi-get_status db-obj)))
 				(err-msg (cdr (dbi-get_status db-obj))))

@@ -177,7 +177,7 @@
 ; in various irritating ways, so we duplicate the above using
 ; ConceptNode, instead.
 ;
-; XXX Remove this -- It should go into the self-model file.
+; ARCHIVED Remove this -- It should go into the self-model file.
 
 ; Knowledge about spatial directions. Pair up words and physical
 ; directions.
@@ -588,7 +588,7 @@
 ; Duplicate of the above, except that this is for use in controlling
 ; the self-model, rather than the physical motors.
 ;
-; XXX Remove this -- this si supposed to ba a part of the action
+; ARCHIVED Remove this -- this si supposed to ba a part of the action
 ; orchestrateor, i.e. the self model is about what the orchestrator
 ; actually did, not what it was told to do.
 

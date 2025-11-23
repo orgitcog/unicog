@@ -37,7 +37,7 @@ jobs:
   
   cogutil:
     name: "🧬 CogUtil Foundation"
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     container:
       image: opencog/opencog-deps:latest
       options: --user root
@@ -85,7 +85,7 @@ jobs:
             echo "✅ CMake configuration successful!"
           else
             echo "🤖 Activating self-healing for CMake configuration..."
-            cd /home/runner/work/cogmo/cogmo
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd cogutil/build && cmake .. -DCMAKE_BUILD_TYPE=Release" \
               --max-attempts 2 \
@@ -98,7 +98,7 @@ jobs:
             echo "✅ Build successful!"
           else
             echo "🤖 Activating self-healing for build..."
-            cd /home/runner/work/cogmo/cogmo
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd cogutil/build && make $MAKEFLAGS" \
               --max-attempts $MAX_FIX_ATTEMPTS \
@@ -174,7 +174,7 @@ jobs:
   atomspace:
     name: "⚛️ AtomSpace Hypergraph"
     needs: [cogutil]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     container:
       image: opencog/opencog-deps:latest
       options: --user root
@@ -258,7 +258,7 @@ jobs:
             echo "✅ Hypergraph configuration successful!"
           else
             echo "🤖 Activating cognitive repair for configuration..."
-            cd /home/runner/work/cogmo/cogmo
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd atomspace/build && cmake .. -DCMAKE_BUILD_TYPE=Release ${{ matrix.flags }}" \
               --context "atomspace-${{ matrix.variant }}" \
@@ -271,7 +271,7 @@ jobs:
             echo "✅ AtomSpace materialized successfully!"
           else
             echo "🤖 Invoking cognitive repair mechanisms..."
-            cd /home/runner/work/cogmo/cogmo
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd atomspace/build && make $MAKEFLAGS" \
               --context "atomspace-${{ matrix.variant }}" \
@@ -339,7 +339,7 @@ jobs:
   cognitive-synthesis:
     name: "🎭 Cognitive Pipeline Synthesis"
     needs: [atomspace]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     if: always()
     
     steps:
@@ -504,7 +504,7 @@ jobs:
   meta-cognitive-evolution:
     name: "🧠 Meta-Cognitive Pipeline Evolution"
     needs: [cognitive-synthesis]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[evolve]')
     
     steps:

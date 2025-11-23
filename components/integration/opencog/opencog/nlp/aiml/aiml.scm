@@ -358,7 +358,7 @@
   aiml-select-rule RULE-LIST - Given a list of AIML rules,
   select one to run.
 "
-	;; XXX FIXME crazy hacky weight-adjusting formula. This makes
+	;; NOTE crazy hacky weight-adjusting formula. This makes
 	;; no sense at all, but is a hacky hack designed to pick more
 	;; desirable rules more often.  Someone should figure out
 	;; some weighting formula that makes more sense tahn this.

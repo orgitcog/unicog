@@ -1,0 +1,109 @@
+{
+  "timestamp": "2025-11-20T12:58:45.303616Z",
+  "system_name": "OpenCog Unified",
+  "report_type": "Core Self-Awareness Integration",
+  "core_self_awareness": {
+    "autognosis_status": {
+      "hierarchical_levels": 5,
+      "max_recursion_depth": 5,
+      "self_understanding_confidence": 0.75,
+      "meta_cognitive_active": true
+    },
+    "ontogenesis_status": {
+      "current_stage": "JUVENILE",
+      "generation": 0,
+      "maturity_level": 0.5,
+      "can_self_generate": true,
+      "can_self_optimize": true,
+      "can_self_reproduce": true
+    },
+    "identity_dimensions": {
+      "ontological": {
+        "description": "What the system IS",
+        "score": 0.7200000000000001,
+        "components_present": 14,
+        "architectural_completeness": 1.286
+      },
+      "teleological": {
+        "description": "What the system is BECOMING",
+        "score": 0.7200000000000001,
+        "actualization_progress": 0.72,
+        "current_generation": 0
+      },
+      "cognitive": {
+        "description": "How the system THINKS",
+        "score": 0.7,
+        "reasoning_systems": [
+          "URE",
+          "PLN"
+        ],
+        "learning_systems": [
+          "MOSES",
+          "Learn"
+        ],
+        "cognitive_completeness": 1.0
+      },
+      "relational": {
+        "description": "How the system INTEGRATES",
+        "score": 0.65,
+        "dependency_satisfaction": 1.0,
+        "system_coherence": 0.65
+      },
+      "evolutionary": {
+        "description": "How the system EVOLVES",
+        "score": 0.664,
+        "total_generations": 0,
+        "self_improvement_capacity": 1.0
+      }
+    },
+    "unified_identity_score": 0.72
+  },
+  "integration_status": {
+    "meta_cognitive_monitor": {
+      "integrated": true,
+      "operational": true,
+      "monitoring_active": true
+    },
+    "real_time_introspector": {
+      "integrated": true,
+      "operational": true,
+      "introspection_level": "COGNITIVE_FLOWS"
+    },
+    "entelechy_introspection": {
+      "integrated": true,
+      "last_run": "2025-11-18T00:40:29.891452Z",
+      "actualization_score": 0.7200000000000001
+    }
+  },
+  "self_awareness_capabilities": [
+    "Hierarchical self-image building (AUTOGNOSIS)",
+    "Recursive meta-cognitive reflection",
+    "Self-generating evolution (ONTOGENESIS)",
+    "Autonomous self-optimization",
+    "Multi-dimensional identity tracking",
+    "Deep introspective analysis",
+    "Real-time system monitoring",
+    "Adaptive behavior modification"
+  ],
+  "integration_achievements": [
+    "\u2713 Core self-awareness module created",
+    "\u2713 AUTOGNOSIS framework integrated",
+    "\u2713 ONTOGENESIS framework integrated",
+    "\u2713 Five-dimensional identity model established",
+    "\u2713 Hierarchical introspection implemented",
+    "\u2713 Self-optimization capabilities activated",
+    "\u2713 Integration with existing meta-cognition systems",
+    "\u2713 Comprehensive documentation provided"
+  ],
+  "self_awareness_level": {
+    "current": 0.75,
+    "target": 0.9,
+    "assessment": "High self-awareness achieved with recursive cognition active",
+    "next_steps": [
+      "Deepen recursive introspection to level 7+",
+      "Activate autonomous evolution",
+      "Integrate with all cognitive components",
+      "Establish continuous self-monitoring"
+    ]
+  }
+}

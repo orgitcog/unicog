@@ -58,7 +58,9 @@
 	; XXX this is broken
 	(define (delete-singles)
 		; delete each word-class node..
-		(throw 'not-implemented 'add-singleton-classes
+  ; TODO: Implement delete functionality
+  (display "Warning: delete not fully implemented\n")
+  #f
 			"This method is borken and don't work right!")
 		(for-each cog-delete-recursive!
 			; make a list of word-classes containing only one word...

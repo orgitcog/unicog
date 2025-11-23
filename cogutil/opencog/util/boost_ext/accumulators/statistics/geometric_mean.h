@@ -24,9 +24,7 @@
 #define OPENCOG_UTIL_GEOMETRIC_MEAN
 
 #include  <cmath>
-
-// MODERNIZED: Replaced deprecated boost::mpl::placeholders with direct type usage
-// This eliminates dependency on deprecated boost features
+#include <boost/mpl/placeholders.hpp>
 #include <boost/accumulators/framework/accumulator_base.hpp>
 #include <boost/accumulators/framework/extractor.hpp>
 #include <boost/accumulators/numeric/functional.hpp>
@@ -91,7 +89,7 @@ namespace tag
     {
         /// INTERNAL ONLY
         ///
-        typedef accumulators::impl::geometric_mean_impl<Sample, tag::sample> impl;
+        typedef accumulators::impl::geometric_mean_impl<mpl::_1, tag::sample> impl;
     };
 
 }

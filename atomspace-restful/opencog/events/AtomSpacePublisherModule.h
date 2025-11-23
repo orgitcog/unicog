@@ -164,10 +164,10 @@ private:
 		std::string tvMessage(Json::Value jsonAtom,
 		                      Json::Value jsonTVOld,
 							  Json::Value jsonTVNew);
-		Json::Value atomToJSON(Handle h);
-		Json::Value tvToJSON(TruthValuePtr tv);
-		Json::Value avToJSON(AttentionValuePtr av);
-		// TODO: add protoatom to JSON functionality
+			Json::Value atomToJSON(Handle h);
+			Json::Value tvToJSON(TruthValuePtr tv);
+			Json::Value avToJSON(AttentionValuePtr av);
+			Json::Value protoatomToJSON(const ProtoAtomPtr& pa);
 
 		DECLARE_CMD_REQUEST(AtomSpacePublisherModule, "publisher-enable-signals",
 		                    do_publisherEnableSignals,

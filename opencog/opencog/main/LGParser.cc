@@ -56,7 +56,7 @@ LGParser::~LGParser()
         lg_dictionary_ = nullptr;
     }
 #else
-    // Clean up placeholder resources
+    // Clean up stub resources (fallback when Link Grammar unavailable)
     if (lg_dictionary_) {
         delete static_cast<int*>(lg_dictionary_);
         lg_dictionary_ = nullptr;
@@ -123,9 +123,12 @@ bool LGParser::initializeParser(const std::string& dict_path)
             }
         }
 #else
-        // Fallback implementation when Link Grammar is not available
-        lg_dictionary_ = new int(1); // Placeholder
-        lg_options_ = new int(2);    // Placeholder
+        // Fallback stub implementation when Link Grammar library is not available
+        // These stubs maintain API compatibility while indicating library absence
+        lg_dictionary_ = new int(1); // Stub: minimal allocation for compatibility
+        lg_options_ = new int(2);    // Stub: minimal allocation for compatibility
+        
+        logger().warn("Link Grammar library not available. Using fallback parser with limited functionality.");
         
         // Verify dictionary language from path
         if (dict_path == "en" || dict_path.find("en/") != std::string::npos) {

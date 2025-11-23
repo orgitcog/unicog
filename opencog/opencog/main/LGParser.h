@@ -133,9 +133,10 @@ private:
     Dictionary lg_dictionary_;
     Parse_Options lg_options_;
 #else
-    // Placeholder types when Link Grammar is not available
-    void* lg_dictionary_;
-    void* lg_options_;
+    // Stub types when Link Grammar is not available
+    // Using void* to maintain API compatibility while indicating unavailability
+    void* lg_dictionary_;  // Stub: would be Dictionary if HAVE_LINK_GRAMMAR
+    void* lg_options_;     // Stub: would be Parse_Options if HAVE_LINK_GRAMMAR
 #endif
     
     /**
@@ -178,7 +179,10 @@ private:
     std::vector<std::string> tokenize(const std::string& text);
     
     /**
-     * Simulate Link Grammar parsing (placeholder for actual LG integration)
+     * Simulate Link Grammar parsing when library is unavailable
+     * Provides basic dependency structure as fallback
+     * @param words Vector of tokenized words
+     * @return Map of link types to word index pairs
      */
     std::map<std::string, std::vector<std::pair<int, int>>> simulateLGParsing(
         const std::vector<std::string>& words);

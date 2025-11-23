@@ -337,7 +337,43 @@ ECANAgent::AttentionMetrics ECANAgent::computePerformanceMetrics() const
     
     // Estimate other metrics (would need more tracking in real implementation)
     metrics.average_request_processing_time = 1.0; // ms
-    metrics.attention_distribution_fairness = 0.7; // Placeholder Gini coefficient
+    
+    // Calculate actual Gini coefficient for attention distribution fairness
+    // Gini coefficient measures inequality: 0 = perfect equality, 1 = perfect inequality
+    std::vector<double> sti_values;
+    for (Handle h : focus) {
+        double sti = static_cast<double>(attentionBank->getSTI(h));
+        if (sti > 0) {
+            sti_values.push_back(sti);
+        }
+    }
+    
+    if (sti_values.size() > 1) {
+        // Sort values for Gini calculation
+        std::sort(sti_values.begin(), sti_values.end());
+        
+        double sum_of_absolute_differences = 0.0;
+        double sum_of_values = 0.0;
+        size_t n = sti_values.size();
+        
+        for (size_t i = 0; i < n; ++i) {
+            sum_of_values += sti_values[i];
+            for (size_t j = 0; j < n; ++j) {
+                sum_of_absolute_differences += std::abs(sti_values[i] - sti_values[j]);
+            }
+        }
+        
+        // Gini coefficient formula: G = sum(|xi - xj|) / (2 * n^2 * mean)
+        double mean = sum_of_values / n;
+        if (mean > 0) {
+            metrics.attention_distribution_fairness = 1.0 - (sum_of_absolute_differences / (2.0 * n * n * mean));
+        } else {
+            metrics.attention_distribution_fairness = 1.0; // Perfect equality if all zeros
+        }
+    } else {
+        metrics.attention_distribution_fairness = 1.0; // Perfect equality with 0-1 atoms
+    }
+    
     metrics.conflict_resolution_rate = 0.95; // 95% success rate
     metrics.total_requests_processed = cycleCount * 5; // Estimate
     metrics.total_conflicts_resolved = cycleCount / 10; // Estimate

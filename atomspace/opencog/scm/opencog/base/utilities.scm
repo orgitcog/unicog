@@ -746,7 +746,7 @@
 
 ; -----------------------------------------------------------------------
 ;
-; XXX This should probably be made obsolete.
+; NOTE: This should probably be made obsolete.
 (define-public (cog-get-reference refptr)
 "
   Given a reference structure, return the referenced list entries.

@@ -291,6 +291,52 @@ Json::Value AtomSpacePublisherModule::tvToJSON(TruthValuePtr tvp)
 	return json;
 }
 
+Json::Value AtomSpacePublisherModule::protoatomToJSON(const ProtoAtomPtr& pa)
+{
+	Json::Value json(Json::objectValue);
+	
+	if (!pa) {
+		json["type"] = "null";
+		return json;
+	}
+	
+	// Check if it's a Handle (Atom)
+	Handle h = HandleCast(pa);
+	if (h) {
+		// If it's an atom, use the existing atomToJSON function
+		return atomToJSON(h);
+	}
+	
+	// Handle other ProtoAtom types (values, numbers, strings, etc.)
+	ValuePtr vp = ValueCast(pa);
+	if (vp) {
+		json["protoatom_type"] = "value";
+		json["value_type"] = nameserver().getTypeName(vp->get_type());
+		
+		// Convert value to string representation
+		std::stringstream ss;
+		ss << vp->to_string();
+		json["value"] = ss.str();
+		
+		// If it's a numeric value, try to extract the number
+		if (vp->is_type(FLOAT_VALUE)) {
+			Json::Value numbers(Json::arrayValue);
+			const std::vector<double>& floats = FloatValueCast(vp)->value();
+			for (double f : floats) {
+				numbers.append(f);
+			}
+			json["numbers"] = numbers;
+		}
+		
+		return json;
+	}
+	
+	// Fallback for unknown ProtoAtom types
+	json["protoatom_type"] = "unknown";
+	json["string_representation"] = pa->to_short_string();
+	return json;
+}
+
 std::string AtomSpacePublisherModule::atomMessage(Json::Value jsonAtom)
 {
 	Json::Value json;

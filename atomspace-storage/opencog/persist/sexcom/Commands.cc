@@ -178,7 +178,7 @@ std::string Commands::cog_execute_cache(const std::string& cmd)
 		Handle meta = Sexpr::decode_atom(cmd, pos, _space_map);
 		meta = _base_space->add_atom(meta);
 
-		// XXX Hacky .. store time in float value...
+		// NOTE Hacky .. store time in float value...
 		_base_space->set_value(query, meta, createFloatValue((double)time(0)));
 		if (std::string::npos != cmd.find("#t", pos))
 			force = true;

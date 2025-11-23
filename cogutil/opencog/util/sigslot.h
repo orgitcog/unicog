@@ -35,7 +35,9 @@
 // main () {
 //     Bar bell;
 //     SigSlot<int, std::vector<int>> siggy;
-//     // MODERN C++: Using std::placeholders instead of boost::placeholders
+//     // Connect member function directly:
+//     siggy.connect_member(&Bar::baz, &bell);
+//     // Or using std::bind:
 //     auto glub = std::bind(&Bar::baz, bell,
 //              std::placeholders::_1, std::placeholders::_2);
 //     siggy.connect(glub);
@@ -69,9 +71,8 @@ class SigSlot
 			return _slot_id;
 		}
 
-#if BORKEN_FOR_SOME_REASON
-		// Connect member of a given object.
-		// XXX Something like this should work, but I can't get it to go.
+		// Connect member function of a given object.
+		// Example usage:
 		//
 		// class Bar { public:
 		//     void baz(int x, std::vector<int> y) {
@@ -82,18 +83,29 @@ class SigSlot
 		// main() {
 		//     Bar bell;
 		//     SigSlot<int, std::vector<int>> siggy;
-		//     siggy.connect_m(&Bar::baz, bell);
+		//     siggy.connect_member(&Bar::baz, &bell);
 		//     siggy.emit(42, {68,69,70});
 		// }
-		template <typename FN, typename... AR>
-		int connect(FN&& fn, AR&& ... ag)
+		template <typename T, typename CLASS>
+		int connect_member(void (CLASS::*fn)(ARGS...), T* obj)
 		{
 			std::lock_guard<std::mutex> lck(_mtx);
 			_slot_id++;
-			_slots.insert({_slot_id, std::bind(fn, ag ...)});
+			auto bound_fn = [obj, fn](ARGS... args) { (obj->*fn)(args...); };
+			_slots.insert(std::make_pair(_slot_id, bound_fn));
 			return _slot_id;
 		}
-#endif
+
+		// Connect const member function of a given object.
+		template <typename T, typename CLASS>
+		int connect_member(void (CLASS::*fn)(ARGS...) const, const T* obj)
+		{
+			std::lock_guard<std::mutex> lck(_mtx);
+			_slot_id++;
+			auto bound_fn = [obj, fn](ARGS... args) { (obj->*fn)(args...); };
+			_slots.insert(std::make_pair(_slot_id, bound_fn));
+			return _slot_id;
+		}
 
 		void disconnect(int id)
 		{

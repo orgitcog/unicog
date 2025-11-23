@@ -96,7 +96,11 @@ bool is_comment(const char c)
 /// This ignores lines that start with a 'standard comment char'
 ///
 //
-// TODO: This routine should be extended so that comments that start
+// Extended comment handling
+// Support comments starting with # or //
+if (line[0] == '#' || (line.length() > 1 && line[0] == '/' && line[1] == '/')) {
+    continue; // Skip comment lines
+}
 // somewhere other than column 0 are also ignored.
 //
 // The signature of this routine is the same as std:getline()

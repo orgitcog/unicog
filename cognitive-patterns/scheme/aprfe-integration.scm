@@ -348,25 +348,110 @@
                            atoms)))))
     atoms))
 
+(define *aprfe-instance-cache* #f)
+(define *aprfe-performance-data* '())
+
 (define (get-aprfe-instance)
-  "Get or create APRFE instance (placeholder for C++ integration)"
-  ; This would interface with the C++ APRFE instance
-  'aprfe-instance)
+  "Get or create APRFE instance with proper initialization"
+  (if (not *aprfe-instance-cache*)
+      (begin
+        (set! *aprfe-instance-cache* 
+              (make-hash-table))
+        (hash-set! *aprfe-instance-cache* 'initialized #t)
+        (hash-set! *aprfe-instance-cache* 'cognitive-load 0.5)
+        (hash-set! *aprfe-instance-cache* 'previous-load 0.5)
+        (hash-set! *aprfe-instance-cache* 'strategy 'hybrid_fusion)
+        (hash-set! *aprfe-instance-cache* 'performance-history '())
+        (hash-set! *aprfe-instance-cache* 'strategy-switches '())))
+  *aprfe-instance-cache*)
 
-; Placeholder accessor functions for C++ integration
+;; Real accessor functions for pattern recognition results
 (define (get-matched-patterns result) 
-  (if result (cog-outgoing-set result) '()))
+  (if (and result (cog-atom? result))
+      (cog-outgoing-set result)
+      (if (list? result) result '())))
 
-(define (get-accuracy result) 
-  (if result 0.85 0.0)) ; Placeholder accuracy
+(define (get-accuracy result)
+  "Calculate actual accuracy based on pattern matching quality"
+  (if (not result)
+      0.0
+      (let* ((matched (get-matched-patterns result))
+             (match-count (length matched))
+             (confidence-sum (fold (lambda (atom acc)
+                                    (+ acc (if (cog-atom? atom)
+                                             (cog-tv-confidence (cog-tv atom))
+                                             0.5)))
+                                  0.0 matched)))
+        (if (> match-count 0)
+            (min 1.0 (/ confidence-sum match-count))
+            0.0))))
 
-(define (get-symbolic-contributions result) 0.4)
-(define (get-neural-contributions result) 0.35)
-(define (get-attention-contributions result) 0.25)
-(define (get-integrated-patterns result) '())
+(define (get-symbolic-contributions result)
+  "Calculate symbolic reasoning contribution to pattern recognition"
+  (if (not result) 0.0
+      (let* ((matched (get-matched-patterns result))
+             (symbolic-atoms (filter (lambda (a) 
+                                      (and (cog-atom? a)
+                                           (or (eq? (cog-type a) 'ConceptNode)
+                                               (eq? (cog-type a) 'PredicateNode)
+                                               (eq? (cog-type a) 'InheritanceLink))))
+                                    matched)))
+        (if (> (length matched) 0)
+            (/ (length symbolic-atoms) (length matched))
+            0.0))))
+
+(define (get-neural-contributions result)
+  "Calculate neural network contribution to pattern recognition"
+  (if (not result) 0.0
+      (let* ((matched (get-matched-patterns result))
+             (neural-score (fold (lambda (atom acc)
+                                  (+ acc (if (cog-atom? atom)
+                                           (cog-tv-mean (cog-tv atom))
+                                           0.0)))
+                                0.0 matched)))
+        (if (> (length matched) 0)
+            (min 1.0 (/ neural-score (length matched)))
+            0.0))))
+
+(define (get-attention-contributions result)
+  "Calculate attention mechanism contribution to pattern recognition"
+  (if (not result) 0.0
+      (let* ((matched (get-matched-patterns result))
+             (attention-sum (fold (lambda (atom acc)
+                                   (+ acc (if (cog-atom? atom)
+                                            (let ((av (cog-av atom)))
+                                              (if av (/ (cog-av-sti av) 100.0) 0.0))
+                                            0.0)))
+                                 0.0 matched)))
+        (if (> (length matched) 0)
+            (min 1.0 (/ attention-sum (length matched)))
+            0.0))))
+
+(define (get-integrated-patterns result)
+  "Extract integrated patterns from cross-modal recognition"
+  (if (not result) '()
+      (let ((matched (get-matched-patterns result)))
+        (filter (lambda (atom)
+                 (and (cog-atom? atom)
+                      (cog-link? atom)
+                      (> (length (cog-outgoing-set atom)) 1)))
+               matched))))
 
 (define (calculate-pattern-novelty pattern)
-  (+ 0.5 (* 0.4 (random:uniform))))
+  "Calculate pattern novelty based on historical pattern database"
+  (if (not (cog-atom? pattern))
+      0.5
+      (let* ((pattern-type (cog-type pattern))
+             (pattern-tv (cog-tv pattern))
+             (pattern-confidence (cog-tv-confidence pattern-tv))
+             (pattern-strength (cog-tv-mean pattern-tv))
+             (incoming-count (length (cog-incoming-set pattern)))
+             ;; Novelty increases with low confidence and few connections
+             (novelty-score (- 1.0 (* pattern-confidence 
+                                     (min 1.0 (/ incoming-count 10.0))))))
+        ;; Boost novelty for high-strength but low-confidence patterns
+        (+ (* novelty-score 0.7) 
+           (* pattern-strength (- 1.0 pattern-confidence) 0.3))))
 
 ;; Export key functions
 (export aprfe-recognize-patterns

@@ -1,5 +1,5 @@
 {
-  "timestamp": 1760900051.6107135,
+  "timestamp": 1763642998.0959125,
   "validations": {
     "directory_structure": {
       "status": "invalid"
@@ -455,67 +455,67 @@
     },
     "integration_tests": {
       "tests_found": [
-        "test_lg-atomese.py",
-        "test_moses.py",
-        "test_ure_dependencies.py",
-        "test_learn.py",
         "test_atomspace-restful.py",
-        "test_attention_spreading_benchmarks.py",
-        "test_miner.py",
-        "test_opencog.py",
-        "test_aprfe_comprehensive.py",
-        "test_phase2_ecan_attention.py",
+        "test_ure_dependencies.py",
         "test_lg_atomese_dependency.py",
-        "test_unify_dependency.py",
-        "test_atomspace-rocks.py"
+        "test_learn.py",
+        "test_phase2_ecan_attention.py",
+        "test_lg-atomese.py",
+        "test_miner.py",
+        "test_aprfe_comprehensive.py",
+        "test_moses.py",
+        "test_opencog.py",
+        "test_atomspace-rocks.py",
+        "test_attention_spreading_benchmarks.py",
+        "test_unify_dependency.py"
       ],
       "tests_run": [
-        "test_lg-atomese.py",
-        "test_moses.py",
-        "test_ure_dependencies.py",
-        "test_learn.py",
         "test_atomspace-restful.py",
-        "test_attention_spreading_benchmarks.py",
-        "test_miner.py",
-        "test_opencog.py",
-        "test_aprfe_comprehensive.py",
-        "test_phase2_ecan_attention.py",
+        "test_ure_dependencies.py",
         "test_lg_atomese_dependency.py",
-        "test_unify_dependency.py",
-        "test_atomspace-rocks.py"
+        "test_learn.py",
+        "test_phase2_ecan_attention.py",
+        "test_lg-atomese.py",
+        "test_miner.py",
+        "test_aprfe_comprehensive.py",
+        "test_moses.py",
+        "test_opencog.py",
+        "test_atomspace-rocks.py",
+        "test_attention_spreading_benchmarks.py",
+        "test_unify_dependency.py"
       ],
       "tests_passed": [
         "test_ure_dependencies.py",
-        "test_attention_spreading_benchmarks.py",
-        "test_miner.py",
-        "test_phase2_ecan_attention.py",
         "test_lg_atomese_dependency.py",
+        "test_phase2_ecan_attention.py",
+        "test_miner.py",
+        "test_attention_spreading_benchmarks.py",
         "test_unify_dependency.py"
       ],
       "tests_failed": [
         {
-          "test": "test_lg-atomese.py",
-          "error": "  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_lg-atomese.py\", line 14\n    class TestLg-atomeseIntegration(unittest.TestCase):\n                ^\nSyntaxError: invalid syntax\n"
-        },
-        {
-          "test": "test_moses.py",
-          "error": "sE.\n======================================================================\nERROR: test_moses_dependencies (__main__.TestMosesIntegration.test_moses_dependencies)\nTest moses dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_moses.py\", line 57, in test_moses_dependencies\n    result = subprocess.run(['pkg-config', '--exists', dep],\n            ^^^^^^^^^^\nNameError: name 'subprocess' is not defined. Did you forget to import 'subprocess'\n\n----------------------------------------------------------------------\nRan 3 tests in 0.004s\n\nFAILED (errors=1, skipped=1)\n"
+          "test": "test_atomspace-restful.py",
+          "error": "  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_atomspace-restful.py\", line 14\n    class TestAtomspace-restfulIntegration(unittest.TestCase):\n                       ^\nSyntaxError: invalid syntax\n"
         },
         {
           "test": "test_learn.py",
           "error": "EEE\n======================================================================\nERROR: test_learn_basic_functionality (__main__.TestLearnIntegration.test_learn_basic_functionality)\nTest basic learn functionality\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_learn.py\", line 37, in test_learn_basic_functionality\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_learn.py\", line 47, in test_learn_basic_functionality\n    self.fail(f\"Basic functionality test failed for {component}: {e}\")\n                                                     ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_learn_dependencies (__main__.TestLearnIntegration.test_learn_dependencies)\nTest learn dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_learn.py\", line 54, in test_learn_dependencies\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_learn.py\", line 70, in test_learn_dependencies\n    self.fail(f\"Dependency integration test failed for {component}: {e}\")\n                                                        ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_learn_import (__main__.TestLearnIntegration.test_learn_import)\nTest that learn can be imported\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_learn.py\", line 26, in test_learn_import\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_learn.py\", line 29, in test_learn_import\n    self.fail(f\"Failed to import {component}: {e}\")\n                                  ^^^^^^^^^\nNameError: name 'component' is not defined\n\n----------------------------------------------------------------------\nRan 3 tests in 0.006s\n\nFAILED (errors=3)\n"
         },
         {
-          "test": "test_atomspace-restful.py",
-          "error": "  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_atomspace-restful.py\", line 14\n    class TestAtomspace-restfulIntegration(unittest.TestCase):\n                       ^\nSyntaxError: invalid syntax\n"
-        },
-        {
-          "test": "test_opencog.py",
-          "error": "EEE\n======================================================================\nERROR: test_opencog_basic_functionality (__main__.TestOpencogIntegration.test_opencog_basic_functionality)\nTest basic opencog functionality\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 37, in test_opencog_basic_functionality\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 47, in test_opencog_basic_functionality\n    self.fail(f\"Basic functionality test failed for {component}: {e}\")\n                                                     ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_dependencies (__main__.TestOpencogIntegration.test_opencog_dependencies)\nTest opencog dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 54, in test_opencog_dependencies\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 70, in test_opencog_dependencies\n    self.fail(f\"Dependency integration test failed for {component}: {e}\")\n                                                        ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_import (__main__.TestOpencogIntegration.test_opencog_import)\nTest that opencog can be imported\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 26, in test_opencog_import\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 29, in test_opencog_import\n    self.fail(f\"Failed to import {component}: {e}\")\n                                  ^^^^^^^^^\nNameError: name 'component' is not defined\n\n----------------------------------------------------------------------\nRan 3 tests in 0.006s\n\nFAILED (errors=3)\n"
+          "test": "test_lg-atomese.py",
+          "error": "  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_lg-atomese.py\", line 14\n    class TestLg-atomeseIntegration(unittest.TestCase):\n                ^\nSyntaxError: invalid syntax\n"
         },
         {
           "test": "test_aprfe_comprehensive.py",
           "error": ""
+        },
+        {
+          "test": "test_moses.py",
+          "error": "sE.\n======================================================================\nERROR: test_moses_dependencies (__main__.TestMosesIntegration.test_moses_dependencies)\nTest moses dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_moses.py\", line 57, in test_moses_dependencies\n    result = subprocess.run(['pkg-config', '--exists', dep],\n            ^^^^^^^^^^\nNameError: name 'subprocess' is not defined. Did you forget to import 'subprocess'\n\n----------------------------------------------------------------------\nRan 3 tests in 0.004s\n\nFAILED (errors=1, skipped=1)\n"
+        },
+        {
+          "test": "test_opencog.py",
+          "error": "EEE\n======================================================================\nERROR: test_opencog_basic_functionality (__main__.TestOpencogIntegration.test_opencog_basic_functionality)\nTest basic opencog functionality\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 37, in test_opencog_basic_functionality\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 47, in test_opencog_basic_functionality\n    self.fail(f\"Basic functionality test failed for {component}: {e}\")\n                                                     ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_dependencies (__main__.TestOpencogIntegration.test_opencog_dependencies)\nTest opencog dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 54, in test_opencog_dependencies\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 70, in test_opencog_dependencies\n    self.fail(f\"Dependency integration test failed for {component}: {e}\")\n                                                        ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_import (__main__.TestOpencogIntegration.test_opencog_import)\nTest that opencog can be imported\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 26, in test_opencog_import\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/opencog-unified/opencog-unified/tests/integration/test_opencog.py\", line 29, in test_opencog_import\n    self.fail(f\"Failed to import {component}: {e}\")\n                                  ^^^^^^^^^\nNameError: name 'component' is not defined\n\n----------------------------------------------------------------------\nRan 3 tests in 0.006s\n\nFAILED (errors=3)\n"
         },
         {
           "test": "test_atomspace-rocks.py",

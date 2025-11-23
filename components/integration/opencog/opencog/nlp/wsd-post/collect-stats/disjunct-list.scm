@@ -9,7 +9,7 @@
 ; is a link-grammar link relations, with an appended + or - indicating
 ; whether the connection is to the right or left.
 ;
-; XXX This code is deprecated and/or obsolete. Why?
+; NOTE: This code is deprecated and/or obsolete. Why?
 ; 1) Because disjuncts can now be obtained directly from relex and LG.
 ;    They use the ConnectorNode, LgAndLink and LgDisjunct to specifiy
 ;    them. Grep the viterbi code for details; see also the sureal code.

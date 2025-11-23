@@ -1271,7 +1271,16 @@
 	(define verb_instance (cog-name verb_inst))
 	(define obj_concept (cog-name obj_lemma))
 	(define obj_instance (cog-name obj_inst))
-	(throw 'not-implemented)
+	; Implementation: Which-subject question handler
+	; Creates query pattern for subject identification in SVO structure
+	(EvaluationLink
+		(PredicateNode "query-subject")
+		(ListLink
+			(VariableNode "$qVar")
+			(PredicateNode verb)
+			(ConceptNode obj_concept)
+		)
+	)
 )
 
 (define-public (whichsubjSVIOQ-rule
@@ -1284,7 +1293,17 @@
 	(define obj_instance (cog-name obj_inst))
 	(define iobj_concept (cog-name iobj_lemma))
 	(define iobj_instance (cog-name iobj_inst))
-	(throw 'not-implemented)
+	; Implementation: Which-subject question with indirect object
+	; Creates query pattern for subject identification in SVIO structure
+	(EvaluationLink
+		(PredicateNode "query-subject-svio")
+		(ListLink
+			(VariableNode "$qVar")
+			(PredicateNode verb)
+			(ConceptNode obj_concept)
+			(ConceptNode iobj_concept)
+		)
+	)
 )
 
 (define-public (whichobjSVIOQ-rule
@@ -1297,7 +1316,17 @@
 	(define obj_instance (cog-name obj_inst))
 	(define iobj_concept (cog-name iobj_lemma))
 	(define iobj_instance (cog-name iobj_inst))
-	(throw 'not-implemented)
+	; Implementation: Which-object question with indirect object
+	; Creates query pattern for object identification in SVIO structure
+	(EvaluationLink
+		(PredicateNode "query-object-svio")
+		(ListLink
+			(ConceptNode subj_concept)
+			(PredicateNode verb)
+			(VariableNode "$qVar")
+			(ConceptNode iobj_concept)
+		)
+	)
 )
 
 (define-public (whichpobjQ-rule
@@ -1308,7 +1337,16 @@
 	(define prep_instance (cog-name prep_inst))
 	(define pobj_concept (cog-name pobj_lemma))
 	(define pobj_instance (cog-name pobj_inst))
-	(throw 'not-implemented)
+	; Implementation: Which prepositional object question
+	; Creates query pattern for prepositional object identification
+	(EvaluationLink
+		(PredicateNode "query-prep-object")
+		(ListLink
+			(ConceptNode subj_concept)
+			(PredicateNode prep)
+			(VariableNode "$qVar")
+		)
+	)
 )
 
 (define-public (whichsubjpobjQ-rule
@@ -1319,7 +1357,16 @@
 	(define prep_instance (cog-name prep_inst))
 	(define pobj_concept (cog-name pobj_lemma))
 	(define pobj_instance (cog-name pobj_inst))
-	(throw 'not-implemented)
+	; Implementation: Which subject with prepositional object question
+	; Creates query pattern for subject identification with prepositional phrase
+	(EvaluationLink
+		(PredicateNode "query-subject-prep")
+		(ListLink
+			(VariableNode "$qVar")
+			(PredicateNode prep)
+			(ConceptNode pobj_concept)
+		)
+	)
 )
 
 (define-public (whichsubjSVQ-rule
@@ -1328,7 +1375,15 @@
 	(define subj_instance (cog-name subj_inst))
 	(define verb (cog-name verb_lemma))
 	(define verb_instance (cog-name verb_inst))
-	(throw 'not-implemented)
+	; Implementation: Which-subject question with subject-verb structure
+	; Creates query pattern for subject identification in SV structure
+	(EvaluationLink
+		(PredicateNode "query-subject-sv")
+		(ListLink
+			(VariableNode "$qVar")
+			(PredicateNode verb)
+		)
+	)
 )
 
 ;
