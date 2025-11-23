@@ -161,12 +161,17 @@ void read_eval_output_results(evalTableParameters& pa)
     // Read data ITable (using ignore_variables)
     Table table;
     if (pa.target_feature_str.empty()) {
-        OC_ASSERT(pa.timestamp_feature_str.empty(),
-                  "Timestamp feature not implemented. "
-                  "You may specify a target feature, option -u, "
-                  "as loadTable does support timestamp");
-        table.itable = loadITable_optimized(pa.input_table_file,
-                                            ignore_variables);
+        // If timestamp is requested, use loadTable which supports timestamps
+        // Otherwise use optimized loader for better performance
+        if (!pa.timestamp_feature_str.empty()) {
+            // loadTable supports timestamps even without target feature
+            // Pass empty string for target_feature to use ITable mode
+            table = loadTable(pa.input_table_file, std::string(),
+                              pa.timestamp_feature_str, ignore_variables);
+        } else {
+            table.itable = loadITable_optimized(pa.input_table_file,
+                                                ignore_variables);
+        }
     }
     else {
         table = loadTable(pa.input_table_file, pa.target_feature_str,

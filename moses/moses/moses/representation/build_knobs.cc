@@ -23,6 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 #include <future>
+#include <functional>
 
 #include <boost/range/irange.hpp>
 
@@ -722,7 +723,7 @@ void build_knobs::build_logical(pre_it subtree, pre_it it)
 /// (???)
 void build_knobs::contin_canonize(pre_it it)
 {
-    using namespace boost::placeholders;
+    using namespace std::placeholders;
 
     if (is_contin(*it) && get_contin(*it) == 0) {
         *it = id::plus;
@@ -741,7 +742,7 @@ void build_knobs::contin_canonize(pre_it it)
         _exemplar.move_after(it, pre_it(it.last_child()));
         // Handle any divs.
         for (sib_it div = _exemplar.partition(it.begin(), it.end(),
-                                              bind(std::not_equal_to<vertex>(), _1,
+                                              std::bind(std::not_equal_to<vertex>(), _1,
                                                    id::div));
              div != it.end();)
             canonize_div(_exemplar.move_after(it, pre_it(div++)));
