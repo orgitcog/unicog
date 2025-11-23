@@ -192,7 +192,7 @@
 	(define DICT (LgDict "any"))
 	(define any-parse (ParseNode "ANY"))
 
-	; XXX Hack to fetch sentence count from storage. XXX we should not
+	; NOTE Hack to fetch sentence count from storage. NOTE we should not
 	; do it this way, and use a cleaner design but I'm in a hurry so....
 	; XXX Need to fetch any-parse, too.
 	; (define any-sent (SentenceNode "ANY"))

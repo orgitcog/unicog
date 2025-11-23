@@ -1,4 +1,4 @@
-; XXX Temp quick hacks for the upcoming demos
+; NOTE Temp quick hacks for the upcoming demos
 ; The design is horrible to call the generator like this
 
 ; Example usage of the generator directly from the command line

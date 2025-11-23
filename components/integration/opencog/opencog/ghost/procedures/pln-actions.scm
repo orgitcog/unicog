@@ -59,14 +59,14 @@
     (define semantics (select-highest-tv-semantics semantics-list))
 
     (define logic
-        ; TODO:  Remove this check once other inference-trails are
+        ; DEPRECATED:  Remove this check once other inference-trails are
         ; handled by different response handlers.
         (if (equal? 'ImplicationLink (cog-type semantics))
             (implication-to-evaluation-s2l
                 (gar semantics) (gdr semantics))
             '()))
 
-    ; TODO: Remove the check  once other inference-trails are handled
+    ; DEPRECATED: Remove the check  once other inference-trails are handled
     ; diffferently.
     (define sureal-result (if (nil? logic) '() (sureal logic)))
 

@@ -853,7 +853,7 @@
         ; PsiImplicator, so psi-action-executed? will return
         ; false for the reused rule even if its action has been
         ; executed already, which is not the behavior we want here
-        ; TODO: Remove the geometric series as it is no longer needed?
+        ; DEPRECATED: Remove the geometric series as it is no longer needed?
         (if (> (length rule-hierarchy) 0)
           (let ((var (Variable (gen-var "GHOST-executed-rule" #f))))
             (set! vars (append vars (list

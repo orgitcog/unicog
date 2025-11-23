@@ -358,7 +358,7 @@
   update:
   - #t or #f to signal the update of etv in the abstracted r2l outputs returned
 "
-;XXX FIXME using the hacky word-get-r2l-node, bad idea!
+;NOTE using the hacky word-get-r2l-node, bad idea!
 	; get all the nodes linked by this link
 	(define old-oset (cog-outgoing-set ilink))
 	(define (replace-old old-atom)

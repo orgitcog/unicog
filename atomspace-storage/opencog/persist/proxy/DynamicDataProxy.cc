@@ -74,7 +74,7 @@ void DynamicDataProxy::loadValue(const Handle& atom, const Handle& key)
 	}
 
 	// Ah! Its a procedure! Make it executable!
-// XXX TODO ... create this in some temp atomspace...
+// NOTE TODO ... create this in some temp atomspace...
 	Handle exo = _atom_space->add_link(EXECUTION_OUTPUT_LINK,
 		HandleCast(rawvp),
 		createLink(LIST_LINK, atom));

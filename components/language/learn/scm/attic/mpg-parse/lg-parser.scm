@@ -129,9 +129,9 @@
 			(cog-extract-recursive! phrali)
 		)
 		(catch #t pthunk (lambda (key . args) (set! timeo #t)))
-(count-one-atom mst-start)   ;; XXX tmp hack
-(count-inc-atom mst-elaps (- (current-time) start)) ; XXX temp hack
-(if timeo (count-one-atom mst-timeo)) ; XXX temp hack
+(count-one-atom mst-start)   ;; NOTE tmp hack
+(count-inc-atom mst-elaps (- (current-time) start)) ; NOTE temp hack
+(if timeo (count-one-atom mst-timeo)) ; NOTE temp hack
 
 		(monitor-parse-rate #f)
 	)

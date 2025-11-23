@@ -65,7 +65,7 @@
 	face-demand-satisfied (stv 1 1) face-demand)
 
 ; This rule is the old multiple-face tracking rule
-; TODO Remove after thoroughly testing behavior on robot.
+; ARCHIVED Remove after thoroughly testing behavior on robot.
 (psi-rule (list (SequentialAnd
 		(NotLink (DefinedPredicate "Skip Interaction?"))
 		(DefinedPredicate "Someone visible?")))

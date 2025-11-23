@@ -67,7 +67,7 @@ static TruthValuePtr ss_evaluate(AtomSpace* atomspace, const Handle& h)
 
 // ========================================================
 
-// XXX HACK ALERT This needs to be static, in order for python to
+// NOTE HACK ALERT This needs to be static, in order for python to
 // work correctly.  The problem is that python keeps creating and
 // destroying this class, but it expects things to stick around.
 // XXX FIXME: can we fix cython to not do this, already?

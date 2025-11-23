@@ -16,7 +16,7 @@
 
 (start-cogserver "../../lib/opencog-chatbot.conf")
 
-; XXX remove the below when we get a chance.
+; ARCHIVED remove the below when we get a chance.
 ; Must load the rulebase before running eva; see bug
 ; https://github.com/opencog/opencog/issues/2021 for details
 ; XXX fixme -- we should not need to load either relex2logic or
@@ -26,7 +26,7 @@
 ; (load-r2l-rulebase)
 ;
 
-; XXX temp hack to run in module context, for debugging
+; NOTE temp hack to run in module context, for debugging
 ; (add-to-load-path ".")
 ; (add-to-load-path "..")
 ; (load "chatbot-eva.scm")

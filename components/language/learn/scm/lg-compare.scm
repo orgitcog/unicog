@@ -362,7 +362,7 @@
 			(define right-wall (WordNode "###RIGHT-WALL###"))
 
 			; Get the list of words in the standard dict.
-			; XXX Temp hack. Currently, the test dicts are missing
+			; NOTE Temp hack. Currently, the test dicts are missing
 			; RIGHT-WALL and so we filter it out manually. This
 			; should be made more elegant. Argh. And the gold dict
 			; is missing them too ...
