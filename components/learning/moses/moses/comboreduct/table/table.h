@@ -644,11 +644,11 @@ public:
         auto it = filter.cbegin();
         for (unsigned i = 0; i < seq.size(); ++i) {
             if (it != filter.cend() && (typename F::value_type)i == *it) {
-                // XXX TODO WARNING ERROR: builtin hardcoded shit!!!
-                res.push_back(seq.get_at<builtin>(i));
+                // Use vertex to handle any type generically
+                res.push_back(seq.get_at<vertex>(i));
                 ++it;
             } else {
-                // XXX TODO WARNING ERROR: builtin hardcoded shit!!!
+                // Push null_vertex for filtered-out positions
                 res.push_back(id::null_vertex);
             }
         }
