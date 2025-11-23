@@ -3,8 +3,8 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-11-23 08:29:48 UTC  
-**Total Items**: 2263  
+**Generated**: 2025-11-23 09:03:48 UTC  
+**Total Items**: 2258  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
 ---
@@ -36,7 +36,7 @@ A section for emergent TODOs.
 ## Outstanding Items
 
 ### AI System
-*Total items: 30*
+*Total items: 27*
 
 - [ ] **ggml-tensor-kernel/demo_real_functionality.cpp:10** (LOW, Feature Completion)
   - `#include "include/atomspace_stub.h"`
@@ -86,9 +86,17 @@ A section for emergent TODOs.
   - `return stub_logger;`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/include/atomspace_stub.h#L90)
 
-- [ ] **ggml-tensor-kernel/include/atomspace_stub.h:569** (LOW, Feature Completion)
+- [ ] **ggml-tensor-kernel/include/atomspace_stub.h:619** (LOW, Error Handling)
+  - `logger().debug("SchemeEval: Expression not handled in stub mode, returning UNDEFINED");`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/include/atomspace_stub.h#L619)
+
+- [ ] **ggml-tensor-kernel/include/atomspace_stub.h:646** (LOW, Error Handling)
+  - `logger().debug("SchemeEval: String expression not fully handled in stub mode");`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/include/atomspace_stub.h#L646)
+
+- [ ] **ggml-tensor-kernel/include/atomspace_stub.h:653** (LOW, Feature Completion)
   - `#endif // _ATOMSPACE_STUB_H`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/include/atomspace_stub.h#L569)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/include/atomspace_stub.h#L653)
 
 - [ ] **ggml-tensor-kernel/include/ggml-cpu.h:2** (LOW, Feature Completion)
   - `* ggml-cpu.h - Minimal GGML CPU stub`
@@ -125,26 +133,6 @@ A section for emergent TODOs.
 - [ ] **ggml-tensor-kernel/src/ggml_stub.c:2** (LOW, Feature Completion)
   - `* ggml_stub.c - Minimal GGML stub implementation for compilation`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/src/ggml_stub.c#L2)
-
-- [ ] **ggml-tensor-kernel/src/ggml_stub.c:136** (LOW, Feature Completion)
-  - `return ggml_dup_tensor(ctx, a); // Stub: just return copy of a`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/src/ggml_stub.c#L136)
-
-- [ ] **ggml-tensor-kernel/src/ggml_stub.c:140** (LOW, Feature Completion)
-  - `return ggml_dup_tensor(ctx, a); // Stub: just return copy of a`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/src/ggml_stub.c#L140)
-
-- [ ] **ggml-tensor-kernel/src/ggml_stub.c:144** (LOW, Feature Completion)
-  - `return ggml_dup_tensor(ctx, a); // Stub: just return copy of a`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/src/ggml_stub.c#L144)
-
-- [ ] **ggml-tensor-kernel/src/ggml_stub.c:148** (LOW, Feature Completion)
-  - `return ggml_dup_tensor(ctx, a); // Stub: just return copy of a`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/src/ggml_stub.c#L148)
-
-- [ ] **ggml-tensor-kernel/src/ggml_stub.c:152** (LOW, Feature Completion)
-  - `return ggml_dup_tensor(ctx, a); // Stub: just return copy of a`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/src/ggml_stub.c#L152)
 
 - [ ] **ggml-tensor-kernel/test_real_functionality.cpp:9** (LOW, Testing)
   - `#include "include/atomspace_stub.h"`
@@ -1757,7 +1745,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/getopt_long.c#L518)
 
 ### MOSES Representation/Scoring
-*Total items: 269*
+*Total items: 267*
 
 - [ ] **components/learning/moses/moses/comboreduct/table/table.h:1301** (HIGH, Performance)
   - `// XXX TODO remove this print, for better performance.`
@@ -1791,9 +1779,9 @@ A section for emergent TODOs.
   - `* XXX/TODO: the performance of this thing can be strongly improved`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/moses/neighborhood_sampling.h#L477)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:316** (HIGH, Performance)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:317** (HIGH, Performance)
   - `/// TODO: measure and compare the resulting performance.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L316)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L317)
 
 - [ ] **moses/moses/moses/scoring/bscores.h:592** (HIGH, Thread Safety)
   - `mutable KLDS<contin_t> _klds; /// @todo dangerous: not thread safe!!!`
@@ -1899,9 +1887,9 @@ A section for emergent TODOs.
   - `// XXX TODO: contin_if should go away.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/interpreter/interpreter.cc#L336)
 
-- [ ] **moses/moses/comboreduct/main/eval-table.cc:279** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/comboreduct/main/eval-table.cc:284** (MEDIUM, Feature Completion)
   - `"TODO could be detected automatically.\n")`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/main/eval-table.cc#L279)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/main/eval-table.cc#L284)
 
 - [ ] **moses/moses/comboreduct/table/table.h:832** (MEDIUM, Feature Completion)
   - `* TODO: we really should use iterators here, not column numbers.`
@@ -1955,21 +1943,21 @@ A section for emergent TODOs.
   - `// TODO this should be a std::valarray not std::vector but I am too`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/moses/types.h#L210)
 
-- [ ] **moses/moses/moses/optimization/star-anneal.cc:42** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/moses/optimization/star-anneal.cc:44** (MEDIUM, Feature Completion)
   - `// XXX TODO the annealing temperature control code should be ported over`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/star-anneal.cc#L42)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/star-anneal.cc#L44)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:489** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:490** (MEDIUM, Feature Completion)
   - `// TODO: should bias the selection of these, so that`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L489)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L490)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:557** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:558** (MEDIUM, Feature Completion)
   - `// We should probably OC_ASSERT here ... TODO`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L557)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L558)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:1181** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:1182** (MEDIUM, Feature Completion)
   - `//TODO: should bias the selection of these (and possibly choose larger subtrees)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L1181)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L1182)
 
 - [ ] **moses/moses/moses/scoring/bscores.cc:930** (MEDIUM, Feature Completion)
   - `/// XXX this should probably be removed! TODO FIXME`
@@ -1983,9 +1971,9 @@ A section for emergent TODOs.
   - `* XXX This class should be reworked to derive from`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/scoring/precision_bscore.h#L102)
 
-- [ ] **moses/moses/moses/scoring/scoring_base.cc:125** (MEDIUM, Feature Completion)
+- [ ] **moses/moses/moses/scoring/scoring_base.cc:135** (MEDIUM, Feature Completion)
   - `* ensemble.  XXX this is probably wrong, we should probably do something`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/scoring/scoring_base.cc#L125)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/scoring/scoring_base.cc#L135)
 
 - [ ] **moses/moses/moses/scoring/scoring_base.h:124** (MEDIUM, Feature Completion)
   - `// XXX TODO should be a std::valarray not a vector.`
@@ -2447,10 +2435,6 @@ A section for emergent TODOs.
   - `// TODO -- replace this by cond`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/main/action-reductor.cc#L93)
 
-- [ ] **moses/moses/comboreduct/main/eval-table.cc:165** (LOW, Feature Completion)
-  - `"Timestamp feature not implemented. "`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/main/eval-table.cc#L165)
-
 - [ ] **moses/moses/comboreduct/reduct/contin_rules.cc:489** (LOW, Feature Completion)
   - `return; //@todo: maybe the other`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/contin_rules.cc#L489)
@@ -2459,25 +2443,25 @@ A section for emergent TODOs.
   - `// TODO:  sin(*(-1 x)) -> -sin(x)`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/contin_rules.cc#L963)
 
-- [ ] **moses/moses/comboreduct/reduct/flat_normal_form.cc:31** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/flat_normal_form.cc#L31)
+- [ ] **moses/moses/comboreduct/reduct/flat_normal_form.cc:33** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/flat_normal_form.cc#L33)
 
-- [ ] **moses/moses/comboreduct/reduct/flat_normal_form.cc:54** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/flat_normal_form.cc#L54)
+- [ ] **moses/moses/comboreduct/reduct/flat_normal_form.cc:56** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/flat_normal_form.cc#L56)
 
-- [ ] **moses/moses/comboreduct/reduct/logical_rules.cc:100** (LOW, Feature Completion)
+- [ ] **moses/moses/comboreduct/reduct/logical_rules.cc:102** (LOW, Feature Completion)
   - `// XXX TODO: I don't understand why this is not damaging contin_if  !??`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/logical_rules.cc#L100)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/logical_rules.cc#L102)
 
-- [ ] **moses/moses/comboreduct/reduct/logical_rules.cc:289** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/logical_rules.cc#L289)
+- [ ] **moses/moses/comboreduct/reduct/logical_rules.cc:291** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/logical_rules.cc#L291)
 
-- [ ] **moses/moses/comboreduct/reduct/logical_rules.cc:341** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/logical_rules.cc#L341)
+- [ ] **moses/moses/comboreduct/reduct/logical_rules.cc:343** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/reduct/logical_rules.cc#L343)
 
 - [ ] **moses/moses/comboreduct/reduct/mixed_rules.cc:959** (LOW, Feature Completion)
   - `// maybe TODO : 0<sum x_i -> true if exist i 0<x_i->true and forall other i 0<=x_i`
@@ -2539,13 +2523,9 @@ A section for emergent TODOs.
   - `// TODO: reimplement loadITable with the same model of loadTable and`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table_io.h#L137)
 
-- [ ] **moses/moses/comboreduct/type_checker/type_tree.cc:55** (LOW, Feature Completion)
-  - `logger().warn() << "default value for " << tn << " not implemented, returning empty vertex";`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/type_checker/type_tree.cc#L55)
-
-- [ ] **moses/moses/comboreduct/type_checker/type_tree.cc:622** (LOW, Feature Completion)
+- [ ] **moses/moses/comboreduct/type_checker/type_tree.cc:627** (LOW, Feature Completion)
   - `// XXX TODO the code below was modified to allow arg lists of`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/type_checker/type_tree.cc#L622)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/type_checker/type_tree.cc#L627)
 
 - [ ] **moses/moses/comboreduct/type_checker/type_tree.h:235** (LOW, Feature Completion)
   - `// TODO : lambda`
@@ -2600,11 +2580,11 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L285)
 
 - [ ] **moses/moses/moses/eda/local_structure.h:293** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
+  - `using namespace std::placeholders;`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L293)
 
 - [ ] **moses/moses/moses/eda/local_structure.h:310** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
+  - `using namespace std::placeholders;`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L310)
 
 - [ ] **moses/moses/moses/eda/optimize.h:120** (LOW, Feature Completion)
@@ -2619,21 +2599,21 @@ A section for emergent TODOs.
   - `// TODO: I think it might be a little more efficent to use the`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/replacement.h#L62)
 
-- [ ] **moses/moses/moses/main/problem-params.cc:166** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/main/problem-params.cc:169** (LOW, Feature Completion)
   - `// XXX TODO: make this print correctly, instead of using brackets.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L166)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L169)
 
-- [ ] **moses/moses/moses/main/problem-params.cc:633** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/main/problem-params.cc:636** (LOW, Feature Completion)
   - `// The remaining options (TODO organize this)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L633)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L636)
 
-- [ ] **moses/moses/moses/main/problem-params.cc:901** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/main/problem-params.cc:904** (LOW, Feature Completion)
   - `"default, only a single deme is created. (XXX Does this "`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L901)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L904)
 
-- [ ] **moses/moses/moses/main/problem-params.cc:1419** (LOW, Feature Completion)
-  - `ss << "Granularity " << time_bscore_granularity_str << " not implemented";`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L1419)
+- [ ] **moses/moses/moses/main/problem-params.cc:1428** (LOW, Feature Completion)
+  - `ss << "Granularity " << time_bscore_granularity_str << " not implemented. "`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.cc#L1428)
 
 - [ ] **moses/moses/moses/metapopulation/ensemble.h:55** (LOW, Feature Completion)
   - `* XXX FIXME: right now, the ensemble is attached to the metapop, its`
@@ -2707,25 +2687,25 @@ A section for emergent TODOs.
   - `// TODO: Improve generation tracking by getting actual number`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/moses/partial.cc#L96)
 
-- [ ] **moses/moses/moses/optimization/hill-climbing.cc:54** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/hill-climbing.cc#L54)
+- [ ] **moses/moses/moses/optimization/hill-climbing.cc:55** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/hill-climbing.cc#L55)
 
 - [ ] **moses/moses/moses/optimization/hill-climbing.h:110** (LOW, Feature Completion)
   - `// XXX TODO make sure this value is appropriately updated.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/hill-climbing.h#L110)
 
-- [ ] **moses/moses/moses/optimization/particle-swarm.cc:52** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.cc#L52)
+- [ ] **moses/moses/moses/optimization/particle-swarm.cc:53** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.cc#L53)
 
-- [ ] **moses/moses/moses/optimization/particle-swarm.cc:197** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/optimization/particle-swarm.cc:198** (LOW, Feature Completion)
   - `// TODO: work in a better way to identify convergence.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.cc#L197)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.cc#L198)
 
-- [ ] **moses/moses/moses/optimization/particle-swarm.cc:236** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/optimization/particle-swarm.cc:237** (LOW, Feature Completion)
   - `// TODO: Explanation`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.cc#L236)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.cc#L237)
 
 - [ ] **moses/moses/moses/optimization/particle-swarm.h:134** (LOW, Feature Completion)
   - `double bit_min_value, bit_max_value, // [0,1] <- XXX these two aren't used yet.`
@@ -2747,41 +2727,41 @@ A section for emergent TODOs.
   - `* XXX Perform search of the local neighborhood of an instance.  The`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.h#L320)
 
-- [ ] **moses/moses/moses/optimization/star-anneal.cc:61** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/star-anneal.cc#L61)
+- [ ] **moses/moses/moses/optimization/star-anneal.cc:63** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/star-anneal.cc#L63)
 
 - [ ] **moses/moses/moses/optimization/star-anneal.h:125** (LOW, Feature Completion)
   - `* distance.  @todo: it may be better to have the distance`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/star-anneal.h#L125)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:211** (LOW, Documentation)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:212** (LOW, Documentation)
   - `* XXX TODO: see comments on disc_probe() below.  This method is a real`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L211)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L212)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:581** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:582** (LOW, Feature Completion)
   - `// TODO: Benchmark and clarify optimal breakeven point across different problem sizes.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L581)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L582)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:690** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:691** (LOW, Feature Completion)
   - `// XXX TODO: Is this really optimal?  The below adds an entire copy`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L690)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L691)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:725** (LOW, Feature Completion)
-  - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L725)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:726** (LOW, Feature Completion)
+  - `using namespace std::placeholders;`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L726)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:914** (LOW, Error Handling)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:915** (LOW, Error Handling)
   - `logger().warn("TODO: handle case where it = id::times in build_knobs::rec_canonize");`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L914)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L915)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:1011** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:1012** (LOW, Feature Completion)
   - `// TODO: implement support for enumerated types in the input.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L1011)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L1012)
 
-- [ ] **moses/moses/moses/representation/build_knobs.cc:1283** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/representation/build_knobs.cc:1284** (LOW, Feature Completion)
   - `// XXX TODO this below is clearly unfinished, broken, etc.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L1283)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L1284)
 
 - [ ] **moses/moses/moses/representation/knobs.h:208** (LOW, Feature Completion)
   - `idx = 0;  // interpreted as "absent", as used below. XXX`
@@ -9120,10 +9100,10 @@ A section for emergent TODOs.
 ## Summary Statistics
 
 ### By Subsystem
-- **AI System**: 30 items
+- **AI System**: 27 items
 - **Build System**: 379 items
 - **Core Utilities**: 19 items
-- **MOSES Representation/Scoring**: 269 items
+- **MOSES Representation/Scoring**: 267 items
 - **Memory System**: 106 items
 - **Other**: 1274 items
 - **Persistence Subsystem**: 143 items
@@ -9133,8 +9113,8 @@ A section for emergent TODOs.
 ### By Category
 - **Distributed Systems**: 3 items
 - **Documentation**: 40 items
-- **Error Handling**: 71 items
-- **Feature Completion**: 1834 items
+- **Error Handling**: 73 items
+- **Feature Completion**: 1827 items
 - **Pattern Matching**: 42 items
 - **Performance**: 30 items
 - **Testing**: 224 items
@@ -9144,7 +9124,7 @@ A section for emergent TODOs.
 - **CRITICAL**: 7 items
 - **HIGH**: 31 items
 - **MEDIUM**: 160 items
-- **LOW**: 2065 items
+- **LOW**: 2060 items
 
 ---
 
@@ -9186,4 +9166,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-23 08:29:48 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-23 09:03:48 UTC*
