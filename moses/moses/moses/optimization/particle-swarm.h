@@ -151,7 +151,23 @@ struct ps_parameters
 // Particle Swarm //
 ////////////////////
 
-// TODO: pso description
+/**
+ * Particle Swarm Optimization (PSO) optimizer.
+ * 
+ * PSO is a population-based stochastic optimization technique inspired by
+ * the social behavior of birds flocking or fish schooling. Each particle
+ * represents a potential solution moving through the search space, influenced
+ * by both its own best position and the global best position found by the swarm.
+ * 
+ * This implementation supports bit, discrete, and continuous field types with
+ * different update rules for each:
+ * - Bit fields: Uses sigmoid transformation for binary decisions
+ * - Discrete fields: Uses rounding with constriction factor
+ * - Continuous fields: Classical PSO with inertia weight
+ * 
+ * The algorithm balances exploration and exploitation through individual
+ * and social learning parameters (c1 and c2).
+ */
 struct particle_swarm : optimizer_base
 {
     particle_swarm(const optim_parameters& op = optim_parameters(),
@@ -250,10 +266,16 @@ protected:
         check_bit_vel(vel);
     }
 
-    // XXX Explanation
+    /**
+     * Generate new bit value using velocity through sigmoid transformation.
+     * The velocity represents the probability of setting the bit to true.
+     * Uses the logistic sigmoid function to map velocity to [0,1] probability.
+     * Alternative faster approximations like f(x) = x/(1+|x|) or tanh(x) could
+     * be used if performance becomes critical.
+     */
     bool new_bit_value(const double& vel){
         return (randGen().randdouble() < // Sigmoid
-                (1 / (1 + std::exp(-vel)))); // XXX if slow try f(x) = x / (1 + abs(x)) or tanh(x)
+                (1 / (1 + std::exp(-vel)))); // Alternative: f(x) = x / (1 + abs(x)) or tanh(x) if performance-critical
     }
 
     void update_bit_particle(instance& temp, const instance& personal,
@@ -278,7 +300,12 @@ protected:
         return (disc_t) std::round(cvalue * (max_dvalue - 1)); // Return dvalue
     }
 
-    // XXX Explanation
+    /**
+     * Update discrete value using continuous-space velocity.
+     * Discrete PSO maps discrete values to continuous space [0,1], updates
+     * them using velocity, then rounds back to discrete values.
+     * This rounding approach is simple but effective for discrete optimization.
+     */
     disc_t new_disc_value(double& cvalue,
             const double& vel, const unsigned max_dvalue){
         cvalue += vel;
@@ -300,9 +327,14 @@ protected:
         check_cont_vel(vel);
     }
 
-    // XXX Explanation
+    /**
+     * Update continuous value by adding velocity.
+     * Applies confinement to keep values within bounds.
+     * Wind dispersion (random perturbation) could be added here for
+     * enhanced exploration, but is not currently implemented.
+     */
     contin_t new_cont_value(const contin_t& value, const double& vel){
-        // Wind dispersion enter here.
+        // Wind dispersion would be implemented here if needed
         contin_t res = value + vel;
         confinement_cont(res);
         return res;
@@ -317,16 +349,17 @@ protected:
 
 public:
     /**
-     * XXX Perform search of the local neighborhood of an instance.  The
-     * search is exhaustive if the local neighborhood is small; else
-     * the local neighborhood is randomly sampled.
+     * Perform particle swarm optimization to explore the solution space.
+     * Initializes a swarm of particles and iteratively updates their positions
+     * based on individual and global best solutions found.
      *
-     * @param deme      Where to store the candidates searched. The deme
+     * @param deme      Where to store the best candidates found. The deme
      *                  is assumed to be empty.  If it is not empty, it
      *                  will be overwritten.
-     * @prama init_inst Start the seach from this instance.
-     * @param iscorer   the Scoring function.
+     * @param init_inst Starting instance for initialization (if provided).
+     * @param iscorer   The scoring function to evaluate candidates.
      * @param max_evals The maximum number of evaluations to perform.
+     * @param max_time  Maximum wall-clock time for the optimization.
      */
     void operator()(deme_t& deme,
                     const instance& init_inst,
@@ -337,7 +370,8 @@ public:
     // Like above but assumes that init_inst is null (backward compatibility)
     // In fact, all of the current code uses this entry point, no one
     // bothers to supply an initial instance.
-    // XXX This could help PSO if we maintain the best particle.
+    // Note: Providing an initial instance could improve PSO convergence
+    // by starting the swarm near a known good solution.
     void operator()(deme_t& deme,
                     const iscorer_base& iscorer,
                     unsigned max_evals,

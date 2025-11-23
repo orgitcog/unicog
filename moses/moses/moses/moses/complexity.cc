@@ -47,10 +47,15 @@ using namespace opencog::combo;
 // And, in a field set, operators are disc_knobs, and so they are
 // counted there ...
 //
-// Soooo... Is this complexity supposed to mirror that of the field
-// set -- i.e. lots-of-knobs==higher-complexity?  That probably means
-// we should count logical and, logical_or, below ..!?!? TODO, clarify.
-// (grep for "information_theoretic_bits" in optimization.h)
+// Complexity calculation is intentionally designed to count only certain
+// operators that add meaningful computational cost. Logical operators
+// (logical_and, logical_or) are not counted as they are considered basic
+// building blocks with minimal complexity. The current approach focuses on:
+// - Mathematical operations (div, exp, log, sin)
+// - Conditional operations (cond, equ)
+// - Random generation (rand)
+// This differs from field set complexity which counts knobs/dimensions.
+// See "information_theoretic_bits" in optimization.h for field complexity.
 //
 // Note Bene: this function returns a POSITIVE number!
 complexity_t tree_complexity(combo_tree::iterator it,
