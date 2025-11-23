@@ -589,7 +589,6 @@ class EntelechyIntrospector:
     def _count_markers_in_directory(self, directory: Path) -> Dict[str, int]:
         """Count TODO/FIXME/STUB markers in a directory"""
         markers = {'TODO': 0, 'FIXME': 0, 'STUB': 0}
-        markers_detailed = {'TODO': [], 'FIXME': [], 'STUB': []}
         
         if not directory.exists() or not directory.is_dir():
             return markers

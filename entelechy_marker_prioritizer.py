@@ -9,6 +9,7 @@ Analyzes code markers (TODO, FIXME, STUB) and prioritizes them based on:
 """
 
 import json
+import os
 import re
 from pathlib import Path
 from collections import defaultdict
@@ -83,10 +84,9 @@ class MarkerPrioritizer:
             'STUB': re.compile(r'(//|#|;)\s*STUB[:\s]?(.+)', re.IGNORECASE),
             'BUG': re.compile(r'(//|#|;)\s*BUG[:\s](.+)', re.IGNORECASE),
             'HACK': re.compile(r'(//|#|;)\s*HACK[:\s](.+)', re.IGNORECASE),
-            'NOT_IMPLEMENTED': re.compile(r'(//|#|;)\s*NOT\s+IMPLEMENTED(.+)', re.IGNORECASE),
+            'NOT_IMPLEMENTED': re.compile(r'(//|#|;)\s*NOT\s+IMPLEMENTED[:\s](.+)', re.IGNORECASE),
         }
         
-        import os
         for root, dirs, files in os.walk(self.repo_path):
             # Filter directories
             dirs[:] = [d for d in dirs if d not in skip_dirs]
@@ -142,8 +142,8 @@ class MarkerPrioritizer:
             # Check if in tests
             if 'test' in str(file_path).lower():
                 return 'tests'
-            # Check if in scripts
-            if 'script' in str(file_path).lower() or file_path.suffix == '.py':
+            # Check if in scripts directory specifically
+            if 'script' in str(file_path).lower() and 'scripts' in parts:
                 return 'scripts'
             # Check if in docs
             if 'doc' in str(file_path).lower() or 'README' in str(file_path):
