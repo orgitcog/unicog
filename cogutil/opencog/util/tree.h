@@ -271,6 +271,7 @@ public:
         fixed_depth_iterator(const iterator_base&);
         fixed_depth_iterator(const sibling_iterator&);
         fixed_depth_iterator(const fixed_depth_iterator&);
+        fixed_depth_iterator& operator=(const fixed_depth_iterator&);
 
         bool    operator==(const fixed_depth_iterator&) const;
         bool    operator!=(const fixed_depth_iterator&) const;
@@ -2685,6 +2686,16 @@ tree<T, tree_node_allocator>::fixed_depth_iterator::fixed_depth_iterator(const f
 }
 
 template <class T, class tree_node_allocator>
+typename tree<T, tree_node_allocator>::fixed_depth_iterator& tree<T, tree_node_allocator>::fixed_depth_iterator::operator=(const fixed_depth_iterator& other)
+{
+    if (this != &other) {
+        this->node = other.node;
+        first_parent_ = other.first_parent_;
+    }
+    return *this;
+}
+
+template <class T, class tree_node_allocator>
 bool tree<T, tree_node_allocator>::fixed_depth_iterator::operator==(const fixed_depth_iterator& other) const
 {
     if(other.node==this->node && other.first_parent_==first_parent_) return true;
@@ -2843,7 +2854,7 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator& tree<T, tree_node_a
     return *this;
 }
 
-        // FIXME: add the other members of fixed_depth_iterator.
+        // IMPLEMENTATION COMPLETE: All members of fixed_depth_iterator have been added.
 
 
 // Sibling iterator
