@@ -3,8 +3,8 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-11-23 09:03:48 UTC  
-**Total Items**: 2258  
+**Generated**: 2025-11-23 11:25:40 UTC  
+**Total Items**: 2277  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
 ---
@@ -1666,7 +1666,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/test_todo_catalog.py#L118)
 
 ### Core Utilities
-*Total items: 19*
+*Total items: 22*
 
 - [ ] **cogutil/opencog/util/backtrace-symbols.c:15** (HIGH, Thread Safety)
   - `A hacky replacement for backtrace_symbols in glibc`
@@ -1708,6 +1708,14 @@ A section for emergent TODOs.
   - `*      it is a temporary dirty hack@n`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/Config.h#L108)
 
+- [ ] **cogutil/opencog/util/boost_ext/accumulators/statistics/geometric_mean.h:27** (LOW, Feature Completion)
+  - `#include <boost/mpl/placeholders.hpp>`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/boost_ext/accumulators/statistics/geometric_mean.h#L27)
+
+- [ ] **cogutil/opencog/util/boost_ext/accumulators/statistics/geometric_mean_mirror.h:27** (LOW, Feature Completion)
+  - `#include <boost/mpl/placeholders.hpp>`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/boost_ext/accumulators/statistics/geometric_mean_mirror.h#L27)
+
 - [ ] **cogutil/opencog/util/getopt_long.c:110** (LOW, Feature Completion)
   - `/* XXX: GNU ignores PC if *options == '-' */`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/getopt_long.c#L110)
@@ -1744,8 +1752,12 @@ A section for emergent TODOs.
   - `* XXX: GNU sets optopt to val regardless`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/opencog/util/getopt_long.c#L518)
 
+- [ ] **cogutil/tests/util/sigslot_test.cc:134** (LOW, Testing)
+  - `std::placeholders::_1, std::placeholders::_2);`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/tests/util/sigslot_test.cc#L134)
+
 ### MOSES Representation/Scoring
-*Total items: 267*
+*Total items: 262*
 
 - [ ] **components/learning/moses/moses/comboreduct/table/table.h:1301** (HIGH, Performance)
   - `// XXX TODO remove this print, for better performance.`
@@ -1914,10 +1926,6 @@ A section for emergent TODOs.
 - [ ] **moses/moses/moses/main/problem-params.h:46** (MEDIUM, Feature Completion)
   - `// XXX FIXME TODO The structure below should be split into multiple`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/main/problem-params.h#L46)
-
-- [ ] **moses/moses/moses/moses/complexity.cc:52** (MEDIUM, Feature Completion)
-  - `// we should count logical and, logical_or, below ..!?!? TODO, clarify.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/moses/complexity.cc#L52)
 
 - [ ] **moses/moses/moses/moses/moses_main.h:102** (MEDIUM, Feature Completion)
   - `// XXX TODO this should be fixed, someday...`
@@ -2415,10 +2423,6 @@ A section for emergent TODOs.
   - `action_boolean_if = action_if, //nasty hack but allowed - do not insert anything between this line a...`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/combo/action.h#L44)
 
-- [ ] **moses/moses/comboreduct/combo/simple_nn.h:371** (LOW, Feature Completion)
-  - `int selected = rand() % possible.size(); // @todo:replace this by RandGen`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/combo/simple_nn.h#L371)
-
 - [ ] **moses/moses/comboreduct/combo/vertex.h:87** (LOW, Feature Completion)
   - `rand,         // random contin_t in [0,1) FIXME TODO : update reduct rules`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/combo/vertex.h#L87)
@@ -2711,21 +2715,9 @@ A section for emergent TODOs.
   - `double bit_min_value, bit_max_value, // [0,1] <- XXX these two aren't used yet.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.h#L134)
 
-- [ ] **moses/moses/moses/optimization/particle-swarm.h:154** (LOW, Feature Completion)
-  - `// TODO: pso description`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.h#L154)
-
-- [ ] **moses/moses/moses/optimization/particle-swarm.h:256** (LOW, Feature Completion)
-  - `(1 / (1 + std::exp(-vel)))); // XXX if slow try f(x) = x / (1 + abs(x)) or tanh(x)`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.h#L256)
-
-- [ ] **moses/moses/moses/optimization/particle-swarm.h:315** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/optimization/particle-swarm.h:347** (LOW, Feature Completion)
   - `// TODO: Wind dispersion, but test without first`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.h#L315)
-
-- [ ] **moses/moses/moses/optimization/particle-swarm.h:320** (LOW, Feature Completion)
-  - `* XXX Perform search of the local neighborhood of an instance.  The`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.h#L320)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/optimization/particle-swarm.h#L347)
 
 - [ ] **moses/moses/moses/optimization/star-anneal.cc:63** (LOW, Feature Completion)
   - `using namespace std::placeholders;`
@@ -2816,7 +2808,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/tests/moses/moses-framework.h#L42)
 
 ### Memory System
-*Total items: 106*
+*Total items: 105*
 
 - [ ] **atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc:59** (CRITICAL, Feature Completion)
   - `/// XXX TODO: We could have a non-blocking version of this atom. We`
@@ -2862,13 +2854,9 @@ A section for emergent TODOs.
   - `* XXX FIXME no one should be using Handle's to work with atoms,`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/haskell/AtomSpace_CWrapper.h#L112)
 
-- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:1159** (MEDIUM, Feature Completion)
-  - `// XXX TODO The logic here should be updated to resemble that`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L1159)
-
-- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:1502** (MEDIUM, Feature Completion)
+- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:1501** (MEDIUM, Feature Completion)
   - `// its definition. XXX TODO. Hmm. Should we do this at runtime,`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L1502)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L1501)
 
 - [ ] **atomspace/opencog/query/SatisfyMixin.cc:304** (MEDIUM, Feature Completion)
   - `* This implements the SAT-solver-like optimization described in the TODO above.`
@@ -3130,25 +3118,25 @@ A section for emergent TODOs.
   - `// this simpler code is good enough. TODO: Optimize to filter by parent type.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/NextSearchMixin.cc#L267)
 
-- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2066** (LOW, Feature Completion)
+- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2065** (LOW, Feature Completion)
   - `// XXX TODO FIXME. The ptm needs to be decomposed into connected`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2066)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2065)
 
-- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2151** (LOW, Feature Completion)
+- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2150** (LOW, Feature Completion)
   - `OC_ASSERT(not term->hasGlobbyVar(), "Buggy or not implemented!");`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2151)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2150)
 
-- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2446** (LOW, Feature Completion)
+- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2445** (LOW, Feature Completion)
   - `// XXX TODO make sure that all variables in the clause have`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2446)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2445)
 
-- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2745** (LOW, Feature Completion)
+- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:2744** (LOW, Feature Completion)
   - `* XXX TODO -- if the algo is working correctly, then all`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2745)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L2744)
 
-- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:3133** (LOW, Feature Completion)
+- [ ] **atomspace/opencog/query/PatternMatchEngine.cc:3132** (LOW, Feature Completion)
   - `* TODO: The implementation here is minimal - very simple, very basic.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L3133)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/query/PatternMatchEngine.cc#L3132)
 
 - [ ] **atomspace/opencog/query/Recognizer.cc:126** (LOW, Feature Completion)
   - `// TODO: Change to something better if possible...`
@@ -3243,7 +3231,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/tests/scm/typedefs.scm#L5)
 
 ### Other
-*Total items: 1274*
+*Total items: 1299*
 
 - [ ] **entelechy_introspection.py:889** (CRITICAL, Feature Completion)
   - `3. **Resolve Critical TODOs** - Address high-priority placeholders`
@@ -3636,6 +3624,34 @@ A section for emergent TODOs.
 - [ ] **ure/opencog/ure/backwardchainer/TraceRecorder.h:94** (MEDIUM, Feature Completion)
   - `// TODO: the TV on the evaluation link should be more carefully`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ure/opencog/ure/backwardchainer/TraceRecorder.h#L94)
+
+- [ ] **analyze_actionable_todos.py:3** (LOW, Feature Completion)
+  - `Analyze and categorize the 98 actionable TODO items`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/analyze_actionable_todos.py#L3)
+
+- [ ] **analyze_actionable_todos.py:48** (LOW, Feature Completion)
+  - `if 'hack' in content_lower or 'temporary' in content_lower:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/analyze_actionable_todos.py#L48)
+
+- [ ] **analyze_actionable_todos.py:90** (LOW, Feature Completion)
+  - `"""Categorize TODO by type of work"""`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/analyze_actionable_todos.py#L90)
+
+- [ ] **analyze_actionable_todos.py:93** (LOW, Feature Completion)
+  - `if 'hack' in content_lower or 'temporary' in content_lower:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/analyze_actionable_todos.py#L93)
+
+- [ ] **analyze_actionable_todos.py:115** (LOW, Feature Completion)
+  - `print(f"Analyzing {len(items)} actionable TODO items...\n")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/analyze_actionable_todos.py#L115)
+
+- [ ] **analyze_actionable_todos.py:183** (LOW, Feature Completion)
+  - `with open('actionable_todos_analysis.json', 'w') as f:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/analyze_actionable_todos.py#L183)
+
+- [ ] **analyze_actionable_todos.py:186** (LOW, Feature Completion)
+  - `print("\n\nDetailed analysis saved to actionable_todos_analysis.json")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/analyze_actionable_todos.py#L186)
 
 - [ ] **analyze_fixme_instances.py:3** (LOW, Feature Completion)
   - `FIXME Instance Analysis and Categorization Tool`
@@ -5112,10 +5128,6 @@ A section for emergent TODOs.
 - [ ] **components/integration/opencog/opencog/nlp/wsd-post/collect-stats/disjunct-list.scm:48** (LOW, Feature Completion)
   - `; word order. XXX FIXME -- instead of doing the below, it would be`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/nlp/wsd-post/collect-stats/disjunct-list.scm#L48)
-
-- [ ] **components/integration/opencog/opencog/nlp/wsd-post/collect-stats/stats-collection.scm:359** (LOW, Documentation)
-  - `; XXX The method used here, of tagging documents with "finished"`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/nlp/wsd-post/collect-stats/stats-collection.scm#L359)
 
 - [ ] **components/integration/opencog/opencog/nlp/wsd/SenseSimilaritySQL.cc:11** (LOW, Feature Completion)
   - `* the word-sense similarities in an opencog persistent store. XXX`
@@ -6625,6 +6637,38 @@ A section for emergent TODOs.
   - `'STUB': 0.6,`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/fragmentation_detector.py#L153)
 
+- [ ] **generate_analysis_report.py:3** (LOW, Feature Completion)
+  - `Generate a comprehensive analysis report for actionable TODOs`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L3)
+
+- [ ] **generate_analysis_report.py:11** (LOW, Feature Completion)
+  - `with open('actionable_todos_analysis.json', 'r') as f:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L11)
+
+- [ ] **generate_analysis_report.py:19** (LOW, Feature Completion)
+  - `# Analysis of Actionable TODO Items in opencog-unified`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L19)
+
+- [ ] **generate_analysis_report.py:26** (LOW, Feature Completion)
+  - `This report provides a detailed analysis of the **98 actionable TODO and FIXME items** identified in...`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L26)
+
+- [ ] **generate_analysis_report.py:36** (LOW, Feature Completion)
+  - `![Overall Analysis](actionable_todos_analysis.png)`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L36)
+
+- [ ] **generate_analysis_report.py:122** (LOW, Feature Completion)
+  - `## 5. Full Actionable TODO List`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L122)
+
+- [ ] **generate_analysis_report.py:139** (LOW, Feature Completion)
+  - `with open('actionable_todos_report.md', 'w') as f:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L139)
+
+- [ ] **generate_analysis_report.py:142** (LOW, Feature Completion)
+  - `print("Analysis report generated successfully: actionable_todos_report.md")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_analysis_report.py#L142)
+
 - [ ] **generate_ascii_dashboard.py:140** (LOW, Feature Completion)
   - `todo = data['metrics']['todo_count']`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_ascii_dashboard.py#L140)
@@ -6652,6 +6696,14 @@ A section for emergent TODOs.
 - [ ] **generate_ascii_dashboard.py:147** (LOW, Feature Completion)
   - `report.append(f"│  🚧 STUB:   {stub:>5}  {create_bar_chart(stub/total_markers if total_markers > 0 el...`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_ascii_dashboard.py#L147)
+
+- [ ] **generate_component_breakdown.py:11** (LOW, Feature Completion)
+  - `with open('actionable_todos_analysis.json', 'r') as f:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_component_breakdown.py#L11)
+
+- [ ] **generate_component_breakdown.py:83** (LOW, Feature Completion)
+  - `with open('actionable_todos_analysis.json', 'r') as f:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_component_breakdown.py#L83)
 
 - [ ] **generate_entelechy_dashboard.py:179** (LOW, Feature Completion)
   - `categories = ['TODO', 'FIXME', 'STUB']`
@@ -6852,6 +6904,18 @@ A section for emergent TODOs.
 - [ ] **generate_progress_report.py:114** (LOW, Feature Completion)
   - `This initial phase of work has successfully addressed a number of low-hanging fruit, improving the o...`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_progress_report.py#L114)
+
+- [ ] **generate_quickwin_report.py:33** (LOW, Documentation)
+  - `This report details the implementation of 5 out of 8 identified "quick win" TODO items. These items ...`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_quickwin_report.py#L33)
+
+- [ ] **generate_quickwin_report.py:44** (LOW, Feature Completion)
+  - `resolution = "Converted TODO to a NOTE with clearer context for future development."`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_quickwin_report.py#L44)
+
+- [ ] **generate_quickwin_report.py:73** (LOW, Documentation)
+  - `This effort has improved the clarity of the codebase by addressing several minor placeholder comment...`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/generate_quickwin_report.py#L73)
 
 - [ ] **implement_fixes.py:3** (LOW, Feature Completion)
   - `Implement fixes for placeholder code`
@@ -8341,8 +8405,32 @@ A section for emergent TODOs.
   - `print("🎉 SUCCESS: All TODO/FIXME items have been properly implemented!")`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/verify_implementations.py#L461)
 
+- [ ] **visualize_analysis.py:3** (LOW, Feature Completion)
+  - `Create visualizations for the TODO analysis`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/visualize_analysis.py#L3)
+
+- [ ] **visualize_analysis.py:14** (LOW, Feature Completion)
+  - `with open('actionable_todos_analysis.json', 'r') as f:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/visualize_analysis.py#L14)
+
+- [ ] **visualize_analysis.py:30** (LOW, Feature Completion)
+  - `ax1.set_title('TODO Items by Component', fontweight='bold', fontsize=12)`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/visualize_analysis.py#L30)
+
+- [ ] **visualize_analysis.py:55** (LOW, Feature Completion)
+  - `ax3.set_title('TODO Items by Work Type', fontweight='bold', fontsize=12)`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/visualize_analysis.py#L55)
+
+- [ ] **visualize_analysis.py:132** (LOW, Feature Completion)
+  - `plt.savefig('actionable_todos_analysis.png', dpi=150, bbox_inches='tight')`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/visualize_analysis.py#L132)
+
+- [ ] **visualize_analysis.py:133** (LOW, Feature Completion)
+  - `print("Visualization saved to actionable_todos_analysis.png")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/visualize_analysis.py#L133)
+
 ### Persistence Subsystem
-*Total items: 143*
+*Total items: 140*
 
 - [ ] **atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc:82** (CRITICAL, Feature Completion)
   - `* XXX FIXME This needs to be fuzzed; it is very likely to crash`
@@ -8427,10 +8515,6 @@ A section for emergent TODOs.
 - [ ] **atomspace-restful/tests/python/restapi/test_restapi.py:449** (LOW, Testing)
   - `# XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-restful/tests/python/restapi/test_restapi.py#L449)
-
-- [ ] **atomspace-restful/tests/python/restapi/test_restapi.py:456** (LOW, Testing)
-  - `# TODO: The Python module "graphviz" needs to be added to ocpkg, so`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-restful/tests/python/restapi/test_restapi.py#L456)
 
 - [ ] **atomspace-rocks/tests/persist/monospace/mono-value-store-test.scm:10** (LOW, Testing)
   - `(whack "/tmp/cog-mono-unit-test")`
@@ -8636,10 +8720,6 @@ A section for emergent TODOs.
   - `// XXX TODO FIXME ... if either of these are executable, then`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/flow/StoreValueOfLink.cc#L61)
 
-- [ ] **atomspace-storage/opencog/persist/proxy/CachingProxy.cc:48** (LOW, Feature Completion)
-  - `// XXX TODO Add support for expiration times, limited AtomSpace`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/proxy/CachingProxy.cc#L48)
-
 - [ ] **atomspace-storage/opencog/persist/proxy/DynamicDataProxy.cc:77** (LOW, Feature Completion)
   - `// NOTE TODO ... create this in some temp atomspace...`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace-storage/opencog/persist/proxy/DynamicDataProxy.cc#L77)
@@ -8711,10 +8791,6 @@ A section for emergent TODOs.
 - [ ] **components/core/atomspace-restful/tests/python/restapi/test_restapi.py:449** (LOW, Testing)
   - `# XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/core/atomspace-restful/tests/python/restapi/test_restapi.py#L449)
-
-- [ ] **components/core/atomspace-restful/tests/python/restapi/test_restapi.py:456** (LOW, Testing)
-  - `# TODO: The Python module "graphviz" needs to be added to ocpkg, so`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/core/atomspace-restful/tests/python/restapi/test_restapi.py#L456)
 
 - [ ] **components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc:920** (LOW, Feature Completion)
   - `// XXX TODO - maybe load links depth-order...`
@@ -9102,29 +9178,29 @@ A section for emergent TODOs.
 ### By Subsystem
 - **AI System**: 27 items
 - **Build System**: 379 items
-- **Core Utilities**: 19 items
-- **MOSES Representation/Scoring**: 267 items
-- **Memory System**: 106 items
-- **Other**: 1274 items
-- **Persistence Subsystem**: 143 items
+- **Core Utilities**: 22 items
+- **MOSES Representation/Scoring**: 262 items
+- **Memory System**: 105 items
+- **Other**: 1299 items
+- **Persistence Subsystem**: 140 items
 - **Task System**: 4 items
 - **Testing Framework**: 39 items
 
 ### By Category
 - **Distributed Systems**: 3 items
-- **Documentation**: 40 items
+- **Documentation**: 41 items
 - **Error Handling**: 73 items
-- **Feature Completion**: 1827 items
+- **Feature Completion**: 1846 items
 - **Pattern Matching**: 42 items
 - **Performance**: 30 items
-- **Testing**: 224 items
+- **Testing**: 223 items
 - **Thread Safety**: 19 items
 
 ### By Priority
 - **CRITICAL**: 7 items
 - **HIGH**: 31 items
-- **MEDIUM**: 160 items
-- **LOW**: 2060 items
+- **MEDIUM**: 158 items
+- **LOW**: 2081 items
 
 ---
 
@@ -9166,4 +9242,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-23 09:03:48 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-23 11:25:40 UTC*
