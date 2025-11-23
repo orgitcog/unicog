@@ -1,0 +1,9 @@
+# Python dependencies for OpenCog Unified
+# Cognitive computation and tensor operations
+numpy
+
+# Additional dependencies used in workflows
+torch
+transformers
+PyGithub
+pyyaml

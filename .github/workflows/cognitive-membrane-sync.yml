@@ -361,6 +361,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
         
+      - name: Setup Python Environment
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          
+      - name: Install Python Dependencies
+        run: |
+          if [ -f "requirements.txt" ]; then
+            pip install -r requirements.txt
+          else
+            pip install numpy
+          fi
+        
       - name: Generate Cognitive Grammar
         run: |
           cat > cognitive_grammar_generator.py << 'EOF'
