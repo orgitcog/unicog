@@ -37,7 +37,7 @@ jobs:
   
   cogutil:
     name: "🧬 CogUtil Foundation"
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     container:
       image: opencog/opencog-deps:latest
       options: --user root
@@ -174,7 +174,7 @@ jobs:
   atomspace:
     name: "⚛️ AtomSpace Hypergraph"
     needs: [cogutil]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     container:
       image: opencog/opencog-deps:latest
       options: --user root
@@ -339,7 +339,7 @@ jobs:
   cognitive-synthesis:
     name: "🎭 Cognitive Pipeline Synthesis"
     needs: [atomspace]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     if: always()
     
     steps:
@@ -504,7 +504,7 @@ jobs:
   meta-cognitive-evolution:
     name: "🧠 Meta-Cognitive Pipeline Evolution"
     needs: [cognitive-synthesis]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[evolve]')
     
     steps:
