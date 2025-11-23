@@ -210,7 +210,42 @@ This fix addresses the issue described in the problem statement:
 ## Additional Notes
 
 ### Self-Healing Scripts
-The workflow references `scripts/auto_fix.py` which doesn't currently exist in the repository. This is a separate issue from the checkout problem. Once the repository is properly checked out, the workflow will correctly attempt to access this script (even if it fails because the script doesn't exist).
+The workflow references `scripts/auto_fix.py` which doesn't currently exist in the repository. **This is a separate issue from the checkout problem.** 
+
+**Before this fix:**
+- ❌ Workflow fails immediately: "Directory not found"
+- ❌ Never attempts to access `scripts/auto_fix.py`
+- ❌ No useful error message
+
+**After this fix:**
+- ✅ Workflow checks out repository successfully
+- ✅ Attempts to access `scripts/auto_fix.py`
+- ❌ Fails with clear error: "File not found: scripts/auto_fix.py"
+- ✅ Provides actionable error message
+
+This fix is a prerequisite for implementing the self-healing feature. Future work should either:
+1. Create the `scripts/auto_fix.py` implementation
+2. Remove the self-healing logic if not needed
+3. Make the self-healing steps conditional with proper error handling
+
+**Recommendation:** Add error handling to self-healing steps:
+```yaml
+- name: "🧪 Cognitive Build with Self-Healing"
+  run: |
+    cd cogutil/build
+    if cmake ..; then
+      echo "✅ CMake successful"
+    else
+      echo "🤖 Attempting self-healing..."
+      if [ -f "${{ github.workspace }}/scripts/auto_fix.py" ]; then
+        cd ${{ github.workspace }}
+        python3 scripts/auto_fix.py ...
+      else
+        echo "⚠️  Self-healing script not found, proceeding without repair"
+        exit 1
+      fi
+    fi
+```
 
 ### Cache Restoration
 The workflow uses caching to speed up builds. The cache is restored **before** checkout, which is intentional - the cache contains build artifacts that don't depend on the current repository state.
