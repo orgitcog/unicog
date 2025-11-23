@@ -34,18 +34,18 @@ class EnhancedJSONEncoder(json.JSONEncoder):
         Raises:
             TypeError: If object type is not supported
         """
-        # Handle NumPy integers
-        if isinstance(obj, (np.integer, np.int_, np.intc, np.intp, np.int8, 
+        # Handle NumPy integers (NumPy 2.0 compatible)
+        if isinstance(obj, (np.integer, np.intc, np.intp, np.int8, 
                            np.int16, np.int32, np.int64,
                            np.uint8, np.uint16, np.uint32, np.uint64)):
             return int(obj)
         
-        # Handle NumPy floats
-        if isinstance(obj, (np.floating, np.float_, np.float16, np.float32, np.float64)):
+        # Handle NumPy floats (NumPy 2.0 compatible)
+        if isinstance(obj, (np.floating, np.float16, np.float32, np.float64)):
             return float(obj)
         
         # Handle NumPy booleans
-        if isinstance(obj, np.bool_):
+        if isinstance(obj, (np.bool_, bool)):
             return bool(obj)
         
         # Handle NumPy arrays
@@ -79,18 +79,18 @@ def deep_convert(obj: Any) -> Any:
     if isinstance(obj, (list, tuple)):
         return [deep_convert(item) for item in obj]
     
-    # Handle NumPy integers
-    if isinstance(obj, (np.integer, np.int_, np.intc, np.intp, np.int8, 
+    # Handle NumPy integers (NumPy 2.0 compatible)
+    if isinstance(obj, (np.integer, np.intc, np.intp, np.int8, 
                        np.int16, np.int32, np.int64,
                        np.uint8, np.uint16, np.uint32, np.uint64)):
         return int(obj)
     
-    # Handle NumPy floats
-    if isinstance(obj, (np.floating, np.float_, np.float16, np.float32, np.float64)):
+    # Handle NumPy floats (NumPy 2.0 compatible)
+    if isinstance(obj, (np.floating, np.float16, np.float32, np.float64)):
         return float(obj)
     
     # Handle NumPy booleans
-    if isinstance(obj, np.bool_):
+    if isinstance(obj, (np.bool_, bool)):
         return bool(obj)
     
     # Handle NumPy arrays
@@ -156,18 +156,18 @@ def enhanced_json_encoder(obj: Any) -> Any:
     Raises:
         TypeError: If object type is not supported
     """
-    # Handle NumPy integers
-    if isinstance(obj, (np.integer, np.int_, np.intc, np.intp, np.int8, 
+    # Handle NumPy integers (NumPy 2.0 compatible)
+    if isinstance(obj, (np.integer, np.intc, np.intp, np.int8, 
                        np.int16, np.int32, np.int64,
                        np.uint8, np.uint16, np.uint32, np.uint64)):
         return int(obj)
     
-    # Handle NumPy floats
-    if isinstance(obj, (np.floating, np.float_, np.float16, np.float32, np.float64)):
+    # Handle NumPy floats (NumPy 2.0 compatible)
+    if isinstance(obj, (np.floating, np.float16, np.float32, np.float64)):
         return float(obj)
     
     # Handle NumPy booleans
-    if isinstance(obj, np.bool_):
+    if isinstance(obj, (np.bool_, bool)):
         return bool(obj)
     
     # Handle NumPy arrays
