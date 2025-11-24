@@ -3,8 +3,8 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-11-23 11:54:38 UTC  
-**Total Items**: 2273  
+**Generated**: 2025-11-24 00:55:30 UTC  
+**Total Items**: 2267  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
 ---
@@ -3219,7 +3219,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/tests/scm/typedefs.scm#L5)
 
 ### Other
-*Total items: 1298*
+*Total items: 1292*
 
 - [ ] **entelechy_introspection.py:889** (CRITICAL, Feature Completion)
   - `3. **Resolve Critical TODOs** - Address high-priority placeholders`
@@ -4153,17 +4153,13 @@ A section for emergent TODOs.
   - `; TODO: Create feedback response that something was learned`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm#L195)
 
-- [ ] **components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm:216** (LOW, Feature Completion)
-  - `; TODO: move to util file`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm#L216)
-
-- [ ] **components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm:230** (LOW, Feature Completion)
+- [ ] **components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm:227** (LOW, Feature Completion)
   - `; TODO: ask linas about these`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm#L230)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm#L227)
 
-- [ ] **components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm:234** (LOW, Feature Completion)
+- [ ] **components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm:231** (LOW, Feature Completion)
   - `; TODO: let's try cog-get-partner instead`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm#L234)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/attic/chatbot-train/simple-training.scm#L231)
 
 - [ ] **components/integration/opencog/opencog/eva/behavior/behavior.scm:19** (LOW, Feature Completion)
   - `; TODO:`
@@ -4328,10 +4324,6 @@ A section for emergent TODOs.
 - [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:362** (LOW, Feature Completion)
   - `; automated via synonymous phrase support. Total hack, needs fixing.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L362)
-
-- [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:402** (LOW, Feature Completion)
-  - `; XXX FIXME ... the list below is duplicated twice, once as adjectives`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm#L402)
 
 - [ ] **components/integration/opencog/opencog/eva/chatbot-eva/knowledge.scm:407** (LOW, Feature Completion)
   - `; XXX FIXME -- this list contains lots of synonyms; needs to be replaced`
@@ -4588,14 +4580,6 @@ A section for emergent TODOs.
 - [ ] **components/integration/opencog/opencog/ghost/stimulation.scm:32** (LOW, Feature Completion)
   - `; TODO: Find some better representation for that`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/ghost/stimulation.scm#L32)
-
-- [ ] **components/integration/opencog/opencog/ghost/terms.scm:291** (LOW, Feature Completion)
-  - `; TODO: Check to make sure the function has been defined`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/ghost/terms.scm#L291)
-
-- [ ] **components/integration/opencog/opencog/ghost/terms.scm:304** (LOW, Feature Completion)
-  - `; TODO: Check to make sure the function has been defined`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/opencog/ghost/terms.scm#L304)
 
 - [ ] **components/integration/opencog/opencog/ghost/translator.scm:547** (LOW, Error Handling)
   - `; TODO: Handle variables as well`
@@ -5332,14 +5316,6 @@ A section for emergent TODOs.
 - [ ] **components/language/learn/learn-lang-diary/p9-tri/pmi.scm:3** (LOW, Feature Completion)
   - `; Hackery for Chapter 9 exploration.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/learn-lang-diary/p9-tri/pmi.scm#L3)
-
-- [ ] **components/language/learn/learn-lang-diary/utils/disjunct-cross.scm:32** (LOW, Feature Completion)
-  - `; NOTE: FIXME add-pair-count-api is obsolete; use add-support-api instead.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/learn-lang-diary/utils/disjunct-cross.scm#L32)
-
-- [ ] **components/language/learn/learn-lang-diary/utils/disjunct-stats.scm:39** (LOW, Feature Completion)
-  - `; NOTE: FIXME add-pair-count-api is obsolete; use add-support-api instead.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/learn-lang-diary/utils/disjunct-stats.scm#L39)
 
 - [ ] **components/language/learn/learn-lang-diary/utils/ortho-compute.scm:21** (LOW, Feature Completion)
   - `; TODO filter the top lists`
@@ -9165,7 +9141,7 @@ A section for emergent TODOs.
 - **Core Utilities**: 22 items
 - **MOSES Representation/Scoring**: 259 items
 - **Memory System**: 105 items
-- **Other**: 1298 items
+- **Other**: 1292 items
 - **Persistence Subsystem**: 140 items
 - **Task System**: 4 items
 - **Testing Framework**: 39 items
@@ -9174,7 +9150,7 @@ A section for emergent TODOs.
 - **Distributed Systems**: 3 items
 - **Documentation**: 44 items
 - **Error Handling**: 75 items
-- **Feature Completion**: 1837 items
+- **Feature Completion**: 1831 items
 - **Pattern Matching**: 42 items
 - **Performance**: 30 items
 - **Testing**: 223 items
@@ -9184,7 +9160,7 @@ A section for emergent TODOs.
 - **CRITICAL**: 7 items
 - **HIGH**: 31 items
 - **MEDIUM**: 159 items
-- **LOW**: 2076 items
+- **LOW**: 2070 items
 
 ---
 
@@ -9226,4 +9202,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-23 11:54:38 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-24 00:55:30 UTC*
