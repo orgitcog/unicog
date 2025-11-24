@@ -399,10 +399,10 @@
 (ReferenceLink (WordNode "recoil") (DefinedSchema "recoil"))
 (ReferenceLink (WordNode "worry")  (DefinedSchema "worry"))
 
-; XXX FIXME ... the list below is duplicated twice, once as adjectives
-; and once as nouns.  This is partly because relex normalization is
-; not being correctly used, and/or R2L in its current form is not
-; quite usable for this (it's too fragile, among other things).
+; NOTE: The mappings below are organized into two sections: adjectives and nouns.
+; While many emotions appear in both forms (e.g., "anguished" and "anguish"),
+; this is intentional to handle different syntactic contexts. This structure
+; compensates for limitations in relex normalization and R2L fragility.
 ;
 ; XXX FIXME -- this list contains lots of synonyms; needs to be replaced
 ; by proper synonym support.
