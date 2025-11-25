@@ -36,8 +36,8 @@
 
 (define pca (make-pseudo-cset-api))
 (define psa (add-pair-stars pca))
-; NOTE: FIXME add-pair-count-api is obsolete; use add-support-api instead.
-(define psc (add-pair-count-api psa))
+; Using add-support-api (modern API)
+(define psc (add-support-api psa))
 (define psf (add-pair-freq-api psa))
 (define psu (add-support-api psa))
 

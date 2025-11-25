@@ -27,3 +27,31 @@
 "
   (cog-logger-debug ebl "~a" (cog-name node))
   (stv 1 1))
+
+; --------------------------------------------------------------
+; General utility shortcuts
+; Moved from chatbot-train/simple-training.scm
+
+(define-public (incoming atom)
+"
+  incoming ATOM
+
+  Shortcut for getting the incoming set of an atom.
+"
+  (cog-incoming-set atom))
+
+(define-public (prt)
+"
+  prt
+
+  Shortcut for printing the atomspace.
+"
+  (cog-prt-atomspace))
+
+(define-public (root atom)
+"
+  root ATOM
+
+  Shortcut for getting the root of an atom.
+"
+  (cog-get-root atom))

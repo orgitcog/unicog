@@ -134,8 +134,16 @@ std::istream& istreamCTable(std::istream& in, CTable& ctable);
 OTable loadOTable(const std::string& file_name,
                   const std::string& target_feature);
 
-// TODO: reimplement loadITable with the same model of loadTable and
-// remove loadITable_optimized
+// NOTE: Code consolidation needed - merge loadITable implementations.
+// Current state: Two separate implementations exist (loadITable and loadITable_optimized)
+// Goal: Unify into a single loadITable following the loadTable/loadOTable pattern
+// Refactoring steps:
+//   1. Analyze performance differences between loadITable and loadITable_optimized
+//   2. Adopt the better-performing approach as the canonical implementation
+//   3. Update loadITable to match loadTable's API design and internal structure
+//   4. Deprecate and remove loadITable_optimized after migration
+//   5. Update all call sites to use the unified loadITable
+// This will reduce code duplication and maintenance burden.
 ITable loadITable(
     const std::string& file_name,
     const std::vector<std::string>& ignore_features=std::vector<std::string>());

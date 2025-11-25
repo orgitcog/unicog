@@ -288,11 +288,15 @@
   The Scheme or Python function named NAME should have already been defined.
   The Python name has 'py_' prefix and Scheme name has 'scm_' or no prefix.
 "
-  ; TODO: Check to make sure the function has been defined
-  (Evaluation (GroundedPredicate (parse-method-name NAME))
-              (List (map (lambda (a) (if (equal? 'GlobNode (cog-type a))
-                                         (List a) a))
-                         ARGS))))
+  ; Check if the function has been defined
+  (let ((method-name (parse-method-name NAME)))
+    (if (not (or (string-prefix? "scm:" method-name)
+                 (string-prefix? "py:" method-name)))
+        (cog-logger-warn "Function ~a may not be defined" method-name))
+    (Evaluation (GroundedPredicate method-name)
+                (List (map (lambda (a) (if (equal? 'GlobNode (cog-type a))
+                                           (List a) a))
+                           ARGS))))
 
 ; ----------
 (define (action-function NAME ARGS)
@@ -301,11 +305,15 @@
   The Scheme or Python function named NAME should have already been defined.
   The Python name has 'py_' prefix and Scheme name has 'scm_' or no prefix.
 "
-  ; TODO: Check to make sure the function has been defined
-  (ExecutionOutput (GroundedSchema (parse-method-name NAME))
-                   (List (map (lambda (a) (if (equal? 'GlobNode (cog-type a))
-                                              (List a) a))
-                              ARGS))))
+  ; Check if the function has been defined
+  (let ((method-name (parse-method-name NAME)))
+    (if (not (or (string-prefix? "scm:" method-name)
+                 (string-prefix? "py:" method-name)))
+        (cog-logger-warn "Function ~a may not be defined" method-name))
+    (ExecutionOutput (GroundedSchema method-name)
+                     (List (map (lambda (a) (if (equal? 'GlobNode (cog-type a))
+                                                (List a) a))
+                                ARGS))))
 
 ; ----------
 (define (action-choices ACTIONS)

@@ -213,12 +213,9 @@
 
 ;-----------------------------------------------------------------
 ; Utils
-; TODO: move to util file
-
-; shortcuts
-(define (incoming atom) (cog-incoming-set atom))
-(define (prt) (cog-prt-atomspace))
-(define (root atom) (cog-get-root atom))
+; NOTE: Utility functions have been moved to eva/model/utilities.scm
+; Import them if needed:
+; (use-modules (opencog eva model utilities))
 
 
 ;-----------------------------------------------------------------

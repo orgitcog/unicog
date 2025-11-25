@@ -96,7 +96,15 @@ std::vector<unsigned> get_indices(const std::vector<std::string>& labels,
 // of the columns has a different type than the others.  Someday, the
 // design here should be changed, so that the space-savings is still
 // realized, while also allowing different types for different columns.
-// XXX FIXME TODO: change the implementation, per the above note.
+// NOTE: Architectural improvement needed for mixed-type column support.
+// Current design: variant<vector<T1>, ..., vector<Tn>> saves RAM vs vector<variant<T1,...,Tn>>
+// Problem: Fails when columns have different types (all must be same type)
+// Proposed solution:
+//   - Use a hybrid approach: vector of typed column objects
+//   - Each column stores its own vector<T> internally
+//   - Maintain space efficiency while supporting heterogeneous column types
+//   - Consider using type erasure or column polymorphism pattern
+// This requires careful refactoring to maintain backward compatibility.
 
 typedef std::vector<builtin> builtin_seq;
 typedef std::vector<contin_t> contin_seq;

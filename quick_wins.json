@@ -1,0 +1,90 @@
+[
+  {
+    "file": "atomspace-storage/opencog/persist/proxy/CachingProxy.cc",
+    "line": 48,
+    "type": "FIXME",
+    "content": "// XXX TODO Add support for expiration times, limited AtomSpace",
+    "context": "}\n\n// Get our configuration from the ProxyParameterLink we live in.\n// XXX TODO Add support for expiration times, limited AtomSpace\n// size and whatever other whizzy caching ideas we might want.\nvoid CachingProxy::open(void)\n{\n",
+    "component": "atomspace-storage",
+    "complexity": "simple",
+    "work_type": "feature_addition",
+    "time_estimate": "1-2hrs"
+  },
+  {
+    "file": "atomspace/opencog/query/PatternMatchEngine.cc",
+    "line": 1159,
+    "type": "FIXME",
+    "content": "// XXX TODO The logic here should be updated to resemble that",
+    "context": "\tDO_LOG({LAZY_LOG_FINE << \"tree_comp NEW SETUP sparse term=\"\n\t                      << ptm->to_string();})\n\n\t// XXX TODO The logic here should be updated to resemble that\n\t// in curr_perm(), which deals correctly with nested permutations\n\t// of unordered patterns. For just right now, we are not\n\t// implementing nested sparse links, mostly because I'm too lazy\n",
+    "component": "atomspace",
+    "complexity": "simple",
+    "work_type": "bug_fix",
+    "time_estimate": "1-2hrs"
+  },
+  {
+    "file": "components/learning/moses/moses/moses/representation/representation.cc",
+    "line": 236,
+    "type": "FIXME",
+    "content": "// XXX TODO need to add support for \"term algebra\" knobs",
+    "context": "/// the instance supplied as the argument.\nvoid representation::transform(const instance& inst)\n{\n    // XXX TODO need to add support for \"term algebra\" knobs\n\n    contin_map_it ckb = contin.begin();\n    for (field_set::const_contin_iterator ci = _fields.begin_contin(inst);\n",
+    "component": "moses",
+    "complexity": "simple",
+    "work_type": "feature_addition",
+    "time_estimate": "1-2hrs"
+  },
+  {
+    "file": "moses/moses/comboreduct/table/table_io.cc",
+    "line": 99,
+    "type": "TODO",
+    "content": "// TODO: This routine should be extended so that comments that start",
+    "context": "/// This ignores lines that start with a 'standard comment char'\n///\n//\n// TODO: This routine should be extended so that comments that start\n// somewhere other than column 0 are also ignored.\n//\n// The signature of this routine is the same as std:getline()\n",
+    "component": "moses",
+    "complexity": "simple",
+    "work_type": "bug_fix",
+    "time_estimate": "30min-1hr"
+  },
+  {
+    "file": "moses/moses/moses/representation/representation.cc",
+    "line": 238,
+    "type": "FIXME",
+    "content": "// XXX TODO need to add support for \"term algebra\" knobs",
+    "context": "/// the instance supplied as the argument.\nvoid representation::transform(const instance& inst)\n{\n    // XXX TODO need to add support for \"term algebra\" knobs\n\n    contin_map_it ckb = contin.begin();\n    for (field_set::const_contin_iterator ci = _fields.begin_contin(inst);\n",
+    "component": "moses",
+    "complexity": "simple",
+    "work_type": "feature_addition",
+    "time_estimate": "1-2hrs"
+  },
+  {
+    "file": "atomspace-restful/tests/python/restapi/test_restapi.py",
+    "line": 456,
+    "type": "TODO",
+    "content": "# TODO: The Python module \"graphviz\" needs to be added to ocpkg, so",
+    "context": "        # properly defined DOT header created and the correct atoms are\n        # included in the description\n\n        # TODO: The Python module \"graphviz\" needs to be added to ocpkg, so\n        # that this dependency will be available for the continuous integration\n        # system\n        try:\n",
+    "component": "atomspace-restful",
+    "complexity": "simple",
+    "work_type": "feature_addition",
+    "time_estimate": "1-2hrs"
+  },
+  {
+    "file": "components/core/atomspace-restful/tests/python/restapi/test_restapi.py",
+    "line": 456,
+    "type": "TODO",
+    "content": "# TODO: The Python module \"graphviz\" needs to be added to ocpkg, so",
+    "context": "        # properly defined DOT header created and the correct atoms are\n        # included in the description\n\n        # TODO: The Python module \"graphviz\" needs to be added to ocpkg, so\n        # that this dependency will be available for the continuous integration\n        # system\n        try:\n",
+    "component": "atomspace-restful",
+    "complexity": "simple",
+    "work_type": "feature_addition",
+    "time_estimate": "1-2hrs"
+  },
+  {
+    "file": "components/integration/opencog/opencog/nlp/wsd-post/collect-stats/stats-collection.scm",
+    "line": 359,
+    "type": "FIXME",
+    "content": "; XXX The method used here, of tagging documents with \"finished\"",
+    "context": "; Return all of the documents for which WSD has been completed,\n; but disjunct processing has not been.\n;\n; XXX The method used here, of tagging documents with \"finished\"\n; tags, is rather ad-hoc, and is meant to be a stop-gap until\n; opencog offers some way of defining a processing pipeline.\n;\n",
+    "component": "nlp",
+    "complexity": "simple",
+    "work_type": "incomplete_implementation",
+    "time_estimate": "30min-1hr"
+  }
+]

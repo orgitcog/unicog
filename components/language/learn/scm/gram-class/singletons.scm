@@ -55,19 +55,16 @@
 		(throw 'missing-method 'add-singleton-classes
 			"The 'flatten method is needed to create singletons\nUse `add-covering-sections` to get it."))
 
-	; XXX this is broken
+	; Delete singleton word-class nodes (classes with only one member)
 	(define (delete-singles)
-		; delete each word-class node..
-  ; TODO: Implement delete functionality
-  (display "Warning: delete not fully implemented\n")
-  #f
-			"This method is borken and don't work right!")
+		"Delete each word-class node that contains only one word."
 		(for-each cog-delete-recursive!
 			; make a list of word-classes containing only one word...
 			(filter
 				(lambda (WRDCLS)
 					(eq? 1 (cog-incoming-size-by-type WRDCLS 'MemberLink)))
-				(LLOBJ 'left-basis))))
+				(LLOBJ 'left-basis)))
+		#t)  ; Return true on success
 
 	; Need to fetch the count from the margin.
 	(define pss (add-support-api LLOBJ))

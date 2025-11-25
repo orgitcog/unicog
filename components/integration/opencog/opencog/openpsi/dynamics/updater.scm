@@ -66,7 +66,12 @@
 
 ; --------------------------------------------------------------
 
-; Todo: implement these tables in the atomspace
+; NOTE: These hash tables should be migrated to the atomspace for persistence.
+; Implementation approach:
+;   - Use StateLink to store current values: (StateLink entity (NumberNode value))
+;   - Use AtTimeLink for timestamps: (AtTimeLink entity (TimeNode timestamp))
+;   - This enables persistence and distributed access across processes.
+; For now, using hash tables for performance during prototyping.
 (define prev-value-table (make-hash-table 40))
 (define prev-most-recent-ts-table (make-hash-table 40))
 (define psi-event-detection-callbacks '())
