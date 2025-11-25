@@ -16,6 +16,11 @@
 namespace ggml {
 namespace tensor {
 
+// Constants for numerical stability and precision
+constexpr float EPSILON_F = 1e-10f;
+constexpr double EPSILON_D = 1e-10;
+constexpr float TEST_EPSILON_F = 0.001f;  // For unit tests
+
 /**
  * @brief Neural activation function types
  */
@@ -66,9 +71,41 @@ struct NeuralTensor {
         }
     }
     
+    // Disable copy constructor and copy assignment (use move semantics instead)
+    NeuralTensor(const NeuralTensor&) = delete;
+    NeuralTensor& operator=(const NeuralTensor&) = delete;
+    
+    // Move constructor
+    NeuralTensor(NeuralTensor&& other) noexcept
+        : data(other.data), shape(other.shape), ndim(other.ndim), total_size(other.total_size) {
+        other.data = nullptr;
+        other.shape = nullptr;
+        other.ndim = 0;
+        other.total_size = 0;
+    }
+    
+    // Move assignment
+    NeuralTensor& operator=(NeuralTensor&& other) noexcept {
+        if (this != &other) {
+            delete[] data;
+            delete[] shape;
+            
+            data = other.data;
+            shape = other.shape;
+            ndim = other.ndim;
+            total_size = other.total_size;
+            
+            other.data = nullptr;
+            other.shape = nullptr;
+            other.ndim = 0;
+            other.total_size = 0;
+        }
+        return *this;
+    }
+    
     ~NeuralTensor() {
-        delete[] data;
-        delete[] shape;
+        if (data) delete[] data;
+        if (shape) delete[] shape;
     }
 };
 
@@ -255,6 +292,11 @@ void neural_add_bias(T* output, const T* bias, size_t m, size_t n) {
  * @param input_dim Input dimension
  * @param output_dim Output dimension
  * @param activation Activation function to apply
+ * 
+ * @note The activation function is applied in-place to the output buffer after
+ *       matrix multiplication and bias addition. This is safe for all standard
+ *       activation functions (sigmoid, tanh, relu, etc.) but may not be suitable
+ *       for all custom activation functions.
  */
 template<typename T>
 void neural_dense_forward(T* output, const T* input, const T* weights,
@@ -325,7 +367,7 @@ template<typename T>
 T neural_cross_entropy_loss(const T* predictions, const T* targets,
                             size_t batch_size, size_t num_classes) {
     T total_loss = static_cast<T>(0);
-    T epsilon = static_cast<T>(1e-10);  // For numerical stability
+    T epsilon = (sizeof(T) == sizeof(float)) ? static_cast<T>(EPSILON_F) : static_cast<T>(EPSILON_D);
     
     for (size_t i = 0; i < batch_size; ++i) {
         for (size_t j = 0; j < num_classes; ++j) {

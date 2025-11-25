@@ -12,6 +12,9 @@
 
 using namespace ggml::tensor;
 
+// Test epsilon for floating point comparisons
+constexpr float TEST_EPSILON = 0.001f;
+
 // Test fold operations
 void test_fold_operations() {
     std::cout << "Testing fold operations..." << std::endl;
@@ -19,24 +22,24 @@ void test_fold_operations() {
     // Test fold_sum
     float data[] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
     float result = tensor_fold_op(data, 5, FoldType::FOLD_SUM);
-    assert(std::abs(result - 15.0f) < 0.001f);
+    assert(std::abs(result - 15.0f) < TEST_EPSILON);
     std::cout << "  ✅ FOLD_SUM: " << result << std::endl;
     
     // Test fold_product
     float data2[] = {2.0f, 3.0f, 4.0f};
     result = tensor_fold_op(data2, 3, FoldType::FOLD_PRODUCT);
-    assert(std::abs(result - 24.0f) < 0.001f);
+    assert(std::abs(result - 24.0f) < TEST_EPSILON);
     std::cout << "  ✅ FOLD_PRODUCT: " << result << std::endl;
     
     // Test fold_max
     float data3[] = {1.5f, 4.2f, 2.1f, 3.7f};
     result = tensor_fold_op(data3, 4, FoldType::FOLD_MAX);
-    assert(std::abs(result - 4.2f) < 0.001f);
+    assert(std::abs(result - 4.2f) < TEST_EPSILON);
     std::cout << "  ✅ FOLD_MAX: " << result << std::endl;
     
     // Test fold_mean
     result = tensor_fold_op(data, 5, FoldType::FOLD_MEAN);
-    assert(std::abs(result - 3.0f) < 0.001f);
+    assert(std::abs(result - 3.0f) < TEST_EPSILON);
     std::cout << "  ✅ FOLD_MEAN: " << result << std::endl;
     
     std::cout << "✅ All fold operations passed!" << std::endl;
@@ -101,10 +104,10 @@ void test_matmul() {
     std::cout << "  [" << C[2] << ", " << C[3] << "]" << std::endl;
     
     // Verify result: C should be [[22, 28], [49, 64]]
-    assert(std::abs(C[0] - 22.0f) < 0.001f);
-    assert(std::abs(C[1] - 28.0f) < 0.001f);
-    assert(std::abs(C[2] - 49.0f) < 0.001f);
-    assert(std::abs(C[3] - 64.0f) < 0.001f);
+    assert(std::abs(C[0] - 22.0f) < TEST_EPSILON);
+    assert(std::abs(C[1] - 28.0f) < TEST_EPSILON);
+    assert(std::abs(C[2] - 49.0f) < TEST_EPSILON);
+    assert(std::abs(C[3] - 64.0f) < TEST_EPSILON);
     
     std::cout << "✅ Matrix multiplication passed!" << std::endl;
 }
@@ -131,9 +134,9 @@ void test_dense_layer() {
     
     // Expected: [1*0.5 + 2*2.0 + 0.1, 1*1.0 + 2*2.5 + 0.2, 1*1.5 + 2*3.0 + 0.3]
     //         = [4.6, 6.2, 7.8]
-    assert(std::abs(output[0] - 4.6f) < 0.001f);
-    assert(std::abs(output[1] - 6.2f) < 0.001f);
-    assert(std::abs(output[2] - 7.8f) < 0.001f);
+    assert(std::abs(output[0] - 4.6f) < TEST_EPSILON);
+    assert(std::abs(output[1] - 6.2f) < TEST_EPSILON);
+    assert(std::abs(output[2] - 7.8f) < TEST_EPSILON);
     
     std::cout << "✅ Dense layer forward pass passed!" << std::endl;
 }

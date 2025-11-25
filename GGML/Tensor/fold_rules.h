@@ -52,9 +52,41 @@ struct Tensor {
         }
     }
     
+    // Disable copy constructor and copy assignment (use move semantics instead)
+    Tensor(const Tensor&) = delete;
+    Tensor& operator=(const Tensor&) = delete;
+    
+    // Move constructor
+    Tensor(Tensor&& other) noexcept
+        : data(other.data), shape(other.shape), ndim(other.ndim), total_size(other.total_size) {
+        other.data = nullptr;
+        other.shape = nullptr;
+        other.ndim = 0;
+        other.total_size = 0;
+    }
+    
+    // Move assignment
+    Tensor& operator=(Tensor&& other) noexcept {
+        if (this != &other) {
+            delete[] data;
+            delete[] shape;
+            
+            data = other.data;
+            shape = other.shape;
+            ndim = other.ndim;
+            total_size = other.total_size;
+            
+            other.data = nullptr;
+            other.shape = nullptr;
+            other.ndim = 0;
+            other.total_size = 0;
+        }
+        return *this;
+    }
+    
     ~Tensor() {
-        delete[] data;
-        delete[] shape;
+        if (data) delete[] data;
+        if (shape) delete[] shape;
     }
 };
 
@@ -159,7 +191,11 @@ T tensor_foldr(T init, const T* data, size_t len, T (*fold_fn)(T, T)) {
  * @param input Input tensor
  * @param axis Axis to fold along (0-indexed)
  * @param fold_type Type of fold operation
- * @return Output tensor with reduced dimension
+ * @return Output tensor with reduced dimension (caller owns and must delete)
+ * 
+ * @note The returned tensor is allocated on the heap and must be deleted by the caller
+ *       to avoid memory leaks. Consider using unique_ptr or shared_ptr for automatic
+ *       memory management.
  */
 template<typename T>
 Tensor<T>* tensor_fold_axis(const Tensor<T>* input, size_t axis, FoldType fold_type) {
