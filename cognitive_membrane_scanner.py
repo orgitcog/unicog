@@ -3,9 +3,14 @@ import torch
 import json
 import yaml
 import os
+import sys
 from datetime import datetime
 from pathlib import Path
 from github import Github
+
+# Add cognitive-membrane-sync to path for imports
+sys.path.insert(0, str(Path(__file__).parent / 'cognitive-membrane-sync'))
+from json_encoder_utils import safe_json_dump
 
 class CognitiveMembrane:
     def __init__(self, enterprise="cosmos"):
@@ -167,7 +172,7 @@ Generated: {membrane_state['timestamp']}
         }
         
         with open('cognitive-grammar.ggml', 'w') as f:
-            json.dump(config, f, indent=2)
+            safe_json_dump(config, f, indent=2)
         
         return config
 

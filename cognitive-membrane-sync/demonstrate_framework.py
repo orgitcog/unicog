@@ -14,6 +14,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent))
 
 from membrane_bridge import CognitiveMembraneBridge
+from json_encoder_utils import safe_json_dump
 
 def print_section(title):
     """Print a formatted section header"""
@@ -164,7 +165,7 @@ def demonstrate_multi_scale_synchronization():
     # Save GGML grammar to file
     ggml_file = "cognitive-grammar-cosmos-enterprise.ggml"
     with open(ggml_file, 'w') as f:
-        json.dump(ggml_grammar, f, indent=2)
+        safe_json_dump(ggml_grammar, f, indent=2)
     print(f"   💾 Saved to: {ggml_file}")
     
     print_section("Phase 7: State Persistence and Analysis")
