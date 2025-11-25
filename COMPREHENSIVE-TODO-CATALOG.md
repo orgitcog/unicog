@@ -3,8 +3,8 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-11-24 00:55:30 UTC  
-**Total Items**: 2267  
+**Generated**: 2025-11-25 18:59:34 UTC  
+**Total Items**: 2276  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
 ---
@@ -1757,7 +1757,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/cogutil/tests/util/sigslot_test.cc#L134)
 
 ### MOSES Representation/Scoring
-*Total items: 259*
+*Total items: 253*
 
 - [ ] **components/learning/moses/moses/comboreduct/table/table.h:1366** (HIGH, Performance)
   - `// XXX TODO remove this print, for better performance.`
@@ -1775,10 +1775,6 @@ A section for emergent TODOs.
   - `/// TODO: measure and compare the resulting performance.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/representation/build_knobs.cc#L316)
 
-- [ ] **components/learning/moses/moses/moses/scoring/bscores.h:589** (HIGH, Thread Safety)
-  - `mutable KLDS<contin_t> _klds; /// @todo dangerous: not thread safe!!!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/scoring/bscores.h#L589)
-
 - [ ] **moses/moses/comboreduct/table/table.h:1366** (HIGH, Performance)
   - `// XXX TODO remove this print, for better performance.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/comboreduct/table/table.h#L1366)
@@ -1794,10 +1790,6 @@ A section for emergent TODOs.
 - [ ] **moses/moses/moses/representation/build_knobs.cc:317** (HIGH, Performance)
   - `/// TODO: measure and compare the resulting performance.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/build_knobs.cc#L317)
-
-- [ ] **moses/moses/moses/scoring/bscores.h:592** (HIGH, Thread Safety)
-  - `mutable KLDS<contin_t> _klds; /// @todo dangerous: not thread safe!!!`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/scoring/bscores.h#L592)
 
 - [ ] **components/learning/moses/moses/comboreduct/interpreter/eval.cc:530** (MEDIUM, Feature Completion)
   - `// XXX TODO: contin_if should go away.`
@@ -2171,17 +2163,13 @@ A section for emergent TODOs.
   - `* XXX implement this. "bde" is "bayesian distribution estimation"`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/eda/local_structure.h#L135)
 
-- [ ] **components/learning/moses/moses/moses/eda/local_structure.h:285** (LOW, Feature Completion)
-  - `// TODO: Clarify what statistics are being accumulated and where they are stored.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/eda/local_structure.h#L285)
-
-- [ ] **components/learning/moses/moses/moses/eda/local_structure.h:293** (LOW, Feature Completion)
+- [ ] **components/learning/moses/moses/moses/eda/local_structure.h:296** (LOW, Feature Completion)
   - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/eda/local_structure.h#L293)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/eda/local_structure.h#L296)
 
-- [ ] **components/learning/moses/moses/moses/eda/local_structure.h:310** (LOW, Feature Completion)
+- [ ] **components/learning/moses/moses/moses/eda/local_structure.h:313** (LOW, Feature Completion)
   - `using namespace boost::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/eda/local_structure.h#L310)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/eda/local_structure.h#L313)
 
 - [ ] **components/learning/moses/moses/moses/eda/optimize.h:120** (LOW, Feature Completion)
   - `std::bind(std::cref(score), std::placeholders::_1));`
@@ -2358,10 +2346,6 @@ A section for emergent TODOs.
 - [ ] **components/learning/moses/moses/moses/representation/build_knobs.cc:1283** (LOW, Feature Completion)
   - `// XXX TODO this below is clearly unfinished, broken, etc.`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/representation/build_knobs.cc#L1283)
-
-- [ ] **components/learning/moses/moses/moses/representation/knobs.h:283** (LOW, Feature Completion)
-  - `// TODO: Clarify the canonization behavior for parent-child relationships.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/learning/moses/moses/moses/representation/knobs.h#L283)
 
 - [ ] **components/learning/moses/moses/moses/representation/representation.cc:51** (LOW, Feature Completion)
   - `// XXX TODO: One might think that varying the stepsize, i.e. shrinking`
@@ -2567,17 +2551,13 @@ A section for emergent TODOs.
   - `* XXX implement this. "bde" is "bayesian distribution estimation"`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L135)
 
-- [ ] **moses/moses/moses/eda/local_structure.h:285** (LOW, Feature Completion)
-  - `// TODO: Clarify what statistics are being accumulated and where they are stored.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L285)
-
-- [ ] **moses/moses/moses/eda/local_structure.h:293** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/eda/local_structure.h:296** (LOW, Feature Completion)
   - `using namespace std::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L293)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L296)
 
-- [ ] **moses/moses/moses/eda/local_structure.h:310** (LOW, Feature Completion)
+- [ ] **moses/moses/moses/eda/local_structure.h:313** (LOW, Feature Completion)
   - `using namespace std::placeholders;`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L310)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/eda/local_structure.h#L313)
 
 - [ ] **moses/moses/moses/eda/optimize.h:120** (LOW, Feature Completion)
   - `std::bind(std::cref(score), std::placeholders::_1));`
@@ -2746,10 +2726,6 @@ A section for emergent TODOs.
 - [ ] **moses/moses/moses/representation/knobs.h:208** (LOW, Feature Completion)
   - `idx = 0;  // interpreted as "absent", as used below. XXX`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/knobs.h#L208)
-
-- [ ] **moses/moses/moses/representation/knobs.h:276** (LOW, Feature Completion)
-  - `// TODO: Clarify the canonization behavior for parent-child relationships.`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/moses/moses/representation/knobs.h#L276)
 
 - [ ] **moses/moses/moses/representation/representation.cc:51** (LOW, Feature Completion)
   - `// XXX TODO: One might think that varying the stepsize, i.e. shrinking`
@@ -3219,11 +3195,11 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/tests/scm/typedefs.scm#L5)
 
 ### Other
-*Total items: 1292*
+*Total items: 1307*
 
-- [ ] **entelechy_introspection.py:889** (CRITICAL, Feature Completion)
+- [ ] **entelechy_introspection.py:909** (CRITICAL, Feature Completion)
   - `3. **Resolve Critical TODOs** - Address high-priority placeholders`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L889)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L909)
 
 - [ ] **analyze_issue_examples.py:14** (HIGH, Performance)
   - `"./atomspace/opencog/atomspace/Transient.cc:/// XXX FIXME. Performance has not been recently measure...`
@@ -5965,49 +5941,69 @@ A section for emergent TODOs.
   - `markers = {'TODO': 0, 'FIXME': 0, 'STUB': 0}`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L591)
 
+- [ ] **entelechy_introspection.py:600** (LOW, Documentation)
+  - `r'TODO.*list',  # TODO lists in docs`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L600)
+
 - [ ] **entelechy_introspection.py:603** (LOW, Feature Completion)
-  - `markers['TODO'] += len(re.findall(r'\bTODO\b', content, re.IGNORECASE))`
+  - `r'from\s+TODO', # References to TODO files/modules`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L603)
 
-- [ ] **entelechy_introspection.py:604** (LOW, Feature Completion)
-  - `markers['FIXME'] += len(re.findall(r'\bFIXME\b', content, re.IGNORECASE))`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L604)
+- [ ] **entelechy_introspection.py:620** (LOW, Feature Completion)
+  - `if re.search(r'\bTODO\b', line, re.IGNORECASE):`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L620)
 
-- [ ] **entelechy_introspection.py:605** (LOW, Feature Completion)
-  - `markers['STUB'] += len(re.findall(r'\bSTUB\b', content, re.IGNORECASE))`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L605)
+- [ ] **entelechy_introspection.py:621** (LOW, Feature Completion)
+  - `markers['TODO'] += 1`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L621)
 
-- [ ] **entelechy_introspection.py:612** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:622** (LOW, Feature Completion)
+  - `if re.search(r'\bFIXME\b', line, re.IGNORECASE):`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L622)
+
+- [ ] **entelechy_introspection.py:623** (LOW, Feature Completion)
+  - `markers['FIXME'] += 1`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L623)
+
+- [ ] **entelechy_introspection.py:624** (LOW, Feature Completion)
+  - `if re.search(r'\bSTUB\b', line, re.IGNORECASE):`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L624)
+
+- [ ] **entelechy_introspection.py:625** (LOW, Feature Completion)
+  - `markers['STUB'] += 1`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L625)
+
+- [ ] **entelechy_introspection.py:632** (LOW, Feature Completion)
   - `"""Assess implementation completeness vs placeholders"""`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L612)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L632)
 
-- [ ] **entelechy_introspection.py:613** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:633** (LOW, Feature Completion)
   - `# Check for small/stub files`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L613)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L633)
 
-- [ ] **entelechy_introspection.py:637** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:657** (LOW, Feature Completion)
   - `'small_stub_files': small_files,`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L637)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L657)
 
-- [ ] **entelechy_introspection.py:680** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:700** (LOW, Feature Completion)
   - `# For now, use placeholders that will be filled by actual analysis`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L680)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L700)
 
-- [ ] **entelechy_introspection.py:790** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:810** (LOW, Feature Completion)
   - `- **TODO Markers:** {self.metrics.todo_count}`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L790)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L810)
 
-- [ ] **entelechy_introspection.py:791** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:811** (LOW, Feature Completion)
   - `- **FIXME Markers:** {self.metrics.fixme_count}`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L791)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L811)
 
-- [ ] **entelechy_introspection.py:792** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:812** (LOW, Feature Completion)
   - `- **STUB Markers:** {self.metrics.stub_count}`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L792)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L812)
 
-- [ ] **entelechy_introspection.py:900** (LOW, Feature Completion)
+- [ ] **entelechy_introspection.py:920** (LOW, Feature Completion)
   - `- Resolving placeholder implementations`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L900)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_introspection.py#L920)
 
 - [ ] **entelechy_marker_analyzer.py:5** (LOW, Feature Completion)
   - `Comprehensive analysis tool for all code markers (TODO, FIXME, STUB, PLACEHOLDER, etc.)`
@@ -6072,6 +6068,46 @@ A section for emergent TODOs.
 - [ ] **entelechy_marker_analyzer.py:262** (LOW, Feature Completion)
   - `if marker_type in ['STUB', 'PLACEHOLDER', 'NOT_IMPLEMENTED']:`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_analyzer.py#L262)
+
+- [ ] **entelechy_marker_prioritizer.py:5** (LOW, Feature Completion)
+  - `Analyzes code markers (TODO, FIXME, STUB) and prioritizes them based on:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L5)
+
+- [ ] **entelechy_marker_prioritizer.py:47** (LOW, Feature Completion)
+  - `'FIXME': 1.0,           # Highest - indicates broken/incorrect code`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L47)
+
+- [ ] **entelechy_marker_prioritizer.py:49** (LOW, Feature Completion)
+  - `'STUB': 0.8,            # High - incomplete implementations`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L49)
+
+- [ ] **entelechy_marker_prioritizer.py:51** (LOW, Feature Completion)
+  - `'HACK': 0.7,            # Medium-high - technical debt`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L51)
+
+- [ ] **entelechy_marker_prioritizer.py:52** (LOW, Feature Completion)
+  - `'TODO': 0.5,            # Medium - future work`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L52)
+
+- [ ] **entelechy_marker_prioritizer.py:53** (LOW, Feature Completion)
+  - `'PLACEHOLDER': 0.4,     # Medium-low - temporary solutions`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L53)
+
+- [ ] **entelechy_marker_prioritizer.py:82** (LOW, Feature Completion)
+  - `'TODO': re.compile(r'(//|#|;)\s*TODO[:\s](.+)', re.IGNORECASE),`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L82)
+
+- [ ] **entelechy_marker_prioritizer.py:83** (LOW, Feature Completion)
+  - `'FIXME': re.compile(r'(//|#|;)\s*FIXME[:\s](.+)', re.IGNORECASE),`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L83)
+
+- [ ] **entelechy_marker_prioritizer.py:84** (LOW, Feature Completion)
+  - `'STUB': re.compile(r'(//|#|;)\s*STUB[:\s]?(.+)', re.IGNORECASE),`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L84)
+
+- [ ] **entelechy_marker_prioritizer.py:86** (LOW, Feature Completion)
+  - `'HACK': re.compile(r'(//|#|;)\s*HACK[:\s](.+)', re.IGNORECASE),`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/entelechy_marker_prioritizer.py#L86)
 
 - [ ] **entelechy_marker_resolver.py:135** (LOW, Documentation)
   - `"""Get markers that are easy to resolve (documentation, simple todos)."""`
@@ -9139,28 +9175,28 @@ A section for emergent TODOs.
 - **AI System**: 27 items
 - **Build System**: 379 items
 - **Core Utilities**: 22 items
-- **MOSES Representation/Scoring**: 259 items
+- **MOSES Representation/Scoring**: 253 items
 - **Memory System**: 105 items
-- **Other**: 1292 items
+- **Other**: 1307 items
 - **Persistence Subsystem**: 140 items
 - **Task System**: 4 items
 - **Testing Framework**: 39 items
 
 ### By Category
 - **Distributed Systems**: 3 items
-- **Documentation**: 44 items
+- **Documentation**: 45 items
 - **Error Handling**: 75 items
-- **Feature Completion**: 1831 items
+- **Feature Completion**: 1841 items
 - **Pattern Matching**: 42 items
 - **Performance**: 30 items
 - **Testing**: 223 items
-- **Thread Safety**: 19 items
+- **Thread Safety**: 17 items
 
 ### By Priority
 - **CRITICAL**: 7 items
-- **HIGH**: 31 items
+- **HIGH**: 29 items
 - **MEDIUM**: 159 items
-- **LOW**: 2070 items
+- **LOW**: 2081 items
 
 ---
 
@@ -9202,4 +9238,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-24 00:55:30 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-25 18:59:34 UTC*
