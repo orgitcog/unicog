@@ -38,3 +38,9 @@ node_modules/
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Test executables
+test_tensor_rules
+test_*_kernel
+*_test
+*.test
