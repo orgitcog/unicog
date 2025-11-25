@@ -231,7 +231,8 @@ protected:
 // or something like that, as it is a unary logical function ... err...
 // well, I guess all combo opers are unary, due to Currying.
 //
-// note - children aren't canonized when parents are called (??? huh ???)
+// Canonization stops at this knob because the subtree is treated as an opaque
+// chunk: replacing the logical fragment also swaps out every descendant knob.
 struct logical_subtree_knob : public discrete_knob<3>
 {
     static const int absent = 0;
@@ -272,9 +273,11 @@ private:
 
 #define MAX_PERM_ACTIONS 128
 
-// Note - children aren't canonized when parents are called.
-// TODO: Clarify the canonization behavior for parent-child relationships.
-// Clarification needed: Review and document the intended behavior
+// Children aren't canonized when parents are called because each knob selection
+// swaps the target subtree with one of the pre-generated permutations stored in
+// `_perms`. Those permutations are produced by `build_knobs::action_canonize`
+// and already follow the canonical layout, so recursing would mutate the cached
+// trees and break knob indices.
 struct action_subtree_knob : public discrete_knob<MAX_PERM_ACTIONS>
 {
     typedef combo_tree::pre_order_iterator pre_it;
