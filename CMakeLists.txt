@@ -54,6 +54,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atomspace-rocks/CMakeLists.txt")
     add_subdirectory(atomspace-rocks)
 endif()
 
+# Add atomspace-restful if it exists and has CMakeLists.txt
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atomspace-restful/CMakeLists.txt")
+    add_subdirectory(atomspace-restful)
+endif()
+
 # Phase I: Core Extensions (Week 3)
 # Add moses if it exists and has CMakeLists.txt
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/moses/CMakeLists.txt")
@@ -70,6 +75,10 @@ endif()
 # atomspace-rocks depends on atomspace
 if(TARGET atomspace-rocks)
     add_dependencies(atomspace-rocks atomspace)
+endif()
+# atomspace-restful depends on atomspace
+if(TARGET atomspace-restful)
+    add_dependencies(atomspace-restful atomspace)
 endif()
 # cogserver optionally depends on atomspace-rocks for RocksDB storage tests
 if(TARGET atomspace-rocks)

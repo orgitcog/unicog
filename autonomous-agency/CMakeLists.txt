@@ -3,15 +3,26 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 # Autonomous Agency Module Configuration
 PROJECT(AutonomousAgency)
 
-# Find required OpenCog components
-FIND_PACKAGE(OpenCog REQUIRED)
+# In a monorepo, OpenCog components are available via parent CMake
+# Find required OpenCog components (optional for monorepo builds)
+FIND_PACKAGE(OpenCog QUIET)
 
-# Include OpenCog directories
-INCLUDE_DIRECTORIES(
-    ${OPENCOG_INCLUDE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
+# Include OpenCog directories if found, otherwise use parent scope
+IF(OpenCog_FOUND)
+    INCLUDE_DIRECTORIES(
+        ${OPENCOG_INCLUDE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
+    )
+ELSE()
+    # In monorepo context, use parent-level includes
+    INCLUDE_DIRECTORIES(
+        ${CMAKE_SOURCE_DIR}/atomspace/opencog
+        ${CMAKE_SOURCE_DIR}/cogutil/opencog
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
+    )
+ENDIF()
 
 # Set C++ standard
 SET(CMAKE_CXX_STANDARD 17)
