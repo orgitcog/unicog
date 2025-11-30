@@ -25,7 +25,12 @@ extract_workflow_patterns() {
         echo "  📋 Analyzing bootstrap workflow patterns..."
         
         # Extract job names and dependencies
-        local jobs=($(grep -E "^[[:space:]]*[a-zA-Z_-]+:" ".github/workflows/bootstrap.yml" | grep -v "^[[:space:]]*name:" | sed 's/:.*//g' | sed 's/^[[:space:]]*//' || echo ""))
+        local jobs=()
+        while IFS= read -r line; do
+            if [[ -n "$line" ]]; then
+                jobs+=("$line")
+            fi
+        done < <(grep -E "^[[:space:]]*[a-zA-Z_-]+:" ".github/workflows/bootstrap.yml" 2>/dev/null | grep -v "^[[:space:]]*name:" | sed 's/:.*//g' | sed 's/^[[:space:]]*//' || true)
         
         for job in "${jobs[@]}"; do
             if [[ -n "$job" && "$job" != "on" && "$job" != "permissions" ]]; then
@@ -44,7 +49,12 @@ extract_workflow_patterns() {
         done
         
         # Extract step patterns within jobs
-        local steps=($(grep -E "^[[:space:]]*-[[:space:]]*name:" ".github/workflows/bootstrap.yml" | sed 's/.*name:[[:space:]]*//' | sed 's/[[:space:]]*$//' || echo ""))
+        local steps=()
+        while IFS= read -r line; do
+            if [[ -n "$line" ]]; then
+                steps+=("$line")
+            fi
+        done < <(grep -E "^[[:space:]]*-[[:space:]]*name:" ".github/workflows/bootstrap.yml" 2>/dev/null | sed 's/.*name:[[:space:]]*//' | sed 's/[[:space:]]*$//' || true)
         
         for step in "${steps[@]}"; do
             if [[ -n "$step" ]]; then
@@ -88,7 +98,9 @@ encode_cognitive_patterns() {
         done
         
         # Extract verification patterns
-        local verifications=($(grep -E "(verify|test|check|validate)" "$script" | wc -l))
+        local verifications=$(grep -E "(verify|test|check|validate)" "$script" 2>/dev/null | wc -l)
+        verifications=${verifications//[^0-9]/}  # Remove non-numeric characters
+        verifications=${verifications:-0}  # Default to 0 if empty
         if [[ $verifications -gt 0 ]]; then
             cognitive_nodes+=("verification:${script_name}:${verifications}_checks")
             cognitive_edges+=("${script_name}->verification_process")
@@ -97,6 +109,8 @@ encode_cognitive_patterns() {
         
         # Extract attention patterns
         local attention_patterns=$(grep -c -i "attention\|focus\|cognitive\|ecan" "$script" 2>/dev/null || echo "0")
+        attention_patterns=${attention_patterns//[^0-9]/}  # Remove non-numeric characters
+        attention_patterns=${attention_patterns:-0}  # Default to 0 if empty
         if [[ $attention_patterns -gt 0 ]]; then
             cognitive_nodes+=("attention:${script_name}:${attention_patterns}_patterns")
             cognitive_edges+=("${script_name}->attention_allocation")
@@ -125,8 +139,14 @@ map_code_to_hypergraph() {
     while IFS= read -r -d '' file; do
         local filename=$(basename "$file")
         local classes=$(grep -c "^[[:space:]]*class[[:space:]]" "$file" 2>/dev/null || echo "0")
+        classes=${classes//[^0-9]/}  # Remove non-numeric characters
+        classes=${classes:-0}  # Default to 0 if empty
         local functions=$(grep -c "^[[:space:]]*[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*(" "$file" 2>/dev/null || echo "0")
+        functions=${functions//[^0-9]/}  # Remove non-numeric characters
+        functions=${functions:-0}  # Default to 0 if empty
         local includes=$(grep -c "^[[:space:]]*#include" "$file" 2>/dev/null || echo "0")
+        includes=${includes//[^0-9]/}  # Remove non-numeric characters
+        includes=${includes:-0}  # Default to 0 if empty
         
         if [[ $((classes + functions)) -gt 0 ]]; then
             code_nodes+=("cpp:$filename:classes_${classes}:functions_${functions}")
@@ -146,8 +166,14 @@ map_code_to_hypergraph() {
     while IFS= read -r -d '' file; do
         local filename=$(basename "$file")
         local definitions=$(grep -c "^[[:space:]]*([[:space:]]*define" "$file" 2>/dev/null || echo "0")
+        definitions=${definitions//[^0-9]/}  # Remove non-numeric characters
+        definitions=${definitions:-0}  # Default to 0 if empty
         local lambdas=$(grep -c "lambda" "$file" 2>/dev/null || echo "0")
+        lambdas=${lambdas//[^0-9]/}  # Remove non-numeric characters
+        lambdas=${lambdas:-0}  # Default to 0 if empty
         local modules=$(grep -c "use-modules" "$file" 2>/dev/null || echo "0")
+        modules=${modules//[^0-9]/}  # Remove non-numeric characters
+        modules=${modules:-0}  # Default to 0 if empty
         
         if [[ $((definitions + lambdas)) -gt 0 ]]; then
             code_nodes+=("scheme:$filename:definitions_${definitions}:lambdas_${lambdas}")
