@@ -83,24 +83,36 @@ ELSE (COGUTIL_FOUND)
 ENDIF (COGUTIL_FOUND)
 
 # AtomSpace
-FIND_PACKAGE(AtomSpace 5.0.3 CONFIG REQUIRED)
+# In monorepo context, AtomSpace is available via parent build
+FIND_PACKAGE(AtomSpace 5.0.3 CONFIG QUIET)
 IF (ATOMSPACE_FOUND)
 	MESSAGE(STATUS "AtomSpace found.")
 	ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
 	SET(HAVE_ATOMSPACE 1)
-ELSE (ATOMSPACE_FOUND)
-	MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
-ENDIF (ATOMSPACE_FOUND)
+ELSE ()
+	# In monorepo context, set AtomSpace variables manually
+	MESSAGE(STATUS "AtomSpace not found as package, using monorepo structure")
+	SET(ATOMSPACE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/atomspace)
+	SET(HAVE_ATOMSPACE 1)
+	ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
+	INCLUDE_DIRECTORIES(${ATOMSPACE_INCLUDE_DIR})
+ENDIF ()
 
 # Unify
-FIND_PACKAGE(Unify CONFIG)
+# In monorepo context, Unify is available via parent build
+FIND_PACKAGE(Unify CONFIG QUIET)
 IF (UNIFY_FOUND)
 	MESSAGE(STATUS "Unify version ${UNIFY_VERSION} found.")
 	ADD_DEFINITIONS(-DHAVE_UNIFY)
 	SET(HAVE_UNIFY 1)
-ELSE (UNIFY_FOUND)
-	MESSAGE(FATAL_ERROR "Unify missing: it is needed!")
-ENDIF (UNIFY_FOUND)
+ELSE ()
+	# In monorepo context, set Unify variables manually
+	MESSAGE(STATUS "Unify not found as package, using monorepo structure")
+	SET(UNIFY_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/unify)
+	SET(HAVE_UNIFY 1)
+	ADD_DEFINITIONS(-DHAVE_UNIFY)
+	INCLUDE_DIRECTORIES(${UNIFY_INCLUDE_DIR})
+ENDIF ()
 
 # add the 'cmake' directory from cogutil to search path
 list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)

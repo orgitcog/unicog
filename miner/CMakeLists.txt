@@ -13,9 +13,20 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find required dependencies
-find_package(CogUtil REQUIRED)
-find_package(AtomSpace REQUIRED)
-find_package(URE REQUIRED)
+find_package(CogUtil QUIET)
+find_package(AtomSpace QUIET)
+find_package(URE QUIET)
+
+# In monorepo context, handle missing packages
+IF(NOT COGUTIL_FOUND)
+	SET(COGUTIL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/cogutil)
+ENDIF()
+IF(NOT ATOMSPACE_FOUND)
+	SET(ATOMSPACE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/atomspace)
+ENDIF()
+IF(NOT URE_FOUND)
+	SET(URE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/ure)
+ENDIF()
 
 # Include directories
 include_directories(

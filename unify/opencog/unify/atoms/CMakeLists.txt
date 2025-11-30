@@ -28,4 +28,4 @@ INSTALL (FILES
 )
 
 # Bogus boiler-plate generator for unit testing.
-ADD_GUILE_EXTENSION(SCM_CONFIG unify-atoms "opencog-ext-path-unify-atoms")
+ADD_GUILE_EXTENSION(SCM_CONFIG_UNIFY unify-atoms "opencog-ext-path-unify-atoms")

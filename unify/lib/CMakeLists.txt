@@ -20,6 +20,11 @@ configure_package_config_file(UnifyConfig.cmake.in
 	PATH_VARS CMAKE_INSTALL_PREFIX
 )
 
+# Ensure SEMANTIC_VERSION has a value
+IF(NOT SEMANTIC_VERSION)
+	SET(SEMANTIC_VERSION "1.0.0")
+ENDIF()
+
 write_basic_package_version_file(
 	"${CMAKE_CURRENT_BINARY_DIR}/UnifyConfigVersion.cmake"
 	VERSION ${SEMANTIC_VERSION}

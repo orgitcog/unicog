@@ -175,7 +175,15 @@ ENDIF (VALGRIND_FOUND)
 # TODO: Once CMAKE_MINIMUM_REQUIRED >= 3.0.2 check use of policy
 # CMP0048.
 #
-FILE(READ "${CMAKE_SOURCE_DIR}/opencog/unify/version.h" _UNIFY_H_CONTENTS)
+# In monorepo context, adjust path to version.h
+IF(EXISTS "${CMAKE_SOURCE_DIR}/opencog/unify/version.h")
+	FILE(READ "${CMAKE_SOURCE_DIR}/opencog/unify/version.h" _UNIFY_H_CONTENTS)
+ELSEIF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/opencog/unify/version.h")
+	FILE(READ "${CMAKE_CURRENT_SOURCE_DIR}/opencog/unify/version.h" _UNIFY_H_CONTENTS)
+ELSE()
+	# Default version if file not found
+	SET(_UNIFY_H_CONTENTS "#define UNIFY_VERSION_STRING \"1.0.0\"")
+ENDIF()
 STRING(REGEX MATCH
 	"#define UNIFY_VERSION_STRING \"([0-9]+[.0-9]+[.0-9]+)\""
         _ "${_UNIFY_H_CONTENTS}")
@@ -254,7 +262,7 @@ IF (CXXTEST_FOUND)
 ENDIF (CXXTEST_FOUND)
 
 IF (NOT WIN32)
-	ADD_CUSTOM_TARGET (examples
+	ADD_CUSTOM_TARGET (unify-examples
 		# using CMAKE_BUILD_TOOL results in teh cryptic error message
 		# warning: jobserver unavailable: using -j1.  Add `+' to parent make rule.
 		# This is because make doesn't know how to pass jobserver args to
@@ -263,15 +271,15 @@ IF (NOT WIN32)
 		# COMMAND ${CMAKE_BUILD_TOOL}
 		COMMAND $(MAKE)
 		WORKING_DIRECTORY examples
-		COMMENT "Building examples"
+		COMMENT "Building unify examples"
 	)
 ENDIF (NOT WIN32)
 
-ADD_CUSTOM_TARGET(cscope
+ADD_CUSTOM_TARGET(cscope-unify
 	COMMAND find opencog examples tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' -o -name '*.scm' > ${CMAKE_SOURCE_DIR}/cscope.files
 	COMMAND cscope -b
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-	COMMENT "Generating CScope database"
+	COMMENT "Generating CScope database for unify"
 )
 
 # ===============================================================
