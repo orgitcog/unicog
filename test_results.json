@@ -1,0 +1,37 @@
+{
+  "passed": [
+    {
+      "test": "test_pattern.tearDown",
+      "details": "Properly implemented with cleanup logic"
+    }
+  ],
+  "failed": [
+    {
+      "test": "fileconfman.save_config",
+      "reason": "attempted relative import with no known parent package"
+    },
+    {
+      "test": "no_mock_implementations",
+      "reason": "Found 4 potential mock implementations",
+      "details": [
+        {
+          "file": "./test_implementations.py",
+          "pattern": "pass  # TODO"
+        },
+        {
+          "file": "./test_implementations.py",
+          "pattern": "pass  # FIXME"
+        },
+        {
+          "file": "./test_implementations.py",
+          "pattern": "return None  # placeholder"
+        },
+        {
+          "file": "./test_implementations.py",
+          "pattern": "raise NotImplementedError  # TODO"
+        }
+      ]
+    }
+  ],
+  "skipped": []
+}
