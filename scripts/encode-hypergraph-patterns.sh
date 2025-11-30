@@ -108,7 +108,7 @@ encode_cognitive_patterns() {
         fi
         
         # Extract attention patterns
-        local attention_patterns=$(grep -c -i "attention\|focus\|cognitive\|ecan" "$script" 2>/dev/null | head -1 || echo "0")
+        local attention_patterns=$(grep -c -i "attention\|focus\|cognitive\|ecan" "$script" 2>/dev/null || echo "0")
         attention_patterns=${attention_patterns//[^0-9]/}  # Remove non-numeric characters
         attention_patterns=${attention_patterns:-0}  # Default to 0 if empty
         if [[ $attention_patterns -gt 0 ]]; then

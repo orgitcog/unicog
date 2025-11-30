@@ -148,14 +148,17 @@ T tensor_fold_op(const T* input, size_t len, FoldType fold_type) {
             // This is specifically designed for bootstrap workflow pattern analysis
             result = T();
             if (len > 0) {
+                // Pre-compute denominator for performance
+                const T len_T = static_cast<T>(len);
+                
                 // First pass: accumulate weighted by depth position
                 for (size_t i = 0; i < len; ++i) {
                     // Weight decreases exponentially with depth to model recursive patterns
-                    T depth_weight = std::exp(-static_cast<T>(i) / static_cast<T>(len));
+                    T depth_weight = std::exp(-static_cast<T>(i) / len_T);
                     result += input[i] * depth_weight;
                 }
                 // Normalize by recursive depth factor
-                result /= static_cast<T>(len);
+                result /= len_T;
             }
             break;
             

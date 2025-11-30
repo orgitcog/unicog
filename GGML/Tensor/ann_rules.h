@@ -16,6 +16,10 @@
 namespace ggml {
 namespace tensor {
 
+// Constants for symbolic attention threshold
+constexpr float SYMBOLIC_ATTENTION_THRESHOLD_F = 0.75f;
+constexpr double SYMBOLIC_ATTENTION_THRESHOLD_D = 0.75;
+
 // Constants for numerical stability and precision
 constexpr float EPSILON_F = 1e-10f;
 constexpr double EPSILON_D = 1e-10;
@@ -194,13 +198,15 @@ void activate_tensor(T* output, const T* input, size_t len,
             
         case ActivationType::SYMBOLIC_ATTENTION: {
             // Symbolic attention allocation for hypergraph patterns
-            // Threshold-based activation with 0.75 minimum for symbolic processing
-            constexpr T SYMBOLIC_THRESHOLD = static_cast<T>(0.75);
+            // Threshold-based activation with configurable minimum for symbolic processing
+            const T SYMBOLIC_THRESHOLD = (sizeof(T) == sizeof(float)) 
+                ? static_cast<T>(SYMBOLIC_ATTENTION_THRESHOLD_F)
+                : static_cast<T>(SYMBOLIC_ATTENTION_THRESHOLD_D);
             
             // First normalize input to [0, 1] range using sigmoid
             for (size_t i = 0; i < len; ++i) {
                 T normalized = static_cast<T>(1) / (static_cast<T>(1) + std::exp(-input[i]));
-                // Apply threshold - values below 0.75 are suppressed, above are amplified
+                // Apply threshold - values below threshold are suppressed, above are amplified
                 if (normalized >= SYMBOLIC_THRESHOLD) {
                     // Amplify symbolic attention for high-value patterns
                     output[i] = normalized * (normalized / SYMBOLIC_THRESHOLD);
