@@ -248,11 +248,14 @@ void TypeChoice::analyze(Handle anontype)
 
 	if (VARIABLE_NODE == t)
 	{
-		// This is a work-around to a URE bug. The URE should be
-		// using a SignatureLink, but its not. As a result, it
-		// gets undefined behavior and incorrect results. Too bad.
-		// For now, just avoid throwing an exception. XXX FIXME.
-		return;
+		// The URE has a bug where it doesn't use SignatureLink properly.
+		// Instead of silently accepting this and causing undefined behavior,
+		// we now throw an exception to make the error explicit.
+		// This helps identify and fix URE usage issues early.
+		throw SyntaxException(TRACE_INFO,
+			"Unexpected VariableNode in type specification.\n"
+			"VariableNodes should be wrapped in a SignatureLink.\n"
+			"Got: %s", anontype->to_string().c_str());
 	}
 
 	// We need to assume that what we got is a type constant.

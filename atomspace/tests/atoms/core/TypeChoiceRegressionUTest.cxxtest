@@ -1,0 +1,110 @@
+/*
+ * tests/atoms/core/TypeChoiceRegressionUTest.cxxtest
+ *
+ * Copyright (C) 2025 OpenCog Foundation
+ * All Rights Reserved
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License v3 as
+ * published by the Free Software Foundation and including the exceptions
+ * at http://opencog.org/wiki/Licenses
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program; if not, write to:
+ * Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+#include <opencog/atoms/base/Atom.h>
+#include <opencog/atoms/base/Node.h>
+#include <opencog/atoms/core/TypeChoice.h>
+#include <opencog/atomspace/AtomSpace.h>
+#include <opencog/util/exceptions.h>
+
+using namespace opencog;
+
+class TypeChoiceRegressionUTest : public CxxTest::TestSuite
+{
+private:
+	AtomSpacePtr as;
+
+public:
+	TypeChoiceRegressionUTest()
+	{
+		as = createAtomSpace();
+	}
+
+	void setUp() {}
+	void tearDown() {}
+
+	/**
+	 * Test that VariableNode in type specification throws exception
+	 * This is a regression test for the FIXME in TypeChoice.cc:254
+	 * 
+	 * Previously, the code would silently accept VariableNodes and
+	 * cause undefined behavior. Now it should throw a SyntaxException.
+	 */
+	void test_variable_node_throws_exception()
+	{
+		// Create a VariableNode
+		Handle var = as->add_node(VARIABLE_NODE, "$X");
+		
+		// Try to create a TypeChoice with a VariableNode
+		// This should throw a SyntaxException
+		HandleSeq hs;
+		hs.push_back(var);
+		
+		bool exception_thrown = false;
+		try {
+			Handle tc = as->add_link(TYPE_CHOICE, hs);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			// Verify the error message mentions VariableNode and SignatureLink
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("VariableNode") != std::string::npos);
+			TS_ASSERT(msg.find("SignatureLink") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that valid TypeChoice constructions still work
+	 */
+	void test_valid_type_choice()
+	{
+		// Create valid type specifications
+		Handle concept_type = as->add_node(TYPE_NODE, "ConceptNode");
+		Handle number_type = as->add_node(TYPE_NODE, "NumberNode");
+		
+		// This should work fine
+		HandleSeq hs;
+		hs.push_back(concept_type);
+		hs.push_back(number_type);
+		
+		Handle tc = as->add_link(TYPE_CHOICE, hs);
+		TS_ASSERT(tc != nullptr);
+	}
+
+	/**
+	 * Test that VariableNode wrapped in SignatureLink works
+	 */
+	void test_variable_in_signature_link()
+	{
+		// Create a VariableNode wrapped in SignatureLink (correct usage)
+		Handle var = as->add_node(VARIABLE_NODE, "$X");
+		Handle sig = as->add_link(SIGNATURE_LINK, var);
+		
+		// This should work because VariableNode is properly wrapped
+		HandleSeq hs;
+		hs.push_back(sig);
+		
+		Handle tc = as->add_link(TYPE_CHOICE, hs);
+		TS_ASSERT(tc != nullptr);
+	}
+};
