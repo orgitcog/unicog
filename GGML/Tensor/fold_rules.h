@@ -318,10 +318,20 @@ std::vector<T> tensor_fold_depth_aware(const Tensor<T>* input, size_t depth, Fol
     
     // Apply fold at each depth level with boundary checks
     // Each depth level processes a progressively smaller slice
+    // Algorithm: depth=0 processes full tensor, depth=N-1 processes 1/N of tensor
     for (size_t d = 0; d < depth; ++d) {
-        // Calculate slice size: starts at total_size, reduces by depth factor
-        // For depth d: process elements 0..(total_size * (depth-d) / depth)
-        size_t slice_size = (input->total_size * (depth - d)) / depth;
+        // Calculate slice size with proper rounding
+        // Formula: slice_size = total_size * (depth - d) / depth
+        // Example with depth=3, total=12: d=0→12, d=1→8, d=2→4
+        size_t numerator = input->total_size * (depth - d);
+        size_t slice_size = numerator / depth;
+        
+        // Round up if there's a remainder to ensure coverage
+        if (numerator % depth != 0) {
+            slice_size += 1;
+        }
+        
+        // Safety check: ensure at least 1 element
         if (slice_size == 0) slice_size = 1;
         
         // Ensure we don't exceed tensor bounds
