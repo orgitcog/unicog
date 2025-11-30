@@ -105,25 +105,25 @@ Handle OpenPsiRules::add_to_category(const Handle& rule, const Handle& category)
   return rule;
 }
 
-HandleSeq& OpenPsiRules::get_categories()
+HandleSeq OpenPsiRules::get_categories()
 {
-  HandleSeq* categories = new HandleSeq();
+  HandleSeq categories;
   for(auto i : _category_index) {
-    categories->emplace_back(i.first);
+    categories.emplace_back(i.first);
   }
 
-  // TODO: Should this be a shared ptr to avoid memory leak?
-  return *categories;
+  // Fixed: Return by value using move semantics (RVO)
+  return categories;
 }
 
-HandleSeq& OpenPsiRules::get_context(const Handle rule)
+HandleSeq OpenPsiRules::get_context(const Handle rule)
 {
   if(_psi_rules.count(rule)) {
     return std::get<0>(_psi_rules[rule]);
   } else {
-    // TODO: Should this be a shared ptr to avoid memory leak?
-    HandleSeq* hs = new HandleSeq();
-    return *hs;
+    // Fixed: Return static empty sequence to avoid memory leak
+    static const HandleSeq empty_seq;
+    return empty_seq;
   }
 }
 

@@ -129,5 +129,8 @@ static __attribute__ ((constructor)) void init(void)
 
 /* This allows guile to load this shared library */
 extern "C" {
+	// Module initialization function for Guile FFI
+	// Empty because initialization is handled by C++ constructors
+	// and the LGDictNode factory registration
 	void opencog_nlp_lgparse_init(void) {}
 };

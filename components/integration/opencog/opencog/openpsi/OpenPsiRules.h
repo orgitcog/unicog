@@ -65,13 +65,13 @@ public:
    *
    * @return A vector of Handles that represent the categories.
    */
-  HandleSeq& get_categories();
+  HandleSeq get_categories();
 
   /**
    * @param rule A psi-rule.
    * @return Context of the given psi-rule.
    */
-  HandleSeq& get_context(const Handle rule);
+  HandleSeq get_context(const Handle rule);
 
   /**
    * @param rule A psi-rule.

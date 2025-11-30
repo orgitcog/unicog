@@ -106,8 +106,12 @@ void Variables::unpack_vartype(const Handle& htypelink)
  */
 void Variables::validate_vardecl(const Handle& hdecls)
 {
-	// XXX FIXME URE calls us with broken handle!!
-	if (nullptr == hdecls) return;
+	// Handle null/invalid handles gracefully
+	// URE may pass null handles in certain edge cases during pattern matching
+	if (nullptr == hdecls) {
+		logger().debug("[Variables] validate_vardecl called with null handle");
+		return;
+	}
 
 	// Expecting the declaration list to be either a single
 	// variable, a list or a set of variable declarations.

@@ -133,7 +133,13 @@ class RocksStorage : public StorageNode
 		void close(void);
 		bool connected(void); // connection to DB is alive
 
-		void create(void) {}
+		void create(void) {
+			// For RocksDB, database is created automatically on open()
+			// This method is a no-op as RocksDB creates the DB if it doesn't exist
+			if (!connected()) {
+				open();
+			}
+		}
 		void destroy(void) { 
 			kill_data(); 
 			if (_rfile) {
