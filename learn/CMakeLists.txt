@@ -13,18 +13,26 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find required dependencies
-find_package(CogUtil REQUIRED)
-find_package(AtomSpace REQUIRED)
+find_package(CogUtil QUIET)
+find_package(AtomSpace QUIET)
+
+# In monorepo context, handle missing packages
+IF(NOT COGUTIL_FOUND)
+	SET(COGUTIL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/cogutil)
+ENDIF()
+IF(NOT ATOMSPACE_FOUND)
+	SET(ATOMSPACE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/atomspace)
+ENDIF()
 
 # Find CogServer (required for learn module integration)
-find_package(CogServer CONFIG)
+find_package(CogServer CONFIG QUIET)
 if(CogServer_FOUND)
     message(STATUS "CogServer found.")
     set(HAVE_COGSERVER 1)
     add_definitions(-DHAVE_COGSERVER)
 else()
     message(STATUS "CogServer not found, using relative path")
-    set(COGSERVER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../cogserver)
+    set(COGSERVER_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/cogserver)
 endif()
 
 # Include directories
