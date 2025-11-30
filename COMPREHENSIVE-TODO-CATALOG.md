@@ -3,7 +3,7 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-11-30 20:37:12 UTC  
+**Generated**: 2025-11-30 22:57:07 UTC  
 **Total Items**: 2397  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
@@ -3461,9 +3461,9 @@ A section for emergent TODOs.
   - `; XXX technically, this is wrong, we should be renaming these...`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/attic/repair/word-merge.scm#L197)
 
-- [ ] **components/language/learn/attic/run-ull-2019/SchemeEval.cc:1028** (MEDIUM, Error Handling)
+- [ ] **components/language/learn/attic/run-ull-2019/SchemeEval.cc:1029** (MEDIUM, Error Handling)
   - `// TODO: it would be nice to pass exceptions on through, but`
-  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/attic/run-ull-2019/SchemeEval.cc#L1028)
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/language/learn/attic/run-ull-2019/SchemeEval.cc#L1029)
 
 - [ ] **components/language/learn/attic/run-v3/run-common/export-dictionary.scm:17** (MEDIUM, Feature Completion)
   - `; Create singleton classes. XXX This should be done elsewhere!?`
@@ -9722,4 +9722,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-30 20:37:12 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-30 22:57:07 UTC*
