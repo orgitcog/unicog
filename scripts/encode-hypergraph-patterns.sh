@@ -138,13 +138,13 @@ map_code_to_hypergraph() {
     # Map C++ files to hypernodes
     while IFS= read -r -d '' file; do
         local filename=$(basename "$file")
-        local classes=$(grep -c "^[[:space:]]*class[[:space:]]" "$file" 2>/dev/null | head -1 || echo "0")
+        local classes=$(grep -c "^[[:space:]]*class[[:space:]]" "$file" 2>/dev/null || echo "0")
         classes=${classes//[^0-9]/}  # Remove non-numeric characters
         classes=${classes:-0}  # Default to 0 if empty
-        local functions=$(grep -c "^[[:space:]]*[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*(" "$file" 2>/dev/null | head -1 || echo "0")
+        local functions=$(grep -c "^[[:space:]]*[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*(" "$file" 2>/dev/null || echo "0")
         functions=${functions//[^0-9]/}  # Remove non-numeric characters
         functions=${functions:-0}  # Default to 0 if empty
-        local includes=$(grep -c "^[[:space:]]*#include" "$file" 2>/dev/null | head -1 || echo "0")
+        local includes=$(grep -c "^[[:space:]]*#include" "$file" 2>/dev/null || echo "0")
         includes=${includes//[^0-9]/}  # Remove non-numeric characters
         includes=${includes:-0}  # Default to 0 if empty
         
@@ -165,13 +165,13 @@ map_code_to_hypergraph() {
     # Map Scheme files to hypernodes
     while IFS= read -r -d '' file; do
         local filename=$(basename "$file")
-        local definitions=$(grep -c "^[[:space:]]*([[:space:]]*define" "$file" 2>/dev/null | head -1 || echo "0")
+        local definitions=$(grep -c "^[[:space:]]*([[:space:]]*define" "$file" 2>/dev/null || echo "0")
         definitions=${definitions//[^0-9]/}  # Remove non-numeric characters
         definitions=${definitions:-0}  # Default to 0 if empty
-        local lambdas=$(grep -c "lambda" "$file" 2>/dev/null | head -1 || echo "0")
+        local lambdas=$(grep -c "lambda" "$file" 2>/dev/null || echo "0")
         lambdas=${lambdas//[^0-9]/}  # Remove non-numeric characters
         lambdas=${lambdas:-0}  # Default to 0 if empty
-        local modules=$(grep -c "use-modules" "$file" 2>/dev/null | head -1 || echo "0")
+        local modules=$(grep -c "use-modules" "$file" 2>/dev/null || echo "0")
         modules=${modules//[^0-9]/}  # Remove non-numeric characters
         modules=${modules:-0}  # Default to 0 if empty
         

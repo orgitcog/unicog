@@ -189,13 +189,6 @@ void activate_tensor(T* output, const T* input, size_t len,
             break;
         }
             
-        case ActivationType::LINEAR:
-        default:
-            for (size_t i = 0; i < len; ++i) {
-                output[i] = input[i];
-            }
-            break;
-            
         case ActivationType::SYMBOLIC_ATTENTION: {
             // Symbolic attention allocation for hypergraph patterns
             // Threshold-based activation with configurable minimum for symbolic processing
@@ -217,6 +210,13 @@ void activate_tensor(T* output, const T* input, size_t len,
             }
             break;
         }
+            
+        case ActivationType::LINEAR:
+        default:
+            for (size_t i = 0; i < len; ++i) {
+                output[i] = input[i];
+            }
+            break;
     }
 }
 
