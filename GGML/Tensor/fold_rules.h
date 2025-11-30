@@ -10,6 +10,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cmath>
 #include <vector>
 
 namespace ggml {
