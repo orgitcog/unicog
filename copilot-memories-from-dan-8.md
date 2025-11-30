@@ -40,3 +40,40 @@ Input
 Failed to store memory with error: Resource not found
 
 The memory storage failed, but that's okay. Let me create a final summary of what was accomplished
+
+---
+
+Perfect! Let me create a summary document for future reference:
+
+Call to store_memory
+Input
+{
+  "subject": "CMake build configuration",
+  "fact": "Use `initial_wait` of 90+ seconds for cmake configuration and 120+ seconds for full builds with `make -j$(nproc)`",
+  "citations": "Experience from this repair session - CMake takes 6-7 seconds to configure, full builds take 30-60 minutes",
+  "reason": "This timing information is critical for future build automation and CI/CD pipeline configuration. The repository is large with 22 components, and insufficient timeouts will cause premature cancellation of successful operations.",
+  "category": "bootstrap_and_build"
+}
+Failed to store memory with error: Resource not found
+
+Call to store_memory
+Input
+{
+  "subject": "monorepo package dependencies",
+  "fact": "In monorepo context, use QUIET with find_package and fallback to CMAKE_SOURCE_DIR paths when packages not found",
+  "citations": "Fixed in ure/CMakeLists.txt, miner/CMakeLists.txt, asmoses/CMakeLists.txt, lg-atomese/CMakeLists.txt, learn/CMakeLists.txt, opencog/CMakeLists.txt",
+  "reason": "Essential pattern for monorepo builds where components aren't installed as system packages. Future components should follow this pattern to work correctly in the unified repository structure.",
+  "category": "general"
+}
+Failed to store memory with error: Resource not found
+
+Call to store_memory
+Input
+{
+  "subject": "duplicate CMake targets",
+  "fact": "Rename duplicate targets with component-specific prefixes: moses-examples, cscope-rocks, SCM_CONFIG_URE",
+  "citations": "Fixed across moses/CMakeLists.txt, atomspace-rocks/CMakeLists.txt, unify/opencog/unify/CMakeLists.txt, ure/opencog/CMakeLists.txt",
+  "reason": "Critical for avoiding CMake target conflicts in monorepo. Future components must use unique target names. This pattern prevents build failures and ensures each component's targets are independently addressable.",
+  "category": "general"
+}
+Failed to store memory with error: Resource not found
