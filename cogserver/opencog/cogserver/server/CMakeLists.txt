@@ -36,7 +36,7 @@ IF (HAVE_GUILE)
 
 	INSTALL (TARGETS guile-cogserver DESTINATION "lib${LIB_DIR_SUFFIX}/opencog")
 
-	ADD_GUILE_EXTENSION(SCM_CONFIG guile-cogserver "opencog-ext-path-cogserver")
+	ADD_GUILE_EXTENSION(COGSERVER_SCM_CONFIG guile-cogserver "opencog-ext-path-cogserver")
 ENDIF (HAVE_GUILE)
 
 # ------------------------------------------------------------

@@ -27,7 +27,7 @@ INSTALL (TARGETS ure-types
 	LIBRARY DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
 )
 
-ADD_GUILE_EXTENSION(SCM_CONFIG ure-types "opencog-ext-path-ure-types")
+ADD_GUILE_EXTENSION(SCM_CONFIG_URE ure-types "opencog-ext-path-ure-types")
 
 INSTALL (FILES
 	${CMAKE_CURRENT_BINARY_DIR}/atom_types.h

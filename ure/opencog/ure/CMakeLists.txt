@@ -36,7 +36,7 @@ TARGET_LINK_LIBRARIES(ure
 	${GUILE_LIBRARIES}
 )
 
-ADD_GUILE_EXTENSION(SCM_CONFIG ure "opencog-ext-path-ure")
+ADD_GUILE_EXTENSION(SCM_CONFIG_URE ure "opencog-ext-path-ure")
 
 INSTALL (TARGETS ure 
     EXPORT URETargets

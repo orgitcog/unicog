@@ -225,11 +225,11 @@ IF (CXXTEST_FOUND)
 
 ENDIF (CXXTEST_FOUND)
 
-ADD_CUSTOM_TARGET(cscope
+ADD_CUSTOM_TARGET(cscope-rocks
 	COMMAND find opencog examples tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' -o -name '*.scm' > ${CMAKE_SOURCE_DIR}/cscope.files
 	COMMAND cscope -b
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-	COMMENT "Generating CScope database"
+	COMMENT "Generating CScope database for atomspace-rocks"
 )
 
 # ===================================================================

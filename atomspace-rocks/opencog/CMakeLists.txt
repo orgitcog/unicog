@@ -1,6 +1,6 @@
 
 # This declaration must happen before subdirectory traversal.
-DECLARE_GUILE_CONFIG_TARGET(SCM_CONFIG "opencog rocks-config" "OPENCOG_TEST")
+DECLARE_GUILE_CONFIG_TARGET(SCM_CONFIG_ROCKS "opencog rocks-config" "OPENCOG_TEST")
 
 IF (HAVE_CYTHON)
 	ADD_SUBDIRECTORY (cython)
@@ -15,13 +15,14 @@ ADD_GUILE_MODULE (FILES
    MODULE_DESTINATION "${GUILE_SITE_DIR}/opencog"
 )
 
-WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/rocks-config.scm SCM_CONFIG TRUE)
+WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/rocks-config.scm SCM_CONFIG_ROCKS TRUE)
 # Ugly hack to work around the icky config-file infrastructure
 FILE(APPEND ${GUILE_BIN_DIR}/opencog/rocks-config.scm
 	"(define-public opencog-ext-path-persist-mono \"${CMAKE_CURRENT_BINARY_DIR}/persist/monospace/\")\n")
 
-WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/rocks-config-installable.scm SCM_CONFIG FALSE)
+WRITE_GUILE_CONFIG(${GUILE_BIN_DIR}/opencog/rocks-config-installable.scm SCM_CONFIG_ROCKS FALSE)
 FILE(APPEND ${GUILE_BIN_DIR}/opencog/rocks-config-installable.scm
 	"(define-public opencog-ext-path-persist-mono opencog-ext-path-persist-rocks)\n")
 
 INSTALL(FILES ${GUILE_BIN_DIR}/opencog/rocks-config-installable.scm DESTINATION ${GUILE_SITE_DIR}/opencog RENAME rocks-config.scm)
+

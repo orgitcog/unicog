@@ -1,0 +1,28 @@
+{
+  "test_kernels": [
+    {
+      "name": "test_kernel_1",
+      "type": "primitive",
+      "description": "Test kernel for unit tests",
+      "parameters": {
+        "input_dim": 10,
+        "output_dim": 5
+      }
+    },
+    {
+      "name": "test_kernel_2",
+      "type": "composite",
+      "description": "Another test kernel",
+      "parameters": {
+        "components": ["test_kernel_1"],
+        "composition": "sequential"
+      }
+    }
+  ],
+  "test_configurations": {
+    "default": {
+      "max_iterations": 100,
+      "tolerance": 1e-6
+    }
+  }
+}

@@ -83,24 +83,36 @@ ELSE (COGUTIL_FOUND)
 ENDIF (COGUTIL_FOUND)
 
 # AtomSpace
-FIND_PACKAGE(AtomSpace 5.0.3 CONFIG REQUIRED)
+# In monorepo context, AtomSpace is available via parent build
+FIND_PACKAGE(AtomSpace 5.0.3 CONFIG QUIET)
 IF (ATOMSPACE_FOUND)
 	MESSAGE(STATUS "AtomSpace found.")
 	ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
 	SET(HAVE_ATOMSPACE 1)
-ELSE (ATOMSPACE_FOUND)
-	MESSAGE(FATAL_ERROR "AtomSpace missing: it is needed!")
-ENDIF (ATOMSPACE_FOUND)
+ELSE ()
+	# In monorepo context, set AtomSpace variables manually
+	MESSAGE(STATUS "AtomSpace not found as package, using monorepo structure")
+	SET(ATOMSPACE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/atomspace)
+	SET(HAVE_ATOMSPACE 1)
+	ADD_DEFINITIONS(-DHAVE_ATOMSPACE)
+	INCLUDE_DIRECTORIES(${ATOMSPACE_INCLUDE_DIR})
+ENDIF ()
 
 # Unify
-FIND_PACKAGE(Unify CONFIG)
+# In monorepo context, Unify is available via parent build
+FIND_PACKAGE(Unify CONFIG QUIET)
 IF (UNIFY_FOUND)
 	MESSAGE(STATUS "Unify version ${UNIFY_VERSION} found.")
 	ADD_DEFINITIONS(-DHAVE_UNIFY)
 	SET(HAVE_UNIFY 1)
-ELSE (UNIFY_FOUND)
-	MESSAGE(FATAL_ERROR "Unify missing: it is needed!")
-ENDIF (UNIFY_FOUND)
+ELSE ()
+	# In monorepo context, set Unify variables manually
+	MESSAGE(STATUS "Unify not found as package, using monorepo structure")
+	SET(UNIFY_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/unify)
+	SET(HAVE_UNIFY 1)
+	ADD_DEFINITIONS(-DHAVE_UNIFY)
+	INCLUDE_DIRECTORIES(${UNIFY_INCLUDE_DIR})
+ENDIF ()
 
 # add the 'cmake' directory from cogutil to search path
 list(APPEND CMAKE_MODULE_PATH  ${COGUTIL_DATA_DIR}/cmake)
@@ -173,7 +185,15 @@ ENDIF (VALGRIND_FOUND)
 # When minimum version is updated to 3.0.2+, we can use:
 # PROJECT(AtomSpace VERSION ${SEMANTIC_VERSION})
 #
-FILE(READ "${CMAKE_SOURCE_DIR}/opencog/ure/version.h" _URE_H_CONTENTS)
+# In monorepo context, adjust path to version.h
+IF(EXISTS "${CMAKE_SOURCE_DIR}/opencog/ure/version.h")
+	FILE(READ "${CMAKE_SOURCE_DIR}/opencog/ure/version.h" _URE_H_CONTENTS)
+ELSEIF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/opencog/ure/version.h")
+	FILE(READ "${CMAKE_CURRENT_SOURCE_DIR}/opencog/ure/version.h" _URE_H_CONTENTS)
+ELSE()
+	# Default version if file not found
+	SET(_URE_H_CONTENTS "#define URE_VERSION_STRING \"1.0.0\"")
+ENDIF()
 STRING(REGEX MATCH
 	"#define URE_VERSION_STRING \"([0-9]+[.0-9]+[.0-9]+)\""
         _ "${_URE_H_CONTENTS}")
@@ -190,9 +210,18 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${Boost_INCLUDE_DIRS}
 	${COGUTIL_INCLUDE_DIR} ${ATOMSPACE_INCLUDE_DIR})
 
 # Macros that define how atom types get declared.
-INCLUDE("${ATOMSPACE_DATA_DIR}/cmake/OpenCogMacros.cmake")
-INCLUDE("${ATOMSPACE_DATA_DIR}/cmake/OpenCogGuile.cmake")
-INCLUDE("${ATOMSPACE_DATA_DIR}/cmake/OpenCogCython.cmake")
+# In monorepo context, use cmake files from atomspace
+IF(EXISTS "${ATOMSPACE_DATA_DIR}/cmake/OpenCogMacros.cmake")
+	INCLUDE("${ATOMSPACE_DATA_DIR}/cmake/OpenCogMacros.cmake")
+	INCLUDE("${ATOMSPACE_DATA_DIR}/cmake/OpenCogGuile.cmake")
+	INCLUDE("${ATOMSPACE_DATA_DIR}/cmake/OpenCogCython.cmake")
+ELSEIF(EXISTS "${CMAKE_SOURCE_DIR}/atomspace/cmake/OpenCogMacros.cmake")
+	INCLUDE("${CMAKE_SOURCE_DIR}/atomspace/cmake/OpenCogMacros.cmake")
+	INCLUDE("${CMAKE_SOURCE_DIR}/atomspace/cmake/OpenCogGuile.cmake")
+	INCLUDE("${CMAKE_SOURCE_DIR}/atomspace/cmake/OpenCogCython.cmake")
+ELSE()
+	MESSAGE(STATUS "OpenCog cmake macros not found, some features may be disabled")
+ENDIF()
 
 # ==========================================================
 # Decide what to build, based on the packages found.
@@ -262,7 +291,7 @@ IF (CXXTEST_FOUND)
 ENDIF (CXXTEST_FOUND)
 
 IF (NOT WIN32)
-	ADD_CUSTOM_TARGET (examples
+	ADD_CUSTOM_TARGET (ure-examples
 		# using CMAKE_BUILD_TOOL results in teh cryptic error message
 		# warning: jobserver unavailable: using -j1.  Add `+' to parent make rule.
 		# This is because make doesn't know how to pass jobserver args to
@@ -271,15 +300,15 @@ IF (NOT WIN32)
 		# COMMAND ${CMAKE_BUILD_TOOL}
 		COMMAND $(MAKE)
 		WORKING_DIRECTORY examples
-		COMMENT "Building examples"
+		COMMENT "Building URE examples"
 	)
 ENDIF (NOT WIN32)
 
-ADD_CUSTOM_TARGET(cscope
+ADD_CUSTOM_TARGET(cscope-ure
 	COMMAND find opencog examples tests -name '*.cc' -o -name '*.h' -o -name '*.cxxtest' -o -name '*.scm' > ${CMAKE_SOURCE_DIR}/cscope.files
 	COMMAND cscope -b
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-	COMMENT "Generating CScope database"
+	COMMENT "Generating CScope database for URE"
 )
 
 # ===============================================================

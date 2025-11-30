@@ -13,16 +13,27 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find required dependencies
-find_package(CogUtil REQUIRED)
+find_package(CogUtil QUIET)
+
+# In monorepo context, handle missing CogUtil
+IF(NOT COGUTIL_FOUND)
+	SET(COGUTIL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/cogutil)
+ENDIF()
 
 # AtomSpace is a critical dependency for lg-atomese
-find_package(AtomSpace 5.0.3 CONFIG REQUIRED)
+# In monorepo context, AtomSpace is available via parent build
+find_package(AtomSpace 5.0.3 CONFIG QUIET)
 if(AtomSpace_FOUND)
     message(STATUS "AtomSpace found.")
     add_definitions(-DHAVE_ATOMSPACE)
     set(HAVE_ATOMSPACE 1)
 else()
-    message(FATAL_ERROR "AtomSpace missing: it is needed for lg-atomese!")
+    # In monorepo context, set AtomSpace variables manually
+    message(STATUS "AtomSpace not found as package, using monorepo structure")
+    set(ATOMSPACE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/atomspace)
+    set(HAVE_ATOMSPACE 1)
+    add_definitions(-DHAVE_ATOMSPACE)
+    include_directories(${ATOMSPACE_INCLUDE_DIR})
 endif()
 
 # Try to find Link Grammar
