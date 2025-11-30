@@ -55,7 +55,13 @@
   (let* ((result (catch #t
                    (lambda () (cog-execute! q))
                    (lambda (key . args)
-                     (display "Query execution error\n")
+                     (display (string-append "Query execution error: " 
+                                            (symbol->string key) 
+                                            " - " 
+                                            (if (not (null? args))
+                                                (object->string (car args))
+                                                "no details")
+                                            "\n"))
                      (Set)))))
     
     ; Validate query result is non-empty

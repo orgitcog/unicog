@@ -21,6 +21,16 @@ constexpr float EPSILON_F = 1e-10f;
 constexpr double EPSILON_D = 1e-10;
 constexpr float TEST_EPSILON_F = 0.001f;  // For unit tests
 
+// Constants for attention allocation (ECAN-style)
+constexpr float ATTENTION_ACTIVITY_STI_MULTIPLIER = 10.0f;  // STI increase per activity unit
+constexpr float ATTENTION_ACTIVITY_LTI_MULTIPLIER = 0.5f;   // LTI increase per activity unit
+constexpr float ATTENTION_STI_THRESHOLD = 50.0f;            // Minimum STI for active attention
+constexpr float ATTENTION_URGENCY_DIVISOR = 100.0f;         // STI to urgency conversion factor
+constexpr float ATTENTION_DEFAULT_STI = 100.0f;             // Default initial STI value
+constexpr float ATTENTION_LTI_WEIGHT = 0.5f;                // LTI contribution to total attention
+constexpr float ATTENTION_URGENCY_WEIGHT = 20.0f;           // Urgency contribution to total attention
+constexpr float ATTENTION_MAX_MODULATION = 2.0f;            // Maximum attention modulation factor
+
 /**
  * @brief Neural activation function types
  */
@@ -394,13 +404,13 @@ struct AttentionAllocation {
     float urgency;       // Processing urgency metric
     size_t allocations;  // Number of attention allocations
     
-    AttentionAllocation() : sti(100.0f), lti(0.0f), urgency(0.0f), allocations(0) {}
+    AttentionAllocation() : sti(ATTENTION_DEFAULT_STI), lti(0.0f), urgency(0.0f), allocations(0) {}
     
     // Update attention based on neural activity
     void update(float activity_level) {
-        sti += activity_level * 10.0f;
-        lti += activity_level * 0.5f;
-        urgency = (sti > 50.0f) ? sti / 100.0f : 0.0f;
+        sti += activity_level * ATTENTION_ACTIVITY_STI_MULTIPLIER;
+        lti += activity_level * ATTENTION_ACTIVITY_LTI_MULTIPLIER;
+        urgency = (sti > ATTENTION_STI_THRESHOLD) ? sti / ATTENTION_URGENCY_DIVISOR : 0.0f;
         allocations++;
     }
     
@@ -412,13 +422,13 @@ struct AttentionAllocation {
     }
     
     // Check if attention is above threshold
-    bool is_active(float threshold = 50.0f) const {
+    bool is_active(float threshold = ATTENTION_STI_THRESHOLD) const {
         return sti >= threshold;
     }
     
     // Get overall attention score
     float get_total_attention() const {
-        return sti + lti * 0.5f + urgency * 20.0f;
+        return sti + lti * ATTENTION_LTI_WEIGHT + urgency * ATTENTION_URGENCY_WEIGHT;
     }
 };
 
@@ -432,7 +442,7 @@ struct AttentionAllocation {
  */
 inline bool validate_attention_allocation(const AttentionAllocation& attention,
                                          const char* rule_name,
-                                         float activity_threshold = 50.0f) {
+                                         float activity_threshold = ATTENTION_STI_THRESHOLD) {
     bool is_valid = true;
     
     // Check for attention depletion
@@ -476,8 +486,11 @@ void activate_with_attention(T* output, const T* input, size_t len,
     // First apply standard activation
     activate_tensor(output, input, len, activation);
     
-    // Calculate attention modulation factor
-    float attention_factor = std::min(attention.get_total_attention() / 100.0f, 2.0f);
+    // Calculate attention modulation factor (capped at max modulation)
+    float attention_factor = std::min(
+        attention.get_total_attention() / ATTENTION_URGENCY_DIVISOR,
+        ATTENTION_MAX_MODULATION
+    );
     
     // Apply attention modulation to outputs
     for (size_t i = 0; i < len; ++i) {

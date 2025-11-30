@@ -241,22 +241,36 @@ Tensor<T>* tensor_fold_axis(const Tensor<T>* input, size_t axis, FoldType fold_t
         for (size_t inner = 0; inner < stride; ++inner) {
             size_t out_idx = (outer / outer_stride) * stride + inner;
             
-            // Boundary check for output index
-            if (out_idx >= output->total_size) continue;
+            // Boundary check for output index - skip if out of bounds
+            if (out_idx >= output->total_size) {
+                // This should not happen with correct stride calculation
+                // But we check to prevent buffer overflow
+                continue;
+            }
             
             // Collect elements to fold with boundary checks
             std::vector<T> fold_data;
             fold_data.reserve(fold_dim);
+            bool all_indices_valid = true;
+            
             for (size_t i = 0; i < fold_dim; ++i) {
                 size_t input_idx = outer + i * stride + inner;
                 // Verify index is within bounds
                 if (input_idx < input->total_size) {
                     fold_data.push_back(input->data[input_idx]);
+                } else {
+                    // If any index is invalid, this indicates a stride calculation error
+                    all_indices_valid = false;
+                    break;
                 }
             }
             
-            if (!fold_data.empty()) {
+            // Only compute fold if all indices were valid
+            if (all_indices_valid && !fold_data.empty()) {
                 output->data[out_idx] = tensor_fold_op(fold_data.data(), fold_data.size(), fold_type);
+            } else if (!all_indices_valid) {
+                // Stride calculation error - initialize to safe default
+                output->data[out_idx] = T();
             }
         }
     }
@@ -303,9 +317,11 @@ std::vector<T> tensor_fold_depth_aware(const Tensor<T>* input, size_t depth, Fol
     results.reserve(depth);
     
     // Apply fold at each depth level with boundary checks
+    // Each depth level processes a progressively smaller slice
     for (size_t d = 0; d < depth; ++d) {
-        // Calculate slice size for this depth level
-        size_t slice_size = input->total_size / (d + 1);
+        // Calculate slice size: starts at total_size, reduces by depth factor
+        // For depth d: process elements 0..(total_size * (depth-d) / depth)
+        size_t slice_size = (input->total_size * (depth - d)) / depth;
         if (slice_size == 0) slice_size = 1;
         
         // Ensure we don't exceed tensor bounds
