@@ -384,6 +384,107 @@ T neural_cross_entropy_loss(const T* predictions, const T* targets,
     return total_loss / static_cast<T>(batch_size);
 }
 
+/**
+ * @brief Attention allocation structure for neural network layers
+ * Tracks attention values for cognitive resource management (ECAN-style)
+ */
+struct AttentionAllocation {
+    float sti;           // Short-term importance (stimulus)
+    float lti;           // Long-term importance (learned value)
+    float urgency;       // Processing urgency metric
+    size_t allocations;  // Number of attention allocations
+    
+    AttentionAllocation() : sti(100.0f), lti(0.0f), urgency(0.0f), allocations(0) {}
+    
+    // Update attention based on neural activity
+    void update(float activity_level) {
+        sti += activity_level * 10.0f;
+        lti += activity_level * 0.5f;
+        urgency = (sti > 50.0f) ? sti / 100.0f : 0.0f;
+        allocations++;
+    }
+    
+    // Decay attention over time (ECAN-style decay)
+    void decay(float decay_rate = 0.1f) {
+        sti *= (1.0f - decay_rate);
+        if (sti < 0.0f) sti = 0.0f;
+        urgency *= (1.0f - decay_rate);
+    }
+    
+    // Check if attention is above threshold
+    bool is_active(float threshold = 50.0f) const {
+        return sti >= threshold;
+    }
+    
+    // Get overall attention score
+    float get_total_attention() const {
+        return sti + lti * 0.5f + urgency * 20.0f;
+    }
+};
+
+/**
+ * @brief Validate and diagnose attention allocation for neural rules
+ * Provides runtime diagnostics for attention leaks and misallocation
+ * @param attention Attention allocation structure
+ * @param rule_name Name of the rule being validated
+ * @param activity_threshold Minimum activity level for valid allocation
+ * @return true if attention allocation is valid, false if leak detected
+ */
+inline bool validate_attention_allocation(const AttentionAllocation& attention,
+                                         const char* rule_name,
+                                         float activity_threshold = 50.0f) {
+    bool is_valid = true;
+    
+    // Check for attention depletion
+    if (attention.sti < activity_threshold) {
+        // Attention leak detected - STI below threshold
+        is_valid = false;
+    }
+    
+    // Check for allocation anomalies
+    if (attention.allocations > 0 && attention.sti < 1.0f) {
+        // Attention leak - allocations occurred but STI critically low
+        is_valid = false;
+    }
+    
+    // Check urgency consistency
+    if (attention.sti > 100.0f && attention.urgency < 0.5f) {
+        // Attention inconsistency - high STI but low urgency
+        is_valid = false;
+    }
+    
+    return is_valid;
+}
+
+/**
+ * @brief Apply dynamic attention-weighted activation
+ * Modulates neural activation based on attention allocation
+ * @tparam T Data type
+ * @param output Output tensor (modified in place)
+ * @param input Input tensor
+ * @param len Length of tensor
+ * @param activation Base activation function
+ * @param attention Attention allocation for this layer
+ * 
+ * @note This implements attention-modulated neural processing where
+ *       activation strength is scaled by attention values (ECAN-inspired)
+ */
+template<typename T>
+void activate_with_attention(T* output, const T* input, size_t len,
+                            ActivationType activation,
+                            const AttentionAllocation& attention) {
+    // First apply standard activation
+    activate_tensor(output, input, len, activation);
+    
+    // Calculate attention modulation factor
+    float attention_factor = std::min(attention.get_total_attention() / 100.0f, 2.0f);
+    
+    // Apply attention modulation to outputs
+    for (size_t i = 0; i < len; ++i) {
+        output[i] *= static_cast<T>(attention_factor);
+    }
+}
+
 // Explicit template instantiations for common types
 extern template void activate_tensor<float>(float*, const float*, size_t, ActivationType, float);
 extern template void activate_tensor<double>(double*, const double*, size_t, ActivationType, double);
