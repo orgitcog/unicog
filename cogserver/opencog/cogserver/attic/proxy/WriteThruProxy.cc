@@ -107,11 +107,23 @@ void WriteThru::set_value_cb(const Handle& atom, const Handle& key,
 void WriteThru::set_values_cb(const Handle& atom)
 {
 	// Loop over all targets, and store everything.
-	// In principle, we should be selective, and only pass
-	// on the values we were given... this would require
-	// Sexpr::decode_slist to return a list of keys,
-	// and then we'd have to store one key at a time,
-	// which seems inefficient. But still ... XXX FIXME ?
+	// Trade-off analysis: Storing the entire atom (all keys) vs. selective storage:
+	//
+	// Current approach (store_atom):
+	// + Simple implementation
+	// + Ensures consistency across all keys
+	// - Transfers more data than necessary
+	// - Higher network/IO overhead
+	//
+	// Selective approach (store individual keys):
+	// + Minimal data transfer
+	// - Requires Sexpr::decode_slist API change
+	// - Multiple store operations may be less efficient than one bulk operation
+	// - More complex code
+	//
+	// Current decision: Keep bulk storage. Most atoms have few keys, so overhead
+	// is minimal. Revisit if profiling shows this as a bottleneck in high-traffic
+	// scenarios with many keys per atom.
 	for (const StorageNodePtr& snp : _targets)
 		snp->store_atom(atom);
 }

@@ -1,0 +1,135 @@
+/*
+ * tests/atoms/core/TypeUtilsExceptionUTest.cxxtest
+ *
+ * Copyright (C) 2025 OpenCog Foundation
+ * All Rights Reserved
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License v3 as
+ * published by the Free Software Foundation and including the exceptions
+ * at http://opencog.org/wiki/Licenses
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program; if not, write to:
+ * Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+#include <opencog/atoms/base/Atom.h>
+#include <opencog/atoms/base/Node.h>
+#include <opencog/atoms/core/TypeUtils.h>
+#include <opencog/atomspace/AtomSpace.h>
+#include <opencog/util/exceptions.h>
+
+using namespace opencog;
+
+class TypeUtilsExceptionUTest : public CxxTest::TestSuite
+{
+private:
+	AtomSpacePtr as;
+
+public:
+	TypeUtilsExceptionUTest()
+	{
+		as = createAtomSpace();
+	}
+
+	void setUp() {}
+	void tearDown() {}
+
+	/**
+	 * Test that filter_vardecl throws exception for unrecognized variable declarations
+	 * This is a regression test for the FIXME in TypeUtils.cc:421
+	 * 
+	 * Previously, the code would silently return Handle::UNDEFINED.
+	 * Now it should throw a SyntaxException with a clear error message.
+	 */
+	void test_filter_vardecl_throws_on_invalid_input()
+	{
+		// Create an invalid variable declaration (e.g., a ConceptNode)
+		Handle invalid_vardecl = as->add_node(CONCEPT_NODE, "not-a-variable");
+		Handle body = as->add_node(VARIABLE_NODE, "$X");
+		
+		bool exception_thrown = false;
+		try {
+			Handle result = filter_vardecl(invalid_vardecl, body);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			// Verify the error message is informative
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("Unrecognized") != std::string::npos ||
+			          msg.find("malformed") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that valid variable declarations still work
+	 */
+	void test_filter_vardecl_valid_variable_node()
+	{
+		Handle var = as->add_node(VARIABLE_NODE, "$X");
+		Handle body = var; // Body contains the variable
+		
+		Handle result = filter_vardecl(var, body);
+		TS_ASSERT(result == var);
+	}
+
+	/**
+	 * Test that GlobNode works
+	 */
+	void test_filter_vardecl_valid_glob_node()
+	{
+		Handle glob = as->add_node(GLOB_NODE, "$G");
+		Handle body = glob;
+		
+		Handle result = filter_vardecl(glob, body);
+		TS_ASSERT(result == glob);
+	}
+
+	/**
+	 * Test that TypedVariableLink works
+	 */
+	void test_filter_vardecl_valid_typed_variable()
+	{
+		Handle var = as->add_node(VARIABLE_NODE, "$X");
+		Handle type = as->add_node(TYPE_NODE, "ConceptNode");
+		Handle typed_var = as->add_link(TYPED_VARIABLE_LINK, var, type);
+		Handle body = var;
+		
+		Handle result = filter_vardecl(typed_var, body);
+		TS_ASSERT(result == typed_var);
+	}
+
+	/**
+	 * Test that VariableList works
+	 */
+	void test_filter_vardecl_valid_variable_list()
+	{
+		Handle var1 = as->add_node(VARIABLE_NODE, "$X");
+		Handle var2 = as->add_node(VARIABLE_NODE, "$Y");
+		Handle varlist = as->add_link(VARIABLE_LIST, var1, var2);
+		Handle body = var1; // Body contains var1
+		
+		Handle result = filter_vardecl(varlist, body);
+		// Should return just var1 since var2 is not in the body
+		TS_ASSERT(result == var1);
+	}
+
+	/**
+	 * Test that nullptr vardecl returns UNDEFINED
+	 */
+	void test_filter_vardecl_null_input()
+	{
+		Handle body = as->add_node(VARIABLE_NODE, "$X");
+		
+		Handle result = filter_vardecl(Handle::UNDEFINED, body);
+		TS_ASSERT(result == Handle::UNDEFINED);
+	}
+};

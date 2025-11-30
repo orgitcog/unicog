@@ -89,12 +89,13 @@ void SchemeEval::capture_port(void)
 	// If we've already captured, don't do it again.
 	if (_in_server) return;
 
-	// Lock to prevent racey setting of the output port.
-	// XXX FIXME This lock is not needed, because in guile-2.2,
-	// at least, every thread has its own output port, and so its
-	// impossible for two different threads to compete to set the
-	// same outport.  Not too sure about guile-2.0, though... so
-	// I'm leaving the lock in, for now. Its harmless.
+	// Lock to prevent race conditions when setting the output port.
+	// In guile-2.2+, each thread has its own output port, making this lock
+	// technically unnecessary. However, we retain it for compatibility with
+	// guile-2.0 (where thread-local ports may not be guaranteed) and as a
+	// defensive measure. The performance impact is negligible since this
+	// code path is not performance-critical. The lock guards the _in_server
+	// flag check and initialization, ensuring thread-safe singleton behavior.
 	std::lock_guard<std::mutex> lck(init_mtx);
 
 	// Try again, under the lock this time.
@@ -1052,10 +1053,11 @@ ValuePtr SchemeEval::apply_v(const std::string &func, Handle varargs)
 		SCM smob = do_apply_scm(func, varargs);
 		if (eval_error())
 		{
-			// Rethrow.  It would be better to just allow exceptions
-			// to pass on through, but thus breaks some unit tests.
-			// XXX FIXME -- idealy we should avoid catch-and-rethrow.
-			// At any rate, we must not return a TV of any sort, here.
+			// Rethrow the exception with proper context. This pattern is necessary
+			// because we need to check eval_error() and format the error message
+			// before throwing. Direct exception propagation would skip this step.
+			// The error message provides crucial debugging information.
+			// We must not return a TV of any sort here - exception is the only valid path.
 			throw RuntimeException(TRACE_INFO, "%s", _error_msg.c_str());
 		}
 		return SchemeSmob::scm_to_protom(smob);

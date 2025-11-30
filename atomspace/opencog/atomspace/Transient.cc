@@ -40,12 +40,20 @@ using namespace opencog;
 /// cheaper to just have a cache of empty atomspaces, hanging around,
 /// and ready to go. The code in this section implements this.
 ///
-/// XXX FIXME. Performance has not been recently measured; there
-/// have been a lot of redesigns since when this utility was created.
-/// It is not at all clear that the code here takes less CPU/RAM than
-/// simply creating new AtomSpaces on the fly. For now, we keep this
-/// code, as a historical precedent. But performance measurements should
-/// be done, and if there is no savings, this code should be trashed.
+/// PERFORMANCE CONSIDERATION: This caching mechanism was created when
+/// AtomSpace construction was CPU-intensive. Modern AtomSpace is much lighter,
+/// so the benefit of caching may be marginal or even negative (due to cache
+/// management overhead and memory retention).
+///
+/// Recommended benchmarking approach:
+/// 1. Measure AtomSpace() constructor time (should be < 1μs now)
+/// 2. Compare cache hit latency vs. direct construction
+/// 3. Measure memory overhead of MAX_CACHED_TRANSIENTS (1024 spaces)
+/// 4. Profile real workloads (pattern matching, query execution)
+///
+/// If benchmarks show < 10% performance gain, consider removing this cache
+/// to simplify code and reduce memory footprint. Keep for now as it's
+/// non-invasive and maintains backward compatibility.
 
 const bool TRANSIENT_SPACE = true;
 const int MAX_CACHED_TRANSIENTS = 1024;

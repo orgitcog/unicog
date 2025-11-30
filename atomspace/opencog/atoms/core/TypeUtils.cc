@@ -417,9 +417,12 @@ Handle filter_vardecl(const Handle& vardecl, const HandleSeq& hs)
 	}
 
 	// If we're here we have failed to recognize vardecl as a useful
-	// and well-formed variable declaration, so Handle::UNDEFINED is
-	// returned. XXX FIXME -- surely this should be a throw, instead!!!
-	return Handle::UNDEFINED;
+	// and well-formed variable declaration. Throw an exception to make
+	// the error explicit rather than silently returning UNDEFINED.
+	throw SyntaxException(TRACE_INFO,
+		"Unrecognized or malformed variable declaration.\n"
+		"Expected VariableNode, GlobNode, TypedVariableLink, VariableList, or VariableSet.\n"
+		"Got: %s", vardecl->to_string().c_str());
 }
 
 bool is_well_typed(Type t)

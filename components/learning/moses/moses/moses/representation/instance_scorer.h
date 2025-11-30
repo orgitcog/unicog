@@ -85,18 +85,29 @@ struct complexity_based_scorer : public iscorer_base
         try {
             combo_tree tr = _rep.get_candidate(inst, _reduce);
             return _cscorer.get_cscore(tr);
-        } catch (...) {
-// XXX FIXME, calling score_tree above does not throw the exception; this should be done
-// differntly, maybe call bscorer directly, then ascorer...
-// ??? Huh? why couldn't we evaluate a tree anyway?  why would we want an exception here?
+        } catch (const std::exception& ex) {
+            // Log the error with full context for debugging, then rethrow.
+            // Catching and returning worst_composite_score masks real errors
+            // and makes debugging extremely difficult. Proper exception
+            // propagation allows callers to handle errors appropriately.
             combo_tree raw_tr = _rep.get_candidate(inst, false);
             combo_tree red_tr = _rep.get_candidate(inst, true);
-            logger().warn() << "The following instance could not be evaluated: "
+            logger().error() << "Failed to evaluate instance: "
                             << _rep.fields().to_string(inst)
                             << "\nUnreduced tree: " << raw_tr
-                            << "\nreduced tree: "<< red_tr;
+                            << "\nReduced tree: "<< red_tr
+                            << "\nException: " << ex.what();
+            throw; // Rethrow the exception instead of silently returning worst score
+        } catch (...) {
+            // Handle unknown exceptions
+            combo_tree raw_tr = _rep.get_candidate(inst, false);
+            combo_tree red_tr = _rep.get_candidate(inst, true);
+            logger().error() << "Unknown exception while evaluating instance: "
+                            << _rep.fields().to_string(inst)
+                            << "\nUnreduced tree: " << raw_tr
+                            << "\nReduced tree: "<< red_tr;
+            throw; // Rethrow unknown exceptions
         }
-        return worst_composite_score;
     }
 
 protected:
