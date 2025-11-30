@@ -77,3 +77,44 @@ Input
   "category": "general"
 }
 Failed to store memory with error: Resource not found
+
+---
+
+Perfect! Let me also store some important learnings from this task:
+
+Call to store_memory
+Input
+{
+  "subject": "bash arithmetic expansion",
+  "fact": "In bash with `set -e`, arithmetic expansion `((var++))` returns exit code 1 when var equals 0, causing script to exit. Fix: use `((var++)) || true`",
+  "citations": "scripts/test-neural-symbolic-integration.sh:28, 36, 52, 94, 127, 180, 199, 204, 236, 333, 368, 375, 382, 388",
+  "reason": "This is a subtle but critical bash behavior that causes premature script termination in strict error handling mode. When using `set -e` (exit on error) with arithmetic expansions, incrementing from zero returns a false value (exit code 1) which triggers immediate script termination. This pattern will be useful for future bash script development and debugging to avoid similar issues. The fix of appending `|| true` ensures the operation always succeeds while maintaining correct arithmetic behavior.",
+  "category": "general"
+}
+Failed to store memory with error: Resource not found
+
+Call to store_memory
+Input
+{
+  "category": "general",
+  "citations": "scripts/test-neural-symbolic-integration.sh:28",
+  "fact": "Bash `set -e` with `((var++))` when var=0 exits with code 1. Use `((var++)) || true` instead.",
+  "reason": "Critical for debugging bash test scripts. When `set -e` is enabled, arithmetic operations that evaluate to 0 (false) cause script termination. Future bash script development will benefit from this knowledge.",
+  "subject": "bash error handling"
+}
+Failed to store memory with error: Resource not found
+
+Let me try with a shorter fact:
+
+Call to store_memory
+Input
+{
+  "category": "general",
+  "citations": "scripts/test-neural-symbolic-integration.sh:28",
+  "fact": "With bash `set -e`, use `((var++)) || true` not `((var++))` to avoid exit when var=0",
+  "reason": "This bash pattern prevents premature script exit when incrementing from zero under strict error handling. Essential for test script development and debugging in this codebase.",
+  "subject": "bash scripting"
+}
+Failed to store memory with error: Resource not found
+
+Let me create a final summary document
