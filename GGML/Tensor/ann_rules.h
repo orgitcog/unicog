@@ -21,6 +21,16 @@ constexpr float EPSILON_F = 1e-10f;
 constexpr double EPSILON_D = 1e-10;
 constexpr float TEST_EPSILON_F = 0.001f;  // For unit tests
 
+// Constants for attention allocation (ECAN-style)
+constexpr float ATTENTION_ACTIVITY_STI_MULTIPLIER = 10.0f;  // STI increase per activity unit
+constexpr float ATTENTION_ACTIVITY_LTI_MULTIPLIER = 0.5f;   // LTI increase per activity unit
+constexpr float ATTENTION_STI_THRESHOLD = 50.0f;            // Minimum STI for active attention
+constexpr float ATTENTION_URGENCY_DIVISOR = 100.0f;         // STI to urgency conversion factor
+constexpr float ATTENTION_DEFAULT_STI = 100.0f;             // Default initial STI value
+constexpr float ATTENTION_LTI_WEIGHT = 0.5f;                // LTI contribution to total attention
+constexpr float ATTENTION_URGENCY_WEIGHT = 20.0f;           // Urgency contribution to total attention
+constexpr float ATTENTION_MAX_MODULATION = 2.0f;            // Maximum attention modulation factor
+
 /**
  * @brief Neural activation function types
  */
@@ -382,6 +392,110 @@ T neural_cross_entropy_loss(const T* predictions, const T* targets,
     }
     
     return total_loss / static_cast<T>(batch_size);
+}
+
+/**
+ * @brief Attention allocation structure for neural network layers
+ * Tracks attention values for cognitive resource management (ECAN-style)
+ */
+struct AttentionAllocation {
+    float sti;           // Short-term importance (stimulus)
+    float lti;           // Long-term importance (learned value)
+    float urgency;       // Processing urgency metric
+    size_t allocations;  // Number of attention allocations
+    
+    AttentionAllocation() : sti(ATTENTION_DEFAULT_STI), lti(0.0f), urgency(0.0f), allocations(0) {}
+    
+    // Update attention based on neural activity
+    void update(float activity_level) {
+        sti += activity_level * ATTENTION_ACTIVITY_STI_MULTIPLIER;
+        lti += activity_level * ATTENTION_ACTIVITY_LTI_MULTIPLIER;
+        urgency = (sti > ATTENTION_STI_THRESHOLD) ? sti / ATTENTION_URGENCY_DIVISOR : 0.0f;
+        allocations++;
+    }
+    
+    // Decay attention over time (ECAN-style decay)
+    void decay(float decay_rate = 0.1f) {
+        sti *= (1.0f - decay_rate);
+        if (sti < 0.0f) sti = 0.0f;
+        urgency *= (1.0f - decay_rate);
+    }
+    
+    // Check if attention is above threshold
+    bool is_active(float threshold = ATTENTION_STI_THRESHOLD) const {
+        return sti >= threshold;
+    }
+    
+    // Get overall attention score
+    float get_total_attention() const {
+        return sti + lti * ATTENTION_LTI_WEIGHT + urgency * ATTENTION_URGENCY_WEIGHT;
+    }
+};
+
+/**
+ * @brief Validate and diagnose attention allocation for neural rules
+ * Provides runtime diagnostics for attention leaks and misallocation
+ * @param attention Attention allocation structure
+ * @param rule_name Name of the rule being validated
+ * @param activity_threshold Minimum activity level for valid allocation
+ * @return true if attention allocation is valid, false if leak detected
+ */
+inline bool validate_attention_allocation(const AttentionAllocation& attention,
+                                         const char* rule_name,
+                                         float activity_threshold = ATTENTION_STI_THRESHOLD) {
+    bool is_valid = true;
+    
+    // Check for attention depletion
+    if (attention.sti < activity_threshold) {
+        // Attention leak detected - STI below threshold
+        is_valid = false;
+    }
+    
+    // Check for allocation anomalies
+    if (attention.allocations > 0 && attention.sti < 1.0f) {
+        // Attention leak - allocations occurred but STI critically low
+        is_valid = false;
+    }
+    
+    // Check urgency consistency
+    if (attention.sti > 100.0f && attention.urgency < 0.5f) {
+        // Attention inconsistency - high STI but low urgency
+        is_valid = false;
+    }
+    
+    return is_valid;
+}
+
+/**
+ * @brief Apply dynamic attention-weighted activation
+ * Modulates neural activation based on attention allocation
+ * @tparam T Data type
+ * @param output Output tensor (modified in place)
+ * @param input Input tensor
+ * @param len Length of tensor
+ * @param activation Base activation function
+ * @param attention Attention allocation for this layer
+ * 
+ * @note This implements attention-modulated neural processing where
+ *       activation strength is scaled by attention values (ECAN-inspired)
+ */
+template<typename T>
+void activate_with_attention(T* output, const T* input, size_t len,
+                            ActivationType activation,
+                            const AttentionAllocation& attention) {
+    // First apply standard activation
+    activate_tensor(output, input, len, activation);
+    
+    // Calculate attention modulation factor (capped at max modulation)
+    float attention_factor = std::min(
+        attention.get_total_attention() / ATTENTION_URGENCY_DIVISOR,
+        ATTENTION_MAX_MODULATION
+    );
+    
+    // Apply attention modulation to outputs
+    for (size_t i = 0; i < len; ++i) {
+        output[i] *= static_cast<T>(attention_factor);
+    }
 }
 
 // Explicit template instantiations for common types

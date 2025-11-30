@@ -199,7 +199,16 @@ T tensor_foldr(T init, const T* data, size_t len, T (*fold_fn)(T, T)) {
  */
 template<typename T>
 Tensor<T>* tensor_fold_axis(const Tensor<T>* input, size_t axis, FoldType fold_type) {
+    // Enhanced boundary checks for attention allocation
+    if (input == nullptr) return nullptr;
+    if (input->data == nullptr || input->shape == nullptr) return nullptr;
+    if (input->ndim == 0 || input->total_size == 0) return nullptr;
     if (axis >= input->ndim) return nullptr;
+    
+    // Validate tensor dimensions to avoid degenerate tensors
+    for (size_t i = 0; i < input->ndim; ++i) {
+        if (input->shape[i] == 0) return nullptr;
+    }
     
     // Calculate output tensor dimensions
     size_t* out_shape = new size_t[input->ndim - 1];
@@ -213,7 +222,7 @@ Tensor<T>* tensor_fold_axis(const Tensor<T>* input, size_t axis, FoldType fold_t
     Tensor<T>* output = new Tensor<T>(out_shape, input->ndim - 1);
     delete[] out_shape;
     
-    // Perform fold operation along specified axis
+    // Perform fold operation along specified axis with enhanced boundary checks
     size_t stride = 1;
     for (size_t i = axis + 1; i < input->ndim; ++i) {
         stride *= input->shape[i];
@@ -222,17 +231,47 @@ Tensor<T>* tensor_fold_axis(const Tensor<T>* input, size_t axis, FoldType fold_t
     size_t fold_dim = input->shape[axis];
     size_t outer_stride = stride * fold_dim;
     
+    // Validate calculated strides to prevent index out of bounds
+    if (outer_stride == 0 || stride == 0 || fold_dim == 0) {
+        delete output;
+        return nullptr;
+    }
+    
     for (size_t outer = 0; outer < input->total_size; outer += outer_stride) {
         for (size_t inner = 0; inner < stride; ++inner) {
             size_t out_idx = (outer / outer_stride) * stride + inner;
             
-            // Collect elements to fold
-            std::vector<T> fold_data;
-            for (size_t i = 0; i < fold_dim; ++i) {
-                fold_data.push_back(input->data[outer + i * stride + inner]);
+            // Boundary check for output index - skip if out of bounds
+            if (out_idx >= output->total_size) {
+                // This should not happen with correct stride calculation
+                // But we check to prevent buffer overflow
+                continue;
             }
             
-            output->data[out_idx] = tensor_fold_op(fold_data.data(), fold_data.size(), fold_type);
+            // Collect elements to fold with boundary checks
+            std::vector<T> fold_data;
+            fold_data.reserve(fold_dim);
+            bool all_indices_valid = true;
+            
+            for (size_t i = 0; i < fold_dim; ++i) {
+                size_t input_idx = outer + i * stride + inner;
+                // Verify index is within bounds
+                if (input_idx < input->total_size) {
+                    fold_data.push_back(input->data[input_idx]);
+                } else {
+                    // If any index is invalid, this indicates a stride calculation error
+                    all_indices_valid = false;
+                    break;
+                }
+            }
+            
+            // Only compute fold if all indices were valid
+            if (all_indices_valid && !fold_data.empty()) {
+                output->data[out_idx] = tensor_fold_op(fold_data.data(), fold_data.size(), fold_type);
+            } else if (!all_indices_valid) {
+                // Stride calculation error - initialize to safe default
+                output->data[out_idx] = T();
+            }
         }
     }
     
@@ -250,6 +289,60 @@ Tensor<T>* tensor_fold_axis(const Tensor<T>* input, size_t axis, FoldType fold_t
 template<typename T>
 T tensor_fold_unroll(const Tensor<T>* input, FoldType fold_type) {
     return tensor_fold_op(input->data, input->total_size, fold_type);
+}
+
+/**
+ * @brief Depth-aware tensor rule folding with recursive complexity matching
+ * Applies fold operations with attention to tensor depth and activation levels
+ * @tparam T Data type
+ * @param input Input tensor
+ * @param depth Recursive depth for folding (number of fold iterations)
+ * @param fold_type Type of fold operation
+ * @return Vector of folded results at each depth level
+ * 
+ * @note This function ensures tensor dimensions match recursive complexity
+ *       as recommended for attention allocation: [rule_count, activation_depth]
+ */
+template<typename T>
+std::vector<T> tensor_fold_depth_aware(const Tensor<T>* input, size_t depth, FoldType fold_type) {
+    std::vector<T> results;
+    
+    // Enhanced validation for attention allocation
+    if (input == nullptr || input->data == nullptr) return results;
+    if (depth == 0 || input->total_size == 0) return results;
+    
+    // Validate tensor has sufficient dimensions for depth operations
+    if (input->ndim == 0) return results;
+    
+    results.reserve(depth);
+    
+    // Apply fold at each depth level with boundary checks
+    // Each depth level processes a progressively smaller slice
+    // Algorithm: depth=0 processes full tensor, depth=N-1 processes 1/N of tensor
+    for (size_t d = 0; d < depth; ++d) {
+        // Calculate slice size with proper rounding
+        // Formula: slice_size = total_size * (depth - d) / depth
+        // Example with depth=3, total=12: d=0→12, d=1→8, d=2→4
+        size_t numerator = input->total_size * (depth - d);
+        size_t slice_size = numerator / depth;
+        
+        // Round up if there's a remainder to ensure coverage
+        if (numerator % depth != 0) {
+            slice_size += 1;
+        }
+        
+        // Safety check: ensure at least 1 element
+        if (slice_size == 0) slice_size = 1;
+        
+        // Ensure we don't exceed tensor bounds
+        if (slice_size > input->total_size) slice_size = input->total_size;
+        
+        // Fold only active elements at this depth
+        T depth_result = tensor_fold_op(input->data, slice_size, fold_type);
+        results.push_back(depth_result);
+    }
+    
+    return results;
 }
 
 // Explicit template instantiations for common types
