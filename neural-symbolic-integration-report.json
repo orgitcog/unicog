@@ -1,0 +1,78 @@
+{
+  "timestamp": "2025-11-30T09:40:40Z",
+  "neural_symbolic_integration": {
+    "cpp_neural_components": {
+      "success_count": 2,
+      "total_tests": 2,
+      "success_rate": 100,
+      "tensor_shapes": [
+        {"component": "tensor_kernel", "shape_info": "Testing"},
+        {"component": "GGML", "shape_info": "GGML"},
+        {"component": "Tensor", "shape_info": "Tensor"},
+        {"component": "Kernel", "shape_info": "Kernel"},
+        {"component": "compilation...", "shape_info": "compilation..."},
+        {"component": "hypergraph_patterns", "shape_info": "Pattern"},
+        {"component": "tensor", "shape_info": "tensor"},
+        {"component": "shape", "shape_info": ""},
+        {"component": "[4x2]", "shape_info": "[4x2]"}
+      ]
+    },
+    "scheme_symbolic_components": {
+      "success_count": 12,
+      "total_tests": 12,
+      "success_rate": 100,
+      "symbolic_structures": [
+        {"component": "agentic-catalog.scm", "structure_info": "symbolic_complexity_655"},
+        {"component": "aprfe-integration.scm", "structure_info": "symbolic_complexity_469"},
+        {"component": "emergent-patterns.scm", "structure_info": "symbolic_complexity_316"},
+        {"component": "perceptual-input.scm", "structure_info": "symbolic_complexity_154"},
+        {"component": "cognitive-visualization-bridge.scm", "structure_info": "symbolic_complexity_295"},
+        {"component": "cognitive-membrane-sync.scm", "structure_info": "symbolic_complexity_384"},
+        {"component": "distributed-cognition.scm", "structure_info": "symbolic_complexity_294"},
+        {"component": "distributed-multi-agent-framework.scm", "structure_info": "symbolic_complexity_440"},
+        {"component": "advanced-tensor-bridge.scm", "structure_info": "symbolic_complexity_417"},
+        {"component": "cognitive-grammar-adapter.scm", "structure_info": "symbolic_complexity_459"},
+        {"component": "tensor-kernel.scm", "structure_info": "symbolic_complexity_160"},
+        {"component": "neural-symbolic-tutorial.scm", "structure_info": "symbolic_complexity_439"}
+      ]
+    },
+    "ggml_tensor_integration": {
+      "success_count": 1,
+      "total_tests": 1,
+      "success_rate": 100,
+      "tensor_operations": [
+        {"component": "ggml_integration", "operation_info": "Input"},
+        {"component": "tensor", "operation_info": "tensor"},
+        {"component": "shape", "operation_info": ""},
+        {"component": "[2x3]
+Weights", "operation_info": "[2x3]
+Weights"},
+        {"component": "tensor", "operation_info": "tensor"},
+        {"component": "shape", "operation_info": ""},
+        {"component": "[3x4]
+Activated", "operation_info": "[3x4]
+Activated"},
+        {"component": "tensor", "operation_info": "tensor"},
+        {"component": "shape", "operation_info": ""},
+        {"component": "[2x4]
+GGML", "operation_info": "[2x4]
+GGML"},
+        {"component": "tensor", "operation_info": "tensor"},
+        {"component": "operations", "operation_info": ""},
+        {"component": "SUCCESS", "operation_info": "SUCCESS"}
+      ]
+    },
+    "cross_language_interoperability": {
+      "success_count": 2,
+      "total_tests": 2,
+      "success_rate": 100
+    },
+    "overall_metrics": {
+      "total_successful_tests": 17,
+      "total_tests": 17,
+      "overall_success_rate": 100,
+      "integration_status": "excellent",
+      "neural_symbolic_synergy": "present"
+    }
+  }
+}
