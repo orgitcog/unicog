@@ -41,7 +41,8 @@ enum class ActivationType {
     LEAKY_RELU,   // Leaky ReLU: x if x > 0 else alpha*x
     ELU,          // Exponential Linear Unit
     SOFTMAX,      // Softmax: exp(x_i) / sum(exp(x_j))
-    LINEAR        // Linear (identity): x
+    LINEAR,       // Linear (identity): x
+    SYMBOLIC_ATTENTION  // Symbolic attention allocation for hypergraph patterns
 };
 
 /**
@@ -190,6 +191,26 @@ void activate_tensor(T* output, const T* input, size_t len,
                 output[i] = input[i];
             }
             break;
+            
+        case ActivationType::SYMBOLIC_ATTENTION: {
+            // Symbolic attention allocation for hypergraph patterns
+            // Threshold-based activation with 0.75 minimum for symbolic processing
+            constexpr T SYMBOLIC_THRESHOLD = static_cast<T>(0.75);
+            
+            // First normalize input to [0, 1] range using sigmoid
+            for (size_t i = 0; i < len; ++i) {
+                T normalized = static_cast<T>(1) / (static_cast<T>(1) + std::exp(-input[i]));
+                // Apply threshold - values below 0.75 are suppressed, above are amplified
+                if (normalized >= SYMBOLIC_THRESHOLD) {
+                    // Amplify symbolic attention for high-value patterns
+                    output[i] = normalized * (normalized / SYMBOLIC_THRESHOLD);
+                } else {
+                    // Suppress sub-threshold attention for noise reduction
+                    output[i] = normalized * (normalized / SYMBOLIC_THRESHOLD) * static_cast<T>(0.5);
+                }
+            }
+            break;
+        }
     }
 }
 
