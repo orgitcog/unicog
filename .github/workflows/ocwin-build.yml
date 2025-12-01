@@ -31,7 +31,7 @@ jobs:
         submodules: false
     
     - name: Setup MSVC
-      uses: microsoft/setup-msbuild@v1.3
+      uses: microsoft/setup-msbuild@v2
     
     - name: Cache vcpkg
       uses: actions/cache@v4
@@ -101,7 +101,7 @@ jobs:
         submodules: false
     
     - name: Setup MSVC
-      uses: microsoft/setup-msbuild@v1.3
+      uses: microsoft/setup-msbuild@v2
     
     - name: Cache vcpkg
       uses: actions/cache@v4
@@ -180,7 +180,7 @@ jobs:
         submodules: false
     
     - name: Setup MSVC
-      uses: microsoft/setup-msbuild@v1.3
+      uses: microsoft/setup-msbuild@v2
     
     - name: Install Dependencies via vcpkg
       run: |
@@ -260,7 +260,7 @@ jobs:
         submodules: false
     
     - name: Setup MSVC
-      uses: microsoft/setup-msbuild@v1.3
+      uses: microsoft/setup-msbuild@v2
     
     - name: Install Dependencies via vcpkg
       run: |
@@ -350,7 +350,7 @@ jobs:
         submodules: false
     
     - name: Setup MSVC
-      uses: microsoft/setup-msbuild@v1.3
+      uses: microsoft/setup-msbuild@v2
     
     - name: Install Dependencies via vcpkg
       run: |
