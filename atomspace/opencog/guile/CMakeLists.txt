@@ -33,7 +33,8 @@ FOREACH(src_file ${SMOB_SOURCES})
 ENDFOREACH()
 
 IF(NOT EXISTING_SOURCES)
-	MESSAGE(FATAL_ERROR "No SOURCES found for smob target in opencog/guile.")
+	MESSAGE(FATAL_ERROR "No source files found for smob target in opencog/guile. "
+		"Ensure required source files exist or update SMOB_SOURCES list in CMakeLists.txt.")
 ENDIF()
 
 ADD_LIBRARY (smob ${EXISTING_SOURCES})
