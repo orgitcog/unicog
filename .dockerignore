@@ -1,0 +1,64 @@
+# Git files
+.git
+.gitignore
+.gitmodules
+.github
+
+# Build artifacts
+build/
+build-*/
+*.o
+*.so
+*.a
+*.dylib
+*.dll
+*.exe
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Documentation
+docs/_build/
+html/
+latex/
+
+# Temporary files
+*.log
+*.tmp
+*.bak
+*.cache
+
+# Analysis reports
+/home/ubuntu/analysis/
+*.json
+*.xml
+
+# Test artifacts
+Testing/
+test_output/
+*.test
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+
+# Package files
+*.deb
+*.rpm
+*.tar.gz
+*.zip

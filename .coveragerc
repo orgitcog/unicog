@@ -1,0 +1,48 @@
+# Code Coverage Configuration for OpenCog Unified
+
+[run]
+branch = True
+source = .
+omit =
+    */tests/*
+    */test_*
+    */build/*
+    */deps/*
+    */.venv/*
+    */venv/*
+    */__pycache__/*
+    */site-packages/*
+
+[report]
+precision = 2
+show_missing = True
+skip_covered = False
+sort = Cover
+
+exclude_lines =
+    # Standard pragmas
+    pragma: no cover
+    
+    # Don't complain about missing debug code
+    def __repr__
+    def __str__
+    
+    # Don't complain if tests don't hit defensive assertion code
+    raise AssertionError
+    raise NotImplementedError
+    
+    # Don't complain if non-runnable code isn't run
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    if typing.TYPE_CHECKING:
+    
+    # Don't complain about abstract methods
+    @abstractmethod
+    @abc.abstractmethod
+
+[html]
+directory = htmlcov
+title = OpenCog Unified Coverage Report
+
+[xml]
+output = coverage.xml
