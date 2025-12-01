@@ -1,9 +1,5 @@
 name: Chocolatey Package Builder (Experimental)
 
-# Experimental workflow for building Chocolatey packages for Windows
-# Creates .nupkg files that can be installed via 'choco install'
-# Suitable for Windows deployment and distribution
-
 on:
   workflow_dispatch:
     inputs:
@@ -15,16 +11,13 @@ on:
         options:
           - cogutil
           - atomspace
-          - cogserver
       version:
-        description: 'Package version (e.g., 1.0.0)'
+        description: 'Package version'
         required: true
         default: '1.0.0'
 
 env:
   BUILD_TYPE: Release
-  VCPKG_DEFAULT_TRIPLET: x64-windows
-  CMAKE_GENERATOR: "Visual Studio 17 2022"
 
 jobs:
   build-chocolatey-packages:
@@ -40,9 +33,9 @@ jobs:
     
     - name: Install Chocolatey
       run: |
-        Set-ExecutionPolicy Bypass -Scope Process -Force
         if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
-          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+          Set-ExecutionPolicy Bypass -Scope Process -Force
+          [System.Net.ServicePointManager]::SecurityProtocol = 3072
           iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
         }
         choco --version
@@ -50,340 +43,40 @@ jobs:
     
     - name: Install Dependencies
       run: |
-        choco install -y cmake --installargs 'ADD_CMAKE_TO_PATH=System'
-        choco install -y 7zip
-        refreshenv
-      shell: powershell
-    
-    - name: Install vcpkg Dependencies
-      run: |
+        choco install -y cmake 7zip
         cd C:\vcpkg
-        .\vcpkg install boost-filesystem:x64-windows boost-program-options:x64-windows boost-system:x64-windows boost-thread:x64-windows boost-regex:x64-windows
+        .\vcpkg install boost-filesystem:x64-windows boost-system:x64-windows
       shell: powershell
     
     - name: Build Component
       run: |
         $component = "${{ github.event.inputs.component }}"
-        
         if (Test-Path $component) {
-          Write-Host "Building $component..."
-          
           mkdir "$component\build" -Force
           cd "$component\build"
-          
-          cmake .. -G "${{ env.CMAKE_GENERATOR }}" `
-            -A x64 `
-            -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} `
-            -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake `
-            -DCMAKE_INSTALL_PREFIX="C:\opencog\$component"
-          
-          cmake --build . --config ${{ env.BUILD_TYPE }} --parallel 2
-          cmake --install . --config ${{ env.BUILD_TYPE }}
-          
-          Write-Host "Build complete"
-        } else {
-          Write-Host "Component $component not found"
-          exit 1
+          cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake
+          cmake --build . --config Release --parallel 2
         }
       shell: powershell
     
-    - name: Create Chocolatey Package Structure
+    - name: Create Package
       run: |
         $component = "${{ github.event.inputs.component }}"
-        $version = "${{ github.event.inputs.version }}"
-        $pkgName = "opencog-$component"
-        $pkgDir = "choco-packages\$pkgName"
-        
-        # Create package directory structure
+        $pkgDir = "choco-packages\opencog-$component"
         New-Item -ItemType Directory -Force -Path "$pkgDir\tools"
         
-        # Create nuspec file
-        $nuspec = @"
-<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
-  <metadata>
-    <id>$pkgName</id>
-    <version>$version</version>
-    <title>OpenCog $component</title>
-    <authors>OpenCog Foundation</authors>
-    <owners>OpenCog Foundation</owners>
-    <licenseUrl>https://github.com/opencog/opencog/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://opencog.org</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>OpenCog $component - Cognitive Architecture Component</description>
-    <summary>OpenCog $component library for Windows</summary>
-    <tags>opencog cognitive-architecture ai $component</tags>
-    <dependencies>
-      <dependency id="vcredist2022" version="14.0" />
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="tools\**" target="tools" />
-  </files>
-</package>
-"@
-        
-        Set-Content -Path "$pkgDir\$pkgName.nuspec" -Value $nuspec
-        
-        # Create install script
-        $installScript = @"
-`$ErrorActionPreference = 'Stop'
-`$packageName = '$pkgName'
-`$toolsDir = "`$(Split-Path -parent `$MyInvocation.MyCommand.Definition)"
-`$installDir = Join-Path `$env:ProgramFiles 'OpenCog\$component'
-
-Write-Host "Installing `$packageName to `$installDir"
-
-# Create install directory
-New-Item -ItemType Directory -Force -Path `$installDir | Out-Null
-
-# Copy files from package
-Copy-Item -Path "`$toolsDir\*" -Destination `$installDir -Recurse -Force
-
-# Add to PATH
-Install-ChocolateyPath -PathToInstall "`$installDir\bin" -PathType 'Machine'
-
-Write-Host "`$packageName has been installed to `$installDir"
-"@
-        
-        Set-Content -Path "$pkgDir\tools\chocolateyinstall.ps1" -Value $installScript
-        
-        # Create uninstall script
-        $uninstallScript = @"
-`$ErrorActionPreference = 'Stop'
-`$packageName = '$pkgName'
-`$installDir = Join-Path `$env:ProgramFiles 'OpenCog\$component'
-
-Write-Host "Uninstalling `$packageName from `$installDir"
-
-# Remove from PATH
-# Note: Chocolatey handles PATH cleanup automatically
-
-# Remove install directory
-if (Test-Path `$installDir) {
-  Remove-Item -Path `$installDir -Recurse -Force
-  Write-Host "Removed `$installDir"
-}
-
-Write-Host "`$packageName has been uninstalled"
-"@
-        
-        Set-Content -Path "$pkgDir\tools\chocolateyuninstall.ps1" -Value $uninstallScript
-        
-        # Copy built files to package
-        if (Test-Path "C:\opencog\$component") {
-          Copy-Item -Path "C:\opencog\$component\*" -Destination "$pkgDir\tools\" -Recurse -Force
-        }
-        
-        Write-Host "Package structure created at $pkgDir"
-        Get-ChildItem -Path $pkgDir -Recurse
-      shell: powershell
-    
-    - name: Build Chocolatey Package
-      run: |
-        $component = "${{ github.event.inputs.component }}"
-        $pkgName = "opencog-$component"
-        $pkgDir = "choco-packages\$pkgName"
+        $nuspec = "<?xml version='1.0'?><package><metadata><id>opencog-$component</id><version>${{ github.event.inputs.version }}</version><title>OpenCog $component</title><authors>OpenCog Foundation</authors><description>OpenCog $component</description></metadata></package>"
+        Set-Content -Path "$pkgDir\opencog-$component.nuspec" -Value $nuspec
         
         cd $pkgDir
         choco pack
-        
-        # Move package to output directory
-        $nupkg = Get-ChildItem -Filter "*.nupkg" | Select-Object -First 1
-        if ($nupkg) {
-          Write-Host "Package created: $($nupkg.Name)"
-          Move-Item $nupkg.FullName ..\ -Force
-        }
-      shell: powershell
-    
-    - name: Test Package Installation
-      run: |
-        $component = "${{ github.event.inputs.component }}"
-        $pkgName = "opencog-$component"
-        
-        # Find the package
-        $nupkg = Get-ChildItem -Path "choco-packages" -Filter "$pkgName*.nupkg" | Select-Object -First 1
-        
-        if ($nupkg) {
-          Write-Host "Testing installation of $($nupkg.Name)"
-          
-          # Install from local package
-          choco install $nupkg.FullName -y --force
-          
-          # Verify installation
-          choco list --local-only | Select-String $pkgName
-          
-          Write-Host "Package test successful"
-        } else {
-          Write-Host "Package not found for testing"
-          exit 1
-        }
       shell: powershell
       continue-on-error: true
     
-    - name: Create Installation Guide
-      run: |
-        $component = "${{ github.event.inputs.component }}"
-        $version = "${{ github.event.inputs.version }}"
-        $pkgName = "opencog-$component"
-        
-        $guide = @"
-# OpenCog Chocolatey Package Installation Guide
-
-## Package: $pkgName
-Version: $version
-
-## Installation
-
-### From Local Package
-
-1. Download the .nupkg file
-2. Install using Chocolatey:
-
-``````powershell
-choco install $pkgName -s . -y
-``````
-
-### From Custom Source
-
-If hosting on a Chocolatey server:
-
-``````powershell
-choco source add -n=opencog -s="http://your-server/chocolatey"
-choco install $pkgName -y
-``````
-
-## Verification
-
-Check installation:
-
-``````powershell
-choco list --local-only | Select-String opencog
-Get-ChildItem "C:\Program Files\OpenCog\$component"
-``````
-
-## Uninstallation
-
-``````powershell
-choco uninstall $pkgName -y
-``````
-
-## Package Contents
-
-This package includes:
-- Compiled libraries (.dll files)
-- Header files (.h, .hpp)
-- Import libraries (.lib files)
-- Documentation
-
-## Dependencies
-
-This package depends on:
-- Visual C++ Redistributable 2022
-- Boost libraries (bundled)
-
-## Environment Variables
-
-The package will:
-- Add bin directory to system PATH
-- Install to: C:\Program Files\OpenCog\$component
-
-## Hosting Your Own Repository
-
-To create a Chocolatey server:
-
-``````powershell
-# Using Chocolatey.Server package
-choco install chocolatey.server -y
-
-# Configure IIS
-# Copy .nupkg files to C:\tools\chocolatey.server\App_Data\Packages
-
-# Access at http://localhost/chocolatey
-``````
-
-## Building Custom Packages
-
-To modify and rebuild:
-
-1. Extract the .nupkg (it's a ZIP file)
-2. Modify the .nuspec or scripts
-3. Rebuild:
-
-``````powershell
-choco pack
-``````
-
-## Troubleshooting
-
-### Installation Fails
-
-``````powershell
-# Run with verbose output
-choco install $pkgName -y -v
-
-# Check logs
-Get-Content C:\ProgramData\chocolatey\logs\chocolatey.log -Tail 50
-``````
-
-### Missing Dependencies
-
-``````powershell
-# Install Visual C++ Redistributable
-choco install vcredist2022 -y
-``````
-
-### PATH Not Updated
-
-``````powershell
-# Refresh environment
-refreshenv
-
-# Or restart PowerShell
-``````
-
-"@
-        
-        Set-Content -Path "CHOCOLATEY-INSTALL-GUIDE.md" -Value $guide
-        Get-Content CHOCOLATEY-INSTALL-GUIDE.md
-      shell: powershell
-    
-    - name: Upload Chocolatey Package
+    - name: Upload Package
       uses: actions/upload-artifact@v4
       with:
-        name: chocolatey-package-${{ github.event.inputs.component }}-${{ github.event.inputs.version }}
-        path: |
-          choco-packages/*.nupkg
-          CHOCOLATEY-INSTALL-GUIDE.md
+        name: chocolatey-package-${{ github.event.inputs.component }}
+        path: choco-packages/**/*.nupkg
         retention-days: 30
-    
-    - name: Generate Package Report
-      run: |
-        $component = "${{ github.event.inputs.component }}"
-        
-        Write-Host "=== Chocolatey Package Report ==="
-        Write-Host ""
-        Write-Host "Component: $component"
-        Write-Host "Version: ${{ github.event.inputs.version }}"
-        Write-Host ""
-        
-        $nupkg = Get-ChildItem -Path "choco-packages" -Filter "*.nupkg" -Recurse | Select-Object -First 1
-        if ($nupkg) {
-          Write-Host "Package File: $($nupkg.Name)"
-          Write-Host "Package Size: $([math]::Round($nupkg.Length / 1MB, 2)) MB"
-          Write-Host "Package Path: $($nupkg.FullName)"
-          Write-Host ""
-          
-          # Extract and show nuspec
-          Write-Host "=== Package Metadata ==="
-          $tempDir = New-Item -ItemType Directory -Force -Path "temp-extract"
-          Expand-Archive -Path $nupkg.FullName -DestinationPath $tempDir -Force
-          
-          $nuspec = Get-ChildItem -Path $tempDir -Filter "*.nuspec" | Select-Object -First 1
-          if ($nuspec) {
-            Get-Content $nuspec.FullName
-          }
-          
-          Remove-Item -Path $tempDir -Recurse -Force
-        }
-      shell: powershell
+      continue-on-error: true

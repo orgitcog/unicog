@@ -438,46 +438,36 @@ jobs:
     
     - name: Generate Build Report
       run: |
-        $report = @"
-# OCC Windows Build Report
-
-## Build Summary
-Build completed at: $(Get-Date)
-
-## Components Built
-
-"@
+        $report = "# OCC Windows Build Report`n`n"
+        $report += "## Build Summary`n"
+        $report += "Build completed at: $(Get-Date)`n`n"
+        $report += "## Components Built`n`n"
         
         if (Test-Path "artifacts") {
-          $report += "`n### Artifacts Generated:`n"
+          $report += "### Artifacts Generated:`n"
           $report += Get-ChildItem -Recurse artifacts | Out-String
         } else {
           $report += "No artifacts found`n"
         }
         
-        $report += @"
-
-## Build Order
-1. CogUtil (Foundation)
-2. AtomSpace (Hypergraph DB)
-3. AtomSpace Storage (Storage backends)
-3b. AtomSpace Rocks (RocksDB storage)
-4. CogServer (Networking)
-
-## Windows Build Notes
-- Uses Visual Studio 2022 Build Tools
-- Dependencies managed via vcpkg
-- System tools installed via Chocolatey
-- Builds for x64-windows platform
-- Build artifacts are DLLs and LIB files
-- Tests run with ctest framework
-
-## Known Limitations
-- Guile Scheme bindings not available on Windows
-- Some Unix-specific components may not build
-- Haskell components require Stack toolchain
-- Some tests may fail on Windows platform
-"@
+        $report += "`n## Build Order`n"
+        $report += "1. CogUtil (Foundation)`n"
+        $report += "2. AtomSpace (Hypergraph DB)`n"
+        $report += "3. AtomSpace Storage (Storage backends)`n"
+        $report += "3b. AtomSpace Rocks (RocksDB storage)`n"
+        $report += "4. CogServer (Networking)`n`n"
+        $report += "## Windows Build Notes`n"
+        $report += "- Uses Visual Studio 2022 Build Tools`n"
+        $report += "- Dependencies managed via vcpkg`n"
+        $report += "- System tools installed via Chocolatey`n"
+        $report += "- Builds for x64-windows platform`n"
+        $report += "- Build artifacts are DLLs and LIB files`n"
+        $report += "- Tests run with ctest framework`n`n"
+        $report += "## Known Limitations`n"
+        $report += "- Guile Scheme bindings not available on Windows`n"
+        $report += "- Some Unix-specific components may not build`n"
+        $report += "- Haskell components require Stack toolchain`n"
+        $report += "- Some tests may fail on Windows platform`n"
         
         Set-Content -Path "BUILD_REPORT.md" -Value $report
         Get-Content BUILD_REPORT.md
