@@ -1,0 +1,484 @@
+name: APT Repository Builder (Experimental)
+
+# Experimental workflow for creating a local APT repository
+# Builds OpenCog components and creates a complete APT repository structure
+# Suitable for internal deployment and testing on Ubuntu/Debian systems
+
+on:
+  workflow_dispatch:
+    inputs:
+      distribution:
+        description: 'Target distribution (focal, jammy, bookworm)'
+        required: true
+        default: 'jammy'
+        type: choice
+        options:
+          - focal
+          - jammy
+          - lunar
+          - bookworm
+          - bullseye
+      version:
+        description: 'Release version (e.g., 1.0.0)'
+        required: true
+        default: '1.0.0'
+
+env:
+  BUILD_TYPE: Release
+  MAKEFLAGS: -j2
+
+jobs:
+  build-apt-repository:
+    runs-on: ubuntu-latest
+    name: Build APT Repository
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Install APT Repository Tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          devscripts \
+          debhelper \
+          dh-make \
+          build-essential \
+          cmake \
+          dpkg-dev \
+          dpkg-sig \
+          reprepro \
+          gnupg \
+          apt-utils \
+          apache2
+    
+    - name: Install Build Dependencies
+      run: |
+        sudo apt-get install -y \
+          cmake \
+          build-essential \
+          cxxtest \
+          binutils-dev \
+          libiberty-dev \
+          libboost-dev \
+          libboost-filesystem-dev \
+          libboost-program-options-dev \
+          libboost-system-dev \
+          libboost-thread-dev \
+          libboost-regex-dev \
+          guile-3.0-dev \
+          libgmp-dev \
+          cython3 \
+          python3-nose \
+          python3-dev \
+          python3-pip \
+          librocksdb-dev \
+          libasio-dev \
+          valgrind \
+          doxygen
+    
+    - name: Setup Repository Structure
+      run: |
+        mkdir -p apt-repo/{conf,dists,pool/main}
+        
+        # Create repository configuration
+        cat > apt-repo/conf/distributions << EOF
+Origin: OpenCog
+Label: OpenCog Unified
+Codename: ${{ github.event.inputs.distribution }}
+Architectures: amd64 arm64 source
+Components: main
+Description: OpenCog Cognitive Architecture - ${{ github.event.inputs.distribution }}
+SignWith: default
+EOF
+        
+        # Create repository options
+        cat > apt-repo/conf/options << EOF
+verbose
+basedir .
+ask-passphrase
+EOF
+    
+    - name: Build and Package CogUtil
+      run: |
+        cd cogutil
+        mkdir build && cd build
+        cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=/usr
+        make ${{ env.MAKEFLAGS }}
+        
+        # Create temporary install directory
+        mkdir -p debian-pkg/DEBIAN
+        mkdir -p debian-pkg/usr
+        
+        # Install to temporary directory
+        DESTDIR=$(pwd)/debian-pkg make install
+        
+        # Create control file
+        cat > debian-pkg/DEBIAN/control << EOF
+Package: libcogutil-dev
+Version: ${{ github.event.inputs.version }}
+Section: science
+Priority: optional
+Architecture: amd64
+Depends: libboost-dev, libboost-filesystem-dev, libboost-program-options-dev, libboost-system-dev, libboost-thread-dev
+Maintainer: OpenCog Developers <opencog-dev@googlegroups.com>
+Description: OpenCog CogUtil - Core Utilities
+ Core utilities library for OpenCog cognitive architecture.
+ Provides foundational data structures, config, logging.
+Homepage: https://opencog.org
+EOF
+        
+        # Build package
+        dpkg-deb --build debian-pkg
+        mv debian-pkg.deb ../../apt-repo/pool/main/libcogutil-dev_${{ github.event.inputs.version }}_amd64.deb
+        
+        # Install for next components
+        sudo make install
+        sudo ldconfig
+    
+    - name: Build and Package AtomSpace
+      run: |
+        cd atomspace
+        mkdir build && cd build
+        cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=/usr
+        make ${{ env.MAKEFLAGS }}
+        
+        # Create temporary install directory
+        mkdir -p debian-pkg/DEBIAN
+        mkdir -p debian-pkg/usr
+        
+        # Install to temporary directory
+        DESTDIR=$(pwd)/debian-pkg make install
+        
+        # Create control file
+        cat > debian-pkg/DEBIAN/control << EOF
+Package: libatomspace-dev
+Version: ${{ github.event.inputs.version }}
+Section: science
+Priority: optional
+Architecture: amd64
+Depends: libcogutil-dev (>= ${{ github.event.inputs.version }}), libboost-dev, guile-3.0-dev, python3
+Maintainer: OpenCog Developers <opencog-dev@googlegroups.com>
+Description: OpenCog AtomSpace - Hypergraph Database
+ Hypergraph database for knowledge representation.
+ Provides atoms, values, and truth values for cognitive processing.
+Homepage: https://opencog.org
+EOF
+        
+        # Build package
+        dpkg-deb --build debian-pkg
+        mv debian-pkg.deb ../../apt-repo/pool/main/libatomspace-dev_${{ github.event.inputs.version }}_amd64.deb
+        
+        # Install for next components
+        sudo make install
+        sudo ldconfig
+    
+    - name: Build and Package CogServer
+      if: hashFiles('cogserver/CMakeLists.txt') != ''
+      run: |
+        cd cogserver
+        mkdir build && cd build
+        cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=/usr
+        make ${{ env.MAKEFLAGS }}
+        
+        # Create temporary install directory
+        mkdir -p debian-pkg/DEBIAN
+        mkdir -p debian-pkg/usr
+        
+        # Install to temporary directory
+        DESTDIR=$(pwd)/debian-pkg make install
+        
+        # Create control file
+        cat > debian-pkg/DEBIAN/control << EOF
+Package: libcogserver-dev
+Version: ${{ github.event.inputs.version }}
+Section: science
+Priority: optional
+Architecture: amd64
+Depends: libatomspace-dev (>= ${{ github.event.inputs.version }}), libasio-dev
+Maintainer: OpenCog Developers <opencog-dev@googlegroups.com>
+Description: OpenCog CogServer - Distributed Cognitive Server
+ Network server for distributed cognitive processing.
+ Provides shell interface and network APIs.
+Homepage: https://opencog.org
+EOF
+        
+        # Build package
+        dpkg-deb --build debian-pkg
+        mv debian-pkg.deb ../../apt-repo/pool/main/libcogserver-dev_${{ github.event.inputs.version }}_amd64.deb
+        
+        # Install for next components
+        sudo make install
+        sudo ldconfig
+      continue-on-error: true
+    
+    - name: Build and Package Unify
+      if: hashFiles('unify/CMakeLists.txt') != ''
+      run: |
+        cd unify
+        mkdir build && cd build
+        cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=/usr
+        make ${{ env.MAKEFLAGS }}
+        
+        mkdir -p debian-pkg/DEBIAN debian-pkg/usr
+        DESTDIR=$(pwd)/debian-pkg make install
+        
+        cat > debian-pkg/DEBIAN/control << EOF
+Package: libunify-dev
+Version: ${{ github.event.inputs.version }}
+Section: science
+Priority: optional
+Architecture: amd64
+Depends: libatomspace-dev (>= ${{ github.event.inputs.version }})
+Maintainer: OpenCog Developers <opencog-dev@googlegroups.com>
+Description: OpenCog Unify - Pattern Matching and Unification
+ Pattern matching and unification for AtomSpace.
+Homepage: https://opencog.org
+EOF
+        
+        dpkg-deb --build debian-pkg
+        mv debian-pkg.deb ../../apt-repo/pool/main/libunify-dev_${{ github.event.inputs.version }}_amd64.deb
+        
+        sudo make install
+        sudo ldconfig
+      continue-on-error: true
+    
+    - name: Generate Repository Metadata
+      run: |
+        cd apt-repo
+        
+        # Scan packages
+        dpkg-scanpackages pool/ /dev/null > dists/${{ github.event.inputs.distribution }}/main/binary-amd64/Packages
+        gzip -k dists/${{ github.event.inputs.distribution }}/main/binary-amd64/Packages
+        
+        # Create directory structure
+        mkdir -p dists/${{ github.event.inputs.distribution }}/main/binary-amd64
+        mkdir -p dists/${{ github.event.inputs.distribution }}/main/binary-arm64
+        mkdir -p dists/${{ github.event.inputs.distribution }}/main/source
+        
+        # Generate Release file
+        cat > dists/${{ github.event.inputs.distribution }}/Release << EOF
+Origin: OpenCog
+Label: OpenCog Unified
+Suite: stable
+Codename: ${{ github.event.inputs.distribution }}
+Version: ${{ github.event.inputs.version }}
+Architectures: amd64 arm64
+Components: main
+Description: OpenCog Cognitive Architecture Repository
+Date: $(date -Ru)
+EOF
+        
+        # Generate Release hashes
+        cd dists/${{ github.event.inputs.distribution }}
+        echo "MD5Sum:" >> Release
+        find . -type f -name "Packages*" -exec md5sum {} \; | sed 's/\.\///' >> Release
+        echo "SHA256:" >> Release
+        find . -type f -name "Packages*" -exec sha256sum {} \; | sed 's/\.\///' >> Release
+    
+    - name: Create Repository Archive
+      run: |
+        cd apt-repo
+        tar -czf ../opencog-apt-repo-${{ github.event.inputs.distribution }}-${{ github.event.inputs.version }}.tar.gz .
+    
+    - name: Generate Setup Script
+      run: |
+        cat > setup-opencog-repo.sh << 'EOF'
+#!/bin/bash
+# OpenCog APT Repository Setup Script
+# Usage: sudo ./setup-opencog-repo.sh
+
+set -e
+
+REPO_ARCHIVE="$1"
+REPO_DIR="/var/opencog-apt"
+
+if [ -z "$REPO_ARCHIVE" ]; then
+    echo "Usage: $0 <repo-archive.tar.gz>"
+    exit 1
+fi
+
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root or with sudo"
+    exit 1
+fi
+
+echo "Setting up OpenCog APT repository..."
+
+# Create repository directory
+mkdir -p "$REPO_DIR"
+cd "$REPO_DIR"
+
+# Extract repository
+echo "Extracting repository archive..."
+tar -xzf "$REPO_ARCHIVE"
+
+# Add to APT sources
+SOURCES_LIST="/etc/apt/sources.list.d/opencog.list"
+echo "deb [trusted=yes] file://$REPO_DIR ${{ github.event.inputs.distribution }} main" > "$SOURCES_LIST"
+
+echo "Repository setup complete!"
+echo ""
+echo "To install OpenCog components:"
+echo "  sudo apt-get update"
+echo "  sudo apt-get install libcogutil-dev"
+echo "  sudo apt-get install libatomspace-dev"
+echo "  sudo apt-get install libcogserver-dev"
+echo ""
+echo "To remove the repository:"
+echo "  sudo rm $SOURCES_LIST"
+echo "  sudo rm -rf $REPO_DIR"
+echo "  sudo apt-get update"
+
+EOF
+        chmod +x setup-opencog-repo.sh
+    
+    - name: Create Repository Documentation
+      run: |
+        cat > APT-REPOSITORY-USAGE.md << 'EOF'
+# OpenCog APT Repository Usage
+
+## Quick Start
+
+1. Download the repository archive and setup script
+2. Run the setup script:
+   ```bash
+   sudo ./setup-opencog-repo.sh opencog-apt-repo-*.tar.gz
+   ```
+
+3. Install packages:
+   ```bash
+   sudo apt-get update
+   sudo apt-get install libatomspace-dev
+   ```
+
+## Manual Setup
+
+### Extract Repository
+```bash
+sudo mkdir -p /var/opencog-apt
+cd /var/opencog-apt
+sudo tar -xzf /path/to/opencog-apt-repo-*.tar.gz
+```
+
+### Add to APT Sources
+```bash
+echo "deb [trusted=yes] file:///var/opencog-apt ${{ github.event.inputs.distribution }} main" | \
+  sudo tee /etc/apt/sources.list.d/opencog.list
+```
+
+### Update and Install
+```bash
+sudo apt-get update
+sudo apt-get install libcogutil-dev libatomspace-dev
+```
+
+## Available Packages
+
+- **libcogutil-dev** - Core utilities and foundations
+- **libatomspace-dev** - Hypergraph database (depends on cogutil)
+- **libcogserver-dev** - Network server (depends on atomspace)
+- **libunify-dev** - Pattern matching (depends on atomspace)
+
+## Package Dependencies
+
+```
+libcogutil-dev
+  └── libboost-dev, libboost-filesystem-dev, ...
+
+libatomspace-dev
+  ├── libcogutil-dev
+  ├── guile-3.0-dev
+  └── python3
+
+libcogserver-dev
+  ├── libatomspace-dev
+  └── libasio-dev
+
+libunify-dev
+  └── libatomspace-dev
+```
+
+## Network Hosting
+
+To serve over HTTP/HTTPS:
+
+```bash
+# Copy to web root
+sudo cp -r /var/opencog-apt /var/www/html/opencog
+
+# Configure in sources.list
+deb [trusted=yes] http://your-server/opencog ${{ github.event.inputs.distribution }} main
+```
+
+## Verification
+
+```bash
+# List installed OpenCog packages
+dpkg -l | grep opencog
+
+# Check library paths
+ldconfig -p | grep cogutil
+ldconfig -p | grep atomspace
+
+# Verify package info
+apt-cache show libatomspace-dev
+```
+
+## Troubleshooting
+
+### Package not found
+```bash
+sudo apt-get update
+apt-cache policy libatomspace-dev
+```
+
+### Dependency issues
+```bash
+sudo apt-get install -f
+```
+
+### Repository not accessible
+```bash
+ls -la /var/opencog-apt
+cat /etc/apt/sources.list.d/opencog.list
+```
+
+EOF
+        cat APT-REPOSITORY-USAGE.md
+    
+    - name: List Repository Contents
+      run: |
+        echo "=== APT Repository Structure ==="
+        tree apt-repo || ls -lhR apt-repo
+        
+        echo ""
+        echo "=== Package List ==="
+        ls -lh apt-repo/pool/main/
+        
+        echo ""
+        echo "=== Package Details ==="
+        for deb in apt-repo/pool/main/*.deb; do
+          echo "--- $deb ---"
+          dpkg-deb --info "$deb"
+          echo ""
+        done
+    
+    - name: Upload APT Repository
+      uses: actions/upload-artifact@v4
+      with:
+        name: opencog-apt-repo-${{ github.event.inputs.distribution }}-${{ github.event.inputs.version }}
+        path: |
+          opencog-apt-repo-*.tar.gz
+          setup-opencog-repo.sh
+          APT-REPOSITORY-USAGE.md
+        retention-days: 90
+    
+    - name: Upload Repository Directory
+      uses: actions/upload-artifact@v4
+      with:
+        name: opencog-apt-repo-full-${{ github.event.inputs.distribution }}
+        path: apt-repo/
+        retention-days: 30
