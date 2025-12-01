@@ -68,7 +68,7 @@ jobs:
             cognitive-foundation-${{ runner.os }}-
             cognitive-foundation-
       
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           path: cogutil
           repository: opencog/cogutil
@@ -223,7 +223,7 @@ jobs:
             cogutil
           key: cognitive-foundation-${{ runner.os }}-${{ github.sha }}
       
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           path: atomspace
           repository: opencog/atomspace
@@ -343,7 +343,7 @@ jobs:
     if: always()
     
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       
       - name: "🧬 Generate Unified Orchestration Analysis"
         run: |
@@ -508,7 +508,7 @@ jobs:
     if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[evolve]')
     
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       
       - name: "🔬 Analyze Build Performance Metrics"
         run: |

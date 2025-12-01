@@ -44,7 +44,7 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       
       - name: Setup Python Environment
         run: |
@@ -334,7 +334,7 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       
       - name: Generate Layer-Specific Issue Template
         id: issue-template
@@ -701,7 +701,7 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       
       - name: Download All Issue Artifacts
         uses: actions/download-artifact@v6
