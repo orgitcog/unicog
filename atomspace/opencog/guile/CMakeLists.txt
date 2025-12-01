@@ -6,7 +6,8 @@ INCLUDE_DIRECTORIES(
 	${GUILE_INCLUDE_DIR}
 )
 
-ADD_LIBRARY (smob
+# Collect all available source files for the smob library
+SET(SMOB_SOURCES
 	SchemeEval.cc
 	SchemeModule.cc
 	SchemePrimitive.cc
@@ -20,6 +21,22 @@ ADD_LIBRARY (smob
 	SchemeSmobValue.cc
 	SchemeSmobLogger.cc
 )
+
+# Verify that at least some source files exist before creating the target
+SET(EXISTING_SOURCES "")
+FOREACH(src_file ${SMOB_SOURCES})
+	IF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${src_file}")
+		LIST(APPEND EXISTING_SOURCES ${src_file})
+	ELSE()
+		MESSAGE(WARNING "Source file not found: ${src_file}")
+	ENDIF()
+ENDFOREACH()
+
+IF(NOT EXISTING_SOURCES)
+	MESSAGE(FATAL_ERROR "No SOURCES found for smob target in opencog/guile.")
+ENDIF()
+
+ADD_LIBRARY (smob ${EXISTING_SOURCES})
 
 TARGET_LINK_LIBRARIES(smob
 
