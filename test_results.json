@@ -1,0 +1,261 @@
+{
+  "summary": {
+    "total_tests": 22,
+    "passed_tests": 19,
+    "success_rate": 86.36363636363636
+  },
+  "details": {
+    "workflow_tests": [
+      {
+        "file": "apt-packaging.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "bootstrap.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "chocolatey-packaging.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "cognitive-membrane-sync.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "cognitive-orchestration.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "cognitive-synergy-engine.yml",
+        "passed": false,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": false,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "debian-packaging.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "electron-packaging.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "entelechy-assessment.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "fixme-tracking.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "gen-cognitive-issues.yml",
+        "passed": false,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": false,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "occ-build.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "ocwin-build.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "ontogenesis-orchestration.yml",
+        "passed": false,
+        "checks": {
+          "has_concurrency": false,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "st.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "todo-catalog-update.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "occ-build-enhanced.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      },
+      {
+        "file": "python-enhanced.yml",
+        "passed": true,
+        "checks": {
+          "has_concurrency": true,
+          "has_timeout": true,
+          "has_checkout": true,
+          "has_jobs": true
+        }
+      }
+    ],
+    "architecture_tests": [
+      {
+        "component": "cognitive_architecture",
+        "passed": true,
+        "checks": {
+          "has_3_engines": true,
+          "has_looms": true,
+          "has_fibers": true,
+          "completed_iterations": true
+        },
+        "state": {
+          "iteration_count": 2,
+          "num_engines": 3,
+          "num_looms": 3,
+          "num_fibers": 3,
+          "engines": [
+            {
+              "id": 1,
+              "state": "initialized",
+              "step_count": 24
+            },
+            {
+              "id": 2,
+              "state": "initialized",
+              "step_count": 24
+            },
+            {
+              "id": 3,
+              "state": "initialized",
+              "step_count": 24
+            }
+          ]
+        }
+      }
+    ],
+    "scheme_tests": [
+      {
+        "file": "cognitive-inference-engine.scm",
+        "passed": true,
+        "checks": {
+          "has_define": true,
+          "has_export": true,
+          "has_documentation": true,
+          "has_functions": true
+        }
+      },
+      {
+        "file": "tensor-thread-fiber.scm",
+        "passed": true,
+        "checks": {
+          "has_define": true,
+          "has_export": true,
+          "has_documentation": true,
+          "has_functions": true
+        }
+      }
+    ],
+    "cmake_tests": [
+      {
+        "file": "OptimizedBuild.cmake",
+        "passed": true,
+        "checks": {
+          "has_ccache": true,
+          "has_lto": true,
+          "has_parallel": true,
+          "has_precompiled_headers": true,
+          "has_unity_build": true
+        }
+      }
+    ]
+  }
+}

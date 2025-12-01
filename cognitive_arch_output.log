@@ -1,0 +1,109 @@
+INFO:__main__:Initializing Advanced Cognitive Architecture
+INFO:__main__:Initialized 3 ontogenetic looms
+INFO:__main__:Added fiber perception to loom at position 0
+INFO:__main__:Added fiber action to loom at position 1
+INFO:__main__:Added fiber memory to loom at position 2
+INFO:__main__:Woven 1 fibers at loom position 0
+INFO:__main__:Woven fiber: perception with dimensions [128, 256, 512]
+INFO:__main__:Woven 1 fibers at loom position 1
+INFO:__main__:Woven fiber: action with dimensions [64, 128, 256]
+INFO:__main__:Woven 1 fibers at loom position 2
+INFO:__main__:Woven fiber: memory with dimensions [256, 512, 1024]
+INFO:__main__:Starting cognitive loop for 2 iterations
+INFO:__main__:
+============================================================
+INFO:__main__:Cognitive Loop Iteration 1
+INFO:__main__:============================================================
+INFO:__main__:Engine 1: Relevance realization at step 1
+INFO:__main__:Engine 2: Relevance realization at step 1
+INFO:__main__:Engine 3: Relevance realization at step 1
+INFO:__main__:Engine 1: Affordance interaction at step 2
+INFO:__main__:Engine 2: Affordance interaction at step 2
+INFO:__main__:Engine 3: Affordance interaction at step 2
+INFO:__main__:Engine 1: Affordance interaction at step 3
+INFO:__main__:Engine 2: Affordance interaction at step 3
+INFO:__main__:Engine 3: Affordance interaction at step 3
+INFO:__main__:Engine 1: Affordance interaction at step 4
+INFO:__main__:Engine 2: Affordance interaction at step 4
+INFO:__main__:Engine 3: Affordance interaction at step 4
+INFO:__main__:Engine 1: Affordance interaction at step 5
+INFO:__main__:Engine 2: Affordance interaction at step 5
+INFO:__main__:Engine 3: Affordance interaction at step 5
+INFO:__main__:Engine 1: Affordance interaction at step 6
+INFO:__main__:Engine 2: Affordance interaction at step 6
+INFO:__main__:Engine 3: Affordance interaction at step 6
+INFO:__main__:Engine 1: Relevance realization at step 7
+INFO:__main__:Engine 2: Relevance realization at step 7
+INFO:__main__:Engine 3: Relevance realization at step 7
+INFO:__main__:Engine 1: Salience simulation at step 8
+INFO:__main__:Engine 2: Salience simulation at step 8
+INFO:__main__:Engine 3: Salience simulation at step 8
+INFO:__main__:Engine 1: Salience simulation at step 9
+INFO:__main__:Engine 2: Salience simulation at step 9
+INFO:__main__:Engine 3: Salience simulation at step 9
+INFO:__main__:Engine 1: Salience simulation at step 10
+INFO:__main__:Engine 2: Salience simulation at step 10
+INFO:__main__:Engine 3: Salience simulation at step 10
+INFO:__main__:Engine 1: Salience simulation at step 11
+INFO:__main__:Engine 2: Salience simulation at step 11
+INFO:__main__:Engine 3: Salience simulation at step 11
+INFO:__main__:Engine 1: Salience simulation at step 12
+INFO:__main__:Engine 2: Salience simulation at step 12
+INFO:__main__:Engine 3: Salience simulation at step 12
+INFO:__main__:Synchronizing inference engines...
+INFO:__main__:Engine synchronization complete
+INFO:__main__:
+============================================================
+INFO:__main__:Cognitive Loop Iteration 2
+INFO:__main__:============================================================
+INFO:__main__:Engine 1: Relevance realization at step 1
+INFO:__main__:Engine 2: Relevance realization at step 1
+INFO:__main__:Engine 3: Relevance realization at step 1
+INFO:__main__:Engine 1: Affordance interaction at step 2
+INFO:__main__:Engine 2: Affordance interaction at step 2
+INFO:__main__:Engine 3: Affordance interaction at step 2
+INFO:__main__:Engine 1: Affordance interaction at step 3
+INFO:__main__:Engine 2: Affordance interaction at step 3
+INFO:__main__:Engine 3: Affordance interaction at step 3
+INFO:__main__:Engine 1: Affordance interaction at step 4
+INFO:__main__:Engine 2: Affordance interaction at step 4
+INFO:__main__:Engine 3: Affordance interaction at step 4
+INFO:__main__:Engine 1: Affordance interaction at step 5
+INFO:__main__:Engine 2: Affordance interaction at step 5
+INFO:__main__:Engine 3: Affordance interaction at step 5
+INFO:__main__:Engine 1: Affordance interaction at step 6
+INFO:__main__:Engine 2: Affordance interaction at step 6
+INFO:__main__:Engine 3: Affordance interaction at step 6
+INFO:__main__:Engine 1: Relevance realization at step 7
+INFO:__main__:Engine 2: Relevance realization at step 7
+INFO:__main__:Engine 3: Relevance realization at step 7
+INFO:__main__:Engine 1: Salience simulation at step 8
+INFO:__main__:Engine 2: Salience simulation at step 8
+INFO:__main__:Engine 3: Salience simulation at step 8
+INFO:__main__:Engine 1: Salience simulation at step 9
+INFO:__main__:Engine 2: Salience simulation at step 9
+INFO:__main__:Engine 3: Salience simulation at step 9
+INFO:__main__:Engine 1: Salience simulation at step 10
+INFO:__main__:Engine 2: Salience simulation at step 10
+INFO:__main__:Engine 3: Salience simulation at step 10
+INFO:__main__:Engine 1: Salience simulation at step 11
+INFO:__main__:Engine 2: Salience simulation at step 11
+INFO:__main__:Engine 3: Salience simulation at step 11
+INFO:__main__:Engine 1: Salience simulation at step 12
+INFO:__main__:Engine 2: Salience simulation at step 12
+INFO:__main__:Engine 3: Salience simulation at step 12
+INFO:__main__:Synchronizing inference engines...
+INFO:__main__:Engine synchronization complete
+INFO:__main__:Integrating with HurdCog OS layer...
+INFO:__main__:HurdCog integration configured: {'layer': 'hurdcog', 'ipc_mechanism': 'mach_msg', 'shared_memory': True, 'cognitive_servers': ['cogserver', 'attention-broker']}
+INFO:__main__:Integrating with CognuMach microkernel...
+INFO:__main__:CognuMach integration configured: {'layer': 'cognumach', 'message_passing': 'mach_msg_send/receive', 'port_rights': ['send', 'receive', 'send_once'], 'memory_objects': True}
+INFO:__main__:Architecture state exported to cognitive_architecture_state.json
+INFO:__main__:
+============================================================
+INFO:__main__:COGNITIVE ARCHITECTURE INTEGRATION COMPLETE
+INFO:__main__:============================================================
+INFO:__main__:Total iterations: 2
+INFO:__main__:Active engines: 3
+INFO:__main__:Ontogenetic looms: 3
+INFO:__main__:Tensor fibers: 3

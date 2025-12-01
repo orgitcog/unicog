@@ -1,0 +1,1432 @@
+{
+  "summary": {
+    "workflow_issues": 16,
+    "build_issues": 4,
+    "placeholder_count": 208
+  },
+  "details": {
+    "workflow_improvements": [
+      {
+        "file": ".github/workflows/apt-packaging.yml",
+        "issues": [
+          "Missing CMake build cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/bootstrap.yml",
+        "issues": [
+          "Missing CMake build cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Missing artifact retention policy",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/chocolatey-packaging.yml",
+        "issues": [
+          "Missing CMake build cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs"
+        ]
+      },
+      {
+        "file": ".github/workflows/cognitive-membrane-sync.yml",
+        "issues": [
+          "Missing pip dependency cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider using matrix strategy for multiple Python versions",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/cognitive-orchestration.yml",
+        "issues": [
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/cognitive-synergy-engine.yml",
+        "issues": [
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/debian-packaging.yml",
+        "issues": [
+          "Missing CMake build cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/electron-packaging.yml",
+        "issues": [
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs"
+        ]
+      },
+      {
+        "file": ".github/workflows/entelechy-assessment.yml",
+        "issues": [
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider using matrix strategy for multiple Python versions",
+          "Missing artifact retention policy",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/fixme-tracking.yml",
+        "issues": [
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider using matrix strategy for multiple Python versions",
+          "Missing artifact retention policy",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/gen-cognitive-issues.yml",
+        "issues": [
+          "Missing CMake build cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/occ-build.yml",
+        "issues": [
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs"
+        ]
+      },
+      {
+        "file": ".github/workflows/ocwin-build.yml",
+        "issues": [
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs"
+        ]
+      },
+      {
+        "file": ".github/workflows/ontogenesis-orchestration.yml",
+        "issues": [
+          "Missing CMake build cache",
+          "Missing pip dependency cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider adding error handling strategies"
+        ]
+      },
+      {
+        "file": ".github/workflows/st.yml",
+        "issues": [
+          "Missing CMake build cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs"
+        ]
+      },
+      {
+        "file": ".github/workflows/todo-catalog-update.yml",
+        "issues": [
+          "Missing pip dependency cache",
+          "Missing job timeout configuration",
+          "Missing concurrency control to prevent duplicate runs",
+          "Consider using matrix strategy for multiple Python versions",
+          "Consider adding error handling strategies"
+        ]
+      }
+    ],
+    "build_optimizations": [
+      {
+        "file": "CMakeLists.txt",
+        "issues": [
+          "CMake version too old (recommend 3.15+)"
+        ]
+      },
+      {
+        "file": "agentic-kernels-catalog/CMakeLists.txt",
+        "issues": [
+          "CMake version too old (recommend 3.15+)",
+          "Prefer target_include_directories over global include_directories"
+        ]
+      },
+      {
+        "file": "agentic-kernels-catalog/tests/CMakeLists.txt",
+        "issues": [
+          "CMake version too old (recommend 3.15+)",
+          "Prefer target_include_directories over global include_directories"
+        ]
+      },
+      {
+        "file": "asmoses/CMakeLists.txt",
+        "issues": [
+          "Consider using target_include_directories for better encapsulation",
+          "Prefer target_include_directories over global include_directories"
+        ]
+      }
+    ],
+    "code_quality_issues": [],
+    "placeholder_resolutions": [
+      {
+        "file": "atomspace-storage/opencog/persist/csv/table_read.h",
+        "type": "TODO",
+        "line": 38,
+        "description": "Should this be a StringValue?"
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/RewriteLink.h",
+        "type": "TODO",
+        "line": 224,
+        "description": "we probably want to"
+      },
+      {
+        "file": "atomspace/opencog/atoms/pattern/PatternTerm.h",
+        "type": "TODO",
+        "line": 80,
+        "description": "it would probably be more efficient to swap which of these"
+      },
+      {
+        "file": "atomspace/opencog/atomspace/AtomSpace.h",
+        "type": "FIXME",
+        "line": 524,
+        "description": "Users should call StorageNode::add_nocheck() instead."
+      },
+      {
+        "file": "cogutil/opencog/util/sigslot.h",
+        "type": "HACK",
+        "line": 55,
+        "description": "ALERT -- use std::map, not std::set here, for only"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiImplicator.h",
+        "type": "TODO",
+        "line": 44,
+        "description": "Why would one need to reset during psi-loop?"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiRules.h",
+        "type": "TODO",
+        "line": 105,
+        "description": "add predicate to check for membership of category."
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiRules.h",
+        "type": "TODO",
+        "line": 126,
+        "description": "Should these entries be a member of Rules class?"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiRules.h",
+        "type": "TODO",
+        "line": 136,
+        "description": "Using names that are prefixed with \"OpenPsi: \" might be a bad idea,"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/combo/vertex.h",
+        "type": "TODO",
+        "line": 505,
+        "description": "// hash_combine(tmp, boost::hash_value(*pc));"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/combo/vertex.h",
+        "type": "TODO",
+        "line": 795,
+        "description": "return false;"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/table/table.h",
+        "type": "FIXME",
+        "line": 98,
+        "description": "TODO: change the implementation, per the above note."
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/table/table_io.h",
+        "type": "TODO",
+        "line": 137,
+        "description": "reimplement loadITable with the same model of loadTable and"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/type_checker/type_tree.h",
+        "type": "TODO",
+        "line": 235,
+        "description": "lambda"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/eda/local_structure.h",
+        "type": "TODO",
+        "line": 285,
+        "description": "Clarify what statistics are being accumulated and where they are stored."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/eda/replacement.h",
+        "type": "TODO",
+        "line": 62,
+        "description": "I think it might be a little more efficent to use the"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/main/problem-params.h",
+        "type": "FIXME",
+        "line": 46,
+        "description": "TODO The structure below should be split into multiple"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/metapopulation/metapopulation.h",
+        "type": "TODO",
+        "line": 535,
+        "description": "we may want to output the visited status as well"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/moses/types.h",
+        "type": "TODO",
+        "line": 210,
+        "description": "this should be a std::valarray not std::vector but I am too"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/optimization/particle-swarm.h",
+        "type": "TODO",
+        "line": 154,
+        "description": "pso description"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/optimization/particle-swarm.h",
+        "type": "TODO",
+        "line": 315,
+        "description": "Wind dispersion, but test without first"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/knobs.h",
+        "type": "TODO",
+        "line": 283,
+        "description": "Clarify the canonization behavior for parent-child relationships."
+      },
+      {
+        "file": "moses/moses/comboreduct/combo/vertex.h",
+        "type": "TODO",
+        "line": 505,
+        "description": "// hash_combine(tmp, boost::hash_value(*pc));"
+      },
+      {
+        "file": "moses/moses/comboreduct/combo/vertex.h",
+        "type": "TODO",
+        "line": 795,
+        "description": "return false;"
+      },
+      {
+        "file": "moses/moses/comboreduct/table/table.h",
+        "type": "FIXME",
+        "line": 99,
+        "description": "TODO: change the implementation, per the above note."
+      },
+      {
+        "file": "moses/moses/comboreduct/table/table_io.h",
+        "type": "TODO",
+        "line": 137,
+        "description": "reimplement loadITable with the same model of loadTable and"
+      },
+      {
+        "file": "moses/moses/comboreduct/type_checker/type_tree.h",
+        "type": "TODO",
+        "line": 235,
+        "description": "lambda"
+      },
+      {
+        "file": "moses/moses/moses/eda/local_structure.h",
+        "type": "TODO",
+        "line": 285,
+        "description": "Clarify what statistics are being accumulated and where they are stored."
+      },
+      {
+        "file": "moses/moses/moses/eda/replacement.h",
+        "type": "TODO",
+        "line": 62,
+        "description": "I think it might be a little more efficent to use the"
+      },
+      {
+        "file": "moses/moses/moses/main/problem-params.h",
+        "type": "FIXME",
+        "line": 46,
+        "description": "TODO The structure below should be split into multiple"
+      },
+      {
+        "file": "moses/moses/moses/metapopulation/metapopulation.h",
+        "type": "TODO",
+        "line": 535,
+        "description": "we may want to output the visited status as well"
+      },
+      {
+        "file": "moses/moses/moses/moses/types.h",
+        "type": "TODO",
+        "line": 210,
+        "description": "this should be a std::valarray not std::vector but I am too"
+      },
+      {
+        "file": "moses/moses/moses/optimization/particle-swarm.h",
+        "type": "TODO",
+        "line": 347,
+        "description": "Wind dispersion, but test without first"
+      },
+      {
+        "file": "moses/moses/moses/representation/knobs.h",
+        "type": "TODO",
+        "line": 276,
+        "description": "Clarify the canonization behavior for parent-child relationships."
+      },
+      {
+        "file": "unify/opencog/unify/Unify.h",
+        "type": "TODO",
+        "line": 48,
+        "description": "the notion of equality between 2 CHandles might one where"
+      },
+      {
+        "file": "unify/opencog/unify/Unify.h",
+        "type": "TODO",
+        "line": 159,
+        "description": "the type of a typed block is currently a handle of the"
+      },
+      {
+        "file": "unify/opencog/unify/Unify.h",
+        "type": "TODO",
+        "line": 188,
+        "description": "maybe we could simplify a great deal of code by replacing"
+      },
+      {
+        "file": "unify/opencog/unify/Unify.h",
+        "type": "TODO",
+        "line": 521,
+        "description": "being friend with UnifyUTest"
+      },
+      {
+        "file": "unify/opencog/unify/Unify.h",
+        "type": "TODO",
+        "line": 601,
+        "description": "being friend with UnifyUTest"
+      },
+      {
+        "file": "ure/opencog/ure/Rule.h",
+        "type": "TODO",
+        "line": 373,
+        "description": "subdivide in smaller and shared mutexes"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/BIT.h",
+        "type": "TODO",
+        "line": 72,
+        "description": "Maybe this should be moved to BackwardChainer"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/BackwardChainer.h",
+        "type": "TODO",
+        "line": 232,
+        "description": "perhaps move that under BIT"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/ControlPolicy.h",
+        "type": "TODO",
+        "line": 45,
+        "description": "maybe wrap that in a class, and use it in foward chainer"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/Fitness.h",
+        "type": "TODO",
+        "line": 75,
+        "description": "we may want to move the arguments in its own class if it"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/Fitness.h",
+        "type": "TODO",
+        "line": 92,
+        "description": "replace by class dedicated to hold the parameters"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/TraceRecorder.h",
+        "type": "TODO",
+        "line": 94,
+        "description": "the TV on the evaluation link should be more carefully"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/FCStat.h",
+        "type": "TODO",
+        "line": 76,
+        "description": "subdivide in smaller and shared mutexes"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.h",
+        "type": "TODO",
+        "line": 237,
+        "description": "subdivide in smaller and shared mutexes"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.h",
+        "type": "TODO",
+        "line": 241,
+        "description": "use shared mutexes"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/SourceRuleSet.h",
+        "type": "TODO",
+        "line": 102,
+        "description": "implement tournament selection as well, as a cheaper"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/SourceSet.h",
+        "type": "TODO",
+        "line": 54,
+        "description": "this class has thing in common with AndBIT, maybe their"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/SourceSet.h",
+        "type": "TODO",
+        "line": 151,
+        "description": "subdivide in smaller and shared mutexes"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/SourceSet.h",
+        "type": "TODO",
+        "line": 165,
+        "description": "this class has things in common with BIT, maybe their common"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/SourceSet.h",
+        "type": "TODO",
+        "line": 223,
+        "description": "subdivide in smaller and shared mutexes"
+      },
+      {
+        "file": "atomspace-storage/opencog/persist/api/cython/PersistCython.cc",
+        "type": "FIXME",
+        "line": 31,
+        "description": "except for the error messages, most of this code is"
+      },
+      {
+        "file": "atomspace-storage/opencog/persist/sexcom/Commands.cc",
+        "type": "FIXME",
+        "line": 165,
+        "description": "read above comment."
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/Checkers.cc",
+        "type": "FIXME",
+        "line": 42,
+        "description": "Much of the onfusion below is due to a bug: if the"
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/Checkers.cc",
+        "type": "FIXME",
+        "line": 93,
+        "description": "... Perhaps IntersectionLink, UnionLink will"
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/RandomChoice.cc",
+        "type": "FIXME",
+        "line": 110,
+        "description": "- fix this so it can also choose a single value"
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/RewriteLink.cc",
+        "type": "TODO",
+        "line": 296,
+        "description": "the following has no unit test!!! Yet it introduces a"
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/RewriteLink.cc",
+        "type": "TODO",
+        "line": 340,
+        "description": "generalize with when Unquote and Quote are apart"
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/TypedVariableLink.cc",
+        "type": "FIXME",
+        "line": 56,
+        "description": "this is wrong; URE-bug"
+      },
+      {
+        "file": "atomspace/opencog/atoms/core/Variables.cc",
+        "type": "FIXME",
+        "line": 109,
+        "description": "URE calls us with broken handle!!"
+      },
+      {
+        "file": "atomspace/opencog/atoms/execution/Instantiator.cc",
+        "type": "TODO",
+        "line": 288,
+        "description": "what about globs?"
+      },
+      {
+        "file": "atomspace/opencog/atoms/execution/Instantiator.cc",
+        "type": "FIXME",
+        "line": 598,
+        "description": "Can we defer the addition to the atomspace to an even"
+      },
+      {
+        "file": "atomspace/opencog/atoms/flow/CollectionOfLink.cc",
+        "type": "TODO",
+        "line": 69,
+        "description": "Handle executable _outgoing[0] by executing it first."
+      },
+      {
+        "file": "atomspace/opencog/atoms/flow/CollectionOfLink.cc",
+        "type": "TODO",
+        "line": 70,
+        "description": "Support complex type signatures beyond simple TYPE_NODE."
+      },
+      {
+        "file": "atomspace/opencog/atoms/flow/FormulaPredicateLink.cc",
+        "type": "FIXME",
+        "line": 41,
+        "description": "- in the future, some user is going to want to include"
+      },
+      {
+        "file": "atomspace/opencog/atoms/join/JoinLink.cc",
+        "type": "TODO",
+        "line": 549,
+        "description": "it might be faster to use hash tables instead of rb-trees"
+      },
+      {
+        "file": "atomspace/opencog/atoms/join/JoinLink.cc",
+        "type": "FIXME",
+        "line": 721,
+        "description": "this is really dumb, using a queue and then"
+      },
+      {
+        "file": "atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "type": "FIXME",
+        "line": 1039,
+        "description": "the code here assumes that the situation is indeed"
+      },
+      {
+        "file": "atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "type": "FIXME",
+        "line": 1255,
+        "description": "-- this is wrong. What we really want is to"
+      },
+      {
+        "file": "atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "type": "FIXME",
+        "line": 1465,
+        "description": "debug_log() above is more readable than the below."
+      },
+      {
+        "file": "atomspace/opencog/atoms/pattern/PatternUtils.cc",
+        "type": "FIXME",
+        "line": 55,
+        "description": "Are the below needed?"
+      },
+      {
+        "file": "atomspace/opencog/atoms/reduct/DecimateLink.cc",
+        "type": "FIXME",
+        "line": 65,
+        "description": "... both the NumberNode and the FloatValue variations"
+      },
+      {
+        "file": "atomspace/opencog/atomspace/AtomSpace.cc",
+        "type": "TODO",
+        "line": 138,
+        "description": "this should probably be moved to a method on class Atom."
+      },
+      {
+        "file": "atomspace/opencog/atomspace/AtomSpace.cc",
+        "type": "FIXME",
+        "line": 283,
+        "description": "-- The recursive design of the depth() routine below makes"
+      },
+      {
+        "file": "atomspace/opencog/cython/PythonEval.cc",
+        "type": "FIXME",
+        "line": 1427,
+        "description": "this does a lot of wasteful string copying."
+      },
+      {
+        "file": "atomspace/opencog/guile/modules/ExecSCM.cc",
+        "type": "FIXME",
+        "line": 73,
+        "description": "can we fix cython to not do this, already?"
+      },
+      {
+        "file": "atomspace/opencog/query/InitiateSearchMixin.cc",
+        "type": "TODO",
+        "line": 382,
+        "description": "-- weed out duplicates!"
+      },
+      {
+        "file": "atomspace/opencog/query/PatternMatchEngine.cc",
+        "type": "FIXME",
+        "line": 284,
+        "description": "this is currently a weak stop-gap measure to handle"
+      },
+      {
+        "file": "atomspace/opencog/query/PatternMatchEngine.cc",
+        "type": "FIXME",
+        "line": 1533,
+        "description": "- this is not very elegant. We should probably"
+      },
+      {
+        "file": "atomspace/opencog/query/PatternMatchEngine.cc",
+        "type": "FIXME",
+        "line": 1983,
+        "description": "Issue #3016 - Unification with unordered AndLinks"
+      },
+      {
+        "file": "atomspace/opencog/query/PatternMatchEngine.cc",
+        "type": "FIXME",
+        "line": 2050,
+        "description": "Right now, this code handles graphs that have only one"
+      },
+      {
+        "file": "atomspace/opencog/query/PatternMatchEngine.cc",
+        "type": "FIXME",
+        "line": 2224,
+        "description": "-- do the above."
+      },
+      {
+        "file": "atomspace/opencog/query/Recognizer.cc",
+        "type": "TODO",
+        "line": 126,
+        "description": "Change to something better if possible..."
+      },
+      {
+        "file": "atomspace/opencog/query/RewriteMixin.cc",
+        "type": "FIXME",
+        "line": 164,
+        "description": "now I see how it can be done. The groupings should"
+      },
+      {
+        "file": "atomspace/opencog/query/SatisfyMixin.cc",
+        "type": "FIXME",
+        "line": 583,
+        "description": "terrible hack."
+      },
+      {
+        "file": "atomspace/opencog/query/TermMatchMixin.cc",
+        "type": "FIXME",
+        "line": 710,
+        "description": "worse: this cannot possibly be right when"
+      },
+      {
+        "file": "components/core/atomspace-rocks/opencog/persist/rocks/RocksPersistSCM.cc",
+        "type": "FIXME",
+        "line": 82,
+        "description": "-- are open and close actually needed for anything?"
+      },
+      {
+        "file": "components/integration/opencog/opencog/nlp/fuzzy/Fuzzy.cc",
+        "type": "TODO",
+        "line": 81,
+        "description": "Extend to find similar links as well"
+      },
+      {
+        "file": "components/integration/opencog/opencog/nlp/fuzzy/FuzzyMatchBasic.cc",
+        "type": "TODO",
+        "line": 106,
+        "description": "May use Truth Value instead"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiImplicator.cc",
+        "type": "TODO",
+        "line": 41,
+        "description": "// Solve for multithreaded access. Create a rule class and lock"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiImplicator.cc",
+        "type": "TODO",
+        "line": 49,
+        "description": "Add cache per atomspace."
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiRules.cc",
+        "type": "TODO",
+        "line": 68,
+        "description": "Test thoroughly, or develop an alternative. See discussion"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiRules.cc",
+        "type": "TODO",
+        "line": 101,
+        "description": "But why make the add_category public then?"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiRules.cc",
+        "type": "TODO",
+        "line": 115,
+        "description": "Should this be a shared ptr to avoid memory leak?"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiRules.cc",
+        "type": "TODO",
+        "line": 124,
+        "description": "Should this be a shared ptr to avoid memory leak?"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiSCM.cc",
+        "type": "TODO",
+        "line": 91,
+        "description": "Should this be a singleton? What could be the issues that need"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiSCM.cc",
+        "type": "TODO",
+        "line": 95,
+        "description": "Add to multiple categories using scheme rest list."
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiSatisfier.cc",
+        "type": "TODO",
+        "line": 42,
+        "description": "Saperated component patterns aren't handled by this function"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiSatisfier.cc",
+        "type": "TODO",
+        "line": 56,
+        "description": "If we are here it means the suggested groundings doesn't have"
+      },
+      {
+        "file": "components/integration/opencog/opencog/openpsi/OpenPsiSatisfier.cc",
+        "type": "TODO",
+        "line": 76,
+        "description": "This happens when InitiateSearchCB::no_search has groundings."
+      },
+      {
+        "file": "components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "type": "TODO",
+        "line": 1028,
+        "description": "it would be nice to pass exceptions on through, but"
+      },
+      {
+        "file": "components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "type": "FIXME",
+        "line": 93,
+        "description": "This lock is not needed, because in guile-2.2,"
+      },
+      {
+        "file": "components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "type": "FIXME",
+        "line": 1057,
+        "description": "-- idealy we should avoid catch-and-rethrow."
+      },
+      {
+        "file": "components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "type": "FIXME",
+        "line": 1180,
+        "description": "only a subset is needed."
+      },
+      {
+        "file": "components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "type": "FIXME",
+        "line": 239,
+        "description": "this does not smell right; optionals should get"
+      },
+      {
+        "file": "components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "type": "FIXME",
+        "line": 268,
+        "description": "... using an std::map would be more efficient."
+      },
+      {
+        "file": "components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "type": "FIXME",
+        "line": 46,
+        "description": "XXX -- Optionals are handled incorrectly here;"
+      },
+      {
+        "file": "components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "type": "FIXME",
+        "line": 103,
+        "description": "-- if dn_head is null, then we should check regexes."
+      },
+      {
+        "file": "components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc",
+        "type": "FIXME",
+        "line": 338,
+        "description": "-- We should fish parse options out of the atomspace."
+      },
+      {
+        "file": "components/learning/moses/examples/example-progs/continmax.cc",
+        "type": "TODO",
+        "line": 67,
+        "description": "Expand documentation to match style of onemax/nmax examples."
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/main/action-reductor.cc",
+        "type": "TODO",
+        "line": 93,
+        "description": "-- replace this by cond"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/main/eval-table.cc",
+        "type": "FIXME",
+        "line": 147,
+        "description": "vector<string> header = get_header(pa.input_table_file);"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/reduct/contin_rules.cc",
+        "type": "TODO",
+        "line": 963,
+        "description": "sin(*(-1 x)) -> -sin(x)"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/reduct/mixed_rules.cc",
+        "type": "TODO",
+        "line": 1228,
+        "description": "combo_tree copy2_tr = tr.subtree(sib_it(it), tr.next_sibling(sib_it(it)));"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/table/table_io.cc",
+        "type": "TODO",
+        "line": 955,
+        "description": "could be simplified, optimized, etc"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/table/table_io.cc",
+        "type": "TODO",
+        "line": 1078,
+        "description": "this could definitely be optimized"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/table/table_io.cc",
+        "type": "TODO",
+        "line": 1256,
+        "description": "implement timestamp support"
+      },
+      {
+        "file": "components/learning/moses/moses/comboreduct/table/table_io.cc",
+        "type": "HACK",
+        "line": 1301,
+        "description": "THIS PART TO MAKE IT SUPPORT OTHER TYPES THAN BOOLEAN"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/deme/deme_expander.cc",
+        "type": "TODO",
+        "line": 441,
+        "description": "DO NOT CHANGE THE MAX SCORE IF USER SET IT: BUT THAT"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/deme/deme_expander.cc",
+        "type": "TODO",
+        "line": 457,
+        "description": "re-enable that once best_possible_bscore is fixed"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/deme/deme_expander.cc",
+        "type": "FIXME",
+        "line": 502,
+        "description": "this is a bug .. the user may have specified that"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/main/table-problems.cc",
+        "type": "FIXME",
+        "line": 138,
+        "description": "-- the multiple tables should be merged into one."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/main/table-problems.cc",
+        "type": "FIXME",
+        "line": 150,
+        "description": ".. check that they all have the same signature."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "type": "TODO",
+        "line": 404,
+        "description": "Make population cap size-sensitive to exemplar complexity."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "type": "FIXME",
+        "line": 261,
+        "description": "we should use a pointer set for scored_combo_tree_set"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "type": "FIXME",
+        "line": 552,
+        "description": "looks to me like it++ can often be collaed twice within this loop!"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/metapopulation/metapopulation.cc",
+        "type": "FIXME",
+        "line": 222,
+        "description": "should probably not recompute every time ..."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/moses/local_moses.cc",
+        "type": "TODO",
+        "line": 180,
+        "description": "use the option of the output"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/moses/mpi_moses.cc",
+        "type": "TODO",
+        "line": 482,
+        "description": "Optimize statistics printing frequency to reduce output volume."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/moses/partial.cc",
+        "type": "TODO",
+        "line": 96,
+        "description": "Improve generation tracking by getting actual number"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/optimization/particle-swarm.cc",
+        "type": "TODO",
+        "line": 197,
+        "description": "work in a better way to identify convergence."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/optimization/particle-swarm.cc",
+        "type": "TODO",
+        "line": 236,
+        "description": "Explanation"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 316,
+        "description": "measure and compare the resulting performance."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 489,
+        "description": "should bias the selection of these, so that"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 581,
+        "description": "Benchmark and clarify optimal breakeven point across different problem sizes."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 1011,
+        "description": "implement support for enumerated types in the input."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 1181,
+        "description": "should bias the selection of these (and possibly choose larger subtrees)"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/representation/build_knobs.cc",
+        "type": "FIXME",
+        "line": 1342,
+        "description": "now just attaches to the first output"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/scoring/bscores.cc",
+        "type": "TODO",
+        "line": 570,
+        "description": "sib_it predicate = it.begin();"
+      },
+      {
+        "file": "components/learning/moses/moses/moses/scoring/scoring_base.cc",
+        "type": "FIXME",
+        "line": 108,
+        "description": "complexity_t should be a double not an int ..."
+      },
+      {
+        "file": "components/learning/moses/moses/moses/scoring/time_dispersion.cc",
+        "type": "TODO",
+        "line": 43,
+        "description": "multipler other than 1 is not supported yet"
+      },
+      {
+        "file": "moses/moses/comboreduct/main/action-reductor.cc",
+        "type": "TODO",
+        "line": 93,
+        "description": "-- replace this by cond"
+      },
+      {
+        "file": "moses/moses/comboreduct/main/eval-table.cc",
+        "type": "FIXME",
+        "line": 147,
+        "description": "vector<string> header = get_header(pa.input_table_file);"
+      },
+      {
+        "file": "moses/moses/comboreduct/reduct/contin_rules.cc",
+        "type": "TODO",
+        "line": 963,
+        "description": "sin(*(-1 x)) -> -sin(x)"
+      },
+      {
+        "file": "moses/moses/comboreduct/reduct/mixed_rules.cc",
+        "type": "TODO",
+        "line": 1228,
+        "description": "combo_tree copy2_tr = tr.subtree(sib_it(it), tr.next_sibling(sib_it(it)));"
+      },
+      {
+        "file": "moses/moses/comboreduct/table/table_io.cc",
+        "type": "TODO",
+        "line": 934,
+        "description": "could be simplified, optimized, etc"
+      },
+      {
+        "file": "moses/moses/comboreduct/table/table_io.cc",
+        "type": "TODO",
+        "line": 1245,
+        "description": "implement timestamp support"
+      },
+      {
+        "file": "moses/moses/comboreduct/table/table_io.cc",
+        "type": "HACK",
+        "line": 1290,
+        "description": "THIS PART TO MAKE IT SUPPORT OTHER TYPES THAN BOOLEAN"
+      },
+      {
+        "file": "moses/moses/moses/deme/deme_expander.cc",
+        "type": "TODO",
+        "line": 441,
+        "description": "DO NOT CHANGE THE MAX SCORE IF USER SET IT: BUT THAT"
+      },
+      {
+        "file": "moses/moses/moses/deme/deme_expander.cc",
+        "type": "TODO",
+        "line": 457,
+        "description": "re-enable that once best_possible_bscore is fixed"
+      },
+      {
+        "file": "moses/moses/moses/deme/deme_expander.cc",
+        "type": "FIXME",
+        "line": 502,
+        "description": "this is a bug .. the user may have specified that"
+      },
+      {
+        "file": "moses/moses/moses/main/table-problems.cc",
+        "type": "FIXME",
+        "line": 138,
+        "description": "-- the multiple tables should be merged into one."
+      },
+      {
+        "file": "moses/moses/moses/main/table-problems.cc",
+        "type": "FIXME",
+        "line": 150,
+        "description": ".. check that they all have the same signature."
+      },
+      {
+        "file": "moses/moses/moses/metapopulation/merging.cc",
+        "type": "TODO",
+        "line": 404,
+        "description": "Make population cap size-sensitive to exemplar complexity."
+      },
+      {
+        "file": "moses/moses/moses/metapopulation/merging.cc",
+        "type": "FIXME",
+        "line": 261,
+        "description": "we should use a pointer set for scored_combo_tree_set"
+      },
+      {
+        "file": "moses/moses/moses/metapopulation/merging.cc",
+        "type": "FIXME",
+        "line": 552,
+        "description": "looks to me like it++ can often be collaed twice within this loop!"
+      },
+      {
+        "file": "moses/moses/moses/metapopulation/metapopulation.cc",
+        "type": "FIXME",
+        "line": 222,
+        "description": "should probably not recompute every time ..."
+      },
+      {
+        "file": "moses/moses/moses/moses/local_moses.cc",
+        "type": "TODO",
+        "line": 180,
+        "description": "use the option of the output"
+      },
+      {
+        "file": "moses/moses/moses/moses/mpi_moses.cc",
+        "type": "TODO",
+        "line": 486,
+        "description": "Optimize statistics printing frequency to reduce output volume."
+      },
+      {
+        "file": "moses/moses/moses/moses/partial.cc",
+        "type": "TODO",
+        "line": 96,
+        "description": "Improve generation tracking by getting actual number"
+      },
+      {
+        "file": "moses/moses/moses/optimization/particle-swarm.cc",
+        "type": "TODO",
+        "line": 198,
+        "description": "work in a better way to identify convergence."
+      },
+      {
+        "file": "moses/moses/moses/optimization/particle-swarm.cc",
+        "type": "TODO",
+        "line": 237,
+        "description": "Explanation"
+      },
+      {
+        "file": "moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 317,
+        "description": "measure and compare the resulting performance."
+      },
+      {
+        "file": "moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 490,
+        "description": "should bias the selection of these, so that"
+      },
+      {
+        "file": "moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 582,
+        "description": "Benchmark and clarify optimal breakeven point across different problem sizes."
+      },
+      {
+        "file": "moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 1012,
+        "description": "implement support for enumerated types in the input."
+      },
+      {
+        "file": "moses/moses/moses/representation/build_knobs.cc",
+        "type": "TODO",
+        "line": 1182,
+        "description": "should bias the selection of these (and possibly choose larger subtrees)"
+      },
+      {
+        "file": "moses/moses/moses/representation/build_knobs.cc",
+        "type": "FIXME",
+        "line": 1343,
+        "description": "now just attaches to the first output"
+      },
+      {
+        "file": "moses/moses/moses/scoring/bscores.cc",
+        "type": "TODO",
+        "line": 570,
+        "description": "sib_it predicate = it.begin();"
+      },
+      {
+        "file": "moses/moses/moses/scoring/scoring_base.cc",
+        "type": "FIXME",
+        "line": 152,
+        "description": "complexity_t should be a double not an int ..."
+      },
+      {
+        "file": "moses/moses/moses/scoring/time_dispersion.cc",
+        "type": "TODO",
+        "line": 43,
+        "description": "multipler other than 1 is not supported yet"
+      },
+      {
+        "file": "ure/opencog/ure/BetaDistribution.cc",
+        "type": "TODO",
+        "line": 33,
+        "description": "should be replaced by tv->get_mode() once implemented"
+      },
+      {
+        "file": "ure/opencog/ure/Rule.cc",
+        "type": "TODO",
+        "line": 58,
+        "description": "could certainly be optimized by not systematically"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/BIT.cc",
+        "type": "TODO",
+        "line": 121,
+        "description": "might differ till needed to optimize"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/BIT.cc",
+        "type": "TODO",
+        "line": 374,
+        "description": "is this merging necessary?"
+      },
+      {
+        "file": "ure/opencog/ure/backwardchainer/BackwardChainer.cc",
+        "type": "TODO",
+        "line": 288,
+        "description": "Maybe we could take advantage of the new read-only"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.cc",
+        "type": "TODO",
+        "line": 101,
+        "description": "For now the FC follows the old standard. We may move to"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.cc",
+        "type": "TODO",
+        "line": 165,
+        "description": "if creating/destroying threads is too expensive, use a thread"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.cc",
+        "type": "TODO",
+        "line": 289,
+        "description": "This can be simplified but is let here until do_step is"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.cc",
+        "type": "TODO",
+        "line": 372,
+        "description": "refine mutex"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.cc",
+        "type": "TODO",
+        "line": 409,
+        "description": "This has the effect of deallocating the rules, which"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/ForwardChainer.cc",
+        "type": "TODO",
+        "line": 523,
+        "description": "refine"
+      },
+      {
+        "file": "ure/opencog/ure/forwardchainer/SourceSet.cc",
+        "type": "TODO",
+        "line": 48,
+        "description": "// 1. Support more fitness functions"
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 17,
+        "description": "-- The recursive design of the depth() routine below makes\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 18,
+        "description": "Users should call StorageNode::add_nocheck() instead.\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 19,
+        "description": "this does a lot of wasteful string copying.\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 25,
+        "description": "can we fix cython to not do this, already?\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 28,
+        "description": "This lock is not needed, because in guile-2.2,\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 30,
+        "description": "Are the below needed?\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 33,
+        "description": "This update is not thread-safe.\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 35,
+        "description": "- fix this so it can also choose a single value\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 36,
+        "description": "URE calls us with broken handle!!\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 38,
+        "description": "The update here is not thread-safe...\","
+      },
+      {
+        "file": "analyze_issue_examples.py",
+        "type": "FIXME",
+        "line": 44,
+        "description": "this is currently a weak stop-gap measure to handle\""
+      },
+      {
+        "file": "setup_fixme_environment.py",
+        "type": "TODO",
+        "line": 83,
+        "description": "Implement error handling for edge case X\""
+      },
+      {
+        "file": "atomspace/tests/cython/guile/test_pattern.py",
+        "type": "stub",
+        "line": 24,
+        "description": "tearDown"
+      },
+      {
+        "file": "components/integration/opencog/opencog/nlp/sentiment/basic_sentiment_analysis.py",
+        "type": "stub",
+        "line": 37,
+        "description": "__init__"
+      },
+      {
+        "file": "language-learning/src/common/absclient.py",
+        "type": "stub",
+        "line": 31,
+        "description": "set_cell_by_indexes"
+      },
+      {
+        "file": "language-learning/src/common/absclient.py",
+        "type": "stub",
+        "line": 35,
+        "description": "set_cell_by_names"
+      },
+      {
+        "file": "language-learning/src/common/absclient.py",
+        "type": "stub",
+        "line": 77,
+        "description": "update"
+      },
+      {
+        "file": "language-learning/src/common/absclient.py",
+        "type": "stub",
+        "line": 81,
+        "description": "set_total"
+      },
+      {
+        "file": "language-learning/src/common/absclient.py",
+        "type": "stub",
+        "line": 110,
+        "description": "on_statistics"
+      },
+      {
+        "file": "language-learning/src/grammar_tester/parsevaluate.py",
+        "type": "stub",
+        "line": 460,
+        "description": "__init__"
+      },
+      {
+        "file": "language-learning/src/link_grammar/lgparsequalityestimator.py",
+        "type": "stub",
+        "line": 97,
+        "description": "on_linkage_done"
+      },
+      {
+        "file": "language-learning/src/pipeline/pipelinetree.py",
+        "type": "stub",
+        "line": 34,
+        "description": "__init__"
+      }
+    ],
+    "architecture_enhancements": []
+  }
+}

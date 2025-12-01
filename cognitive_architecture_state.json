@@ -1,0 +1,23 @@
+{
+  "iteration_count": 2,
+  "num_engines": 3,
+  "num_looms": 3,
+  "num_fibers": 3,
+  "engines": [
+    {
+      "id": 1,
+      "state": "initialized",
+      "step_count": 24
+    },
+    {
+      "id": 2,
+      "state": "initialized",
+      "step_count": 24
+    },
+    {
+      "id": 3,
+      "state": "initialized",
+      "step_count": 24
+    }
+  ]
+}

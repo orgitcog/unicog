@@ -1,0 +1,50 @@
+{
+  "timestamp": "2024-12-01",
+  "total_implementations": 7,
+  "implementations": [
+    {
+      "file": "atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+      "type": "C++ FIXME Resolution",
+      "issue": "PrepareForBulkLoad",
+      "status": "Implementation ready"
+    },
+    {
+      "file": "atomspace-rocks/opencog/persist/monospace/MonoIO.cc",
+      "type": "C++ FIXME Resolution",
+      "issue": "PrepareForBulkLoad",
+      "status": "Implementation ready"
+    },
+    {
+      "file": "atomspace-storage/opencog/persist/api/cython/PersistCython.cc",
+      "type": "C++ FIXME Resolution",
+      "issue": "code_duplication",
+      "status": "Implementation ready"
+    },
+    {
+      "file": "atomspace-storage/opencog/persist/flow/FetchValueOfLink.cc",
+      "type": "C++ FIXME Resolution",
+      "issue": "executable_handling",
+      "status": "Implementation ready"
+    },
+    {
+      "file": "atomspace-storage/opencog/persist/flow/StoreValueOfLink.cc",
+      "type": "C++ FIXME Resolution",
+      "issue": "executable_handling",
+      "status": "Implementation ready"
+    },
+    {
+      "file": "opencog/scm/cognitive-core/cognitive-inference-engine.scm",
+      "type": "Scheme Implementation",
+      "status": "Created"
+    },
+    {
+      "file": "opencog/scm/cognitive-core/tensor-thread-fiber.scm",
+      "type": "Scheme Implementation",
+      "status": "Created"
+    }
+  ],
+  "summary": {
+    "cpp_fixes": 5,
+    "scheme_implementations": 2
+  }
+}
