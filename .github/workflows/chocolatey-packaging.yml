@@ -1,0 +1,82 @@
+name: Chocolatey Package Builder (Experimental)
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: 'Component to package'
+        required: true
+        default: 'cogutil'
+        type: choice
+        options:
+          - cogutil
+          - atomspace
+      version:
+        description: 'Package version'
+        required: true
+        default: '1.0.0'
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build-chocolatey-packages:
+    runs-on: windows-latest
+    name: Build Chocolatey Package
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    
+    - name: Setup MSVC
+      uses: microsoft/setup-msbuild@v1.3
+    
+    - name: Install Chocolatey
+      run: |
+        if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
+          Set-ExecutionPolicy Bypass -Scope Process -Force
+          [System.Net.ServicePointManager]::SecurityProtocol = 3072
+          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+        }
+        choco --version
+      shell: powershell
+    
+    - name: Install Dependencies
+      run: |
+        choco install -y cmake 7zip
+        cd C:\vcpkg
+        .\vcpkg install boost-filesystem:x64-windows boost-system:x64-windows
+      shell: powershell
+    
+    - name: Build Component
+      run: |
+        $component = "${{ github.event.inputs.component }}"
+        if (Test-Path $component) {
+          mkdir "$component\build" -Force
+          cd "$component\build"
+          cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake
+          cmake --build . --config Release --parallel 2
+        }
+      shell: powershell
+    
+    - name: Create Package
+      run: |
+        $component = "${{ github.event.inputs.component }}"
+        $pkgDir = "choco-packages\opencog-$component"
+        New-Item -ItemType Directory -Force -Path "$pkgDir\tools"
+        
+        $nuspec = "<?xml version='1.0'?><package><metadata><id>opencog-$component</id><version>${{ github.event.inputs.version }}</version><title>OpenCog $component</title><authors>OpenCog Foundation</authors><description>OpenCog $component</description></metadata></package>"
+        Set-Content -Path "$pkgDir\opencog-$component.nuspec" -Value $nuspec
+        
+        cd $pkgDir
+        choco pack
+      shell: powershell
+      continue-on-error: true
+    
+    - name: Upload Package
+      uses: actions/upload-artifact@v4
+      with:
+        name: chocolatey-package-${{ github.event.inputs.component }}
+        path: choco-packages/**/*.nupkg
+        retention-days: 30
+      continue-on-error: true
