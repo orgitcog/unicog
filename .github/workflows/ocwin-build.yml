@@ -90,7 +90,7 @@ jobs:
       shell: powershell
     
     - name: Upload CogUtil Build
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: cogutil-build-windows
         path: |
@@ -176,7 +176,7 @@ jobs:
       shell: powershell
     
     - name: Upload AtomSpace Build
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: atomspace-build-windows
         path: |
@@ -517,7 +517,7 @@ jobs:
       shell: powershell
     
     - name: Upload Build Report
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: occ-windows-build-report
         path: BUILD_REPORT.md
