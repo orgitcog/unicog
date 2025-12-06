@@ -40,4 +40,24 @@ class JsonFileConfigManager(AbstractConfigClient):
         :param comp_name:       Component name string.
         :return:                None
         """
-        print("save_config() is not implemented.")
+        if self._data is None:
+            self._data = []
+        
+        # Update or add configuration
+        config_found = False
+        for cfg in self._data:
+            if cfg.get("component") == comp_name:
+                cfg["name"] = config_name
+                config_found = True
+                break
+        
+        if not config_found:
+            self._data.append({
+                "component": comp_name,
+                "name": config_name,
+                "parameters": {}
+            })
+        
+        # Write to file
+        with open(self._file_path, "w") as json_file:
+            json.dump(self._data, json_file, indent=2)

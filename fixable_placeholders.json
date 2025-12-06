@@ -1,0 +1,840 @@
+{
+  "fixable_high_priority": [
+    {
+      "file": "entelechy_introspection.py",
+      "line": 627,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                                if re.search(r'\\bSTUB\\b', line, re.IGNORECASE):\n                                    markers['STUB'] += 1\n                except Exception:\n                    pass\n        \n        return markers\n    \n"
+    },
+    {
+      "file": "entelechy_marker_prioritizer.py",
+      "line": 133,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                        })\n                        \n        except Exception as e:\n            pass\n    \n    def _get_component(self, file_path: Path) -> str:\n        \"\"\"Determine component from file path\"\"\"\n"
+    },
+    {
+      "file": "find_actual_stubs.py",
+      "line": 59,
+      "type": "raise_not_implemented",
+      "content": "elif 'raise NotImplementedError' in first_impl:",
+      "context": "                            elif re.match(r'^\\s*\\.\\.\\.\\s*$', first_impl):\n                                is_stub = True\n                                stub_type = 'ellipsis'\n                            elif 'raise NotImplementedError' in first_impl:\n                                is_stub = True\n                                stub_type = 'NotImplementedError'\n                            elif re.match(r'^\\s*return\\s+None\\s*$', first_impl) and len(impl_lines) == 1:\n"
+    },
+    {
+      "file": "find_actual_stubs.py",
+      "line": 76,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                                    'context': '\\n'.join(lines[max(0, i-2):min(i+8, len(lines))])\n                                })\n        except Exception as e:\n            pass\n    \n    return stubs\n\n"
+    },
+    {
+      "file": "find_placeholders.py",
+      "line": 48,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                            'context': self._get_context(lines, i-1)\n                        })\n        except Exception as e:\n            pass\n            \n    def _get_context(self, lines, line_idx, context_size=3):\n        \"\"\"Get surrounding context for a placeholder\"\"\"\n"
+    },
+    {
+      "file": "atomspace-restful/tests/python/restapi/test_restapi.py",
+      "line": 450,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "        # Test an arbitrary Scheme command to ensure the binding is working\n        # properly\n        # XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.\n        pass \n    def test_n_dot_export(self):\n        # Export the atomspace to DOT format and ensure that there is a\n        # properly defined DOT header created and the correct atoms are\n"
+    },
+    {
+      "file": "atomspace/tests/cython/guile/test_pattern.py",
+      "line": 25,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                    os.environ['PROJECT_SOURCE_DIR'] + '/opencog/scm\")')\n\n    def tearDown(self):\n        pass\n\n    # Load several different scheme files, containing atom type\n    # declarations, and utilities. They should load just fine.\n"
+    },
+    {
+      "file": "cognitive-gnn/query_parser.py",
+      "line": 388,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            else:\n                return int(value_string)\n        except ValueError:\n            pass\n        \n        # Parse booleans\n        if value_string.lower() == 'true':\n"
+    },
+    {
+      "file": "components/core/atomspace-restful/tests/python/restapi/test_restapi.py",
+      "line": 450,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "        # Test an arbitrary Scheme command to ensure the binding is working\n        # properly\n        # XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.\n        pass \n    def test_n_dot_export(self):\n        # Export the atomspace to DOT format and ensure that there is a\n        # properly defined DOT header created and the correct atoms are\n"
+    },
+    {
+      "file": "distributed-cognitive-mesh/demo_phase4.py",
+      "line": 216,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            if response.status_code == 200:\n                return response.json()\n        except:\n            pass\n        return {}\n    \n    def get_embodiment_tensor(self, agent_id: str) -> Dict:\n"
+    },
+    {
+      "file": "distributed-cognitive-mesh/demo_phase4.py",
+      "line": 226,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            if response.status_code == 200:\n                return response.json()\n        except:\n            pass\n        return {}\n\nclass WebSocketStreamDemo:\n"
+    },
+    {
+      "file": "entelechy/introspector.py",
+      "line": 556,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                        markers['FIXME'] += len(re.findall(r'\\bFIXME\\b', content, re.IGNORECASE))\n                        markers['STUB'] += len(re.findall(r'\\bSTUB\\b', content, re.IGNORECASE))\n                except Exception:\n                    pass\n        \n        return markers\n    \n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 22,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass DashboardError(Exception):\n    pass\n\n\nclass AbstractDashboardClient(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 32,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \"\"\"\n    @abstractmethod\n    def set_cell_by_indexes(self, row_index: int, col_index: int, value: object):\n        pass\n\n    @abstractmethod\n    def set_cell_by_names(self, row_name: str, col_name: str, value: object):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 36,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n    @abstractmethod\n    def set_cell_by_names(self, row_name: str, col_name: str, value: object):\n        pass\n\n    @abstractmethod\n    def update_dashboard(self):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 41,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def update_dashboard(self):\n        \"\"\" Update dashboard values \"\"\"\n        pass\n\n\nclass AbstractConfigClient(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 58,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "        :param comp_name:       Component name string.\n        :return:                Dictionary instance holding configuration parameters.\n        \"\"\"\n        pass\n\n    @abstractmethod\n    def save_config(self, config_name: str, comp_name: str) -> None:\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 69,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "        :param comp_name:       Component name string.\n        :return:                None\n        \"\"\"\n        pass\n\n\nclass AbstractProgressClient(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 78,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \"\"\"\n    @abstractmethod\n    def update(self, increment: int) -> None:\n        pass\n\n    @abstractmethod\n    def set_total(self, total: int) -> None:\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 82,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n    @abstractmethod\n    def set_total(self, total: int) -> None:\n        pass\n\n\nclass AbstractGrammarTestClient(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 92,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def test(self, dict_path: str, corpus_path: str, output_path: str, reference_path: str, options: int,\n             progress: AbstractProgressClient = None) -> (ParseMetrics, ParseQuality):\n        pass\n\n\nclass AbstractFileParserClient(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 102,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def parse(self, dict_path: str, corpus_path: str, output_path: str, ref_file: str, options: int,\n              progress: AbstractProgressClient = None, **kwargs) -> (ParseMetrics, ParseQuality):\n        pass\n\n\nclass AbstractStatEventHandler(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 111,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \"\"\"\n    @abstractmethod\n    def on_statistics(self, nodes: list, metrics: ParseMetrics, quality: ParseQuality) -> None:\n        pass\n\n\nclass AbstractPipelineComponent(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 125,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            method should check all of the parameters print error messages and return False if at least one parameter\n            is invalid.\n        \"\"\"\n        pass\n\n    @abstractmethod\n    def run(self, **kwargs) -> dict:\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 130,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def run(self, **kwargs) -> dict:\n        \"\"\" Run component execution. In case of severe errors exceptions should be raised to stop pipeline execution \"\"\"\n        pass\n\n\nclass AbstractSerializer(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 140,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def open(self):\n        \"\"\" Open data storage \"\"\"\n        pass\n\n    @abstractmethod\n    def close(self):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 145,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def close(self):\n        \"\"\" Close data storage \"\"\"\n        pass\n\n    @abstractmethod\n    def read(self):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 150,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def read(self):\n        \"\"\" Read a single record/datum \"\"\"\n        pass\n\n    @abstractmethod\n    def write(self, record):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 155,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def write(self, record):\n        \"\"\" Write a single record/datum \"\"\"\n        pass\n\n    @abstractmethod\n    def load(self):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 160,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def load(self):\n        \"\"\" Deserialize data from a storage \"\"\"\n        pass\n\n    @abstractmethod\n    def dump(self, data_structure):\n"
+    },
+    {
+      "file": "language-learning/src/common/absclient.py",
+      "line": 165,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def dump(self, data_structure):\n        \"\"\" Serialize data to a storage \"\"\"\n        pass\n\n"
+    },
+    {
+      "file": "language-learning/src/common/sentencecount.py",
+      "line": 16,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass SentCountError(Exception):\n    pass\n\n\ndef get_sentence_count(corpus_path: str, options: int) -> int:\n"
+    },
+    {
+      "file": "language-learning/src/common/tokencount.py",
+      "line": 20,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass TokenCountError(Exception):\n    pass\n\n\ndef unbox_tokens(tokens: List[str]) -> List[str]:\n"
+    },
+    {
+      "file": "language-learning/src/grammar_learner/pqa_table.py",
+      "line": 311,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            clustering = ['mean_shift', 'auto']\n        elif clustering == 'group':  # ILE clustering\n            # ILE (Identical Link Entries) clustering is handled in group_links()\n            pass\n        elif clustering == 'random':  # Random clustering\n            # Random clustering is handled in random_clusters()\n            pass\n"
+    },
+    {
+      "file": "language-learning/src/grammar_learner/pqa_table.py",
+      "line": 314,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            pass\n        elif clustering == 'random':  # Random clustering\n            # Random clustering is handled in random_clusters()\n            pass\n        else:\n            clustering = ['agglomerative', 'ward', 'euclidean']\n\n"
+    },
+    {
+      "file": "language-learning/src/grammar_learner/pqa_table.py",
+      "line": 542,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            clustering = ['mean_shift', 'auto']\n        elif clustering == 'group':  # ILE clustering\n            # ILE (Identical Link Entries) clustering is handled in group_links()\n            pass\n        elif clustering == 'random':  # Random clustering\n            # Random clustering is handled in random_clusters()\n            pass\n"
+    },
+    {
+      "file": "language-learning/src/grammar_learner/pqa_table.py",
+      "line": 545,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            pass\n        elif clustering == 'random':  # Random clustering\n            # Random clustering is handled in random_clusters()\n            pass\n        else:\n            clustering = ['agglomerative', 'ward', 'euclidean']\n\n"
+    },
+    {
+      "file": "language-learning/src/grammar_tester/grammartester.py",
+      "line": 29,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass GrammarTestError(Exception):\n    pass\n\nCONF_MIN_WORD_CNT = \"min_word_count\"\nCONF_MAX_SENT_LEN = \"max_sentence_len\"\n"
+    },
+    {
+      "file": "language-learning/src/grammar_tester/lgmisc.py",
+      "line": 20,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "logger = logging.getLogger(__name__)\n\nclass ParserError(Exception):\n    pass\n\nclass LGParseError(ParserError):\n    pass\n"
+    },
+    {
+      "file": "language-learning/src/grammar_tester/lgmisc.py",
+      "line": 23,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    pass\n\nclass LGParseError(ParserError):\n    pass\n\n\ndef get_dir_name(file_name: str) -> (str, str):\n"
+    },
+    {
+      "file": "language-learning/src/grammar_tester/linkgrammarver.py",
+      "line": 6,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "import os\n\nclass LGVersionParseError(Exception):\n    pass\n\n\ndef handle_version_response(text: str) -> Tuple[str, str]:\n"
+    },
+    {
+      "file": "language-learning/src/grammar_tester/parsevaluate.py",
+      "line": 34,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass SentenceError(Exception):\n    pass\n\n\nclass EvalError(Exception):\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 49,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_data(self, text: str, options: int):\n        \"\"\" Called when buffer is filled with parses to process \"\"\"\n        pass\n\n\nclass AbstractLGStreamParser(AbstractStreamParser):\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 59,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def setup(self):\n        \"\"\" Called to initialize all necessary data to start parsing stream data \"\"\"\n        pass\n\n    @abstractmethod\n    def cleanup(self):\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 64,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def cleanup(self):\n        \"\"\" Called to clean up after stream parsing is done \"\"\"\n        pass\n\n    @abstractmethod\n    def on_sentence_init(self, sentence: SentenceParse) -> bool:\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 69,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_sentence_init(self, sentence: SentenceParse) -> bool:\n        \"\"\" Called to initialize SentenceParse instance \"\"\"\n        pass\n\n    @abstractmethod\n    def on_sentence_done(self, sentence: SentenceParse) -> bool:\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 74,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_sentence_done(self, sentence: SentenceParse) -> bool:\n        \"\"\" Called to clean up SentenceParse instance \"\"\"\n        pass\n\n    @abstractmethod\n    def on_linkage_init(self, sentence: SentenceParse, linkage: Linkage) -> bool:\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 79,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_linkage_init(self, sentence: SentenceParse, linkage: Linkage) -> bool:\n        \"\"\" Called to perform all necessary initialization before linkage parsing is started \"\"\"\n        pass\n\n    @abstractmethod\n    def on_parsed_linkage(self, sentence: SentenceParse, linkage: Linkage) -> bool:\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 84,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_parsed_linkage(self, sentence: SentenceParse, linkage: Linkage) -> bool:\n        \"\"\" Called when linkage is completely parsed and lists with tokens and links are prepared \"\"\"\n        pass\n\n    @abstractmethod\n    def on_linkage_done(self, sentence: SentenceParse, linkage: Linkage) -> bool:\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 89,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_linkage_done(self, sentence: SentenceParse, linkage: Linkage) -> bool:\n        \"\"\" Called to perform clean up after linkage parsing is done \"\"\"\n        pass\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgparsequalityestimator.py",
+      "line": 53,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    def cleanup(self):\n        # self._parse_metrics.sentences = self._sentence_count\n        # self._parse_quality.sentences = self._sentence_count\n        pass\n\n    def on_sentence_init(self, sentence: PQSentenceParse):\n        sentence.linkage_count = 0\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgparsequalityestimator.py",
+      "line": 98,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "        # sentence.linkage_count += 1\n\n    def on_linkage_done(self, sentence: PQSentenceParse, linkage: Linkage):\n        pass\n\n    def get_pa_pq(self) -> (ParseMetrics, ParseQuality):\n        return self._parse_metrics, self._parse_quality\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgpsstreamparser.py",
+      "line": 10,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass BreakCycle(Exception):\n    pass\n\n\nclass ContinueCycle(Exception):\n"
+    },
+    {
+      "file": "language-learning/src/link_grammar/lgpsstreamparser.py",
+      "line": 14,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass ContinueCycle(Exception):\n    pass\n\n\nclass LGPSStreamParser(AbstractLGStreamParser):\n"
+    },
+    {
+      "file": "language-learning/src/observer/lgobserver.py",
+      "line": 20,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n    def cleanup(self):\n        # self._pairs.count_mi()\n        pass\n\n    def on_sentence_init(self, sentence: PQSentenceParse):\n        sentence.linkage_count = 0\n"
+    },
+    {
+      "file": "language-learning/src/observer/wordpairs.py",
+      "line": 7,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "__all__ = [\"WordPair\", \"WordPairs\"]\n\nclass WordPairError(Exception):\n    pass\n\n\nclass WordPair:\n"
+    },
+    {
+      "file": "language-learning/src/pipeline/pipelineexceptions.py",
+      "line": 49,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n\nclass FatalPipelineException(Exception):\n    pass\n"
+    },
+    {
+      "file": "language-learning/src/web/api/lgclient.py",
+      "line": 46,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_linkages(self, linkages):\n        \"\"\" Linkages processig callback method \"\"\"\n        pass\n\n    @abstractmethod\n    def on_linkage(self, linkage):\n"
+    },
+    {
+      "file": "language-learning/src/web/api/lgclient.py",
+      "line": 51,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_linkage(self, linkage):\n        \"\"\" Linkage processig callback method \"\"\"\n        pass\n\n    @abstractmethod\n    def on_link(self, link):\n"
+    },
+    {
+      "file": "language-learning/src/web/api/lgclient.py",
+      "line": 56,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def on_link(self, link):\n        \"\"\" Link processig callback method \"\"\"\n        pass\n\n\nclass LGClient(metaclass=ABCMeta):\n"
+    },
+    {
+      "file": "language-learning/src/web/api/lgclient.py",
+      "line": 88,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def parse_cbf(self, line, callback, param1=None, param2=None):\n        \"\"\" Parse sentense using specified callback function for processing linkages \"\"\"\n        pass\n\n    @abstractmethod\n    def parse(self, line, callback):\n"
+    },
+    {
+      "file": "language-learning/src/web/api/lgclient.py",
+      "line": 93,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    @abstractmethod\n    def parse(self, line, callback):\n        \"\"\" Parse sentense using specified class callback instance for processing linkages \"\"\"\n        pass\n\n\nclass LGClientLib(LGClient):\n"
+    },
+    {
+      "file": "language-learning/src/web/api/examples/clscallback.py",
+      "line": 33,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n    def on_link(self, link):\n        \"\"\" on_link is ment to be called for each link when processing links \"\"\"\n        pass\n\n\ndef main():\n"
+    },
+    {
+      "file": "language-learning/tests/test_grammar_learner.py",
+      "line": 66,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "        # 'test_corpus': module_path + '/data/POC-Turtle/poc-turtle-corpus.txt',\n        # 'reference_path': module_path + '/data/POC-Turtle/poc-turtle-parses-expected.txt',\n        # 'template_path': 'poc-turtle',  # FIXME: changed in June 2018 Grammar Tester\n        pass\n\n    '''Legacy ~ POC.0.3 test ~ as it was before 2018-09-29\n    def test_turtle_diled(self):\n"
+    },
+    {
+      "file": "tests/cognitive-architecture-explorer.py",
+      "line": 173,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                        if keyword in content.lower():\n                            functions.append(keyword)\n        except Exception:\n            pass\n        \n        return list(set(functions))\n    \n"
+    },
+    {
+      "file": "tests/cognitive-architecture-explorer.py",
+      "line": 195,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                            'estimated_complexity': content.count('class') + content.count('struct')\n                        }\n        except Exception:\n            pass\n        \n        return signatures\n    \n"
+    },
+    {
+      "file": "tests/cognitive-architecture-explorer.py",
+      "line": 221,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "                        if len(parts) > 2:\n                            dependencies.extend(parts[2:])\n        except Exception:\n            pass\n        \n        return dependencies\n    \n"
+    },
+    {
+      "file": "tests/test_entelechy_framework.py",
+      "line": 179,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "        tracker = EntelechyTracker(str(self.temp_dir))\n        # Note: This will fail in temp dir without proper structure\n        # In real tests, use actual repo\n        pass\n\n\nclass TestResonanceDetection(unittest.TestCase):\n"
+    },
+    {
+      "file": "tests/integration/test_atomspace-restful.py",
+      "line": 19,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \n    def setUp(self):\n        \"\"\"Set up test environment\"\"\"\n        pass\n        \n    def test_atomspace_restful_import(self):\n        \"\"\"Test that atomspace-restful can be imported\"\"\"\n"
+    },
+    {
+      "file": "tests/integration/test_atomspace-rocks.py",
+      "line": 19,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \n    def setUp(self):\n        \"\"\"Set up test environment\"\"\"\n        pass\n        \n    def test_atomspace_rocks_import(self):\n        \"\"\"Test that atomspace-rocks can be imported\"\"\"\n"
+    },
+    {
+      "file": "tests/integration/test_learn.py",
+      "line": 19,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \n    def setUp(self):\n        \"\"\"Set up test environment\"\"\"\n        pass\n        \n    def test_learn_import(self):\n        \"\"\"Test that learn can be imported\"\"\"\n"
+    },
+    {
+      "file": "tests/integration/test_lg-atomese.py",
+      "line": 19,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \n    def setUp(self):\n        \"\"\"Set up test environment\"\"\"\n        pass\n        \n    def test_lg-atomese_import(self):\n        \"\"\"Test that lg-atomese can be imported\"\"\"\n"
+    },
+    {
+      "file": "tests/integration/test_moses.py",
+      "line": 20,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \n    def setUp(self):\n        \"\"\"Set up test environment\"\"\"\n        pass\n        \n    def test_moses_import(self):\n        \"\"\"Test that moses can be imported\"\"\"\n"
+    },
+    {
+      "file": "tests/integration/test_opencog.py",
+      "line": 19,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \n    def setUp(self):\n        \"\"\"Set up test environment\"\"\"\n        pass\n        \n    def test_opencog_import(self):\n        \"\"\"Test that opencog can be imported\"\"\"\n"
+    }
+  ],
+  "legitimate_passes": [
+    {
+      "file": "atomspace-restful/tests/python/restapi/test_restapi.py",
+      "line": 472,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            assert \"bird\" in get_result\n            assert get_result.count(\"label\") == 2\n        except ImportError:\n            pass\n"
+    },
+    {
+      "file": "components/core/atomspace-restful/tests/python/restapi/test_restapi.py",
+      "line": 472,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "            assert \"bird\" in get_result\n            assert get_result.count(\"label\") == 2\n        except ImportError:\n            pass\n"
+    },
+    {
+      "file": "components/integration/opencog/opencog/nlp/sentiment/basic_sentiment_analysis.py",
+      "line": 38,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "class POSTagger(object):\n\n    def __init__(self):\n        pass\n\n    def pos_tag(self, sentences):\n        \"\"\"\n"
+    },
+    {
+      "file": "language-learning/src/grammar_learner/__init__.py",
+      "line": 23,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n    def __init__(self, **kwargs):\n        # check_kwargs(**kwargs)\n        pass\n\n    def validate_parameters(self, **kwargs):\n        \"\"\" Validate configuration parameters \"\"\"\n"
+    },
+    {
+      "file": "language-learning/src/grammar_tester/parsevaluate.py",
+      "line": 461,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n    \"\"\"\n    def __init__(self, **kwargs):\n        pass\n\n    def validate_parameters(self, **kwargs):\n        \"\"\" Validate configuration parameters \"\"\"\n"
+    },
+    {
+      "file": "language-learning/src/pipeline/pipelinetree.py",
+      "line": 35,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "\n    \"\"\"\n    def __init__(self):\n        pass\n\n    def validate_parameters(self, **kwargs):\n        return True\n"
+    },
+    {
+      "file": "language-learning/src/pipeline/pipelinetree.py",
+      "line": 60,
+      "type": "pass_only",
+      "content": "pass",
+      "context": "    \"\"\"\n    def __init__(self, **kwargs):\n        # check_kwargs(**kwargs)\n        pass\n\n    def validate_parameters(self, **kwargs):\n        \"\"\" Validate configuration parameters \"\"\"\n"
+    }
+  ],
+  "stub_functions": [
+    {
+      "file": "./atomspace/tests/cython/guile/test_pattern.py",
+      "line": 24,
+      "function": "tearDown",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 31,
+      "function": "set_cell_by_indexes",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 35,
+      "function": "set_cell_by_names",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 39,
+      "function": "update_dashboard",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 77,
+      "function": "update",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 81,
+      "function": "set_total",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 110,
+      "function": "on_statistics",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 128,
+      "function": "run",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 138,
+      "function": "open",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 143,
+      "function": "close",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 148,
+      "function": "read",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 153,
+      "function": "write",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 158,
+      "function": "load",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/common/absclient.py",
+      "line": 163,
+      "function": "dump",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 47,
+      "function": "on_data",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 57,
+      "function": "setup",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 62,
+      "function": "cleanup",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 67,
+      "function": "on_sentence_init",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 72,
+      "function": "on_sentence_done",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 77,
+      "function": "on_linkage_init",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 82,
+      "function": "on_parsed_linkage",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgdatastructures.py",
+      "line": 87,
+      "function": "on_linkage_done",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgparsequalityestimator.py",
+      "line": 50,
+      "function": "cleanup",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/link_grammar/lgparsequalityestimator.py",
+      "line": 97,
+      "function": "on_linkage_done",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/observer/lgobserver.py",
+      "line": 18,
+      "function": "cleanup",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/web/api/lgclient.py",
+      "line": 44,
+      "function": "on_linkages",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/web/api/lgclient.py",
+      "line": 49,
+      "function": "on_linkage",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/web/api/lgclient.py",
+      "line": 54,
+      "function": "on_link",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/web/api/lgclient.py",
+      "line": 86,
+      "function": "parse_cbf",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/web/api/lgclient.py",
+      "line": 91,
+      "function": "parse",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./language-learning/src/web/api/examples/clscallback.py",
+      "line": 31,
+      "function": "on_link",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./tests/integration/test_atomspace-restful.py",
+      "line": 17,
+      "function": "setUp",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./tests/integration/test_atomspace-rocks.py",
+      "line": 17,
+      "function": "setUp",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./tests/integration/test_learn.py",
+      "line": 17,
+      "function": "setUp",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./tests/integration/test_lg-atomese.py",
+      "line": 17,
+      "function": "setUp",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./tests/integration/test_moses.py",
+      "line": 18,
+      "function": "setUp",
+      "type": "stub_function",
+      "implementation": "pass"
+    },
+    {
+      "file": "./tests/integration/test_opencog.py",
+      "line": 17,
+      "function": "setUp",
+      "type": "stub_function",
+      "implementation": "pass"
+    }
+  ],
+  "summary": {
+    "total_high_priority": 81,
+    "fixable": 74,
+    "legitimate": 7,
+    "stub_functions": 37
+  }
+}

@@ -3,9 +3,28 @@ import torch
 import json
 import yaml
 import os
+import sys
 from datetime import datetime
 from pathlib import Path
 from github import Github
+
+# Enhanced JSON encoder for NumPy types (NumPy 2.0 compatible)
+class EnhancedJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        # Removed deprecated np.int_ and np.float_ for NumPy 2.0 compatibility
+        if isinstance(obj, (np.integer, np.intc, np.intp, np.int8, 
+                           np.int16, np.int32, np.int64,
+                           np.uint8, np.uint16, np.uint32, np.uint64)):
+            return int(obj)
+        if isinstance(obj, (np.floating, np.float16, np.float32, np.float64)):
+            return float(obj)
+        if isinstance(obj, (np.bool_, bool)):
+            return bool(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        if isinstance(obj, np.generic):
+            return obj.item()
+        return super().default(obj)
 
 class CognitiveMembrane:
     def __init__(self, enterprise="cosmos"):
@@ -167,7 +186,7 @@ Generated: {membrane_state['timestamp']}
         }
         
         with open('cognitive-grammar.ggml', 'w') as f:
-            json.dump(config, f, indent=2)
+            json.dump(config, f, indent=2, cls=EnhancedJSONEncoder)
         
         return config
 

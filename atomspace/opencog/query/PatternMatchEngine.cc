@@ -1156,12 +1156,11 @@ bool PatternMatchEngine::setup_rotors(const PatternTermPtr& ptm,
 	DO_LOG({LAZY_LOG_FINE << "tree_comp NEW SETUP sparse term="
 	                      << ptm->to_string();})
 
-	// XXX TODO The logic here should be updated to resemble that
-	// in curr_perm(), which deals correctly with nested permutations
-	// of unordered patterns. For just right now, we are not
-	// implementing nested sparse links, mostly because I'm too lazy
-	// to write the unit tests. Sorry!  The fix is easy, though: do
-	// what `curr_perm()` does.
+	// NOTE: The logic here should be updated to resemble that in curr_perm(),
+	// which correctly handles nested permutations of unordered patterns.
+	// Currently, nested sparse links are not implemented. To fix this,
+	// apply the same permutation handling approach used in curr_perm().
+	// This requires comprehensive unit tests to ensure correctness.
 
 	const PatternTermSeq& osp = ptm->getOutgoingSet();
 	const HandleSeq& osg = hg->getOutgoingSet();

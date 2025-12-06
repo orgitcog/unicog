@@ -36,6 +36,7 @@
 #include <boost/accumulators/statistics/weighted_skewness.hpp>
 
 #include <moses/comboreduct/table/table.h>
+#include <opencog/util/ThreadSafeKLDS.h>
 
 #include "scoring_base.h"
 #include "../moses/types.h"
@@ -589,7 +590,8 @@ protected:
 
     counter_t _counter; // counter of the unconditioned distribution
     pdf_t _pdf;     // pdf of the unconditioned distribution
-    mutable KLDS<contin_t> _klds; /// @todo dangerous: not thread safe!!!
+    // Thread-safe wrapper eliminates the historical FIXME about mutable KLDS.
+    mutable ThreadSafeKLDS<contin_t> _klds;
     CTable _ctable;
     contin_t _skewness;   // skewness of the unconditioned distribution
 

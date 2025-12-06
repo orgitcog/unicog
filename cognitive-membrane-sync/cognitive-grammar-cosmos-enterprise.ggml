@@ -2,7 +2,7 @@
   "cognitive_grammar": {
     "version": "2.0",
     "enterprise": "cosmos-enterprise",
-    "generation_timestamp": "2025-09-02T08:44:21.627520",
+    "generation_timestamp": "2025-11-23T11:10:47.864249",
     "membrane_topology": {
       "enterprise_id": "cosmos-enterprise",
       "tensor_dimensions": [
@@ -12,7 +12,7 @@
         50,
         100
       ],
-      "timestamp": "2025-09-02T08:44:16.122423",
+      "timestamp": "2025-11-23T11:10:42.359166",
       "organizations": {
         "cogpilot": {
           "org_id": "cogpilot",
@@ -39,11 +39,11 @@
                 1
               ],
               "membrane_permeability": "high",
-              "created_at": "2025-09-02T08:44:18.123999"
+              "created_at": "2025-11-23T11:10:44.360721"
             }
           },
-          "created_at": "2025-09-02T08:44:16.622784",
-          "last_synchronized": "2025-09-02T08:44:21.126854"
+          "created_at": "2025-11-23T11:10:42.859507",
+          "last_synchronized": "2025-11-23T11:10:47.363506"
         },
         "OzCog": {
           "org_id": "OzCog",
@@ -71,11 +71,11 @@
                 1
               ],
               "membrane_permeability": "selective",
-              "created_at": "2025-09-02T08:44:18.624413"
+              "created_at": "2025-11-23T11:10:44.861140"
             }
           },
-          "created_at": "2025-09-02T08:44:17.123170",
-          "last_synchronized": "2025-09-02T08:44:21.126968"
+          "created_at": "2025-11-23T11:10:43.359888",
+          "last_synchronized": "2025-11-23T11:10:47.363656"
         },
         "cosmos": {
           "org_id": "cosmos",
@@ -101,11 +101,11 @@
                 1
               ],
               "membrane_permeability": "medium",
-              "created_at": "2025-09-02T08:44:19.124909"
+              "created_at": "2025-11-23T11:10:45.361518"
             }
           },
-          "created_at": "2025-09-02T08:44:17.623582",
-          "last_synchronized": "2025-09-02T08:44:21.127071"
+          "created_at": "2025-11-23T11:10:43.860259",
+          "last_synchronized": "2025-11-23T11:10:47.363759"
         }
       },
       "repositories": {},
@@ -124,7 +124,7 @@
         "total_complexity": 16.0,
         "total_repositories": 3,
         "memory_efficiency": 1.0,
-        "last_updated": "2025-09-02T08:44:21.127135"
+        "last_updated": "2025-11-23T11:10:47.363825"
       }
     },
     "cognitive_primitives": {

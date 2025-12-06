@@ -26,7 +26,7 @@ INSTALL (TARGETS unify-types
 	LIBRARY DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
 )
 
-ADD_GUILE_EXTENSION(SCM_CONFIG unify-types "opencog-ext-path-unify")
+ADD_GUILE_EXTENSION(SCM_CONFIG_UNIFY unify-types "opencog-ext-path-unify")
 
 INSTALL (FILES
 	${CMAKE_CURRENT_BINARY_DIR}/atom_types.h

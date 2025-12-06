@@ -25,7 +25,7 @@ test_cpp_neural_components() {
     # Test tensor kernel compilation and execution
     if [[ -f "ggml-tensor-kernel/test_tensor_kernel.cc" ]]; then
         echo "  Testing tensor kernel compilation..."
-        ((cpp_total++))
+        ((cpp_total++)) || true
         
         if g++ -std=c++17 -I./ggml-tensor-kernel/include -o "$TEST_DIR/test_tensor_kernel" ggml-tensor-kernel/test_tensor_kernel.cc 2>/dev/null; then
             echo "  ✅ Tensor kernel compilation: SUCCESS"
@@ -33,7 +33,7 @@ test_cpp_neural_components() {
             # Run and capture output to extract tensor information
             if "$TEST_DIR/test_tensor_kernel" > "$TEST_DIR/tensor_output.log" 2>&1; then
                 echo "  ✅ Tensor kernel execution: SUCCESS"
-                ((cpp_success++))
+                ((cpp_success++)) || true
                 
                 # Extract tensor dimensions from output
                 local tensor_info=$(grep -i "tensor\|dimension\|shape" "$TEST_DIR/tensor_output.log" 2>/dev/null || echo "default: [2x2]")
@@ -49,7 +49,7 @@ test_cpp_neural_components() {
     # Test cognitive pattern processors
     if [[ -f "cognitive-patterns/src/HypergraphPatternExtractor.cc" ]]; then
         echo "  Testing hypergraph pattern extractor..."
-        ((cpp_total++))
+        ((cpp_total++)) || true
         
         # Create a simple test wrapper
         cat > "$TEST_DIR/test_hypergraph.cc" << 'EOF'
@@ -91,7 +91,7 @@ EOF
         if g++ -std=c++17 -o "$TEST_DIR/test_hypergraph" "$TEST_DIR/test_hypergraph.cc" 2>/dev/null; then
             if "$TEST_DIR/test_hypergraph" > "$TEST_DIR/hypergraph_output.log" 2>&1; then
                 echo "  ✅ Hypergraph pattern extraction: SUCCESS"
-                ((cpp_success++))
+                ((cpp_success++)) || true
                 
                 local shape_info=$(grep "tensor shape" "$TEST_DIR/hypergraph_output.log" 2>/dev/null || echo "[4x2]")
                 tensor_shapes+=("hypergraph_patterns:$shape_info")
@@ -124,7 +124,7 @@ test_scheme_symbolic_components() {
     # Test basic Scheme evaluation capabilities
     if command -v guile >/dev/null 2>&1; then
         echo "  Testing Scheme neural-symbolic integration..."
-        ((scheme_total++))
+        ((scheme_total++)) || true
         
         # Create a test script for neural-symbolic concepts
         cat > "$TEST_DIR/test_neural_symbolic.scm" << 'EOF'
@@ -177,7 +177,7 @@ EOF
         if guile -s "$TEST_DIR/test_neural_symbolic.scm" > "$TEST_DIR/scheme_output.log" 2>&1; then
             if grep -q "SUCCESS" "$TEST_DIR/scheme_output.log"; then
                 echo "  ✅ Scheme neural-symbolic integration: SUCCESS"
-                ((scheme_success++))
+                ((scheme_success++)) || true
                 
                 # Extract tensor shape information
                 local shapes=$(grep "tensor shape\|tensor dimensions" "$TEST_DIR/scheme_output.log" 2>/dev/null || echo "[4x1]")
@@ -196,12 +196,12 @@ EOF
     for scheme_file in */scheme/*.scm; do
         if [[ -f "$scheme_file" && $(basename "$scheme_file") != "test_neural_symbolic.scm" ]]; then
             echo "  Testing symbolic content in $(basename "$scheme_file")..."
-            ((scheme_total++))
+            ((scheme_total++)) || true
             
             # Check for symbolic processing indicators
             if grep -q -i -E "(neural|symbolic|tensor|pattern|cognitive)" "$scheme_file"; then
                 echo "    ✅ Symbolic content detected in $(basename "$scheme_file")"
-                ((scheme_success++))
+                ((scheme_success++)) || true
                 
                 # Estimate symbolic complexity
                 local line_count=$(wc -l < "$scheme_file")
@@ -233,7 +233,7 @@ test_ggml_tensor_integration() {
     # Test GGML components if available
     if [[ -d "ggml-tensor-kernel" ]]; then
         echo "  Testing GGML tensor kernel integration..."
-        ((ggml_total++))
+        ((ggml_total++)) || true
         
         # Create a comprehensive GGML test
         cat > "$TEST_DIR/test_ggml_integration.cc" << 'EOF'
@@ -330,7 +330,7 @@ EOF
             if "$TEST_DIR/test_ggml_integration" > "$TEST_DIR/ggml_output.log" 2>&1; then
                 if grep -q "SUCCESS" "$TEST_DIR/ggml_output.log"; then
                     echo "  ✅ GGML tensor integration: SUCCESS"
-                    ((ggml_success++))
+                    ((ggml_success++)) || true
                     
                     # Extract tensor operation information
                     local tensor_ops=$(grep "tensor shape\|tensor operations" "$TEST_DIR/ggml_output.log" 2>/dev/null || echo "matmul:[2x4], activation:[2x4]")
@@ -365,27 +365,27 @@ test_cross_language_interop() {
     
     # Test if we can find integration points
     echo "  Scanning for C++/Scheme integration points..."
-    ((interop_total++))
+    ((interop_total++)) || true
     
     local cpp_scheme_bridges=$(find . -name "*.cc" -o -name "*.cpp" | xargs grep -l -i "scheme\|scm\|guile" 2>/dev/null | wc -l)
     local scheme_cpp_bridges=$(find . -name "*.scm" | xargs grep -l -i "ffi\|c\+\+\|native" 2>/dev/null | wc -l)
     
     if [[ $((cpp_scheme_bridges + scheme_cpp_bridges)) -gt 0 ]]; then
         echo "    ✅ C++/Scheme integration points found: $((cpp_scheme_bridges + scheme_cpp_bridges))"
-        ((interop_success++))
+        ((interop_success++)) || true
     else
         echo "    ❌ No C++/Scheme integration points detected"
     fi
     
     # Test for tensor/neural integration across languages
     echo "  Scanning for neural-symbolic integration..."
-    ((interop_total++))
+    ((interop_total++)) || true
     
     local neural_files=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i "neural\|tensor" 2>/dev/null | wc -l)
     
     if [[ $neural_files -gt 2 ]]; then
         echo "    ✅ Neural-symbolic integration detected across $neural_files files"
-        ((interop_success++))
+        ((interop_success++)) || true
     else
         echo "    ❌ Limited neural-symbolic integration detected"
     fi

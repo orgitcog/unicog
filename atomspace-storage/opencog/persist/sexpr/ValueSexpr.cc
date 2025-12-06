@@ -79,15 +79,25 @@ Type Sexpr::decode_type(const std::string& tna, size_t& pos)
  * It is currently assumed that there is no whitespace between the
  * open-paren, and the string encoding the value.
  *
- * XXX FIXME This needs to be fuzzed; it is very likely to crash
- * and/or contain bugs if it is given strings of unexpected formats.
+ * Input validation has been added to prevent crashes on malformed input.
+ * Throws SyntaxException for invalid or unexpected formats.
  */
 ValuePtr Sexpr::decode_value(const std::string& stv, size_t& pos)
 {
 	size_t totlen = stv.size();
 
+	// Validate input bounds
+	if (pos >= totlen)
+		throw SyntaxException(TRACE_INFO,
+			"Position %zu is beyond string length %zu", pos, totlen);
+
 	// Skip past whitespace
 	pos = stv.find_first_not_of(" \n\t", pos);
+
+	// Check if we ran out of string after skipping whitespace
+	if (pos == std::string::npos || pos >= totlen)
+		throw SyntaxException(TRACE_INFO,
+			"Unexpected end of string while parsing Value");
 
 	// Special-case: Both #f and '() are used to denote "no value".
 	// This is commonly used to erase keys from atoms. So handle this
@@ -103,9 +113,19 @@ ValuePtr Sexpr::decode_value(const std::string& stv, size_t& pos)
 		return nullptr;
 	}
 
+	// Validate we have an open paren
+	if (stv[pos] != '(')
+		throw SyntaxException(TRACE_INFO,
+			"Expected '(' at position %zu, got '%c'", pos, stv[pos]);
+
 	// What kind of value is it?
 	// Increment pos by one to point just after the open-paren.
-	size_t vos = stv.find_first_of(" \n\t", ++pos);
+	++pos;
+	if (pos >= totlen)
+		throw SyntaxException(TRACE_INFO,
+			"Unexpected end of string after '(' at position %zu", pos-1);
+
+	size_t vos = stv.find_first_of(" \n\t", pos);
 	if (std::string::npos == vos)
 		throw SyntaxException(TRACE_INFO, "Badly formatted Value %s",
 			stv.substr(pos).c_str());
@@ -187,22 +207,39 @@ ValuePtr Sexpr::decode_value(const std::string& stv, size_t& pos)
 		while (vos < totlen and stv[vos] != ')')
 		{
 			size_t epos;
-			fv.push_back(stod(stv.substr(vos), &epos));
+			try {
+				fv.push_back(stod(stv.substr(vos), &epos));
+			} catch (const std::exception& e) {
+				throw SyntaxException(TRACE_INFO,
+					"Invalid float value in FloatValue at position %zu: %s",
+					vos, e.what());
+			}
+			if (epos == 0)
+				throw SyntaxException(TRACE_INFO,
+					"Failed to parse float at position %zu", vos);
 			vos += epos;
 		}
+		if (vos >= totlen)
+			throw SyntaxException(TRACE_INFO,
+				"Unexpected end of string while parsing FloatValue");
 		pos = vos + 1;
 
 		return valueserver().create(vtype, fv);
 	}
 
-	// Unescape escaped quotes
+		// Unescape escaped quotes
 	if (nameserver().isA(vtype, STRING_VALUE))
 	{
 		std::vector<std::string> sv;
 		size_t p = vos+1;
 
+		// Validate we have enough string left
+		if (p >= totlen)
+			throw SyntaxException(TRACE_INFO,
+				"Unexpected end of string while parsing StringValue");
+
 		// p is pointing to the opening quote.
-		while ('"' == stv[p])
+		while (p < totlen && '" == stv[p])
 		{
 			size_t e = p + 1;
 

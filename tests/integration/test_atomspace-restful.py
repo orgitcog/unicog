@@ -16,7 +16,9 @@ class TestAtomspace-restfulIntegration(unittest.TestCase):
     
     def setUp(self):
         """Set up test environment"""
-        pass
+        # Initialize test fixtures
+        self.test_data = {}
+        self.temp_files = []
         
     def test_atomspace_restful_import(self):
         """Test that atomspace-restful can be imported"""

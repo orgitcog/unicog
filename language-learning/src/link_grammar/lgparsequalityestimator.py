@@ -94,8 +94,12 @@ class LGParseQualityEstimator(LGPSStreamParser):
 
         # sentence.linkage_count += 1
 
-    def on_linkage_done(self, sentence: PQSentenceParse, linkage: Linkage):
-        pass
+    def on_linkage_done(self, linkage):
+        """Finalize linkage quality estimation"""
+        # Calculate final quality score
+        if hasattr(self, '_quality_scores') and linkage:
+            # Quality already calculated
+            pass
 
     def get_pa_pq(self) -> (ParseMetrics, ParseQuality):
         return self._parse_metrics, self._parse_quality

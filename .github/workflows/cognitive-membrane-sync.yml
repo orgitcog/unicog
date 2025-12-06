@@ -69,9 +69,28 @@ jobs:
           import json
           import yaml
           import os
+          import sys
           from datetime import datetime
           from pathlib import Path
           from github import Github
+          
+          # Enhanced JSON encoder for NumPy types (NumPy 2.0 compatible)
+          class EnhancedJSONEncoder(json.JSONEncoder):
+              def default(self, obj):
+                  # Removed deprecated np.int_ and np.float_ for NumPy 2.0 compatibility
+                  if isinstance(obj, (np.integer, np.intc, np.intp, np.int8, 
+                                     np.int16, np.int32, np.int64,
+                                     np.uint8, np.uint16, np.uint32, np.uint64)):
+                      return int(obj)
+                  if isinstance(obj, (np.floating, np.float16, np.float32, np.float64)):
+                      return float(obj)
+                  if isinstance(obj, (np.bool_, bool)):
+                      return bool(obj)
+                  if isinstance(obj, np.ndarray):
+                      return obj.tolist()
+                  if isinstance(obj, np.generic):
+                      return obj.item()
+                  return super().default(obj)
           
           class CognitiveMembrane:
               def __init__(self, enterprise="cosmos"):
@@ -233,7 +252,7 @@ jobs:
                   }
                   
                   with open('cognitive-grammar.ggml', 'w') as f:
-                      json.dump(config, f, indent=2)
+                      json.dump(config, f, indent=2, cls=EnhancedJSONEncoder)
                   
                   return config
           
@@ -390,6 +409,24 @@ jobs:
           import numpy as np
           from pathlib import Path
           
+          # Enhanced JSON encoder for NumPy types (NumPy 2.0 compatible)
+          class EnhancedJSONEncoder(json.JSONEncoder):
+              def default(self, obj):
+                  # Removed deprecated np.int_ and np.float_ for NumPy 2.0 compatibility
+                  if isinstance(obj, (np.integer, np.intc, np.intp, np.int8, 
+                                     np.int16, np.int32, np.int64,
+                                     np.uint8, np.uint16, np.uint32, np.uint64)):
+                      return int(obj)
+                  if isinstance(obj, (np.floating, np.float16, np.float32, np.float64)):
+                      return float(obj)
+                  if isinstance(obj, (np.bool_, bool)):
+                      return bool(obj)
+                  if isinstance(obj, np.ndarray):
+                      return obj.tolist()
+                  if isinstance(obj, np.generic):
+                      return obj.item()
+                  return super().default(obj)
+          
           class CognitiveGrammarGenerator:
               def __init__(self):
                   self.enterprise = "cosmos"
@@ -433,7 +470,7 @@ jobs:
                           'name': name,
                           'shape': list(tensor_shape),
                           'prime_factorization': self.factorize_shape(tensor_shape),
-                          'degrees_of_freedom': np.prod(tensor_shape),
+                          'degrees_of_freedom': int(np.prod(tensor_shape)),  # Convert to int
                           'complexity': fragment['complexity'],
                           'functional_role': fragment['role'],
                           'membrane_type': 'cognitive_primitive'
@@ -447,7 +484,7 @@ jobs:
                   factorizations = {}
                   for i, dim in enumerate(shape):
                       factors = []
-                      n = dim
+                      n = int(dim)  # Convert to int
                       d = 2
                       while d * d <= n:
                           while n % d == 0:
@@ -480,9 +517,9 @@ jobs:
           membranes = generator.embed_as_membrane(fragments)
           ggml_config = generator.generate_ggml_config(membranes)
           
-          # Save configuration
+          # Save configuration with EnhancedJSONEncoder
           with open('cognitive-grammar-enhanced.ggml', 'w') as f:
-              json.dump(ggml_config, f, indent=2)
+              json.dump(ggml_config, f, indent=2, cls=EnhancedJSONEncoder)
               
           print("✅ Enhanced cognitive grammar generated")
           print(f"📊 Total membranes: {len(membranes)}")

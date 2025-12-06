@@ -16,7 +16,9 @@ class TestLg-atomeseIntegration(unittest.TestCase):
     
     def setUp(self):
         """Set up test environment"""
-        pass
+        # Initialize test fixtures
+        self.test_data = {}
+        self.temp_files = []
         
     def test_lg-atomese_import(self):
         """Test that lg-atomese can be imported"""

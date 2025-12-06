@@ -1,0 +1,3407 @@
+{
+  "total": 110,
+  "by_severity": {
+    "HIGH": [
+      {
+        "file": "./atomspace/opencog/atoms/core/TypeUtils.cc",
+        "line": 421,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// returned. XXX FIXME -- surely this should be a throw, instead!!!",
+        "context_preview": "// If we're here we have failed to recognize vardecl as a useful\n\t// and well-formed variable declaration, so Handle::UNDEFINED is\n\t// returned. XXX FIXME -- surely this should be a throw, instead!!!\n..."
+      },
+      {
+        "file": "./atomspace/opencog/atomspace/AtomSpace.cc",
+        "line": 283,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "// XXX FIXME -- The recursive design of the depth() routine below makes",
+        "context_preview": "// ====================================================================\n// XXX FIXME -- The recursive design of the depth() routine below makes\n// it into a bottleneck, when the stack of AtomSpaces ex..."
+      },
+      {
+        "file": "./atomspace/opencog/atomspace/Transient.cc",
+        "line": 43,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "/// XXX FIXME. Performance has not been recently measured; there",
+        "context_preview": "/// and ready to go. The code in this section implements this.\n///\n/// XXX FIXME. Performance has not been recently measured; there\n/// have been a lot of redesigns since when this utility was created..."
+      },
+      {
+        "file": "./atomspace/opencog/query/RewriteMixin.cc",
+        "line": 118,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// See issue #950 and pull req #962. XXX FIXME later.",
+        "context_preview": "// nothing.  In practice it is difficult to insure, so\n\t// meanwhile this try-catch is used.\n\t// See issue #950 and pull req #962. XXX FIXME later.\n\t// Tested by BuggyBindLinkUTest and NoExceptionUTes..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/attic/proxy/WriteThruProxy.cc",
+        "line": 114,
+        "module": "cogserver",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "// which seems inefficient. But still ... XXX FIXME ?",
+        "context_preview": "// Sexpr::decode_slist to return a list of keys,\n\t// and then we'd have to store one key at a time,\n\t// which seems inefficient. But still ... XXX FIXME ?\n\tfor (const StorageNodePtr& snp : _targets)\n\t..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/server/CogServer.cc",
+        "line": 125,
+        "module": "cogserver",
+        "severity": "HIGH",
+        "category": "thread_safety",
+        "description": "Thread safety or concurrency issue",
+        "content": "// XXX FIXME. terrible terrible hack. What we should be",
+        "context_preview": "runLoopStep();\n\n        // XXX FIXME. terrible terrible hack. What we should be\n        // doing is running in our own thread, waiting on a semaphore,\n        // until some request is queued. Spinning..."
+      },
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 93,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "thread_safety",
+        "description": "Thread safety or concurrency issue",
+        "content": "// XXX FIXME This lock is not needed, because in guile-2.2,",
+        "context_preview": "// Lock to prevent racey setting of the output port.\n\t// XXX FIXME This lock is not needed, because in guile-2.2,\n\t// at least, every thread has its own output port, and so its\n\t// impossible for two ..."
+      },
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 1057,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME -- idealy we should avoid catch-and-rethrow.",
+        "context_preview": "// Rethrow.  It would be better to just allow exceptions\n\t\t\t// to pass on through, but thus breaks some unit tests.\n\t\t\t// XXX FIXME -- idealy we should avoid catch-and-rethrow.\n\t\t\t// At any rate, we m..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/representation/instance_scorer.h",
+        "line": 89,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME, calling score_tree above does not throw the exception; this should be done",
+        "context_preview": "return _cscorer.get_cscore(tr);\n        } catch (...) {\n// XXX FIXME, calling score_tree above does not throw the exception; this should be done\n// differntly, maybe call bscorer directly, then ascore..."
+      },
+      {
+        "file": "./moses/moses/moses/representation/instance_scorer.h",
+        "line": 89,
+        "module": "moses",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME, calling score_tree above does not throw the exception; this should be done",
+        "context_preview": "return _cscorer.get_cscore(tr);\n        } catch (...) {\n// XXX FIXME, calling score_tree above does not throw the exception; this should be done\n// differntly, maybe call bscorer directly, then ascore..."
+      }
+    ],
+    "LOW": [
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 42,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Much of the onfusion below is due to a bug: if the",
+        "context_preview": "/// it does not check deep types, nor does it check arity.\n\n// XXX FIXME Much of the onfusion below is due to a bug: if the\n// types script says something like\n// FOOBAR <- FUNCTION_LINK,BOOL_INPUT_LI..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 79,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, this is to be removed, because UnionLink,",
+        "context_preview": "// union and complement. Since it cannot inherit from\n\t\t// EVALUATABLE_LINK (cause it's a Node) we have to add it here.\n\t\t// XXX FIXME, this is to be removed, because UnionLink,\n\t\t// IntersectionLink ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 93,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... Perhaps IntersectionLink, UnionLink will",
+        "context_preview": "// specialized operator to explicitly map the higher order into\n\t\t// the lower order but as of today it is required.\n\t\t// XXX FIXME ... Perhaps IntersectionLink, UnionLink will\n\t\t// resolve this?\n\t\tif..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/FindUtils.h",
+        "line": 146,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: what if it appears quoted in one place, and unquoted",
+        "context_preview": "* QuoteLink.\n *\n * XXX FIXME: what if it appears quoted in one place, and unquoted\n * in another? then what?\n */\nbool is_quoted_in_tree(const Handle& tree, const Handle& atom);"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/RandomChoice.cc",
+        "line": 110,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME - fix this so it can also choose a single value",
+        "context_preview": "///\n\n// XXX FIXME - fix this so it can also choose a single value\n// out of a vector of values.\nValuePtr RandomChoiceLink::execute(AtomSpace* as, bool silent)\n{"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/RandomChoice.cc",
+        "line": 179,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, also allow a FloatValue!!",
+        "context_preview": "for (Handle h : ofirst->getOutgoingSet())\n\t\t{\n\t\t\t// XXX FIXME, also allow a FloatValue!!\n\t\t\tif (h->is_executable())\n\t\t\t\th = HandleCast(h->execute(as, silent));"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 598,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Can we defer the addition to the atomspace to an even",
+        "context_preview": "// atoms to the atomspace is an expensive process.  We can save\n\t// some time by doing it just once, right here, in one big batch.\n\t// XXX FIXME Can we defer the addition to the atomspace to an even\n\t..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/FormulaPredicateLink.cc",
+        "line": 41,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME - in the future, some user is going to want to include",
+        "context_preview": "/// component of the final truth value...\n///\n/// XXX FIXME - in the future, some user is going to want to include\n/// variable declarations, and/or an explicit Lambda in the body, for\n/// some reason..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/join/JoinLink.cc",
+        "line": 721,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this is really dumb, using a queue and then",
+        "context_preview": "HandleSet hs = container(as, jcb, silent);\n\n\t// XXX FIXME this is really dumb, using a queue and then\n\t// copying things into it. Whatever. Fix this.\n\tQueueValuePtr qvp(createQueueValue());\n\tfor (cons..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/BindLink.cc",
+        "line": 79,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// Shoot. XXX FIXME. Most of the unit tests require that the atom",
+        "context_preview": "#define PLACE_RESULTS_IN_ATOMSPACE\n#ifdef PLACE_RESULTS_IN_ATOMSPACE\n\t// Shoot. XXX FIXME. Most of the unit tests require that the atom\n\t// that we return is in the atomspace. But it would be nice if ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/GetLink.cc",
+        "line": 62,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// Shoot. XXX FIXME. Most of the unit tests require that the atom",
+        "context_preview": "#define PLACE_RESULTS_IN_ATOMSPACE\n#ifdef PLACE_RESULTS_IN_ATOMSPACE\n\t// Shoot. XXX FIXME. Most of the unit tests require that the atom\n\t// that we return is in the atomspace. But it would be nice if ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 146,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, more correct would be to loop over",
+        "context_preview": "// The variables for that component are just the variables\n\t\t// that can be found in that component.\n\t\t// XXX FIXME, more correct would be to loop over\n\t\t// _pat.clause_variables and add those. Probab..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 165,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, this handles `absents`, `always` and `grouping`",
+        "context_preview": "// Each component consists of the assorted parts.\n\t\t// XXX FIXME, this handles `absents`, `always` and `grouping`\n\t\t// incorrectly.\n\t\tHandleSeq clseq;\n\t\tfor (const PatternTermPtr& ptm: _pat.pmandatory..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1039,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: the code here assumes that the situation is indeed",
+        "context_preview": "/// as an ordinary clause, and searched for as if it was \"present\".\n///\n/// XXX FIXME: the code here assumes that the situation is indeed\n/// simple: more complex cases are not handled correctly.  Doi..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1465,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: debug_log() above is more readable than the below.",
+        "context_preview": "DEFINE_LINK_FACTORY(PatternLink, PATTERN_LINK)\n\n// XXX FIXME: debug_log() above is more readable than the below.\nstd::string PatternLink::to_long_string(const std::string& indent) const\n{\n\tstd::string..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternUtils.cc",
+        "line": 55,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Are the below needed?",
+        "context_preview": "EVALUATABLE_LINK)))\n\n\t\t// XXX FIXME Are the below needed?\n\t\tor contains_atomtype(clause, DEFINED_PREDICATE_NODE)\n\t\tor contains_atomtype(clause, DEFINED_SCHEMA_NODE)\n\t\tor is_black_box(clause);"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/reduct/DecimateLink.cc",
+        "line": 65,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... both the NumberNode and the FloatValue variations",
+        "context_preview": "}\n\n\t// XXX FIXME ... both the NumberNode and the FloatValue variations\n\t// below make a copy of the mask.  Instead of making a copy, create\n\t// something more efficient/faster. It is, after all, a sim..."
+      },
+      {
+        "file": "./atomspace/opencog/atomspace/AtomSpace.h",
+        "line": 524,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Users should call StorageNode::add_nocheck() instead.",
+        "context_preview": "/* ----------------------------------------------------------- */\n    // Not for public use! Only StorageNodes get to call this!\n    // XXX FIXME Users should call StorageNode::add_nocheck() instead.\n..."
+      },
+      {
+        "file": "./atomspace/opencog/cython/PythonEval.cc",
+        "line": 1427,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this does a lot of wasteful string copying.",
+        "context_preview": "void PythonEval::eval_expr(const std::string& partial_expr)\n{\n    // XXX FIXME this does a lot of wasteful string copying.\n    std::string expr = partial_expr;\n    size_t nl = expr.find_first_of(\"\\n\\r..."
+      },
+      {
+        "file": "./atomspace/opencog/guile/SchemeSmobAtom.cc",
+        "line": 210,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "printf(\"XXX FIXME Bad string %s\\nconverted to %s\\n\", (char *) data, wbuf);",
+        "context_preview": "iconv(cd, &inbuf, &ilen, &obuf, &olen);\n\tobuf[olen] = 0x0;\n\tprintf(\"XXX FIXME Bad string %s\\nconverted to %s\\n\", (char *) data, wbuf);\n\tSCM str = scm_from_utf8_string(obuf);\n\tfree(wbuf);\n\treturn str;"
+      },
+      {
+        "file": "./atomspace/opencog/guile/modules/ExecSCM.cc",
+        "line": 73,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: can we fix cython to not do this, already?",
+        "context_preview": "// work correctly.  The problem is that python keeps creating and\n// destroying this class, but it expects things to stick around.\n// XXX FIXME: can we fix cython to not do this, already?\n// Oh well. ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 270,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// So we are good to go. XXX FIXME -- we could try again, to find",
+        "context_preview": "// If we encountered choices, then we have enumerated all of them.\n\t\t// So we are good to go. XXX FIXME -- we could try again, to find\n\t\t// some thinner set of choices. Later, some other time.\n\t\tif (0..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 284,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: this is currently a weak stop-gap measure to handle",
+        "context_preview": "/// proposed grounding. The term `ptm` points at the Present term.\n///\n/// XXX FIXME: this is currently a weak stop-gap measure to handle\n/// the special case of Present terms embedded in Choice terms..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 1532,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME - this is not very elegant. We should probably",
+        "context_preview": "// search pattern, i.e. if is is a scoped variable, then\n\t// accept a match to any other alpha-equivalent variable.\n\t// XXX FIXME - this is not very elegant. We should probably\n\t// have a distinct `sc..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 1982,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: Issue #3016 - Unification with unordered AndLinks",
+        "context_preview": "///\n//\n// XXX FIXME: Issue #3016 - Unification with unordered AndLinks\n// The current implementation of unordered link permutation exploration\n// in IdenticalLinks stops after finding the first valid ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2049,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: Right now, this code handles graphs that have only one",
+        "context_preview": "/// is not a part of the functional group.\n///\n/// XXX FIXME: Right now, this code handles graphs that have only one\n/// single sparse search.   Nested sparse searches are not supported;\n/// to implem..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2223,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME -- do the above.",
+        "context_preview": "/// -- build a clause_variables struct, but just for this term\n/// -- search for the thinnest joint, just like `get_next_clause`\n/// XXX FIXME -- do the above.\n///\nbool PatternMatchEngine::next_untrie..."
+      },
+      {
+        "file": "./atomspace/opencog/query/RewriteMixin.cc",
+        "line": 164,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME now I see how it can be done. The groupings should",
+        "context_preview": "/// clever way to find groupings in a single batch; but for now, I don't\n/// see how this could be done.\n/// XXX FIXME now I see how it can be done. The groupings should\n/// be converted to marginals,..."
+      },
+      {
+        "file": "./atomspace/opencog/query/TermMatchMixin.cc",
+        "line": 710,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: worse: this cannot possibly be right when",
+        "context_preview": "// anything about that here? Seems like we can't do anything...\n\t\t//\n\t\t// XXX FIXME: worse: this cannot possibly be right when\n\t\t// the ChoiceLink contains presentLinks.\n\t\tfor (const Handle& h : oset)..."
+      },
+      {
+        "file": "./atomspace-rocks/opencog/persist/monospace/MonoIO.cc",
+        "line": 1004,
+        "module": "atomspace-rocks",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "void MonoStorage::storeAtomSpace(const AtomSpace* table)\n{\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. ..."
+      },
+      {
+        "file": "./atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 1371,
+        "module": "atomspace-rocks",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "convertForFrames(HandleCast(getAtomSpace()));\n\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. Should we ma..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/api/cython/PersistCython.cc",
+        "line": 31,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: except for the error messages, most of this code is",
+        "context_preview": "namespace opencog {\n\n// XXX FIXME: except for the error messages, most of this code is\n// mostly a cut-n-pate of what's in PersistSCM.cc\n\n// ===========================================================..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/WriteBufferProxy.cc",
+        "line": 195,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. Buffering these naively, like this, voilates the",
+        "context_preview": "const ValuePtr& delta)\n{\n\t// XXX FIXME. Buffering these naively, like this, voilates the\n\t// intent of how this method should work. However, for the\n\t// RocksStorageNode, doing this is harmless. And t..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/tlb/UuidSCM.cc",
+        "line": 83,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// what the heck. I'm gonna punt. XXX FIXME.",
+        "context_preview": "// atomspaces, and really, we should have nested hierarchical TLB\n\t// resolvers for nested atomspaces. But for now, no one uses this so\n\t// what the heck. I'm gonna punt. XXX FIXME.\n\tconst AtomSpacePt..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/server/CogServer.cc",
+        "line": 216,
+        "module": "cogserver",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// assumes a singleton instance, so we leave this for now. XXX FIXME.",
+        "context_preview": "// interesting use cases where one might want to run multiple\n// cogservers. However, at this time, too much of the code (???)\n// assumes a singleton instance, so we leave this for now. XXX FIXME.\n\n//..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc",
+        "line": 944,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "void MonoStorage::storeAtomSpace(const AtomSpace* table)\n{\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. ..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 694,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// Note: currently broken for multi-space usage, XXX FIXME.",
+        "context_preview": "/// Backend callback - find the Link. This is used ONLY to implement\n/// the backend Query call, and is not otherwised used.\n/// Note: currently broken for multi-space usage, XXX FIXME.\nHandle RocksSt..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 1283,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "convertForFrames(HandleCast(getAtomSpace()));\n\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. Should we ma..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksPersistSCM.cc",
+        "line": 82,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME -- are open and close actually needed for anything?",
+        "context_preview": "}\n\n// XXX FIXME -- are open and close actually needed for anything?\nvoid RocksPersistSCM::do_open(const std::string& uri)\n{\n    if (_storage)"
+      },
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 1180,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME only a subset is needed.",
+        "context_preview": "void SchemeEval::init_scheme(void)\n{\n\t// XXX FIXME only a subset is needed.\n\tSchemeEval sch;\n}"
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "line": 239,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this does not smell right; optionals should get",
+        "context_preview": "if (m_type == CONNECTOR_type)\n    {\n        // XXX FIXME this does not smell right; optionals should get\n        // blown up into pairs of disjuncts, one with and one without.\n        if (m_string == ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "line": 268,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... using an std::map would be more efficient.",
+        "context_preview": "if (m_type == OR_type)\n    {\n        // XXX FIXME ... using an std::map would be more efficient.\n        std::sort(outgoing.begin(), outgoing.end());\n        outgoing.erase(std::unique(outgoing.begin(..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictUtils.cc",
+        "line": 53,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "XXX FIXME -- this currently fails to correctly handle the head-tail",
+        "context_preview": "* Check if two connectors' type matches.\n\nXXX FIXME -- this currently fails to correctly handle the head-tail\nindicators on link types.  Perhaps it would be better to just call\nthe same matchinng rout..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc",
+        "line": 338,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME -- We should fish parse options out of the atomspace.",
+        "context_preview": "}\n\n\t// XXX FIXME -- We should fish parse options out of the atomspace.\n\t// Something like this, maybe:\n\t//     EvaluationLink\n\t//         PredicateNode \"LG ParseTime\""
+      },
+      {
+        "file": "./components/learning/moses/moses/comboreduct/combo/descriptions.cc",
+        "line": 94,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// type. XXX FIXME...",
+        "context_preview": "// testing for booleans, contin as well, but not today. \n    // Fixing this will require work in typechecker, and use of union\n    // type. XXX FIXME...\n    { id::equ,                  \"->(enum enum b..."
+      },
+      {
+        "file": "./components/learning/moses/moses/comboreduct/main/eval-table.cc",
+        "line": 147,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME",
+        "context_preview": "// HERE WE ARE ASSUMING THAT THE INPUT FILE HAS A HEADER!!!\n// XXX FIXME\n    vector<string> header = get_header(pa.input_table_file);\n\n    // Add to ignore_values (header - all_unique_variables - targ..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/table-problems.cc",
+        "line": 150,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME .. check that they all have the same signature.",
+        "context_preview": "// Check that all input data files have the same arity\n    // XXX FIXME .. check that they all have the same signature.\n    if (_tables.size() > 1) {\n        for (size_t i = 1; i < _tables.size(); ++i..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/ensemble.h",
+        "line": 55,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* from the metapopulation, which has no particular admission criteria.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's eas..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "line": 261,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: we should use a pointer set for scored_combo_tree_set",
+        "context_preview": "candidates.size());\n\n        // XXX FIXME: we should use a pointer set for scored_combo_tree_set\n        // This would avoid some pointless copying here and a few other\n        // places.  This is eas..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "line": 552,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
+        "context_preview": "}\n\n// XXX FIXME looks to me like it++ can often be collaed twice within this loop!\n                prev_it = it++;\n            }"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/metapopulation.h",
+        "line": 90,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* for inference, the metapopulation for breeding.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's easier for now.\n * Somed..."
+      },
+      {
+        "file": "./moses/moses/comboreduct/combo/descriptions.cc",
+        "line": 94,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// type. XXX FIXME...",
+        "context_preview": "// testing for booleans, contin as well, but not today. \n    // Fixing this will require work in typechecker, and use of union\n    // type. XXX FIXME...\n    { id::equ,                  \"->(enum enum b..."
+      },
+      {
+        "file": "./moses/moses/comboreduct/main/eval-table.cc",
+        "line": 147,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME",
+        "context_preview": "// HERE WE ARE ASSUMING THAT THE INPUT FILE HAS A HEADER!!!\n// XXX FIXME\n    vector<string> header = get_header(pa.input_table_file);\n\n    // Add to ignore_values (header - all_unique_variables - targ..."
+      },
+      {
+        "file": "./moses/moses/moses/main/table-problems.cc",
+        "line": 150,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME .. check that they all have the same signature.",
+        "context_preview": "// Check that all input data files have the same arity\n    // XXX FIXME .. check that they all have the same signature.\n    if (_tables.size() > 1) {\n        for (size_t i = 1; i < _tables.size(); ++i..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/ensemble.h",
+        "line": 55,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* from the metapopulation, which has no particular admission criteria.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's eas..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/merging.cc",
+        "line": 261,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: we should use a pointer set for scored_combo_tree_set",
+        "context_preview": "candidates.size());\n\n        // XXX FIXME: we should use a pointer set for scored_combo_tree_set\n        // This would avoid some pointless copying here and a few other\n        // places.  This is eas..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/merging.cc",
+        "line": 552,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
+        "context_preview": "}\n\n// XXX FIXME looks to me like it++ can often be collaed twice within this loop!\n                prev_it = it++;\n            }"
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/metapopulation.h",
+        "line": 90,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* for inference, the metapopulation for breeding.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's easier for now.\n * Somed..."
+      },
+      {
+        "file": "./unify/opencog/unify/atoms/UnifierLink.cc",
+        "line": 141,
+        "module": "unify",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, Maybe. This seems to handle all of the cases I've",
+        "context_preview": "// This is my best guess.\n\n\t// XXX FIXME, Maybe. This seems to handle all of the cases I've\n\t// looked at so far. However, the unifier has all sorts of fancy\n\t// reduction code, and I don't understand..."
+      }
+    ],
+    "CRITICAL": [
+      {
+        "file": "./atomspace/opencog/atoms/core/TypeChoice.cc",
+        "line": 254,
+        "module": "atomspace",
+        "severity": "CRITICAL",
+        "category": "security_or_crash",
+        "description": "Security vulnerability or crash risk",
+        "content": "// For now, just avoid throwing an exception. XXX FIXME.",
+        "context_preview": "// using a SignatureLink, but its not. As a result, it\n\t\t// gets undefined behavior and incorrect results. Too bad.\n\t\t// For now, just avoid throwing an exception. XXX FIXME.\n\t\treturn;\n\t}"
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc",
+        "line": 82,
+        "module": "atomspace-storage",
+        "severity": "CRITICAL",
+        "category": "security_or_crash",
+        "description": "Security vulnerability or crash risk",
+        "content": "* XXX FIXME This needs to be fuzzed; it is very likely to crash",
+        "context_preview": "* open-paren, and the string encoding the value.\n *\n * XXX FIXME This needs to be fuzzed; it is very likely to crash\n * and/or contain bugs if it is given strings of unexpected formats.\n */\nValuePtr S..."
+      }
+    ],
+    "MEDIUM": [
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 196,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// cleanly separated from each other. (XXX FIXME, these need to be",
+        "context_preview": "/// walk_tree() performs a kind-of eager-evaluation of function arguments.\n/// The code in here is a mashup of several different ideas that are not\n/// cleanly separated from each other. (XXX FIXME, t..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 642,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME, we need to get rid of this call entirely, and just",
+        "context_preview": "return expr->execute(_as, silent);\n\n\t// XXX FIXME, we need to get rid of this call entirely, and just\n\t// return expr->execute(_as, silent) instead, like above.\n\t// However, assorted parts are still b..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/FilterLink.cc",
+        "line": 615,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME -- if vex is a stream, e.g. a QueueValue,",
+        "context_preview": "vex = _outgoing[1]->execute(as, silent);\n\n\t\t// XXX TODO FIXME -- if vex is a stream, e.g. a QueueValue,\n\t\t// then we should construct another Queue as the return value,\n\t\t// and perform filtering on-d..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/ValueOfLink.cc",
+        "line": 84,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of these are executable, then",
+        "context_preview": "// trickle out properly in the end.\n\t//\n\t// XXX TODO FIXME ... if either of these are executable, then\n\t// they need to be executed, first, right? Yes, they do! We\n\t// can currently get away with not ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/join/JoinLink.cc",
+        "line": 550,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// i.e. to use UnorderedHandleSet instead of HandleSet. XXX FIXME.",
+        "context_preview": "///\n/// TODO: it might be faster to use hash tables instead of rb-trees\n/// i.e. to use UnorderedHandleSet instead of HandleSet. XXX FIXME.\nHandleSet JoinLink::supremum(AtomSpace* as, bool silent,\n   ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 721,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// BUG - XXX FIXME. This extracts PresentLink's from the",
+        "context_preview": "OR_LINK, SEQUENTIAL_OR_LINK, NOT_LINK});\n\n\t// BUG - XXX FIXME. This extracts PresentLink's from the\n\t// Sequentials. This is not really correct, because the\n\t// evaluation of the sequential might term..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1255,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- this is wrong. What we really want is to",
+        "context_preview": "ptm->addEvaluatable();\n\n\t\t\t// XXX FIXME -- this is wrong. What we really want is to\n\t\t\t// identify those clauses that bridge across multiple\n\t\t\t// components... not everything here does so. The\n\t\t\t// ..."
+      },
+      {
+        "file": "./atomspace/opencog/guile/SchemeSmobAtom.cc",
+        "line": 84,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// XXX FIXME. Work around the despicable, horrible guile UTF8 handling.",
+        "context_preview": "/* ============================================================== */\n\n// XXX FIXME. Work around the despicable, horrible guile UTF8 handling.\n// I am flabbergasted. The guile people are smart, but the..."
+      },
+      {
+        "file": "./atomspace/opencog/haskell/AtomSpace_CWrapper.h",
+        "line": 112,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME no one should be using Handle's to work with atoms,",
+        "context_preview": "/**\n     * AtomSpace_getAtomByHandle Gets an atom back from the atomspace.\n     * XXX FIXME no one should be using Handle's to work with atoms,\n     * except for the database and communications back-e..."
+      },
+      {
+        "file": "./atomspace/opencog/haskell/PatternMatcher_CWrapper.h",
+        "line": 8,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME: atoms must never be accessed by UUID except by the",
+        "context_preview": "* An interface necessary for haskell bindings.\n * (ghc supports FFI for c libraries)\n * XXX FIXME: atoms must never be accessed by UUID except by the\n * communication and database layers. The UUID is ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 126,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME; we should be using ptm->isVariable() instead !?",
+        "context_preview": "if (_nameserver.isNode(t))\n\t{\n\t\t// XXX FIXME; we should be using ptm->isVariable() instead !?\n\t\tif (VARIABLE_NODE != t and GLOB_NODE != t and SIGN_NODE != t)\n\t\t{\n\t\t\twidth = h->getIncomingSetSize();"
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 732,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// no unit test triggers this, but its not clear why. XXX FIXME??",
+        "context_preview": "// If this is used in a way such that the handle appears under a\n// ChoiceLink, then an incomplete search will result!  Right now,\n// no unit test triggers this, but its not clear why. XXX FIXME??\n// ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2065,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME. The ptm needs to be decomposed into connected",
+        "context_preview": "logmsg(\"Explore sparse: Start exploration\");\n\n\t// XXX TODO FIXME. The ptm needs to be decomposed into connected\n\t// components. Then only the connected components need to be walked\n\t// over.  That wou..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.h",
+        "line": 189,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// with it. XXX Needs to move to the Mixin class... XXX FIXME.",
+        "context_preview": "// State that manages the next PresentLink subterm to be grounded.\n\t// Similar to the next-clause, above, and someday should be unified\n\t// with it. XXX Needs to move to the Mixin class... XXX FIXME.\n..."
+      },
+      {
+        "file": "./atomspace/opencog/query/SatisfyMixin.cc",
+        "line": 583,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "code_quality",
+        "description": "Code quality/refactoring needed",
+        "content": "// XXX FIXME terrible hack.",
+        "context_preview": "if (is_pure_absent)\n\t\t{\n\t\t\t// XXX FIXME terrible hack.\n\t\t\tTermMatchMixin* intu =\n\t\t\t\tdynamic_cast<TermMatchMixin*>(this);\n\t\t\tif (intu->optionals_present()) return false;"
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/flow/FetchValueOfLink.cc",
+        "line": 63,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of _outgoing[0] or _outgoing[1]",
+        "context_preview": "StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);\n\n\t// XXX TODO FIXME ... if either of _outgoing[0] or _outgoing[1]\n\t// are executable, then they need to be executed, first, right?\n\t// Yes, they do..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/flow/StoreValueOfLink.cc",
+        "line": 61,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of these are executable, then",
+        "context_preview": "StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);\n\n\t// XXX TODO FIXME ... if either of these are executable, then\n\t// they need to be executed, first, right? Because that's the\n\t// usual intent. El..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/ProxyNode.cc",
+        "line": 141,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME. Using this ProxyParametersLink thing is a kind of",
+        "context_preview": "// Hmm, perhaps this should be a StateLink?\n//\n// XXX FIXME. Using this ProxyParametersLink thing is a kind of\n// cheesy hack, to pass parameters to the ProxyNode. It vaguely\n// resembles the structur..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/ProxyNode.h",
+        "line": 62,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// updated at some later date. XXX FIXME.",
+        "context_preview": "// Virtual methods from the BackingStore API. These provide some default\n\t// implementations. Some of these are stop-gap, and will need to be\n\t// updated at some later date. XXX FIXME.\n\n\tvirtual void ..."
+      },
+      {
+        "file": "./components/integration/opencog/opencog/neighbors/Neighbors.h",
+        "line": 58,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME -- this function is curently not used anywhere. Perhaps",
+        "context_preview": "* @return      an UnorderedHandleSet of neighbors\n *\n * XXX FIXME -- this function is curently not used anywhere. Perhaps\n * it should be deleted?\n */\nUnorderedHandleSet get_distant_neighbors(const Ha..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "line": 87,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME -- this gives incorrect results if the word has non-trivial",
+        "context_preview": "* appear anywhere.\n*\n* XXX FIXME -- this gives incorrect results if the word has non-trivial\n* morphology e.g. if its Russian, and can be split into a stem and a\n* suffix.  The problem is that in LG, ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "line": 103,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// XXX FIXME -- if dn_head is null, then we should check regexes.",
+        "context_preview": "HandleSeq outgoing;\n\n// XXX FIXME -- if dn_head is null, then we should check regexes.\n// Currently, LG does not do this automatically, but it almost surely\n// should. i.e. the LG public API needs to ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc",
+        "line": 229,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME. This should be part of the LgDictNode but since",
+        "context_preview": "// This must happen before ldn->get_dictionary() because the\n\t// setup is stateful. This seems buggy, but is adequate for now.\n\t// XXX FIXME. This should be part of the LgDictNode but since\n\t// LgDict..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/deme/deme_expander.cc",
+        "line": 502,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME this is a bug .. the user may have specified that",
+        "context_preview": "// reset scorer to use all variables (important so that\n        // behavioral score is consistent across generations\n        // XXX FIXME this is a bug .. the user may have specified that\n        // c..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/problem-params.h",
+        "line": 46,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME TODO The structure below should be split into multiple",
+        "context_preview": "namespace opencog { namespace moses {\n\n// XXX FIXME TODO The structure below should be split into multiple\n// parts, with each sub-part responsible for picking out the argv's\n// that it cares about. U..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/table-problems.cc",
+        "line": 138,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- the multiple tables should be merged into one.",
+        "context_preview": "logger().info(\"Number of rows in tables = %d\", num_rows);\n\n    // XXX FIXME -- the multiple tables should be merged into one.\n    ctable = _ctables.front();\n    table = _tables.front();"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/metapopulation.cc",
+        "line": 222,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME should probably not recompute every time ...",
+        "context_preview": "return _best_cscore;\n\n    // XXX FIXME should probably not recompute every time ...\n    // need to figure who is calling this method, and what they are expecting.\n    return _cscorer.get_cscore(_ensem..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/scoring/bscores.cc",
+        "line": 930,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// XXX this should probably be removed! TODO FIXME",
+        "context_preview": "/// formula (the edges, with are printed by hand, below).\n///\n/// XXX this should probably be removed! TODO FIXME\n\ncluster_bscore::cluster_bscore(const ITable& itable)\n    : _itable(itable)"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/scoring/scoring_base.cc",
+        "line": 108,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME complexity_t should be a double not an int ...",
+        "context_preview": "}\n\n    // XXX FIXME complexity_t should be a double not an int ...\n    return (complexity_t) floor (cpxy / norm + 0.5);\n}"
+      },
+      {
+        "file": "./moses/moses/moses/deme/deme_expander.cc",
+        "line": 502,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME this is a bug .. the user may have specified that",
+        "context_preview": "// reset scorer to use all variables (important so that\n        // behavioral score is consistent across generations\n        // XXX FIXME this is a bug .. the user may have specified that\n        // c..."
+      },
+      {
+        "file": "./moses/moses/moses/main/problem-params.h",
+        "line": 46,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME TODO The structure below should be split into multiple",
+        "context_preview": "namespace opencog { namespace moses {\n\n// XXX FIXME TODO The structure below should be split into multiple\n// parts, with each sub-part responsible for picking out the argv's\n// that it cares about. U..."
+      },
+      {
+        "file": "./moses/moses/moses/main/table-problems.cc",
+        "line": 138,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- the multiple tables should be merged into one.",
+        "context_preview": "logger().info(\"Number of rows in tables = %d\", num_rows);\n\n    // XXX FIXME -- the multiple tables should be merged into one.\n    ctable = _ctables.front();\n    table = _tables.front();"
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/metapopulation.cc",
+        "line": 222,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME should probably not recompute every time ...",
+        "context_preview": "return _best_cscore;\n\n    // XXX FIXME should probably not recompute every time ...\n    // need to figure who is calling this method, and what they are expecting.\n    return _cscorer.get_cscore(_ensem..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/bscores.cc",
+        "line": 930,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// XXX this should probably be removed! TODO FIXME",
+        "context_preview": "/// formula (the edges, with are printed by hand, below).\n///\n/// XXX this should probably be removed! TODO FIXME\n\ncluster_bscore::cluster_bscore(const ITable& itable)\n    : _itable(itable)"
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 646,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t bep_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / (cnt * _true_total);\n    doubl..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 655,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t bep_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / (cnt);\n    double best_possible_r..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 707,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t f_one_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    return 1.0;\n}"
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 714,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t f_one_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / cnt;\n    double best_possibl..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/scoring_base.cc",
+        "line": 152,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME complexity_t should be a double not an int ...",
+        "context_preview": "}\n\n    // XXX FIXME complexity_t should be a double not an int ...\n    return (complexity_t) floor (cpxy / norm + 0.5);\n}"
+      }
+    ]
+  },
+  "by_module": {
+    "components": [
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 93,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "thread_safety",
+        "description": "Thread safety or concurrency issue",
+        "content": "// XXX FIXME This lock is not needed, because in guile-2.2,",
+        "context_preview": "// Lock to prevent racey setting of the output port.\n\t// XXX FIXME This lock is not needed, because in guile-2.2,\n\t// at least, every thread has its own output port, and so its\n\t// impossible for two ..."
+      },
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 1057,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME -- idealy we should avoid catch-and-rethrow.",
+        "context_preview": "// Rethrow.  It would be better to just allow exceptions\n\t\t\t// to pass on through, but thus breaks some unit tests.\n\t\t\t// XXX FIXME -- idealy we should avoid catch-and-rethrow.\n\t\t\t// At any rate, we m..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/representation/instance_scorer.h",
+        "line": 89,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME, calling score_tree above does not throw the exception; this should be done",
+        "context_preview": "return _cscorer.get_cscore(tr);\n        } catch (...) {\n// XXX FIXME, calling score_tree above does not throw the exception; this should be done\n// differntly, maybe call bscorer directly, then ascore..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc",
+        "line": 944,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "void MonoStorage::storeAtomSpace(const AtomSpace* table)\n{\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. ..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 694,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// Note: currently broken for multi-space usage, XXX FIXME.",
+        "context_preview": "/// Backend callback - find the Link. This is used ONLY to implement\n/// the backend Query call, and is not otherwised used.\n/// Note: currently broken for multi-space usage, XXX FIXME.\nHandle RocksSt..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 1283,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "convertForFrames(HandleCast(getAtomSpace()));\n\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. Should we ma..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksPersistSCM.cc",
+        "line": 82,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME -- are open and close actually needed for anything?",
+        "context_preview": "}\n\n// XXX FIXME -- are open and close actually needed for anything?\nvoid RocksPersistSCM::do_open(const std::string& uri)\n{\n    if (_storage)"
+      },
+      {
+        "file": "./components/integration/opencog/opencog/neighbors/Neighbors.h",
+        "line": 58,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME -- this function is curently not used anywhere. Perhaps",
+        "context_preview": "* @return      an UnorderedHandleSet of neighbors\n *\n * XXX FIXME -- this function is curently not used anywhere. Perhaps\n * it should be deleted?\n */\nUnorderedHandleSet get_distant_neighbors(const Ha..."
+      },
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 1180,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME only a subset is needed.",
+        "context_preview": "void SchemeEval::init_scheme(void)\n{\n\t// XXX FIXME only a subset is needed.\n\tSchemeEval sch;\n}"
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "line": 239,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this does not smell right; optionals should get",
+        "context_preview": "if (m_type == CONNECTOR_type)\n    {\n        // XXX FIXME this does not smell right; optionals should get\n        // blown up into pairs of disjuncts, one with and one without.\n        if (m_string == ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "line": 268,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... using an std::map would be more efficient.",
+        "context_preview": "if (m_type == OR_type)\n    {\n        // XXX FIXME ... using an std::map would be more efficient.\n        std::sort(outgoing.begin(), outgoing.end());\n        outgoing.erase(std::unique(outgoing.begin(..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "line": 87,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME -- this gives incorrect results if the word has non-trivial",
+        "context_preview": "* appear anywhere.\n*\n* XXX FIXME -- this gives incorrect results if the word has non-trivial\n* morphology e.g. if its Russian, and can be split into a stem and a\n* suffix.  The problem is that in LG, ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "line": 103,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// XXX FIXME -- if dn_head is null, then we should check regexes.",
+        "context_preview": "HandleSeq outgoing;\n\n// XXX FIXME -- if dn_head is null, then we should check regexes.\n// Currently, LG does not do this automatically, but it almost surely\n// should. i.e. the LG public API needs to ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictUtils.cc",
+        "line": 53,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "XXX FIXME -- this currently fails to correctly handle the head-tail",
+        "context_preview": "* Check if two connectors' type matches.\n\nXXX FIXME -- this currently fails to correctly handle the head-tail\nindicators on link types.  Perhaps it would be better to just call\nthe same matchinng rout..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc",
+        "line": 229,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME. This should be part of the LgDictNode but since",
+        "context_preview": "// This must happen before ldn->get_dictionary() because the\n\t// setup is stateful. This seems buggy, but is adequate for now.\n\t// XXX FIXME. This should be part of the LgDictNode but since\n\t// LgDict..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc",
+        "line": 338,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME -- We should fish parse options out of the atomspace.",
+        "context_preview": "}\n\n\t// XXX FIXME -- We should fish parse options out of the atomspace.\n\t// Something like this, maybe:\n\t//     EvaluationLink\n\t//         PredicateNode \"LG ParseTime\""
+      },
+      {
+        "file": "./components/learning/moses/moses/comboreduct/combo/descriptions.cc",
+        "line": 94,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// type. XXX FIXME...",
+        "context_preview": "// testing for booleans, contin as well, but not today. \n    // Fixing this will require work in typechecker, and use of union\n    // type. XXX FIXME...\n    { id::equ,                  \"->(enum enum b..."
+      },
+      {
+        "file": "./components/learning/moses/moses/comboreduct/main/eval-table.cc",
+        "line": 147,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME",
+        "context_preview": "// HERE WE ARE ASSUMING THAT THE INPUT FILE HAS A HEADER!!!\n// XXX FIXME\n    vector<string> header = get_header(pa.input_table_file);\n\n    // Add to ignore_values (header - all_unique_variables - targ..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/deme/deme_expander.cc",
+        "line": 502,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME this is a bug .. the user may have specified that",
+        "context_preview": "// reset scorer to use all variables (important so that\n        // behavioral score is consistent across generations\n        // XXX FIXME this is a bug .. the user may have specified that\n        // c..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/problem-params.h",
+        "line": 46,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME TODO The structure below should be split into multiple",
+        "context_preview": "namespace opencog { namespace moses {\n\n// XXX FIXME TODO The structure below should be split into multiple\n// parts, with each sub-part responsible for picking out the argv's\n// that it cares about. U..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/table-problems.cc",
+        "line": 138,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- the multiple tables should be merged into one.",
+        "context_preview": "logger().info(\"Number of rows in tables = %d\", num_rows);\n\n    // XXX FIXME -- the multiple tables should be merged into one.\n    ctable = _ctables.front();\n    table = _tables.front();"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/table-problems.cc",
+        "line": 150,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME .. check that they all have the same signature.",
+        "context_preview": "// Check that all input data files have the same arity\n    // XXX FIXME .. check that they all have the same signature.\n    if (_tables.size() > 1) {\n        for (size_t i = 1; i < _tables.size(); ++i..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/ensemble.h",
+        "line": 55,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* from the metapopulation, which has no particular admission criteria.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's eas..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "line": 261,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: we should use a pointer set for scored_combo_tree_set",
+        "context_preview": "candidates.size());\n\n        // XXX FIXME: we should use a pointer set for scored_combo_tree_set\n        // This would avoid some pointless copying here and a few other\n        // places.  This is eas..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "line": 552,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
+        "context_preview": "}\n\n// XXX FIXME looks to me like it++ can often be collaed twice within this loop!\n                prev_it = it++;\n            }"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/metapopulation.cc",
+        "line": 222,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME should probably not recompute every time ...",
+        "context_preview": "return _best_cscore;\n\n    // XXX FIXME should probably not recompute every time ...\n    // need to figure who is calling this method, and what they are expecting.\n    return _cscorer.get_cscore(_ensem..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/metapopulation.h",
+        "line": 90,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* for inference, the metapopulation for breeding.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's easier for now.\n * Somed..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/scoring/bscores.cc",
+        "line": 930,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// XXX this should probably be removed! TODO FIXME",
+        "context_preview": "/// formula (the edges, with are printed by hand, below).\n///\n/// XXX this should probably be removed! TODO FIXME\n\ncluster_bscore::cluster_bscore(const ITable& itable)\n    : _itable(itable)"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/scoring/scoring_base.cc",
+        "line": 108,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME complexity_t should be a double not an int ...",
+        "context_preview": "}\n\n    // XXX FIXME complexity_t should be a double not an int ...\n    return (complexity_t) floor (cpxy / norm + 0.5);\n}"
+      }
+    ],
+    "atomspace": [
+      {
+        "file": "./atomspace/opencog/atomspace/Transient.cc",
+        "line": 43,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "/// XXX FIXME. Performance has not been recently measured; there",
+        "context_preview": "/// and ready to go. The code in this section implements this.\n///\n/// XXX FIXME. Performance has not been recently measured; there\n/// have been a lot of redesigns since when this utility was created..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/TypeChoice.cc",
+        "line": 254,
+        "module": "atomspace",
+        "severity": "CRITICAL",
+        "category": "security_or_crash",
+        "description": "Security vulnerability or crash risk",
+        "content": "// For now, just avoid throwing an exception. XXX FIXME.",
+        "context_preview": "// using a SignatureLink, but its not. As a result, it\n\t\t// gets undefined behavior and incorrect results. Too bad.\n\t\t// For now, just avoid throwing an exception. XXX FIXME.\n\t\treturn;\n\t}"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/TypeUtils.cc",
+        "line": 421,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// returned. XXX FIXME -- surely this should be a throw, instead!!!",
+        "context_preview": "// If we're here we have failed to recognize vardecl as a useful\n\t// and well-formed variable declaration, so Handle::UNDEFINED is\n\t// returned. XXX FIXME -- surely this should be a throw, instead!!!\n..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 196,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// cleanly separated from each other. (XXX FIXME, these need to be",
+        "context_preview": "/// walk_tree() performs a kind-of eager-evaluation of function arguments.\n/// The code in here is a mashup of several different ideas that are not\n/// cleanly separated from each other. (XXX FIXME, t..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 42,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Much of the onfusion below is due to a bug: if the",
+        "context_preview": "/// it does not check deep types, nor does it check arity.\n\n// XXX FIXME Much of the onfusion below is due to a bug: if the\n// types script says something like\n// FOOBAR <- FUNCTION_LINK,BOOL_INPUT_LI..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 79,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, this is to be removed, because UnionLink,",
+        "context_preview": "// union and complement. Since it cannot inherit from\n\t\t// EVALUATABLE_LINK (cause it's a Node) we have to add it here.\n\t\t// XXX FIXME, this is to be removed, because UnionLink,\n\t\t// IntersectionLink ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 93,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... Perhaps IntersectionLink, UnionLink will",
+        "context_preview": "// specialized operator to explicitly map the higher order into\n\t\t// the lower order but as of today it is required.\n\t\t// XXX FIXME ... Perhaps IntersectionLink, UnionLink will\n\t\t// resolve this?\n\t\tif..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/FindUtils.h",
+        "line": 146,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: what if it appears quoted in one place, and unquoted",
+        "context_preview": "* QuoteLink.\n *\n * XXX FIXME: what if it appears quoted in one place, and unquoted\n * in another? then what?\n */\nbool is_quoted_in_tree(const Handle& tree, const Handle& atom);"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/RandomChoice.cc",
+        "line": 110,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME - fix this so it can also choose a single value",
+        "context_preview": "///\n\n// XXX FIXME - fix this so it can also choose a single value\n// out of a vector of values.\nValuePtr RandomChoiceLink::execute(AtomSpace* as, bool silent)\n{"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/RandomChoice.cc",
+        "line": 179,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, also allow a FloatValue!!",
+        "context_preview": "for (Handle h : ofirst->getOutgoingSet())\n\t\t{\n\t\t\t// XXX FIXME, also allow a FloatValue!!\n\t\t\tif (h->is_executable())\n\t\t\t\th = HandleCast(h->execute(as, silent));"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 598,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Can we defer the addition to the atomspace to an even",
+        "context_preview": "// atoms to the atomspace is an expensive process.  We can save\n\t// some time by doing it just once, right here, in one big batch.\n\t// XXX FIXME Can we defer the addition to the atomspace to an even\n\t..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 642,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME, we need to get rid of this call entirely, and just",
+        "context_preview": "return expr->execute(_as, silent);\n\n\t// XXX FIXME, we need to get rid of this call entirely, and just\n\t// return expr->execute(_as, silent) instead, like above.\n\t// However, assorted parts are still b..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/FilterLink.cc",
+        "line": 615,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME -- if vex is a stream, e.g. a QueueValue,",
+        "context_preview": "vex = _outgoing[1]->execute(as, silent);\n\n\t\t// XXX TODO FIXME -- if vex is a stream, e.g. a QueueValue,\n\t\t// then we should construct another Queue as the return value,\n\t\t// and perform filtering on-d..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/FormulaPredicateLink.cc",
+        "line": 41,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME - in the future, some user is going to want to include",
+        "context_preview": "/// component of the final truth value...\n///\n/// XXX FIXME - in the future, some user is going to want to include\n/// variable declarations, and/or an explicit Lambda in the body, for\n/// some reason..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/ValueOfLink.cc",
+        "line": 84,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of these are executable, then",
+        "context_preview": "// trickle out properly in the end.\n\t//\n\t// XXX TODO FIXME ... if either of these are executable, then\n\t// they need to be executed, first, right? Yes, they do! We\n\t// can currently get away with not ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/join/JoinLink.cc",
+        "line": 550,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// i.e. to use UnorderedHandleSet instead of HandleSet. XXX FIXME.",
+        "context_preview": "///\n/// TODO: it might be faster to use hash tables instead of rb-trees\n/// i.e. to use UnorderedHandleSet instead of HandleSet. XXX FIXME.\nHandleSet JoinLink::supremum(AtomSpace* as, bool silent,\n   ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/join/JoinLink.cc",
+        "line": 721,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this is really dumb, using a queue and then",
+        "context_preview": "HandleSet hs = container(as, jcb, silent);\n\n\t// XXX FIXME this is really dumb, using a queue and then\n\t// copying things into it. Whatever. Fix this.\n\tQueueValuePtr qvp(createQueueValue());\n\tfor (cons..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/BindLink.cc",
+        "line": 79,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// Shoot. XXX FIXME. Most of the unit tests require that the atom",
+        "context_preview": "#define PLACE_RESULTS_IN_ATOMSPACE\n#ifdef PLACE_RESULTS_IN_ATOMSPACE\n\t// Shoot. XXX FIXME. Most of the unit tests require that the atom\n\t// that we return is in the atomspace. But it would be nice if ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/GetLink.cc",
+        "line": 62,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// Shoot. XXX FIXME. Most of the unit tests require that the atom",
+        "context_preview": "#define PLACE_RESULTS_IN_ATOMSPACE\n#ifdef PLACE_RESULTS_IN_ATOMSPACE\n\t// Shoot. XXX FIXME. Most of the unit tests require that the atom\n\t// that we return is in the atomspace. But it would be nice if ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 146,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, more correct would be to loop over",
+        "context_preview": "// The variables for that component are just the variables\n\t\t// that can be found in that component.\n\t\t// XXX FIXME, more correct would be to loop over\n\t\t// _pat.clause_variables and add those. Probab..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 165,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, this handles `absents`, `always` and `grouping`",
+        "context_preview": "// Each component consists of the assorted parts.\n\t\t// XXX FIXME, this handles `absents`, `always` and `grouping`\n\t\t// incorrectly.\n\t\tHandleSeq clseq;\n\t\tfor (const PatternTermPtr& ptm: _pat.pmandatory..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 721,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// BUG - XXX FIXME. This extracts PresentLink's from the",
+        "context_preview": "OR_LINK, SEQUENTIAL_OR_LINK, NOT_LINK});\n\n\t// BUG - XXX FIXME. This extracts PresentLink's from the\n\t// Sequentials. This is not really correct, because the\n\t// evaluation of the sequential might term..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1039,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: the code here assumes that the situation is indeed",
+        "context_preview": "/// as an ordinary clause, and searched for as if it was \"present\".\n///\n/// XXX FIXME: the code here assumes that the situation is indeed\n/// simple: more complex cases are not handled correctly.  Doi..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1255,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- this is wrong. What we really want is to",
+        "context_preview": "ptm->addEvaluatable();\n\n\t\t\t// XXX FIXME -- this is wrong. What we really want is to\n\t\t\t// identify those clauses that bridge across multiple\n\t\t\t// components... not everything here does so. The\n\t\t\t// ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1465,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: debug_log() above is more readable than the below.",
+        "context_preview": "DEFINE_LINK_FACTORY(PatternLink, PATTERN_LINK)\n\n// XXX FIXME: debug_log() above is more readable than the below.\nstd::string PatternLink::to_long_string(const std::string& indent) const\n{\n\tstd::string..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternUtils.cc",
+        "line": 55,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Are the below needed?",
+        "context_preview": "EVALUATABLE_LINK)))\n\n\t\t// XXX FIXME Are the below needed?\n\t\tor contains_atomtype(clause, DEFINED_PREDICATE_NODE)\n\t\tor contains_atomtype(clause, DEFINED_SCHEMA_NODE)\n\t\tor is_black_box(clause);"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/reduct/DecimateLink.cc",
+        "line": 65,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... both the NumberNode and the FloatValue variations",
+        "context_preview": "}\n\n\t// XXX FIXME ... both the NumberNode and the FloatValue variations\n\t// below make a copy of the mask.  Instead of making a copy, create\n\t// something more efficient/faster. It is, after all, a sim..."
+      },
+      {
+        "file": "./atomspace/opencog/atomspace/AtomSpace.cc",
+        "line": 283,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "// XXX FIXME -- The recursive design of the depth() routine below makes",
+        "context_preview": "// ====================================================================\n// XXX FIXME -- The recursive design of the depth() routine below makes\n// it into a bottleneck, when the stack of AtomSpaces ex..."
+      },
+      {
+        "file": "./atomspace/opencog/atomspace/AtomSpace.h",
+        "line": 524,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Users should call StorageNode::add_nocheck() instead.",
+        "context_preview": "/* ----------------------------------------------------------- */\n    // Not for public use! Only StorageNodes get to call this!\n    // XXX FIXME Users should call StorageNode::add_nocheck() instead.\n..."
+      },
+      {
+        "file": "./atomspace/opencog/cython/PythonEval.cc",
+        "line": 1427,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this does a lot of wasteful string copying.",
+        "context_preview": "void PythonEval::eval_expr(const std::string& partial_expr)\n{\n    // XXX FIXME this does a lot of wasteful string copying.\n    std::string expr = partial_expr;\n    size_t nl = expr.find_first_of(\"\\n\\r..."
+      },
+      {
+        "file": "./atomspace/opencog/guile/SchemeSmobAtom.cc",
+        "line": 84,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// XXX FIXME. Work around the despicable, horrible guile UTF8 handling.",
+        "context_preview": "/* ============================================================== */\n\n// XXX FIXME. Work around the despicable, horrible guile UTF8 handling.\n// I am flabbergasted. The guile people are smart, but the..."
+      },
+      {
+        "file": "./atomspace/opencog/guile/SchemeSmobAtom.cc",
+        "line": 210,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "printf(\"XXX FIXME Bad string %s\\nconverted to %s\\n\", (char *) data, wbuf);",
+        "context_preview": "iconv(cd, &inbuf, &ilen, &obuf, &olen);\n\tobuf[olen] = 0x0;\n\tprintf(\"XXX FIXME Bad string %s\\nconverted to %s\\n\", (char *) data, wbuf);\n\tSCM str = scm_from_utf8_string(obuf);\n\tfree(wbuf);\n\treturn str;"
+      },
+      {
+        "file": "./atomspace/opencog/guile/modules/ExecSCM.cc",
+        "line": 73,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: can we fix cython to not do this, already?",
+        "context_preview": "// work correctly.  The problem is that python keeps creating and\n// destroying this class, but it expects things to stick around.\n// XXX FIXME: can we fix cython to not do this, already?\n// Oh well. ..."
+      },
+      {
+        "file": "./atomspace/opencog/haskell/AtomSpace_CWrapper.h",
+        "line": 112,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME no one should be using Handle's to work with atoms,",
+        "context_preview": "/**\n     * AtomSpace_getAtomByHandle Gets an atom back from the atomspace.\n     * XXX FIXME no one should be using Handle's to work with atoms,\n     * except for the database and communications back-e..."
+      },
+      {
+        "file": "./atomspace/opencog/haskell/PatternMatcher_CWrapper.h",
+        "line": 8,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME: atoms must never be accessed by UUID except by the",
+        "context_preview": "* An interface necessary for haskell bindings.\n * (ghc supports FFI for c libraries)\n * XXX FIXME: atoms must never be accessed by UUID except by the\n * communication and database layers. The UUID is ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 126,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME; we should be using ptm->isVariable() instead !?",
+        "context_preview": "if (_nameserver.isNode(t))\n\t{\n\t\t// XXX FIXME; we should be using ptm->isVariable() instead !?\n\t\tif (VARIABLE_NODE != t and GLOB_NODE != t and SIGN_NODE != t)\n\t\t{\n\t\t\twidth = h->getIncomingSetSize();"
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 270,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// So we are good to go. XXX FIXME -- we could try again, to find",
+        "context_preview": "// If we encountered choices, then we have enumerated all of them.\n\t\t// So we are good to go. XXX FIXME -- we could try again, to find\n\t\t// some thinner set of choices. Later, some other time.\n\t\tif (0..."
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 732,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// no unit test triggers this, but its not clear why. XXX FIXME??",
+        "context_preview": "// If this is used in a way such that the handle appears under a\n// ChoiceLink, then an incomplete search will result!  Right now,\n// no unit test triggers this, but its not clear why. XXX FIXME??\n// ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 284,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: this is currently a weak stop-gap measure to handle",
+        "context_preview": "/// proposed grounding. The term `ptm` points at the Present term.\n///\n/// XXX FIXME: this is currently a weak stop-gap measure to handle\n/// the special case of Present terms embedded in Choice terms..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 1532,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME - this is not very elegant. We should probably",
+        "context_preview": "// search pattern, i.e. if is is a scoped variable, then\n\t// accept a match to any other alpha-equivalent variable.\n\t// XXX FIXME - this is not very elegant. We should probably\n\t// have a distinct `sc..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 1982,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: Issue #3016 - Unification with unordered AndLinks",
+        "context_preview": "///\n//\n// XXX FIXME: Issue #3016 - Unification with unordered AndLinks\n// The current implementation of unordered link permutation exploration\n// in IdenticalLinks stops after finding the first valid ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2049,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: Right now, this code handles graphs that have only one",
+        "context_preview": "/// is not a part of the functional group.\n///\n/// XXX FIXME: Right now, this code handles graphs that have only one\n/// single sparse search.   Nested sparse searches are not supported;\n/// to implem..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2065,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME. The ptm needs to be decomposed into connected",
+        "context_preview": "logmsg(\"Explore sparse: Start exploration\");\n\n\t// XXX TODO FIXME. The ptm needs to be decomposed into connected\n\t// components. Then only the connected components need to be walked\n\t// over.  That wou..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2223,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME -- do the above.",
+        "context_preview": "/// -- build a clause_variables struct, but just for this term\n/// -- search for the thinnest joint, just like `get_next_clause`\n/// XXX FIXME -- do the above.\n///\nbool PatternMatchEngine::next_untrie..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.h",
+        "line": 189,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// with it. XXX Needs to move to the Mixin class... XXX FIXME.",
+        "context_preview": "// State that manages the next PresentLink subterm to be grounded.\n\t// Similar to the next-clause, above, and someday should be unified\n\t// with it. XXX Needs to move to the Mixin class... XXX FIXME.\n..."
+      },
+      {
+        "file": "./atomspace/opencog/query/RewriteMixin.cc",
+        "line": 118,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// See issue #950 and pull req #962. XXX FIXME later.",
+        "context_preview": "// nothing.  In practice it is difficult to insure, so\n\t// meanwhile this try-catch is used.\n\t// See issue #950 and pull req #962. XXX FIXME later.\n\t// Tested by BuggyBindLinkUTest and NoExceptionUTes..."
+      },
+      {
+        "file": "./atomspace/opencog/query/RewriteMixin.cc",
+        "line": 164,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME now I see how it can be done. The groupings should",
+        "context_preview": "/// clever way to find groupings in a single batch; but for now, I don't\n/// see how this could be done.\n/// XXX FIXME now I see how it can be done. The groupings should\n/// be converted to marginals,..."
+      },
+      {
+        "file": "./atomspace/opencog/query/SatisfyMixin.cc",
+        "line": 583,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "code_quality",
+        "description": "Code quality/refactoring needed",
+        "content": "// XXX FIXME terrible hack.",
+        "context_preview": "if (is_pure_absent)\n\t\t{\n\t\t\t// XXX FIXME terrible hack.\n\t\t\tTermMatchMixin* intu =\n\t\t\t\tdynamic_cast<TermMatchMixin*>(this);\n\t\t\tif (intu->optionals_present()) return false;"
+      },
+      {
+        "file": "./atomspace/opencog/query/TermMatchMixin.cc",
+        "line": 710,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: worse: this cannot possibly be right when",
+        "context_preview": "// anything about that here? Seems like we can't do anything...\n\t\t//\n\t\t// XXX FIXME: worse: this cannot possibly be right when\n\t\t// the ChoiceLink contains presentLinks.\n\t\tfor (const Handle& h : oset)..."
+      }
+    ],
+    "atomspace-storage": [
+      {
+        "file": "./atomspace-storage/opencog/persist/api/cython/PersistCython.cc",
+        "line": 31,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: except for the error messages, most of this code is",
+        "context_preview": "namespace opencog {\n\n// XXX FIXME: except for the error messages, most of this code is\n// mostly a cut-n-pate of what's in PersistSCM.cc\n\n// ===========================================================..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/flow/FetchValueOfLink.cc",
+        "line": 63,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of _outgoing[0] or _outgoing[1]",
+        "context_preview": "StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);\n\n\t// XXX TODO FIXME ... if either of _outgoing[0] or _outgoing[1]\n\t// are executable, then they need to be executed, first, right?\n\t// Yes, they do..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/flow/StoreValueOfLink.cc",
+        "line": 61,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of these are executable, then",
+        "context_preview": "StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);\n\n\t// XXX TODO FIXME ... if either of these are executable, then\n\t// they need to be executed, first, right? Because that's the\n\t// usual intent. El..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/ProxyNode.cc",
+        "line": 141,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME. Using this ProxyParametersLink thing is a kind of",
+        "context_preview": "// Hmm, perhaps this should be a StateLink?\n//\n// XXX FIXME. Using this ProxyParametersLink thing is a kind of\n// cheesy hack, to pass parameters to the ProxyNode. It vaguely\n// resembles the structur..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/ProxyNode.h",
+        "line": 62,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// updated at some later date. XXX FIXME.",
+        "context_preview": "// Virtual methods from the BackingStore API. These provide some default\n\t// implementations. Some of these are stop-gap, and will need to be\n\t// updated at some later date. XXX FIXME.\n\n\tvirtual void ..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/WriteBufferProxy.cc",
+        "line": 195,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. Buffering these naively, like this, voilates the",
+        "context_preview": "const ValuePtr& delta)\n{\n\t// XXX FIXME. Buffering these naively, like this, voilates the\n\t// intent of how this method should work. However, for the\n\t// RocksStorageNode, doing this is harmless. And t..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc",
+        "line": 82,
+        "module": "atomspace-storage",
+        "severity": "CRITICAL",
+        "category": "security_or_crash",
+        "description": "Security vulnerability or crash risk",
+        "content": "* XXX FIXME This needs to be fuzzed; it is very likely to crash",
+        "context_preview": "* open-paren, and the string encoding the value.\n *\n * XXX FIXME This needs to be fuzzed; it is very likely to crash\n * and/or contain bugs if it is given strings of unexpected formats.\n */\nValuePtr S..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/tlb/UuidSCM.cc",
+        "line": 83,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// what the heck. I'm gonna punt. XXX FIXME.",
+        "context_preview": "// atomspaces, and really, we should have nested hierarchical TLB\n\t// resolvers for nested atomspaces. But for now, no one uses this so\n\t// what the heck. I'm gonna punt. XXX FIXME.\n\tconst AtomSpacePt..."
+      }
+    ],
+    "moses": [
+      {
+        "file": "./moses/moses/moses/representation/instance_scorer.h",
+        "line": 89,
+        "module": "moses",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME, calling score_tree above does not throw the exception; this should be done",
+        "context_preview": "return _cscorer.get_cscore(tr);\n        } catch (...) {\n// XXX FIXME, calling score_tree above does not throw the exception; this should be done\n// differntly, maybe call bscorer directly, then ascore..."
+      },
+      {
+        "file": "./moses/moses/comboreduct/combo/descriptions.cc",
+        "line": 94,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// type. XXX FIXME...",
+        "context_preview": "// testing for booleans, contin as well, but not today. \n    // Fixing this will require work in typechecker, and use of union\n    // type. XXX FIXME...\n    { id::equ,                  \"->(enum enum b..."
+      },
+      {
+        "file": "./moses/moses/comboreduct/main/eval-table.cc",
+        "line": 147,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME",
+        "context_preview": "// HERE WE ARE ASSUMING THAT THE INPUT FILE HAS A HEADER!!!\n// XXX FIXME\n    vector<string> header = get_header(pa.input_table_file);\n\n    // Add to ignore_values (header - all_unique_variables - targ..."
+      },
+      {
+        "file": "./moses/moses/moses/deme/deme_expander.cc",
+        "line": 502,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME this is a bug .. the user may have specified that",
+        "context_preview": "// reset scorer to use all variables (important so that\n        // behavioral score is consistent across generations\n        // XXX FIXME this is a bug .. the user may have specified that\n        // c..."
+      },
+      {
+        "file": "./moses/moses/moses/main/problem-params.h",
+        "line": 46,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME TODO The structure below should be split into multiple",
+        "context_preview": "namespace opencog { namespace moses {\n\n// XXX FIXME TODO The structure below should be split into multiple\n// parts, with each sub-part responsible for picking out the argv's\n// that it cares about. U..."
+      },
+      {
+        "file": "./moses/moses/moses/main/table-problems.cc",
+        "line": 138,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- the multiple tables should be merged into one.",
+        "context_preview": "logger().info(\"Number of rows in tables = %d\", num_rows);\n\n    // XXX FIXME -- the multiple tables should be merged into one.\n    ctable = _ctables.front();\n    table = _tables.front();"
+      },
+      {
+        "file": "./moses/moses/moses/main/table-problems.cc",
+        "line": 150,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME .. check that they all have the same signature.",
+        "context_preview": "// Check that all input data files have the same arity\n    // XXX FIXME .. check that they all have the same signature.\n    if (_tables.size() > 1) {\n        for (size_t i = 1; i < _tables.size(); ++i..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/ensemble.h",
+        "line": 55,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* from the metapopulation, which has no particular admission criteria.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's eas..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/merging.cc",
+        "line": 261,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: we should use a pointer set for scored_combo_tree_set",
+        "context_preview": "candidates.size());\n\n        // XXX FIXME: we should use a pointer set for scored_combo_tree_set\n        // This would avoid some pointless copying here and a few other\n        // places.  This is eas..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/merging.cc",
+        "line": 552,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
+        "context_preview": "}\n\n// XXX FIXME looks to me like it++ can often be collaed twice within this loop!\n                prev_it = it++;\n            }"
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/metapopulation.cc",
+        "line": 222,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME should probably not recompute every time ...",
+        "context_preview": "return _best_cscore;\n\n    // XXX FIXME should probably not recompute every time ...\n    // need to figure who is calling this method, and what they are expecting.\n    return _cscorer.get_cscore(_ensem..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/metapopulation.h",
+        "line": 90,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* for inference, the metapopulation for breeding.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's easier for now.\n * Somed..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/bscores.cc",
+        "line": 930,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// XXX this should probably be removed! TODO FIXME",
+        "context_preview": "/// formula (the edges, with are printed by hand, below).\n///\n/// XXX this should probably be removed! TODO FIXME\n\ncluster_bscore::cluster_bscore(const ITable& itable)\n    : _itable(itable)"
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 646,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t bep_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / (cnt * _true_total);\n    doubl..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 655,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t bep_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / (cnt);\n    double best_possible_r..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 707,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t f_one_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    return 1.0;\n}"
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 714,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t f_one_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / cnt;\n    double best_possibl..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/scoring_base.cc",
+        "line": 152,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME complexity_t should be a double not an int ...",
+        "context_preview": "}\n\n    // XXX FIXME complexity_t should be a double not an int ...\n    return (complexity_t) floor (cpxy / norm + 0.5);\n}"
+      }
+    ],
+    "atomspace-rocks": [
+      {
+        "file": "./atomspace-rocks/opencog/persist/monospace/MonoIO.cc",
+        "line": 1004,
+        "module": "atomspace-rocks",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "void MonoStorage::storeAtomSpace(const AtomSpace* table)\n{\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. ..."
+      },
+      {
+        "file": "./atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 1371,
+        "module": "atomspace-rocks",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "convertForFrames(HandleCast(getAtomSpace()));\n\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. Should we ma..."
+      }
+    ],
+    "cogserver": [
+      {
+        "file": "./cogserver/opencog/cogserver/attic/proxy/WriteThruProxy.cc",
+        "line": 114,
+        "module": "cogserver",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "// which seems inefficient. But still ... XXX FIXME ?",
+        "context_preview": "// Sexpr::decode_slist to return a list of keys,\n\t// and then we'd have to store one key at a time,\n\t// which seems inefficient. But still ... XXX FIXME ?\n\tfor (const StorageNodePtr& snp : _targets)\n\t..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/server/CogServer.cc",
+        "line": 125,
+        "module": "cogserver",
+        "severity": "HIGH",
+        "category": "thread_safety",
+        "description": "Thread safety or concurrency issue",
+        "content": "// XXX FIXME. terrible terrible hack. What we should be",
+        "context_preview": "runLoopStep();\n\n        // XXX FIXME. terrible terrible hack. What we should be\n        // doing is running in our own thread, waiting on a semaphore,\n        // until some request is queued. Spinning..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/server/CogServer.cc",
+        "line": 216,
+        "module": "cogserver",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// assumes a singleton instance, so we leave this for now. XXX FIXME.",
+        "context_preview": "// interesting use cases where one might want to run multiple\n// cogservers. However, at this time, too much of the code (???)\n// assumes a singleton instance, so we leave this for now. XXX FIXME.\n\n//..."
+      }
+    ],
+    "unify": [
+      {
+        "file": "./unify/opencog/unify/atoms/UnifierLink.cc",
+        "line": 141,
+        "module": "unify",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, Maybe. This seems to handle all of the cases I've",
+        "context_preview": "// This is my best guess.\n\n\t// XXX FIXME, Maybe. This seems to handle all of the cases I've\n\t// looked at so far. However, the unifier has all sorts of fancy\n\t// reduction code, and I don't understand..."
+      }
+    ]
+  },
+  "by_category": {
+    "thread_safety": [
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 93,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "thread_safety",
+        "description": "Thread safety or concurrency issue",
+        "content": "// XXX FIXME This lock is not needed, because in guile-2.2,",
+        "context_preview": "// Lock to prevent racey setting of the output port.\n\t// XXX FIXME This lock is not needed, because in guile-2.2,\n\t// at least, every thread has its own output port, and so its\n\t// impossible for two ..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/server/CogServer.cc",
+        "line": 125,
+        "module": "cogserver",
+        "severity": "HIGH",
+        "category": "thread_safety",
+        "description": "Thread safety or concurrency issue",
+        "content": "// XXX FIXME. terrible terrible hack. What we should be",
+        "context_preview": "runLoopStep();\n\n        // XXX FIXME. terrible terrible hack. What we should be\n        // doing is running in our own thread, waiting on a semaphore,\n        // until some request is queued. Spinning..."
+      }
+    ],
+    "performance": [
+      {
+        "file": "./atomspace/opencog/atomspace/Transient.cc",
+        "line": 43,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "/// XXX FIXME. Performance has not been recently measured; there",
+        "context_preview": "/// and ready to go. The code in this section implements this.\n///\n/// XXX FIXME. Performance has not been recently measured; there\n/// have been a lot of redesigns since when this utility was created..."
+      },
+      {
+        "file": "./atomspace/opencog/atomspace/AtomSpace.cc",
+        "line": 283,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "// XXX FIXME -- The recursive design of the depth() routine below makes",
+        "context_preview": "// ====================================================================\n// XXX FIXME -- The recursive design of the depth() routine below makes\n// it into a bottleneck, when the stack of AtomSpaces ex..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/attic/proxy/WriteThruProxy.cc",
+        "line": 114,
+        "module": "cogserver",
+        "severity": "HIGH",
+        "category": "performance",
+        "description": "Performance optimization needed",
+        "content": "// which seems inefficient. But still ... XXX FIXME ?",
+        "context_preview": "// Sexpr::decode_slist to return a list of keys,\n\t// and then we'd have to store one key at a time,\n\t// which seems inefficient. But still ... XXX FIXME ?\n\tfor (const StorageNodePtr& snp : _targets)\n\t..."
+      }
+    ],
+    "general": [
+      {
+        "file": "./atomspace-storage/opencog/persist/api/cython/PersistCython.cc",
+        "line": 31,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: except for the error messages, most of this code is",
+        "context_preview": "namespace opencog {\n\n// XXX FIXME: except for the error messages, most of this code is\n// mostly a cut-n-pate of what's in PersistSCM.cc\n\n// ===========================================================..."
+      },
+      {
+        "file": "./atomspace-rocks/opencog/persist/monospace/MonoIO.cc",
+        "line": 1004,
+        "module": "atomspace-rocks",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "void MonoStorage::storeAtomSpace(const AtomSpace* table)\n{\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. ..."
+      },
+      {
+        "file": "./atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 1371,
+        "module": "atomspace-rocks",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "convertForFrames(HandleCast(getAtomSpace()));\n\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. Should we ma..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/WriteBufferProxy.cc",
+        "line": 195,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. Buffering these naively, like this, voilates the",
+        "context_preview": "const ValuePtr& delta)\n{\n\t// XXX FIXME. Buffering these naively, like this, voilates the\n\t// intent of how this method should work. However, for the\n\t// RocksStorageNode, doing this is harmless. And t..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/tlb/UuidSCM.cc",
+        "line": 83,
+        "module": "atomspace-storage",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// what the heck. I'm gonna punt. XXX FIXME.",
+        "context_preview": "// atomspaces, and really, we should have nested hierarchical TLB\n\t// resolvers for nested atomspaces. But for now, no one uses this so\n\t// what the heck. I'm gonna punt. XXX FIXME.\n\tconst AtomSpacePt..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 42,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Much of the onfusion below is due to a bug: if the",
+        "context_preview": "/// it does not check deep types, nor does it check arity.\n\n// XXX FIXME Much of the onfusion below is due to a bug: if the\n// types script says something like\n// FOOBAR <- FUNCTION_LINK,BOOL_INPUT_LI..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 79,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, this is to be removed, because UnionLink,",
+        "context_preview": "// union and complement. Since it cannot inherit from\n\t\t// EVALUATABLE_LINK (cause it's a Node) we have to add it here.\n\t\t// XXX FIXME, this is to be removed, because UnionLink,\n\t\t// IntersectionLink ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 93,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... Perhaps IntersectionLink, UnionLink will",
+        "context_preview": "// specialized operator to explicitly map the higher order into\n\t\t// the lower order but as of today it is required.\n\t\t// XXX FIXME ... Perhaps IntersectionLink, UnionLink will\n\t\t// resolve this?\n\t\tif..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/FindUtils.h",
+        "line": 146,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: what if it appears quoted in one place, and unquoted",
+        "context_preview": "* QuoteLink.\n *\n * XXX FIXME: what if it appears quoted in one place, and unquoted\n * in another? then what?\n */\nbool is_quoted_in_tree(const Handle& tree, const Handle& atom);"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/RandomChoice.cc",
+        "line": 110,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME - fix this so it can also choose a single value",
+        "context_preview": "///\n\n// XXX FIXME - fix this so it can also choose a single value\n// out of a vector of values.\nValuePtr RandomChoiceLink::execute(AtomSpace* as, bool silent)\n{"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/RandomChoice.cc",
+        "line": 179,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, also allow a FloatValue!!",
+        "context_preview": "for (Handle h : ofirst->getOutgoingSet())\n\t\t{\n\t\t\t// XXX FIXME, also allow a FloatValue!!\n\t\t\tif (h->is_executable())\n\t\t\t\th = HandleCast(h->execute(as, silent));"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 598,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Can we defer the addition to the atomspace to an even",
+        "context_preview": "// atoms to the atomspace is an expensive process.  We can save\n\t// some time by doing it just once, right here, in one big batch.\n\t// XXX FIXME Can we defer the addition to the atomspace to an even\n\t..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/FormulaPredicateLink.cc",
+        "line": 41,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME - in the future, some user is going to want to include",
+        "context_preview": "/// component of the final truth value...\n///\n/// XXX FIXME - in the future, some user is going to want to include\n/// variable declarations, and/or an explicit Lambda in the body, for\n/// some reason..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/join/JoinLink.cc",
+        "line": 721,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this is really dumb, using a queue and then",
+        "context_preview": "HandleSet hs = container(as, jcb, silent);\n\n\t// XXX FIXME this is really dumb, using a queue and then\n\t// copying things into it. Whatever. Fix this.\n\tQueueValuePtr qvp(createQueueValue());\n\tfor (cons..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/BindLink.cc",
+        "line": 79,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// Shoot. XXX FIXME. Most of the unit tests require that the atom",
+        "context_preview": "#define PLACE_RESULTS_IN_ATOMSPACE\n#ifdef PLACE_RESULTS_IN_ATOMSPACE\n\t// Shoot. XXX FIXME. Most of the unit tests require that the atom\n\t// that we return is in the atomspace. But it would be nice if ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/GetLink.cc",
+        "line": 62,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// Shoot. XXX FIXME. Most of the unit tests require that the atom",
+        "context_preview": "#define PLACE_RESULTS_IN_ATOMSPACE\n#ifdef PLACE_RESULTS_IN_ATOMSPACE\n\t// Shoot. XXX FIXME. Most of the unit tests require that the atom\n\t// that we return is in the atomspace. But it would be nice if ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 146,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, more correct would be to loop over",
+        "context_preview": "// The variables for that component are just the variables\n\t\t// that can be found in that component.\n\t\t// XXX FIXME, more correct would be to loop over\n\t\t// _pat.clause_variables and add those. Probab..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 165,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, this handles `absents`, `always` and `grouping`",
+        "context_preview": "// Each component consists of the assorted parts.\n\t\t// XXX FIXME, this handles `absents`, `always` and `grouping`\n\t\t// incorrectly.\n\t\tHandleSeq clseq;\n\t\tfor (const PatternTermPtr& ptm: _pat.pmandatory..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1039,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: the code here assumes that the situation is indeed",
+        "context_preview": "/// as an ordinary clause, and searched for as if it was \"present\".\n///\n/// XXX FIXME: the code here assumes that the situation is indeed\n/// simple: more complex cases are not handled correctly.  Doi..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1465,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: debug_log() above is more readable than the below.",
+        "context_preview": "DEFINE_LINK_FACTORY(PatternLink, PATTERN_LINK)\n\n// XXX FIXME: debug_log() above is more readable than the below.\nstd::string PatternLink::to_long_string(const std::string& indent) const\n{\n\tstd::string..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternUtils.cc",
+        "line": 55,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Are the below needed?",
+        "context_preview": "EVALUATABLE_LINK)))\n\n\t\t// XXX FIXME Are the below needed?\n\t\tor contains_atomtype(clause, DEFINED_PREDICATE_NODE)\n\t\tor contains_atomtype(clause, DEFINED_SCHEMA_NODE)\n\t\tor is_black_box(clause);"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/reduct/DecimateLink.cc",
+        "line": 65,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... both the NumberNode and the FloatValue variations",
+        "context_preview": "}\n\n\t// XXX FIXME ... both the NumberNode and the FloatValue variations\n\t// below make a copy of the mask.  Instead of making a copy, create\n\t// something more efficient/faster. It is, after all, a sim..."
+      },
+      {
+        "file": "./atomspace/opencog/atomspace/AtomSpace.h",
+        "line": 524,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME Users should call StorageNode::add_nocheck() instead.",
+        "context_preview": "/* ----------------------------------------------------------- */\n    // Not for public use! Only StorageNodes get to call this!\n    // XXX FIXME Users should call StorageNode::add_nocheck() instead.\n..."
+      },
+      {
+        "file": "./atomspace/opencog/cython/PythonEval.cc",
+        "line": 1427,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this does a lot of wasteful string copying.",
+        "context_preview": "void PythonEval::eval_expr(const std::string& partial_expr)\n{\n    // XXX FIXME this does a lot of wasteful string copying.\n    std::string expr = partial_expr;\n    size_t nl = expr.find_first_of(\"\\n\\r..."
+      },
+      {
+        "file": "./atomspace/opencog/guile/SchemeSmobAtom.cc",
+        "line": 210,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "printf(\"XXX FIXME Bad string %s\\nconverted to %s\\n\", (char *) data, wbuf);",
+        "context_preview": "iconv(cd, &inbuf, &ilen, &obuf, &olen);\n\tobuf[olen] = 0x0;\n\tprintf(\"XXX FIXME Bad string %s\\nconverted to %s\\n\", (char *) data, wbuf);\n\tSCM str = scm_from_utf8_string(obuf);\n\tfree(wbuf);\n\treturn str;"
+      },
+      {
+        "file": "./atomspace/opencog/guile/modules/ExecSCM.cc",
+        "line": 73,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: can we fix cython to not do this, already?",
+        "context_preview": "// work correctly.  The problem is that python keeps creating and\n// destroying this class, but it expects things to stick around.\n// XXX FIXME: can we fix cython to not do this, already?\n// Oh well. ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 270,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// So we are good to go. XXX FIXME -- we could try again, to find",
+        "context_preview": "// If we encountered choices, then we have enumerated all of them.\n\t\t// So we are good to go. XXX FIXME -- we could try again, to find\n\t\t// some thinner set of choices. Later, some other time.\n\t\tif (0..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 284,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: this is currently a weak stop-gap measure to handle",
+        "context_preview": "/// proposed grounding. The term `ptm` points at the Present term.\n///\n/// XXX FIXME: this is currently a weak stop-gap measure to handle\n/// the special case of Present terms embedded in Choice terms..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 1532,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME - this is not very elegant. We should probably",
+        "context_preview": "// search pattern, i.e. if is is a scoped variable, then\n\t// accept a match to any other alpha-equivalent variable.\n\t// XXX FIXME - this is not very elegant. We should probably\n\t// have a distinct `sc..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 1982,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: Issue #3016 - Unification with unordered AndLinks",
+        "context_preview": "///\n//\n// XXX FIXME: Issue #3016 - Unification with unordered AndLinks\n// The current implementation of unordered link permutation exploration\n// in IdenticalLinks stops after finding the first valid ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2049,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME: Right now, this code handles graphs that have only one",
+        "context_preview": "/// is not a part of the functional group.\n///\n/// XXX FIXME: Right now, this code handles graphs that have only one\n/// single sparse search.   Nested sparse searches are not supported;\n/// to implem..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2223,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME -- do the above.",
+        "context_preview": "/// -- build a clause_variables struct, but just for this term\n/// -- search for the thinnest joint, just like `get_next_clause`\n/// XXX FIXME -- do the above.\n///\nbool PatternMatchEngine::next_untrie..."
+      },
+      {
+        "file": "./atomspace/opencog/query/RewriteMixin.cc",
+        "line": 164,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// XXX FIXME now I see how it can be done. The groupings should",
+        "context_preview": "/// clever way to find groupings in a single batch; but for now, I don't\n/// see how this could be done.\n/// XXX FIXME now I see how it can be done. The groupings should\n/// be converted to marginals,..."
+      },
+      {
+        "file": "./atomspace/opencog/query/TermMatchMixin.cc",
+        "line": 710,
+        "module": "atomspace",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: worse: this cannot possibly be right when",
+        "context_preview": "// anything about that here? Seems like we can't do anything...\n\t\t//\n\t\t// XXX FIXME: worse: this cannot possibly be right when\n\t\t// the ChoiceLink contains presentLinks.\n\t\tfor (const Handle& h : oset)..."
+      },
+      {
+        "file": "./cogserver/opencog/cogserver/server/CogServer.cc",
+        "line": 216,
+        "module": "cogserver",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// assumes a singleton instance, so we leave this for now. XXX FIXME.",
+        "context_preview": "// interesting use cases where one might want to run multiple\n// cogservers. However, at this time, too much of the code (???)\n// assumes a singleton instance, so we leave this for now. XXX FIXME.\n\n//..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/monospace/MonoIO.cc",
+        "line": 944,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "void MonoStorage::storeAtomSpace(const AtomSpace* table)\n{\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. ..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 694,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "/// Note: currently broken for multi-space usage, XXX FIXME.",
+        "context_preview": "/// Backend callback - find the Link. This is used ONLY to implement\n/// the backend Query call, and is not otherwised used.\n/// Note: currently broken for multi-space usage, XXX FIXME.\nHandle RocksSt..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksIO.cc",
+        "line": 1283,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME. We would like to call",
+        "context_preview": "convertForFrames(HandleCast(getAtomSpace()));\n\n\t// XXX FIXME. We would like to call\n\t// Options::PrepareForBulkLoad() here, but its too late, this\n\t// can only be set when opening the DB. Should we ma..."
+      },
+      {
+        "file": "./components/core/atomspace-rocks/opencog/persist/rocks/RocksPersistSCM.cc",
+        "line": 82,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME -- are open and close actually needed for anything?",
+        "context_preview": "}\n\n// XXX FIXME -- are open and close actually needed for anything?\nvoid RocksPersistSCM::do_open(const std::string& uri)\n{\n    if (_storage)"
+      },
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 1180,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME only a subset is needed.",
+        "context_preview": "void SchemeEval::init_scheme(void)\n{\n\t// XXX FIXME only a subset is needed.\n\tSchemeEval sch;\n}"
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "line": 239,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME this does not smell right; optionals should get",
+        "context_preview": "if (m_type == CONNECTOR_type)\n    {\n        // XXX FIXME this does not smell right; optionals should get\n        // blown up into pairs of disjuncts, one with and one without.\n        if (m_string == ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictExpContainer.cc",
+        "line": 268,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME ... using an std::map would be more efficient.",
+        "context_preview": "if (m_type == OR_type)\n    {\n        // XXX FIXME ... using an std::map would be more efficient.\n        std::sort(outgoing.begin(), outgoing.end());\n        outgoing.erase(std::unique(outgoing.begin(..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictUtils.cc",
+        "line": 53,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "XXX FIXME -- this currently fails to correctly handle the head-tail",
+        "context_preview": "* Check if two connectors' type matches.\n\nXXX FIXME -- this currently fails to correctly handle the head-tail\nindicators on link types.  Perhaps it would be better to just call\nthe same matchinng rout..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc",
+        "line": 338,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME -- We should fish parse options out of the atomspace.",
+        "context_preview": "}\n\n\t// XXX FIXME -- We should fish parse options out of the atomspace.\n\t// Something like this, maybe:\n\t//     EvaluationLink\n\t//         PredicateNode \"LG ParseTime\""
+      },
+      {
+        "file": "./components/learning/moses/moses/comboreduct/combo/descriptions.cc",
+        "line": 94,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// type. XXX FIXME...",
+        "context_preview": "// testing for booleans, contin as well, but not today. \n    // Fixing this will require work in typechecker, and use of union\n    // type. XXX FIXME...\n    { id::equ,                  \"->(enum enum b..."
+      },
+      {
+        "file": "./components/learning/moses/moses/comboreduct/main/eval-table.cc",
+        "line": 147,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME",
+        "context_preview": "// HERE WE ARE ASSUMING THAT THE INPUT FILE HAS A HEADER!!!\n// XXX FIXME\n    vector<string> header = get_header(pa.input_table_file);\n\n    // Add to ignore_values (header - all_unique_variables - targ..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/table-problems.cc",
+        "line": 150,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME .. check that they all have the same signature.",
+        "context_preview": "// Check that all input data files have the same arity\n    // XXX FIXME .. check that they all have the same signature.\n    if (_tables.size() > 1) {\n        for (size_t i = 1; i < _tables.size(); ++i..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/ensemble.h",
+        "line": 55,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* from the metapopulation, which has no particular admission criteria.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's eas..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "line": 261,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: we should use a pointer set for scored_combo_tree_set",
+        "context_preview": "candidates.size());\n\n        // XXX FIXME: we should use a pointer set for scored_combo_tree_set\n        // This would avoid some pointless copying here and a few other\n        // places.  This is eas..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/merging.cc",
+        "line": 552,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
+        "context_preview": "}\n\n// XXX FIXME looks to me like it++ can often be collaed twice within this loop!\n                prev_it = it++;\n            }"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/metapopulation.h",
+        "line": 90,
+        "module": "components",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* for inference, the metapopulation for breeding.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's easier for now.\n * Somed..."
+      },
+      {
+        "file": "./moses/moses/comboreduct/combo/descriptions.cc",
+        "line": 94,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// type. XXX FIXME...",
+        "context_preview": "// testing for booleans, contin as well, but not today. \n    // Fixing this will require work in typechecker, and use of union\n    // type. XXX FIXME...\n    { id::equ,                  \"->(enum enum b..."
+      },
+      {
+        "file": "./moses/moses/comboreduct/main/eval-table.cc",
+        "line": 147,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME",
+        "context_preview": "// HERE WE ARE ASSUMING THAT THE INPUT FILE HAS A HEADER!!!\n// XXX FIXME\n    vector<string> header = get_header(pa.input_table_file);\n\n    // Add to ignore_values (header - all_unique_variables - targ..."
+      },
+      {
+        "file": "./moses/moses/moses/main/table-problems.cc",
+        "line": 150,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME .. check that they all have the same signature.",
+        "context_preview": "// Check that all input data files have the same arity\n    // XXX FIXME .. check that they all have the same signature.\n    if (_tables.size() > 1) {\n        for (size_t i = 1; i < _tables.size(); ++i..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/ensemble.h",
+        "line": 55,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* from the metapopulation, which has no particular admission criteria.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's eas..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/merging.cc",
+        "line": 261,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME: we should use a pointer set for scored_combo_tree_set",
+        "context_preview": "candidates.size());\n\n        // XXX FIXME: we should use a pointer set for scored_combo_tree_set\n        // This would avoid some pointless copying here and a few other\n        // places.  This is eas..."
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/merging.cc",
+        "line": 552,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME looks to me like it++ can often be collaed twice within this loop!",
+        "context_preview": "}\n\n// XXX FIXME looks to me like it++ can often be collaed twice within this loop!\n                prev_it = it++;\n            }"
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/metapopulation.h",
+        "line": 90,
+        "module": "moses",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "* XXX FIXME: right now, the ensemble is attached to the metapop, its",
+        "context_preview": "* for inference, the metapopulation for breeding.\n *\n * XXX FIXME: right now, the ensemble is attached to the metapop, its\n * kind-of coming along for the ride, because that's easier for now.\n * Somed..."
+      },
+      {
+        "file": "./unify/opencog/unify/atoms/UnifierLink.cc",
+        "line": 141,
+        "module": "unify",
+        "severity": "LOW",
+        "category": "general",
+        "description": "General improvement or consideration",
+        "content": "// XXX FIXME, Maybe. This seems to handle all of the cases I've",
+        "context_preview": "// This is my best guess.\n\n\t// XXX FIXME, Maybe. This seems to handle all of the cases I've\n\t// looked at so far. However, the unifier has all sorts of fancy\n\t// reduction code, and I don't understand..."
+      }
+    ],
+    "security_or_crash": [
+      {
+        "file": "./atomspace/opencog/atoms/core/TypeChoice.cc",
+        "line": 254,
+        "module": "atomspace",
+        "severity": "CRITICAL",
+        "category": "security_or_crash",
+        "description": "Security vulnerability or crash risk",
+        "content": "// For now, just avoid throwing an exception. XXX FIXME.",
+        "context_preview": "// using a SignatureLink, but its not. As a result, it\n\t\t// gets undefined behavior and incorrect results. Too bad.\n\t\t// For now, just avoid throwing an exception. XXX FIXME.\n\t\treturn;\n\t}"
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/sexpr/ValueSexpr.cc",
+        "line": 82,
+        "module": "atomspace-storage",
+        "severity": "CRITICAL",
+        "category": "security_or_crash",
+        "description": "Security vulnerability or crash risk",
+        "content": "* XXX FIXME This needs to be fuzzed; it is very likely to crash",
+        "context_preview": "* open-paren, and the string encoding the value.\n *\n * XXX FIXME This needs to be fuzzed; it is very likely to crash\n * and/or contain bugs if it is given strings of unexpected formats.\n */\nValuePtr S..."
+      }
+    ],
+    "exception_handling": [
+      {
+        "file": "./atomspace/opencog/atoms/core/TypeUtils.cc",
+        "line": 421,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// returned. XXX FIXME -- surely this should be a throw, instead!!!",
+        "context_preview": "// If we're here we have failed to recognize vardecl as a useful\n\t// and well-formed variable declaration, so Handle::UNDEFINED is\n\t// returned. XXX FIXME -- surely this should be a throw, instead!!!\n..."
+      },
+      {
+        "file": "./components/language/learn/attic/run-ull-2019/SchemeEval.cc",
+        "line": 1057,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME -- idealy we should avoid catch-and-rethrow.",
+        "context_preview": "// Rethrow.  It would be better to just allow exceptions\n\t\t\t// to pass on through, but thus breaks some unit tests.\n\t\t\t// XXX FIXME -- idealy we should avoid catch-and-rethrow.\n\t\t\t// At any rate, we m..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/representation/instance_scorer.h",
+        "line": 89,
+        "module": "components",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME, calling score_tree above does not throw the exception; this should be done",
+        "context_preview": "return _cscorer.get_cscore(tr);\n        } catch (...) {\n// XXX FIXME, calling score_tree above does not throw the exception; this should be done\n// differntly, maybe call bscorer directly, then ascore..."
+      },
+      {
+        "file": "./moses/moses/moses/representation/instance_scorer.h",
+        "line": 89,
+        "module": "moses",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// XXX FIXME, calling score_tree above does not throw the exception; this should be done",
+        "context_preview": "return _cscorer.get_cscore(tr);\n        } catch (...) {\n// XXX FIXME, calling score_tree above does not throw the exception; this should be done\n// differntly, maybe call bscorer directly, then ascore..."
+      },
+      {
+        "file": "./atomspace/opencog/query/RewriteMixin.cc",
+        "line": 118,
+        "module": "atomspace",
+        "severity": "HIGH",
+        "category": "exception_handling",
+        "description": "Exception/error handling issue",
+        "content": "// See issue #950 and pull req #962. XXX FIXME later.",
+        "context_preview": "// nothing.  In practice it is difficult to insure, so\n\t// meanwhile this try-catch is used.\n\t// See issue #950 and pull req #962. XXX FIXME later.\n\t// Tested by BuggyBindLinkUTest and NoExceptionUTes..."
+      }
+    ],
+    "incomplete_feature": [
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 196,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// cleanly separated from each other. (XXX FIXME, these need to be",
+        "context_preview": "/// walk_tree() performs a kind-of eager-evaluation of function arguments.\n/// The code in here is a mashup of several different ideas that are not\n/// cleanly separated from each other. (XXX FIXME, t..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/flow/FetchValueOfLink.cc",
+        "line": 63,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of _outgoing[0] or _outgoing[1]",
+        "context_preview": "StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);\n\n\t// XXX TODO FIXME ... if either of _outgoing[0] or _outgoing[1]\n\t// are executable, then they need to be executed, first, right?\n\t// Yes, they do..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/flow/StoreValueOfLink.cc",
+        "line": 61,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of these are executable, then",
+        "context_preview": "StorageNodePtr stnp = StorageNodeCast(_outgoing[2]);\n\n\t// XXX TODO FIXME ... if either of these are executable, then\n\t// they need to be executed, first, right? Because that's the\n\t// usual intent. El..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/ProxyNode.cc",
+        "line": 141,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME. Using this ProxyParametersLink thing is a kind of",
+        "context_preview": "// Hmm, perhaps this should be a StateLink?\n//\n// XXX FIXME. Using this ProxyParametersLink thing is a kind of\n// cheesy hack, to pass parameters to the ProxyNode. It vaguely\n// resembles the structur..."
+      },
+      {
+        "file": "./atomspace-storage/opencog/persist/proxy/ProxyNode.h",
+        "line": 62,
+        "module": "atomspace-storage",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// updated at some later date. XXX FIXME.",
+        "context_preview": "// Virtual methods from the BackingStore API. These provide some default\n\t// implementations. Some of these are stop-gap, and will need to be\n\t// updated at some later date. XXX FIXME.\n\n\tvirtual void ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/execution/Instantiator.cc",
+        "line": 642,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME, we need to get rid of this call entirely, and just",
+        "context_preview": "return expr->execute(_as, silent);\n\n\t// XXX FIXME, we need to get rid of this call entirely, and just\n\t// return expr->execute(_as, silent) instead, like above.\n\t// However, assorted parts are still b..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/FilterLink.cc",
+        "line": 615,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME -- if vex is a stream, e.g. a QueueValue,",
+        "context_preview": "vex = _outgoing[1]->execute(as, silent);\n\n\t\t// XXX TODO FIXME -- if vex is a stream, e.g. a QueueValue,\n\t\t// then we should construct another Queue as the return value,\n\t\t// and perform filtering on-d..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/ValueOfLink.cc",
+        "line": 84,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME ... if either of these are executable, then",
+        "context_preview": "// trickle out properly in the end.\n\t//\n\t// XXX TODO FIXME ... if either of these are executable, then\n\t// they need to be executed, first, right? Yes, they do! We\n\t// can currently get away with not ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/join/JoinLink.cc",
+        "line": 550,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// i.e. to use UnorderedHandleSet instead of HandleSet. XXX FIXME.",
+        "context_preview": "///\n/// TODO: it might be faster to use hash tables instead of rb-trees\n/// i.e. to use UnorderedHandleSet instead of HandleSet. XXX FIXME.\nHandleSet JoinLink::supremum(AtomSpace* as, bool silent,\n   ..."
+      },
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 1255,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- this is wrong. What we really want is to",
+        "context_preview": "ptm->addEvaluatable();\n\n\t\t\t// XXX FIXME -- this is wrong. What we really want is to\n\t\t\t// identify those clauses that bridge across multiple\n\t\t\t// components... not everything here does so. The\n\t\t\t// ..."
+      },
+      {
+        "file": "./atomspace/opencog/haskell/AtomSpace_CWrapper.h",
+        "line": 112,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME no one should be using Handle's to work with atoms,",
+        "context_preview": "/**\n     * AtomSpace_getAtomByHandle Gets an atom back from the atomspace.\n     * XXX FIXME no one should be using Handle's to work with atoms,\n     * except for the database and communications back-e..."
+      },
+      {
+        "file": "./atomspace/opencog/haskell/PatternMatcher_CWrapper.h",
+        "line": 8,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME: atoms must never be accessed by UUID except by the",
+        "context_preview": "* An interface necessary for haskell bindings.\n * (ghc supports FFI for c libraries)\n * XXX FIXME: atoms must never be accessed by UUID except by the\n * communication and database layers. The UUID is ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 126,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME; we should be using ptm->isVariable() instead !?",
+        "context_preview": "if (_nameserver.isNode(t))\n\t{\n\t\t// XXX FIXME; we should be using ptm->isVariable() instead !?\n\t\tif (VARIABLE_NODE != t and GLOB_NODE != t and SIGN_NODE != t)\n\t\t{\n\t\t\twidth = h->getIncomingSetSize();"
+      },
+      {
+        "file": "./atomspace/opencog/query/InitiateSearchMixin.cc",
+        "line": 732,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// no unit test triggers this, but its not clear why. XXX FIXME??",
+        "context_preview": "// If this is used in a way such that the handle appears under a\n// ChoiceLink, then an incomplete search will result!  Right now,\n// no unit test triggers this, but its not clear why. XXX FIXME??\n// ..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 2065,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME. The ptm needs to be decomposed into connected",
+        "context_preview": "logmsg(\"Explore sparse: Start exploration\");\n\n\t// XXX TODO FIXME. The ptm needs to be decomposed into connected\n\t// components. Then only the connected components need to be walked\n\t// over.  That wou..."
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.h",
+        "line": 189,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// with it. XXX Needs to move to the Mixin class... XXX FIXME.",
+        "context_preview": "// State that manages the next PresentLink subterm to be grounded.\n\t// Similar to the next-clause, above, and someday should be unified\n\t// with it. XXX Needs to move to the Mixin class... XXX FIXME.\n..."
+      },
+      {
+        "file": "./components/integration/opencog/opencog/neighbors/Neighbors.h",
+        "line": 58,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME -- this function is curently not used anywhere. Perhaps",
+        "context_preview": "* @return      an UnorderedHandleSet of neighbors\n *\n * XXX FIXME -- this function is curently not used anywhere. Perhaps\n * it should be deleted?\n */\nUnorderedHandleSet get_distant_neighbors(const Ha..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "line": 87,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "* XXX FIXME -- this gives incorrect results if the word has non-trivial",
+        "context_preview": "* appear anywhere.\n*\n* XXX FIXME -- this gives incorrect results if the word has non-trivial\n* morphology e.g. if its Russian, and can be split into a stem and a\n* suffix.  The problem is that in LG, ..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-parse/LGParseLink.cc",
+        "line": 229,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME. This should be part of the LgDictNode but since",
+        "context_preview": "// This must happen before ldn->get_dictionary() because the\n\t// setup is stateful. This seems buggy, but is adequate for now.\n\t// XXX FIXME. This should be part of the LgDictNode but since\n\t// LgDict..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/deme/deme_expander.cc",
+        "line": 502,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME this is a bug .. the user may have specified that",
+        "context_preview": "// reset scorer to use all variables (important so that\n        // behavioral score is consistent across generations\n        // XXX FIXME this is a bug .. the user may have specified that\n        // c..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/problem-params.h",
+        "line": 46,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME TODO The structure below should be split into multiple",
+        "context_preview": "namespace opencog { namespace moses {\n\n// XXX FIXME TODO The structure below should be split into multiple\n// parts, with each sub-part responsible for picking out the argv's\n// that it cares about. U..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/main/table-problems.cc",
+        "line": 138,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- the multiple tables should be merged into one.",
+        "context_preview": "logger().info(\"Number of rows in tables = %d\", num_rows);\n\n    // XXX FIXME -- the multiple tables should be merged into one.\n    ctable = _ctables.front();\n    table = _tables.front();"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/metapopulation/metapopulation.cc",
+        "line": 222,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME should probably not recompute every time ...",
+        "context_preview": "return _best_cscore;\n\n    // XXX FIXME should probably not recompute every time ...\n    // need to figure who is calling this method, and what they are expecting.\n    return _cscorer.get_cscore(_ensem..."
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/scoring/bscores.cc",
+        "line": 930,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// XXX this should probably be removed! TODO FIXME",
+        "context_preview": "/// formula (the edges, with are printed by hand, below).\n///\n/// XXX this should probably be removed! TODO FIXME\n\ncluster_bscore::cluster_bscore(const ITable& itable)\n    : _itable(itable)"
+      },
+      {
+        "file": "./components/learning/moses/moses/moses/scoring/scoring_base.cc",
+        "line": 108,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME complexity_t should be a double not an int ...",
+        "context_preview": "}\n\n    // XXX FIXME complexity_t should be a double not an int ...\n    return (complexity_t) floor (cpxy / norm + 0.5);\n}"
+      },
+      {
+        "file": "./moses/moses/moses/deme/deme_expander.cc",
+        "line": 502,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME this is a bug .. the user may have specified that",
+        "context_preview": "// reset scorer to use all variables (important so that\n        // behavioral score is consistent across generations\n        // XXX FIXME this is a bug .. the user may have specified that\n        // c..."
+      },
+      {
+        "file": "./moses/moses/moses/main/problem-params.h",
+        "line": 46,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME TODO The structure below should be split into multiple",
+        "context_preview": "namespace opencog { namespace moses {\n\n// XXX FIXME TODO The structure below should be split into multiple\n// parts, with each sub-part responsible for picking out the argv's\n// that it cares about. U..."
+      },
+      {
+        "file": "./moses/moses/moses/main/table-problems.cc",
+        "line": 138,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME -- the multiple tables should be merged into one.",
+        "context_preview": "logger().info(\"Number of rows in tables = %d\", num_rows);\n\n    // XXX FIXME -- the multiple tables should be merged into one.\n    ctable = _ctables.front();\n    table = _tables.front();"
+      },
+      {
+        "file": "./moses/moses/moses/metapopulation/metapopulation.cc",
+        "line": 222,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME should probably not recompute every time ...",
+        "context_preview": "return _best_cscore;\n\n    // XXX FIXME should probably not recompute every time ...\n    // need to figure who is calling this method, and what they are expecting.\n    return _cscorer.get_cscore(_ensem..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/bscores.cc",
+        "line": 930,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "/// XXX this should probably be removed! TODO FIXME",
+        "context_preview": "/// formula (the edges, with are printed by hand, below).\n///\n/// XXX this should probably be removed! TODO FIXME\n\ncluster_bscore::cluster_bscore(const ITable& itable)\n    : _itable(itable)"
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 646,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t bep_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / (cnt * _true_total);\n    doubl..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 655,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t bep_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / (cnt);\n    double best_possible_r..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 707,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t f_one_bscore::get_fixed(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    return 1.0;\n}"
+      },
+      {
+        "file": "./moses/moses/moses/scoring/discriminating_bscore.cc",
+        "line": 714,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX TODO FIXME is this really correct?",
+        "context_preview": "score_t f_one_bscore::get_variable(score_t pos, score_t neg, unsigned cnt) const\n{\n    // XXX TODO FIXME is this really correct?\n    double best_possible_precision = pos / cnt;\n    double best_possibl..."
+      },
+      {
+        "file": "./moses/moses/moses/scoring/scoring_base.cc",
+        "line": 152,
+        "module": "moses",
+        "severity": "MEDIUM",
+        "category": "incomplete_feature",
+        "description": "Incomplete implementation",
+        "content": "// XXX FIXME complexity_t should be a double not an int ...",
+        "context_preview": "}\n\n    // XXX FIXME complexity_t should be a double not an int ...\n    return (complexity_t) floor (cpxy / norm + 0.5);\n}"
+      }
+    ],
+    "api_design": [
+      {
+        "file": "./atomspace/opencog/atoms/pattern/PatternLink.cc",
+        "line": 721,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// BUG - XXX FIXME. This extracts PresentLink's from the",
+        "context_preview": "OR_LINK, SEQUENTIAL_OR_LINK, NOT_LINK});\n\n\t// BUG - XXX FIXME. This extracts PresentLink's from the\n\t// Sequentials. This is not really correct, because the\n\t// evaluation of the sequential might term..."
+      },
+      {
+        "file": "./atomspace/opencog/guile/SchemeSmobAtom.cc",
+        "line": 84,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// XXX FIXME. Work around the despicable, horrible guile UTF8 handling.",
+        "context_preview": "/* ============================================================== */\n\n// XXX FIXME. Work around the despicable, horrible guile UTF8 handling.\n// I am flabbergasted. The guile people are smart, but the..."
+      },
+      {
+        "file": "./components/language/lg-atomese/opencog/nlp/lg-dict/LGDictReader.cc",
+        "line": 103,
+        "module": "components",
+        "severity": "MEDIUM",
+        "category": "api_design",
+        "description": "API or design improvement",
+        "content": "// XXX FIXME -- if dn_head is null, then we should check regexes.",
+        "context_preview": "HandleSeq outgoing;\n\n// XXX FIXME -- if dn_head is null, then we should check regexes.\n// Currently, LG does not do this automatically, but it almost surely\n// should. i.e. the LG public API needs to ..."
+      }
+    ],
+    "code_quality": [
+      {
+        "file": "./atomspace/opencog/query/SatisfyMixin.cc",
+        "line": 583,
+        "module": "atomspace",
+        "severity": "MEDIUM",
+        "category": "code_quality",
+        "description": "Code quality/refactoring needed",
+        "content": "// XXX FIXME terrible hack.",
+        "context_preview": "if (is_pure_absent)\n\t\t{\n\t\t\t// XXX FIXME terrible hack.\n\t\t\tTermMatchMixin* intu =\n\t\t\t\tdynamic_cast<TermMatchMixin*>(this);\n\t\t\tif (intu->optionals_present()) return false;"
+      }
+    ]
+  },
+  "summary": {
+    "critical": 2,
+    "high": 10,
+    "medium": 39,
+    "low": 59
+  },
+  "module_summary": {
+    "components": {
+      "critical": 0,
+      "high": 3,
+      "medium": 10,
+      "low": 16
+    },
+    "atomspace": {
+      "critical": 1,
+      "high": 4,
+      "medium": 15,
+      "low": 29
+    },
+    "atomspace-storage": {
+      "critical": 1,
+      "high": 0,
+      "medium": 4,
+      "low": 3
+    },
+    "moses": {
+      "critical": 0,
+      "high": 1,
+      "medium": 10,
+      "low": 7
+    },
+    "atomspace-rocks": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 2
+    },
+    "cogserver": {
+      "critical": 0,
+      "high": 2,
+      "medium": 0,
+      "low": 1
+    },
+    "unify": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 1
+    }
+  },
+  "category_summary": {
+    "thread_safety": 2,
+    "performance": 3,
+    "general": 59,
+    "security_or_crash": 2,
+    "exception_handling": 5,
+    "incomplete_feature": 35,
+    "api_design": 3,
+    "code_quality": 1
+  }
+}

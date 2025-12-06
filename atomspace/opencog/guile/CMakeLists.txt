@@ -19,7 +19,6 @@ SET(SMOB_SOURCES
 	SchemeSmobPrint.cc
 	SchemeSmobTV.cc
 	SchemeSmobValue.cc
-	SchemeSmobLogger.cc
 )
 
 # Verify that at least some source files exist before creating the target

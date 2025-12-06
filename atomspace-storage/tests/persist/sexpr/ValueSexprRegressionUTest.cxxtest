@@ -1,0 +1,240 @@
+/*
+ * tests/persist/sexpr/ValueSexprRegressionUTest.cxxtest
+ *
+ * Copyright (C) 2025 OpenCog Foundation
+ * All Rights Reserved
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License v3 as
+ * published by the Free Software Foundation and including the exceptions
+ * at http://opencog.org/wiki/Licenses
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program; if not, write to:
+ * Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+#include <opencog/atoms/value/FloatValue.h>
+#include <opencog/atoms/value/StringValue.h>
+#include <opencog/atoms/value/LinkValue.h>
+#include <opencog/persist/sexpr/ValueSexpr.h>
+#include <opencog/util/exceptions.h>
+
+using namespace opencog;
+
+class ValueSexprRegressionUTest : public CxxTest::TestSuite
+{
+public:
+	void setUp() {}
+	void tearDown() {}
+
+	/**
+	 * Test that position beyond string length throws exception
+	 * Regression test for FIXME in ValueSexpr.cc:82
+	 */
+	void test_position_beyond_length()
+	{
+		std::string input = "(FloatValue 1 2 3)";
+		size_t pos = 100; // Way beyond string length
+		
+		bool exception_thrown = false;
+		try {
+			ValuePtr v = Sexpr::decode_value(input, pos);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("beyond string length") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that empty string after whitespace throws exception
+	 */
+	void test_empty_after_whitespace()
+	{
+		std::string input = "   "; // Only whitespace
+		size_t pos = 0;
+		
+		bool exception_thrown = false;
+		try {
+			ValuePtr v = Sexpr::decode_value(input, pos);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("Unexpected end of string") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that missing open paren throws exception
+	 */
+	void test_missing_open_paren()
+	{
+		std::string input = "FloatValue 1 2 3)"; // Missing opening paren
+		size_t pos = 0;
+		
+		bool exception_thrown = false;
+		try {
+			ValuePtr v = Sexpr::decode_value(input, pos);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("Expected '('") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that truncated input after open paren throws exception
+	 */
+	void test_truncated_after_open_paren()
+	{
+		std::string input = "("; // Just an open paren
+		size_t pos = 0;
+		
+		bool exception_thrown = false;
+		try {
+			ValuePtr v = Sexpr::decode_value(input, pos);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("Unexpected end of string after '('") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that invalid float value throws exception
+	 */
+	void test_invalid_float_value()
+	{
+		std::string input = "(FloatValue abc def)"; // Non-numeric values
+		size_t pos = 0;
+		
+		bool exception_thrown = false;
+		try {
+			ValuePtr v = Sexpr::decode_value(input, pos);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("Invalid float value") != std::string::npos ||
+			          msg.find("Failed to parse float") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that truncated FloatValue throws exception
+	 */
+	void test_truncated_float_value()
+	{
+		std::string input = "(FloatValue 1 2 3"; // Missing closing paren
+		size_t pos = 0;
+		
+		bool exception_thrown = false;
+		try {
+			ValuePtr v = Sexpr::decode_value(input, pos);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("Unexpected end of string") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that truncated StringValue throws exception
+	 */
+	void test_truncated_string_value()
+	{
+		std::string input = "(StringValue"; // Truncated
+		size_t pos = 0;
+		
+		bool exception_thrown = false;
+		try {
+			ValuePtr v = Sexpr::decode_value(input, pos);
+		} catch (const SyntaxException& e) {
+			exception_thrown = true;
+			std::string msg = e.what();
+			TS_ASSERT(msg.find("Unexpected end of string") != std::string::npos ||
+			          msg.find("Badly formatted") != std::string::npos);
+		}
+		
+		TS_ASSERT(exception_thrown);
+	}
+
+	/**
+	 * Test that valid FloatValue still works
+	 */
+	void test_valid_float_value()
+	{
+		std::string input = "(FloatValue 1.5 2.5 3.5)";
+		size_t pos = 0;
+		
+		ValuePtr v = Sexpr::decode_value(input, pos);
+		TS_ASSERT(v != nullptr);
+		
+		FloatValuePtr fv = FloatValueCast(v);
+		TS_ASSERT(fv != nullptr);
+		TS_ASSERT_EQUALS(fv->size(), 3);
+		TS_ASSERT_DELTA(fv->value()[0], 1.5, 0.001);
+		TS_ASSERT_DELTA(fv->value()[1], 2.5, 0.001);
+		TS_ASSERT_DELTA(fv->value()[2], 3.5, 0.001);
+	}
+
+	/**
+	 * Test that valid StringValue still works
+	 */
+	void test_valid_string_value()
+	{
+		std::string input = "(StringValue \"hello\" \"world\")";
+		size_t pos = 0;
+		
+		ValuePtr v = Sexpr::decode_value(input, pos);
+		TS_ASSERT(v != nullptr);
+		
+		StringValuePtr sv = StringValueCast(v);
+		TS_ASSERT(sv != nullptr);
+		TS_ASSERT_EQUALS(sv->size(), 2);
+		TS_ASSERT_EQUALS(sv->value()[0], "hello");
+		TS_ASSERT_EQUALS(sv->value()[1], "world");
+	}
+
+	/**
+	 * Test that #f (false) still works
+	 */
+	void test_false_value()
+	{
+		std::string input = "#f";
+		size_t pos = 0;
+		
+		ValuePtr v = Sexpr::decode_value(input, pos);
+		TS_ASSERT(v == nullptr);
+	}
+
+	/**
+	 * Test that '() (empty list) still works
+	 */
+	void test_empty_list()
+	{
+		std::string input = "'()";
+		size_t pos = 0;
+		
+		ValuePtr v = Sexpr::decode_value(input, pos);
+		TS_ASSERT(v == nullptr);
+	}
+};

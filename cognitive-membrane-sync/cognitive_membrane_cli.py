@@ -9,6 +9,7 @@ import json
 import sys
 from pathlib import Path
 from membrane_bridge import CognitiveMembraneBridge
+from json_encoder_utils import safe_json_dump
 
 def main():
     parser = argparse.ArgumentParser(
@@ -176,7 +177,7 @@ Examples:
             grammar = bridge.generate_ggml_grammar(args.enterprise_id)
             output_file = f"cognitive-grammar-{args.enterprise_id}.ggml"
             with open(output_file, 'w') as f:
-                json.dump(grammar, f, indent=2)
+                safe_json_dump(grammar, f, indent=2)
             print(f"✅ Generated ggml grammar for {args.enterprise_id}")
             print(f"   Output: {output_file}")
             

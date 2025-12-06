@@ -14,6 +14,9 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 import logging
 
+# Import JSON encoder utilities
+from json_encoder_utils import safe_json_dump
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -259,7 +262,7 @@ class CognitiveMembraneBridge:
         
         output_file = Path(output_path)
         with open(output_file, 'w') as f:
-            json.dump(state_data, f, indent=2)
+            safe_json_dump(state_data, f, indent=2)
         
         logger.info(f"💾 Saved membrane state to {output_file}")
         return str(output_file)

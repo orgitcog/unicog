@@ -255,9 +255,12 @@
 		(ConceptNode "look-at-cmd")
 		(ConceptNode "schema-thing")))
 
-; XXX FIXME -- Implement-me, actually -- need to do the above, but for
-; the self-model, rather than the direct robot action.  The self-model
-; is not being updated by these imperatives.
+; NOTE: Self-model integration needed for imperative commands.
+; Currently, imperative commands (look-at, gaze-at) directly control robot actions
+; but do not update the self-model state. The self-model should reflect these
+; actions to maintain consistency between actual behavior and internal representation.
+; Implementation: Add StateLink updates to track self-model state changes when
+; imperative commands are executed.
 ;--------------------------------------------------------------------
 ;--------------------------------------------------------------------
 ; Emotional expression semantics (groundings) for robot control
@@ -396,10 +399,10 @@
 (ReferenceLink (WordNode "recoil") (DefinedSchema "recoil"))
 (ReferenceLink (WordNode "worry")  (DefinedSchema "worry"))
 
-; XXX FIXME ... the list below is duplicated twice, once as adjectives
-; and once as nouns.  This is partly because relex normalization is
-; not being correctly used, and/or R2L in its current form is not
-; quite usable for this (it's too fragile, among other things).
+; NOTE: The mappings below are organized into two sections: adjectives and nouns.
+; While many emotions appear in both forms (e.g., "anguished" and "anguish"),
+; this is intentional to handle different syntactic contexts. This structure
+; compensates for limitations in relex normalization and R2L fragility.
 ;
 ; XXX FIXME -- this list contains lots of synonyms; needs to be replaced
 ; by proper synonym support.

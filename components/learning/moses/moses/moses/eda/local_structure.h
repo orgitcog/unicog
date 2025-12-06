@@ -282,9 +282,12 @@ local_structure_model::local_structure_model(const field_set& fs,
 // each variable in the field set (and more, for contins & terms).  So,
 // iterate over the dtrees, and accumulate statistics.
 //
-// TODO: Clarify what statistics are being accumulated and where they are stored.
-// Clarification needed: Review and document the intended behavior
-// This function processes decision trees and updates the destination model.
+// Each dtree node owns a histogram slot for every possible raw value plus
+// a trailing accumulator that stores the total sample count.  Leaves simply
+// tally frequencies for the associated field (see rec_learn).  Internal nodes
+// partition the [from,to) iterator range by the parent's raw value and then
+// recurse, so the statistics live directly inside the dtree structure rather
+// than in an external cache.
 template<typename It>
 void local_structure_probs_learning::operator()(const field_set& fs,
                                                 It from, It to,

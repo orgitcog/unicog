@@ -109,15 +109,13 @@ bool RewriteMixin::propose_grounding(const GroundingMap& var_soln,
 	record_marginals(var_soln);
 
 	// Catch and ignore SilentExceptions. This arises when
-	// running with the URE, which creates ill-formed links
-	// (due to rules producing nothing). Ideally this should
-	// be treated as a user error, that is, the user should
-	// design rule pre-conditions to prevent them from producing
-	// nothing.  In practice it is difficult to insure, so
-	// meanwhile this try-catch is used.
-	// See issue #950 and pull req #962. XXX FIXME later.
+	// instantiation produces ill-formed links (e.g., rules producing nothing).
+	// While the URE (which originally motivated this) is deprecated, this
+	// exception handling remains useful for other edge cases where instantiation
+	// may legitimately fail (e.g., AbsentLinks, conditional logic).
+	// Removing this would break existing code that relies on graceful handling
+	// of instantiation failures. See issue #950 and PR #962.
 	// Tested by BuggyBindLinkUTest and NoExceptionUTest.
-	// Well, given that URE is dead meat, maybe we can remove this?
 	try {
 		if (1 == _implicand.size())
 		{

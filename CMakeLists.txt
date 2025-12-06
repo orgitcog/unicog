@@ -54,6 +54,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atomspace-rocks/CMakeLists.txt")
     add_subdirectory(atomspace-rocks)
 endif()
 
+# Add atomspace-restful if it exists and has CMakeLists.txt
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atomspace-restful/CMakeLists.txt")
+    add_subdirectory(atomspace-restful)
+endif()
+
 # Phase I: Core Extensions (Week 3)
 # Add moses if it exists and has CMakeLists.txt
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/moses/CMakeLists.txt")
@@ -70,6 +75,10 @@ endif()
 # atomspace-rocks depends on atomspace
 if(TARGET atomspace-rocks)
     add_dependencies(atomspace-rocks atomspace)
+endif()
+# atomspace-restful depends on atomspace
+if(TARGET atomspace-restful)
+    add_dependencies(atomspace-restful atomspace)
 endif()
 # cogserver optionally depends on atomspace-rocks for RocksDB storage tests
 if(TARGET atomspace-rocks)
@@ -88,18 +97,20 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/cognitive-visualization)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tutorial-automation)
 
 # Add Phase II modules if they have CMakeLists.txt
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cognitive-patterns/CMakeLists.txt")
-    add_subdirectory(cognitive-patterns)
-endif()
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/distributed-cognition/CMakeLists.txt")
-    add_subdirectory(distributed-cognition)
-endif()
+# Temporarily disabled due to empty source lists - will be fixed in future PR
+# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cognitive-patterns/CMakeLists.txt")
+#     add_subdirectory(cognitive-patterns)
+# endif()
+# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/distributed-cognition/CMakeLists.txt")
+#     add_subdirectory(distributed-cognition)
+# endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cognitive-visualization/CMakeLists.txt")
     add_subdirectory(cognitive-visualization)
 endif()
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tutorial-automation/CMakeLists.txt")
-    add_subdirectory(tutorial-automation)
-endif()
+# Temporarily disabled due to empty source lists - will be fixed in future PR
+# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tutorial-automation/CMakeLists.txt")
+#     add_subdirectory(tutorial-automation)
+# endif()
 
 # Add unified GGML tensor kernel
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ggml-tensor-kernel/CMakeLists.txt")
@@ -278,9 +289,10 @@ if(TARGET evolutionary-optimization)
     endif()
 endif()
 # Phase 4: Distributed Cognitive Mesh API & Embodiment Layer
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/distributed-cognitive-mesh/CMakeLists.txt")
-    add_subdirectory(distributed-cognitive-mesh)
-endif()
+# Temporarily disabled due to empty source lists - will be fixed in future PR
+# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/distributed-cognitive-mesh/CMakeLists.txt")
+#     add_subdirectory(distributed-cognitive-mesh)
+# endif()
 
 # Add Phase 4 distributed cognitive mesh target
 add_custom_target(distributed-cognitive-mesh-phase4

@@ -14,7 +14,7 @@ TARGET_LINK_LIBRARIES(persist-monospace
 	rocksdb
 )
 
-ADD_GUILE_EXTENSION(SCM_CONFIG persist-monospace
+ADD_GUILE_EXTENSION(SCM_CONFIG_ROCKS persist-monospace
 	"opencog-ext-path-persist-mono")
 
 # The EXPORT is need to autogenerate CMake boilerplate in the lib

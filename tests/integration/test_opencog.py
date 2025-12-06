@@ -16,7 +16,9 @@ class TestOpencogIntegration(unittest.TestCase):
     
     def setUp(self):
         """Set up test environment"""
-        pass
+        # Initialize test fixtures
+        self.test_data = {}
+        self.temp_files = []
         
     def test_opencog_import(self):
         """Test that opencog can be imported"""

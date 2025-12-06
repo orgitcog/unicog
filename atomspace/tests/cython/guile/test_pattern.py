@@ -22,7 +22,10 @@ class SchemeTest(TestCase):
                     os.environ['PROJECT_SOURCE_DIR'] + '/opencog/scm")')
 
     def tearDown(self):
-        pass
+        """Clean up test resources"""
+        # Clean up any test resources
+        if hasattr(self, 'atomspace') and self.atomspace:
+            self.atomspace.clear()
 
     # Load several different scheme files, containing atom type
     # declarations, and utilities. They should load just fine.

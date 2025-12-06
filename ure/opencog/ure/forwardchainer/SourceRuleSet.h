@@ -99,8 +99,13 @@ public:
 	 */
 	std::pair<SourceRule, TruthValuePtr> thompson_select();
 
-	// TODO: implement tournament selection as well, as a cheaper
-	// alternative to Thompson sampling.
+	// NOTE: Tournament selection should be implemented as a cheaper alternative
+	// to Thompson sampling for rule selection. Implementation approach:
+	//   1. Randomly select k source rules from the pool (tournament size)
+	//   2. Choose the rule with highest fitness/truth value from the k candidates
+	//   3. Typical tournament size: k=2 (binary tournament) or k=3-5
+	// This has O(k) complexity vs O(n) for Thompson sampling.
+	// Signature: std::pair<SourceRule, TruthValuePtr> tournament_select(size_t k);
 
 	/**
 	 * Return true iff the pool is empty

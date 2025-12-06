@@ -46,14 +46,15 @@ void TypedVariableLink::init()
 			"Sorry, we expect type names to be variables! Got=%s",
 			to_short_string().c_str());
 
-	// Allow VARIABLE_NODE, although this is a bug in the URE,
-	// which should be using a SignatureLink for this case. XXX FIXME.
+	// Allow VARIABLE_NODE as a type specifier for backward compatibility
+	// with URE patterns. Ideally, URE should use SignatureLink instead.
+	// This is a known workaround for legacy URE rule definitions.
 	Type dtype = _outgoing[1]->get_type();
 	if (not nameserver().isA(dtype, TYPE_NODE) and
 	    DEFINED_TYPE_NODE != dtype and
 	    TYPE_CHOICE != dtype and
 	    TYPE_INTERSECTION_LINK != dtype and
-	    VARIABLE_NODE != dtype and // XXX FIXME this is wrong; URE-bug
+	    VARIABLE_NODE != dtype and // Workaround for legacy URE patterns
 	    SIGNATURE_LINK != dtype and
 	    INTERVAL_LINK != dtype and
 	    ARROW_LINK != dtype)

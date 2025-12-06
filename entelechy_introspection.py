@@ -595,14 +595,34 @@ class EntelechyIntrospector:
         
         extensions = ['.cc', '.h', '.cpp', '.hpp', '.scm', '.py']
         
+        # Patterns to exclude (informational, not actionable)
+        exclude_patterns = [
+            r'TODO.*list',  # TODO lists in docs
+            r'GNU',         # GNU license references
+            r'Copyright',   # Copyright notices
+            r'from\s+TODO', # References to TODO files/modules
+        ]
+        
         for ext in extensions:
             for file_path in directory.rglob(f'*{ext}'):
                 try:
                     with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                        content = f.read()
-                        markers['TODO'] += len(re.findall(r'\bTODO\b', content, re.IGNORECASE))
-                        markers['FIXME'] += len(re.findall(r'\bFIXME\b', content, re.IGNORECASE))
-                        markers['STUB'] += len(re.findall(r'\bSTUB\b', content, re.IGNORECASE))
+                        lines = f.readlines()
+                        for line_num, line in enumerate(lines, 1):
+                            # Skip if it's just an informational reference
+                            skip = False
+                            for exclude_pattern in exclude_patterns:
+                                if re.search(exclude_pattern, line, re.IGNORECASE):
+                                    skip = True
+                                    break
+                            
+                            if not skip:
+                                if re.search(r'\bTODO\b', line, re.IGNORECASE):
+                                    markers['TODO'] += 1
+                                if re.search(r'\bFIXME\b', line, re.IGNORECASE):
+                                    markers['FIXME'] += 1
+                                if re.search(r'\bSTUB\b', line, re.IGNORECASE):
+                                    markers['STUB'] += 1
                 except Exception:
                     pass
         
