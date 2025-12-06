@@ -1,0 +1,42 @@
+{
+  "issues": {
+    "bootstrap.yml": [
+      "Referenced script not found: tests/comprehensive-test-runner.sh in job 'comprehensive-verification'",
+      "Referenced script not found: scripts/extract-attention-metrics.sh in job 'cognitive-enhancement'",
+      "Referenced script not found: scripts/test-neural-symbolic-integration.sh in job 'cognitive-enhancement'",
+      "Referenced script not found: scripts/simple-tensor-analysis.sh in job 'cognitive-enhancement'",
+      "Referenced script not found: scripts/encode-hypergraph-patterns.sh in job 'cognitive-enhancement'",
+      "Referenced script not found: scripts/analyze-meta-completeness.sh in job 'cognitive-enhancement'",
+      "Referenced script not found: scripts/generate-recursive-feedback.sh in job 'cognitive-enhancement'"
+    ],
+    "cognitive-membrane-sync.yml": [
+      "Referenced script not found: scripts/cognitive-membrane/extract-cognitive-patterns.py in job 'cognitive-pattern-extraction'",
+      "Referenced script not found: scripts/cognitive-membrane/generate-membrane-report.py in job 'cognitive-pattern-extraction'"
+    ],
+    "cognitive-orchestration.yml": [
+      "Referenced script not found: scripts/cognitive-orchestration/extract-architecture.py in job 'architecture-extraction'",
+      "Referenced script not found: scripts/cognitive-orchestration/generate-cognitive-issues.py in job 'generate-cognitive-issues'",
+      "Referenced script not found: scripts/cognitive-orchestration/generate-orchestration-report.py in job 'generate-orchestration-report'"
+    ],
+    "cognitive-synergy-engine.yml": [
+      "Referenced script not found: scripts/cognitive-synergy/analyze-synergy.py in job 'synergy-analysis'",
+      "Referenced script not found: scripts/cognitive-synergy/generate-synergy-report.py in job 'generate-synergy-report'"
+    ],
+    "entelechy-assessment.yml": [
+      "Referenced script not found: scripts/entelechy/extract-entelechy-metrics.py in job 'entelechy-extraction'",
+      "Referenced script not found: scripts/entelechy/generate-entelechy-report.py in job 'generate-entelechy-report'"
+    ],
+    "fixme-tracking.yml": [
+      "Referenced script not found: scripts/track-fixme.sh in job 'track-fixme'"
+    ],
+    "gen-cognitive-issues.yml": [
+      "Referenced script not found: scripts/generate-cognitive-issues.sh in job 'generate-cognitive-issues'"
+    ],
+    "ontogenesis-orchestration.yml": [
+      "Referenced script not found: scripts/ontogenesis/parse-architecture.py in job 'architecture-parser'",
+      "Referenced script not found: scripts/ontogenesis/generate-tensor-analysis.py in job 'architecture-parser'",
+      "Referenced script not found: scripts/ontogenesis/analyze-dependencies.py in job 'architecture-parser'",
+      "Referenced script not found: scripts/ontogenesis/generate-orchestration-issues.py in job 'generate-orchestration-issues'"
+    ]
+  }
+}
