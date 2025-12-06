@@ -2,6 +2,10 @@ name: SpaceTime Build
 
 # Builds components in dependency order: cogutil -> atomspace -> cogserver -> attention -> unify -> ure -> miner -> asmoses
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   push:
     branches: [ "main", "master" ]
@@ -29,6 +33,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -52,6 +57,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -61,6 +67,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -71,6 +78,7 @@ jobs:
     - name: Rebuild and Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -82,6 +90,7 @@ jobs:
     - name: Rebuild and Install CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p cogserver/build
         cd cogserver/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -91,6 +100,7 @@ jobs:
     
     - name: Check SpaceTime Directory
       run: |
+        set -euo pipefail
         if [ -d "spacetime" ]; then
           echo "SpaceTime directory exists"
           ls -la spacetime/
@@ -102,6 +112,7 @@ jobs:
     - name: Configure SpaceTime
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p spacetime/build
         cd spacetime/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -109,12 +120,14 @@ jobs:
     - name: Build SpaceTime
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -122,6 +135,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -129,6 +143,7 @@ jobs:
     - name: Install SpaceTime
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         sudo make install
         sudo ldconfig

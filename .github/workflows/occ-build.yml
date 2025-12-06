@@ -4,6 +4,10 @@ name: OCC Build - Complete Stack
 # Based on CircleCI configurations and CMakeLists.txt from various components
 # Builds components in dependency order: cogutil -> atomspace -> cogserver -> attention -> unify -> ure -> miner -> asmoses
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   push:
     branches: [ "main", "master" ]
@@ -37,6 +41,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -57,22 +62,26 @@ jobs:
     
     - name: Configure CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
     
     - name: Build CogUtil
       run: |
+        set -euo pipefail
         cd cogutil/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build CogUtil Tests
       run: |
+        set -euo pipefail
         cd cogutil/build
         make ${{ env.MAKEFLAGS }} tests
     
     - name: Run CogUtil Tests
       run: |
+        set -euo pipefail
         cd cogutil/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -80,12 +89,14 @@ jobs:
     - name: Print Test Log
       if: always()
       run: |
+        set -euo pipefail
         if [ -f cogutil/build/tests/Testing/Temporary/LastTest.log ]; then
           cat cogutil/build/tests/Testing/Temporary/LastTest.log
         fi
     
     - name: Install CogUtil
       run: |
+        set -euo pipefail
         cd cogutil/build
         sudo make install
         sudo ldconfig
@@ -137,6 +148,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -162,6 +174,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -171,22 +184,26 @@ jobs:
     
     - name: Configure AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
     
     - name: Build AtomSpace
       run: |
+        set -euo pipefail
         cd atomspace/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build AtomSpace Tests
       run: |
+        set -euo pipefail
         cd atomspace/build
         make ${{ env.MAKEFLAGS }} tests
     
     - name: Run AtomSpace Tests
       run: |
+        set -euo pipefail
         cd atomspace/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -194,18 +211,21 @@ jobs:
     - name: Print Test Log
       if: always()
       run: |
+        set -euo pipefail
         if [ -f atomspace/build/tests/Testing/Temporary/LastTest.log ]; then
           cat atomspace/build/tests/Testing/Temporary/LastTest.log
         fi
     
     - name: Install AtomSpace
       run: |
+        set -euo pipefail
         cd atomspace/build
         sudo make install
         sudo ldconfig
     
     - name: Build Examples
       run: |
+        set -euo pipefail
         cd atomspace/build
         make ${{ env.MAKEFLAGS }} examples
       continue-on-error: true
@@ -233,6 +253,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -254,6 +275,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -263,6 +285,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -272,6 +295,7 @@ jobs:
     
     - name: Check AtomSpace Storage Directory
       run: |
+        set -euo pipefail
         if [ -d "atomspace-storage" ]; then
           echo "AtomSpace Storage directory exists"
           ls -la atomspace-storage/
@@ -283,6 +307,7 @@ jobs:
     - name: Configure AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -290,12 +315,14 @@ jobs:
     - name: Build AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-storage/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-storage/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -303,6 +330,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-storage/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -310,6 +338,7 @@ jobs:
     - name: Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-storage/build
         sudo make install
         sudo ldconfig
@@ -328,6 +357,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -350,6 +380,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -359,6 +390,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -369,6 +401,7 @@ jobs:
     - name: Rebuild and Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -379,6 +412,7 @@ jobs:
     - name: Verify AtomSpace Storage Installation
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         echo "Checking for AtomSpaceStorageConfig.cmake..."
         find /usr/local -name "*AtomSpaceStorage*Config.cmake" || echo "AtomSpaceStorageConfig.cmake not found"
         ls -la /usr/local/lib/cmake/ || echo "No cmake directory"
@@ -386,6 +420,7 @@ jobs:
     
     - name: Check AtomSpace Rocks Directory
       run: |
+        set -euo pipefail
         if [ -d "atomspace-rocks" ]; then
           echo "AtomSpace Rocks directory exists"
           ls -la atomspace-rocks/
@@ -397,6 +432,7 @@ jobs:
     - name: Configure AtomSpace Rocks
       if: hashFiles('atomspace-rocks/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-rocks/build
         cd atomspace-rocks/build
         cmake .. \
@@ -406,12 +442,14 @@ jobs:
     - name: Build AtomSpace Rocks
       if: hashFiles('atomspace-rocks/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-rocks/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('atomspace-rocks/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-rocks/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -419,6 +457,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('atomspace-rocks/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-rocks/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -426,6 +465,7 @@ jobs:
     - name: Install AtomSpace Rocks
       if: hashFiles('atomspace-rocks/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-rocks/build
         sudo make install
         sudo ldconfig
@@ -444,6 +484,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -466,6 +507,7 @@ jobs:
     
     - name: Verify Asio Installation
       run: |
+        set -euo pipefail
         echo "Checking for Asio installation..."
         ls -la /usr/include/asio.hpp || echo "WARNING: asio.hpp not found in /usr/include"
         ls -la /usr/share/pkgconfig/asio.pc || echo "WARNING: asio.pc not found"
@@ -474,6 +516,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -483,6 +526,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -493,6 +537,7 @@ jobs:
     - name: Build and Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -503,6 +548,7 @@ jobs:
     
     - name: Check CogServer Directory
       run: |
+        set -euo pipefail
         if [ -d "cogserver" ]; then
           echo "CogServer directory exists"
           ls -la cogserver/
@@ -514,6 +560,7 @@ jobs:
     - name: Configure CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p cogserver/build
         cd cogserver/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -521,12 +568,14 @@ jobs:
     - name: Build CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd cogserver/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd cogserver/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -534,6 +583,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd cogserver/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -541,6 +591,7 @@ jobs:
     - name: Install CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd cogserver/build
         sudo make install
         sudo ldconfig
@@ -559,6 +610,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -581,6 +633,7 @@ jobs:
     
     - name: Verify Asio Installation
       run: |
+        set -euo pipefail
         echo "Checking for Asio installation..."
         ls -la /usr/include/asio.hpp || echo "WARNING: asio.hpp not found in /usr/include"
         ls -la /usr/share/pkgconfig/asio.pc || echo "WARNING: asio.pc not found"
@@ -589,6 +642,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -598,6 +652,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -608,6 +663,7 @@ jobs:
     - name: Rebuild and Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -619,6 +675,7 @@ jobs:
     - name: Rebuild and Install CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p cogserver/build
         cd cogserver/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -628,6 +685,7 @@ jobs:
     
     - name: Check AtomSpace Cog Directory
       run: |
+        set -euo pipefail
         if [ -d "atomspace-cog" ]; then
           echo "AtomSpace Cog directory exists"
           ls -la atomspace-cog/
@@ -639,6 +697,7 @@ jobs:
     - name: Configure AtomSpace Cog
       if: hashFiles('atomspace-cog/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-cog/build
         cd atomspace-cog/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -646,12 +705,14 @@ jobs:
     - name: Build AtomSpace Cog
       if: hashFiles('atomspace-cog/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-cog/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('atomspace-cog/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-cog/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -659,6 +720,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('atomspace-cog/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-cog/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -666,6 +728,7 @@ jobs:
     - name: Install AtomSpace Cog
       if: hashFiles('atomspace-cog/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd atomspace-cog/build
         sudo make install
         sudo ldconfig
@@ -684,6 +747,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -705,6 +769,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -714,6 +779,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -723,6 +789,7 @@ jobs:
     
     - name: Check Unify Directory
       run: |
+        set -euo pipefail
         if [ -d "unify" ]; then
           echo "Unify directory exists"
           ls -la unify/
@@ -734,6 +801,7 @@ jobs:
     - name: Configure Unify
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p unify/build
         cd unify/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -741,12 +809,14 @@ jobs:
     - name: Build Unify
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd unify/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd unify/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -754,6 +824,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd unify/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -761,6 +832,7 @@ jobs:
     - name: Install Unify
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd unify/build
         sudo make install
         sudo ldconfig
@@ -779,6 +851,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -800,6 +873,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -809,6 +883,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -819,6 +894,7 @@ jobs:
     - name: Rebuild and Install Unify
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p unify/build
         cd unify/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -828,6 +904,7 @@ jobs:
     
     - name: Check URE Directory
       run: |
+        set -euo pipefail
         if [ -d "ure" ]; then
           echo "URE directory exists"
           ls -la ure/
@@ -839,6 +916,7 @@ jobs:
     - name: Configure URE
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p ure/build
         cd ure/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -846,12 +924,14 @@ jobs:
     - name: Build URE
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd ure/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd ure/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -859,6 +939,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd ure/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -866,6 +947,7 @@ jobs:
     - name: Install URE
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd ure/build
         sudo make install
         sudo ldconfig
@@ -892,6 +974,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -913,6 +996,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -922,6 +1006,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -932,6 +1017,7 @@ jobs:
     - name: Rebuild and Install Unify
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p unify/build
         cd unify/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -942,6 +1028,7 @@ jobs:
     - name: Rebuild and Install URE
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p ure/build
         cd ure/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -951,6 +1038,7 @@ jobs:
     
     - name: Check Miner Directory
       run: |
+        set -euo pipefail
         if [ -d "miner" ]; then
           echo "Miner directory exists"
           ls -la miner/
@@ -962,6 +1050,7 @@ jobs:
     - name: Configure Miner
       if: hashFiles('miner/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p miner/build
         cd miner/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -969,12 +1058,14 @@ jobs:
     - name: Build Miner
       if: hashFiles('miner/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd miner/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('miner/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd miner/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -982,6 +1073,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('miner/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd miner/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -989,6 +1081,7 @@ jobs:
     - name: Install Miner
       if: hashFiles('miner/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd miner/build
         sudo make install
         sudo ldconfig
@@ -1007,6 +1100,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -1029,6 +1123,7 @@ jobs:
     
     - name: Verify Asio Installation
       run: |
+        set -euo pipefail
         echo "Checking for Asio installation..."
         ls -la /usr/include/asio.hpp || echo "WARNING: asio.hpp not found in /usr/include"
         ls -la /usr/share/pkgconfig/asio.pc || echo "WARNING: asio.pc not found"
@@ -1037,6 +1132,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1046,6 +1142,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1056,6 +1153,7 @@ jobs:
     - name: Rebuild and Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1067,6 +1165,7 @@ jobs:
     - name: Rebuild and Install CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p cogserver/build
         cd cogserver/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1076,6 +1175,7 @@ jobs:
     
     - name: Check Attention Directory
       run: |
+        set -euo pipefail
         if [ -d "attention" ]; then
           echo "Attention directory exists"
           ls -la attention/
@@ -1087,6 +1187,7 @@ jobs:
     - name: Configure Attention
       if: hashFiles('attention/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p attention/build
         cd attention/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1094,12 +1195,14 @@ jobs:
     - name: Build Attention
       if: hashFiles('attention/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd attention/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('attention/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd attention/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -1107,6 +1210,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('attention/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd attention/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -1114,6 +1218,7 @@ jobs:
     - name: Install Attention
       if: hashFiles('attention/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd attention/build
         sudo make install
         sudo ldconfig
@@ -1132,6 +1237,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -1154,6 +1260,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1163,6 +1270,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1173,6 +1281,7 @@ jobs:
     - name: Rebuild and Install Unify
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p unify/build
         cd unify/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1183,6 +1292,7 @@ jobs:
     - name: Rebuild and Install URE
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p ure/build
         cd ure/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1192,6 +1302,7 @@ jobs:
     
     - name: Check AS-MOSES Directory
       run: |
+        set -euo pipefail
         if [ -d "asmoses" ]; then
           echo "AS-MOSES directory exists"
           ls -la asmoses/
@@ -1203,6 +1314,7 @@ jobs:
     - name: Configure AS-MOSES
       if: hashFiles('asmoses/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p asmoses/build
         cd asmoses/build
         cmake .. \
@@ -1212,6 +1324,7 @@ jobs:
     - name: Build AS-MOSES
       if: hashFiles('asmoses/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd asmoses/build
         make ${{ env.MAKEFLAGS }}
     
@@ -1221,6 +1334,7 @@ jobs:
     - name: Install AS-MOSES
       if: hashFiles('asmoses/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd asmoses/build
         sudo make install
         sudo ldconfig
@@ -1228,6 +1342,7 @@ jobs:
     - name: Build Tests
       if: hashFiles('asmoses/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd asmoses/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -1235,6 +1350,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('asmoses/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd asmoses/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -1253,6 +1369,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -1274,6 +1391,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1283,6 +1401,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1292,6 +1411,7 @@ jobs:
     
     - name: Check Matrix Directory
       run: |
+        set -euo pipefail
         if [ -d "matrix" ]; then
           echo "Matrix directory exists"
           ls -la matrix/
@@ -1303,6 +1423,7 @@ jobs:
     - name: Configure Matrix
       if: hashFiles('matrix/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p matrix/build
         cd matrix/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1310,12 +1431,14 @@ jobs:
     - name: Build Matrix
       if: hashFiles('matrix/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd matrix/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('matrix/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd matrix/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -1323,6 +1446,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('matrix/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd matrix/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -1330,6 +1454,7 @@ jobs:
     - name: Install Matrix
       if: hashFiles('matrix/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd matrix/build
         sudo make install
         sudo ldconfig
@@ -1348,6 +1473,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -1371,6 +1497,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1380,6 +1507,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1390,6 +1518,7 @@ jobs:
     - name: Rebuild and Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1401,6 +1530,7 @@ jobs:
     - name: Rebuild and Install CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p cogserver/build
         cd cogserver/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1410,6 +1540,7 @@ jobs:
     
     - name: Check SpaceTime Directory
       run: |
+        set -euo pipefail
         if [ -d "spacetime" ]; then
           echo "SpaceTime directory exists"
           ls -la spacetime/
@@ -1421,6 +1552,7 @@ jobs:
     - name: Configure SpaceTime
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p spacetime/build
         cd spacetime/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1428,12 +1560,14 @@ jobs:
     - name: Build SpaceTime
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -1441,6 +1575,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -1448,6 +1583,7 @@ jobs:
     - name: Install SpaceTime
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd spacetime/build
         sudo make install
         sudo ldconfig
@@ -1466,6 +1602,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -1489,6 +1626,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1498,6 +1636,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1508,6 +1647,7 @@ jobs:
     - name: Rebuild and Install AtomSpace Storage
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1519,6 +1659,7 @@ jobs:
     - name: Rebuild and Install CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p cogserver/build
         cd cogserver/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1529,6 +1670,7 @@ jobs:
     - name: Rebuild and Install Unify
       if: hashFiles('unify/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p unify/build
         cd unify/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1539,6 +1681,7 @@ jobs:
     - name: Rebuild and Install URE
       if: hashFiles('ure/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p ure/build
         cd ure/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1549,6 +1692,7 @@ jobs:
     - name: Rebuild and Install SpaceTime
       if: hashFiles('spacetime/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p spacetime/build
         cd spacetime/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1558,6 +1702,7 @@ jobs:
     
     - name: Check PLN Directory
       run: |
+        set -euo pipefail
         if [ -d "pln" ]; then
           echo "PLN directory exists"
           ls -la pln/
@@ -1569,6 +1714,7 @@ jobs:
     - name: Configure PLN
       if: hashFiles('pln/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p pln/build
         cd pln/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1576,12 +1722,14 @@ jobs:
     - name: Build PLN
       if: hashFiles('pln/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd pln/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('pln/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd pln/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -1589,6 +1737,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('pln/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd pln/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -1596,6 +1745,7 @@ jobs:
     - name: Install PLN
       if: hashFiles('pln/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd pln/build
         sudo make install
         sudo ldconfig
@@ -1614,6 +1764,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
@@ -1636,6 +1787,7 @@ jobs:
     
     - name: Verify Asio Installation
       run: |
+        set -euo pipefail
         echo "Checking for Asio installation..."
         ls -la /usr/include/asio.hpp || echo "WARNING: asio.hpp not found in /usr/include"
         ls -la /usr/share/pkgconfig/asio.pc || echo "WARNING: asio.pc not found"
@@ -1644,6 +1796,7 @@ jobs:
     
     - name: Rebuild and Install CogUtil
       run: |
+        set -euo pipefail
         mkdir -p cogutil/build
         cd cogutil/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1653,6 +1806,7 @@ jobs:
     
     - name: Rebuild and Install AtomSpace
       run: |
+        set -euo pipefail
         mkdir -p atomspace/build
         cd atomspace/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1664,6 +1818,7 @@ jobs:
       # Note: atomspace-storage is optional, so we continue even if it fails
       if: hashFiles('atomspace-storage/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p atomspace-storage/build
         cd atomspace-storage/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1675,6 +1830,7 @@ jobs:
     - name: Rebuild and Install CogServer
       if: hashFiles('cogserver/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p cogserver/build
         cd cogserver/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1684,6 +1840,7 @@ jobs:
     
     - name: Check Learn Directory
       run: |
+        set -euo pipefail
         if [ -d "learn" ]; then
           echo "Learn directory exists"
           ls -la learn/
@@ -1695,6 +1852,7 @@ jobs:
     - name: Configure Learn
       if: hashFiles('learn/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         mkdir -p learn/build
         cd learn/build
         cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
@@ -1702,12 +1860,14 @@ jobs:
     - name: Build Learn
       if: hashFiles('learn/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd learn/build
         make ${{ env.MAKEFLAGS }}
     
     - name: Build Tests
       if: hashFiles('learn/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd learn/build
         make ${{ env.MAKEFLAGS }} tests
       continue-on-error: true
@@ -1715,6 +1875,7 @@ jobs:
     - name: Run Tests
       if: hashFiles('learn/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd learn/build
         make check ARGS="${{ env.MAKEFLAGS }}"
       continue-on-error: true
@@ -1722,6 +1883,7 @@ jobs:
     - name: Install Learn
       if: hashFiles('learn/CMakeLists.txt') != ''
       run: |
+        set -euo pipefail
         cd learn/build
         sudo make install
         sudo ldconfig
@@ -1754,6 +1916,7 @@ jobs:
     
     - name: Generate Build Report
       run: |
+        set -euo pipefail
         echo "# OCC Build Report" > BUILD_REPORT.md
         echo "" >> BUILD_REPORT.md
         echo "## Build Summary" >> BUILD_REPORT.md
