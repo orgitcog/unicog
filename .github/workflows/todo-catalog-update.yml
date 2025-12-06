@@ -1,5 +1,9 @@
 name: "TODO Catalog Update"
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   push:
     branches: [ main, master ]
@@ -19,7 +23,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -31,16 +35,19 @@ jobs:
     
     - name: Install dependencies
       run: |
+        set -euo pipefail
         python -m pip install --upgrade pip
         pip install requests
     
     - name: Generate TODO catalog
       run: |
+        set -euo pipefail
         python scripts/generate_todo_catalog.py
         echo "TODO catalog generation completed"
     
     - name: Update recursive TODO resolution progress
       run: |
+        set -euo pipefail
         python scripts/recursive_todo_resolver.py --validate-batch-6
         echo "Batch 6 validation completed"
     
@@ -52,6 +59,7 @@ jobs:
     - name: Commit updated catalog
       if: steps.check_changes.outputs.changes == 'true'
       run: |
+        set -euo pipefail
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add COMPREHENSIVE-TODO-CATALOG.md todo_resolution_progress.json

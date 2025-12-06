@@ -1,0 +1,78 @@
+name: Electron Binary Packager (Experimental)
+
+permissions:
+  contents: read
+  actions: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_name:
+        description: 'Application name'
+        required: true
+        default: 'OpenCog-Explorer'
+      version:
+        description: 'Application version'
+        required: true
+        default: '1.0.0'
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  build-electron-app:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    
+    name: Build Electron App
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    
+    - name: Create App Structure
+      run: |
+        set -euo pipefail
+        mkdir -p electron-app/src
+        echo '{"name":"opencog-explorer","version":"${{ github.event.inputs.version }}","main":"src/main.js","scripts":{"start":"electron ."},"dependencies":{"electron":"^27.0.0"}}' > electron-app/package.json
+      shell: bash
+    
+    - name: Create Main Script
+      run: |
+        set -euo pipefail
+        mkdir -p electron-app/src
+        echo "const { app, BrowserWindow } = require('electron');" > electron-app/src/main.js
+        echo "function createWindow() {" >> electron-app/src/main.js
+        echo "  const win = new BrowserWindow({ width: 800, height: 600 });" >> electron-app/src/main.js
+        echo "  win.loadFile('src/index.html');" >> electron-app/src/main.js
+        echo "}" >> electron-app/src/main.js
+        echo "app.whenReady().then(createWindow);" >> electron-app/src/main.js
+      shell: bash
+    
+    - name: Create HTML
+      run: |
+        echo '<!DOCTYPE html><html><head><title>${{ github.event.inputs.app_name }}</title></head><body><h1>OpenCog Explorer</h1></body></html>' > electron-app/src/index.html
+      shell: bash
+    
+    - name: Install Dependencies
+      run: |
+        set -euo pipefail
+        cd electron-app
+        npm install
+      shell: bash
+      continue-on-error: true
+    
+    - name: Upload App
+      uses: actions/upload-artifact@v4
+      with:
+        name: electron-app-${{ matrix.os }}
+        path: electron-app/
+        retention-days: 30
+      continue-on-error: true

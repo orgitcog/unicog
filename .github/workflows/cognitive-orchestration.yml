@@ -49,6 +49,7 @@ jobs:
     steps:
       - name: "🌀 Initialize Cognitive State"
         run: |
+          set -euo pipefail
           echo "COGNITIVE_LAYER=FOUNDATION" >> $GITHUB_ENV
           echo "TENSOR_SHAPE=[512,128,8]" >> $GITHUB_ENV
           date +%d-%m-%Y > /tmp/date
@@ -68,18 +69,7 @@ jobs:
             cognitive-foundation-${{ runner.os }}-
             cognitive-foundation-
       
-      - name: "📥 Checkout Main Repository"
-        uses: actions/checkout@v5
-      
-      - name: "✅ Verify Working Directory"
-        run: |
-          echo "🔍 Verifying workspace availability..."
-          echo "Current directory: $(pwd)"
-          echo "GitHub workspace: ${{ github.workspace }}"
-          ls -al ${{ github.workspace }}
-          echo "✅ Workspace verified successfully"
-      
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           path: cogutil
           repository: opencog/cogutil
@@ -88,6 +78,7 @@ jobs:
       - name: "🧪 Cognitive Build with Self-Healing"
         id: build
         run: |
+          set -euo pipefail
           cd cogutil
           mkdir -p build && cd build
           
@@ -96,7 +87,7 @@ jobs:
             echo "✅ CMake configuration successful!"
           else
             echo "🤖 Activating self-healing for CMake configuration..."
-            cd ${{ github.workspace }}
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd cogutil/build && cmake .. -DCMAKE_BUILD_TYPE=Release" \
               --max-attempts 2 \
@@ -109,7 +100,7 @@ jobs:
             echo "✅ Build successful!"
           else
             echo "🤖 Activating self-healing for build..."
-            cd ${{ github.workspace }}
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd cogutil/build && make $MAKEFLAGS" \
               --max-attempts $MAX_FIX_ATTEMPTS \
@@ -118,6 +109,7 @@ jobs:
       
       - name: "🧬 Execute Cognitive Tests"
         run: |
+          set -euo pipefail
           cd cogutil/build
           echo "🧪 Building test suite..."
           make tests || echo "⚠️  Test build had issues, continuing..."
@@ -127,6 +119,7 @@ jobs:
       
       - name: "📦 Install & Persist State"
         run: |
+          set -euo pipefail
           cd cogutil/build
           make install
           ldconfig
@@ -150,6 +143,7 @@ jobs:
       - name: "🎯 Configure Tensor Output"
         id: tensor-config
         run: |
+          set -euo pipefail
           echo "shape=[512,128,8]" >> $GITHUB_OUTPUT
           echo "state=foundation-active" >> $GITHUB_OUTPUT
       
@@ -165,6 +159,7 @@ jobs:
       - name: "📊 Generate Cognitive Metrics"
         if: always()
         run: |
+          set -euo pipefail
           echo "=== Foundation Layer Tensor Analysis ==="
           echo "Component: CogUtil"
           echo "Tensor Shape: [512, 128, 8]"
@@ -215,6 +210,7 @@ jobs:
     steps:
       - name: "🌀 Initialize Hypergraph Substrate"
         run: |
+          set -euo pipefail
           echo "COGNITIVE_LAYER=CORE" >> $GITHUB_ENV
           echo "TENSOR_SHAPE=[1024,256,16,4]" >> $GITHUB_ENV
           echo "VARIANT=${{ matrix.variant }}" >> $GITHUB_ENV
@@ -234,18 +230,7 @@ jobs:
             cogutil
           key: cognitive-foundation-${{ runner.os }}-${{ github.sha }}
       
-      - name: "📥 Checkout Main Repository"
-        uses: actions/checkout@v5
-      
-      - name: "✅ Verify Working Directory"
-        run: |
-          echo "🔍 Verifying workspace availability..."
-          echo "Current directory: $(pwd)"
-          echo "GitHub workspace: ${{ github.workspace }}"
-          ls -al ${{ github.workspace }}
-          echo "✅ Workspace verified successfully"
-      
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           path: atomspace
           repository: opencog/atomspace
@@ -253,6 +238,7 @@ jobs:
       
       - name: "🧬 Install Foundation Layer"
         run: |
+          set -euo pipefail
           echo "🔧 Installing CogUtil foundation..."
           cd cogutil/build
           make install
@@ -272,6 +258,7 @@ jobs:
       
       - name: "🧪 Build AtomSpace with Cognitive Enhancement"
         run: |
+          set -euo pipefail
           cd atomspace
           mkdir -p build && cd build
           
@@ -280,7 +267,7 @@ jobs:
             echo "✅ Hypergraph configuration successful!"
           else
             echo "🤖 Activating cognitive repair for configuration..."
-            cd ${{ github.workspace }}
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd atomspace/build && cmake .. -DCMAKE_BUILD_TYPE=Release ${{ matrix.flags }}" \
               --context "atomspace-${{ matrix.variant }}" \
@@ -293,7 +280,7 @@ jobs:
             echo "✅ AtomSpace materialized successfully!"
           else
             echo "🤖 Invoking cognitive repair mechanisms..."
-            cd ${{ github.workspace }}
+            cd /home/runner/work/opencog-unified/opencog-unified
             python3 scripts/auto_fix.py \
               --build-cmd "cd atomspace/build && make $MAKEFLAGS" \
               --context "atomspace-${{ matrix.variant }}" \
@@ -302,6 +289,7 @@ jobs:
       
       - name: "🧬 Cognitive Test Execution"
         run: |
+          set -euo pipefail
           cd atomspace/build
           echo "🧪 Building hypergraph test suite..."
           make tests || echo "⚠️  Test build encountered quantum fluctuations"
@@ -314,6 +302,7 @@ jobs:
       
       - name: "💾 Persist Hypergraph State"
         run: |
+          set -euo pipefail
           cd atomspace/build
           make install
           ldconfig
@@ -340,6 +329,7 @@ jobs:
       - name: "📊 Generate Cognitive Metrics"
         if: always()
         run: |
+          set -euo pipefail
           echo "=== Core Layer Tensor Field Analysis ==="
           echo "Component: AtomSpace"
           echo "Variant: ${{ matrix.variant }}"
@@ -365,10 +355,11 @@ jobs:
     if: always()
     
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       
       - name: "🧬 Generate Unified Orchestration Analysis"
         run: |
+          set -euo pipefail
           mkdir -p cognitive-artifacts
           
           cat > cognitive-artifacts/orchestration-synthesis.md << 'EOF'
@@ -426,6 +417,7 @@ jobs:
       
       - name: "📊 Generate GGML Kernel Definitions"
         run: |
+          set -euo pipefail
           cat > cognitive-artifacts/ggml-kernels.scm << 'EOF'
           ;; GGML Kernel Definitions for Cognitive CI/CD
           ;; Generated by unified orchestration synthesis
@@ -500,6 +492,7 @@ jobs:
       - name: "📊 Tensor Field Status Report"
         if: always()  
         run: |
+          set -euo pipefail
           echo "🧬 COGNITIVE ORCHESTRATION TENSOR FIELD REPORT"
           echo "=============================================="
           echo ""
@@ -530,10 +523,11 @@ jobs:
     if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[evolve]')
     
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       
       - name: "🔬 Analyze Build Performance Metrics"
         run: |
+          set -euo pipefail
           echo "🧬 Analyzing cognitive performance across tensor fields..."
           echo "Meta-cognitive evolution system activated"
           
@@ -555,6 +549,7 @@ jobs:
       
       - name: "🧬 Generate Evolved Pipeline Configuration"
         run: |
+          set -euo pipefail
           echo "🧬 Generating next-generation pipeline evolution..."
           
           cat > evolution-artifacts/evolution-plan.md << 'EOF'
@@ -585,6 +580,7 @@ jobs:
       - name: "🚀 Propose Evolution PR" 
         if: github.event_name == 'schedule'
         run: |
+          set -euo pipefail
           echo "🧬 Meta-cognitive evolution complete!"
           echo "Performance metrics analyzed and optimization strategies generated"
           echo "Evolution artifacts created for next development cycle"
