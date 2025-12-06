@@ -13,7 +13,7 @@ jobs:
     name: Comprehensive Implementation Verification
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         
       - name: Install dependencies
         run: |
@@ -132,7 +132,7 @@ jobs:
     name: Cognitive Enhancement Analysis
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         
       - name: Install cognitive analysis dependencies
         run: |
@@ -195,7 +195,7 @@ jobs:
     name: Build System Verification
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         
       - name: Install build dependencies
         run: |
@@ -225,7 +225,7 @@ jobs:
     name: Cognitive Synergy Integration Report
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         
       - name: Download cognitive analysis artifacts
         uses: actions/download-artifact@v6
