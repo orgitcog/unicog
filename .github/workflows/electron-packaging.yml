@@ -1,5 +1,9 @@
 name: Electron Binary Packager (Experimental)
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   workflow_dispatch:
     inputs:
@@ -35,12 +39,14 @@ jobs:
     
     - name: Create App Structure
       run: |
+        set -euo pipefail
         mkdir -p electron-app/src
         echo '{"name":"opencog-explorer","version":"${{ github.event.inputs.version }}","main":"src/main.js","scripts":{"start":"electron ."},"dependencies":{"electron":"^27.0.0"}}' > electron-app/package.json
       shell: bash
     
     - name: Create Main Script
       run: |
+        set -euo pipefail
         mkdir -p electron-app/src
         echo "const { app, BrowserWindow } = require('electron');" > electron-app/src/main.js
         echo "function createWindow() {" >> electron-app/src/main.js
@@ -57,6 +63,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        set -euo pipefail
         cd electron-app
         npm install
       shell: bash

@@ -55,12 +55,14 @@ jobs:
           
       - name: Install Cognitive Dependencies
         run: |
+          set -euo pipefail
           pip install numpy torch transformers PyGithub pyyaml
           npm install -g @octokit/graphql
           
       - name: Create Cognitive Membrane Scanner
         id: membrane-scanner
         run: |
+          set -euo pipefail
           cat > cognitive_membrane_scanner.py << 'EOF'
           import numpy as np
           import torch
@@ -266,6 +268,7 @@ jobs:
           INPUT_ENTERPRISE: ${{ inputs.enterprise || 'cosmos' }}
           INPUT_COGNITIVE_MODE: ${{ inputs.cognitive_mode || 'fold' }}
         run: |
+          set -euo pipefail
           echo "🌀 Executing membrane folding operation..."
           python cognitive_membrane_scanner.py
           
@@ -279,6 +282,7 @@ jobs:
       - name: Generate Cognitive Index
         id: index-gen
         run: |
+          set -euo pipefail
           # Enhance the generated cognitive index with tensor information
           if [ -f "cosmos-cognitive-index.md" ]; then
             echo "📊 Enhancing cognitive index with tensor analytics..."
@@ -311,6 +315,7 @@ jobs:
       - name: Configure Tensor Shape
         id: tensor-config
         run: |
+          set -euo pipefail
           # Parse tensor dimensions from input
           IFS=',' read -ra DIMS <<< "${{ inputs.tensor_dimensions || '7,3,10,50,100' }}"
           SHAPE=$(printf "[%s]" "$(IFS=,; echo "${DIMS[*]}")")
@@ -321,6 +326,7 @@ jobs:
       - name: Commit Cognitive Membrane State
         if: steps.membrane-fold.outputs.state == 'folded'
         run: |
+          set -euo pipefail
           git config --global user.name "Cognitive Membrane Sync"
           git config --global user.email "cognitive-sync@opencog.org"
           
@@ -330,6 +336,7 @@ jobs:
           
       - name: Generate Membrane Status
         run: |
+          set -euo pipefail
           cat > cognitive-membrane-status.json << EOF
           {
             "synchronization": {
@@ -368,6 +375,7 @@ jobs:
           
       - name: Install Python Dependencies
         run: |
+          set -euo pipefail
           if [ -f "requirements.txt" ]; then
             pip install -r requirements.txt
           else
@@ -376,6 +384,7 @@ jobs:
         
       - name: Generate Cognitive Grammar
         run: |
+          set -euo pipefail
           cat > cognitive_grammar_generator.py << 'EOF'
           import json
           import numpy as np

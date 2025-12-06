@@ -1,5 +1,9 @@
 name: 🌌 Genesis of Cognitive Build Issues
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   workflow_dispatch:
 
@@ -10,6 +14,7 @@ jobs:
       - name: Compose Issue Templates of Distributed Cognition
         id: issues
         run: |
+          set -euo pipefail
           cat << EOF > issues.json
           [
             {

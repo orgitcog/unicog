@@ -1,5 +1,9 @@
 name: Debian Package Builder (Experimental)
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   workflow_dispatch:
     inputs:
@@ -30,6 +34,7 @@ jobs:
     
     - name: Install Build Tools
       run: |
+        set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y devscripts debhelper dh-make build-essential cmake fakeroot lintian dpkg-dev
         sudo apt-get install -y libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev guile-3.0-dev python3-dev cython3 cxxtest
@@ -37,6 +42,7 @@ jobs:
     - name: Build CogUtil Package
       if: github.event.inputs.component == 'cogutil'
       run: |
+        set -euo pipefail
         cd cogutil
         mkdir -p debian/source
         echo "3.0 (native)" > debian/source/format

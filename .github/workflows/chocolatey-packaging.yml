@@ -1,5 +1,9 @@
 name: Chocolatey Package Builder (Experimental)
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   workflow_dispatch:
     inputs:
@@ -33,6 +37,7 @@ jobs:
     
     - name: Install Chocolatey
       run: |
+        $ErrorActionPreference = 'Stop'
         if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
           Set-ExecutionPolicy Bypass -Scope Process -Force
           [System.Net.ServicePointManager]::SecurityProtocol = 3072
@@ -43,6 +48,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        $ErrorActionPreference = 'Stop'
         choco install -y cmake 7zip
         cd C:\vcpkg
         .\vcpkg install boost-filesystem:x64-windows boost-system:x64-windows
@@ -50,6 +56,7 @@ jobs:
     
     - name: Build Component
       run: |
+        $ErrorActionPreference = 'Stop'
         $component = "${{ github.event.inputs.component }}"
         if (Test-Path $component) {
           mkdir "$component\build" -Force
@@ -61,6 +68,7 @@ jobs:
     
     - name: Create Package
       run: |
+        $ErrorActionPreference = 'Stop'
         $component = "${{ github.event.inputs.component }}"
         $pkgDir = "choco-packages\opencog-$component"
         New-Item -ItemType Directory -Force -Path "$pkgDir\tools"

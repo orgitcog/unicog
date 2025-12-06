@@ -1,5 +1,9 @@
 name: FIXME Tracking
 
+permissions:
+  contents: read
+  actions: read
+
 on:
   push:
     branches: [ main, master ]
@@ -26,6 +30,7 @@ jobs:
     - name: Check for new FIXMEs in PR
       if: github.event_name == 'pull_request'
       run: |
+        set -euo pipefail
         git fetch origin ${{ github.base_ref }}
         if git diff origin/${{ github.base_ref }}...HEAD | grep -E "^\+.*FIXME|^\+.*XXX.*FIXME"; then
           echo "❌ New FIXME comments detected in this PR"
