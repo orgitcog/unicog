@@ -3,8 +3,8 @@
 **Problem Identification**
 The OpenCog Unified codebase contains distributed TODOs, FIXMEs, stubs, and "not implemented" fragments that block full cognitive realization. These are detected by CI and halt verification (see job: https://github.com/OzCog/opencog-unified/actions/runs/16539657246/job/46779076096, ref: 25d11bfe332cd501a967d9ab3a6957a22504249f).
 
-**Generated**: 2025-11-30 22:57:07 UTC  
-**Total Items**: 2397  
+**Generated**: 2025-12-06 18:31:56 UTC  
+**Total Items**: 2446  
 **Commit Reference**: 25d11bfe332cd501a967d9ab3a6957a22504249f
 
 ---
@@ -147,7 +147,11 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/ggml-tensor-kernel/test_real_functionality.cpp#L150)
 
 ### Build System
-*Total items: 379*
+*Total items: 427*
+
+- [ ] **scripts/code_quality_check.py:261** (CRITICAL, Feature Completion)
+  - `recommendations.append("Many FIXMEs found. Prioritize resolving critical bugs.")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L261)
 
 - [ ] **scripts/recursive_todo_resolver.py:239** (CRITICAL, Feature Completion)
   - `if todo.priority in ['CRITICAL', 'HIGH']:`
@@ -208,6 +212,54 @@ A section for emergent TODOs.
 - [ ] **components/integration/opencog/scripts/get_python_lib.py:6** (LOW, Feature Completion)
   - `# This is a hack due to the distutils in debian/ubuntu's python3 being misconfigured`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/components/integration/opencog/scripts/get_python_lib.py#L6)
+
+- [ ] **scripts/code_quality_check.py:22** (LOW, Feature Completion)
+  - `def check_todo_fixme(self) -> Dict[str, int]:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L22)
+
+- [ ] **scripts/code_quality_check.py:23** (LOW, Feature Completion)
+  - `"""Count TODO, FIXME, and similar markers"""`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L23)
+
+- [ ] **scripts/code_quality_check.py:25** (LOW, Feature Completion)
+  - `'TODO': r'TODO|@todo',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L25)
+
+- [ ] **scripts/code_quality_check.py:26** (LOW, Feature Completion)
+  - `'FIXME': r'FIXME|@fixme',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L26)
+
+- [ ] **scripts/code_quality_check.py:27** (LOW, Feature Completion)
+  - `'XXX': r'XXX',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L27)
+
+- [ ] **scripts/code_quality_check.py:28** (LOW, Feature Completion)
+  - `'HACK': r'HACK',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L28)
+
+- [ ] **scripts/code_quality_check.py:29** (LOW, Feature Completion)
+  - `'PLACEHOLDER': r'PLACEHOLDER|placeholder',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L29)
+
+- [ ] **scripts/code_quality_check.py:221** (LOW, Feature Completion)
+  - `print("  ➤ Checking TODO/FIXME markers...")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L221)
+
+- [ ] **scripts/code_quality_check.py:222** (LOW, Feature Completion)
+  - `markers = self.check_todo_fixme()`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L222)
+
+- [ ] **scripts/code_quality_check.py:257** (LOW, Feature Completion)
+  - `if markers.get('TODO', 0) > 100:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L257)
+
+- [ ] **scripts/code_quality_check.py:258** (LOW, Feature Completion)
+  - `recommendations.append("High number of TODOs detected. Consider creating GitHub issues for tracking....`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L258)
+
+- [ ] **scripts/code_quality_check.py:260** (LOW, Feature Completion)
+  - `if markers.get('FIXME', 0) > 50:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/code_quality_check.py#L260)
 
 - [ ] **scripts/generate_todo_catalog.py:3** (LOW, Feature Completion)
   - `Comprehensive TODO/FIXME Enumeration System for OpenCog Unified`
@@ -1484,6 +1536,146 @@ A section for emergent TODOs.
 - [ ] **scripts/recursive_todo_resolver.py:1031** (LOW, Feature Completion)
   - `print("🎉 All TODOs have been processed!")`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/recursive_todo_resolver.py#L1031)
+
+- [ ] **scripts/resolve_todos.py:3** (LOW, Feature Completion)
+  - `Automated TODO/FIXME Resolution System`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L3)
+
+- [ ] **scripts/resolve_todos.py:4** (LOW, Feature Completion)
+  - `Intelligently resolves placeholder implementations and TODO markers`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L4)
+
+- [ ] **scripts/resolve_todos.py:12** (LOW, Feature Completion)
+  - `class TodoResolver:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L12)
+
+- [ ] **scripts/resolve_todos.py:19** (LOW, Feature Completion)
+  - `def resolve_placeholder_functions(self, file_path: Path) -> int:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L19)
+
+- [ ] **scripts/resolve_todos.py:20** (LOW, Feature Completion)
+  - `"""Resolve placeholder function implementations"""`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L20)
+
+- [ ] **scripts/resolve_todos.py:31** (LOW, Pattern Matching)
+  - `# C++ placeholder patterns`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L31)
+
+- [ ] **scripts/resolve_todos.py:35** (LOW, Feature Completion)
+  - `r'(\w+\s+\w+::\w+\([^)]*\)\s*\{\s*//\s*TODO[^\n]*\n\s*\})',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L35)
+
+- [ ] **scripts/resolve_todos.py:42** (LOW, Error Handling)
+  - `r'throw\s+std::runtime_error\s*\(\s*"Not implemented"\s*\)\s*;',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L42)
+
+- [ ] **scripts/resolve_todos.py:47** (LOW, Pattern Matching)
+  - `# Python placeholder patterns`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L47)
+
+- [ ] **scripts/resolve_todos.py:51** (LOW, Feature Completion)
+  - `r'def\s+(\w+)\([^)]*\):\s*\n\s*"""[^"]*"""\s*\n\s*#\s*TODO[^\n]*\n\s*pass',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L51)
+
+- [ ] **scripts/resolve_todos.py:79** (LOW, Feature Completion)
+  - `return func_signature.replace('// TODO', '// Auto-generated implementation\n    return;')`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L79)
+
+- [ ] **scripts/resolve_todos.py:81** (LOW, Feature Completion)
+  - `return func_signature.replace('// TODO', '// Auto-generated implementation\n    return false;')`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L81)
+
+- [ ] **scripts/resolve_todos.py:83** (LOW, Feature Completion)
+  - `return func_signature.replace('// TODO', '// Auto-generated implementation\n    return 0;')`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L83)
+
+- [ ] **scripts/resolve_todos.py:85** (LOW, Feature Completion)
+  - `return func_signature.replace('// TODO', '// Auto-generated implementation\n    return {};')`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L85)
+
+- [ ] **scripts/resolve_todos.py:158** (LOW, Feature Completion)
+  - `def resolve_simple_todos(self, file_path: Path) -> int:`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L158)
+
+- [ ] **scripts/resolve_todos.py:159** (LOW, Feature Completion)
+  - `"""Resolve simple, actionable TODOs"""`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L159)
+
+- [ ] **scripts/resolve_todos.py:166** (LOW, Error Handling)
+  - `# Replace TODO: Add error handling with basic try-catch`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L166)
+
+- [ ] **scripts/resolve_todos.py:169** (LOW, Error Handling)
+  - `r'//\s*TODO:\s*Add error handling\s*\n',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L169)
+
+- [ ] **scripts/resolve_todos.py:174** (LOW, Feature Completion)
+  - `# Replace TODO: Add logging with basic log statement`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L174)
+
+- [ ] **scripts/resolve_todos.py:176** (LOW, Feature Completion)
+  - `r'//\s*TODO:\s*Add logging\s*\n',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L176)
+
+- [ ] **scripts/resolve_todos.py:181** (LOW, Performance)
+  - `# Replace TODO: Optimize with note`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L181)
+
+- [ ] **scripts/resolve_todos.py:183** (LOW, Performance)
+  - `r'//\s*TODO:\s*Optimize\s*\n',`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L183)
+
+- [ ] **scripts/resolve_todos.py:200** (LOW, Feature Completion)
+  - `print("🔧 Resolving TODOs and placeholders...")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L200)
+
+- [ ] **scripts/resolve_todos.py:204** (LOW, Feature Completion)
+  - `'placeholders_resolved': 0,`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L204)
+
+- [ ] **scripts/resolve_todos.py:207** (LOW, Feature Completion)
+  - `'todos_resolved': 0,`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L207)
+
+- [ ] **scripts/resolve_todos.py:217** (LOW, Feature Completion)
+  - `# Resolve placeholders`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L217)
+
+- [ ] **scripts/resolve_todos.py:218** (LOW, Feature Completion)
+  - `if self.resolve_placeholder_functions(file_path):`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L218)
+
+- [ ] **scripts/resolve_todos.py:219** (LOW, Feature Completion)
+  - `stats['placeholders_resolved'] += 1`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L219)
+
+- [ ] **scripts/resolve_todos.py:229** (LOW, Feature Completion)
+  - `# Resolve simple TODOs`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L229)
+
+- [ ] **scripts/resolve_todos.py:230** (LOW, Feature Completion)
+  - `if self.resolve_simple_todos(file_path):`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L230)
+
+- [ ] **scripts/resolve_todos.py:231** (LOW, Feature Completion)
+  - `stats['todos_resolved'] += 1`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L231)
+
+- [ ] **scripts/resolve_todos.py:243** (LOW, Feature Completion)
+  - `print("OpenCog Unified - Automated TODO Resolution")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L243)
+
+- [ ] **scripts/resolve_todos.py:247** (LOW, Feature Completion)
+  - `resolver = TodoResolver(repo_path)`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L247)
+
+- [ ] **scripts/resolve_todos.py:255** (LOW, Feature Completion)
+  - `print(f"  Placeholders resolved: {stats['placeholders_resolved']}")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L255)
+
+- [ ] **scripts/resolve_todos.py:258** (LOW, Feature Completion)
+  - `print(f"  TODOs resolved: {stats['todos_resolved']}")`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/scripts/resolve_todos.py#L258)
 
 - [ ] **scripts/test_recursive_todo_resolution.py:3** (LOW, Testing)
   - `Test script for the Recursive TODO Resolution System`
@@ -2772,7 +2964,7 @@ A section for emergent TODOs.
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/moses/tests/moses/moses-framework.h#L42)
 
 ### Memory System
-*Total items: 104*
+*Total items: 105*
 
 - [ ] **atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc:59** (CRITICAL, Feature Completion)
   - `/// XXX TODO: We could have a non-blocking version of this atom. We`
@@ -3053,6 +3245,10 @@ A section for emergent TODOs.
 - [ ] **atomspace/opencog/guile/SchemeSmobAtom.cc:210** (LOW, Feature Completion)
   - `printf("XXX FIXME Bad string %s\nconverted to %s\n", (char *) data, wbuf);`
   - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/guile/SchemeSmobAtom.cc#L210)
+
+- [ ] **atomspace/opencog/guile/SchemeSmobLogger.cc:6** (LOW, Feature Completion)
+  - `* NOTE: This is a stub/placeholder file. Logger functionality has been`
+  - [Code reference](https://github.com/OzCog/opencog-unified/blob/25d11bfe332cd501a967d9ab3a6957a22504249f/atomspace/opencog/guile/SchemeSmobLogger.cc#L6)
 
 - [ ] **atomspace/opencog/haskell/PatternMatcher_CWrapper.h:8** (LOW, Feature Completion)
   - `* XXX FIXME: atoms must never be accessed by UUID except by the`
@@ -9657,10 +9853,10 @@ A section for emergent TODOs.
 
 ### By Subsystem
 - **AI System**: 27 items
-- **Build System**: 379 items
+- **Build System**: 427 items
 - **Core Utilities**: 22 items
 - **MOSES Representation/Scoring**: 253 items
-- **Memory System**: 104 items
+- **Memory System**: 105 items
 - **Other**: 1430 items
 - **Persistence Subsystem**: 139 items
 - **Task System**: 4 items
@@ -9669,18 +9865,18 @@ A section for emergent TODOs.
 ### By Category
 - **Distributed Systems**: 3 items
 - **Documentation**: 49 items
-- **Error Handling**: 77 items
-- **Feature Completion**: 1947 items
-- **Pattern Matching**: 43 items
-- **Performance**: 30 items
+- **Error Handling**: 80 items
+- **Feature Completion**: 1989 items
+- **Pattern Matching**: 45 items
+- **Performance**: 32 items
 - **Testing**: 230 items
 - **Thread Safety**: 18 items
 
 ### By Priority
-- **CRITICAL**: 6 items
+- **CRITICAL**: 7 items
 - **HIGH**: 30 items
 - **MEDIUM**: 158 items
-- **LOW**: 2203 items
+- **LOW**: 2251 items
 
 ---
 
@@ -9722,4 +9918,4 @@ The enumeration above represents our cognitive debt, but also our potential. Eac
 
 ---
 
-*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-11-30 22:57:07 UTC*
+*This document is automatically generated and should be updated regularly as the codebase evolves. Last updated: 2025-12-06 18:31:56 UTC*
