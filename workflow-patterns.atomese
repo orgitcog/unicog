@@ -1,0 +1,38 @@
+; OpenCog Unified Workflow Hypergraph Patterns
+; Generated automatically from bootstrap workflow analysis
+; Timestamp: 2025-12-06T18:42:25Z
+
+; === WORKFLOW PATTERNS ===
+; Total workflow jobs: 4
+; Total workflow steps: 29
+
+(ConceptNode "workflow_hypergraph")
+(ConceptNode "cognitive_patterns")
+(ConceptNode "code_structures")
+
+; Hypergraph meta-pattern
+(EvaluationLink
+  (PredicateNode "encodes")
+  (ListLink
+    (ConceptNode "workflow_hypergraph")
+    (NumberNode 33)))
+
+(EvaluationLink
+  (PredicateNode "contains")
+  (ListLink
+    (ConceptNode "cognitive_patterns")
+    (NumberNode 355)))
+
+(EvaluationLink
+  (PredicateNode "maps_to")
+  (ListLink
+    (ConceptNode "code_structures")
+    (NumberNode 14)))
+
+; Recursive enhancement pattern
+(ConceptNode "recursive_enhancement")
+(EvaluationLink
+  (PredicateNode "feedback_loop")
+  (ListLink
+    (ConceptNode "workflow_patterns")
+    (ConceptNode "recursive_enhancement")))
