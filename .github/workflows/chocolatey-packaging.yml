@@ -5,6 +5,12 @@ permissions:
   actions: read
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'language-learning/**'
+      - '.github/workflows/chocolatey-packaging.yml'
   workflow_dispatch:
     inputs:
       component:
