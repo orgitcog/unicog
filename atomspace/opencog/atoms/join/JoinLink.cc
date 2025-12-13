@@ -20,6 +20,7 @@
  */
 
 #include <algorithm>
+#include <opencog/util/Logger.h>
 #include <iterator>
 
 #include <opencog/util/oc_assert.h>

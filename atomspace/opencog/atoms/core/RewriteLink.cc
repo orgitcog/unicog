@@ -20,6 +20,7 @@
  */
 
 #include <string>
+#include <opencog/util/Logger.h>
 
 #include <opencog/atoms/atom_types/NameServer.h>
 #include <opencog/atoms/core/FindUtils.h>

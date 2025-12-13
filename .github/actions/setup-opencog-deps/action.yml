@@ -1,0 +1,43 @@
+name: 'Setup OpenCog Dependencies'
+description: 'Install and cache OpenCog build dependencies with optimal caching'
+author: 'OpenCog Engineering Team'
+
+inputs:
+  cache-key-suffix:
+    description: 'Additional suffix for cache key'
+    required: false
+    default: ''
+
+outputs:
+  cache-hit:
+    description: 'Whether dependencies were restored from cache'
+    value: ${{ steps.cache-deps.outputs.cache-hit }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Cache System Dependencies
+      id: cache-deps
+      uses: actions/cache@v4
+      with:
+        path: |
+          /var/cache/apt/archives
+          ~/.cache/ccache
+        key: opencog-deps-${{ runner.os }}-${{ inputs.cache-key-suffix }}-${{ hashFiles('**/CMakeLists.txt') }}
+        restore-keys: |
+          opencog-deps-${{ runner.os }}-
+    
+    - name: Install Dependencies
+      if: steps.cache-deps.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          cmake build-essential cxxtest ccache \
+          libboost-all-dev guile-3.0-dev \
+          python3-dev cython3
+
+branding:
+  icon: 'package'
+  color: 'blue'

@@ -20,6 +20,7 @@
  */
 
 #include <opencog/guile/SchemePrimitive.h>
+#include <opencog/util/Logger.h>
 
 #include "OpenPsiImplicator.h"
 #include "OpenPsiRules.h"

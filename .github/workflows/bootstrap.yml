@@ -7,6 +7,11 @@ on:
   pull_request:
     branches: [main]
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   comprehensive-verification:
     runs-on: ubuntu-latest
@@ -17,6 +22,7 @@ jobs:
         
       - name: Install dependencies
         run: |
+          set -euo pipefail
           sudo apt-get update
           sudo apt-get install -y guile-3.0 cmake build-essential g++
           
@@ -52,11 +58,13 @@ jobs:
           
       - name: Run comprehensive verification framework
         run: |
+          set -euo pipefail
           chmod +x ./tests/comprehensive-test-runner.sh
           ./tests/comprehensive-test-runner.sh
           
       - name: Verify implementation completeness
         run: |
+          set -euo pipefail
           echo "🧪 Verifying implementation completeness..."
           
           # Check C++ implementations have substantial content
@@ -87,6 +95,7 @@ jobs:
           
       - name: Test tensor kernel compilation
         run: |
+          set -euo pipefail
           echo "🔧 Testing tensor kernel compilation..."
           if [[ -f "ggml-tensor-kernel/test_tensor_kernel.cc" ]]; then
             g++ -std=c++17 -I./ggml-tensor-kernel/include -o /tmp/test_tensor_kernel ggml-tensor-kernel/test_tensor_kernel.cc
@@ -96,6 +105,7 @@ jobs:
           
       - name: Validate Scheme syntax
         run: |
+          set -euo pipefail
           echo "🧠 Validating Scheme syntax..."
           for file in */scheme/*.scm; do
             if [[ -f "$file" ]]; then
@@ -108,11 +118,13 @@ jobs:
           
       - name: Bootstrap verification
         run: |
+          set -euo pipefail
           chmod +x ./init-unified-repo.sh
           ./init-unified-repo.sh
           
       - name: Generate verification report
         run: |
+          set -euo pipefail
           echo "📊 VERIFICATION SUMMARY" > verification-report.txt
           echo "======================" >> verification-report.txt
           echo "Timestamp: $(date)" >> verification-report.txt
@@ -156,41 +168,48 @@ jobs:
         
       - name: Install cognitive analysis dependencies
         run: |
+          set -euo pipefail
           sudo apt-get update
           sudo apt-get install -y jq bc guile-3.0
           
       - name: Extract ECAN-style attention metrics
         run: |
+          set -euo pipefail
           echo "🧠 Extracting ECAN-style attention allocation metrics..."
           chmod +x ./scripts/extract-attention-metrics.sh
           ./scripts/extract-attention-metrics.sh
           
       - name: Test neural-symbolic integration
         run: |
+          set -euo pipefail
           echo "🔬 Testing neural-symbolic (C++/Scheme/GGML) integration..."
           chmod +x ./scripts/test-neural-symbolic-integration.sh
           ./scripts/test-neural-symbolic-integration.sh
           
       - name: Estimate tensor dimensions and field synthesis
         run: |
+          set -euo pipefail
           echo "📐 Estimating tensor dimensions and field synthesis potential..."
           chmod +x ./scripts/simple-tensor-analysis.sh
           ./scripts/simple-tensor-analysis.sh
           
       - name: Encode hypergraph patterns
         run: |
+          set -euo pipefail
           echo "🕸️  Encoding workflow logic as hypergraph patterns..."
           chmod +x ./scripts/encode-hypergraph-patterns.sh
           ./scripts/encode-hypergraph-patterns.sh
           
       - name: Analyze meta-completeness
         run: |
+          set -euo pipefail
           echo "🔍 Analyzing meta-completeness and cognitive coverage..."
           chmod +x ./scripts/analyze-meta-completeness.sh
           ./scripts/analyze-meta-completeness.sh
           
       - name: Generate recursive feedback
         run: |
+          set -euo pipefail
           echo "🔄 Generating recursive feedback and enhancement proposals..."
           chmod +x ./scripts/generate-recursive-feedback.sh
           ./scripts/generate-recursive-feedback.sh
@@ -219,11 +238,13 @@ jobs:
         
       - name: Install build dependencies
         run: |
+          set -euo pipefail
           sudo apt-get update
           sudo apt-get install -y cmake build-essential g++ pkg-config
           
       - name: CMake configuration test
         run: |
+          set -euo pipefail
           mkdir build
           cd build
           cmake .. -DCMAKE_BUILD_TYPE=Debug
@@ -231,6 +252,7 @@ jobs:
           
       - name: Test partial build
         run: |
+          set -euo pipefail
           cd build
           # Test building tensor kernel if available
           if [[ -f "../ggml-tensor-kernel/CMakeLists.txt" ]]; then
@@ -261,11 +283,13 @@ jobs:
           
       - name: Install reporting dependencies
         run: |
+          set -euo pipefail
           sudo apt-get update
           sudo apt-get install -y jq bc
           
       - name: Generate enhanced verification report with cognitive synergy
         run: |
+          set -euo pipefail
           echo "📊 ENHANCED VERIFICATION WITH COGNITIVE SYNERGY" > enhanced-verification-report.txt
           echo "===============================================" >> enhanced-verification-report.txt
           echo "Timestamp: $(date)" >> enhanced-verification-report.txt

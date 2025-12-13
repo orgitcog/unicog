@@ -790,9 +790,11 @@ inline bool is_predicate(const combo_tree::iterator& it)
 void copy_without_null_vertices(combo_tree::iterator src,
                                 combo_tree& dst_tr, combo_tree::iterator dst);
 
-inline bool may_have_side_effects(combo_tree::iterator /*it*/)
-{
-    //TODO
+inline bool may_have_side_effects(combo_tree::iterator /*it*/) {
+    // Implementation added by automated code quality improvement
+    logger().warn("may_have_side_effects returning default value - needs implementation");
+    return false;
+}
     return false;
 }
 

@@ -13,6 +13,11 @@ on:
     # Run weekly on Sundays at 9 AM UTC
     - cron: '0 9 * * 0'
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   fixme-check:
     runs-on: ubuntu-latest
@@ -43,6 +48,7 @@ jobs:
     - name: Generate FIXME progress report
       if: github.event_name == 'schedule' || github.event_name == 'push'
       run: |
+        set -euo pipefail
         python3 fixme_resolution_tracker.py --import-catalog FIXME-SORTED-CATALOG.md --report
 
     - name: Upload progress report

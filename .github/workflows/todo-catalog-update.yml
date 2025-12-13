@@ -11,6 +11,11 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   update-todo-catalog:
     runs-on: ubuntu-latest
@@ -54,6 +59,7 @@ jobs:
     - name: Check for catalog changes
       id: check_changes
       run: |
+        set -euo pipefail
         git diff --name-only | grep -E "(COMPREHENSIVE-TODO-CATALOG.md|todo_resolution_progress.json)" && echo "changes=true" >> $GITHUB_OUTPUT || echo "changes=false" >> $GITHUB_OUTPUT
     
     - name: Commit updated catalog

@@ -58,6 +58,7 @@ jobs:
     
     - name: Create HTML
       run: |
+        set -euo pipefail
         echo '<!DOCTYPE html><html><head><title>${{ github.event.inputs.app_name }}</title></head><body><h1>OpenCog Explorer</h1></body></html>' > electron-app/src/index.html
       shell: bash
     

@@ -23,6 +23,7 @@
  */
 
 #include <opencog/atoms/base/Node.h>
+#include <opencog/util/Logger.h>
 #include <opencog/atoms/core/FindUtils.h>
 #include <opencog/attentionbank/bank/AttentionBank.h>
 #include <opencog/neighbors/GetPredicates.h>

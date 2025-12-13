@@ -22,6 +22,7 @@
  */
 
 #include <string>
+#include <opencog/util/Logger.h>
 #include <iostream>
 #include <fstream>
 #include <list>

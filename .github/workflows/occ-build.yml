@@ -8,12 +8,22 @@ permissions:
   contents: read
   actions: read
 
+
+# NOTE: This workflow rebuilds dependencies multiple times.
+# Consider using Docker images or build artifacts to optimize build time.
+# See: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+
 on:
   push:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   BUILD_TYPE: Release
@@ -41,6 +51,18 @@ jobs:
     
     - name: Install Dependencies
       run: |
+        # Cache apt packages
+      set -euo pipefail
+      - name: Cache APT packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: apt-cache-${{ runner.os }}-${{ hashFiles('**/*.yml') }}
+          restore-keys: |
+            apt-cache-${{ runner.os }}-
+      
+      - name: Install Dependencies
+        run: |
         set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \

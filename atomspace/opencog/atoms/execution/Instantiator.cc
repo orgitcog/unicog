@@ -22,6 +22,7 @@
  */
 
 #include <opencog/atoms/atom_types/atom_types.h>
+#include <opencog/util/Logger.h>
 #include <opencog/atoms/core/DefineLink.h>
 #include <opencog/atoms/core/LambdaLink.h>
 #include <opencog/atoms/core/PutLink.h>
