@@ -1,0 +1,208 @@
+{
+  "layers": {
+    "0": "Kernel Core - Memory & Storage",
+    "1": "Cognitive Process Managers",
+    "2": "Cognitive Device Drivers",
+    "3": "High-Level Cognitive Services",
+    "4": "Distributed Cognitive Infrastructure",
+    "5": "Neural-Symbolic Accelerators"
+  },
+  "component_mapping": {
+    "kernel_core": {
+      "cogutil": {
+        "description": "Core utilities and logging - becomes kernel primitives",
+        "source_files": 76,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "atomspace": {
+        "description": "Hypergraph knowledge representation - kernel memory manager",
+        "source_files": 361,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "atomspace-storage": {
+        "description": "Persistence layer - kernel storage subsystem",
+        "source_files": 66,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "atomspace-rocks": {
+        "description": "RocksDB backend - kernel block device",
+        "source_files": 13,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      }
+    },
+    "cognitive_managers": {
+      "attention": {
+        "description": "Attention allocation - kernel scheduler for cognitive resources",
+        "source_files": 12,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "ure": {
+        "description": "Unified Rule Engine - kernel inference service",
+        "source_files": 37,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "pln": {
+        "description": "Probabilistic Logic Networks - kernel reasoning service",
+        "source_files": 2,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      },
+      "moses": {
+        "description": "Evolutionary optimization - kernel learning service",
+        "source_files": 256,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      }
+    },
+    "cognitive_devices": {
+      "cogserver": {
+        "description": "Network cognitive server - kernel network stack",
+        "source_files": 66,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "unify": {
+        "description": "Pattern matching - kernel pattern device",
+        "source_files": 8,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "miner": {
+        "description": "Pattern mining - kernel analytics device",
+        "source_files": 2,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      },
+      "spacetime": {
+        "description": "Spatiotemporal reasoning - kernel time device",
+        "source_files": 10,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      }
+    },
+    "cognitive_services": {
+      "opencog": {
+        "description": "OpenPsi motivational system - kernel behavior service",
+        "source_files": 9,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      },
+      "meta-cognition": {
+        "description": "Self-monitoring - kernel introspection service",
+        "source_files": 8,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "learn": {
+        "description": "Language learning - kernel NLP service",
+        "source_files": 5,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      },
+      "lg-atomese": {
+        "description": "Link Grammar integration - kernel linguistic service",
+        "source_files": 5,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      }
+    },
+    "distributed_cognition": {
+      "distributed-cognition": {
+        "description": "Distributed cognitive mesh - kernel cluster manager",
+        "source_files": 10,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      },
+      "agentic-kernels-catalog": {
+        "description": "Cognitive agents - kernel process manager",
+        "source_files": 5,
+        "has_tests": true,
+        "kernel_integration_ready": true
+      },
+      "cognitive-patterns": {
+        "description": "Reusable patterns - kernel library",
+        "source_files": 6,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      }
+    },
+    "neural_symbolic": {
+      "neural-symbolic-integration": {
+        "description": "Neural-symbolic bridge - kernel ML accelerator",
+        "source_files": 3,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      },
+      "ggml-tensor-kernel": {
+        "description": "Tensor operations - kernel compute device",
+        "source_files": 31,
+        "has_tests": false,
+        "kernel_integration_ready": false
+      }
+    }
+  },
+  "kernel_services": {
+    "atomspace_manager": {
+      "type": "Memory Manager",
+      "function": "Kernel-level hypergraph memory management",
+      "syscalls": [
+        "atom_create",
+        "atom_delete",
+        "atom_query",
+        "atom_link"
+      ]
+    },
+    "attention_scheduler": {
+      "type": "Process Scheduler",
+      "function": "Economic attention network resource allocation",
+      "syscalls": [
+        "attention_allocate",
+        "attention_focus",
+        "attention_spread"
+      ]
+    },
+    "inference_engine": {
+      "type": "Reasoning Service",
+      "function": "Kernel-level logical inference",
+      "syscalls": [
+        "infer_forward",
+        "infer_backward",
+        "infer_abductive"
+      ]
+    },
+    "pattern_matcher": {
+      "type": "Pattern Device",
+      "function": "High-speed pattern matching",
+      "syscalls": [
+        "pattern_match",
+        "pattern_unify",
+        "pattern_bind"
+      ]
+    },
+    "cognitive_network": {
+      "type": "Network Stack",
+      "function": "Distributed cognition protocol",
+      "syscalls": [
+        "cog_connect",
+        "cog_send",
+        "cog_receive",
+        "cog_sync"
+      ]
+    },
+    "learning_accelerator": {
+      "type": "Learning Device",
+      "function": "Evolutionary and gradient-based learning",
+      "syscalls": [
+        "learn_evolve",
+        "learn_gradient",
+        "learn_reinforce"
+      ]
+    }
+  }
+}

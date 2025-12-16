@@ -1,0 +1,211 @@
+{
+  "summary": {
+    "total_components": 25,
+    "components_with_tests": 15,
+    "components_without_tests": 10,
+    "critical_priority": 14,
+    "high_priority": 5
+  },
+  "components": {
+    "cogutil": {
+      "source_files": 76,
+      "test_files": 15,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.2,
+      "priority": "HIGH"
+    },
+    "atomspace": {
+      "source_files": 366,
+      "test_files": 411,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 1.12,
+      "priority": "LOW"
+    },
+    "atomspace-storage": {
+      "source_files": 66,
+      "test_files": 16,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.24,
+      "priority": "HIGH"
+    },
+    "atomspace-rocks": {
+      "source_files": 13,
+      "test_files": 48,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 3.69,
+      "priority": "LOW"
+    },
+    "atomspace-restful": {
+      "source_files": 3,
+      "test_files": 2,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.67,
+      "priority": "MEDIUM"
+    },
+    "cogserver": {
+      "source_files": 66,
+      "test_files": 3,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.05,
+      "priority": "HIGH"
+    },
+    "attention": {
+      "source_files": 16,
+      "test_files": 0,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "unify": {
+      "source_files": 8,
+      "test_files": 3,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.38,
+      "priority": "MEDIUM"
+    },
+    "ure": {
+      "source_files": 37,
+      "test_files": 64,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 1.73,
+      "priority": "LOW"
+    },
+    "miner": {
+      "source_files": 2,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "moses": {
+      "source_files": 265,
+      "test_files": 40,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.15,
+      "priority": "HIGH"
+    },
+    "asmoses": {
+      "source_files": 2,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "learn": {
+      "source_files": 5,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "pln": {
+      "source_files": 2,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "spacetime": {
+      "source_files": 14,
+      "test_files": 0,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "lg-atomese": {
+      "source_files": 5,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "language-learning": {
+      "source_files": 0,
+      "test_files": 28,
+      "has_test_dir": true,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0,
+      "priority": "N/A"
+    },
+    "opencog": {
+      "source_files": 9,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "meta-cognition": {
+      "source_files": 8,
+      "test_files": 0,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "neural-symbolic-integration": {
+      "source_files": 3,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "ggml-tensor-kernel": {
+      "source_files": 33,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "agentic-kernels-catalog": {
+      "source_files": 16,
+      "test_files": 1,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.06,
+      "priority": "HIGH"
+    },
+    "cognitive-patterns": {
+      "source_files": 6,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "distributed-cognition": {
+      "source_files": 10,
+      "test_files": 0,
+      "has_test_dir": false,
+      "has_cmake_tests": false,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    },
+    "evolutionary-optimization": {
+      "source_files": 3,
+      "test_files": 0,
+      "has_test_dir": true,
+      "has_cmake_tests": true,
+      "coverage_ratio": 0.0,
+      "priority": "CRITICAL"
+    }
+  }
+}
