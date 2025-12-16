@@ -48,7 +48,6 @@ jobs:
     
     - name: Install Chocolatey
       run: |
-        set -euo pipefail
         $ErrorActionPreference = 'Stop'
         if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
           Set-ExecutionPolicy Bypass -Scope Process -Force
@@ -60,7 +59,6 @@ jobs:
     
     - name: Install Dependencies
       run: |
-        set -euo pipefail
         $ErrorActionPreference = 'Stop'
         choco install -y cmake 7zip
         cd C:\vcpkg
@@ -69,7 +67,6 @@ jobs:
     
     - name: Build Component
       run: |
-        set -euo pipefail
         $ErrorActionPreference = 'Stop'
         $component = "${{ github.event.inputs.component }}"
         if (Test-Path $component) {
@@ -82,7 +79,6 @@ jobs:
     
     - name: Create Package
       run: |
-        set -euo pipefail
         $ErrorActionPreference = 'Stop'
         $component = "${{ github.event.inputs.component }}"
         $pkgDir = "choco-packages\opencog-$component"
