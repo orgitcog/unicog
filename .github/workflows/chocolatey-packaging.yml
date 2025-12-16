@@ -10,6 +10,8 @@ on:
       - main
     paths:
       - 'language-learning/**'
+      - 'cogutil/**'
+      - 'atomspace/**'
       - '.github/workflows/chocolatey-packaging.yml'
   workflow_dispatch:
     inputs:
