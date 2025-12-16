@@ -33,6 +33,9 @@ concurrency:
 
 env:
   BUILD_TYPE: Release
+  # Default values for push-triggered runs (workflow_dispatch inputs override these)
+  DEFAULT_COMPONENT: cogutil
+  DEFAULT_VERSION: '1.0.0'
 
 jobs:
   build-chocolatey-packages:
@@ -41,7 +44,7 @@ jobs:
     
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v4
     
     - name: Setup MSVC
       uses: microsoft/setup-msbuild@v1.3
@@ -68,23 +71,41 @@ jobs:
     - name: Build Component
       run: |
         $ErrorActionPreference = 'Stop'
+        # Use workflow_dispatch input if available, otherwise use default
         $component = "${{ github.event.inputs.component }}"
+        if ([string]::IsNullOrEmpty($component)) {
+          $component = "${{ env.DEFAULT_COMPONENT }}"
+        }
+        Write-Host "Building component: $component"
+        
         if (Test-Path $component) {
           mkdir "$component\build" -Force
           cd "$component\build"
           cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake
           cmake --build . --config Release --parallel 2
+        } else {
+          Write-Host "Component directory '$component' not found - skipping build"
         }
       shell: powershell
     
     - name: Create Package
       run: |
         $ErrorActionPreference = 'Stop'
+        # Use workflow_dispatch inputs if available, otherwise use defaults
         $component = "${{ github.event.inputs.component }}"
+        $version = "${{ github.event.inputs.version }}"
+        if ([string]::IsNullOrEmpty($component)) {
+          $component = "${{ env.DEFAULT_COMPONENT }}"
+        }
+        if ([string]::IsNullOrEmpty($version)) {
+          $version = "${{ env.DEFAULT_VERSION }}"
+        }
+        Write-Host "Creating package for: $component v$version"
+        
         $pkgDir = "choco-packages\opencog-$component"
         New-Item -ItemType Directory -Force -Path "$pkgDir\tools"
         
-        $nuspec = "<?xml version='1.0'?><package><metadata><id>opencog-$component</id><version>${{ github.event.inputs.version }}</version><title>OpenCog $component</title><authors>OpenCog Foundation</authors><description>OpenCog $component</description></metadata></package>"
+        $nuspec = "<?xml version='1.0'?><package><metadata><id>opencog-$component</id><version>$version</version><title>OpenCog $component</title><authors>OpenCog Foundation</authors><description>OpenCog $component</description></metadata></package>"
         Set-Content -Path "$pkgDir\opencog-$component.nuspec" -Value $nuspec
         
         cd $pkgDir
@@ -95,7 +116,7 @@ jobs:
     - name: Upload Package
       uses: actions/upload-artifact@v4
       with:
-        name: chocolatey-package-${{ github.event.inputs.component }}
+        name: chocolatey-package-${{ github.event.inputs.component || 'cogutil' }}
         path: choco-packages/**/*.nupkg
         retention-days: 30
       continue-on-error: true
