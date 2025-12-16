@@ -64,19 +64,19 @@ SET(SEMANTIC_VERSION ${CMAKE_MATCH_1})
 include(cmake/OpenCogGccOptions.cmake)
 
 # ------------------------------------------------------
-IF (WIN32) # Windows host but not cygwin
-	MESSAGE(FATAL_ERROR "You must use Cygwin if compiling under Windows.")
-
-	# Previous definitions used for win32 (non cygwin) compilation.
-	# For reference only
-
-	# ADD_DEFINITIONS(-DWIN32_NOT_UNIX)
-	# FIND_PACKAGE(PThreads REQUIRED)
-	# FIND_PACKAGE(STLPort REQUIRED)
-	# INCLUDE_DIRECTORIES("${CMAKE_SOURCE_DIR}/include/win32" ${PTHREADS_INCLUDE_DIR} ${STLPORT_INCLUDE_DIR})
-	# LINK_LIBRARIES(${PTHREADS_LIBRARY} ${STLPORT_LIBRARIES})
-	# ADD_DEFINITIONS(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
-ENDIF (WIN32)
+# Native Windows (MSVC) build support
+IF (WIN32 AND NOT CYGWIN)
+	MESSAGE(STATUS "Configuring for native Windows (MSVC) build")
+	ADD_DEFINITIONS(-DWIN32_NOT_UNIX)
+	ADD_DEFINITIONS(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
+	
+	# Use Windows threads instead of pthreads
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /MP")
+	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
+	
+	# Disable some warnings that are common in cross-platform code
+	ADD_DEFINITIONS(/wd4996 /wd4267 /wd4244 /wd4018)
+ENDIF (WIN32 AND NOT CYGWIN)
 
 # Do the cygwin build
 IF (CYGWIN)

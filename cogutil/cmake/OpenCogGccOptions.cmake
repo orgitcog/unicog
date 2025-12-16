@@ -85,3 +85,43 @@ IF (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 	# So disable, by default; MOSES users will need to hack this.
 	SET(CMAKE_CXX_FLAGS "-std=c++17")
 ENDIF (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+
+# Microsoft Visual C++ compiler support
+IF (MSVC)
+	MESSAGE(STATUS "Configuring for MSVC compiler")
+	
+	# Enable C++17 standard
+	SET(CMAKE_CXX_STANDARD 17)
+	SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+	
+	# MSVC-specific flags
+	# /EHsc - Enable C++ exception handling
+	# /MP - Enable multi-processor compilation
+	# /W3 - Warning level 3 (reasonable balance)
+	# /permissive- - Enable standards conformance mode
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /MP /W3 /permissive-")
+	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP /W3")
+	
+	# Disable specific warnings that are common in cross-platform code
+	# 4996 - deprecated functions (e.g., strcpy)
+	# 4267 - conversion from size_t to smaller type
+	# 4244 - conversion with possible loss of data
+	# 4018 - signed/unsigned mismatch
+	# 4101 - unreferenced local variable
+	ADD_DEFINITIONS(/wd4996 /wd4267 /wd4244 /wd4018 /wd4101)
+	
+	# Debug configuration
+	SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Od /Zi /RTC1")
+	SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /Od /Zi /RTC1")
+	
+	# Release configuration
+	SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2 /DNDEBUG")
+	SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} /O2 /DNDEBUG")
+	
+	# RelWithDebInfo configuration
+	SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /O2 /Zi")
+	SET(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} /O2 /Zi")
+	
+	# Define NO_AS_NEEDED as empty for MSVC (not applicable)
+	SET(NO_AS_NEEDED "")
+ENDIF (MSVC)
