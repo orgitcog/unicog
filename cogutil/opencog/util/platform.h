@@ -32,6 +32,12 @@
 #define strcasecmp _stricmp
 #define snprintf _snprintf
 
+// Windows-specific includes for compatibility
+#include <io.h>
+#include <process.h>
+#define getpid _getpid
+#define dup2 _dup2
+
 #endif // WIN32
 
 #include <stdio.h>
@@ -45,18 +51,26 @@ char*              __strtok_r(char *s1, const char *s2, char **lasts);
 
 #ifdef WIN32_NOT_UNIX
 
+#ifndef M_PI
 #define M_PI 3.14159265358979323846
+#endif
 
 struct timezone {};
 
+// Note: Modern Windows SDK (10.0.26100+) already provides rint() and atoll()
+// in corecrt_math.h and stdlib.h respectively. Only define these if they
+// are not already available.
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
 int                round(float x);
+double             rint(double nr);
+unsigned long long atoll(const char *str);
+#endif
+
 char*              __strtok_r(char *s1, const char *s2, char **lasts);
 int                gettimeofday(struct timeval* tp, void* tzp);
 void               usleep(unsigned useconds);
 int                __getpid(void);
-double             rint(double nr);
 int                __dup2(int, int);
-unsigned long long atoll(const char *str);
 unsigned int       sleep(unsigned seconds);
 
 #endif // ~WIN32_NOT_UNIX

@@ -67,7 +67,8 @@ jobs:
         $ErrorActionPreference = 'Stop'
         choco install -y cmake 7zip
         cd C:\vcpkg
-        .\vcpkg install boost-filesystem:x64-windows boost-system:x64-windows
+        # Install all required Boost components for cogutil
+        .\vcpkg install boost-filesystem:x64-windows boost-system:x64-windows boost-thread:x64-windows boost-program-options:x64-windows boost-algorithm:x64-windows boost-lexical-cast:x64-windows
       shell: powershell
     
     - name: Build Component

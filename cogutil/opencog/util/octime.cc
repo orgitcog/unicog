@@ -25,6 +25,7 @@
 #include <time.h>
 #ifdef WIN32_NOT_UNIX
 #include <winsock2.h>
+#include <opencog/util/platform.h>  // For gettimeofday on Windows
 #else
 #include <sys/time.h>
 #endif

@@ -32,7 +32,14 @@
 #include <cstdlib>
 
 #include <errno.h>
+#ifdef _WIN32
+#include <io.h>
+#include <direct.h>
+#define getcwd _getcwd
+#define chdir _chdir
+#else
 #include <unistd.h>
+#endif
 
 // For backward compatibility as from boost 1.46 filesystem 3 is the default
 // as of boost 1.50 there is no version 2, and compiles will fail ;-(
