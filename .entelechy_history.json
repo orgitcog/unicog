@@ -15,6 +15,22 @@
       "fitness": 0.9435603751465417,
       "development_stage": "transcendent",
       "genome_id": "b70a648eb1fd4fe8"
+    },
+    {
+      "timestamp": "2025-12-17T17:35:27.986340Z",
+      "metrics": {
+        "actualization_score": 0.9522993278784336,
+        "coherence_score": 1.0,
+        "vitality_score": 0.6819955191895577,
+        "completeness_score": 1.0,
+        "alignment_score": 1.0,
+        "fitness": 0.9403741598480421,
+        "development_stage": "transcendent"
+      },
+      "fragmentations": 1,
+      "fitness": 0.9403741598480421,
+      "development_stage": "transcendent",
+      "genome_id": "ed24daf33116d28b"
     }
   ],
   "genomes": [
@@ -44,6 +60,35 @@
       "actualization_level": 0.9548483001172333,
       "birth_time": "2025-11-21T08:56:16.903448Z",
       "last_update": "2025-11-21T08:56:16.903451Z"
+    },
+    {
+      "id": "ed24daf33116d28b",
+      "generation": 1,
+      "lineage": [
+        "b70a648eb1fd4fe8"
+      ],
+      "genes": {
+        "ontological": [
+          1.0
+        ],
+        "teleological": [
+          1.0
+        ],
+        "cognitive": [
+          0.9522993278784336
+        ],
+        "integrative": [
+          1.0
+        ],
+        "evolutionary": [
+          0.6819955191895577
+        ]
+      },
+      "fitness": 0.9403741598480421,
+      "age": 0,
+      "actualization_level": 0.9522993278784336,
+      "birth_time": "2025-12-17T17:35:27.986333Z",
+      "last_update": "2025-12-17T17:35:27.986335Z"
     }
   ]
 }
