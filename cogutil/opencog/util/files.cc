@@ -38,12 +38,20 @@
 
 #ifdef WIN32_NOT_UNIX
 #include <direct.h>
-#define  mkdir _mkdir
+#include <io.h>
+#define mkdir _mkdir
+#define access _access
+#define F_OK 0
+#define R_OK 4
+#define W_OK 2
+#ifndef PATH_MAX
+#define PATH_MAX MAX_PATH
 #endif
-
+#else
 #include <unistd.h>
 #ifndef PATH_MAX
 #define PATH_MAX 1024
+#endif
 #endif
 
 

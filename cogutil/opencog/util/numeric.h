@@ -23,8 +23,18 @@
 #ifndef _OPENCOG_NUMERIC_H
 #define _OPENCOG_NUMERIC_H
 
+// Enable M_PI and other math constants on Windows
+#ifdef _WIN32
+#define _USE_MATH_DEFINES
+#endif
+
 #include <algorithm> // for std::max
 #include <cmath>
+
+// Fallback definition if M_PI is still not defined
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 #include <climits>
 #include <cstdlib>
 #include <limits>

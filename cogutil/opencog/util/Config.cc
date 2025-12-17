@@ -35,10 +35,17 @@
 #ifdef _WIN32
 #include <io.h>
 #include <direct.h>
+#include <windows.h>
 #define getcwd _getcwd
 #define chdir _chdir
+#ifndef PATH_MAX
+#define PATH_MAX MAX_PATH
+#endif
 #else
 #include <unistd.h>
+#ifndef PATH_MAX
+#define PATH_MAX 1024
+#endif
 #endif
 
 // For backward compatibility as from boost 1.46 filesystem 3 is the default
