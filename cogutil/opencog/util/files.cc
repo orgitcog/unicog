@@ -37,9 +37,10 @@
 #include <boost/algorithm/string/classification.hpp>
 
 #ifdef WIN32_NOT_UNIX
+#include <windows.h>
 #include <direct.h>
 #include <io.h>
-#define mkdir _mkdir
+#define mkdir(path, mode) _mkdir(path)
 #define access _access
 #define F_OK 0
 #define R_OK 4
@@ -47,6 +48,10 @@
 #ifndef PATH_MAX
 #define PATH_MAX MAX_PATH
 #endif
+// Windows doesn't have these Unix permission macros
+#define S_IRWXU 0700
+#define S_IRWXG 0070
+#define S_IRWXO 0007
 #else
 #include <unistd.h>
 #ifndef PATH_MAX
@@ -157,8 +162,8 @@ void opencog::expand_path(std::string& path)
 bool opencog::create_directory(const char* directory)
 {
 
-#ifdef WIN32_NOT_CYGWIN
-    if (mkdir(directory) == 0 || errno == EEXIST) {
+#ifdef WIN32_NOT_UNIX
+    if (_mkdir(directory) == 0 || errno == EEXIST) {
 #else
     if (mkdir(directory, S_IRWXU | S_IRWXG | S_IRWXO) == 0 || errno == EEXIST) {
 #endif
@@ -216,14 +221,22 @@ bool opencog::load_text_file(const std::string &fname, std::string& dest)
 std::string opencog::get_exe_name()
 {
     static char buf[PATH_MAX];
+#ifdef WIN32_NOT_UNIX
+    DWORD rslt = GetModuleFileNameA(NULL, buf, PATH_MAX);
+    if (rslt == 0 || rslt >= PATH_MAX) {
+        return std::string();
+    }
+    return std::string(buf);
+#else
     int rslt = readlink("/proc/self/exe", buf, PATH_MAX);
 
     if ( rslt < 0 || rslt >= PATH_MAX ) {
-        return NULL;
+        return std::string();
     }
 
     buf[rslt] = '\0';
-        return std::string(buf);
+    return std::string(buf);
+#endif
 }
 
 std::string opencog::get_exe_dir()
