@@ -10,6 +10,8 @@ ADD_LIBRARY (server SHARED
 	WebServer.cc
 )
 
+ADD_DEPENDENCIES(server network cogutil)
+
 TARGET_LINK_LIBRARIES(server
 	network
 	${ATOMSPACE_LIBRARIES}
