@@ -22,25 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// Windows headers must be included first to avoid conflicts
-#ifdef _WIN32
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#include <windows.h>
-#include <io.h>
-#include <direct.h>
-#define getcwd _getcwd
-#define chdir _chdir
-#ifndef PATH_MAX
-#define PATH_MAX MAX_PATH
-#endif
-#else
-#include <unistd.h>
-#ifndef PATH_MAX
-#define PATH_MAX 1024
-#endif
-#endif
-
 #include "Config.h"
 #include "Logger.h"
 
@@ -49,7 +30,9 @@
 #include <sstream>
 #include <cstdio>
 #include <cstdlib>
+
 #include <errno.h>
+#include <unistd.h>
 
 // For backward compatibility as from boost 1.46 filesystem 3 is the default
 // as of boost 1.50 there is no version 2, and compiles will fail ;-(

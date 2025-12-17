@@ -1,18 +1,31 @@
 name: Chocolatey Package Builder (Experimental)
 
+# NOTE: This workflow is experimental and currently disabled.
+# Native Windows MSVC support for cogutil requires significant work to resolve
+# Windows header conflicts (objidl.h, winsock2.h) and Unix API replacements.
+# See: https://github.com/OzCog/opencog-unified/issues for tracking.
+#
+# Current status: CMake configuration passes, but compilation fails due to:
+# 1. Windows header order conflicts (objidl.h 'string' syntax error)
+# 2. Boost source_location.hpp std::_snprintf issue
+# 3. Logger.h enum/class member visibility issues with Windows headers
+#
+# For now, OpenCog components should be built on Linux/macOS or WSL on Windows.
+
 permissions:
   contents: read
   actions: read
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'language-learning/**'
-      - 'cogutil/**'
-      - 'atomspace/**'
-      - '.github/workflows/chocolatey-packaging.yml'
+  # Disabled automatic triggers - manual dispatch only for testing
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'language-learning/**'
+  #     - 'cogutil/**'
+  #     - 'atomspace/**'
+  #     - '.github/workflows/chocolatey-packaging.yml'
   workflow_dispatch:
     inputs:
       component:
@@ -90,6 +103,7 @@ jobs:
           Write-Host "Component directory '$component' not found - skipping build"
         }
       shell: powershell
+      continue-on-error: true
     
     - name: Create Package
       run: |

@@ -21,19 +21,13 @@
  */
 
 #include <stdlib.h>
+#include <string>
 #include <time.h>
-
 #ifdef WIN32_NOT_UNIX
-// Windows headers must be included in specific order to avoid conflicts
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <winsock2.h>
-#include <opencog/util/platform.h>  // For gettimeofday on Windows
 #else
 #include <sys/time.h>
 #endif
-
-#include <string>
 
 #include <opencog/util/octime.h>
 #include <opencog/util/exceptions.h>
