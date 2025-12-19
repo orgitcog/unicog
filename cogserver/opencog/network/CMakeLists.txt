@@ -8,6 +8,8 @@ ADD_LIBRARY (network SHARED
 	WebSocket.cc
 )
 
+ADD_DEPENDENCIES(network cogutil)
+
 TARGET_LINK_LIBRARIES(network
 	${COGUTIL_LIBRARY}
 	# ${Boost_SYSTEM_LIBRARY}

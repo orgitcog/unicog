@@ -10,6 +10,8 @@ ADD_LIBRARY (persist-rocks SHARED
 	RocksPersistSCM.cc
 )
 
+ADD_DEPENDENCIES(persist-rocks atomspace)
+
 TARGET_LINK_LIBRARIES(persist-rocks
 	${ATOMSPACE_STORAGE_LIBRARIES}
 	${ATOMSPACE_LIBRARIES}

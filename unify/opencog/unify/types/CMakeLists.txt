@@ -22,7 +22,7 @@ TARGET_LINK_LIBRARIES(unify-types
 	${ATOMSPACE_LIBRARIES}
 )
 
-INSTALL (TARGETS unify-types
+INSTALL (TARGETS unify-types EXPORT AtomSpaceTargets
 	LIBRARY DESTINATION "lib${LIB_DIR_SUFFIX}/opencog"
 )
 
