@@ -146,3 +146,42 @@ Input
 Failed to store memory with error: Resource not found
 
 Now let me run a final code review to make sure everything is ready
+
+---
+
+Given the time constraints and complexity of the build system issues in a monorepo with complex interdependencies, let me store what we've learned and provide a clear summary:
+
+Call to store_memory
+Input
+{
+  "subject": "build system dependencies",
+  "fact": "OpenCog Unified monorepo requires explicit ADD_DEPENDENCIES declarations for parallel builds. Components like cogserver, atomspace-rocks must depend on cogutil/atomspace targets, not just link libraries.",
+  "citations": "cogserver/opencog/network/CMakeLists.txt:11-14, atomspace-rocks/opencog/persist/monospace/CMakeLists.txt:11-15, build failures showing race conditions",
+  "reason": "Future build system work will need to ensure all ADD_LIBRARY statements have corresponding ADD_DEPENDENCIES for their prerequisites. This prevents parallel build race conditions where headers aren't available yet. Critical for maintaining build stability as new components are added.",
+  "category": "bootstrap_and_build"
+}
+Failed to store memory with error: user is not authorized to create memories for this repository
+
+Call to store_memory
+Input
+{
+  "subject": "CMake configuration",
+  "fact": "System dependencies: libboost-all-dev, guile-3.0-dev, librocksdb-dev required. CMake export targets must include all dependent libraries (unify-types must export to AtomSpaceTargets since unify-atoms depends on it).",
+  "citations": "CMakeLists.txt CMake errors, unify/opencog/unify/types/CMakeLists.txt:25",
+  "reason": "Essential for any future CMake configuration work or when adding new components. Export consistency is critical for proper package finding in dependent components. Will prevent \"target requires target that is not in any export set\" errors.",
+  "category": "bootstrap_and_build"
+}
+Failed to store memory with error: user is not authorized to create memories for this repository
+
+Call to store_memory
+Input
+{
+  "subject": "entelechy framework status",
+  "fact": "System at 95.2% actualization (Transcendent stage), 68.2% vitality. Main weakness is 2,841 code markers (TODO/FIXME/STUB). Target >70% vitality by addressing high-priority markers.",
+  "citations": "User input: entelechy introspection output showing actualization: 95.2%, vitality: 68.2%, total markers: 2841",
+  "reason": "Critical context for prioritizing future work. The system has achieved structural completeness but needs implementation depth improvements. Code marker reduction directly improves vitality score and should be prioritized after build stabilization.",
+  "category": "general"
+}
+Failed to store memory with error: user is not authorized to create memories for this repository
+
+Let me provide a final comprehensive summary and commit the progress:
