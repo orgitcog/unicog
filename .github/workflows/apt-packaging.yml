@@ -67,7 +67,7 @@ jobs:
         tar -czf ../opencog-apt-repo-${{ github.event.inputs.distribution }}.tar.gz .
     
     - name: Upload Repository
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: opencog-apt-repo-${{ github.event.inputs.distribution }}
         path: opencog-apt-repo-*.tar.gz
