@@ -121,7 +121,7 @@ def skl_clustering(cd, n_clusters=10, **kwargs):
         # except: metrics['davies_bouldin_score'] = 0.0
 
         return labels, metrics, centroids
-    except:  # else:  # FIXME
+    except Exception:  # Handle clustering errors
         print('except: skl_clustering error')
         return np.asarray(range(cd.shape[0])), \
                {'clustering': 'skl_clustering error'}, []

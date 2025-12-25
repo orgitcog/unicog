@@ -141,7 +141,7 @@ def jaccard(x, y):
     try:
         xx = set(x)
         yy = set(y)
-    except:
+    except (TypeError, ValueError):
         return 0
     if len(xx) == 0 or len(yy) == 0:
         return 0
@@ -155,7 +155,7 @@ def squared(x, y):
     try:
         xx = set(x)
         yy = set(y)
-    except:
+    except (TypeError, ValueError):
         return 0
     if len(xx) == 0 or len(yy) == 0:
         return 0

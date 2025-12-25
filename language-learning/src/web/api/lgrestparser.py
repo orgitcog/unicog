@@ -163,11 +163,6 @@ class LinkParserResource:
             link_list["errors"].append(error_msg)
             logging.error(error_msg)
 
-        except:
-            error_msg = "Unhandled exception."
-            link_list["errors"].append(error_msg)
-            logging.error(error_msg)
-
         # Return proper JSON output
         resp.body = json.dumps(link_list)
         resp.status = falcon.HTTP_200

@@ -299,7 +299,7 @@ def iterate(**kwargs):                                                  # 90204
             table.append([str(i), str(n), str(int(round(pa * 100, 0))) + '%,',
                           str(round(f1, 2))])
             kwargs['input_grammar'] = re['grammar_file']
-        except: break
+        except Exception: break
         if n < 4: break
         elif n == np:           # Stop if same number of clusters as previous iteration
             return table, re

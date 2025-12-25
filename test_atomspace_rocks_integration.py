@@ -88,7 +88,7 @@ def test_rocksdb_library():
             else:
                 print("✗ RocksDB library not found")
                 return False
-    except:
+    except Exception:
         print("✗ Error checking RocksDB library")
         return False
 

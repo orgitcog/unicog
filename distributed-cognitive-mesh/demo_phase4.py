@@ -203,7 +203,7 @@ class CognitiveMeshAPIDemo:
                 timeout=2
             )
             return response.status_code == 200
-        except:
+        except Exception:
             return False
     
     def get_agent_state(self, agent_id: str) -> Dict:
@@ -212,7 +212,7 @@ class CognitiveMeshAPIDemo:
             response = requests.get(f"{self.api_base_url}/agents/{agent_id}/state", timeout=2)
             if response.status_code == 200:
                 return response.json()
-        except:
+        except Exception:
             pass
         return {}
     
@@ -222,7 +222,7 @@ class CognitiveMeshAPIDemo:
             response = requests.get(f"{self.api_base_url}/agents/{agent_id}/embodiment", timeout=2)
             if response.status_code == 200:
                 return response.json()
-        except:
+        except Exception:
             pass
         return {}
 

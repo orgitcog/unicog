@@ -102,7 +102,7 @@ def number_of_clusters(vdf, cluster_range, algorithm='kmeans', \
         if len(list(dct.values())) == len(set(list(dct.values()))):
             try:
                 n3 = mode(lst)
-            except:
+            except Exception:
                 # If mode() fails (e.g., no unique mode), use the mean
                 n3 = n_clusters
                 logger.debug(f"mode() failed, using mean value: {n3}")
