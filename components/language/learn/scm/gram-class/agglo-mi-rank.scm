@@ -42,7 +42,6 @@
 ; Main entry point:
 ; * Call `in-group-mi-cluster`, below.
 ;
-; TODO:
 ; * Before each merge step, a new AtomSpace frame should be created, so
 ;   that the pre-merge data remains available.  This is not being done.
 ;   It's really easy to add, but ... nothing needs this yet.

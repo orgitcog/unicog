@@ -39,7 +39,6 @@ OpenPsiImplicator::OpenPsiImplicator(AtomSpace* as)
 TruthValuePtr OpenPsiImplicator::check_satisfiability(const Handle& rule,
     OpenPsiRules& opr)
 {
-  // TODO:
   // Solve for multithreaded access. Create a rule class and lock
   // the rule when updating the cache.
 

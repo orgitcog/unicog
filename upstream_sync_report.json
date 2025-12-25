@@ -1,0 +1,299 @@
+{
+  "fixes": [
+    {
+      "repo": "atomspace",
+      "commit_sha": "ce231e7b",
+      "commit_date": "Fri Dec 19 18:04:22 2025 +0000",
+      "file_path": "opencog/atoms/value/GroupStream.cc",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Inherit the base container update",
+      "diff_snippet": "--- a/opencog/atoms/value/GroupStream.cc\n+++ b/opencog/atoms/value/GroupStream.cc\n-void GroupStream::update() const\n-{\n-\t// TODO: Return next bucket\n-}\n-// ==============================================================",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "dd0d1628",
+      "commit_date": "Fri Dec 19 06:53:24 2025 +0000",
+      "file_path": "opencog/atoms/value/GroupStream.cc",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Implement grouping container add",
+      "diff_snippet": "--- a/opencog/atoms/value/GroupStream.cc\n+++ b/opencog/atoms/value/GroupStream.cc\n-\t// TODO: Assign item to appropriate bucket\n+\tadd(ValuePtr(vp));\n+/// Add one item to the stream. The item is placed into a bucket\n+/// with other equivalent items. If no equivalent bucket exists,\n+/// a new bucket is created. If the item is a VoidValue or an\n+/// empty LinkValue, the stream closes.\n-\t// TODO: Assign item to appropriate bucket\n+\t// VoidValue or empty LinkValue signals end-of-stream.",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "86995953",
+      "commit_date": "Fri Dec 19 05:53:12 2025 +0000",
+      "file_path": "opencog/atoms/value/GroupStream.cc",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Implement the equivalence relation.",
+      "diff_snippet": "--- a/opencog/atoms/value/GroupStream.cc\n+++ b/opencog/atoms/value/GroupStream.cc\n+// Set up the equivalence comparator by wrapping the given relation in\n+// an ExecutionOutputLink, fed by a pair of ValueShims that will pass\n+// the Values into the relation.\n-\t// TODO: Set up the equivalence comparator\n+\t// ValueShims for left and right comparison arguments\n+\t_left_shim = createValueShimLink();\n+\t_right_shim = createValueShimLink();\n+\t// The ExecutionOutputLink provides general machinery that can run",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "545fb800",
+      "commit_date": "Fri Dec 19 02:20:54 2025 +0000",
+      "file_path": "CMakeLists.txt",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Centralize, simplify test options",
+      "diff_snippet": "--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n-# ----------------------------------------------------------\n-# Optional, but needed for unit tests.\n-FIND_PACKAGE(Cxxtest)\n-IF (CXXTEST_FOUND)\n-\tMESSAGE(STATUS \"CxxTest found.\")\n-ELSE (CXXTEST_FOUND)\n-\tMESSAGE(STATUS \"CxxTest missing: needed for unit tests.\")\n-ENDIF (CXXTEST_FOUND)",
+      "applicable": true
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "0fb885b4",
+      "commit_date": "Thu Dec 25 19:21:31 2025 +0000",
+      "file_path": "opencog/atoms/value/UnisetValue.cc",
+      "marker_type": "\\bFIXME\\b",
+      "fix_description": "remove remove() to base class",
+      "diff_snippet": "--- a/opencog/atoms/value/UnisetValue.cc\n+++ b/opencog/atoms/value/UnisetValue.cc\n-#if 1\n-\t// XXX FIXME ... I don't know if this is correct. It might be.\n-\t// At any rate, no unit test expects this.\n-\t//\n-\t\tif (0 == size())\n+\t\tif (0 == _value.size())\n-#endif",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "798d3e1d",
+      "commit_date": "Tue Dec 23 01:42:46 2025 -0600",
+      "file_path": "opencog/query/PatternMatchEngine.cc",
+      "marker_type": "\\bFIXME\\b",
+      "fix_description": "Revert earlier attempt; its on the wrong track.",
+      "diff_snippet": "--- a/opencog/query/PatternMatchEngine.cc\n+++ b/opencog/query/PatternMatchEngine.cc\n-/**\n- * Explore a clause that is an AlwaysLink. Such clauses wrap evaluatable\n- * predicates which must evaluate to true for every possible grounding\n- * of the variables that they contain. Thus, an exhaustive search must\n- * be made of those groundings, before continuing.\n- */\n-bool PatternMatchEngine::explore_clause_always(const PatternTermPtr& term,\n-                                               const Handle& grnd,",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "f50e87e6",
+      "commit_date": "Tue Dec 23 00:36:26 2025 -0600",
+      "file_path": "opencog/query/PatternMatchEngine.cc",
+      "marker_type": "\\bFIXME\\b",
+      "fix_description": "Reverse the evaluation order.",
+      "diff_snippet": "--- a/opencog/query/PatternMatchEngine.cc\n+++ b/opencog/query/PatternMatchEngine.cc\n-\t// XXX FIXME just a stub, right now. i.e. broken.\n-\tif (pclause->hasAnyEvaluatable())\n-\t\treturn explore_clause_evaluatable(term, grnd, pclause);\n+\tif (not pclause->hasAnyEvaluatable())\n+\t\treturn explore_clause_cacheable(term, grnd, pclause);\n-\treturn explore_clause_cacheable(term, grnd, pclause);\n+\t// XXX FIXME just a stub, right now. i.e. broken.\n+\treturn explore_clause_evaluatable(term, grnd, pclause);",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "5470173a",
+      "commit_date": "Sat Dec 20 04:49:36 2025 +0000",
+      "file_path": "opencog/atoms/pattern/PatternLink.cc",
+      "marker_type": "\\bFIXME\\b",
+      "fix_description": "Remove GroupLink from query engine",
+      "diff_snippet": "--- a/opencog/atoms/pattern/PatternLink.cc\n+++ b/opencog/atoms/pattern/PatternLink.cc\n-\tlocate_defines(_pat.grouping);\n-\tclauses_get_variables(_pat.grouping);\n-\tlocate_cacheable(_pat.grouping);\n-\t// Also check absents, always, grouping\n+\t// Also check absents, always\n-\tfor (const PatternTermPtr& ptm : _pat.grouping)\n-\t\tcollect_exclusives_recursive(ptm);\n-\t\t// BTW, any `absents`, `always` and `grouping` are probably",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "a66dacb2",
+      "commit_date": "Tue Dec 16 16:09:06 2025 -0600",
+      "file_path": "lib/AtomSpaceConfig.cmake.in",
+      "marker_type": "\\bFIXME\\b",
+      "fix_description": "Update CMake build info",
+      "diff_snippet": "--- a/lib/AtomSpaceConfig.cmake.in\n+++ b/lib/AtomSpaceConfig.cmake.in\n-# These names are used in various projects e.g. opencog, as-moses, etc.\n-# XXX FIXME ... they probably should not be! It would be best if the all\n-# of the libs were specified i.e. LINK_LIBRARIES(${ATOMSPACE_LIBRARIES})\n-set(ATOMSPACE_LIBRARY atomspace)\n-set(ATOMSPACE_atombase_LIBRARY atombase)\n-set(ATOMSPACE_atomcore_LIBRARY atomcore)\n-set(ATOMSPACE_atomflow_LIBRARY atomflow)\n-set(ATOMSPACE_atomproto_LIBRARY value)",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "7f20c9d5",
+      "commit_date": "Mon Dec 15 03:47:47 2025 +0000",
+      "file_path": "opencog/cython/opencog/type_constructors.pyx",
+      "marker_type": "\\bFIXME\\b",
+      "fix_description": "Python: ditch opencog.type_constructors module",
+      "diff_snippet": "--- a/opencog/cython/opencog/type_constructors.pyx\n+++ /dev/null\n-#\n-# This file reads files that are generated by the OPENCOG_ADD_ATOM_TYPES\n-# macro so they can be imported using:\n-#\n-# from type_constructors import *\n-#\n-# This imports all the python wrappers for atom creation.\n-#",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "ac98c3b1",
+      "commit_date": "Wed Dec 10 21:42:52 2025 +0000",
+      "file_path": "cmake/OpenCogGenPythonTypes.cmake",
+      "marker_type": "\\bFIXME\\b",
+      "fix_description": "Do not generate atom types for the *_SIG mixin",
+      "diff_snippet": "--- a/cmake/OpenCogGenPythonTypes.cmake\n+++ b/cmake/OpenCogGenPythonTypes.cmake\n-\tIF (NOT TYPE_NAME STREQUAL \"Atom\")\n-\t\t# XXX This is broken in two ways. First, createValue() is\n-\t\t# a C++ template, and so it can't be used like this.\n-\t\t# Also, PYTHON_SUPPORTED_VALUE_LIST is an empty list (above)\n-\t\t# so this is a no-op, anyway. XXX FIXME someday, I guess\n-\t\t# Until then, the value ctors are hard-coded into\n-\t\t# opencog/cython/opencog/type_constructors.pyx\n-\t\tIF (ISVALUE STREQUAL \"VALUE\" OR ISSTREAM STREQUAL \"STREAM\")",
+      "applicable": true
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "0fb885b4",
+      "commit_date": "Thu Dec 25 19:21:31 2025 +0000",
+      "file_path": "opencog/atoms/value/UnisetValue.cc",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "remove remove() to base class",
+      "diff_snippet": "--- a/opencog/atoms/value/UnisetValue.cc\n+++ b/opencog/atoms/value/UnisetValue.cc\n-#if 1\n-\t// XXX FIXME ... I don't know if this is correct. It might be.\n-\t// At any rate, no unit test expects this.\n-\t//\n-\t\tif (0 == size())\n+\t\tif (0 == _value.size())\n-#endif",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "798d3e1d",
+      "commit_date": "Tue Dec 23 01:42:46 2025 -0600",
+      "file_path": "opencog/query/PatternMatchEngine.cc",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Revert earlier attempt; its on the wrong track.",
+      "diff_snippet": "--- a/opencog/query/PatternMatchEngine.cc\n+++ b/opencog/query/PatternMatchEngine.cc\n-/**\n- * Explore a clause that is an AlwaysLink. Such clauses wrap evaluatable\n- * predicates which must evaluate to true for every possible grounding\n- * of the variables that they contain. Thus, an exhaustive search must\n- * be made of those groundings, before continuing.\n- */\n-bool PatternMatchEngine::explore_clause_always(const PatternTermPtr& term,\n-                                               const Handle& grnd,",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "f50e87e6",
+      "commit_date": "Tue Dec 23 00:36:26 2025 -0600",
+      "file_path": "opencog/query/PatternMatchEngine.cc",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Reverse the evaluation order.",
+      "diff_snippet": "--- a/opencog/query/PatternMatchEngine.cc\n+++ b/opencog/query/PatternMatchEngine.cc\n-\t// XXX FIXME just a stub, right now. i.e. broken.\n-\tif (pclause->hasAnyEvaluatable())\n-\t\treturn explore_clause_evaluatable(term, grnd, pclause);\n+\tif (not pclause->hasAnyEvaluatable())\n+\t\treturn explore_clause_cacheable(term, grnd, pclause);\n-\treturn explore_clause_cacheable(term, grnd, pclause);\n+\t// XXX FIXME just a stub, right now. i.e. broken.\n+\treturn explore_clause_evaluatable(term, grnd, pclause);",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "5470173a",
+      "commit_date": "Sat Dec 20 04:49:36 2025 +0000",
+      "file_path": "opencog/atoms/pattern/PatternLink.cc",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Remove GroupLink from query engine",
+      "diff_snippet": "--- a/opencog/atoms/pattern/PatternLink.cc\n+++ b/opencog/atoms/pattern/PatternLink.cc\n-\tlocate_defines(_pat.grouping);\n-\tclauses_get_variables(_pat.grouping);\n-\tlocate_cacheable(_pat.grouping);\n-\t// Also check absents, always, grouping\n+\t// Also check absents, always\n-\tfor (const PatternTermPtr& ptm : _pat.grouping)\n-\t\tcollect_exclusives_recursive(ptm);\n-\t\t// BTW, any `absents`, `always` and `grouping` are probably",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "a66dacb2",
+      "commit_date": "Tue Dec 16 16:09:06 2025 -0600",
+      "file_path": "lib/AtomSpaceConfig.cmake.in",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Update CMake build info",
+      "diff_snippet": "--- a/lib/AtomSpaceConfig.cmake.in\n+++ b/lib/AtomSpaceConfig.cmake.in\n-# These names are used in various projects e.g. opencog, as-moses, etc.\n-# XXX FIXME ... they probably should not be! It would be best if the all\n-# of the libs were specified i.e. LINK_LIBRARIES(${ATOMSPACE_LIBRARIES})\n-set(ATOMSPACE_LIBRARY atomspace)\n-set(ATOMSPACE_atombase_LIBRARY atombase)\n-set(ATOMSPACE_atomcore_LIBRARY atomcore)\n-set(ATOMSPACE_atomflow_LIBRARY atomflow)\n-set(ATOMSPACE_atomproto_LIBRARY value)",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "7f20c9d5",
+      "commit_date": "Mon Dec 15 03:47:47 2025 +0000",
+      "file_path": "opencog/cython/opencog/type_constructors.pyx",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Python: ditch opencog.type_constructors module",
+      "diff_snippet": "--- a/opencog/cython/opencog/type_constructors.pyx\n+++ /dev/null\n-#\n-# This file reads files that are generated by the OPENCOG_ADD_ATOM_TYPES\n-# macro so they can be imported using:\n-#\n-# from type_constructors import *\n-#\n-# This imports all the python wrappers for atom creation.\n-#",
+      "applicable": false
+    },
+    {
+      "repo": "atomspace",
+      "commit_sha": "ac98c3b1",
+      "commit_date": "Wed Dec 10 21:42:52 2025 +0000",
+      "file_path": "cmake/OpenCogGenPythonTypes.cmake",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Do not generate atom types for the *_SIG mixin",
+      "diff_snippet": "--- a/cmake/OpenCogGenPythonTypes.cmake\n+++ b/cmake/OpenCogGenPythonTypes.cmake\n-\tIF (NOT TYPE_NAME STREQUAL \"Atom\")\n-\t\t# XXX This is broken in two ways. First, createValue() is\n-\t\t# a C++ template, and so it can't be used like this.\n-\t\t# Also, PYTHON_SUPPORTED_VALUE_LIST is an empty list (above)\n-\t\t# so this is a no-op, anyway. XXX FIXME someday, I guess\n-\t\t# Until then, the value ctors are hard-coded into\n-\t\t# opencog/cython/opencog/type_constructors.pyx\n-\t\tIF (ISVALUE STREQUAL \"VALUE\" OR ISSTREAM STREQUAL \"STREAM\")",
+      "applicable": true
+    },
+    {
+      "repo": "cogutil",
+      "commit_sha": "5702f8d5",
+      "commit_date": "Fri Dec 19 01:58:23 2025 +0000",
+      "file_path": "CMakeLists.txt",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Move cxxtest boilerplate out of the way",
+      "diff_snippet": "--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n-FIND_PACKAGE(Cxxtest)\n-IF (NOT CXXTEST_FOUND)\n-\tMESSAGE(STATUS \"CxxTest missing: needed for unit tests.\")\n-ENDIF (NOT CXXTEST_FOUND)\n+# CxxTest setup (also provides OPENCOG_SETUP_TESTING macro)\n+INCLUDE(OpenCogTestOptions)\n-IF (CXXTEST_FOUND)\n-\t# Enable CTest support so that 'ctest' command works",
+      "applicable": true
+    },
+    {
+      "repo": "cogutil",
+      "commit_sha": "951f626a",
+      "commit_date": "Sun Dec 7 02:13:02 2025 +0000",
+      "file_path": "opencog/util/async_buffer.h",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Avoid busy spinloops, use c++20 atomic::wait",
+      "diff_snippet": "--- a/opencog/util/async_buffer.h\n+++ b/opencog/util/async_buffer.h\n-#include <unistd.h> /* for usleep() */\n- *\n- * Another issue is that the assorted loops to drain queues use\n- * spin-loops and usleeps. I think this is mostly harmless, but is\n- * impure, and should be replaced by CV's. Doing so becomes much easier\n- * once C++20 is widely available, as it has CV's on std::atomic ints.\n-\t// Spin a while, until the writer threads are (mostly) done.\n+\t// Wait until the writer threads are (mostly) done.",
+      "applicable": false
+    },
+    {
+      "repo": "cogutil",
+      "commit_sha": "30e9aef6",
+      "commit_date": "Wed Dec 10 14:11:52 2025 -0600",
+      "file_path": "opencog/util/getopt_long.c",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Remove decade-old MSWindows portability files.",
+      "diff_snippet": "--- a/opencog/util/getopt_long.c\n+++ /dev/null\n-/*  $NetBSD: getopt_long.c,v 1.15 2002/01/31 22:43:40 tv Exp $  */\n-/*  $FreeBSD: src/lib/libc/stdlib/getopt_long.c,v 1.2 2002/10/16 22:18:42 alfred Exp $ */\n-/*-\n- * Copyright (c) 2000 The NetBSD Foundation, Inc.\n- * All rights reserved.\n- *\n- * This code is derived from software contributed to The NetBSD Foundation\n- * by Dieter Baron and Thomas Klausner.",
+      "applicable": false
+    },
+    {
+      "repo": "cogutil",
+      "commit_sha": "951f626a",
+      "commit_date": "Sun Dec 7 02:13:02 2025 +0000",
+      "file_path": "opencog/util/async_buffer.h",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Avoid busy spinloops, use c++20 atomic::wait",
+      "diff_snippet": "--- a/opencog/util/async_buffer.h\n+++ b/opencog/util/async_buffer.h\n-#include <unistd.h> /* for usleep() */\n- *\n- * Another issue is that the assorted loops to drain queues use\n- * spin-loops and usleeps. I think this is mostly harmless, but is\n- * impure, and should be replaced by CV's. Doing so becomes much easier\n- * once C++20 is widely available, as it has CV's on std::atomic ints.\n-\t// Spin a while, until the writer threads are (mostly) done.\n+\t// Wait until the writer threads are (mostly) done.",
+      "applicable": false
+    },
+    {
+      "repo": "cogserver",
+      "commit_sha": "5ebdf134",
+      "commit_date": "Fri Dec 19 02:51:41 2025 +0000",
+      "file_path": "CMakeLists.txt",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Remove cxxtest boilerplate",
+      "diff_snippet": "--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n-# ----------------------------------------------------------\n-# Needed for unit tests\n-FIND_PACKAGE(Cxxtest)\n-IF (NOT CXXTEST_FOUND)\n-\tMESSAGE(STATUS \"CxxTest missing: needed for unit tests.\")\n-ENDIF (NOT CXXTEST_FOUND)\n-IF (CXXTEST_FOUND)\n-\tENABLE_TESTING()",
+      "applicable": true
+    },
+    {
+      "repo": "cogserver",
+      "commit_sha": "fe430183",
+      "commit_date": "Fri Dec 12 21:49:14 2025 +0000",
+      "file_path": "opencog/cogserver/server/README.md",
+      "marker_type": "\\bTODO\\b",
+      "fix_description": "Remove Config.h",
+      "diff_snippet": "--- a/opencog/cogserver/server/README.md\n+++ b/opencog/cogserver/server/README.md\n-Future Plans\n-------------\n-There will be a `CogServerNode`, derived from `ObjectNode`, accepting\n-object messages. Each of the loadable modules should also be some form\n+CogServerNode\n+-------------\n+The `CogServerNode`, derived from `ObjectNode`, accepts object messages\n+for control. Each of the loadable modules should also be some form",
+      "applicable": false
+    },
+    {
+      "repo": "cogserver",
+      "commit_sha": "cafe3fd4",
+      "commit_date": "Sun Dec 14 02:26:26 2025 +0000",
+      "file_path": "opencog/cogserver/scm/cogserver.scm",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Remove leftover crud from an earlier era",
+      "diff_snippet": "--- a/opencog/cogserver/scm/cogserver.scm\n+++ b/opencog/cogserver/scm/cogserver.scm\n+; This is a convenience wrapper around the CogSewrverNode\n-  start-cogserver #:logfile \\\"/tmp/cogserver.log\\\"\n-; To stop the repl server..\n-(use-modules (system repl server))\n-\t; The start-cogserver also starts a repl shell on port 18001\n-\t; so we stop that, here ... XXX what?? where ?\n-\t;   (stop-server-and-clients!)  ???",
+      "applicable": false
+    },
+    {
+      "repo": "cogserver",
+      "commit_sha": "d3a525be",
+      "commit_date": "Sat Dec 13 07:21:10 2025 +0000",
+      "file_path": "opencog/cogserver/server/ServerConsole.cc",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Get rid of hacks to find the prompt strings",
+      "diff_snippet": "--- a/opencog/cogserver/server/ServerConsole.cc\n+++ b/opencog/cogserver/server/ServerConsole.cc\n-#include <opencog/cogserver/types/atom_types.h>\n-ServerConsole::ServerConsole(CogServer& cs, SocketManager* mgr) :\n+ServerConsole::ServerConsole(const Handle& hcsn, CogServer& cs, SocketManager* mgr) :\n-\t// Get the CogServerNode to retrieve prompt settings.\n-\tAtomSpacePtr asp = cs.getAS();\n-\tHandle h = asp->get_node(COG_SERVER_NODE, \"cogserver\");\n-\tif (nullptr == h)\n-\t\th = asp->get_node(COG_SERVER_NODE, \"test-cogserver\");",
+      "applicable": false
+    },
+    {
+      "repo": "cogserver",
+      "commit_sha": "c53a7037",
+      "commit_date": "Sat Dec 13 05:48:44 2025 +0000",
+      "file_path": "opencog/cogserver/atoms/CogServerNode.cc",
+      "marker_type": "\\bXXX\\b",
+      "fix_description": "Remove the temp hacks added during migration",
+      "diff_snippet": "--- a/opencog/cogserver/atoms/CogServerNode.cc\n+++ b/opencog/cogserver/atoms/CogServerNode.cc\n-\t// XXX HACK: Keep shadow copy that never becomes null.\n-\t// This is needed because unit tests call clear() which nulls\n-\t// Atom::_atom_space, but getAS() must always return valid ptr.\n-\t_shadow_as = AtomSpaceCast(as);\n-\treturn _shadow_as;\n+\treturn AtomSpaceCast(_atom_space);\n-//--- XXX REMOVE ME temp hackery until atomspace-cog unit tests ported.\n-CogServer& opencog::cogserver(void)",
+      "applicable": false
+    },
+    {
+      "repo": "cogserver",
+      "commit_sha": "d3a525be",
+      "commit_date": "Sat Dec 13 07:21:10 2025 +0000",
+      "file_path": "opencog/cogserver/server/ServerConsole.cc",
+      "marker_type": "\\bHACK\\b",
+      "fix_description": "Get rid of hacks to find the prompt strings",
+      "diff_snippet": "--- a/opencog/cogserver/server/ServerConsole.cc\n+++ b/opencog/cogserver/server/ServerConsole.cc\n-#include <opencog/cogserver/types/atom_types.h>\n-ServerConsole::ServerConsole(CogServer& cs, SocketManager* mgr) :\n+ServerConsole::ServerConsole(const Handle& hcsn, CogServer& cs, SocketManager* mgr) :\n-\t// Get the CogServerNode to retrieve prompt settings.\n-\tAtomSpacePtr asp = cs.getAS();\n-\tHandle h = asp->get_node(COG_SERVER_NODE, \"cogserver\");\n-\tif (nullptr == h)\n-\t\th = asp->get_node(COG_SERVER_NODE, \"test-cogserver\");",
+      "applicable": false
+    },
+    {
+      "repo": "cogserver",
+      "commit_sha": "c53a7037",
+      "commit_date": "Sat Dec 13 05:48:44 2025 +0000",
+      "file_path": "opencog/cogserver/atoms/CogServerNode.cc",
+      "marker_type": "\\bHACK\\b",
+      "fix_description": "Remove the temp hacks added during migration",
+      "diff_snippet": "--- a/opencog/cogserver/atoms/CogServerNode.cc\n+++ b/opencog/cogserver/atoms/CogServerNode.cc\n-\t// XXX HACK: Keep shadow copy that never becomes null.\n-\t// This is needed because unit tests call clear() which nulls\n-\t// Atom::_atom_space, but getAS() must always return valid ptr.\n-\t_shadow_as = AtomSpaceCast(as);\n-\treturn _shadow_as;\n+\treturn AtomSpaceCast(_atom_space);\n-//--- XXX REMOVE ME temp hackery until atomspace-cog unit tests ported.\n-CogServer& opencog::cogserver(void)",
+      "applicable": false
+    }
+  ],
+  "summary": {
+    "total_fixes": 29,
+    "applicable_fixes": 5,
+    "repos_with_fixes": 3
+  }
+}

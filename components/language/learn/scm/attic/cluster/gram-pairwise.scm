@@ -185,7 +185,6 @@
 ; of the two is already a word-class, then the counts are simply moved
 ; from the word to the class.
 ;
-; TODO
 ; ----
 ; It might be useful to move the management of the MemberLink's to
 ; the `add-gram-class-api` object.

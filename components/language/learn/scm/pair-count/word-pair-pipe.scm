@@ -21,7 +21,6 @@
 ; and
 ;    run-common/cogserver-pair.scm:(define (observe-block-pairs TXT)
 ;
-; TODO:
 ; * Need ((add-count-api LLOBJ) 'count-key) to replace hard-coded count
 ;   But this is not urgent, because the count-api itself is hard coded.
 

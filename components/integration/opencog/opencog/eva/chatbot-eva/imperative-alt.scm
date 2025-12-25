@@ -55,6 +55,12 @@
 ; possible direction to explore.
 
 ;--------------------------------------------------------------------
+;
+; DEPRECATED: NEEDS REVIEW: r2l-sets format changed, code may be outdated
+; Replacement: None
+; Date: 2025-12-25
+;
+
 (use-modules (opencog) (opencog nlp) (opencog exec))
 (use-modules (opencog nlp fuzzy))
 (use-modules (opencog nlp relex2logic))

@@ -45,7 +45,6 @@ double calculate_weight(const Handle& bdy, double cpx_fctr)
 	// The minimum value is 1e-16 to not ignore completely the source
 	// when the it is a default TV.
 	//
-	// TODO:
 	// 1. Support more fitness functions
 	// 2. Explicitely turn the fitness into a probability of success
 	TruthValuePtr tv = bdy->getTruthValue();

@@ -36,7 +36,6 @@
 ;   of the individual Edges in that Section. (The edges are effectively
 ;   word-pairs, although this depends on the dictionary.)
 ;
-; TODO:
 ; * Need ((add-count-api LLOBJ) 'count-key) to replace hard-coded count
 ;   But this is not urgent, because the count-api itself is hard coded.
 

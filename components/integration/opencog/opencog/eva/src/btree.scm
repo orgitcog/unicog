@@ -27,6 +27,12 @@
 ;
 ; Unit testing:  See `unit-test.scm` and also notes in `behavior.scm`.
 ;
+;
+; DEPRECATED: Replaced by btree-psi.scm with PSI integration
+; Replacement: components/integration/opencog/opencog/eva/src/btree-psi.scm
+; Date: 2025-12-25
+;
+
 (use-modules (opencog))
 (load "time-map.scm") ;;; octomap for faces
 ; Start the cogsserver.  It is used by the face-tracker to poke data

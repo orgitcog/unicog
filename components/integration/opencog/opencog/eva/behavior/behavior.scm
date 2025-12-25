@@ -16,7 +16,6 @@
 ; Pause the main loop:
 ;    (halt)
 ;
-; TODO:
 ; -----
 ; The current OpenPsi framework allows much more general and flexible
 ; rules than what are presented below; this geneality should be made
