@@ -14,7 +14,7 @@ path_out = sys.argv[2]
 
 try:
     os.stat(path_out)
-except:
+except OSError:
     os.mkdir(path_out)
 
 for filename in glob.iglob(path + '*'):

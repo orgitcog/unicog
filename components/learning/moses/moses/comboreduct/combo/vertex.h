@@ -502,7 +502,6 @@ inline size_t hash_value(const vertex& v) noexcept
         size_t tmp = c_last;
         std::cout << pc << std::endl;
         // WARNING: Use the boost namespace (see above)
-        // TODO
         // hash_combine(tmp, boost::hash_value(*pc));
         return tmp;
     }

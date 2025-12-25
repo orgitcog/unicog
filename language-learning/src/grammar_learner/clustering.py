@@ -127,7 +127,7 @@ def number_of_clusters(vdf, **kwargs):                                  # 90104
         if len(list(dct.values())) == len(set(list(dct.values()))):
             try:
                 n3 = mode(lst)
-            except:
+            except Exception:
                 # If mode() fails (e.g., no unique mode), use the mean
                 n3 = n_clusters
                 logger.debug(f"mode() failed, using mean value: {n3}")
@@ -168,7 +168,7 @@ def best_clusters(vdf, **kwargs):                                       # 90104
             if len(algo) > 1 and algo[1][0] == 'r': init = 'random'
             if len(algo) > 2:
                 try: n_init = int(algo[2])
-                except: n_init = 10
+                except ValueError: n_init = 10
 
     if crange[0] == crange[1]:  # given n_clusters
         if len(crange) > 2 and crange[2] > 1:  # run crange[2] times
@@ -177,7 +177,7 @@ def best_clusters(vdf, **kwargs):                                       # 90104
                 try:
                     c, s, i = cluster_words_kmeans(vdf, crange[0], init, n_init)
                     lst.append((n, crange[0], c, s, i))
-                except:
+                except Exception:
                     if n == crange[2] - 1 and len(lst) == 0:
                         return 0, 0, 0
                     else:
@@ -203,7 +203,7 @@ def best_clusters(vdf, **kwargs):                                       # 90104
                 try:
                     c, s, i = cluster_words_kmeans(vdf, n_clstrs, init, n_init)
                     lst.append((n, n_clstrs, c, s, i))
-                except:
+                except Exception:
                     if n == crange[3] - 1 and len(lst) == 0:
                         return 0, 0, 0
                     else:
@@ -230,7 +230,7 @@ def best_clusters(vdf, **kwargs):                                       # 90104
             try:
                 c, s, i = cluster_words_kmeans(vdf, max_clusters, init, n_init)
                 break
-            except:
+            except Exception:
                 max_clusters -= 1
         n_clusters = max_clusters  # 80623: cure case max < crange.min
         if level < 0.1:
@@ -247,7 +247,7 @@ def best_clusters(vdf, **kwargs):                                       # 90104
                         c, s, i = cluster_words_kmeans(vdf, min_clusters,
                                                        init, n_init)
                         break
-                    except:
+                    except Exception:
                         min_clusters += 1
             lst.append((1, min_clusters, c, s, i))
             middle = int((min_clusters + max_clusters) / 2)

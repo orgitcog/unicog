@@ -50,7 +50,7 @@ def learn_categories(links, **kwargs):
         try:
             dim = vector_space_dim(links, dict_path, tmpath, dim_max, sv_min,
                                    verbose)
-        except:  # FIXME
+        except Exception:  # FIXME
             dim = dim_max
         log.update({'vector_space_dim': dim})
 

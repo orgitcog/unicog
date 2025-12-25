@@ -201,7 +201,7 @@ def table_rows(lines, out_dir, cp, rp, runs=(1, 1), **kwargs):
                 else:
                     s = 0
                     s_str = ' --- '
-            except:  # else: #
+            except Exception:  # Handle learn_grammar errors
                 logger.critical('pqa_table.py table_rows:',
                                 'learn_grammar(**kwargs) ⇒ exception:\n',
                                 sys.exc_info())
@@ -417,7 +417,7 @@ def wide_rows(lines, out_dir, cp, rp, runs=(1, 1), **kwargs):
                 else:
                     s = 0
                     s_str = ' --- '
-            except:  # else: #
+            except Exception:  # Handle learn_grammar errors
                 logger.critical('pqa_table.py wide_rows:',
                                 'learn_grammar(**kwargs) ⇒ exception:\n',
                                 sys.exc_info())

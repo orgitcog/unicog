@@ -108,12 +108,12 @@ def skl_clustering(cd, n_clusters=10, **kwargs):
         try:
             metrics['silhouette_index'] = float(
                 silhouette_score(cd, labels, metric=clustering_metric[1]))
-        except:  # FIXME
+        except Exception:  # FIXME
             metrics['silhouette_index'] = 0.0
         try:
             metrics['variance_ratio'] = float(
                 calinski_harabaz_score(cd, labels))
-        except:  # FIXME
+        except Exception:  # FIXME
             metrics['variance_ratio'] = 0.0
         # try:
         #   metrics['davies_bouldin_score'] = float(
@@ -121,7 +121,7 @@ def skl_clustering(cd, n_clusters=10, **kwargs):
         # except: metrics['davies_bouldin_score'] = 0.0
 
         return labels, metrics, centroids
-    except:  # else:  # FIXME
+    except Exception:  # Handle clustering errors
         print('except: skl_clustering error')
         return np.asarray(range(cd.shape[0])), \
                {'clustering': 'skl_clustering error'}, []

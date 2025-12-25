@@ -263,7 +263,6 @@ unfinished prototype
 	; updated CrossSection.
 	(define (revise-xsect XST)
 ; xxxxx
-; todo
 		#f
 	)
 

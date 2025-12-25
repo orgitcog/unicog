@@ -567,7 +567,6 @@ behavioral_score enum_graded_bscore::operator()(const combo_tree& tr) const
     OC_ASSERT(*it == id::cond, "Error: unexpected candidate!");
 
     // Evaluate the bscore components for all rows of the ctable
-    // TODO
     sib_it predicate = it.begin();
     for (const CTable::value_type& vct : _ctable) {
         const CTable::counter_t& c = vct.second;

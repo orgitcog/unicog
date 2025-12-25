@@ -43,4 +43,5 @@ Thumbs.db
 test_tensor_rules
 test_*_kernel
 *_test
-*.test
+*.test.upstream_cache/
+.upstream_cache/
