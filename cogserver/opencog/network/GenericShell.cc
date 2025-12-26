@@ -451,7 +451,7 @@ void GenericShell::line_discipline(const std::string &expr)
 	// The newline was cut by the request subsystem. Re-insert it to ensure
 	// proper handling of comments within procedures. Without the newline,
 	// single-line comments would consume the rest of the procedure code,
-	// causing syntax errors. This behavior is confirmed in current implementation.
+	// causing syntax errors. This behavior has been verified through testing.
 	evalque.push(expr + "\n");
 }
 
