@@ -259,9 +259,9 @@ void ServerConsole::sendPrompt()
 
 /// Parse command line. Quotes are stripped.
 /// NOTE: This is a simple tokenizer that handles basic quoting but does not
-/// process escaped quotes within strings. For complex escaping requirements,
+/// process escaped quotes (e.g., \") within strings. Quotes embedded in the
+/// middle of unquoted strings are passed through. For complex escaping,
 /// consider using a more robust parsing library.
-/// This implementation handles quotes embedded in the middle of strings correctly.
 static std::list<std::string> simple_tokenize(const std::string& line)
 {
     std::list<std::string> params;

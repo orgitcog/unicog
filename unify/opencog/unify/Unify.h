@@ -187,7 +187,7 @@ public:
 	// after substitution (cause some values may be variables).
 	//
 	// NOTE: Current implementation uses Handle for flexibility. Future optimization
-	// could use Variables objects for improved type safety and reduced complexity.
+	// could use Variable objects for improved type safety and reduced complexity.
 	typedef std::map<HandleCHandleMap, Handle> TypedSubstitutions;
 	typedef std::pair<HandleCHandleMap, Handle> TypedSubstitution;
 
