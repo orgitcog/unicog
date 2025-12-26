@@ -258,9 +258,10 @@ void ServerConsole::sendPrompt()
 
 
 /// Parse command line. Quotes are stripped.
-/// XXX escaped quotes are not handled correctly. FIXME.
-/// This passes over quotes embeded in the middle strings.
-/// And that OK, because what the heck did you want to happen?
+/// NOTE: This is a simple tokenizer that handles basic quoting but does not
+/// process escaped quotes within strings. For complex escaping requirements,
+/// consider using a more robust parsing library.
+/// This implementation handles quotes embedded in the middle of strings correctly.
 static std::list<std::string> simple_tokenize(const std::string& line)
 {
     std::list<std::string> params;

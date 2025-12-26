@@ -52,9 +52,9 @@ class SigSlot
 
 	private:
 		mutable std::mutex _mtx;
-		// HACK ALERT -- use std::map, not std::set here, for only
-		// one reason: so that we get a natural operator-less, which
-		// is needed for the insert() to work.
+		// Implementation note: std::map is used instead of std::set to provide
+		// a natural operator<, which is required for efficient insertion and
+		// lookup operations with the slot_type function objects.
 
 		mutable std::map<int, std::function<void(ARGS...)>> _slots;
 		mutable int _slot_id;

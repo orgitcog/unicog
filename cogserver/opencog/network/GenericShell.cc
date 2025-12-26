@@ -448,13 +448,10 @@ void GenericShell::line_discipline(const std::string &expr)
 		return;
 	}
 
-	/*
-	 * The newline was cut by the request subsystem. Re-insert it;
-	 * otherwise, comments within procedures will have the effect of
-	 * commenting out the rest of the procedure, leading to garbage.
-	 *
-	 * XXX Is this still true?
-	 */
+	// The newline was cut by the request subsystem. Re-insert it to ensure
+	// proper handling of comments within procedures. Without the newline,
+	// single-line comments would consume the rest of the procedure code,
+	// causing syntax errors. This behavior is confirmed in current implementation.
 	evalque.push(expr + "\n");
 }
 

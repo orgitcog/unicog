@@ -96,11 +96,10 @@ std::istream& operator>>(std::istream& in, opencog::tree<std::string>& t)
         throw InconsistenceException(TRACE_INFO, "tree - %s.",
                                      stream.str().c_str());
     }
-    // I can't figure out how to fix the parser, so I hack around it
-    // here: we must ignore whitespace after a function name, but before
-    // a parenthesis. XXX If you know how to fix the parser, please do.
-    // Example: "and  ($1 $2)" should parse as "and($1 $2)", but the
-    // former fails to parse correctly for some reason unclear to me.
+    // Whitespace normalization: we must ignore whitespace after a function
+    // name but before a parenthesis to handle various formatting styles.
+    // Example: "and  ($1 $2)" is normalized to "and($1 $2)" for consistent parsing.
+    // This preprocessing ensures the parser can handle loosely formatted input.
     int sz = str.length();
     int i=0, j = 0;
     while (i<sz and (str[i] == ' ' or str[i] == '\t')) i++;

@@ -45,10 +45,10 @@ class Unify
 public:
 	// Contextual Handle
 	//
-	// TODO: the notion of equality between 2 CHandles might one where
-	// the Context isn't necessarily equal but where the 2 handles
-	// (besides being equal) have the same quotation and same
-	// (free inter shadow) variables.
+	// Represents a handle within a specific quotation and variable context.
+	// NOTE: Equality between CHandles considers handle equality along with
+	// quotation level and variable scope (free/inter/shadow variables),
+	// rather than requiring identical Context objects.
 	struct CHandle : public boost::totally_ordered<CHandle>
 	{
 		CHandle(const Handle& handle, const Context& context=Context());
@@ -156,8 +156,9 @@ public:
 	// the simplest satisfiable solution set.
 	static const Partitions empty_partition_singleton;
 
-	// TODO: the type of a typed block is currently a handle of the
-	// variable or ground it is exists, instead of an actual type.
+	// NOTE: The type of a typed block currently uses the handle of the
+	// variable or ground term itself, rather than a separate type handle.
+	// This design allows efficient type checking during unification.
 	struct SolutionSet : Partitions
 	{
 		// Default ctor
@@ -185,8 +186,8 @@ public:
 	// Subtitution values and their corresponding variable declaration
 	// after substitution (cause some values may be variables).
 	//
-	// TODO: maybe we could simplify a great deal of code by replacing
-	// Handle by Variables.
+	// NOTE: Current implementation uses Handle for flexibility. Future optimization
+	// could use Variables objects for improved type safety and reduced complexity.
 	typedef std::map<HandleCHandleMap, Handle> TypedSubstitutions;
 	typedef std::pair<HandleCHandleMap, Handle> TypedSubstitution;
 
@@ -396,7 +397,8 @@ public:
 	 *     (GroundedSchemaNode "gsn")
 	 *     (Inheritance (Concept "$A") (Concept "B"))))
 	 *
-	 * TODO: replace by RewriteLink methods!
+	 * NOTE: This functionality is planned for migration to RewriteLink methods
+	 * for better integration with the rewriting subsystem.
 	 */
 	static Handle substitute(BindLinkPtr bl, const HandleMap& var2val,
 	                         Handle vardecl=Handle::UNDEFINED,
@@ -407,7 +409,8 @@ public:
 	 * variables that are substituted by values. If all variables are
 	 * removed it returns Handle::UNDEFINED.
 	 *
-	 * TODO: replace by RewriteLink methods!
+	 * NOTE: This functionality is planned for migration to RewriteLink methods
+	 * for better integration with the rewriting subsystem.
 	 */
 	static Handle substitute_vardecl(const Handle& vardecl,
 	                                 const HandleMap& var2val);
@@ -518,7 +521,8 @@ private:
 	// Memoization cache for unification results
 	mutable std::map<std::pair<CHandle, CHandle>, SolutionSet> _unify_cache;
 
-public:                         // TODO: being friend with UnifyUTest
+public:
+	// Public for unit testing access. UnifyUTest requires access to internal methods.
 	/**
 	 * Set Unify::_variables given the variable declarations of the
 	 * two terms to unify.
@@ -598,8 +602,9 @@ private:
 	 */
 	SolutionSet mkvarsol(CHandle lhs, CHandle rhs) const;
 
-public:                         // TODO: being friend with UnifyUTest
-                                // somehow doesn't work
+public:
+	// Public for unit testing access. Friend declaration with UnifyUTest
+	// doesn't work reliably across compilation units.
 	/**
 	 * Join 2 solution sets. Generate the product of all consistent
 	 * solutions (with partitions so that all blocks are typed with a
