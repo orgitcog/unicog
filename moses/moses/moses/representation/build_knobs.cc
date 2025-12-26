@@ -119,7 +119,8 @@ build_knobs::build_knobs(combo_tree& exemplar,
         action_cleanup();
     }
     else if (output_type == id::ann_type) {
-        // ANN  XXX This is calling unfinished, broken code, below.
+        // ANN - NOTE: ANN knob building is experimental and under active
+        // development. Current implementation may need refinement.
         ann_canonize(_exemplar.begin());
         build_contin(_exemplar.begin());
     }

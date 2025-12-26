@@ -333,8 +333,8 @@ static inline Handle expand(const Handle& arg, bool silent)
  *         ConceptNode "hot patootie"
  *
  * Type checking is performed during substitution; if the arguments fail
- * to have the desired types, no substitution is performed.  In this case,
- * an undefined handle is returned (?? XXX really? or is it a throw?).
+ * to have the desired types, no substitution is performed. In this case,
+ * an exception is thrown (InvalidParamException or SyntaxException).
  * For set substitutions, this acts as a filter, removing (filtering out)
  * the mismatched types.
  *

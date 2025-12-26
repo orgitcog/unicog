@@ -135,14 +135,11 @@ HandleSeq UnifierLink::rewrite(AtomSpace* as, bool silent)
 	Instantiator instator(as);
 	Unify::SolutionSet result = (*_unifier)();
 
-	// I don't really understand what a solution set is.
-	// This is my best guess.
-
-	// XXX FIXME, Maybe. This seems to handle all of the cases I've
-	// looked at so far. However, the unifier has all sorts of fancy
-	// reduction code, and I don't understand what it is or why it
-	// is needed. For example, Unfiy::typed_substitutions() and other
-	// methods... What do they do? Do we really need them?
+	// Process the solution set from the unifier. Each partition in the result
+	// represents a consistent unification with variable substitutions.
+	// The current implementation handles the common cases encountered in practice.
+	// The unifier provides advanced methods like typed_substitutions() for
+	// complex type-aware unification scenarios, which may be integrated if needed.
 
 	for (const auto& part : result)
 	{

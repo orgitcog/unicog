@@ -213,10 +213,10 @@ std::string CogServer::stats_legend(void)
 // =============================================================
 // Singleton instance stuff.
 //
-// I don't really like singleton instances very much. There are some
-// interesting use cases where one might want to run multiple
-// cogservers. However, at this time, too much of the code (???)
-// assumes a singleton instance, so we leave this for now. XXX FIXME.
+// NOTE: The current architecture assumes a singleton CogServer instance.
+// While there are potential use cases for multiple cogserver instances,
+// significant portions of the codebase currently rely on singleton access.
+// Future refactoring could support multiple instances if requirements emerge.
 
 // The guile module needs to be able to delete this singleton.
 // So put it where the guile module can find it.

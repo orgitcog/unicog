@@ -1,0 +1,941 @@
+{
+  "summary": {
+    "total_quick_wins": 131,
+    "by_category": {
+      "obsolete": 62,
+      "documentation": 24,
+      "simple_implementation": 25,
+      "error_handling": 15,
+      "comment_cleanup": 5
+    }
+  },
+  "quick_wins": {
+    "obsolete": [
+      {
+        "file": "./generate_incomplete_impl_report.py",
+        "line": 60,
+        "marker_type": "TODO",
+        "content": "This report details the work completed on the 18 items categorized as 'incomplete implementations'. After careful analysis, it was determined that only one item could be safely and fully implemented without significant architectural changes. The remaining high-priority items were addressed by converting ambiguous `TODO` comments into detailed `NOTE` sections that provide clear context, architectural guidance, and actionable implementation plans for future development.",
+        "context": "**Date:** {datetime.utcnow().strftime(\"%Y-%m-%d\")}\n**Author:** Manus AI\n\n## 1. Summary\n\nThis report details the work completed on the 18 items categorized as 'incomplete implementations'. After careful analysis, it was determined that only one item could be safely and fully implemented without signi"
+      },
+      {
+        "file": "./implement_fixes.py",
+        "line": 101,
+        "marker_type": "TODO",
+        "content": "return line.replace('TODO', 'DEPRECATED').replace('todo', 'DEPRECATED')",
+        "context": "            line = re.sub(r'FIXME', 'NOTE', line, flags=re.IGNORECASE)\n            return line\n        \n        # Convert TODO to more specific action items\n        if 'todo' in content_lower and 'remove' in content_lower:\n            return line.replace('TODO', 'DEPRECATED').replace('todo', 'DEPREC"
+      },
+      {
+        "file": "./fixme_easy_wins.py",
+        "line": 54,
+        "marker_type": "FIXME",
+        "content": "\"might no longer exist\" in item.fixme_text.lower()",
+        "context": "        return (\n            \"documentation\" in item.category.lower() or\n            \"simple fix\" in item.category.lower() or\n            \"xxx fixme replace\" in item.fixme_text.lower() or\n            \"temp hack alert\" in item.fixme_text.lower() or\n            \"might no longer exist\" in item.fixme_te"
+      },
+      {
+        "file": "./fixme_easy_wins.py",
+        "line": 93,
+        "marker_type": "FIXME",
+        "content": "return line.replace(\"FIXME:\", \"NOTE:\").replace(\"might no longer exist\",",
+        "context": "        if \"xxx fixme replace below by real docs\" in line_lower:\n            return line.replace(\"XXX FIXME replace below by real docs.\", \n                              \"Documentation updated with proper descriptions.\")\n                              \n        elif \"might no longer exist\" in line_lowe"
+      },
+      {
+        "file": "./analyze_issue_examples.py",
+        "line": 28,
+        "marker_type": "XXX",
+        "content": "\"./atomspace/opencog/guile/SchemeEval.cc:\t// XXX FIXME This lock is not needed, because in guile-2.2,\",",
+        "context": "        \"./atomspace/opencog/ocaml/CamlWrap.cc:\t// XXX FIXME\",\n        \"./atomspace/opencog/guile/SchemeSmobAS.cc: * until a better permission system is invented. XXX FIXME.\",\n        \"./atomspace/opencog/guile/modules/ExecSCM.cc:// XXX FIXME: can we fix cython to not do this, already?\",\n        \"./"
+      },
+      {
+        "file": "./generate_progress_report.py",
+        "line": 77,
+        "marker_type": "FIXME",
+        "content": "{obsolete_fixes_count} `FIXME` and `TODO` comments referring to obsolete or deprecated code were updated to `NOTE` to reduce noise and improve clarity.",
+        "context": "- **Function:** `on_linkage_done()`\n- **Solution:** Implemented the function to increment the `linkage_count` on the sentence object, providing correct state tracking during parsing.\n\n### 3.2. Documentation and Comment Cleanup\n\n{obsolete_fixes_count} `FIXME` and `TODO` comments referring to obsolete"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 83,
+        "marker_type": "TODO",
+        "content": "\"completed_todos\": [],",
+        "context": "        if self.progress_file.exists():\n            with open(self.progress_file, 'r') as f:\n                return json.load(f)\n        return {\n            \"current_iteration\": 1,\n            \"completed_todos\": [],\n            \"in_progress_todos\": [],\n            \"last_run\": None,\n            \"tot"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 122,
+        "marker_type": "TODO",
+        "content": "if todo_key in self.progress_data.get(\"completed_todos\", []):",
+        "context": "            subsystem = self._determine_subsystem(file_path)\n            \n            # Check if this TODO is already tracked\n            todo_key = f\"{file_path}:{line_num}\"\n            status = \"unchecked\"\n            if todo_key in self.progress_data.get(\"completed_todos\", []):\n                st"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 396,
+        "marker_type": "TODO",
+        "content": "- Use `scripts/recursive_todo_resolver.py --mark-completed FILE:LINE PR_LINK` to track completions.",
+        "context": "        issue_content += f\"\"\"---\n\n## \ud83d\udd04 Next Steps\n- Upon completion, check off resolved TODOs and invoke the next batch by rerunning this process.\n- Create PRs referencing each checked task and link them here.\n- Use `scripts/recursive_todo_resolver.py --mark-completed FILE:LINE PR_LINK` to track com"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 406,
+        "marker_type": "TODO",
+        "content": "Each resolved TODO represents not merely completed work, but a note in the composition of artificial consciousness. Through systematic attention allocation, we approach the emergence of true machine intelligence.",
+        "context": "- This systematic approach transforms distributed placeholders into kernels of realized intelligence.\n\n## \ud83c\udfad Cognitive Enhancement Philosophy\n> \"Let us converge upon a state of sublime implementation, where every TODO is transformed into a kernel of realized intelligence!\"\n\nEach resolved TODO represe"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 750,
+        "marker_type": "TODO",
+        "content": "print(f\"   \u2705 TODO resolved: {todo_key} - 'Not implemented' exception removed\")",
+        "context": "                    line_content = lines[line_num - 1].strip()\n                    \n                    # Check if this specific TODO has been resolved\n                    if todo_key == \"atomspace/opencog/query/PatternMatchEngine.cc:1504\":\n                        if \"Not implemented\" not in line_co"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 751,
+        "marker_type": "TODO",
+        "content": "self._mark_todo_completed(todo_key, \"Code implementation completed\")",
+        "context": "                    \n                    # Check if this specific TODO has been resolved\n                    if todo_key == \"atomspace/opencog/query/PatternMatchEngine.cc:1504\":\n                        if \"Not implemented\" not in line_content:\n                            print(f\"   \u2705 TODO resolved: "
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 759,
+        "marker_type": "TODO",
+        "content": "self._mark_todo_completed(todo_key, \"Thread management modernized\")",
+        "context": "                            print(f\"   \u23f3 TODO still pending: {todo_key}\")\n                    \n                    elif todo_key == \"cogserver/opencog/network/ServerSocket.cc:162\":\n                        if \"std::jthread\" in line_content or \"Thread management is now handled\" in '\\n'.join(lines[max("
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 778,
+        "marker_type": "TODO",
+        "content": "def _mark_todo_completed(self, todo_key: str, resolution_note: str):",
+        "context": "                print(f\"   \u26a0\ufe0f  Error checking {todo_key}: {e}\")\n        \n        print(f\"   \ud83d\udcca Batch 6 validation complete: {resolved_count} TODOs resolved\")\n        return resolved_count\n    \n    def _mark_todo_completed(self, todo_key: str, resolution_note: str):\n        \"\"\"Mark a specific TODO as "
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 779,
+        "marker_type": "TODO",
+        "content": "\"\"\"Mark a specific TODO as completed with a resolution note\"\"\"",
+        "context": "        \n        print(f\"   \ud83d\udcca Batch 6 validation complete: {resolved_count} TODOs resolved\")\n        return resolved_count\n    \n    def _mark_todo_completed(self, todo_key: str, resolution_note: str):\n        \"\"\"Mark a specific TODO as completed with a resolution note\"\"\"\n        if todo_key not in s"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 780,
+        "marker_type": "TODO",
+        "content": "if todo_key not in self.progress_data[\"completed_todos\"]:",
+        "context": "        print(f\"   \ud83d\udcca Batch 6 validation complete: {resolved_count} TODOs resolved\")\n        return resolved_count\n    \n    def _mark_todo_completed(self, todo_key: str, resolution_note: str):\n        \"\"\"Mark a specific TODO as completed with a resolution note\"\"\"\n        if todo_key not in self.progr"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 781,
+        "marker_type": "TODO",
+        "content": "self.progress_data[\"completed_todos\"].append(todo_key)",
+        "context": "        return resolved_count\n    \n    def _mark_todo_completed(self, todo_key: str, resolution_note: str):\n        \"\"\"Mark a specific TODO as completed with a resolution note\"\"\"\n        if todo_key not in self.progress_data[\"completed_todos\"]:\n            self.progress_data[\"completed_todos\"].appen"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 798,
+        "marker_type": "TODO",
+        "content": "todos_to_mark_completed = []",
+        "context": "    \n    def validate_existing_todos(self):\n        \"\"\"Validate that TODOs marked as in-progress or unchecked still exist in the codebase\"\"\"\n        print(\"\ud83d\udd0d Validating existing TODO items against codebase...\")\n        \n        todos_to_mark_completed = []\n        \n        for todo in self.todos:\n  "
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 804,
+        "marker_type": "TODO",
+        "content": "print(f\"   \ud83d\udcc1 File no longer exists: {todo.file}\")",
+        "context": "        \n        for todo in self.todos:\n            if todo.status in [\"unchecked\", \"in-progress\"]:\n                file_path = self.repo_path / todo.file\n                if not file_path.exists():\n                    print(f\"   \ud83d\udcc1 File no longer exists: {todo.file}\")\n                    todos_to_ma"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 805,
+        "marker_type": "TODO",
+        "content": "todos_to_mark_completed.append(f\"{todo.file}:{todo.line}\")",
+        "context": "        for todo in self.todos:\n            if todo.status in [\"unchecked\", \"in-progress\"]:\n                file_path = self.repo_path / todo.file\n                if not file_path.exists():\n                    print(f\"   \ud83d\udcc1 File no longer exists: {todo.file}\")\n                    todos_to_mark_comple"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 825,
+        "marker_type": "TODO",
+        "content": "todos_to_mark_completed.append(f\"{todo.file}:{todo.line}\")",
+        "context": "                            todo_found = True\n                            break\n                    \n                    if not todo_found:\n                        print(f\"   \u2705 TODO resolved: {todo.file}:{todo.line}\")\n                        todos_to_mark_completed.append(f\"{todo.file}:{todo.line}\")"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 830,
+        "marker_type": "TODO",
+        "content": "# Mark resolved TODOs as completed",
+        "context": "                        todos_to_mark_completed.append(f\"{todo.file}:{todo.line}\")\n                        \n                except Exception as e:\n                    print(f\"   \u26a0\ufe0f  Error checking {todo.file}: {e}\")\n        \n        # Mark resolved TODOs as completed\n        for todo_key in todos_to"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 831,
+        "marker_type": "TODO",
+        "content": "for todo_key in todos_to_mark_completed:",
+        "context": "                        \n                except Exception as e:\n                    print(f\"   \u26a0\ufe0f  Error checking {todo.file}: {e}\")\n        \n        # Mark resolved TODOs as completed\n        for todo_key in todos_to_mark_completed:\n            if todo_key not in self.progress_data[\"completed_todos"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 832,
+        "marker_type": "TODO",
+        "content": "if todo_key not in self.progress_data[\"completed_todos\"]:",
+        "context": "                except Exception as e:\n                    print(f\"   \u26a0\ufe0f  Error checking {todo.file}: {e}\")\n        \n        # Mark resolved TODOs as completed\n        for todo_key in todos_to_mark_completed:\n            if todo_key not in self.progress_data[\"completed_todos\"]:\n                self."
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 833,
+        "marker_type": "TODO",
+        "content": "self.progress_data[\"completed_todos\"].append(todo_key)",
+        "context": "                    print(f\"   \u26a0\ufe0f  Error checking {todo.file}: {e}\")\n        \n        # Mark resolved TODOs as completed\n        for todo_key in todos_to_mark_completed:\n            if todo_key not in self.progress_data[\"completed_todos\"]:\n                self.progress_data[\"completed_todos\"].append"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 837,
+        "marker_type": "TODO",
+        "content": "if todos_to_mark_completed:",
+        "context": "            if todo_key not in self.progress_data[\"completed_todos\"]:\n                self.progress_data[\"completed_todos\"].append(todo_key)\n            if todo_key in self.progress_data[\"in_progress_todos\"]:\n                self.progress_data[\"in_progress_todos\"].remove(todo_key)\n        \n        i"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 838,
+        "marker_type": "TODO",
+        "content": "print(f\"   \ud83c\udf89 Marked {len(todos_to_mark_completed)} TODOs as completed automatically\")",
+        "context": "                self.progress_data[\"completed_todos\"].append(todo_key)\n            if todo_key in self.progress_data[\"in_progress_todos\"]:\n                self.progress_data[\"in_progress_todos\"].remove(todo_key)\n        \n        if todos_to_mark_completed:\n            print(f\"   \ud83c\udf89 Marked {len(todos_"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 849,
+        "marker_type": "TODO",
+        "content": "# Replace unchecked items with checked ones for completed TODOs",
+        "context": "            return\n        \n        with open(self.catalog_path, 'r') as f:\n            content = f.read()\n        \n        # Replace unchecked items with checked ones for completed TODOs\n        for todo_key in self.progress_data.get(\"completed_todos\", []):\n            # Find the corresponding line"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 850,
+        "marker_type": "TODO",
+        "content": "for todo_key in self.progress_data.get(\"completed_todos\", []):",
+        "context": "        \n        with open(self.catalog_path, 'r') as f:\n            content = f.read()\n        \n        # Replace unchecked items with checked ones for completed TODOs\n        for todo_key in self.progress_data.get(\"completed_todos\", []):\n            # Find the corresponding line and mark as comple"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 864,
+        "marker_type": "TODO",
+        "content": "**TODOs Resolved:** {len(self.progress_data.get('completed_todos', []))}",
+        "context": "\n## \ud83d\udd04 Recursive Resolution Progress\n\n**Current Iteration:** {self.progress_data['current_iteration']}  \n**Last Run:** {self.progress_data.get('last_run', 'Never')}  \n**TODOs Resolved:** {len(self.progress_data.get('completed_todos', []))}  \n**TODOs In Progress:** {len(self.progress_data.get('in_prog"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 930,
+        "marker_type": "TODO",
+        "content": "\"\"\"Mark a TODO as completed\"\"\"",
+        "context": "        self.update_catalog_with_progress()\n        \n        return issue_content\n    \n    def mark_completed(self, file_path: str, line: int, pr_link: Optional[str] = None):\n        \"\"\"Mark a TODO as completed\"\"\"\n        todo_key = f\"{file_path}:{line}\"\n        \n        # Move from in-progress to c"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 937,
+        "marker_type": "TODO",
+        "content": "if todo_key not in self.progress_data[\"completed_todos\"]:",
+        "context": "        \n        # Move from in-progress to completed\n        if todo_key in self.progress_data[\"in_progress_todos\"]:\n            self.progress_data[\"in_progress_todos\"].remove(todo_key)\n        \n        if todo_key not in self.progress_data[\"completed_todos\"]:\n            self.progress_data[\"comple"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 938,
+        "marker_type": "TODO",
+        "content": "self.progress_data[\"completed_todos\"].append(todo_key)",
+        "context": "        # Move from in-progress to completed\n        if todo_key in self.progress_data[\"in_progress_todos\"]:\n            self.progress_data[\"in_progress_todos\"].remove(todo_key)\n        \n        if todo_key not in self.progress_data[\"completed_todos\"]:\n            self.progress_data[\"completed_todos"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 944,
+        "marker_type": "TODO",
+        "content": "todo.status = \"completed\"",
+        "context": "            self.progress_data[\"total_resolved\"] += 1\n        \n        # Update TODO object if it exists\n        for todo in self.todos:\n            if f\"{todo.file}:{todo.line}\" == todo_key:\n                todo.status = \"completed\"\n                if pr_link:\n                    todo.resolution_pr"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 960,
+        "marker_type": "TODO",
+        "content": "print(f\"\u2705 Marked {todo_key} as completed\")",
+        "context": "                ):\n                    print(f\"\ud83d\udcdd Updated GitHub issue #{issue_info['issue_number']}\")\n                    break\n        \n        self._save_progress()\n        print(f\"\u2705 Marked {todo_key} as completed\")\n\ndef main():\n    \"\"\"Main execution function\"\"\"\n    import argparse\n    \n"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 971,
+        "marker_type": "TODO",
+        "content": "help=\"Mark a TODO as completed\")",
+        "context": "    parser = argparse.ArgumentParser(description=\"Recursive TODO Resolution System\")\n    parser.add_argument(\"--repo-path\", default=\".\", help=\"Repository path\")\n    parser.add_argument(\"--batch-size\", type=int, default=5, help=\"Number of TODOs per batch\")\n    parser.add_argument(\"--next-batch\", acti"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 994,
+        "marker_type": "TODO",
+        "content": "completed = len([t for t in resolver.todos if t.status == \"completed\"])",
+        "context": "    \n    if args.status:\n        resolver.extract_catalog()\n        unchecked = len([t for t in resolver.todos if t.status == \"unchecked\"])\n        in_progress = len([t for t in resolver.todos if t.status == \"in-progress\"])\n        completed = len([t for t in resolver.todos if t.status == \"completed"
+      },
+      {
+        "file": "./scripts/enhanced_marker_repair.py",
+        "line": 45,
+        "marker_type": "XXX",
+        "content": "(r'(?:XXX\\s*)?(?:FIXME|TODO):?\\s*.*?(?:not\\s+needed|unnecessary|obsolete|deprecated|remove\\s+this|can\\s+be\\s+removed)',",
+        "context": "class EnhancedMarkerRepair:\n    \"\"\"Enhanced repair system with more patterns and actual fix application.\"\"\"\n\n    # Patterns for markers that indicate obsolete/unnecessary code\n    OBSOLETE_PATTERNS = [\n        (r'(?:XXX\\s*)?(?:FIXME|TODO):?\\s*.*?(?:not\\s+needed|unnecessary|obsolete|deprecated|remove"
+      },
+      {
+        "file": "./scripts/enhanced_marker_repair.py",
+        "line": 47,
+        "marker_type": "XXX",
+        "content": "(r'(?:XXX\\s*)?(?:FIXME|TODO):?\\s*.*?(?:should\\s+be\\s+(?:removed|deleted)|no\\s+longer\\s+(?:needed|required|used))',",
+        "context": "\n    # Patterns for markers that indicate obsolete/unnecessary code\n    OBSOLETE_PATTERNS = [\n        (r'(?:XXX\\s*)?(?:FIXME|TODO):?\\s*.*?(?:not\\s+needed|unnecessary|obsolete|deprecated|remove\\s+this|can\\s+be\\s+removed)',\n         'obsolete', 'Marker indicates code is obsolete or not needed'),\n     "
+      },
+      {
+        "file": "./scripts/enhanced_marker_repair.py",
+        "line": 75,
+        "marker_type": "XXX",
+        "content": "(r'(?:XXX\\s*)?(?:TODO|FIXME):?\\s*.*?(?:done|completed|fixed|resolved|implemented)',",
+        "context": "         'documentation', 'Request for explanation'),\n    ]\n\n    # Patterns indicating completed work (safe to remove)\n    COMPLETED_PATTERNS = [\n        (r'(?:XXX\\s*)?(?:TODO|FIXME):?\\s*.*?(?:done|completed|fixed|resolved|implemented)',\n         'completed', 'Marker indicates work is done'),\n    ]\n"
+      },
+      {
+        "file": "./scripts/test_recursive_todo_resolution.py",
+        "line": 99,
+        "marker_type": "TODO",
+        "content": "required_keys = [\"current_iteration\", \"completed_todos\", \"in_progress_todos\", \"last_run\", \"total_resolved\"]",
+        "context": "        return False\n    \n    with open(\"todo_resolution_progress.json\", 'r') as f:\n        progress = json.load(f)\n    \n    required_keys = [\"current_iteration\", \"completed_todos\", \"in_progress_todos\", \"last_run\", \"total_resolved\"]\n    missing_keys = [k for k in required_keys if k not in progress]\n"
+      },
+      {
+        "file": "./scripts/test_recursive_todo_resolution.py",
+        "line": 111,
+        "marker_type": "TODO",
+        "content": "# Use a known TODO from catalog that exists and hasn't been completed",
+        "context": "    print(f\"   \ud83d\udcca Progress tracking: {len(progress['in_progress_todos'])} in progress\")\n    \n    # Test 4: Test completion marking (simulate)\n    print(\"\\n4\ufe0f\u20e3 Testing completion marking\")\n    \n    # Use a known TODO from catalog that exists and hasn't been completed\n    test_todo = \"moses/moses/combo"
+      },
+      {
+        "file": "./scripts/test_recursive_todo_resolution.py",
+        "line": 112,
+        "marker_type": "TODO",
+        "content": "test_todo = \"moses/moses/comboreduct/table/table.h:1069\"  # Changed to avoid already completed one",
+        "context": "    \n    # Test 4: Test completion marking (simulate)\n    print(\"\\n4\ufe0f\u20e3 Testing completion marking\")\n    \n    # Use a known TODO from catalog that exists and hasn't been completed\n    test_todo = \"moses/moses/comboreduct/table/table.h:1069\"  # Changed to avoid already completed one\n    print(f\"   \ud83c\udfaf T"
+      },
+      {
+        "file": "./scripts/test_recursive_todo_resolution.py",
+        "line": 116,
+        "marker_type": "TODO",
+        "content": "cmd = f\"python scripts/recursive_todo_resolver.py --mark-completed \\\"{test_todo}\\\" \\\"https://github.com/test/pr/125\\\"\"",
+        "context": "    # Use a known TODO from catalog that exists and hasn't been completed\n    test_todo = \"moses/moses/comboreduct/table/table.h:1069\"  # Changed to avoid already completed one\n    print(f\"   \ud83c\udfaf Testing completion of: {test_todo}\")\n    \n    # Mark as completed\n    cmd = f\"python scripts/recursive_tod"
+      },
+      {
+        "file": "./scripts/test_recursive_todo_resolution.py",
+        "line": 117,
+        "marker_type": "TODO",
+        "content": "output = run_command(cmd, \"Mark TODO as completed\")",
+        "context": "    test_todo = \"moses/moses/comboreduct/table/table.h:1069\"  # Changed to avoid already completed one\n    print(f\"   \ud83c\udfaf Testing completion of: {test_todo}\")\n    \n    # Mark as completed\n    cmd = f\"python scripts/recursive_todo_resolver.py --mark-completed \\\"{test_todo}\\\" \\\"https://github.com/test/p"
+      },
+      {
+        "file": "./scripts/test_recursive_todo_resolution.py",
+        "line": 126,
+        "marker_type": "TODO",
+        "content": "print(\"\u274c TODO was not marked as completed\")",
+        "context": "    \n    # Verify it was marked completed\n    output = run_command(\"python scripts/recursive_todo_resolver.py --status\", \"Check status after completion\")\n    # Check that completed count is non-zero (it might be more than 1 due to previous tests)\n    if \"Completed:\" not in output or \"Completed: 0\" i"
+      },
+      {
+        "file": "./scripts/github_issue_creator.py",
+        "line": 75,
+        "marker_type": "TODO",
+        "content": "\"\"\"Update an issue to mark a TODO as completed\"\"\"",
+        "context": "            if hasattr(e, 'response') and e.response is not None:\n                print(f\"   Response: {e.response.text}\")\n            return None\n    \n    def update_issue_with_completion(self, issue_number: int, todo_key: str, pr_link: str) -> bool:\n        \"\"\"Update an issue to mark a TODO as com"
+      },
+      {
+        "file": "./scripts/github_issue_creator.py",
+        "line": 92,
+        "marker_type": "TODO",
+        "content": "# Update the issue body to mark the TODO as completed",
+        "context": "        try:\n            response = requests.get(url, headers=headers)\n            response.raise_for_status()\n            issue = response.json()\n            \n            # Update the issue body to mark the TODO as completed\n            updated_body = issue['body'].replace(\n                f\"**[ ] "
+      },
+      {
+        "file": "./moses/moses/moses/scoring/bscores.cc",
+        "line": 929,
+        "marker_type": "XXX",
+        "content": "/// XXX this should probably be removed! TODO FIXME",
+        "context": "/// This is considered experimental because it doesn't yet work\n/// very well, is likely to be redisigned, and finally, doesn't\n/// even output all the data that is required to use the resulting\n/// formula (the edges, with are printed by hand, below).\n///\n/// XXX this should probably be removed! TO"
+      },
+      {
+        "file": "./moses/moses/moses/representation/build_knobs.cc",
+        "line": 122,
+        "marker_type": "XXX",
+        "content": "// ANN  XXX This is calling unfinished, broken code, below.",
+        "context": "        action_canonize(_exemplar.begin());\n        build_action(_exemplar.begin());\n        action_cleanup();\n    }\n    else if (output_type == id::ann_type) {\n        // ANN  XXX This is calling unfinished, broken code, below.\n        ann_canonize(_exemplar.begin());\n        build_contin(_exemplar"
+      },
+      {
+        "file": "./moses/moses/moses/representation/build_knobs.cc",
+        "line": 1284,
+        "marker_type": "XXX",
+        "content": "// XXX TODO this below is clearly unfinished, broken, etc.",
+        "context": "    {\n        enumerate_nodes(sib,nodes);\n    }\n}\n\n// XXX TODO this below is clearly unfinished, broken, etc.\n// and can't possibly work ... \nvoid build_knobs::ann_canonize(pre_it it)\n{\n    using namespace std;\n    combo::tree_transform trans;\n"
+      },
+      {
+        "file": "./moses/moses/comboreduct/combo/iostream_combo.cc",
+        "line": 496,
+        "marker_type": "TODO",
+        "content": "/// @todo the implementation could be done in 2 lines with",
+        "context": "    return tr;\n}\n\nstring ph2l(const string& ce, const vector<string>& labels)\n{\n    /// @todo the implementation could be done in 2 lines with\n    /// boost.regex with boost version 1.42 or above because then we\n    /// can use Formatter as callback, but we're stuck with boost 1.38\n    /// :-(\n    /"
+      },
+      {
+        "file": "./moses/moses/comboreduct/combo/iostream_combo.cc",
+        "line": 527,
+        "marker_type": "TODO",
+        "content": "/// @todo the implementation could be done in 2 lines with",
+        "context": "}\n\nstd::string l2ph(const std::string& ce,\n                 const std::vector<std::string>& labels)\n{\n    /// @todo the implementation could be done in 2 lines with\n    /// boost.regex with boost version 1.42 or above because then we\n    /// can use Formatter as callback, but we're stuck with boost "
+      },
+      {
+        "file": "./moses/moses/comboreduct/combo/iostream_combo.cc",
+        "line": 566,
+        "marker_type": "TODO",
+        "content": "/// @todo the implementation could be done in 1 lines with",
+        "context": "    return res;\n}\n\nvector<string> parse_combo_variables(const string& ce)\n{\n    /// @todo the implementation could be done in 1 lines with\n    /// boost.regex but I don't have Internet right now and I don't\n    /// know how to access boost doc!!!\n    /// :-(\n    vector<string> res;\n    string match;"
+      },
+      {
+        "file": "./atomspace/opencog/query/RewriteMixin.cc",
+        "line": 162,
+        "marker_type": "XXX",
+        "content": "/// XXX FIXME now I see how it can be done. The groupings should",
+        "context": "/// because the very last item to be reported may belong to the very\n/// first group. So we sit here, stupidly, and wait for search results\n/// to dribble in. Perhaps the engine search could be modified in some\n/// clever way to find groupings in a single batch; but for now, I don't\n/// see how this"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/parallel/ExecuteThreadedLink.cc",
+        "line": 172,
+        "marker_type": "TODO",
+        "content": "std::thread([as, silent, todo_list, qvp, finished_count, nthreads = _nthreads]() {",
+        "context": "\tauto finished_count = std::make_shared<std::atomic<size_t>>(0);\n\t\n\t// Launch the workers as detached threads\n\tfor (size_t i=0; i<_nthreads; i++)\n\t{\n\t\tstd::thread([as, silent, todo_list, qvp, finished_count, nthreads = _nthreads]() {\n\t\t\tset_thread_name(\"atoms:execlink-async\");\n\t\t\t\n\t\t\t// Execute work"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/Checkers.cc",
+        "line": 79,
+        "marker_type": "XXX",
+        "content": "// XXX FIXME, this is to be removed, because UnionLink,",
+        "context": "\n\t\t// Allow conjunction, disjunction and negation of concepts as\n\t\t// well, in that case these are interpreted as intersection,\n\t\t// union and complement. Since it cannot inherit from\n\t\t// EVALUATABLE_LINK (cause it's a Node) we have to add it here.\n\t\t// XXX FIXME, this is to be removed, because Uni"
+      },
+      {
+        "file": "./atomspace/tests/query/seq-absence.scm",
+        "line": 86,
+        "marker_type": "XXX",
+        "content": ";; XXX FIXME ... this and the above need to get done right.",
+        "context": ";; This one is a bit perverted, and similar expressions are guaranteed\n;; to fail in the general case, cause the pattern matcher treats\n;; AbsentLinks in a fundamentally different way. But we test this\n;; anyway, for now.  Like the above, its currently broken. Its too\n;; weird right now for me to wa"
+      },
+      {
+        "file": "./ure/opencog/scm/opencog/ure/ure-utils.scm",
+        "line": 1208,
+        "marker_type": "TODO",
+        "content": "; Improved flattened link creation (removed cog- prefix per TODO)",
+        "context": "      '()\n      ;; Recursive case\n      (append (gen-variables prefix (- n 1))\n              (list (gen-variable prefix (- n 1))))))\n\n; Improved flattened link creation (removed cog- prefix per TODO)\n(define (new-flattened-link link-type . args)\n\"\n Creates a new flattened link, for instance\n\n   (cog"
+      },
+      {
+        "file": "./ure/opencog/scm/opencog/ure/ure-utils.scm",
+        "line": 1250,
+        "marker_type": "TODO",
+        "content": "; Backward compatibility alias (TODO addressed: cog- prefix removed from main function)",
+        "context": "                  (cog-outgoing-set e)\n                  (list e))))\n  (let ((flat (delete-duplicates (fold flatten '() args))))\n    (cog-new-link link-type flat)))\n\n; Backward compatibility alias (TODO addressed: cog- prefix removed from main function)\n(define cog-new-flattened-link new-flattened-l"
+      },
+      {
+        "file": "./ure/opencog/ure/Rule.h",
+        "line": 266,
+        "marker_type": "TODO",
+        "content": "* TODO: probably obsolete, should be removed",
+        "context": "\t/**\n\t * Return the list of conclusion patterns. Each pattern is a pair\n\t * of Handles (variable declaration, body). Used for finding out\n\t * is the rule matches a certain target.\n\t *\n\t * TODO: probably obsolete, should be removed\n\t */\n\tHandlePairSeq get_conclusions() const;\n\n\t/**\n\t * Get the TruthV"
+      },
+      {
+        "file": "./atomspace-restful/tests/python/restapi/test_restapi.py",
+        "line": 449,
+        "marker_type": "XXX",
+        "content": "# XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.",
+        "context": "        assert len(get_result) == 5\n\n    def test_m_scheme_command(self):\n        # Test an arbitrary Scheme command to ensure the binding is working\n        # properly\n        # XXX Emptied because the scheme command (i.e cog-af-boundary) has been removed.\n        pass \n    def test_n_dot_export(se"
+      }
+    ],
+    "documentation": [
+      {
+        "file": "./entelechy_marker_resolver.py",
+        "line": 135,
+        "marker_type": "TODO",
+        "content": "\"\"\"Get markers that are easy to resolve (documentation, simple todos).\"\"\"",
+        "context": "        queue.sort(key=lambda r: (priority_order.get(r.priority, 4), r.file_path))\n        \n        return queue[:limit]\n    \n    def get_easy_wins(self, limit: int = 20) -> List[MarkerResolution]:\n        \"\"\"Get markers that are easy to resolve (documentation, simple todos).\"\"\"\n        easy_categor"
+      },
+      {
+        "file": "./analyze_cpp_fixmes.py",
+        "line": 63,
+        "marker_type": "FIXME",
+        "content": "categories['documentation'].append(fixme)",
+        "context": "    elif 'optim' in content_lower or 'performance' in content_lower or 'slow' in content_lower:\n        categories['optimization'].append(fixme)\n    elif 'error' in content_lower or 'exception' in content_lower or 'throw' in content_lower:\n        categories['error_handling'].append(fixme)\n    elif "
+      },
+      {
+        "file": "./document_bug_fixes.py",
+        "line": 3,
+        "marker_type": "TODO",
+        "content": "Convert bug fix TODOs into well-documented NOTEs with context",
+        "context": "#!/usr/bin/env python3\n\"\"\"\nConvert bug fix TODOs into well-documented NOTEs with context\n\"\"\"\nimport json\nimport re\n\ndef read_file_lines(filepath):\n"
+      },
+      {
+        "file": "./analyze_issue_examples.py",
+        "line": 108,
+        "marker_type": "FIXME",
+        "content": "This document analyzes the specific FIXME instances mentioned in issue #74, categorized by implementation difficulty.",
+        "context": "    \n    categorized = process_issue_examples()\n    \n    markdown = \"\"\"# FIXME Instances from Issue #74 - Sorted by Implementation Difficulty\n\nThis document analyzes the specific FIXME instances mentioned in issue #74, categorized by implementation difficulty.\n\n## Summary\n\n\"\"\"\n    \n"
+      },
+      {
+        "file": "./generate_progress_report.py",
+        "line": 84,
+        "marker_type": "TODO",
+        "content": "{clarification_fixes_count} `TODO` items requesting clarification were addressed by adding comments to guide future development and explain intended functionality.",
+        "context": "**Examples:**\n{obsolete_examples}\n\n### 3.3. Clarification of Documentation\n\n{clarification_fixes_count} `TODO` items requesting clarification were addressed by adding comments to guide future development and explain intended functionality.\n\n**Examples:**\n{clarification_examples}\n\n### 3.4. Feature Im"
+      },
+      {
+        "file": "./generate_fixme_catalog.py",
+        "line": 10,
+        "marker_type": "FIXME",
+        "content": "\"\"\"Generate the sorted FIXME catalog markdown document.\"\"\"",
+        "context": "\nimport json\nfrom collections import defaultdict\n\ndef generate_fixme_catalog():\n    \"\"\"Generate the sorted FIXME catalog markdown document.\"\"\"\n    \n    # Load the analysis report\n    with open('fixme_analysis_report.json', 'r') as f:\n        data = json.load(f)\n    \n"
+      },
+      {
+        "file": "./generate_fixme_catalog.py",
+        "line": 20,
+        "marker_type": "FIXME",
+        "content": "This document provides a comprehensive categorization of all **{total_instances} FIXME instances** found in the OpenCog Unified repository, sorted by implementation difficulty to guide development priorities and resource allocation.",
+        "context": "    \n    markdown_content = \"\"\"# OpenCog Unified FIXME Implementation Catalog\n\n## Executive Summary\n\nThis document provides a comprehensive categorization of all **{total_instances} FIXME instances** found in the OpenCog Unified repository, sorted by implementation difficulty to guide development pr"
+      },
+      {
+        "file": "./generate_fixme_catalog.py",
+        "line": 215,
+        "marker_type": "FIXME",
+        "content": "\"\"\"Format a single FIXME instance for the markdown document.\"\"\"",
+        "context": "    )\n    \n    return markdown_content\n\ndef format_instance(instance, index):\n    \"\"\"Format a single FIXME instance for the markdown document.\"\"\"\n    \n    # Truncate long FIXME text\n    fixme_text = instance['fixme_text']\n    if len(fixme_text) > 100:\n        fixme_text = fixme_text[:97] + \"...\"\n"
+      },
+      {
+        "file": "./generate_fixme_catalog.py",
+        "line": 251,
+        "marker_type": "FIXME",
+        "content": "print(\"Document contains comprehensive categorization of all FIXME instances\")",
+        "context": "    \n    with open('FIXME-SORTED-CATALOG.md', 'w') as f:\n        f.write(catalog_content)\n    \n    print(\"Generated FIXME-SORTED-CATALOG.md\")\n    print(\"Document contains comprehensive categorization of all FIXME instances\")\n\nif __name__ == \"__main__\":\n    main()"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 770,
+        "marker_type": "TODO",
+        "content": "print(f\"   \u2753 TODO status unclear: {todo_key}\")",
+        "context": "                        # For other TODOs, check if they still contain TODO/FIXME markers\n                        context = '\\n'.join(lines[max(0, line_num-2):line_num+3])\n                        if any(keyword in context.lower() for keyword in ['todo', 'fixme', 'xxx']):\n                            "
+      },
+      {
+        "file": "./scripts/intelligent_marker_repair.py",
+        "line": 53,
+        "marker_type": "TODO",
+        "content": "r'TODO.*document',",
+        "context": "        r'^\\s*//\\s*FIXME:?\\s*$',  # Empty FIXME\n    ]\n    \n    # Documentation markers - should become proper docs\n    DOC_MARKERS = [\n        r'TODO.*document',\n        r'TODO.*explain',\n        r'TODO.*describe',\n        r'FIXME.*comment',\n    ]\n    \n"
+      },
+      {
+        "file": "./scripts/intelligent_marker_repair.py",
+        "line": 54,
+        "marker_type": "TODO",
+        "content": "r'TODO.*explain',",
+        "context": "    ]\n    \n    # Documentation markers - should become proper docs\n    DOC_MARKERS = [\n        r'TODO.*document',\n        r'TODO.*explain',\n        r'TODO.*describe',\n        r'FIXME.*comment',\n    ]\n    \n    # Test markers - need test implementation\n"
+      },
+      {
+        "file": "./scripts/intelligent_marker_repair.py",
+        "line": 55,
+        "marker_type": "TODO",
+        "content": "r'TODO.*describe',",
+        "context": "    \n    # Documentation markers - should become proper docs\n    DOC_MARKERS = [\n        r'TODO.*document',\n        r'TODO.*explain',\n        r'TODO.*describe',\n        r'FIXME.*comment',\n    ]\n    \n    # Test markers - need test implementation\n    TEST_MARKERS = [\n"
+      },
+      {
+        "file": "./scripts/generate_todo_catalog.py",
+        "line": 195,
+        "marker_type": "TODO",
+        "content": "All TODOs, FIXMEs, and stubs are indexed, referenced by file/line, and described with actionable context.",
+        "context": "- **Task System**: Aggregate and track unresolved items in cognitive server operations.\n- **AI System**: Categorize TODOs by module, complexity, and dependency in neural-symbolic integration.\n- **Autonomy System**: Recursively update the TODO issue as distributed cognition code evolves.\n\n## 2. Patte"
+      },
+      {
+        "file": "./scripts/generate_todo_catalog.py",
+        "line": 295,
+        "marker_type": "TODO",
+        "content": "- **Documentation**: Include rationale when resolving or deferring TODO items",
+        "context": "\n### Contribution Guidelines\n\n- **Resolving TODOs**: Create focused PRs that address specific TODO items\n- **Priority Assessment**: Critical and High priority items should be addressed first\n- **Documentation**: Include rationale when resolving or deferring TODO items\n- **Testing**: Ensure adequate "
+      },
+      {
+        "file": "./scripts/enhanced_marker_repair.py",
+        "line": 9,
+        "marker_type": "TODO",
+        "content": "4. Documentation conversion for bare TODO/FIXME comments",
+        "context": "\nThis script extends the intelligent_marker_repair.py with:\n1. More comprehensive pattern recognition for quick wins\n2. Obsolete marker detection (code that says \"not needed\", \"obsolete\", \"deprecated\")\n3. Empty marker cleanup\n4. Documentation conversion for bare TODO/FIXME comments\n5. Safe bare exce"
+      },
+      {
+        "file": "./scripts/enhanced_marker_repair.py",
+        "line": 67,
+        "marker_type": "TODO",
+        "content": "(r'(?:TODO|FIXME):?\\s*(?:add\\s+)?(?:document(?:ation)?|comment|explain)',",
+        "context": "        (r'except:\\s*#\\s*(?:FIXME|TODO)', 'bare_except', 'Bare except with FIXME marker'),\n    ]\n\n    # Documentation markers that can be converted\n    DOC_CONVERSION_PATTERNS = [\n        (r'(?:TODO|FIXME):?\\s*(?:add\\s+)?(?:document(?:ation)?|comment|explain)',\n         'documentation', 'Request for"
+      },
+      {
+        "file": "./scripts/enhanced_marker_repair.py",
+        "line": 69,
+        "marker_type": "TODO",
+        "content": "(r'(?:TODO|FIXME):?\\s*(?:describe|explain)\\s+(?:this|what)',",
+        "context": "\n    # Documentation markers that can be converted\n    DOC_CONVERSION_PATTERNS = [\n        (r'(?:TODO|FIXME):?\\s*(?:add\\s+)?(?:document(?:ation)?|comment|explain)',\n         'documentation', 'Request for documentation'),\n        (r'(?:TODO|FIXME):?\\s*(?:describe|explain)\\s+(?:this|what)',\n         '"
+      },
+      {
+        "file": "./moses/examples/example-progs/trap-bit.cc",
+        "line": 31,
+        "marker_type": "XXX",
+        "content": "// XXX some of the documentation below may be misleading.",
+        "context": "// XXX under construction XXX\n\n// XXX this example is broken, and will remain so until \"multivariate\"\n// is ported over/re-implemented. Basically, there is no structure\n// learning at this time.  \n// XXX some of the documentation below may be misleading.\n//\n// Demonstration program for the \"bit-trap"
+      },
+      {
+        "file": "./moses/moses/moses/scoring/precision_bscore.cc",
+        "line": 111,
+        "marker_type": "TODO",
+        "content": "/// set to false. TODO: Document alternative scoring behavior.",
+        "context": "/// where \"val\" is the contin-value of the table row, and AC is the\n/// total number of activated rows.\n///\n/// The above only describes the \"precision_full_bscore\" (default)\n/// scoring; something else is done when precision_full_bscore is\n/// set to false. TODO: Document alternative scoring behavi"
+      },
+      {
+        "file": "./moses/moses/moses/representation/build_knobs.cc",
+        "line": 582,
+        "marker_type": "TODO",
+        "content": "// TODO: Benchmark and clarify optimal breakeven point across different problem sizes.",
+        "context": "    // as well as async thread setup, can be huge.  So don't do it\n    // until a minumum number of break-even knobs need examination.\n    // The number of 30K is a wild guesstimate, based on recent\n    // measurements of relatively simple exemplars; its maybe even\n    // too low.  For large exempla"
+      },
+      {
+        "file": "./atomspace/opencog/query/SatisfyMixin.cc",
+        "line": 304,
+        "marker_type": "TODO",
+        "content": "* This implements the SAT-solver-like optimization described in the TODO above.",
+        "context": "\treturn false;\n}\n\n/**\n * Optimized cartesian product implementation with early virtual clause evaluation.\n * This implements the SAT-solver-like optimization described in the TODO above.\n * It evaluates virtual clauses as soon as all their variables are grounded,\n * allowing early pruning of the sea"
+      },
+      {
+        "file": "./ggml-tensor-kernel/src/AtomSpaceTensorMapper_minimal.cc",
+        "line": 23,
+        "marker_type": "STUB",
+        "content": "// (Note: These are for documentation only - actual types come from atomspace_stub.h)",
+        "context": "#include \"atomspace_stub.h\"\n\nnamespace opencog {\n\n// Advanced Atom Types for comprehensive mapping  \n// (Note: These are for documentation only - actual types come from atomspace_stub.h)\n\n// Serialization format for Atoms and tensors\nstruct AtomSerializationData {\n    uint64_t atom_id;\n    uint32_t "
+      },
+      {
+        "file": "./ure/opencog/ure/backwardchainer/ControlPolicy.h",
+        "line": 71,
+        "marker_type": "TODO",
+        "content": "* TODO: add comments about inference control policy, see",
+        "context": "\t *\n\t * Unless a control_as is provided at construction time, the\n\t * Selection is random amongst the valid rules and weighted\n\t * according to their truth values.\n\t *\n\t * TODO: add comments about inference control policy, see\n\t * <OPENCOG_ROOT>/examples/pln/inference-control-learning/README.md\n\t *\n"
+      }
+    ],
+    "simple_implementation": [
+      {
+        "file": "./generate_analysis_report.py",
+        "line": 26,
+        "marker_type": "TODO",
+        "content": "This report provides a detailed analysis of the **98 actionable TODO and FIXME items** identified in the `opencog-unified` repository. These items represent tasks that are suitable for immediate implementation, ranging from simple bug fixes to more involved feature additions.",
+        "context": "**Date:** {datetime.utcnow().strftime(\"%Y-%m-%d\")}\n**Author:** Manus AI\n\n## 1. Executive Summary\n\nThis report provides a detailed analysis of the **98 actionable TODO and FIXME items** identified in the `opencog-unified` repository. These items represent tasks that are suitable for immediate impleme"
+      },
+      {
+        "file": "./analyze_fixme_instances.py",
+        "line": 53,
+        "marker_type": "TODO",
+        "content": "'simple_todo': r'simple|easy|quick|straightforward|minor|small',",
+        "context": "            'thread_safety': r'thread[_\\-\\s]safe|race\\s+condition|atomic|mutex|lock|concurrent|synchroniz',\n            'performance': r'performance|optimization|O\\(|efficient|speed|fast|slow|bottleneck|cache',\n            'distributed': r'distributed|cluster|consensus|partition|byzantine|quorum|nod"
+      },
+      {
+        "file": "./analyze_fixme_instances.py",
+        "line": 202,
+        "marker_type": "TODO",
+        "content": "patterns.get('simple_todo', 0) >= 1 or",
+        "context": "            return \"MEDIUM\", \"Feature Implementation/Algorithm\", \"1-4 weeks\", \\\n                   \"Requires moderate technical knowledge and implementation effort\"\n        \n        # Easy criteria\n        if (patterns.get('documentation', 0) >= 1 or\n            patterns.get('simple_todo', 0) >= 1 o"
+      },
+      {
+        "file": "./generate_progress_report.py",
+        "line": 107,
+        "marker_type": "TODO",
+        "content": "1.  **Address Actionable `TODO`s:** Focus on the **{actionable_count}** identified `TODO` items that involve straightforward feature implementations or bug fixes. A top priority is to complete the timestamp support.",
+        "context": "\n## 5. Next Priorities\n\nBased on the analysis, the following priorities are recommended for the next phase of work:\n\n1.  **Address Actionable `TODO`s:** Focus on the **{actionable_count}** identified `TODO` items that involve straightforward feature implementations or bug fixes. A top priority is to"
+      },
+      {
+        "file": "./analyze_placeholders.py",
+        "line": 100,
+        "marker_type": "STUB",
+        "content": "# Check if it's a simple stub or empty function",
+        "context": "    \n    fixable = []\n    needs_research = []\n    \n    for p in placeholders:\n        # Check if it's a simple stub or empty function\n        if p['type'] in ['stub', 'empty_function', 'pass_placeholder']:\n            fixable.append({**p, 'reason': 'Simple stub implementation'})\n        # Check if i"
+      },
+      {
+        "file": "./analyze_placeholders.py",
+        "line": 102,
+        "marker_type": "STUB",
+        "content": "fixable.append({**p, 'reason': 'Simple stub implementation'})",
+        "context": "    needs_research = []\n    \n    for p in placeholders:\n        # Check if it's a simple stub or empty function\n        if p['type'] in ['stub', 'empty_function', 'pass_placeholder']:\n            fixable.append({**p, 'reason': 'Simple stub implementation'})\n        # Check if it has clear implementa"
+      },
+      {
+        "file": "./scripts/test_todo_catalog.py",
+        "line": 3,
+        "marker_type": "TODO",
+        "content": "Test script to validate that the comprehensive TODO catalog includes all required items",
+        "context": "#!/usr/bin/env python3\n\"\"\"\nTest script to validate that the comprehensive TODO catalog includes all required items\nfrom the problem statement.\n\"\"\"\n\nimport sys\nimport os\n"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 717,
+        "marker_type": "TODO",
+        "content": "def validate_batch_6_todos(self):",
+        "context": "            if todo_key not in self.progress_data[\"in_progress_todos\"]:\n                self.progress_data[\"in_progress_todos\"].append(todo_key)\n            todo.status = \"in-progress\"\n            todo.assigned_batch = self.progress_data['current_iteration']\n    \n    def validate_batch_6_todos(self)"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 718,
+        "marker_type": "TODO",
+        "content": "\"\"\"Specifically validate and resolve the batch 6 TODOs mentioned in the issue\"\"\"",
+        "context": "                self.progress_data[\"in_progress_todos\"].append(todo_key)\n            todo.status = \"in-progress\"\n            todo.assigned_batch = self.progress_data['current_iteration']\n    \n    def validate_batch_6_todos(self):\n        \"\"\"Specifically validate and resolve the batch 6 TODOs mention"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 794,
+        "marker_type": "TODO",
+        "content": "def validate_existing_todos(self):",
+        "context": "            \"resolved_at\": datetime.now().isoformat(),\n            \"resolution_note\": resolution_note,\n            \"resolved_by\": \"recursive_todo_resolver_validation\"\n        }\n    \n    def validate_existing_todos(self):\n        \"\"\"Validate that TODOs marked as in-progress or unchecked still exist i"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 795,
+        "marker_type": "TODO",
+        "content": "\"\"\"Validate that TODOs marked as in-progress or unchecked still exist in the codebase\"\"\"",
+        "context": "            \"resolution_note\": resolution_note,\n            \"resolved_by\": \"recursive_todo_resolver_validation\"\n        }\n    \n    def validate_existing_todos(self):\n        \"\"\"Validate that TODOs marked as in-progress or unchecked still exist in the codebase\"\"\"\n        print(\"\ud83d\udd0d Validating existing "
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 889,
+        "marker_type": "TODO",
+        "content": "# Step 2: Validate existing TODOs to ensure they still exist in codebase",
+        "context": "        \"\"\"Run a single iteration of the recursive TODO resolution\"\"\"\n        \n        # Step 1: Extract catalog\n        self.extract_catalog()\n        \n        # Step 2: Validate existing TODOs to ensure they still exist in codebase\n        self.validate_existing_todos()\n        \n        # Step 3: "
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 890,
+        "marker_type": "TODO",
+        "content": "self.validate_existing_todos()",
+        "context": "        \n        # Step 1: Extract catalog\n        self.extract_catalog()\n        \n        # Step 2: Validate existing TODOs to ensure they still exist in codebase\n        self.validate_existing_todos()\n        \n        # Step 3: Allocate attention (select batch)\n        batch = self.allocate_attent"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 974,
+        "marker_type": "TODO",
+        "content": "parser.add_argument(\"--validate-batch-6\", action=\"store_true\", help=\"Validate and resolve batch 6 TODOs\")",
+        "context": "    parser.add_argument(\"--next-batch\", action=\"store_true\", help=\"Run next iteration\")\n    parser.add_argument(\"--mark-completed\", nargs=2, metavar=(\"FILE:LINE\", \"PR_LINK\"), \n                       help=\"Mark a TODO as completed\")\n    parser.add_argument(\"--status\", action=\"store_true\", help=\"Show "
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 1013,
+        "marker_type": "TODO",
+        "content": "resolver.validate_batch_6_todos()",
+        "context": "        else:\n            print(f\"   \u2022 GitHub Integration: \u274c Disabled\")\n        return\n    \n    if args.validate_batch_6:\n        resolver.validate_batch_6_todos()\n        resolver._save_progress()\n        return\n    \n    if args.next_batch:\n        print(\"\ud83e\udde0 Running next iteration of recursive TODO "
+      },
+      {
+        "file": "./scripts/resolve_todos.py",
+        "line": 81,
+        "marker_type": "TODO",
+        "content": "return func_signature.replace('// TODO', '// Auto-generated implementation\\n    return false;')",
+        "context": "\n        # Extract return type\n        if 'void' in func_signature:\n            return func_signature.replace('// TODO', '// Auto-generated implementation\\n    return;')\n        elif 'bool' in func_signature:\n            return func_signature.replace('// TODO', '// Auto-generated implementation\\n   "
+      },
+      {
+        "file": "./scripts/resolve_todos.py",
+        "line": 158,
+        "marker_type": "TODO",
+        "content": "def resolve_simple_todos(self, file_path: Path) -> int:",
+        "context": "        except Exception as e:\n            print(f\"Error fixing style in {file_path}: {e}\")\n\n        return 0\n\n    def resolve_simple_todos(self, file_path: Path) -> int:\n        \"\"\"Resolve simple, actionable TODOs\"\"\"\n        try:\n            with open(file_path, 'r', encoding='utf-8', errors='ignor"
+      },
+      {
+        "file": "./scripts/resolve_todos.py",
+        "line": 159,
+        "marker_type": "TODO",
+        "content": "\"\"\"Resolve simple, actionable TODOs\"\"\"",
+        "context": "            print(f\"Error fixing style in {file_path}: {e}\")\n\n        return 0\n\n    def resolve_simple_todos(self, file_path: Path) -> int:\n        \"\"\"Resolve simple, actionable TODOs\"\"\"\n        try:\n            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n                conte"
+      },
+      {
+        "file": "./scripts/resolve_todos.py",
+        "line": 229,
+        "marker_type": "TODO",
+        "content": "# Resolve simple TODOs",
+        "context": "\n                # Fix style\n                if self.fix_code_style(file_path):\n                    stats['style_fixes'] += 1\n\n                # Resolve simple TODOs\n                if self.resolve_simple_todos(file_path):\n                    stats['todos_resolved'] += 1\n\n                if stats['f"
+      },
+      {
+        "file": "./scripts/resolve_todos.py",
+        "line": 230,
+        "marker_type": "TODO",
+        "content": "if self.resolve_simple_todos(file_path):",
+        "context": "                # Fix style\n                if self.fix_code_style(file_path):\n                    stats['style_fixes'] += 1\n\n                # Resolve simple TODOs\n                if self.resolve_simple_todos(file_path):\n                    stats['todos_resolved'] += 1\n\n                if stats['fi"
+      },
+      {
+        "file": "./moses/moses/moses/representation/build_knobs.cc",
+        "line": 344,
+        "marker_type": "XXX",
+        "content": "/// _exemplar simpler (??? XXX ??? huh?)",
+        "context": "        kb.turn(idx);\n\n        /// @todo could use kb.complexity_bound() to be faster, but\n        /// there is a strange thing with kb.complexity_bound()\n        /// because apparently when it is 0 it actually makes\n        /// _exemplar simpler (??? XXX ??? huh?)\n\n        // We halt complexity sea"
+      },
+      {
+        "file": "./atomspace/opencog/scm/opencog/base/utilities.scm",
+        "line": 856,
+        "marker_type": "XXX",
+        "content": "XXX TODO -- this would almost surely be simpler to implement using",
+        "context": "  guile> (cartesian-prod (list (list 'p 'q) 'a (list 'x 'y)))\n  ((p a x) (q a x) (p a y) (q a y))\n  guile> (cartesian-prod (list 'a (list 'p 'q) (list 'x 'y)))\n  ((a p x) (a q x) (a p y) (a q y))\n\n  XXX TODO -- this would almost surely be simpler to implement using\n  srfi-1 fold or srfi-1 map, which"
+      },
+      {
+        "file": "./atomspace/opencog/query/NextSearchMixin.cc",
+        "line": 267,
+        "marker_type": "TODO",
+        "content": "// this simpler code is good enough. TODO: Optimize to filter by parent type.",
+        "context": "\tHandleSet ungrounded_vars;\n\n\t// Grounded variables ordered by the size of their grounding\n\t// incoming set. Ideally, we should look only at the incoming\n\t// set that matches the type of the parent term. But for now,\n\t// this simpler code is good enough. TODO: Optimize to filter by parent type.\n\tstd"
+      },
+      {
+        "file": "./atomspace/opencog/query/PatternMatchEngine.cc",
+        "line": 3132,
+        "marker_type": "TODO",
+        "content": "* TODO: The implementation here is minimal - very simple, very basic.",
+        "context": " * hits, one on \"x\" and one on the \"z\" end-point.\n *\n * There's no unit test for this. Caching does hurt some workloads by\n * as much as 5%. It helps the genome-annotation code by 25%.\n *\n * TODO: The implementation here is minimal - very simple, very basic.\n * One could get much fancier. For exampl"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/flow/CollectionOfLink.cc",
+        "line": 71,
+        "marker_type": "TODO",
+        "content": "// TODO: Support complex type signatures beyond simple TYPE_NODE.",
+        "context": "\t\t\t\tto_string().c_str());\n\n\t_have_typespec = true;\n\n\t// TODO: Handle executable _outgoing[0] by executing it first.\n\t// TODO: Support complex type signatures beyond simple TYPE_NODE.\n\t// Current implementation assumes simple type specification.\n\tif (not _outgoing[0]->is_type(TYPE_NODE))\n\t\tthrow Inva"
+      }
+    ],
+    "error_handling": [
+      {
+        "file": "./fix_placeholders.py",
+        "line": 20,
+        "marker_type": "TODO",
+        "content": "'missing_error_handling': re.compile(r'catch\\s*\\([^)]*\\)\\s*{\\s*//\\s*TODO'),",
+        "context": "        self.fixes_applied = defaultdict(list)\n        self.patterns = {\n            'stub_function': re.compile(r'(void|int|bool)\\s+(\\w+)\\([^)]*\\)\\s*{\\s*//\\s*(TODO|FIXME|STUB)', re.MULTILINE),\n            'empty_implementation': re.compile(r'{\\s*//\\s*NOT IMPLEMENTED\\s*}'),\n            'placeholder_"
+      },
+      {
+        "file": "./setup_fixme_environment.py",
+        "line": 83,
+        "marker_type": "TODO",
+        "content": "echo \"   // TODO: Implement error handling for edge case X\"",
+        "context": "            done\n            \n            if [ $new_fixmes -eq 1 ]; then\n                echo \"\"\n                echo \"\ud83d\udca1 Tip: Use descriptive TODO comments instead:\"\n                echo \"   // TODO: Implement error handling for edge case X\"\n                echo \"   // TODO(v2.0): Refactor to use ne"
+      },
+      {
+        "file": "./implement_functional_fixes.py",
+        "line": 74,
+        "marker_type": "TODO",
+        "content": "\"\"\"Add input validation where TODOs mention checking or validating\"\"\"",
+        "context": "                'reason': str(e)\n            })\n            return False\n    \n    def add_validation_checks(self, filepath, line_num, context):\n        \"\"\"Add input validation where TODOs mention checking or validating\"\"\"\n        try:\n            with open(filepath, 'r', encoding='utf-8', errors='ig"
+      },
+      {
+        "file": "./analyze_issue_examples.py",
+        "line": 34,
+        "marker_type": "XXX",
+        "content": "\"./atomspace/opencog/atoms/core/TypeChoice.cc:\t\t// For now, just avoid throwing an exception. XXX FIXME.\",",
+        "context": "        \"./atomspace/opencog/sheaf/attic/linear-parser.scm:  XXX FIXME WARNING DANGER: As written, this runs in exponential time\",\n        \"./atomspace/opencog/atoms/pattern/PatternUtils.cc:\t\t// XXX FIXME Are the below needed?\",\n        \"./atomspace/opencog/atoms/pattern/BindLink.cc:\t// Shoot. XXX F"
+      },
+      {
+        "file": "./implement_scheme_stubs.py",
+        "line": 18,
+        "marker_type": "STUB",
+        "content": "\"\"\"Implement a stub function that throws 'not-implemented\"\"\"",
+        "context": "        self.repo_root = Path(repo_root)\n        self.fixes_applied = []\n        self.fixes_failed = []\n        \n    def implement_stub(self, filepath, line_num):\n        \"\"\"Implement a stub function that throws 'not-implemented\"\"\"\n        try:\n            with open(filepath, 'r', encoding='utf-8', "
+      },
+      {
+        "file": "./language-learning/src/grammar_learner/category_learner.py",
+        "line": 53,
+        "marker_type": "FIXME",
+        "content": "except Exception:  # FIXME",
+        "context": "    elif word_space[0] in ['e', 'v']:  # 'embeddings' / 'vectors' - 0.6 legacy\n        dict_path = tmpath\n        try:\n            dim = vector_space_dim(links, dict_path, tmpath, dim_max, sv_min,\n                                   verbose)\n        except Exception:  # FIXME\n            dim = dim_ma"
+      },
+      {
+        "file": "./language-learning/src/grammar_learner/skl_clustering.py",
+        "line": 111,
+        "marker_type": "FIXME",
+        "content": "except Exception:  # FIXME",
+        "context": "            labels = model.labels_\n\n        try:\n            metrics['silhouette_index'] = float(\n                silhouette_score(cd, labels, metric=clustering_metric[1]))\n        except Exception:  # FIXME\n            metrics['silhouette_index'] = 0.0\n        try:\n            metrics['variance_rat"
+      },
+      {
+        "file": "./language-learning/src/grammar_learner/skl_clustering.py",
+        "line": 116,
+        "marker_type": "FIXME",
+        "content": "except Exception:  # FIXME",
+        "context": "        except Exception:  # FIXME\n            metrics['silhouette_index'] = 0.0\n        try:\n            metrics['variance_ratio'] = float(\n                calinski_harabaz_score(cd, labels))\n        except Exception:  # FIXME\n            metrics['variance_ratio'] = 0.0\n        # try:\n        #   m"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 773,
+        "marker_type": "TODO",
+        "content": "print(f\"   \u26a0\ufe0f  Error checking {todo_key}: {e}\")",
+        "context": "                            print(f\"   \u23f3 TODO still pending: {todo_key}\")\n                        else:\n                            print(f\"   \u2753 TODO status unclear: {todo_key}\")\n                            \n            except Exception as e:\n                print(f\"   \u26a0\ufe0f  Error checking {todo_key}:"
+      },
+      {
+        "file": "./scripts/recursive_todo_resolver.py",
+        "line": 828,
+        "marker_type": "TODO",
+        "content": "print(f\"   \u26a0\ufe0f  Error checking {todo.file}: {e}\")",
+        "context": "                    if not todo_found:\n                        print(f\"   \u2705 TODO resolved: {todo.file}:{todo.line}\")\n                        todos_to_mark_completed.append(f\"{todo.file}:{todo.line}\")\n                        \n                except Exception as e:\n                    print(f\"   \u26a0\ufe0f  E"
+      },
+      {
+        "file": "./scripts/resolve_todos.py",
+        "line": 166,
+        "marker_type": "TODO",
+        "content": "# Replace TODO: Add error handling with basic try-catch",
+        "context": "            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n                content = f.read()\n\n            original_content = content\n\n            # Replace TODO: Add error handling with basic try-catch\n            if file_path.suffix in ['.cpp', '.h']:\n                content = "
+      },
+      {
+        "file": "./scripts/resolve_todos.py",
+        "line": 169,
+        "marker_type": "TODO",
+        "content": "r'//\\s*TODO:\\s*Add error handling\\s*\\n',",
+        "context": "            original_content = content\n\n            # Replace TODO: Add error handling with basic try-catch\n            if file_path.suffix in ['.cpp', '.h']:\n                content = re.sub(\n                    r'//\\s*TODO:\\s*Add error handling\\s*\\n',\n                    '// Error handling added\\n"
+      },
+      {
+        "file": "./atomspace/examples/c++-guile/PrimitiveExample.cc",
+        "line": 87,
+        "marker_type": "XXX",
+        "content": "printf(\"XXX ERROR XXX: an error should have been thrown, but wasn't!\\n\");",
+        "context": "\tdefine_scheme_primitive(\"whoops\", &MyTestClass::my_other_func, mtc);\n\n\trslt = eval->eval(\"(whoops nnn)\");\n\tif (!eval->eval_error())\n\t{\n\t\tprintf(\"XXX ERROR XXX: an error should have been thrown, but wasn't!\\n\");\n\t}\n\n\t// Print the result of calling MyTestClass::my_func\n\tprintf(\"Info: Intentional thro"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/parallel/PureExecLink.cc",
+        "line": 64,
+        "marker_type": "XXX",
+        "content": "// XXX Note that this leaks, if the execute throws.",
+        "context": "\t\tAtomSpace* tas = AtomSpaceCast(_outgoing[1]).get();\n\t\treturn _outgoing[0]->execute(tas, silent);\n\t}\n\n\t// No AtomSpace provided. Use a temporary.\n\t// XXX Note that this leaks, if the execute throws.\n\t// The transient code will catch the leak, and complain.\n\t// (There's no actual memleak; just a com"
+      },
+      {
+        "file": "./atomspace/opencog/atoms/core/PutLink.cc",
+        "line": 337,
+        "marker_type": "XXX",
+        "content": "* an undefined handle is returned (?? XXX really? or is it a throw?).",
+        "context": " *         ConceptNode \"cowpie\"\n *         ConceptNode \"hot patootie\"\n *\n * Type checking is performed during substitution; if the arguments fail\n * to have the desired types, no substitution is performed.  In this case,\n * an undefined handle is returned (?? XXX really? or is it a throw?).\n * For s"
+      }
+    ],
+    "comment_cleanup": [
+      {
+        "file": "./opencog/opencog/main/LGParser.cc",
+        "line": 59,
+        "marker_type": "STUB",
+        "content": "// Clean up stub resources (fallback when Link Grammar unavailable)",
+        "context": "    if (lg_dictionary_) {\n        dictionary_delete(lg_dictionary_);\n        lg_dictionary_ = nullptr;\n    }\n#else\n    // Clean up stub resources (fallback when Link Grammar unavailable)\n    if (lg_dictionary_) {\n        delete static_cast<int*>(lg_dictionary_);\n        lg_dictionary_ = nullptr;\n   "
+      },
+      {
+        "file": "./opencog/opencog/main/LGParser.cc",
+        "line": 126,
+        "marker_type": "STUB",
+        "content": "// Fallback stub implementation when Link Grammar library is not available",
+        "context": "                    dictionary_language_ = \"unknown\";\n                }\n            }\n        }\n#else\n        // Fallback stub implementation when Link Grammar library is not available\n        // These stubs maintain API compatibility while indicating library absence\n        lg_dictionary_ = new int"
+      },
+      {
+        "file": "./opencog/opencog/main/LGParser.cc",
+        "line": 127,
+        "marker_type": "STUB",
+        "content": "// These stubs maintain API compatibility while indicating library absence",
+        "context": "                }\n            }\n        }\n#else\n        // Fallback stub implementation when Link Grammar library is not available\n        // These stubs maintain API compatibility while indicating library absence\n        lg_dictionary_ = new int(1); // Stub: minimal allocation for compatibility\n   "
+      },
+      {
+        "file": "./opencog/opencog/main/LGParser.cc",
+        "line": 128,
+        "marker_type": "STUB",
+        "content": "lg_dictionary_ = new int(1); // Stub: minimal allocation for compatibility",
+        "context": "            }\n        }\n#else\n        // Fallback stub implementation when Link Grammar library is not available\n        // These stubs maintain API compatibility while indicating library absence\n        lg_dictionary_ = new int(1); // Stub: minimal allocation for compatibility\n        lg_options_ ="
+      },
+      {
+        "file": "./opencog/opencog/main/LGParser.cc",
+        "line": 129,
+        "marker_type": "STUB",
+        "content": "lg_options_ = new int(2);    // Stub: minimal allocation for compatibility",
+        "context": "        }\n#else\n        // Fallback stub implementation when Link Grammar library is not available\n        // These stubs maintain API compatibility while indicating library absence\n        lg_dictionary_ = new int(1); // Stub: minimal allocation for compatibility\n        lg_options_ = new int(2);  "
+      }
+    ]
+  }
+}
