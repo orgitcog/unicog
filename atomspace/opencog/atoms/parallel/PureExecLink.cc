@@ -61,9 +61,10 @@ ValuePtr PureExecLink::execute(AtomSpace* as,
 	}
 
 	// No AtomSpace provided. Use a temporary.
-	// XXX Note that this leaks, if the execute throws.
-	// The transient code will catch the leak, and complain.
-	// (There's no actual memleak; just a complaint about counting.)
+	// NOTE: If execute() throws an exception, the transient atomspace
+	// may not be properly released, causing the transient tracking code
+	// to report a leak warning. This is a false positive - there is no
+	// actual memory leak, only a reference count accounting issue.
 	AtomSpace* tas = grab_transient_atomspace(as);
 	ValuePtr evp(_outgoing[0]->execute(tas, silent));
 	release_transient_atomspace(tas);

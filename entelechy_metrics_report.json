@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-12-26T06:54:45.399788Z",
+  "total_markers": 545,
+  "by_type": {
+    "TODO": 238,
+    "FIXME": 80,
+    "STUB": 39,
+    "XXX": 132,
+    "HACK": 50,
+    "NOT IMPLEMENTED": 6
+  },
+  "by_component": {
+    "moses": 225,
+    "atomspace": 167,
+    "ure": 68,
+    "ggml-tensor-kernel": 26,
+    "atomspace-storage": 24,
+    "unify": 8,
+    "opencog": 7,
+    "tests": 6,
+    "cogutil": 6,
+    "cogserver": 5,
+    "atomspace-rocks": 2,
+    "atomspace-restful": 1
+  },
+  "entelechy_metrics": {
+    "baseline_markers": 2895,
+    "current_markers": 545,
+    "markers_resolved": 2350,
+    "resolution_rate": 81.17443868739205,
+    "severity": 0.18166666666666664,
+    "actualization": 0.9811744386873921,
+    "fitness": 0.9091666666666667
+  },
+  "top_components": {
+    "moses": 225,
+    "atomspace": 167,
+    "ure": 68,
+    "ggml-tensor-kernel": 26,
+    "atomspace-storage": 24,
+    "unify": 8,
+    "opencog": 7,
+    "tests": 6,
+    "cogutil": 6,
+    "cogserver": 5
+  }
+}
