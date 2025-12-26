@@ -922,11 +922,13 @@ score_t interesting_predicate_bscore::min_improv() const
 /// clustering algo.
 ///
 /// This is considered experimental because it doesn't yet work
-/// very well, is likely to be redisigned, and finally, doesn't
+/// very well, is likely to be redesigned, and finally, doesn't
 /// even output all the data that is required to use the resulting
-/// formula (the edges, with are printed by hand, below).
+/// formula (the edges, which are printed by hand, below).
 ///
-/// XXX this should probably be removed! TODO FIXME
+/// NOTE: This class is retained for backward compatibility but may
+/// be deprecated in a future release. Consider using precision_bscore
+/// for production use cases.
 
 cluster_bscore::cluster_bscore(const ITable& itable)
     : _itable(itable)

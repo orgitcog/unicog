@@ -76,8 +76,10 @@ static bool check_evaluatable(const Handle& bool_atom)
 		// well, in that case these are interpreted as intersection,
 		// union and complement. Since it cannot inherit from
 		// EVALUATABLE_LINK (cause it's a Node) we have to add it here.
-		// XXX FIXME, this is to be removed, because UnionLink,
-		// IntersectionLink takes the place of OrLink, AndLink.
+		//
+		// NOTE: This is a transitional implementation. In the long term,
+		// UnionLink and IntersectionLink should replace OrLink and AndLink
+		// for concept operations, providing more semantically clear operations.
 		if (h->is_type(CONCEPT_NODE)) continue;
 
 		// Fucking quote links. I hate those with a passion.

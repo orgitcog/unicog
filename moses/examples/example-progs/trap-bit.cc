@@ -23,12 +23,13 @@
 
 using boost::lexical_cast;
 
-// XXX under construction XXX
-
-// XXX this example is broken, and will remain so until "multivariate"
-// is ported over/re-implemented. Basically, there is no structure
-// learning at this time.  
-// XXX some of the documentation below may be misleading.
+// NOTE: This example is currently non-functional and retained for
+// reference purposes only. It requires multivariate structure learning
+// to be reimplemented.
+//
+// The example will remain disabled until structure learning capabilities
+// are restored. The documentation below describes the intended functionality
+// but may not reflect the current implementation state.
 //
 // Demonstration program for the "bit-trap" optimization problem.
 // This is a standard optimization demonstraton problem: a 
@@ -39,7 +40,7 @@ using boost::lexical_cast;
 // scoring functions make different bits depend on one-another.  Thus,
 // the optimal solution cannot be found without structure learning; the
 // MOSES univariate() learner is a no-op, and so cannot solve this problem.
-// XXX which is why we need to put structure leanring back in the code XXX
+// Structure learning needs to be reimplemented to enable this optimization.
 //
 // The correlation between variables is accomplished by using a
 // vee-shaped scoring function. The vee-shape is meant to be "deceptive",
