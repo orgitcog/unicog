@@ -306,9 +306,7 @@ if(TARGET distributed-cognitive-mesh)
 endif()
 
 # Add comprehensive target that includes all phases
-add_custom_target(cognitive-complete 
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization
-    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, and language systems"
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration distributed-cognitive-mesh-phase4
-    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language systems, and distributed cognitive mesh"
+add_custom_target(cognitive-complete
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, and distributed cognitive mesh systems"
 )
