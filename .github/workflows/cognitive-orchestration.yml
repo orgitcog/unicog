@@ -41,6 +41,7 @@ jobs:
   # =================================================================
   
   cogutil:
+    timeout-minutes: 60
     name: "🧬 CogUtil Foundation"
     runs-on: ubuntu-latest
     container:
@@ -183,6 +184,7 @@ jobs:
   # =================================================================
   
   atomspace:
+    timeout-minutes: 60
     name: "⚛️ AtomSpace Hypergraph"
     needs: [cogutil]
     runs-on: ubuntu-latest
@@ -354,6 +356,7 @@ jobs:
   # =================================================================
   
   cognitive-synthesis:
+    timeout-minutes: 60
     name: "🎭 Cognitive Pipeline Synthesis"
     needs: [atomspace]
     runs-on: ubuntu-latest
@@ -522,6 +525,7 @@ jobs:
   # =================================================================
   
   meta-cognitive-evolution:
+    timeout-minutes: 60
     name: "🧠 Meta-Cognitive Pipeline Evolution"
     needs: [cognitive-synthesis]
     runs-on: ubuntu-latest

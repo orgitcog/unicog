@@ -35,6 +35,7 @@ permissions:
 
 jobs:
   architecture-parser:
+    timeout-minutes: 60
     name: "🏗️ Architecture Parser & Validator"
     runs-on: blacksmith-4vcpu-ubuntu-2404
     outputs:
@@ -330,6 +331,7 @@ jobs:
           retention-days: 30
 
   generate-orchestration-issues:
+    timeout-minutes: 60
     name: "🎭 Generate Orchestration Issues"
     needs: [architecture-parser]
     runs-on: blacksmith-4vcpu-ubuntu-2404
@@ -700,6 +702,7 @@ jobs:
           retention-days: 30
 
   create-github-issues:
+    timeout-minutes: 60
     name: "🎯 Create GitHub Issues"
     needs: [architecture-parser, generate-orchestration-issues]
     runs-on: blacksmith-4vcpu-ubuntu-2404
@@ -917,6 +920,7 @@ jobs:
             console.log(`Created ${createdIssues.length} layer implementation issues`);
             
   generate-summary:
+    timeout-minutes: 60
     name: "📊 Generate Implementation Summary"
     needs: [architecture-parser, generate-orchestration-issues, create-github-issues]
     runs-on: blacksmith-4vcpu-ubuntu-2404

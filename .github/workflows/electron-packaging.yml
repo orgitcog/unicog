@@ -21,6 +21,7 @@ env:
 
 jobs:
   build-electron-app:
+    timeout-minutes: 60
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

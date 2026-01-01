@@ -35,6 +35,7 @@ env:
 jobs:
   # Stage 1: Build CogUtil (Foundation)
   build-cogutil:
+    timeout-minutes: 60
     runs-on: windows-latest
     name: Build CogUtil (Windows)
     
@@ -116,6 +117,7 @@ jobs:
 
   # Stage 2: Build AtomSpace (depends on CogUtil)
   build-atomspace:
+    timeout-minutes: 60
     runs-on: windows-latest
     name: Build AtomSpace (Windows)
     needs: build-cogutil
@@ -209,6 +211,7 @@ jobs:
 
   # Stage 3: Build AtomSpace Storage (depends on AtomSpace)
   build-atomspace-storage:
+    timeout-minutes: 60
     runs-on: windows-latest
     name: Build AtomSpace Storage (Windows)
     needs: build-atomspace
@@ -305,6 +308,7 @@ jobs:
 
   # Stage 3b: Build AtomSpace Rocks (depends on AtomSpace Storage)
   build-atomspace-rocks:
+    timeout-minutes: 60
     runs-on: windows-latest
     name: Build AtomSpace RocksDB Storage (Windows)
     needs: build-atomspace-storage
@@ -413,6 +417,7 @@ jobs:
 
   # Stage 4: Build CogServer (depends on AtomSpace)
   build-cogserver:
+    timeout-minutes: 60
     runs-on: windows-latest
     name: Build CogServer (Windows)
     needs: build-atomspace-storage
@@ -509,6 +514,7 @@ jobs:
 
   # Final Stage: Package and Report
   package-and-report:
+    timeout-minutes: 60
     runs-on: windows-latest
     name: Package OCC Windows Build
     needs:

@@ -20,6 +20,7 @@ concurrency:
 
 jobs:
   fixme-check:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     permissions:
       contents: read
