@@ -10,7 +10,7 @@ ADD_LIBRARY (rule
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(rule opencog_atom_types)
+ADD_DEPENDENCIES(rule atombase atomcore atomvalue cogutil opencog_atom_types truthvalue)
 
 TARGET_LINK_LIBRARIES(rule
 	atomcore

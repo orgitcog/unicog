@@ -22,7 +22,7 @@ TARGET_LINK_LIBRARIES(nlp-oc-types
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(nlp-oc-types nlp_oc_atom_types)
+ADD_DEPENDENCIES(nlp-oc-types atomspace-types cogutil nlp_oc_atom_types)
 
 IF (WIN32)
     INSTALL (TARGETS nlp-oc-types

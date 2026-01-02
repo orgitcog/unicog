@@ -45,6 +45,8 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/scheme)
 
 # Create the distributed cognition library
 add_library(distributed-cognition SHARED ${DISTRIBUTED_SOURCES})
+ADD_DEPENDENCIES(distributed-cognition atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 # Link with parent modules (when they're available)
 # target_link_libraries(distributed-cognition cogutil atomspace cognitive-patterns)

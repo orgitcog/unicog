@@ -16,7 +16,7 @@ ADD_LIBRARY (unify-types SHARED
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(unify-types unify_atom_types)
+ADD_DEPENDENCIES(unify-types atombase atomcore atomspace atomvalue cogutil truthvalue unify_atom_types)
 
 TARGET_LINK_LIBRARIES(unify-types
 	${ATOMSPACE_LIBRARIES}

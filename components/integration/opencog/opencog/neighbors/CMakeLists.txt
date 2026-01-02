@@ -2,6 +2,8 @@ ADD_LIBRARY (neighbors
 	GetPredicates.cc
 	Neighbors.cc
 )
+ADD_DEPENDENCIES(neighbors atombase atomvalue cogutil truthvalue)
+
 
 TARGET_LINK_LIBRARIES(neighbors
 	atombase

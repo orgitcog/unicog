@@ -60,6 +60,8 @@ ADD_LIBRARY(comboreduct SHARED
 	reduct/perception_rules.cc
 	reduct/reduct.cc
 )
+ADD_DEPENDENCIES(comboreduct cogutil)
+
 
 TARGET_LINK_LIBRARIES (comboreduct
 	${COGUTIL_LIBRARY}
@@ -75,6 +77,8 @@ ADD_LIBRARY(comboant SHARED
 	ant_combo_vocabulary/ant_indefinite_object.cc
 	ant_combo_vocabulary/ant_combo_vocabulary.cc
 )
+ADD_DEPENDENCIES(comboant cogutil comboreduct)
+
 
 TARGET_LINK_LIBRARIES (comboant
 	comboreduct

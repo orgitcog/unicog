@@ -10,7 +10,7 @@ ADD_LIBRARY (columnvec
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(columnvec opencog_atom_types)
+ADD_DEPENDENCIES(columnvec atombase atomcore atomvalue cogutil opencog_atom_types truthvalue)
 
 TARGET_LINK_LIBRARIES(columnvec
 	atomcore

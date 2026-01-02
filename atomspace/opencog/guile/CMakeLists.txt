@@ -37,6 +37,8 @@ IF(NOT EXISTING_SOURCES)
 ENDIF()
 
 ADD_LIBRARY (smob ${EXISTING_SOURCES})
+ADD_DEPENDENCIES(smob atombase atomcore atomspace atomvalue clearbox cogutil execution pattern truthvalue)
+
 
 TARGET_LINK_LIBRARIES(smob
 

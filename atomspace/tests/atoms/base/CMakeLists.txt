@@ -31,7 +31,7 @@ ADD_LIBRARY (test-types SHARED
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(test-types test_atom_types)
+ADD_DEPENDENCIES(test-types atomspace-types cogutil test_atom_types)
 
 TARGET_LINK_LIBRARIES(test-types
    ${ATOMSPACE_atomtypes_LIBRARY}

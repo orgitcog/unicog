@@ -7,6 +7,8 @@ ADD_LIBRARY (json SHARED
 	JsonEval.cc
 	McpPlugAtomSpace.cc
 )
+ADD_DEPENDENCIES(json atombase atomcore atomspace atomvalue cogutil execution truthvalue)
+
 
 TARGET_LINK_LIBRARIES(json
 	atomspace

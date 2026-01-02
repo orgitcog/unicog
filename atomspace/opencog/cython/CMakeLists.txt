@@ -29,7 +29,7 @@ ADD_LIBRARY(PythonEval
 	PythonEval.cc
 )
 
-ADD_DEPENDENCIES(PythonEval py_atomspace_header atomspace_cython type_constructors)
+ADD_DEPENDENCIES(PythonEval atombase atomcore atomspace atomspace_cython atomvalue cogutil execution pattern py_atomspace_header truthvalue type_constructors)
 
 TARGET_LINK_LIBRARIES(PythonEval
 	pattern
@@ -65,7 +65,7 @@ IF(HAVE_GUILE)
 	ADD_LIBRARY(PythonSCM
 		PythonSCM.cc
 	)
-	ADD_DEPENDENCIES(PythonSCM PythonEval)
+	ADD_DEPENDENCIES(PythonSCM PythonEval atomspace smob)
 
 	TARGET_LINK_LIBRARIES(PythonSCM
 		PythonEval

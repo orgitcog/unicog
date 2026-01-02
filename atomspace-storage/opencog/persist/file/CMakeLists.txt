@@ -26,6 +26,8 @@ ADD_LIBRARY (persist-file SHARED
 	FileStorage.cc
 	PersistFileSCM.cc
 )
+ADD_DEPENDENCIES(persist-file atombase atomcore atomspace atomvalue cogutil persist smob truthvalue)
+
 
 TARGET_LINK_LIBRARIES(persist-file
 	persist

@@ -9,6 +9,8 @@ ADD_SUBDIRECTORY (scm)
 ADD_LIBRARY (unify
 	Unify.cc
 )
+ADD_DEPENDENCIES(unify atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 TARGET_LINK_LIBRARIES(unify
 	${ATOMSPACE_LIBRARIES}

@@ -19,7 +19,7 @@ ADD_LIBRARY (value
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(value opencog_atom_types)
+ADD_DEPENDENCIES(value atom_types cogutil opencog_atom_types)
 
 TARGET_LINK_LIBRARIES(value
 	atom_types

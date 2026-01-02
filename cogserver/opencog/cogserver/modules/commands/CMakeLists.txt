@@ -4,6 +4,8 @@ ADD_LIBRARY (builtinreqs MODULE
 	ModuleManagement.cc
 	ShutdownRequest.cc
 )
+ADD_DEPENDENCIES(builtinreqs atomspace cogutil network server)
+
 
 TARGET_LINK_LIBRARIES(builtinreqs
 	server

@@ -51,6 +51,8 @@ file(GLOB_RECURSE MINER_HEADERS
 # Create miner library
 if(MINER_SOURCES)
     add_library(miner SHARED ${MINER_SOURCES})
+ADD_DEPENDENCIES(miner atombase atomcore atomspace atomvalue cogutil truthvalue unify ure)
+
     
     # Link dependencies
     target_link_libraries(miner

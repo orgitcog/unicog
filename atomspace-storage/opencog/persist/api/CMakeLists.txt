@@ -10,6 +10,8 @@ ADD_LIBRARY (persist SHARED
 	PersistSCM.cc
 	StorageNode.cc
 )
+ADD_DEPENDENCIES(persist atombase atomcore atomspace atomvalue cogutil smob truthvalue)
+
 
 TARGET_LINK_LIBRARIES(persist
 	storage-types

@@ -6,7 +6,7 @@ ADD_LIBRARY (sexcom SHARED
 	SexprEval.cc
 )
 
-ADD_DEPENDENCIES(sexcom storage_types)
+ADD_DEPENDENCIES(sexcom atombase atomcore atomspace atomvalue cogutil execution persist persist-proxy storage_types truthvalue)
 
 TARGET_LINK_LIBRARIES(sexcom
 	storage-types

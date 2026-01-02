@@ -12,6 +12,8 @@ IF (HAVE_CYTHON)
 		PythonShell.cc
 		PythonShellModule.cc
 	)
+ADD_DEPENDENCIES(py-shell atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+
 
 	TARGET_LINK_LIBRARIES(py-shell
 		network
@@ -29,6 +31,8 @@ ADD_LIBRARY (scheme-shell SHARED
 	SchemeShell.cc
 	SchemeShellModule.cc
 )
+ADD_DEPENDENCIES(scheme-shell atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+
 
 TARGET_LINK_LIBRARIES(scheme-shell
 	network
@@ -42,6 +46,8 @@ ADD_LIBRARY (sexpr-shell SHARED
 	SexprShell.cc
 	SexprShellModule.cc
 )
+ADD_DEPENDENCIES(sexpr-shell atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+
 
 TARGET_LINK_LIBRARIES(sexpr-shell
 	network
@@ -54,6 +60,8 @@ ADD_LIBRARY (json-shell SHARED
 	JsonShell.cc
 	JsonShellModule.cc
 )
+ADD_DEPENDENCIES(json-shell atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+
 
 TARGET_LINK_LIBRARIES(json-shell
 	network
@@ -67,6 +75,8 @@ ADD_LIBRARY (top-shell SHARED
 	TopShell.cc
 	TopShellModule.cc
 )
+ADD_DEPENDENCIES(top-shell atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+
 
 TARGET_LINK_LIBRARIES(top-shell
 	network
