@@ -58,3 +58,4 @@ jobs:
       with:
         name: fixme-progress-report
         path: FIXME_RESOLUTION_PROGRESS_REPORT.md
+        retention-days: 30
