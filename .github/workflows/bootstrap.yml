@@ -214,6 +214,13 @@ jobs:
           chmod +x ./scripts/generate-recursive-feedback.sh
           ./scripts/generate-recursive-feedback.sh
           
+      - name: Execute autognostic ontogenesis
+        run: |
+          set -eu
+          echo "🧬 Executing autognostic ontogenesis cycle..."
+          chmod +x ./scripts/autognostic-ontogenesis.sh
+          ./scripts/autognostic-ontogenesis.sh
+          
       - name: Upload cognitive analysis artifacts
         uses: actions/upload-artifact@v5
         with:
@@ -227,6 +234,7 @@ jobs:
             meta-completeness-analysis.json
             recursive-feedback-report.json
             cognitive-enhancement-issue.md
+            ontogenesis-state.json
           
   build-verification:
     runs-on: ubuntu-latest
