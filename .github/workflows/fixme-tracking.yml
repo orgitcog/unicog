@@ -35,7 +35,7 @@ jobs:
     - name: Check for new FIXMEs in PR
       if: github.event_name == 'pull_request'
       run: |
-        set -euo pipefail
+        set -eu
         git fetch origin ${{ github.base_ref }}
         if git diff origin/${{ github.base_ref }}...HEAD | grep -E "^\+.*FIXME|^\+.*XXX.*FIXME"; then
           echo "❌ New FIXME comments detected in this PR"
@@ -48,7 +48,7 @@ jobs:
     - name: Generate FIXME progress report
       if: github.event_name == 'schedule' || github.event_name == 'push'
       run: |
-        set -euo pipefail
+        set -eu
         python3 fixme_resolution_tracker.py --import-catalog FIXME-SORTED-CATALOG.md --report
 
     - name: Upload progress report

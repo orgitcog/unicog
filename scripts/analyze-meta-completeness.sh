@@ -2,7 +2,7 @@
 # Meta-Completeness and Cognitive Coverage Analysis Script
 # Fast CI/CD optimized version
 
-set -euo pipefail
+set -eu
 
 echo "🔍 Meta-Completeness and Cognitive Coverage Analysis"
 echo "===================================================="

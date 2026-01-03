@@ -48,14 +48,14 @@ jobs:
       
       - name: Setup Python Environment
         run: |
-          set -euo pipefail
+          set -eu
           python3 -m pip install --upgrade pip
           python3 -m pip install pyyaml networkx matplotlib
           
       - name: Parse Architecture from Mermaid
         id: parse-architecture
         run: |
-          set -euo pipefail
+          set -eu
           python3 << 'EOF'
           import re
           import json
@@ -181,7 +181,7 @@ jobs:
       - name: Generate Tensor Analysis
         id: tensor-analysis
         run: |
-          set -euo pipefail
+          set -eu
           python3 << 'EOF'
           import json
           
@@ -250,7 +250,7 @@ jobs:
       - name: Dependency Analysis
         id: dependency-analysis
         run: |
-          set -euo pipefail
+          set -eu
           python3 << 'EOF'
           import json
           
@@ -343,7 +343,7 @@ jobs:
       - name: Generate Layer-Specific Issue Template
         id: issue-template
         run: |
-          set -euo pipefail
+          set -eu
           python3 << 'EOF'
           import json
           import os
@@ -925,7 +925,7 @@ jobs:
     steps:
       - name: Generate Architecture Summary
         run: |
-          set -euo pipefail
+          set -eu
           cat > ontogenesis-summary.md << 'EOF'
           # 🧬 Ontogenesis Implementation Summary
           
@@ -978,7 +978,7 @@ jobs:
       
       - name: Display Summary
         run: |
-          set -euo pipefail
+          set -eu
           echo "🧬 ONTOGENESIS IMPLEMENTATION SUMMARY"
           echo "===================================="
           echo ""

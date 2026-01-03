@@ -14,7 +14,7 @@ jobs:
       - name: Compose Issue Templates of Distributed Cognition
         id: issues
         run: |
-          set -euo pipefail
+          set -eu
           cat << EOF > issues.json
           [
             {

@@ -40,32 +40,32 @@ jobs:
     
     - name: Install dependencies
       run: |
-        set -euo pipefail
+        set -eu
         python -m pip install --upgrade pip
         pip install requests
     
     - name: Generate TODO catalog
       run: |
-        set -euo pipefail
+        set -eu
         python scripts/generate_todo_catalog.py
         echo "TODO catalog generation completed"
     
     - name: Update recursive TODO resolution progress
       run: |
-        set -euo pipefail
+        set -eu
         python scripts/recursive_todo_resolver.py --validate-batch-6
         echo "Batch 6 validation completed"
     
     - name: Check for catalog changes
       id: check_changes
       run: |
-        set -euo pipefail
+        set -eu
         git diff --name-only | grep -E "(COMPREHENSIVE-TODO-CATALOG.md|todo_resolution_progress.json)" && echo "changes=true" >> $GITHUB_OUTPUT || echo "changes=false" >> $GITHUB_OUTPUT
     
     - name: Commit updated catalog
       if: steps.check_changes.outputs.changes == 'true'
       run: |
-        set -euo pipefail
+        set -eu
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add COMPREHENSIVE-TODO-CATALOG.md todo_resolution_progress.json

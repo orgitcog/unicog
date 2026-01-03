@@ -39,14 +39,14 @@ jobs:
     
     - name: Create App Structure
       run: |
-        set -euo pipefail
+        set -eu
         mkdir -p electron-app/src
         echo '{"name":"opencog-explorer","version":"${{ github.event.inputs.version }}","main":"src/main.js","scripts":{"start":"electron ."},"dependencies":{"electron":"^27.0.0"}}' > electron-app/package.json
       shell: bash
     
     - name: Create Main Script
       run: |
-        set -euo pipefail
+        set -eu
         mkdir -p electron-app/src
         echo "const { app, BrowserWindow } = require('electron');" > electron-app/src/main.js
         echo "function createWindow() {" >> electron-app/src/main.js
@@ -58,13 +58,13 @@ jobs:
     
     - name: Create HTML
       run: |
-        set -euo pipefail
+        set -eu
         echo '<!DOCTYPE html><html><head><title>${{ github.event.inputs.app_name }}</title></head><body><h1>OpenCog Explorer</h1></body></html>' > electron-app/src/index.html
       shell: bash
     
     - name: Install Dependencies
       run: |
-        set -euo pipefail
+        set -eu
         cd electron-app
         npm install
       shell: bash

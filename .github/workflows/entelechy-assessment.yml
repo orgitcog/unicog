@@ -47,7 +47,7 @@ jobs:
       - name: Run Entelechy Tests
         id: tests
         run: |
-          set -euo pipefail
+          set -eu
           echo "Running Entelechy framework tests..."
           python3 tests/test_entelechy_framework.py 2>&1 | tee test_output.txt
           TEST_EXIT_CODE=${PIPESTATUS[0]}
@@ -89,7 +89,7 @@ jobs:
       - name: Perform Deep Introspection
         id: introspection
         run: |
-          set -euo pipefail
+          set -eu
           echo "🧠 Performing deep entelechy introspection..."
           python3 entelechy_cli.py introspect -o entelechy_report.json
           
@@ -111,7 +111,7 @@ jobs:
       
       - name: Generate Next Steps Script
         run: |
-          set -euo pipefail
+          set -eu
           cat > generate_issues.py << 'EOF'
           #!/usr/bin/env python3
           """Generate GitHub issues from entelechy repair roadmap"""
@@ -272,7 +272,7 @@ jobs:
       - name: Generate Issues JSON
         id: generate_issues
         run: |
-          set -euo pipefail
+          set -eu
           if [ "${{ github.event_name }}" == "schedule" ]; then
             python3 generate_issues.py schedule > issues.json
           else
@@ -331,7 +331,7 @@ jobs:
       
       - name: Summary
         run: |
-          set -euo pipefail
+          set -eu
           echo "## 🧠 Entelechy Assessment Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Actualization**: ${{ steps.introspection.outputs.actualization }}" >> $GITHUB_STEP_SUMMARY
