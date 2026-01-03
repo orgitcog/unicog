@@ -50,6 +50,7 @@ Integration:        opencog (final integration)
 | **Phase 3** | Weeks 9-12 | Cognitive Systems | Logic systems |
 | **Phase 4** | Weeks 13-16 | Advanced & Learning | Cognitive systems |
 | **Phase 5** | Weeks 17-20 | Language & Integration | All previous |
+| **Phase 6** | Weeks 21-24 | CogZero Agent Framework | All previous |
 
 ---
 
@@ -400,7 +401,7 @@ Integration:        opencog (final integration)
 - ✅ Complete OpenCog stack functional
 
 ### Week 20: Final Validation & Documentation
-**Priority**: CRITICAL  
+**Priority**: CRITICAL
 **Dependencies**: All previous phases
 
 #### Tasks
@@ -409,6 +410,78 @@ Integration:        opencog (final integration)
 - [ ] **Day 4**: Load testing and stress testing
 - [ ] **Day 5**: Final documentation completion
 - [ ] **Day 6-7**: Release preparation and validation
+
+---
+
+## 🤖 PHASE 6: COGZERO AGENT FRAMEWORK (Weeks 21-24)
+
+### Overview
+**CogZero** is a high-performance C++ implementation of Agent-Zero, optimized for integration with the OpenCog cognitive architecture. It provides a modular catalog of powerful cognitive tools, skills, abilities, and knowledge enhancements for building autonomous agents with advanced reasoning capabilities.
+
+**Repository**: https://github.com/o9nn/cogzero
+**Status**: ✅ INTEGRATED (January 2026)
+
+### CogZero Modules
+
+| Module | Description | Dependencies |
+|--------|-------------|--------------|
+| **agentzero-core** | Main orchestration engine | cogutil, atomspace, cogserver |
+| **agentzero-perception** | Multi-modal sensory processing | core |
+| **agentzero-planning** | Hierarchical goal management | core, spacetime |
+| **agentzero-learning** | Continuous learning & adaptation | core, moses |
+| **agentzero-memory** | Context and memory management | core, attention |
+| **agentzero-communication** | NLP and multi-agent interaction | core, lg-atomese |
+| **agentzero-tools** | External tool integration | core |
+| **agentzero-distributed** | Distributed computing support | core |
+| **agentzero-python-bridge** | Python interoperability | core |
+
+### Week 21: Core Integration
+**Priority**: HIGH
+**Dependencies**: atomspace, cogserver, cogutil
+
+#### Tasks
+- [x] Clone cogzero repository
+- [x] Remove .git and integrate into monorepo
+- [x] Update CMakeLists.txt for monorepo dependency resolution
+- [x] Configure agentzero-core with local atomspace/cogutil
+- [ ] Build and test core module
+- [ ] Validate cognitive loop functionality
+
+### Week 22: Perception & Planning
+**Priority**: HIGH
+**Dependencies**: spacetime, agentzero-core
+
+#### Tasks
+- [ ] Configure agentzero-perception module
+- [ ] Integrate agentzero-planning with spacetime
+- [ ] Test multi-modal sensory processing
+- [ ] Validate hierarchical goal management
+
+### Week 23: Learning & Memory
+**Priority**: HIGH
+**Dependencies**: moses, attention, agentzero-core
+
+#### Tasks
+- [ ] Configure agentzero-learning with MOSES integration
+- [ ] Setup agentzero-memory with attention allocation
+- [ ] Test continuous learning capabilities
+- [ ] Validate context management
+
+### Week 24: Communication & Distribution
+**Priority**: MEDIUM
+**Dependencies**: lg-atomese, agentzero-core
+
+#### Tasks
+- [ ] Configure agentzero-communication with NLP
+- [ ] Setup agentzero-distributed for cluster support
+- [ ] Configure Python bridge for interoperability
+- [ ] Final integration testing and documentation
+
+#### Deliverables
+- ✅ Complete CogZero agent framework integrated
+- ✅ All 9 modules building with monorepo dependencies
+- ✅ Agent orchestration functional
+- ✅ Multi-agent communication operational
 
 ---
 

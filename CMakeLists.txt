@@ -305,8 +305,45 @@ if(TARGET distributed-cognitive-mesh)
     add_dependencies(distributed-cognitive-mesh distributed-cognition cognitive-visualization)
 endif()
 
+# Phase VI: CogZero - Agent-Zero C++ Implementation
+# High-performance autonomous agent framework optimized for OpenCog
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cogzero/CMakeLists.txt")
+    add_subdirectory(cogzero)
+    message(STATUS "CogZero Agent Framework: ENABLED")
+else()
+    message(STATUS "CogZero Agent Framework: NOT FOUND")
+endif()
+
+# Add Phase VI CogZero target
+add_custom_target(cogzero-phase6
+    COMMENT "Building Phase VI: CogZero Agent-Zero Framework"
+)
+
+# Add dependencies for CogZero if targets exist
+if(TARGET cogzero)
+    add_dependencies(cogzero-phase6 cogzero)
+endif()
+if(TARGET agentzero-core)
+    add_dependencies(agentzero-core atomspace cogutil)
+    if(TARGET server)
+        add_dependencies(agentzero-core server)
+    endif()
+endif()
+if(TARGET agentzero-learning AND TARGET moses)
+    add_dependencies(agentzero-learning moses)
+endif()
+if(TARGET agentzero-planning AND TARGET spacetime)
+    add_dependencies(agentzero-planning spacetime)
+endif()
+if(TARGET agentzero-memory AND TARGET attention)
+    add_dependencies(agentzero-memory attention)
+endif()
+if(TARGET agentzero-communication AND TARGET lg-atomese)
+    add_dependencies(agentzero-communication lg-atomese)
+endif()
+
 # Add comprehensive target that includes all phases
 add_custom_target(cognitive-complete
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4
-    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, and distributed cognitive mesh systems"
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4 cogzero-phase6
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, distributed cognitive mesh, and CogZero agent systems"
 )
