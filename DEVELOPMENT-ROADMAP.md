@@ -50,6 +50,9 @@ Integration:        opencog (final integration)
 | **Phase 3** | Weeks 9-12 | Cognitive Systems | Logic systems |
 | **Phase 4** | Weeks 13-16 | Advanced & Learning | Cognitive systems |
 | **Phase 5** | Weeks 17-20 | Language & Integration | All previous |
+| **Phase 6** | Weeks 21-24 | CogZero Agent Framework | All previous |
+| **Phase 7** | Weeks 25-28 | ATenSpace Tensor Backend | All previous |
+| **Phase 8** | Weeks 29-32 | HyperMind Neural Framework | ATenSpace (optional) |
 
 ---
 
@@ -400,7 +403,7 @@ Integration:        opencog (final integration)
 - ✅ Complete OpenCog stack functional
 
 ### Week 20: Final Validation & Documentation
-**Priority**: CRITICAL  
+**Priority**: CRITICAL
 **Dependencies**: All previous phases
 
 #### Tasks
@@ -409,6 +412,241 @@ Integration:        opencog (final integration)
 - [ ] **Day 4**: Load testing and stress testing
 - [ ] **Day 5**: Final documentation completion
 - [ ] **Day 6-7**: Release preparation and validation
+
+---
+
+## 🤖 PHASE 6: COGZERO AGENT FRAMEWORK (Weeks 21-24)
+
+### Overview
+**CogZero** is a high-performance C++ implementation of Agent-Zero, optimized for integration with the OpenCog cognitive architecture. It provides a modular catalog of powerful cognitive tools, skills, abilities, and knowledge enhancements for building autonomous agents with advanced reasoning capabilities.
+
+**Repository**: https://github.com/o9nn/cogzero
+**Status**: ✅ INTEGRATED (January 2026)
+
+### CogZero Modules
+
+| Module | Description | Dependencies |
+|--------|-------------|--------------|
+| **agentzero-core** | Main orchestration engine | cogutil, atomspace, cogserver |
+| **agentzero-perception** | Multi-modal sensory processing | core |
+| **agentzero-planning** | Hierarchical goal management | core, spacetime |
+| **agentzero-learning** | Continuous learning & adaptation | core, moses |
+| **agentzero-memory** | Context and memory management | core, attention |
+| **agentzero-communication** | NLP and multi-agent interaction | core, lg-atomese |
+| **agentzero-tools** | External tool integration | core |
+| **agentzero-distributed** | Distributed computing support | core |
+| **agentzero-python-bridge** | Python interoperability | core |
+
+### Week 21: Core Integration
+**Priority**: HIGH
+**Dependencies**: atomspace, cogserver, cogutil
+
+#### Tasks
+- [x] Clone cogzero repository
+- [x] Remove .git and integrate into monorepo
+- [x] Update CMakeLists.txt for monorepo dependency resolution
+- [x] Configure agentzero-core with local atomspace/cogutil
+- [ ] Build and test core module
+- [ ] Validate cognitive loop functionality
+
+### Week 22: Perception & Planning
+**Priority**: HIGH
+**Dependencies**: spacetime, agentzero-core
+
+#### Tasks
+- [ ] Configure agentzero-perception module
+- [ ] Integrate agentzero-planning with spacetime
+- [ ] Test multi-modal sensory processing
+- [ ] Validate hierarchical goal management
+
+### Week 23: Learning & Memory
+**Priority**: HIGH
+**Dependencies**: moses, attention, agentzero-core
+
+#### Tasks
+- [ ] Configure agentzero-learning with MOSES integration
+- [ ] Setup agentzero-memory with attention allocation
+- [ ] Test continuous learning capabilities
+- [ ] Validate context management
+
+### Week 24: Communication & Distribution
+**Priority**: MEDIUM
+**Dependencies**: lg-atomese, agentzero-core
+
+#### Tasks
+- [ ] Configure agentzero-communication with NLP
+- [ ] Setup agentzero-distributed for cluster support
+- [ ] Configure Python bridge for interoperability
+- [ ] Final integration testing and documentation
+
+#### Deliverables
+- ✅ Complete CogZero agent framework integrated
+- ✅ All 9 modules building with monorepo dependencies
+- ✅ Agent orchestration functional
+- ✅ Multi-agent communication operational
+
+---
+
+## ⚡ PHASE 7: ATENSPACE TENSOR BACKEND (Weeks 25-28)
+
+### Overview
+**ATenSpace** is an ATen tensor-based adaptation of OpenCog's AtomSpace, providing a hypergraph knowledge representation system with efficient tensor operations for AI applications. It bridges symbolic and neural AI by combining knowledge graphs with tensor embeddings.
+
+**Repository**: https://github.com/o9nn/ATenSpace
+**Status**: ✅ INTEGRATED (January 2026)
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Tensor Truth Values** | Truth values backed by ATen tensors for GPU acceleration |
+| **Neural Embeddings** | Native support for node/link embeddings |
+| **GPU Acceleration** | CUDA support for high-performance operations |
+| **PLN Integration** | Probabilistic Logic Networks with tensor operations |
+| **ECAN Support** | Economic Attention Networks using tensor math |
+| **Pattern Matching** | Tensor-accelerated pattern matching engine |
+| **Serialization** | Efficient tensor-based persistence |
+
+### Core Components
+
+| Component | Description |
+|-----------|-------------|
+| `Atom.h` | Base class for tensor-backed atoms |
+| `AtomSpace.h` | Tensor-based hypergraph container |
+| `TruthValue.h` | PLN truth value formulas with tensors |
+| `AttentionBank.h` | Attention value management |
+| `ECAN.h` | Economic Attention Networks |
+| `PatternMatcher.h` | Tensor-accelerated pattern matching |
+| `ForwardChainer.h` | Forward chaining inference |
+| `BackwardChainer.h` | Goal-directed inference |
+| `TimeServer.h` | Temporal information management |
+| `Serializer.h` | Tensor serialization for persistence |
+
+### Week 25: Core Integration
+**Priority**: HIGH
+**Dependencies**: atomspace, PyTorch/LibTorch
+
+#### Tasks
+- [x] Clone ATenSpace repository
+- [x] Remove .git and integrate into monorepo
+- [x] Create wrapper CMakeLists.txt for monorepo
+- [x] Configure conditional PyTorch detection
+- [ ] Test header-only mode without PyTorch
+- [ ] Test full build with PyTorch installed
+
+### Week 26: Tensor Backend Testing
+**Priority**: HIGH
+**Dependencies**: atenspace core
+
+#### Tasks
+- [ ] Run ATenSpace test suite
+- [ ] Validate tensor truth value operations
+- [ ] Test embedding similarity queries
+- [ ] Benchmark GPU vs CPU performance
+
+### Week 27: PLN & ECAN Integration
+**Priority**: MEDIUM
+**Dependencies**: atenspace core, pln, attention
+
+#### Tasks
+- [ ] Validate PLN forward/backward chaining
+- [ ] Test ECAN attention spreading
+- [ ] Integrate with monorepo attention module
+- [ ] Performance comparison with standard AtomSpace
+
+### Week 28: Documentation & Examples
+**Priority**: MEDIUM
+**Dependencies**: All atenspace components
+
+#### Tasks
+- [ ] Create integration examples
+- [ ] Document API compatibility with AtomSpace
+- [ ] Write migration guide for existing code
+- [ ] Final validation and release preparation
+
+#### Deliverables
+- ✅ ATenSpace tensor backend integrated
+- ✅ Header-only mode for environments without PyTorch
+- ✅ CUDA-accelerated operations available
+- ✅ PLN and ECAN tensor implementations
+
+---
+
+## 🧠 PHASE 8: HYPERMIND NEURAL FRAMEWORK (Weeks 29-32)
+
+**HyperMind** is a distributed neural network framework built on actor-based concurrency and reactive streams for high-performance, scalable deep learning computation. It provides sophisticated infrastructure for neural network training and inference with GPU/Database integration.
+
+**Repository**: https://github.com/o9nn/hypermind
+
+### Core Components
+
+1. **Actor-Based Concurrency**
+   - `NeuralReactor`: Main actor class for processing neural computations
+   - `ThreadActor`: Base class for actors running in dedicated threads
+   - `SessionInitiator`: Manages training session lifecycle
+   - `SessionState`: Tracks session state within actors
+
+2. **Command System**
+   - `FeedForward`: Forward propagation command
+   - `BackPropagation`: Gradient computation via chain rule
+   - `WeightUpdate`: Applies gradient descent updates
+   - `GradientComputation`: Local gradient computations
+
+3. **Integration Interfaces**
+   - GPU operations (CUDA/OpenCL - stub)
+   - PostgreSQL async queries (stub)
+   - Network communication (distributed reactors - stub)
+
+### Week 29: Core Integration
+**Priority**: HIGH
+**Dependencies**: atenspace (optional)
+
+#### Tasks
+- [x] Clone HyperMind repository
+  ```bash
+  git clone https://github.com/o9nn/hypermind.git hypermind
+  rm -rf hypermind/.git
+  ```
+- [x] Analyze actor-based architecture
+- [x] Integrate into CMakeLists.txt
+- [ ] Configure optional CUDA support
+- [ ] Configure optional PostgreSQL support
+
+### Week 30: Neural Reactor Development
+**Priority**: HIGH
+**Dependencies**: Core integration
+
+#### Tasks
+- [ ] Implement NeuralReactor event loop
+- [ ] Complete command execute() methods
+- [ ] Implement priority queue management
+- [ ] Test actor message passing
+
+### Week 31: GPU/Database Integration
+**Priority**: MEDIUM
+**Dependencies**: Neural reactor
+
+#### Tasks
+- [ ] Implement CUDA kernel submission
+- [ ] Complete PostgreSQL async operations
+- [ ] Add network serialization (Protocol Buffers/MessagePack)
+- [ ] Implement distributed reactor communication
+
+### Week 32: Testing & Validation
+**Priority**: HIGH
+**Dependencies**: All hypermind components
+
+#### Tasks
+- [ ] Run session lifecycle tests
+- [ ] Execute multi-reactor tests
+- [ ] Perform performance benchmarks
+- [ ] Integration with ATenSpace tensors
+
+#### Deliverables
+- ✅ HyperMind neural framework integrated
+- ✅ Header-only mode for core functionality
+- ✅ Optional CUDA acceleration support
+- ✅ Optional PostgreSQL persistence support
 
 ---
 

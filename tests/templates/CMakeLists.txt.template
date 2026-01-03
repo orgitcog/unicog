@@ -1,0 +1,112 @@
+# CMakeLists.txt Template for OpenCog Component Tests
+#
+# This template provides the standard CMake configuration for adding tests
+# to an OpenCog Unified component.
+#
+# Usage:
+#   1. Copy this file to your component's tests/ directory as CMakeLists.txt
+#   2. Replace YOUR_COMPONENT with your component name
+#   3. Replace your_library with your component's library target
+#   4. Add additional test files as needed
+#
+# Copyright (C) 2025-2026 OpenCog Foundation
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# =====================================================
+# Include necessary CMake modules
+# =====================================================
+INCLUDE(OpenCogCxxTestGen)
+
+# =====================================================
+# Find required packages
+# =====================================================
+IF (CXXTEST_FOUND)
+    # Specify libraries that all tests in this directory need to link against
+    LINK_LIBRARIES(
+        your_library           # Replace with your component's library
+        ${ATOMSPACE_LIBRARIES}
+        ${COGUTIL_LIBRARY}
+        ${Boost_FILESYSTEM_LIBRARY}
+        ${Boost_SYSTEM_LIBRARY}
+        ${Boost_THREAD_LIBRARY}
+    )
+
+    # =====================================================
+    # C++ Unit Tests
+    # =====================================================
+    # Each ADD_CXXTEST creates a test executable from a .h file
+    # The test file should be named ComponentUTest.h
+
+    # Basic unit test
+    ADD_CXXTEST(YourComponentUTest)
+
+    # Test with additional source files
+    # ADD_CXXTEST(YourComponentAdvancedUTest
+    #     EXTRA_SOURCE additional_test_helpers.cc
+    # )
+
+    # Test that requires specific libraries
+    # ADD_CXXTEST(YourComponentIntegrationUTest
+    #     EXTRA_LIBS
+    #         ${SOME_EXTRA_LIBRARY}
+    # )
+
+ENDIF (CXXTEST_FOUND)
+
+# =====================================================
+# Python Unit Tests
+# =====================================================
+IF (HAVE_CYTHON AND PYTHONINTERP_FOUND)
+    # Add Python test directory to the test path
+    SET(PYTHON_TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/python)
+
+    # Add individual Python tests
+    ADD_TEST(
+        NAME YourComponentPythonTest
+        COMMAND ${PYTHON_EXECUTABLE}
+            -m pytest
+            ${PYTHON_TEST_DIR}/test_your_component.py
+            -v
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    )
+
+    # Set environment for Python tests
+    SET_TESTS_PROPERTIES(YourComponentPythonTest PROPERTIES
+        ENVIRONMENT "PYTHONPATH=${CMAKE_BINARY_DIR}/opencog/cython"
+    )
+ENDIF()
+
+# =====================================================
+# Scheme Unit Tests
+# =====================================================
+IF (HAVE_GUILE)
+    SET(SCHEME_TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/scm)
+
+    ADD_TEST(
+        NAME YourComponentSchemeTest
+        COMMAND ${GUILE_EXECUTABLE}
+            -L ${PROJECT_BINARY_DIR}/opencog/scm
+            -L ${CMAKE_INSTALL_PREFIX}/share/opencog/scm
+            -l ${SCHEME_TEST_DIR}/your-component-test.scm
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+ENDIF()
+
+# =====================================================
+# Performance/Benchmark Tests (Optional)
+# =====================================================
+# IF (BUILD_PERFORMANCE_TESTS)
+#     ADD_EXECUTABLE(YourComponentBenchmark benchmark.cc)
+#     TARGET_LINK_LIBRARIES(YourComponentBenchmark
+#         your_library
+#         ${ATOMSPACE_LIBRARIES}
+#         ${COGUTIL_LIBRARY}
+#     )
+#     # Don't add to regular test suite - run manually
+# ENDIF()
+
+# =====================================================
+# Subdirectories (if tests are organized in subdirs)
+# =====================================================
+# ADD_SUBDIRECTORY(integration)
+# ADD_SUBDIRECTORY(performance)

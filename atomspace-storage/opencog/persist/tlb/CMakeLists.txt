@@ -2,6 +2,8 @@
 ADD_LIBRARY (tlb SHARED
 	TLB.cc
 )
+ADD_DEPENDENCIES(tlb atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 TARGET_LINK_LIBRARIES(tlb
 	atombase
@@ -21,6 +23,8 @@ INSTALL (FILES
 # --------------------------------
 
 ADD_LIBRARY (guile-uuid UuidSCM.cc)
+ADD_DEPENDENCIES(guile-uuid atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 TARGET_LINK_LIBRARIES(guile-uuid SHARED
 	tlb

@@ -305,8 +305,90 @@ if(TARGET distributed-cognitive-mesh)
     add_dependencies(distributed-cognitive-mesh distributed-cognition cognitive-visualization)
 endif()
 
+# Phase VI: CogZero - Agent-Zero C++ Implementation
+# High-performance autonomous agent framework optimized for OpenCog
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cogzero/CMakeLists.txt")
+    add_subdirectory(cogzero)
+    message(STATUS "CogZero Agent Framework: ENABLED")
+else()
+    message(STATUS "CogZero Agent Framework: NOT FOUND")
+endif()
+
+# Add Phase VI CogZero target
+add_custom_target(cogzero-phase6
+    COMMENT "Building Phase VI: CogZero Agent-Zero Framework"
+)
+
+# Add dependencies for CogZero if targets exist
+if(TARGET cogzero)
+    add_dependencies(cogzero-phase6 cogzero)
+endif()
+if(TARGET agentzero-core)
+    add_dependencies(agentzero-core atomspace cogutil)
+    if(TARGET server)
+        add_dependencies(agentzero-core server)
+    endif()
+endif()
+if(TARGET agentzero-learning AND TARGET moses)
+    add_dependencies(agentzero-learning moses)
+endif()
+if(TARGET agentzero-planning AND TARGET spacetime)
+    add_dependencies(agentzero-planning spacetime)
+endif()
+if(TARGET agentzero-memory AND TARGET attention)
+    add_dependencies(agentzero-memory attention)
+endif()
+if(TARGET agentzero-communication AND TARGET lg-atomese)
+    add_dependencies(agentzero-communication lg-atomese)
+endif()
+
+# Phase VII: ATenSpace - Tensor-based AtomSpace
+# ATen/PyTorch tensor-based adaptation of AtomSpace with GPU acceleration
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atenspace/CMakeLists.txt")
+    add_subdirectory(atenspace)
+    message(STATUS "ATenSpace Tensor Backend: ENABLED")
+else()
+    message(STATUS "ATenSpace Tensor Backend: NOT FOUND")
+endif()
+
+# Add Phase VII ATenSpace target
+add_custom_target(atenspace-phase7
+    COMMENT "Building Phase VII: ATenSpace Tensor-based AtomSpace"
+)
+
+# Add dependencies for ATenSpace if targets exist
+if(TARGET atenspace)
+    add_dependencies(atenspace-phase7 atenspace)
+endif()
+if(TARGET atenspace-headers)
+    add_dependencies(atenspace-phase7 atenspace-headers)
+endif()
+
+# Phase VIII: HyperMind - Distributed Neural Network Framework
+# Actor-based concurrency and reactive streams for high-performance deep learning
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/hypermind/CMakeLists.txt")
+    add_subdirectory(hypermind)
+    message(STATUS "HyperMind Neural Framework: ENABLED")
+else()
+    message(STATUS "HyperMind Neural Framework: NOT FOUND")
+endif()
+
+# Add Phase VIII HyperMind target
+add_custom_target(hypermind-phase8
+    COMMENT "Building Phase VIII: HyperMind Distributed Neural Network Framework"
+)
+
+# Add dependencies for HyperMind if targets exist
+if(TARGET hypermind)
+    add_dependencies(hypermind-phase8 hypermind)
+    # HyperMind can optionally integrate with ATenSpace for tensor operations
+    if(TARGET atenspace)
+        add_dependencies(hypermind atenspace)
+    endif()
+endif()
+
 # Add comprehensive target that includes all phases
 add_custom_target(cognitive-complete
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4
-    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, and distributed cognitive mesh systems"
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4 cogzero-phase6 atenspace-phase7 hypermind-phase8
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, distributed cognitive mesh, CogZero agent, ATenSpace tensor, and HyperMind neural network systems"
 )

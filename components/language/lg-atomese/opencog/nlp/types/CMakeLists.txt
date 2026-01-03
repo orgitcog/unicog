@@ -22,7 +22,7 @@ TARGET_LINK_LIBRARIES(nlp-types
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(nlp-types nlp_atom_types)
+ADD_DEPENDENCIES(nlp-types atomspace-types cogutil nlp_atom_types)
 
 INSTALL (TARGETS nlp-types
 	EXPORT LGAtomeseTargets

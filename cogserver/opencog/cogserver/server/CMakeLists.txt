@@ -10,7 +10,7 @@ ADD_LIBRARY (server SHARED
 	WebServer.cc
 )
 
-ADD_DEPENDENCIES(server network cogutil)
+ADD_DEPENDENCIES(server atombase atomcore atomspace atomvalue cogutil network truthvalue)
 
 TARGET_LINK_LIBRARIES(server
 	network
@@ -29,6 +29,8 @@ IF (HAVE_GUILE)
 	ADD_LIBRARY (guile-cogserver SHARED
 		CogServerSCM.cc
 	)
+ADD_DEPENDENCIES(guile-cogserver atomspace cogutil network server)
+
 
 	TARGET_LINK_LIBRARIES(guile-cogserver
 		server

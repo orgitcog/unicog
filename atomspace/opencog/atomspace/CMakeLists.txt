@@ -16,7 +16,7 @@ ADD_LIBRARY (atomspace
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(atomspace opencog_atom_types)
+ADD_DEPENDENCIES(atomspace atombase atomcore atomvalue clearbox cogutil execution opencog_atom_types pattern truthvalue)
 
 TARGET_LINK_LIBRARIES(atomspace
 	# We want to list every possible library that defines some

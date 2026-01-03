@@ -30,7 +30,7 @@ ADD_LIBRARY (atom_types
 # Without this, parallel make will race and crap up the generated files.
 # Actually, that's not true ... even with this, compilation of other
 # units might start before the generation has finished.  Ugh.
-ADD_DEPENDENCIES(atom_types opencog_atom_types)
+ADD_DEPENDENCIES(atom_types cogutil opencog_atom_types)
 
 TARGET_LINK_LIBRARIES(atom_types
 	${COGUTIL_LIBRARY}

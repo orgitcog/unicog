@@ -54,6 +54,8 @@ IF (HAVE_MOSES)
 	ADD_LIBRARY(moses_cython SHARED
 		pymoses.cpp
 	)
+ADD_DEPENDENCIES(moses_cython cogutil comboreduct moses)
+
 
 	# Don't reverse the order of moses_exec and moses, if reversed will give
 	# undefined symbol: _ZNK5boost15program_options22error_with_option_name4whatEv

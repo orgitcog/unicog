@@ -34,6 +34,8 @@ set(SPACETIME_SOURCES
 
 # Create spacetime library
 add_library(spacetime SHARED ${SPACETIME_SOURCES})
+ADD_DEPENDENCIES(spacetime atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 # Link dependencies  
 target_link_libraries(spacetime

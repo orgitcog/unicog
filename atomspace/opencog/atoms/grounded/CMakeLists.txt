@@ -21,7 +21,7 @@ IF (HAVE_CYTHON)
 ENDIF (HAVE_CYTHON)
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(grounded opencog_atom_types)
+ADD_DEPENDENCIES(grounded atombase atomvalue cogutil opencog_atom_types truthvalue)
 
 TARGET_LINK_LIBRARIES(grounded
 	atombase

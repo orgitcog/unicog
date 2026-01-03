@@ -41,6 +41,8 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/scheme)
 
 # Create the enhanced cognitive patterns library with APRFE
 add_library(cognitive-patterns SHARED ${PATTERN_SOURCES})
+ADD_DEPENDENCIES(cognitive-patterns atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 # Link with parent modules (when they're available)
 # target_link_libraries(cognitive-patterns cogutil atomspace)

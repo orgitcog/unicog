@@ -4,6 +4,8 @@ ADD_LIBRARY (nlpfz SHARED
 	FuzzyMatchBasic.cc
 	FuzzySCM.cc
 )
+ADD_DEPENDENCIES(nlpfz atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 TARGET_LINK_LIBRARIES (nlpfz
 	neighbors

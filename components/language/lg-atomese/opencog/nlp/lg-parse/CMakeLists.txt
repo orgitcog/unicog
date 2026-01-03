@@ -9,7 +9,7 @@ ADD_LIBRARY (lg-parse SHARED
 	LGParseLink.cc
 )
 
-ADD_DEPENDENCIES (lg-parse nlp_atom_types)
+ADD_DEPENDENCIES(lg-parse atombase atomcore atomspace atomvalue cogutil nlp_atom_types truthvalue)
 
 TARGET_LINK_LIBRARIES (lg-parse
 	lg-dict-entry

@@ -15,7 +15,7 @@ ADD_LIBRARY (persist-proxy SHARED
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(persist-proxy storage_types)
+ADD_DEPENDENCIES(persist-proxy atombase atomcore atomspace atomvalue cogutil persist storage_types truthvalue)
 
 TARGET_LINK_LIBRARIES(persist-proxy
 	persist

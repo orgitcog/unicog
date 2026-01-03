@@ -9,6 +9,8 @@ ADD_LIBRARY (pleasure SHARED
 	pleasure/population
 	
 )
+ADD_DEPENDENCIES(pleasure cogutil comboreduct)
+
 
 TARGET_LINK_LIBRARIES (pleasure
 	comboreduct

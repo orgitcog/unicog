@@ -64,6 +64,8 @@ file(GLOB_RECURSE PLN_HEADERS
 # Create PLN library
 if(PLN_SOURCES)
     add_library(pln SHARED ${PLN_SOURCES})
+ADD_DEPENDENCIES(pln atombase atomcore atomspace atomvalue cogutil spacetime truthvalue unify ure)
+
     
     # Link dependencies - using target names for unified build
     target_link_libraries(pln

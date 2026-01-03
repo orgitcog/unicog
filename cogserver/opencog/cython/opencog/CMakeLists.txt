@@ -28,6 +28,8 @@ IF (HAVE_ATOMSPACE)
 	ADD_LIBRARY(cogserver_type_constructors SHARED
 		cogserver_type_constructors.cpp
 	)
+ADD_DEPENDENCIES(cogserver_type_constructors atombase atomcore atomspace atomvalue cogutil truthvalue)
+
 
 	TARGET_LINK_LIBRARIES(cogserver_type_constructors
 		${ATOMSPACE_LIBRARIES}
@@ -57,6 +59,8 @@ list(APPEND ADDITIONAL_MAKE_CLEAN_FILES "cogserver.cpp")
 ADD_LIBRARY(cogserver_cython SHARED
 	cogserver.cpp
 )
+ADD_DEPENDENCIES(cogserver_cython atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+
 
 TARGET_LINK_LIBRARIES(cogserver_cython
 	server

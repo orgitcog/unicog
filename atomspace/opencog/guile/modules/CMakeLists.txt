@@ -2,6 +2,8 @@
 # --------------------------------
 
 ADD_LIBRARY (exec ExecSCM.cc)
+ADD_DEPENDENCIES(exec atomspace execution smob)
+
 
 TARGET_LINK_LIBRARIES(exec execution smob)
 
@@ -16,6 +18,8 @@ ADD_GUILE_MODULE (FILES
 # --------------------------------
 
 ADD_LIBRARY (logger LoggerSCM.cc)
+ADD_DEPENDENCIES(logger atomspace cogutil smob)
+
 
 TARGET_LINK_LIBRARIES(logger
 	smob
@@ -32,6 +36,8 @@ ADD_GUILE_MODULE (FILES
 # --------------------------------
 
 ADD_LIBRARY (randgen RandGenSCM.cc)
+ADD_DEPENDENCIES(randgen atomspace cogutil smob)
+
 
 TARGET_LINK_LIBRARIES(randgen
 	smob
@@ -48,6 +54,8 @@ ADD_GUILE_MODULE (FILES
 # --------------------------------
 
 ADD_LIBRARY (type-utils TypeUtilsSCM.cc)
+ADD_DEPENDENCIES(type-utils atombase atomcore atomspace atomvalue cogutil smob truthvalue)
+
 
 TARGET_LINK_LIBRARIES(type-utils
 	atomcore

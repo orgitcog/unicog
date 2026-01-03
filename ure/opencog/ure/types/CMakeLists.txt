@@ -16,7 +16,7 @@ ADD_LIBRARY (ure-types SHARED
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(ure-types ure_atom_types)
+ADD_DEPENDENCIES(ure-types atomspace-types cogutil ure_atom_types)
 
 TARGET_LINK_LIBRARIES(ure-types
 	${ATOMSPACE_atomtypes_LIBRARY}

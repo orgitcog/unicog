@@ -149,7 +149,7 @@ IF (HAVE_GUILE)
 	)
 
 	# Without this, parallel make will race and crap up the generated files.
-	ADD_DEPENDENCIES(chem-types chem_atom_types)
+	ADD_DEPENDENCIES(chem-types atomspace-types chem_atom_types cogutil)
 
 	TARGET_LINK_LIBRARIES(chem-types
 		${ATOMSPACE_atomtypes_LIBRARY}

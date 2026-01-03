@@ -12,6 +12,8 @@ ADD_LIBRARY (PythonModule MODULE
 	PythonModule.cc 
 	PyRequest.cc
 )
+ADD_DEPENDENCIES(PythonModule atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+
 
 TARGET_LINK_LIBRARIES(PythonModule
 	server

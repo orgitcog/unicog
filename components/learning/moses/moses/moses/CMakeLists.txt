@@ -69,6 +69,8 @@ ADD_LIBRARY (moses SHARED
 	scoring/scoring_base.cc
 	scoring/select_bscore.cc
 )
+ADD_DEPENDENCIES(moses cogutil comboant comboreduct)
+
 
 TARGET_LINK_LIBRARIES (moses
 	feature_selection
