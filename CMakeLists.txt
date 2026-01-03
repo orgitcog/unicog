@@ -364,8 +364,31 @@ if(TARGET atenspace-headers)
     add_dependencies(atenspace-phase7 atenspace-headers)
 endif()
 
+# Phase VIII: HyperMind - Distributed Neural Network Framework
+# Actor-based concurrency and reactive streams for high-performance deep learning
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/hypermind/CMakeLists.txt")
+    add_subdirectory(hypermind)
+    message(STATUS "HyperMind Neural Framework: ENABLED")
+else()
+    message(STATUS "HyperMind Neural Framework: NOT FOUND")
+endif()
+
+# Add Phase VIII HyperMind target
+add_custom_target(hypermind-phase8
+    COMMENT "Building Phase VIII: HyperMind Distributed Neural Network Framework"
+)
+
+# Add dependencies for HyperMind if targets exist
+if(TARGET hypermind)
+    add_dependencies(hypermind-phase8 hypermind)
+    # HyperMind can optionally integrate with ATenSpace for tensor operations
+    if(TARGET atenspace)
+        add_dependencies(hypermind atenspace)
+    endif()
+endif()
+
 # Add comprehensive target that includes all phases
 add_custom_target(cognitive-complete
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4 cogzero-phase6 atenspace-phase7
-    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, distributed cognitive mesh, CogZero agent, and ATenSpace tensor systems"
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4 cogzero-phase6 atenspace-phase7 hypermind-phase8
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, distributed cognitive mesh, CogZero agent, ATenSpace tensor, and HyperMind neural network systems"
 )

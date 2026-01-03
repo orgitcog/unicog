@@ -52,6 +52,7 @@ Integration:        opencog (final integration)
 | **Phase 5** | Weeks 17-20 | Language & Integration | All previous |
 | **Phase 6** | Weeks 21-24 | CogZero Agent Framework | All previous |
 | **Phase 7** | Weeks 25-28 | ATenSpace Tensor Backend | All previous |
+| **Phase 8** | Weeks 29-32 | HyperMind Neural Framework | ATenSpace (optional) |
 
 ---
 
@@ -568,6 +569,84 @@ Integration:        opencog (final integration)
 - ✅ Header-only mode for environments without PyTorch
 - ✅ CUDA-accelerated operations available
 - ✅ PLN and ECAN tensor implementations
+
+---
+
+## 🧠 PHASE 8: HYPERMIND NEURAL FRAMEWORK (Weeks 29-32)
+
+**HyperMind** is a distributed neural network framework built on actor-based concurrency and reactive streams for high-performance, scalable deep learning computation. It provides sophisticated infrastructure for neural network training and inference with GPU/Database integration.
+
+**Repository**: https://github.com/o9nn/hypermind
+
+### Core Components
+
+1. **Actor-Based Concurrency**
+   - `NeuralReactor`: Main actor class for processing neural computations
+   - `ThreadActor`: Base class for actors running in dedicated threads
+   - `SessionInitiator`: Manages training session lifecycle
+   - `SessionState`: Tracks session state within actors
+
+2. **Command System**
+   - `FeedForward`: Forward propagation command
+   - `BackPropagation`: Gradient computation via chain rule
+   - `WeightUpdate`: Applies gradient descent updates
+   - `GradientComputation`: Local gradient computations
+
+3. **Integration Interfaces**
+   - GPU operations (CUDA/OpenCL - stub)
+   - PostgreSQL async queries (stub)
+   - Network communication (distributed reactors - stub)
+
+### Week 29: Core Integration
+**Priority**: HIGH
+**Dependencies**: atenspace (optional)
+
+#### Tasks
+- [x] Clone HyperMind repository
+  ```bash
+  git clone https://github.com/o9nn/hypermind.git hypermind
+  rm -rf hypermind/.git
+  ```
+- [x] Analyze actor-based architecture
+- [x] Integrate into CMakeLists.txt
+- [ ] Configure optional CUDA support
+- [ ] Configure optional PostgreSQL support
+
+### Week 30: Neural Reactor Development
+**Priority**: HIGH
+**Dependencies**: Core integration
+
+#### Tasks
+- [ ] Implement NeuralReactor event loop
+- [ ] Complete command execute() methods
+- [ ] Implement priority queue management
+- [ ] Test actor message passing
+
+### Week 31: GPU/Database Integration
+**Priority**: MEDIUM
+**Dependencies**: Neural reactor
+
+#### Tasks
+- [ ] Implement CUDA kernel submission
+- [ ] Complete PostgreSQL async operations
+- [ ] Add network serialization (Protocol Buffers/MessagePack)
+- [ ] Implement distributed reactor communication
+
+### Week 32: Testing & Validation
+**Priority**: HIGH
+**Dependencies**: All hypermind components
+
+#### Tasks
+- [ ] Run session lifecycle tests
+- [ ] Execute multi-reactor tests
+- [ ] Perform performance benchmarks
+- [ ] Integration with ATenSpace tensors
+
+#### Deliverables
+- ✅ HyperMind neural framework integrated
+- ✅ Header-only mode for core functionality
+- ✅ Optional CUDA acceleration support
+- ✅ Optional PostgreSQL persistence support
 
 ---
 
