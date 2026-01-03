@@ -342,8 +342,30 @@ if(TARGET agentzero-communication AND TARGET lg-atomese)
     add_dependencies(agentzero-communication lg-atomese)
 endif()
 
+# Phase VII: ATenSpace - Tensor-based AtomSpace
+# ATen/PyTorch tensor-based adaptation of AtomSpace with GPU acceleration
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/atenspace/CMakeLists.txt")
+    add_subdirectory(atenspace)
+    message(STATUS "ATenSpace Tensor Backend: ENABLED")
+else()
+    message(STATUS "ATenSpace Tensor Backend: NOT FOUND")
+endif()
+
+# Add Phase VII ATenSpace target
+add_custom_target(atenspace-phase7
+    COMMENT "Building Phase VII: ATenSpace Tensor-based AtomSpace"
+)
+
+# Add dependencies for ATenSpace if targets exist
+if(TARGET atenspace)
+    add_dependencies(atenspace-phase7 atenspace)
+endif()
+if(TARGET atenspace-headers)
+    add_dependencies(atenspace-phase7 atenspace-headers)
+endif()
+
 # Add comprehensive target that includes all phases
 add_custom_target(cognitive-complete
-    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4 cogzero-phase6
-    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, distributed cognitive mesh, and CogZero agent systems"
+    DEPENDS cognitive agentic-kernels-catalog logic-systems cognitive-systems advanced-systems language-integration meta-cognitive-optimization distributed-cognitive-mesh-phase4 cogzero-phase6 atenspace-phase7
+    COMMENT "Building complete cognitive system with all phases: core, logic, cognitive, advanced, language, meta-cognitive, distributed cognitive mesh, CogZero agent, and ATenSpace tensor systems"
 )

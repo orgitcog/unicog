@@ -51,6 +51,7 @@ Integration:        opencog (final integration)
 | **Phase 4** | Weeks 13-16 | Advanced & Learning | Cognitive systems |
 | **Phase 5** | Weeks 17-20 | Language & Integration | All previous |
 | **Phase 6** | Weeks 21-24 | CogZero Agent Framework | All previous |
+| **Phase 7** | Weeks 25-28 | ATenSpace Tensor Backend | All previous |
 
 ---
 
@@ -482,6 +483,91 @@ Integration:        opencog (final integration)
 - ✅ All 9 modules building with monorepo dependencies
 - ✅ Agent orchestration functional
 - ✅ Multi-agent communication operational
+
+---
+
+## ⚡ PHASE 7: ATENSPACE TENSOR BACKEND (Weeks 25-28)
+
+### Overview
+**ATenSpace** is an ATen tensor-based adaptation of OpenCog's AtomSpace, providing a hypergraph knowledge representation system with efficient tensor operations for AI applications. It bridges symbolic and neural AI by combining knowledge graphs with tensor embeddings.
+
+**Repository**: https://github.com/o9nn/ATenSpace
+**Status**: ✅ INTEGRATED (January 2026)
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Tensor Truth Values** | Truth values backed by ATen tensors for GPU acceleration |
+| **Neural Embeddings** | Native support for node/link embeddings |
+| **GPU Acceleration** | CUDA support for high-performance operations |
+| **PLN Integration** | Probabilistic Logic Networks with tensor operations |
+| **ECAN Support** | Economic Attention Networks using tensor math |
+| **Pattern Matching** | Tensor-accelerated pattern matching engine |
+| **Serialization** | Efficient tensor-based persistence |
+
+### Core Components
+
+| Component | Description |
+|-----------|-------------|
+| `Atom.h` | Base class for tensor-backed atoms |
+| `AtomSpace.h` | Tensor-based hypergraph container |
+| `TruthValue.h` | PLN truth value formulas with tensors |
+| `AttentionBank.h` | Attention value management |
+| `ECAN.h` | Economic Attention Networks |
+| `PatternMatcher.h` | Tensor-accelerated pattern matching |
+| `ForwardChainer.h` | Forward chaining inference |
+| `BackwardChainer.h` | Goal-directed inference |
+| `TimeServer.h` | Temporal information management |
+| `Serializer.h` | Tensor serialization for persistence |
+
+### Week 25: Core Integration
+**Priority**: HIGH
+**Dependencies**: atomspace, PyTorch/LibTorch
+
+#### Tasks
+- [x] Clone ATenSpace repository
+- [x] Remove .git and integrate into monorepo
+- [x] Create wrapper CMakeLists.txt for monorepo
+- [x] Configure conditional PyTorch detection
+- [ ] Test header-only mode without PyTorch
+- [ ] Test full build with PyTorch installed
+
+### Week 26: Tensor Backend Testing
+**Priority**: HIGH
+**Dependencies**: atenspace core
+
+#### Tasks
+- [ ] Run ATenSpace test suite
+- [ ] Validate tensor truth value operations
+- [ ] Test embedding similarity queries
+- [ ] Benchmark GPU vs CPU performance
+
+### Week 27: PLN & ECAN Integration
+**Priority**: MEDIUM
+**Dependencies**: atenspace core, pln, attention
+
+#### Tasks
+- [ ] Validate PLN forward/backward chaining
+- [ ] Test ECAN attention spreading
+- [ ] Integrate with monorepo attention module
+- [ ] Performance comparison with standard AtomSpace
+
+### Week 28: Documentation & Examples
+**Priority**: MEDIUM
+**Dependencies**: All atenspace components
+
+#### Tasks
+- [ ] Create integration examples
+- [ ] Document API compatibility with AtomSpace
+- [ ] Write migration guide for existing code
+- [ ] Final validation and release preparation
+
+#### Deliverables
+- ✅ ATenSpace tensor backend integrated
+- ✅ Header-only mode for environments without PyTorch
+- ✅ CUDA-accelerated operations available
+- ✅ PLN and ECAN tensor implementations
 
 ---
 
