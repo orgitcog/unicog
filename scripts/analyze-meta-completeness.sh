@@ -39,7 +39,7 @@ analyze_pattern_coverage() {
         fi
         
         # Check for pattern in code content
-        if ! $pattern_found && find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i "$pattern" >/dev/null 2>&1; then
+        if ! $pattern_found && find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i "$pattern" >/dev/null 2>&1; then
             pattern_found=true
         fi
         
@@ -47,19 +47,19 @@ analyze_pattern_coverage() {
         if ! $pattern_found; then
             case "$pattern" in
                 "perceptual_input") 
-                    if find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i -E "(perceptual|input|sensor)" >/dev/null 2>&1; then
+                    if find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i -E "(perceptual|input|sensor)" >/dev/null 2>&1; then
                         pattern_found=true
                     fi ;;
                 "attention_allocation")
-                    if find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i -E "(attention|ecan|focus)" >/dev/null 2>&1; then
+                    if find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i -E "(attention|ecan|focus)" >/dev/null 2>&1; then
                         pattern_found=true
                     fi ;;
                 "neural_processing")
-                    if find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i -E "(neural|network|activation)" >/dev/null 2>&1; then
+                    if find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i -E "(neural|network|activation)" >/dev/null 2>&1; then
                         pattern_found=true
                     fi ;;
                 "tensor_operations")
-                    if find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i -E "(tensor|ggml|matrix)" >/dev/null 2>&1; then
+                    if find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i -E "(tensor|ggml|matrix)" >/dev/null 2>&1; then
                         pattern_found=true
                     fi ;;
             esac
@@ -94,7 +94,7 @@ analyze_neural_symbolic_paths() {
     echo ""
     echo "🧠 Analyzing Neural-Symbolic Path Traversal..."
     
-    local cpp_files=$(find . -name "*.cc" -o -name "*.cpp" | wc -l)
+    local cpp_files=$(find . \( -name "*.cc" -o -name "*.cpp" \) | wc -l)
     local scheme_files=$(find . -name "*.scm" | wc -l)
     local integration_points=0
     local path_segments=()
@@ -102,7 +102,7 @@ analyze_neural_symbolic_paths() {
     # Analyze C++ to Scheme bridges
     echo "  🔗 Detecting C++/Scheme integration paths..."
     
-    local cpp_scheme_refs=$(find . -name "*.cc" -o -name "*.cpp" | xargs grep -c -i -E "(scheme|scm|guile)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local cpp_scheme_refs=$(find . \( -name "*.cc" -o -name "*.cpp" \) | xargs grep -c -i -E "(scheme|scm|guile)" 2>/dev/null | paste -sd+ | bc || echo "0")
     local scheme_cpp_refs=$(find . -name "*.scm" | xargs grep -c -i -E "(ffi|c\+\+|native|bind)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     integration_points=$((cpp_scheme_refs + scheme_cpp_refs))
@@ -118,7 +118,7 @@ analyze_neural_symbolic_paths() {
     # Analyze neural processing paths
     echo "  🧮 Detecting neural processing pathways..."
     
-    local neural_cpp=$(find . -name "*.cc" -o -name "*.cpp" | xargs grep -c -i -E "(neural|network|activation|sigmoid|relu)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local neural_cpp=$(find . \( -name "*.cc" -o -name "*.cpp" \) | xargs grep -c -i -E "(neural|network|activation|sigmoid|relu)" 2>/dev/null | paste -sd+ | bc || echo "0")
     local neural_scheme=$(find . -name "*.scm" | xargs grep -c -i -E "(neural|network|activation)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     local neural_paths=$((neural_cpp + neural_scheme))
@@ -150,7 +150,7 @@ analyze_neural_symbolic_paths() {
     # Analyze tensor operation paths
     echo "  ⚡ Detecting tensor operation pathways..."
     
-    local tensor_operations=$(find . -name "*.cc" -o -name "*.cpp" | xargs grep -c -i -E "(tensor|matrix|ggml|linear|algebra)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local tensor_operations=$(find . \( -name "*.cc" -o -name "*.cpp" \) | xargs grep -c -i -E "(tensor|matrix|ggml|linear|algebra)" 2>/dev/null | paste -sd+ | bc || echo "0")
     local tensor_schemes=$(find . -name "*.scm" | xargs grep -c -i "tensor" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     local tensor_paths=$((tensor_operations + tensor_schemes))
@@ -191,7 +191,7 @@ analyze_cognitive_synergy() {
     # Check for cross-language cognitive patterns
     echo "  🔗 Checking cross-language cognitive synergy..."
     
-    local cognitive_cpp=$(find . -name "*.cc" -o -name "*.cpp" | xargs grep -c -i -E "(cognitive|atomspace|hypergraph|ecan)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local cognitive_cpp=$(find . \( -name "*.cc" -o -name "*.cpp" \) | xargs grep -c -i -E "(cognitive|atomspace|hypergraph|ecan)" 2>/dev/null | paste -sd+ | bc || echo "0")
     local cognitive_scheme=$(find . -name "*.scm" | xargs grep -c -i -E "(cognitive|atom|hypergraph|attention)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     if [[ $cognitive_cpp -gt 0 && $cognitive_scheme -gt 0 ]]; then
@@ -206,7 +206,7 @@ analyze_cognitive_synergy() {
     # Check for emergent behavior indicators
     echo "  🌱 Checking emergent behavior patterns..."
     
-    local emergent_keywords=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -c -i -E "(emergent|emergence|adaptive|self)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local emergent_keywords=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -c -i -E "(emergent|emergence|adaptive|self)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     if [[ $emergent_keywords -gt 5 ]]; then
         synergy_score=$((synergy_score + 20))
@@ -224,7 +224,7 @@ analyze_cognitive_synergy() {
     # Check for recursive/feedback patterns
     echo "  🔄 Checking recursive feedback patterns..."
     
-    local recursive_patterns=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -c -i -E "(recursive|feedback|loop|iterate)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local recursive_patterns=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -c -i -E "(recursive|feedback|loop|iterate)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     if [[ $recursive_patterns -gt 10 ]]; then
         synergy_score=$((synergy_score + 20))
@@ -242,7 +242,7 @@ analyze_cognitive_synergy() {
     # Check for distributed cognition patterns
     echo "  🌐 Checking distributed cognition patterns..."
     
-    local distributed_patterns=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -c -i -E "(distributed|parallel|concurrent|agent)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local distributed_patterns=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -c -i -E "(distributed|parallel|concurrent|agent)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     if [[ $distributed_patterns -gt 5 ]]; then
         synergy_score=$((synergy_score + 15))
@@ -256,7 +256,7 @@ analyze_cognitive_synergy() {
     # Check for meta-cognitive patterns
     echo "  🤔 Checking meta-cognitive patterns..."
     
-    local meta_patterns=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -c -i -E "(meta|reflection|introspection|self.*aware)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local meta_patterns=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -c -i -E "(meta|reflection|introspection|self.*aware)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     if [[ $meta_patterns -gt 3 ]]; then
         synergy_score=$((synergy_score + 20))
@@ -293,7 +293,7 @@ assess_tensor_field_synthesis() {
     echo "  📐 Checking tensor implementation readiness..."
     
     local tensor_files=$(find . -name "*tensor*" -type f | wc -l)
-    local ggml_components=$(find . -path "*ggml*" -name "*.cc" -o -name "*.h" | wc -l)
+    local ggml_components=$(find . -path "*ggml*" \( -name "*.cc" -o -name "*.h" \) | wc -l)
     
     if [[ $((tensor_files + ggml_components)) -gt 5 ]]; then
         synthesis_readiness=$((synthesis_readiness + 30))

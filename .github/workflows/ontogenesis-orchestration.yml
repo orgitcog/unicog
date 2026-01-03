@@ -36,7 +36,7 @@ permissions:
 jobs:
   architecture-parser:
     name: "🏗️ Architecture Parser & Validator"
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     outputs:
       architecture-matrix: ${{ steps.parse-architecture.outputs.matrix }}
       tensor-mapping: ${{ steps.tensor-analysis.outputs.mapping }}
@@ -332,7 +332,7 @@ jobs:
   generate-orchestration-issues:
     name: "🎭 Generate Orchestration Issues"
     needs: [architecture-parser]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.architecture-parser.outputs.architecture-matrix) }}
     
@@ -702,7 +702,7 @@ jobs:
   create-github-issues:
     name: "🎯 Create GitHub Issues"
     needs: [architecture-parser, generate-orchestration-issues]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     
     steps:
       - name: Checkout Repository
@@ -919,7 +919,7 @@ jobs:
   generate-summary:
     name: "📊 Generate Implementation Summary"
     needs: [architecture-parser, generate-orchestration-issues, create-github-issues]
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     if: always()
     
     steps:

@@ -47,7 +47,7 @@ echo "  ✅ Encoded cognitive process patterns"
 echo ""
 echo "🗂️  Mapping Code Structure to Hypergraph..."
 
-CPP_COUNT=$(find ./GGML ./cognitive-patterns -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" 2>/dev/null | wc -l || echo "0")
+CPP_COUNT=$(find ./GGML ./cognitive-patterns \( -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \) 2>/dev/null | wc -l || echo "0")
 echo "    📊 Found $CPP_COUNT C++ files"
 
 SCM_COUNT=$(find ./cognitive-patterns -name "*.scm" 2>/dev/null | wc -l || echo "0")

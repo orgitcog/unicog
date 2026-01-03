@@ -13,9 +13,9 @@ REPORT_FILE="simple-tensor-analysis.json"
 # Count basic metrics
 echo "📊 Analyzing repository structure..."
 
-cpp_files=$(find . -name "*.cc" -o -name "*.cpp" | wc -l)
+cpp_files=$(find . \( -name "*.cc" -o -name "*.cpp" \) | wc -l)
 scheme_files=$(find . -name "*.scm" | wc -l)
-header_files=$(find . -name "*.h" -o -name "*.hpp" | wc -l)
+header_files=$(find . \( -name "*.h" -o -name "*.hpp" \) | wc -l)
 
 # Calculate basic tensor field metrics
 total_files=$((cpp_files + scheme_files + header_files))

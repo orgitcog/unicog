@@ -51,7 +51,7 @@ estimate_cpp_tensor_dimensions() {
         
         cpp_artifacts+=("$filename:[$primary_dimension,$secondary_dimension,$tertiary_dimension]:$degrees_of_freedom")
         
-    done < <(find . -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" -print0 2>/dev/null)
+    done < <(find . \( -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \) -print0 2>/dev/null)
     
     export CPP_TENSOR_ARTIFACTS="${cpp_artifacts[*]}"
     echo "  ✅ Analyzed ${#cpp_artifacts[@]} C++ artifacts"
@@ -117,12 +117,12 @@ estimate_tensor_field_synthesis() {
     echo "⚡ Estimating Tensor Field Synthesis Potential..."
     
     # Calculate cross-language tensor coupling
-    local cpp_files=$(find . -name "*.cc" -o -name "*.cpp" | wc -l)
+    local cpp_files=$(find . \( -name "*.cc" -o -name "*.cpp" \) | wc -l)
     local scheme_files=$(find . -name "*.scm" | wc -l)
     local total_files=$((cpp_files + scheme_files))
     
     # Estimate field coherence based on integration points
-    local integration_points=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i -E "(tensor|neural|cognitive|atomspace)" 2>/dev/null | wc -l)
+    local integration_points=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i -E "(tensor|neural|cognitive|atomspace)" 2>/dev/null | wc -l)
     local field_coherence=$((integration_points * 100 / (total_files + 1)))
     
     # Calculate tensor field dimensions
@@ -162,9 +162,9 @@ analyze_meta_completeness() {
     echo "🔍 Analyzing Meta-Completeness Metrics..."
     
     # Calculate pattern coverage
-    local cognitive_patterns=$(find . -path "*/cognitive-patterns/*" -name "*.cc" -o -name "*.scm" | wc -l)
-    local neural_symbolic_files=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i -E "(neural|symbolic)" 2>/dev/null | wc -l)
-    local tensor_files=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i "tensor" 2>/dev/null | wc -l)
+    local cognitive_patterns=$(find . -path "*/cognitive-patterns/*" \( -name "*.cc" -o -name "*.scm" \) | wc -l)
+    local neural_symbolic_files=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i -E "(neural|symbolic)" 2>/dev/null | wc -l)
+    local tensor_files=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i "tensor" 2>/dev/null | wc -l)
     
     # Calculate completeness scores
     local pattern_coverage=$((cognitive_patterns * 10))
@@ -207,9 +207,9 @@ estimate_computational_complexity() {
     echo "💻 Estimating Computational Complexity Tensor..."
     
     # Analyze algorithmic complexity indicators
-    local loop_complexity=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -c -E "(for|while|loop|iterate)" 2>/dev/null | paste -sd+ | bc || echo "0")
-    local recursive_complexity=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -c -E "(recursive|recurse)" 2>/dev/null | paste -sd+ | bc || echo "0")
-    local data_structure_complexity=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -c -E "(vector|list|map|tree|graph)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local loop_complexity=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -c -E "(for|while|loop|iterate)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local recursive_complexity=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -c -E "(recursive|recurse)" 2>/dev/null | paste -sd+ | bc || echo "0")
+    local data_structure_complexity=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -c -E "(vector|list|map|tree|graph)" 2>/dev/null | paste -sd+ | bc || echo "0")
     
     # Calculate complexity tensor dimensions
     local time_complexity=$((loop_complexity + recursive_complexity))

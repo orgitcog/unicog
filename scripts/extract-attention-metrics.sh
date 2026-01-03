@@ -60,7 +60,7 @@ extract_cognitive_workload() {
         cpp_attention=$((cpp_attention + attention))
         total_files=$((total_files + 1))
         echo "  C++ File: $(basename "$file") -> Attention: $attention"
-    done < <(find . -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" -print0 2>/dev/null)
+    done < <(find . \( -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \) -print0 2>/dev/null)
     
     # Process Scheme files
     while IFS= read -r -d '' file; do
@@ -76,7 +76,7 @@ extract_cognitive_workload() {
         ggml_attention=$((ggml_attention + attention))
         total_files=$((total_files + 1))
         echo "  GGML/Tensor File: $(basename "$file") -> Attention: $attention"
-    done < <(find . -path "*/ggml-tensor-kernel/*" -name "*.cc" -o -name "*.h" -print0 2>/dev/null)
+    done < <(find . -path "*/ggml-tensor-kernel/*" \( -name "*.cc" -o -name "*.h" \) -print0 2>/dev/null)
     
     # Calculate distribution percentages
     local total_attention=$((cpp_attention + scheme_attention + ggml_attention))
@@ -118,7 +118,7 @@ detect_attention_hotspots() {
             hotspots+=("$(basename "$file"):$attention")
             echo "  🌟 High-attention file: $(basename "$file") (attention: $attention)"
         fi
-    done < <(find . -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.scm" -print0 2>/dev/null)
+    done < <(find . \( -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.scm" \) -print0 2>/dev/null)
     
     if [[ ${#hotspots[@]} -eq 0 ]]; then
         echo "  📊 No attention hotspots detected (all files < 70 attention units)"
@@ -152,7 +152,7 @@ calculate_ecan_urgency() {
     fi
     
     # Base urgency from system complexity
-    local complexity_files=$(find . -name "*.cc" -o -name "*.scm" | wc -l)
+    local complexity_files=$(find . \( -name "*.cc" -o -name "*.scm" \) | wc -l)
     low_urgency=$((complexity_files * 2))
     echo "  📊 Low Urgency (base complexity): $low_urgency units"
     

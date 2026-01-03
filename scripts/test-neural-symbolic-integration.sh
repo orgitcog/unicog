@@ -367,7 +367,7 @@ test_cross_language_interop() {
     echo "  Scanning for C++/Scheme integration points..."
     ((interop_total++)) || true
     
-    local cpp_scheme_bridges=$(find . -name "*.cc" -o -name "*.cpp" | xargs grep -l -i "scheme\|scm\|guile" 2>/dev/null | wc -l)
+    local cpp_scheme_bridges=$(find . \( -name "*.cc" -o -name "*.cpp" \) | xargs grep -l -i "scheme\|scm\|guile" 2>/dev/null | wc -l)
     local scheme_cpp_bridges=$(find . -name "*.scm" | xargs grep -l -i "ffi\|c\+\+\|native" 2>/dev/null | wc -l)
     
     if [[ $((cpp_scheme_bridges + scheme_cpp_bridges)) -gt 0 ]]; then
@@ -381,7 +381,7 @@ test_cross_language_interop() {
     echo "  Scanning for neural-symbolic integration..."
     ((interop_total++)) || true
     
-    local neural_files=$(find . -name "*.cc" -o -name "*.scm" | xargs grep -l -i "neural\|tensor" 2>/dev/null | wc -l)
+    local neural_files=$(find . \( -name "*.cc" -o -name "*.scm" \) | xargs grep -l -i "neural\|tensor" 2>/dev/null | wc -l)
     
     if [[ $neural_files -gt 2 ]]; then
         echo "    ✅ Neural-symbolic integration detected across $neural_files files"

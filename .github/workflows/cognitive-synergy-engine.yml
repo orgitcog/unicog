@@ -15,7 +15,7 @@ on:
 
 jobs:
   generate-cognitive-synergy-issues:
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     if: ${{ inputs.create_issues }}
     steps:
       - name: Create Issues for Distributed Agentic Cognitive Grammar Network

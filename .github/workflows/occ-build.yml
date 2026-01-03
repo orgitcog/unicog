@@ -51,36 +51,24 @@ jobs:
     
     - name: Install Dependencies
       run: |
-        # Cache apt packages
-      set -euo pipefail
-      - name: Cache APT packages
-        uses: actions/cache@v4
-        with:
-          path: /var/cache/apt/archives
-          key: apt-cache-${{ runner.os }}-${{ hashFiles('**/*.yml') }}
-          restore-keys: |
-            apt-cache-${{ runner.os }}-
-      
-      - name: Install Dependencies
-        run: |
         set -euo pipefail
         sudo apt-get update
         sudo apt-get install -y \
-          cmake \
-          build-essential \
-          cxxtest \
-          binutils-dev \
-          libiberty-dev \
-          libboost-dev \
-          libboost-filesystem-dev \
-          libboost-program-options-dev \
-          libboost-system-dev \
-          libboost-thread-dev \
-          libboost-regex-dev \
-          python3-nose \
-          valgrind \
-          doxygen \
-          ccache
+        cmake \
+        build-essential \
+        cxxtest \
+        binutils-dev \
+        libiberty-dev \
+        libboost-dev \
+        libboost-filesystem-dev \
+        libboost-program-options-dev \
+        libboost-system-dev \
+        libboost-thread-dev \
+        libboost-regex-dev \
+        python3-nose \
+        valgrind \
+        doxygen \
+        ccache
     
     - name: Configure CogUtil
       run: |
