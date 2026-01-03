@@ -26,12 +26,32 @@ sanitize_int() {
 }
 
 # OEIS A000081 Nested Shell Structure
-# N=1: 1 term, N=2: 2 terms, N=3: 4 terms, N=4: 9 terms
+# N=1: 1 term, N=2: 2 terms, N=3: 4 terms, N=4: 9 terms, N=5: 20 terms
+# Extended to support autogenetic inference components
 declare -A NESTED_SHELLS=(
     [1]=1   # Foundation: cogutil
-    [2]=2   # Core: atomspace, atomspace-rocks
+    [2]=3   # Core: atomspace → atomspace-storage → atomspace-rocks
     [3]=4   # Logic: ure, unify, pln, miner
     [4]=9   # Cognitive: attention, spacetime, cogserver, learn, language-learning, asmoses, moses, opencog, sensory
+    [5]=6   # Autogenetic: cogzero, atenspace, hypermind, entelechy, cognitive-das, cognitive-gnn
+)
+
+# Component dependency chains for build ordering
+declare -A DEPENDENCY_CHAINS=(
+    ["cogutil"]=""
+    ["atomspace"]="cogutil"
+    ["atomspace-storage"]="atomspace"
+    ["atomspace-rocks"]="atomspace-storage"
+    ["ure"]="atomspace"
+    ["unify"]="atomspace"
+    ["pln"]="ure"
+    ["miner"]="ure"
+    ["attention"]="atomspace"
+    ["cogserver"]="atomspace-storage"
+    ["cogzero"]="cogserver,attention"
+    ["atenspace"]="atomspace,cogzero"
+    ["hypermind"]="atenspace,cogserver"
+    ["entelechy"]="hypermind,pln,attention"
 )
 
 # 12-Step Cognitive Loop with 3 Concurrent Streams
@@ -52,23 +72,42 @@ declare -A COGNITIVE_LOOP=(
 )
 
 # Tensor Field Dimensions for Each Layer
+# Updated with atomspace-storage and new cognitive components
 declare -A TENSOR_SHAPES=(
+    # Foundation Layer
     ["cogutil"]="512,128,8"
+    ["moses"]="512,128,8"
+    
+    # Core Layer (atomspace → atomspace-storage → atomspace-rocks)
     ["atomspace"]="1024,256,16,4"
+    ["atomspace-storage"]="896,224,14,4"
     ["atomspace-rocks"]="768,192,12"
+    
+    # Logic Layer
     ["ure"]="768,192,12"
     ["unify"]="640,160,10"
     ["pln"]="896,224,14,7"
     ["miner"]="768,192,12,6"
+    
+    # Cognitive Layer
     ["attention"]="512,128,8,2"
     ["spacetime"]="896,224,14"
     ["cogserver"]="640,160,8,2"
     ["learn"]="1024,256,16,8"
     ["language-learning"]="768,192,12,6"
     ["asmoses"]="640,160,10,5"
-    ["moses"]="512,128,8"
-    ["opencog"]="2048,512,32,16,8"
     ["sensory"]="512,128,8,4"
+    
+    # Integration Layer
+    ["opencog"]="2048,512,32,16,8"
+    
+    # New Cognitive Components (autogenetic inference)
+    ["cogzero"]="1536,384,24,12,6"       # Agent-zero neural substrate
+    ["atenspace"]="1280,320,20,10,5"     # ATen tensor-atomspace bridge
+    ["hypermind"]="1792,448,28,14,7"     # Distributed neural reactor
+    ["entelechy"]="2560,640,40,20,10,5"  # Entelechy actualization engine
+    ["cognitive-das"]="1024,256,16,8,4"  # Distributed AtomSpace
+    ["cognitive-gnn"]="896,224,14,7"     # Graph neural networks
 )
 
 # Function to assess current ontogenetic stage
@@ -263,10 +302,33 @@ generate_ontogenesis_report() {
     "tensor_field_synthesis": {
       "foundation_shape": [512, 128, 8],
       "core_shape": [1024, 256, 16, 4],
+      "core_storage_shape": [896, 224, 14, 4],
+      "core_rocks_shape": [768, 192, 12],
       "logic_shape": [768, 192, 12],
       "cognitive_shape": [640, 160, 8, 2],
       "advanced_shape": [896, 224, 14, 7],
-      "integration_shape": [2048, 512, 32, 16, 8]
+      "integration_shape": [2048, 512, 32, 16, 8],
+      "cogzero_shape": [1536, 384, 24, 12, 6],
+      "atenspace_shape": [1280, 320, 20, 10, 5],
+      "hypermind_shape": [1792, 448, 28, 14, 7],
+      "entelechy_shape": [2560, 640, 40, 20, 10, 5]
+    },
+    "autogenetic_inference": {
+      "loop_structure": {
+        "streams": 3,
+        "steps_per_cycle": 12,
+        "phase_offset_degrees": 120
+      },
+      "integration_points": {
+        "cogzero": ["agent-core", "communication", "action-executor", "memory-interface"],
+        "atenspace": ["tensor-atoms", "similarity", "ecan", "pln-bridge"],
+        "hypermind": ["neural-reactor", "session-manager", "command-system", "distributed"]
+      },
+      "aar_self_image": {
+        "agent": "dynamic-tensor-transformations",
+        "arena": "base-manifold-state-space",
+        "relation": "recurrent-attentional-feedback"
+      }
     },
     "recursive_enhancement": {
       "proposals": "$(echo $ENHANCEMENT_PROPOSALS | tr ' ' ',')",
