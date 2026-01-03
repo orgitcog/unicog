@@ -371,35 +371,54 @@ jobs:
           mkdir -p /ws/cognitive-state/core-storage
           echo "Storage substrate initialized at $(date)" > /ws/cognitive-state/core-storage/genesis.log
       
-      - name: "🔮 Restore Cognitive State"
+      - name: "🔮 Restore Build Cache"
         uses: actions/cache@v4
         with:
-          path: |
-            /ws/ccache
-            /ws/cognitive-state
-            cogutil
-            atomspace
-          key: cognitive-core-${{ runner.os }}-${{ github.sha }}
+          path: /ws/ccache
+          key: ccache-storage-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            ccache-storage-${{ runner.os }}-
+            ccache-core-${{ runner.os }}-
       
       - uses: actions/checkout@v6
-        with:
-          path: atomspace-storage
-          repository: opencog/atomspace-storage
-          ref: master
       
-      - name: "🧬 Install Foundation & Core Layers"
+      - name: "🧬 Clone Prerequisites"
         run: |
           set -eu
-          echo "🔧 Installing CogUtil foundation..."
-          cd cogutil/build
-          make install
-          ldconfig
+          echo "📦 Cloning CogUtil..."
+          git clone --depth 1 https://github.com/opencog/cogutil.git
           
-          echo "🔧 Installing AtomSpace core..."
-          cd ../../atomspace/build
+          echo "📦 Cloning AtomSpace..."
+          git clone --depth 1 https://github.com/opencog/atomspace.git
+          
+          echo "📦 Cloning AtomSpace-Storage..."
+          git clone --depth 1 https://github.com/opencog/atomspace-storage.git
+          
+          echo "✅ All prerequisites cloned"
+      
+      - name: "🧬 Build & Install CogUtil"
+        run: |
+          set -eu
+          echo "🔧 Building CogUtil foundation..."
+          cd cogutil
+          mkdir -p build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make -j2
           make install
           ldconfig
-          echo "✅ Foundation and Core layers integrated"
+          echo "✅ CogUtil installed"
+      
+      - name: "🧬 Build & Install AtomSpace"
+        run: |
+          set -eu
+          echo "🔧 Building AtomSpace core..."
+          cd atomspace
+          mkdir -p build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make -j2
+          make install
+          ldconfig
+          echo "✅ AtomSpace installed"
       
       - name: "🧪 Build AtomSpace-Storage"
         run: |
@@ -497,41 +516,69 @@ jobs:
           mkdir -p /ws/cognitive-state/core-rocks
           echo "RocksDB substrate initialized at $(date)" > /ws/cognitive-state/core-rocks/genesis.log
       
-      - name: "🔮 Restore Cognitive State"
+      - name: "🔮 Restore Build Cache"
         uses: actions/cache@v4
         with:
-          path: |
-            /ws/ccache
-            /ws/cognitive-state
-            cogutil
-            atomspace
-            atomspace-storage
-          key: cognitive-storage-${{ runner.os }}-${{ github.sha }}
+          path: /ws/ccache
+          key: ccache-rocks-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            ccache-rocks-${{ runner.os }}-
+            ccache-storage-${{ runner.os }}-
       
       - uses: actions/checkout@v6
-        with:
-          path: atomspace-rocks
-          repository: opencog/atomspace-rocks
-          ref: master
       
-      - name: "🧬 Install Prerequisite Layers"
+      - name: "🧬 Clone All Prerequisites"
         run: |
           set -eu
-          echo "🔧 Installing CogUtil foundation..."
-          cd cogutil/build
-          make install
-          ldconfig
+          echo "📦 Cloning CogUtil..."
+          git clone --depth 1 https://github.com/opencog/cogutil.git
           
-          echo "🔧 Installing AtomSpace core..."
-          cd ../../atomspace/build
-          make install
-          ldconfig
+          echo "📦 Cloning AtomSpace..."
+          git clone --depth 1 https://github.com/opencog/atomspace.git
           
-          echo "🔧 Installing AtomSpace-Storage..."
-          cd ../../atomspace-storage/build
+          echo "📦 Cloning AtomSpace-Storage..."
+          git clone --depth 1 https://github.com/opencog/atomspace-storage.git
+          
+          echo "📦 Cloning AtomSpace-Rocks..."
+          git clone --depth 1 https://github.com/opencog/atomspace-rocks.git
+          
+          echo "✅ All prerequisites cloned"
+      
+      - name: "🧬 Build & Install CogUtil"
+        run: |
+          set -eu
+          echo "🔧 Building CogUtil foundation..."
+          cd cogutil
+          mkdir -p build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make -j2
           make install
           ldconfig
-          echo "✅ All prerequisite layers integrated"
+          echo "✅ CogUtil installed"
+      
+      - name: "🧬 Build & Install AtomSpace"
+        run: |
+          set -eu
+          echo "🔧 Building AtomSpace core..."
+          cd atomspace
+          mkdir -p build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make -j2
+          make install
+          ldconfig
+          echo "✅ AtomSpace installed"
+      
+      - name: "🧬 Build & Install AtomSpace-Storage"
+        run: |
+          set -eu
+          echo "🔧 Building AtomSpace-Storage..."
+          cd atomspace-storage
+          mkdir -p build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make -j2
+          make install
+          ldconfig
+          echo "✅ AtomSpace-Storage installed"
       
       - name: "🧪 Build AtomSpace-Rocks"
         run: |
