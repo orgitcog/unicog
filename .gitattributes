@@ -1,0 +1,173 @@
+# Git attributes for OpenCog Unified Repository
+# https://git-scm.com/docs/gitattributes
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# =================================================================
+# SOURCE CODE
+# =================================================================
+
+# C/C++ files
+*.c text diff=cpp
+*.cc text diff=cpp
+*.cpp text diff=cpp
+*.cxx text diff=cpp
+*.h text diff=cpp
+*.hpp text diff=cpp
+*.hxx text diff=cpp
+
+# Python files
+*.py text diff=python
+*.pyi text diff=python
+*.pyw text diff=python
+
+# Scheme files
+*.scm text diff=scheme
+
+# Shell scripts
+*.sh text eol=lf diff=bash
+*.bash text eol=lf diff=bash
+*.zsh text eol=lf diff=bash
+
+# CMake files
+CMakeLists.txt text
+*.cmake text
+
+# =================================================================
+# CONFIGURATION FILES
+# =================================================================
+
+# YAML files
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# JSON files
+*.json text
+
+# TOML files
+*.toml text
+
+# XML files
+*.xml text
+
+# INI files
+*.ini text
+*.cfg text
+
+# =================================================================
+# DOCUMENTATION
+# =================================================================
+
+# Markdown files
+*.md text diff=markdown
+*.markdown text diff=markdown
+
+# reStructuredText
+*.rst text
+
+# Plain text
+*.txt text
+
+# =================================================================
+# WEB FILES
+# =================================================================
+
+*.html text diff=html
+*.htm text diff=html
+*.css text diff=css
+*.js text
+*.ts text
+*.jsx text
+*.tsx text
+
+# =================================================================
+# DATA FILES
+# =================================================================
+
+*.csv text
+*.tsv text
+*.sql text
+
+# =================================================================
+# BINARY FILES
+# =================================================================
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text
+*.webp binary
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+*.bz2 binary
+*.xz binary
+*.7z binary
+
+# Compiled files
+*.o binary
+*.so binary
+*.a binary
+*.dll binary
+*.exe binary
+*.pyc binary
+*.pyo binary
+
+# =================================================================
+# SPECIAL FILES
+# =================================================================
+
+# Docker
+Dockerfile text eol=lf
+*.dockerfile text eol=lf
+
+# Makefiles
+Makefile text eol=lf
+*.mk text eol=lf
+
+# Git files
+.gitattributes text
+.gitignore text
+.gitmodules text
+
+# GitHub
+.github/** text eol=lf
+
+# =================================================================
+# LINGUIST OVERRIDES
+# =================================================================
+
+# Exclude vendor/submodule directories from language stats
+atomspace/** linguist-vendored
+cogutil/** linguist-vendored
+ure/** linguist-vendored
+pln/** linguist-vendored
+miner/** linguist-vendored
+attention/** linguist-vendored
+spacetime/** linguist-vendored
+cogserver/** linguist-vendored
+learn/** linguist-vendored
+opencog/** linguist-vendored
+moses/** linguist-vendored
+asmoses/** linguist-vendored
+lg-atomese/** linguist-vendored
+unify/** linguist-vendored
+language-learning/** linguist-vendored
+atomspace-storage/** linguist-vendored
+atomspace-rocks/** linguist-vendored
+atenspace/** linguist-vendored
+cogzero/** linguist-vendored
+hypermind/** linguist-vendored
+
+# Documentation
+docs/** linguist-documentation
+*.md linguist-documentation
+
+# Generated files
+*.generated.* linguist-generated
