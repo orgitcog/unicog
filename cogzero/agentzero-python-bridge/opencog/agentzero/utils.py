@@ -20,55 +20,84 @@ except ImportError:
         pass
 
 
-def create_goal(name, description=None, priority=1.0):
+def create_goal(name, description=None, priority=1.0, atomspace=None):
     """
     Create a goal atom with metadata.
-    
+
     Args:
         name (str): Goal name
         description (str): Optional description
         priority (float): Priority level (0.0 to 1.0)
-    
+        atomspace: Optional AtomSpace to add the goal to
+
     Returns:
         ConceptNode: The goal atom
-    
+
     Example:
         >>> goal = create_goal("LearnPython", "Learn Python programming", 0.9)
     """
-    goal = ConceptNode(name)
-    
+    goal = ConceptNode(f"goal:{name}")
+
     if description:
-        # Could add description as metadata
-        pass
-    
+        try:
+            # Add description as a StateLink
+            from opencog.atomspace import StateLink, ConceptNode as CN
+            desc_node = CN(f"description:{name}")
+            desc_node.name = description
+        except ImportError:
+            pass
+
+    if priority != 1.0:
+        try:
+            from opencog.atomspace import TruthValue
+            goal.tv = TruthValue(priority, 0.9)
+        except (ImportError, AttributeError):
+            pass
+
     return goal
 
 
-def create_task(name, goal=None, dependencies=None):
+def create_task(name, goal=None, dependencies=None, atomspace=None):
     """
     Create a task atom linked to a goal.
-    
+
     Args:
         name (str): Task name
         goal: Optional goal this task contributes to
         dependencies: Optional list of prerequisite tasks
-    
+        atomspace: Optional AtomSpace to add the task to
+
     Returns:
         ConceptNode: The task atom
-    
+
     Example:
         >>> task = create_task("InstallPython", goal=learn_goal)
     """
-    task = ConceptNode(name)
-    
+    task = ConceptNode(f"task:{name}")
+
     if goal:
-        # Could create a link between task and goal
-        pass
-    
+        try:
+            from opencog.atomspace import EvaluationLink, PredicateNode as PN, ListLink as LL
+            # Create a link showing task contributes to goal
+            EvaluationLink(
+                PN("contributes_to"),
+                LL(task, goal)
+            )
+        except ImportError:
+            pass
+
     if dependencies:
-        # Could create dependency links
-        pass
-    
+        try:
+            from opencog.atomspace import EvaluationLink, PredicateNode as PN, ListLink as LL
+            for dep in dependencies:
+                # Create dependency links
+                EvaluationLink(
+                    PN("depends_on"),
+                    LL(task, dep)
+                )
+        except ImportError:
+            pass
+
     return task
 
 
@@ -127,23 +156,36 @@ def format_handle_list(handles):
     return f"[{result}]"
 
 
-def create_action(name, parameters=None):
+def create_action(name, parameters=None, atomspace=None):
     """
-    Create an action atom.
-    
+    Create an action atom with parameters.
+
     Args:
         name (str): Action name
-        parameters: Optional action parameters
-    
+        parameters: Optional dict of action parameters
+        atomspace: Optional AtomSpace to add the action to
+
     Returns:
         ConceptNode: The action atom
     """
-    action = ConceptNode(name)
-    
-    if parameters:
-        # Could add parameters as values
-        pass
-    
+    action = ConceptNode(f"action:{name}")
+
+    if parameters and isinstance(parameters, dict):
+        try:
+            from opencog.atomspace import EvaluationLink, PredicateNode as PN, ListLink as LL, NumberNode
+            for key, value in parameters.items():
+                # Create parameter links
+                if isinstance(value, (int, float)):
+                    param_node = NumberNode(str(value))
+                else:
+                    param_node = ConceptNode(str(value))
+                EvaluationLink(
+                    PN(f"param:{key}"),
+                    LL(action, param_node)
+                )
+        except ImportError:
+            pass
+
     return action
 
 

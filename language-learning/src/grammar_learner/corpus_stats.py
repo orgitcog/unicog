@@ -3,6 +3,16 @@ from collections import Counter
 
 
 def corpus_stats(lines, extended = False):
+    """
+    Calculate statistics for a parsed corpus.
+
+    Args:
+        lines: list of strings from parsed file
+        extended: if True, include detailed statistics
+
+    Returns:
+        dict with corpus statistics
+    """
     # lines :: [str] -- parses file converted to a list of strings
     words = Counter()   # words in sentences
     pw = Counter()      # parsed words
@@ -11,8 +21,8 @@ def corpus_stats(lines, extended = False):
     rights = Counter()  # right words in links
     links = Counter()   # tuples: (left_word, right_word)
     lw = Counter()      # linked words
-    nlw = Counter()     # non-linked words  # FIXME: not used » DEL?
-    nlws = set()        # a set of non-linked words in a sentence in a loop
+    nlw = Counter()     # non-linked words (words that appear but are never linked)
+    nlws = set()        # a set of non-linked word indices in current sentence
     nnlws = 0           # number of non-linked word occasions in all sentences
     sentence = []       # a list of words (used within loops)
     sentence_lengths = []  # a list of sentence lengths (to find max, mean)
@@ -34,7 +44,8 @@ def corpus_stats(lines, extended = False):
                 if len(nlws) > 0:  # indices of non-parsed words in sentence
                     nnlws += len(nlws)  # number of non-linked words
                     for j in nlws:
-                        nlw[sentence[j]] += 1  # FIXME:DEL? nlw not returned
+                        if j < len(sentence):
+                            nlw[sentence[j]] += 1  # Track non-linked word counts
                     # nlws = set()
                 # sentence = []
                 # Count only parsed words (excluding ###LEFT-WALL### and .)
@@ -95,22 +106,24 @@ def corpus_stats(lines, extended = False):
                 'left_&_right_intersection': len(lefts & rights),
                 'left_|_right_union': len(lefts | rights),
                 'lost_words': len(lost_words),
-                'non_parsed|lost_words': len(unpws | lost_words)
+                'non_parsed|lost_words': len(unpws | lost_words),
+                'non_linked_word_occasions': nnlws,
+                'unique_non_linked_words': len(nlw)
             },
             'unique non-parsed words': unpws,
             'unique non-linked words': unlws,
-            'lost_words': lost_words
+            'lost_words': lost_words,
+            'non_linked_word_counts': dict(nlw)  # Include the actual counts
         })
 
     return response
 
 
 # Notes:
-
 # 80802 poc05 restructured: moved here from pparser.py
 # 80829,31 unpws, unlws
-# TODO: update - see GitHub issue?
 # 81231 cleanup
 # 90217 update for use with filtered dataset
 # 90219 count non-linked words, not marked as [not parsed] -- nlw, nlws, nnlws
-# TODO: update sentence length count to parsed words?
+# 250104 Fixed: nlw counter now properly returned in extended stats
+#        Sentence lengths now count only parsed words (excl. ###LEFT-WALL### and .)
