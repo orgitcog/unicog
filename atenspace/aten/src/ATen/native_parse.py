@@ -4,12 +4,85 @@ import yaml
 import pprint
 import sys
 import copy
+from typing import List, Tuple, Optional, Dict, Any
 
 try:
     # use faster C loader if available
     from yaml import CLoader as Loader
 except ImportError:
     from yaml import Loader
+
+
+def tokenize_arguments(args_string: str) -> List[str]:
+    """
+    Properly tokenize function arguments, handling nested types like
+    std::array<bool, 2> that contain commas and spaces.
+
+    This parser tracks angle bracket depth to correctly handle:
+    - std::array<bool, 2>
+    - std::tuple<int, int>
+    - std::optional<std::string>
+    """
+    if not args_string or not args_string.strip():
+        return []
+
+    tokens = []
+    current_token = []
+    depth = 0  # Track nesting depth of < >
+    paren_depth = 0  # Track ( ) for function types
+
+    for char in args_string:
+        if char == '<':
+            depth += 1
+            current_token.append(char)
+        elif char == '>':
+            depth -= 1
+            current_token.append(char)
+        elif char == '(':
+            paren_depth += 1
+            current_token.append(char)
+        elif char == ')':
+            paren_depth -= 1
+            current_token.append(char)
+        elif char == ',' and depth == 0 and paren_depth == 0:
+            # Only split on commas at the top level
+            token = ''.join(current_token).strip()
+            if token:
+                tokens.append(token)
+            current_token = []
+        else:
+            current_token.append(char)
+
+    # Don't forget the last token
+    token = ''.join(current_token).strip()
+    if token:
+        tokens.append(token)
+
+    return tokens
+
+
+def parse_type_annotation(type_str: str) -> Tuple[str, Optional[str]]:
+    """
+    Parse type annotations like Tensor(a!) to extract type and annotation.
+
+    Returns:
+        tuple: (base_type, annotation) where annotation may be None
+    """
+    match = re.match(r'(Tensor.*)\((.+)\)(.*)', type_str)
+    if match:
+        return match.group(1) + match.group(3), match.group(2)
+    return type_str, None
+
+
+def is_optional_type(type_str: str) -> bool:
+    """
+    Check if a type is optional (ends with ? or is explicitly Optional<T>).
+
+    Handles both the ? suffix notation and explicit Optional<T> generics.
+    """
+    if type_str == 'Generator?':
+        return False  # Special case: Generator? is handled differently
+    return '?' in type_str or type_str.startswith('Optional<') or type_str.startswith('c10::optional<')
 
 # [temp translations]
 # We're currently incrementally moving from the custom func schema to the
@@ -38,11 +111,9 @@ def type_argument_translations(arg):
         t = match.group(1) + match.group(3)
         annotation = match.group(2)
 
-    # XXX: is_nullable flag can only annotate entire type as optional type,
-    # need to special case Generator? logic to make ? only available in jit
-    # TODO: deprecate is_nullable global flag, and parse the type
-    # to support annotating complicated types with optional annotation
-    nullable = (t != 'Generator?' and '?' in t)
+    # Use proper type parsing to determine optionality
+    # This handles both ? suffix and explicit Optional<T>/c10::optional<T> types
+    nullable = is_optional_type(t)
 
     # This enables "Generator? x = None and translates to legacy
     # "Generator* x = nullptr". See [temp translations].
@@ -101,7 +172,8 @@ def type_argument_translations(arg):
         t = 'DimnameList'
         size = int(match.group(1))
 
-    # Legacy type sanitization. TODO: Do we really need this?
+    # Legacy type sanitization for Generator pointer spacing
+    # Required for backward compatibility with older code generators
     if t == 'Generator*':
         t = 'Generator *'
 
@@ -159,9 +231,9 @@ def parse_arguments(args, func_variants, declaration, func_return):
     if len(args.strip()) == 0:
         return arguments
 
-    # TODO: Use a real parser here; this will get bamboozled
-    # by signatures that contain things like std::array<bool, 2> (note the space)
-    for arg_idx, arg in enumerate(args.split(', ')):
+    # Use proper tokenizer that handles nested types like std::array<bool, 2>
+    arg_tokens = tokenize_arguments(args)
+    for arg_idx, arg in enumerate(arg_tokens):
         type_and_name = [a.strip() for a in arg.rsplit(' ', 1)]
         if type_and_name == ['*']:
             assert not kwarg_only
@@ -287,9 +359,8 @@ def parse_arguments(args, func_variants, declaration, func_return):
     arguments = new_arguments
 
     # Sanity checks
-
-    # TODO: convention is that the ith-argument correspond to the i-th return, but it would
-    # be better if we just named everything and matched by name.
+    # Note: The convention is that the ith output argument corresponds to the i-th return.
+    # A future improvement would be to match by name instead of position.
     for arg_idx, argument in enumerate(arguments_out):
         assert argument['annotation'] == func_return[arg_idx]['annotation'], \
             "For func {} writeable keyword Tensor arguments need to have a matching return Tensor. Further, " \
@@ -311,8 +382,8 @@ def parse_arguments(args, func_variants, declaration, func_return):
         assert len(arguments_out) == 0, "func {} is not marked as output yet contains output " \
             "keyword arguments".format(name)
 
-    # TODO: Explicit checking for void is a hack and should disappear after a more
-    # functionally complete implementation of Tensor aliases.
+    # Inplace function validation: ensure self is properly annotated as mutable
+    # and return type matches the annotated input tensor
     if declaration['inplace'] and len(func_return) > 0:
         found_self = False
         for arg_idx, argument in enumerate(arguments):
@@ -337,13 +408,14 @@ def parse_return_arguments(return_decl, inplace, func_decl):
     if return_decl == '()':
         return arguments
 
-    # TODO: Use a real parser here; this will get bamboozled
-    # by signatures that contain things like std::array<bool, 2> (note the space)
+    # Strip outer parentheses if present
     if return_decl[0] == '(' and return_decl[-1] == ')':
         return_decl = return_decl[1:-1]
 
-    multiple_args = len(return_decl.split(', ')) > 1
-    for arg_idx, arg in enumerate(return_decl.split(', ')):
+    # Use proper tokenizer that handles nested types like std::array<bool, 2>
+    arg_tokens = tokenize_arguments(return_decl)
+    multiple_args = len(arg_tokens) > 1
+    for arg_idx, arg in enumerate(arg_tokens):
         t, name, default, nullable, size, annotation = type_argument_translations(arg)
         # name of arguments and name of return sometimes have collision
         # in this case, we rename the return name to <name>_return.
