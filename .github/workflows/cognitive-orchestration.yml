@@ -64,7 +64,7 @@ jobs:
           echo "Cognitive Foundation Layer initialized at $(date)" > /ws/cognitive-state/foundation/genesis.log
       
       - name: "🔮 Restore Hypergraph State"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             /ws/ccache
@@ -153,7 +153,7 @@ jobs:
           echo "state=foundation-active" >> $GITHUB_OUTPUT
       
       - name: "💾 Save Hypergraph State"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             /ws/ccache
@@ -227,7 +227,7 @@ jobs:
           echo "Hypergraph substrate ${{ matrix.variant }} initialized at $(date)" > /ws/cognitive-state/core/genesis-${{ matrix.variant }}.log
       
       - name: "🔮 Restore Cognitive State"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             /ws/ccache
@@ -252,7 +252,7 @@ jobs:
       
       - name: "🔮 Restore Haskell State" 
         if: matrix.variant == 'haskell'
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.stack
@@ -372,7 +372,7 @@ jobs:
           echo "Storage substrate initialized at $(date)" > /ws/cognitive-state/core-storage/genesis.log
       
       - name: "🔮 Restore Build Cache"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /ws/ccache
           key: ccache-storage-${{ runner.os }}-${{ github.sha }}
@@ -517,7 +517,7 @@ jobs:
           echo "RocksDB substrate initialized at $(date)" > /ws/cognitive-state/core-rocks/genesis.log
       
       - name: "🔮 Restore Build Cache"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /ws/ccache
           key: ccache-rocks-${{ runner.os }}-${{ github.sha }}

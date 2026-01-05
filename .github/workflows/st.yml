@@ -42,7 +42,7 @@ jobs:
         submodules: false
     
     - name: Cache APT packages
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: /var/cache/apt/archives
         key: apt-cache-${{ runner.os }}-${{ hashFiles('**/*.yml') }}
