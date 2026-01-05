@@ -1,0 +1,46 @@
+{
+  "meta_system_id": "meta-1767615516",
+  "timestamp": "2026-01-05T12:18:36Z",
+  "loop_configuration": {
+    "update_frequency_ms": 100,
+    "monitoring_interval_ms": 500,
+    "introspection_interval_ms": 5000
+  },
+  "recursive_loops": [
+    {
+      "loop_id": "object_process",
+      "level": 0,
+      "frequency_hz": 10,
+      "operations": ["perceive", "reason", "act"]
+    },
+    {
+      "loop_id": "meta_monitor",
+      "level": 1,
+      "frequency_hz": 2,
+      "operations": ["monitor", "evaluate", "adapt"],
+      "observes": ["object_process"]
+    },
+    {
+      "loop_id": "meta_meta_introspect",
+      "level": 2,
+      "frequency_hz": 0.1,
+      "operations": ["introspect", "improve", "evolve"],
+      "observes": ["object_process", "meta_monitor", "meta_meta_introspect"]
+    }
+  ],
+  "autognosis_parameters": {
+    "self_reference_depth": 5,
+    "awareness_threshold": 0.7,
+    "self_model_complexity": 1000,
+    "introspection_recursion_limit": 10
+  },
+  "emergence_detection": {
+    "enabled": true,
+    "detection_methods": [
+      "pattern_analysis",
+      "complexity_metrics",
+      "recursive_depth_tracking",
+      "self_reference_cycles"
+    ]
+  }
+}
