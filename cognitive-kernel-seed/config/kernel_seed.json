@@ -1,0 +1,53 @@
+{
+  "kernel_id": "cognitive-kernel-1767615516",
+  "timestamp": "2026-01-05T12:18:36Z",
+  "meta_cognition": {
+    "levels": 3,
+    "recursion_depth": 5,
+    "autognosis_threshold": 0.7
+  },
+  "foundation_components": {
+    "cogutil": {
+      "tensor_shape": [64, 32, 16],
+      "dof": 32768,
+      "role": "computational_substrate"
+    },
+    "atomspace": {
+      "tensor_shape": [1024, 512, 256],
+      "dof": 134217728,
+      "role": "symbolic_knowledge_base"
+    }
+  },
+  "meta_loops": [
+    {
+      "level": 0,
+      "name": "object_level",
+      "description": "Direct cognitive processing",
+      "operations": ["perceive", "reason", "act"]
+    },
+    {
+      "level": 1,
+      "name": "meta_level",
+      "description": "Monitoring and adaptation",
+      "operations": ["monitor", "evaluate", "adapt"]
+    },
+    {
+      "level": 2,
+      "name": "meta_meta_level",
+      "description": "Self-modification and improvement",
+      "operations": ["introspect", "improve", "evolve"]
+    }
+  ],
+  "autognosis_capabilities": {
+    "self_model": true,
+    "self_monitoring": true,
+    "self_modification": true,
+    "recursive_introspection": true,
+    "emergent_awareness": true
+  },
+  "distributed_cognition": {
+    "enabled": true,
+    "node_coordination": "consensus",
+    "state_synchronization": "eventual_consistency"
+  }
+}
