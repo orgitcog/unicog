@@ -21,7 +21,7 @@ jobs:
     
     steps:
       - name: "📥 Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Full history for better diff analysis
 
@@ -70,7 +70,7 @@ jobs:
     
     steps:
       - name: "📥 Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: "🔍 Lint YAML Files"
         uses: ibiqlik/action-yamllint@v3
@@ -88,7 +88,7 @@ jobs:
     
     steps:
       - name: "📥 Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: "🔍 Lint GitHub Actions"
         uses: reviewdog/action-actionlint@v1
@@ -102,7 +102,7 @@ jobs:
     
     steps:
       - name: "📥 Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: "🔍 Run ShellCheck"
         uses: ludeeus/action-shellcheck@master
@@ -120,7 +120,7 @@ jobs:
     
     steps:
       - name: "📥 Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: "🐍 Setup Python"
         uses: actions/setup-python@v5
@@ -142,7 +142,7 @@ jobs:
     
     steps:
       - name: "📥 Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: "🐍 Setup Python"
         uses: actions/setup-python@v5
