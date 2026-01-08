@@ -42,7 +42,7 @@ jobs:
         submodules: false
     
     - name: Cache CCache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ~/.cache/ccache
         key: ccache-cogutil-${{ runner.os }}-${{ hashFiles('cogutil/**') }}
@@ -133,7 +133,7 @@ jobs:
         submodules: false
     
     - name: Cache CCache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ~/.cache/ccache
         key: ccache-atomspace-${{ runner.os }}-${{ hashFiles('atomspace/**') }}
@@ -141,7 +141,7 @@ jobs:
           ccache-atomspace-${{ runner.os }}-
     
     - name: Cache GHC
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ~/.stack
         key: ghc-${{ runner.os }}-${{ hashFiles('atomspace/opencog/haskell/stack.yaml') }}
@@ -149,7 +149,7 @@ jobs:
           ghc-${{ runner.os }}-
     
     - name: Cache Haskell Dependencies
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: atomspace/opencog/haskell/.stack-work
         key: haskelldeps-${{ runner.os }}-${{ hashFiles('atomspace/opencog/haskell/stack.yaml', 'atomspace/opencog/haskell/opencog-atomspace.cabal') }}
@@ -975,7 +975,7 @@ jobs:
         submodules: false
     
     - name: Cache GHC
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ~/.stack
         key: ghc-miner-${{ runner.os }}-${{ hashFiles('atomspace/opencog/haskell/stack.yaml') }}

@@ -48,7 +48,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
     
     - name: Cache vcpkg
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: C:\vcpkg\installed
         key: vcpkg-cogutil-${{ runner.os }}-${{ hashFiles('cogutil/**') }}
@@ -130,7 +130,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
     
     - name: Cache vcpkg
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: C:\vcpkg\installed
         key: vcpkg-atomspace-${{ runner.os }}-${{ hashFiles('atomspace/**') }}
