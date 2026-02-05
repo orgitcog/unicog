@@ -1,5 +1,7 @@
 # OpenCog Unified Cognitive Repository
 
+> 📘 **New to this repository?** See [NAVIGATION.md](NAVIGATION.md) for a comprehensive guide to finding your way around.
+
 ## Cognitive Vision
 Unified integration of OpenCog core components as a single monorepo, designed for ease of deployment, automation, and interactive neural-symbolic exploration. All components are directly included (no submodules) for seamless development and integration.
 

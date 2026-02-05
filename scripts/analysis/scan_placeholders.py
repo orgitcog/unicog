@@ -96,10 +96,11 @@ if __name__ == '__main__':
         ptype = p['type']
         result['by_type'][ptype] = result['by_type'].get(ptype, 0) + 1
     
-    with open('placeholder_scan_results.json', 'w') as f:
+    os.makedirs('data/todo-fixme', exist_ok=True)
+    with open('data/todo-fixme/placeholder_scan_results.json', 'w') as f:
         json.dump(result, f, indent=2)
     
     print(f"\nHigh priority: {result['high_priority']}")
     print(f"Medium priority: {result['medium_priority']}")
     print(f"Low priority: {result['low_priority']}")
-    print("\nResults saved to placeholder_scan_results.json")
+    print("\nResults saved to data/todo-fixme/placeholder_scan_results.json")

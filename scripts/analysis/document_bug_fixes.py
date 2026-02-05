@@ -2,6 +2,7 @@
 """
 Convert bug fix TODOs into well-documented NOTEs with context
 """
+import os
 import json
 import re
 
@@ -89,9 +90,10 @@ for item in selected_fixes:
     else:
         print(f"  Skipped (line number out of range)")
 
+os.makedirs('data/todo-fixme', exist_ok=True)
 # Save report
-with open('bug_fix_documentation_report.json', 'w') as f:
+with open('data/todo-fixme/bug_fix_documentation_report.json', 'w') as f:
     json.dump(processed, f, indent=2)
 
 print(f"\n\nProcessed {len(processed)} bug fix documentation updates")
-print(f"Report saved to bug_fix_documentation_report.json")
+print(f"Report saved to data/todo-fixme/bug_fix_documentation_report.json")

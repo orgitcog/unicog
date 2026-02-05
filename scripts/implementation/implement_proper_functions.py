@@ -3,6 +3,7 @@
 Implement proper functional code for stub functions
 Following zero-tolerance policy for mock features
 """
+import os
 import json
 import re
 from pathlib import Path
@@ -167,7 +168,7 @@ class ProperImplementer:
 
 if __name__ == '__main__':
     # Load placeholder analysis
-    with open('placeholder_analysis.json', 'r') as f:
+    with open('data/todo-fixme/placeholder_analysis.json', 'r') as f:
         data = json.load(f)
     
     # Find question rule stubs in rule-helpers.scm
@@ -194,9 +195,9 @@ if __name__ == '__main__':
             implementer.implement_question_rule(filepath, placeholder['line'], func_name, params)
     
     # Generate report
+    os.makedirs('data/analysis-results', exist_ok=True)
     report = implementer.generate_report()
-    
-    with open('proper_implementations_report.json', 'w') as f:
+    with open('data/analysis-results/proper_implementations_report.json', 'w') as f:
         json.dump(report, f, indent=2)
     
     print(f"\n\nProper Implementations: {report['summary']['total_implemented']}")

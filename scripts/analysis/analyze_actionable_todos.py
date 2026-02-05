@@ -2,6 +2,7 @@
 """
 Analyze and categorize the 98 actionable TODO items
 """
+import os
 import json
 import re
 from pathlib import Path
@@ -178,9 +179,9 @@ def analyze_actionable_items():
         'by_complexity': {k: v for k, v in by_complexity.items()},
         'by_type': {k: v for k, v in by_type.items()},
         'by_time': {k: v for k, v in by_time.items()}
+    os.makedirs('data/todo-fixme', exist_ok=True)
     }
-    
-    with open('actionable_todos_analysis.json', 'w') as f:
+    with open('data/todo-fixme/actionable_todos_analysis.json', 'w') as f:
         json.dump(output, f, indent=2)
     
     print("\n\nDetailed analysis saved to actionable_todos_analysis.json")

@@ -116,9 +116,9 @@ if __name__ == '__main__':
             'legitimate': len(legitimate),
             'stub_functions': len(stubs)
         }
+    os.makedirs('data/todo-fixme', exist_ok=True)
     }
-    
-    with open('fixable_placeholders.json', 'w') as f:
+    with open('data/todo-fixme/fixable_placeholders.json', 'w') as f:
         json.dump(output, f, indent=2)
     
     print("\nResults saved to fixable_placeholders.json")

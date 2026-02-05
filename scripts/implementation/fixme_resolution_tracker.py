@@ -49,8 +49,10 @@ class FIXMEResolutionTracker:
     
     def __init__(self, repo_root: str):
         self.repo_root = Path(repo_root)
-        self.tracking_file = self.repo_root / "fixme_resolution_progress.json"
+        self.tracking_file = self.repo_root / "data/todo-fixme/fixme_resolution_progress.json"
         self.resolutions: Dict[str, FIXMEResolution] = {}
+        # Ensure data directory exists
+        self.tracking_file.parent.mkdir(parents=True, exist_ok=True)
         self.load_progress()
         
     def load_progress(self):

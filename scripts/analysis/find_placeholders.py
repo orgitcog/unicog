@@ -106,8 +106,9 @@ if __name__ == '__main__':
     
     report = detector.generate_report()
     
+    os.makedirs('data/todo-fixme', exist_ok=True)
     # Save to JSON
-    with open('placeholder_analysis.json', 'w') as f:
+    with open('data/todo-fixme/placeholder_analysis.json', 'w') as f:
         json.dump(report, f, indent=2)
     
     print("\nPlaceholder Summary:")

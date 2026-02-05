@@ -9,7 +9,7 @@ def generate_report():
     repo_root = Path("/home/ubuntu/opencog-unified")
     
     # Load all data
-    with open(repo_root / 'placeholder_analysis.json', 'r') as f:
+    with open(repo_root / 'data/todo-fixme/placeholder_analysis.json', 'r') as f:
         analysis = json.load(f)
     with open(repo_root / 'stub_implementations.json', 'r') as f:
         stubs = json.load(f)

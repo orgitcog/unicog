@@ -2,6 +2,7 @@
 """
 Categorize placeholders by implementability
 """
+import os
 import json
 from pathlib import Path
 
@@ -121,8 +122,9 @@ if __name__ == '__main__':
         'actionable_priority': actionable_priority
     }
     
+    os.makedirs('data/todo-fixme', exist_ok=True)
     # Save report
-    with open('placeholder_categorization.json', 'w') as f:
+    with open('data/todo-fixme/placeholder_categorization.json', 'w') as f:
         json.dump(report, f, indent=2)
     
     print("Placeholder Categorization Report")

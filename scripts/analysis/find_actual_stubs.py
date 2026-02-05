@@ -97,8 +97,9 @@ if __name__ == '__main__':
             print(f"  Line {stub['line']}: {stub['function']}({stub['params']}) - {stub['stub_type']}")
     
     # Save detailed results
+    os.makedirs('data/todo-fixme', exist_ok=True)
     import json
-    with open('stub_implementations.json', 'w') as f:
+    with open('data/todo-fixme/stub_implementations.json', 'w') as f:
         json.dump(stubs, f, indent=2)
     
     print(f"\n\nDetailed results saved to stub_implementations.json")

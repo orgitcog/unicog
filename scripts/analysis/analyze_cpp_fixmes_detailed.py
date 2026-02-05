@@ -4,6 +4,7 @@ Detailed C++ FIXME Analysis Script
 Categorizes FIXMEs by severity, module, and impact
 """
 
+import os
 import json
 import re
 from pathlib import Path
@@ -156,8 +157,9 @@ def analyze_fixmes():
     for severity in analysis['by_severity']:
         analysis['by_severity'][severity].sort(key=lambda x: (x['module'], x['file'], x['line']))
     
+    os.makedirs('data/todo-fixme', exist_ok=True)
     # Save detailed analysis
-    with open('cpp_fixme_detailed_analysis.json', 'w') as f:
+    with open('data/todo-fixme/cpp_fixme_detailed_analysis.json', 'w') as f:
         json.dump(analysis, f, indent=2)
     
     return analysis

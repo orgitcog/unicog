@@ -204,8 +204,9 @@ def main():
     metrics = EntelechyMetrics()
     report = metrics.generate_report()
     
+    os.makedirs('data/entelechy', exist_ok=True)
     # Save detailed report
-    with open('entelechy_metrics_report.json', 'w') as f:
+    with open('data/entelechy/entelechy_metrics_report.json', 'w') as f:
         json.dump(report, f, indent=2)
     
     # Print summary

@@ -139,7 +139,10 @@ if __name__ == '__main__':
         'needs_research': needs_research
     }
     
-    with open('detailed_placeholder_analysis.json', 'w') as f:
+    # Ensure data directory exists
+    os.makedirs('data/todo-fixme', exist_ok=True)
+    
+    with open('data/todo-fixme/detailed_placeholder_analysis.json', 'w') as f:
         json.dump(analysis, f, indent=2)
     
-    print("\nDetailed analysis saved to detailed_placeholder_analysis.json")
+    print("\nDetailed analysis saved to data/todo-fixme/detailed_placeholder_analysis.json")

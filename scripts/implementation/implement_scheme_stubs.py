@@ -125,7 +125,7 @@ class SchemeStubImplementer:
 
 if __name__ == '__main__':
     # Load placeholder analysis
-    with open('placeholder_analysis.json', 'r') as f:
+    with open('data/todo-fixme/placeholder_analysis.json', 'r') as f:
         data = json.load(f)
     
     # Find all 'not-implemented' throws

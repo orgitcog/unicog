@@ -77,9 +77,9 @@ output = {
     'total': len(fixmes),
     'categories': {k: len(v) for k, v in categories.items()},
     'fixmes_by_category': categories
+os.makedirs('data/todo-fixme', exist_ok=True)
 }
-
-with open('cpp_fixme_analysis.json', 'w') as f:
+    with open('data/todo-fixme/cpp_fixme_analysis.json', 'w') as f:
     json.dump(output, f, indent=2)
 
 print("\nAnalysis saved to cpp_fixme_analysis.json")

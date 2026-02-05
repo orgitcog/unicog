@@ -10,14 +10,14 @@ from pathlib import Path
 
 def test_integration_report_exists():
     """Test that integration report was generated"""
-    report_file = Path("core_self_awareness_integration.json")
+    report_file = Path("data/analysis-results/core_self_awareness_integration.json")
     assert report_file.exists(), "Integration report not found"
     print("✓ Integration report exists")
     return True
 
 def test_report_structure():
     """Test that report has correct structure"""
-    report_file = Path("core_self_awareness_integration.json")
+    report_file = Path("data/analysis-results/core_self_awareness_integration.json")
     with open(report_file, 'r') as f:
         report = json.load(f)
     
@@ -38,7 +38,7 @@ def test_report_structure():
 
 def test_autognosis_integration():
     """Test AUTOGNOSIS integration status"""
-    report_file = Path("core_self_awareness_integration.json")
+    report_file = Path("data/analysis-results/core_self_awareness_integration.json")
     with open(report_file, 'r') as f:
         report = json.load(f)
     
@@ -53,7 +53,7 @@ def test_autognosis_integration():
 
 def test_ontogenesis_integration():
     """Test ONTOGENESIS integration status"""
-    report_file = Path("core_self_awareness_integration.json")
+    report_file = Path("data/analysis-results/core_self_awareness_integration.json")
     with open(report_file, 'r') as f:
         report = json.load(f)
     
@@ -69,7 +69,7 @@ def test_ontogenesis_integration():
 
 def test_identity_dimensions():
     """Test five-dimensional identity model"""
-    report_file = Path("core_self_awareness_integration.json")
+    report_file = Path("data/analysis-results/core_self_awareness_integration.json")
     with open(report_file, 'r') as f:
         report = json.load(f)
     
@@ -93,7 +93,7 @@ def test_identity_dimensions():
 
 def test_self_awareness_level():
     """Test self-awareness level metrics"""
-    report_file = Path("core_self_awareness_integration.json")
+    report_file = Path("data/analysis-results/core_self_awareness_integration.json")
     with open(report_file, 'r') as f:
         report = json.load(f)
     
@@ -114,7 +114,7 @@ def test_self_awareness_level():
 
 def test_integration_achievements():
     """Test that key achievements are present"""
-    report_file = Path("core_self_awareness_integration.json")
+    report_file = Path("data/analysis-results/core_self_awareness_integration.json")
     with open(report_file, 'r') as f:
         report = json.load(f)
     
