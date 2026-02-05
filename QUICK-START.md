@@ -8,8 +8,30 @@ This guide provides quick instructions for working with the OpenCog Unified comp
 opencog-unified/
 ├── DEVELOPMENT-ROADMAP.md      # Main development roadmap
 ├── component-config.json       # Component definitions and metadata
-├── integrate-components.sh     # Automated integration script
+├── integrate-components.sh     # Symlink to scripts/bootstrap/integrate-components.sh
 ├── validate-integration.py     # Integration validation tool
+├── scripts/                    # Automation & validation scripts
+│   ├── analysis/              # Analysis and metrics scripts
+│   ├── bootstrap/             # Integration and setup scripts
+│   ├── build/                 # Build optimization scripts
+│   ├── demo/                  # Demonstration scripts
+│   ├── entelechy/             # Entelechy framework scripts
+│   ├── implementation/        # Implementation automation
+│   └── testing/               # Test execution scripts
+├── docs/                       # Project documentation
+│   ├── archive/               # Historical documentation
+│   ├── cognitive/             # Cognitive architecture docs
+│   ├── entelechy/             # Entelechy framework docs
+│   ├── guides/                # Implementation guides
+│   ├── phases/                # Phase-specific documentation
+│   ├── reports/               # Progress reports and summaries
+│   └── todo-fixme/            # TODO/FIXME tracking
+├── data/                       # Generated data and results
+│   ├── analysis-results/      # Analysis outputs
+│   ├── cognitive-state/       # Cognitive state snapshots
+│   ├── entelechy/             # Entelechy tracking data
+│   ├── test-results/          # Test outputs and logs
+│   └── todo-fixme/            # TODO/FIXME tracking data
 ├── components/                 # Integrated components directory
 │   ├── core/                  # Core layer components
 │   ├── logic/                 # Logic layer components  
@@ -18,10 +40,11 @@ opencog-unified/
 │   ├── learning/              # Learning systems
 │   ├── language/              # Language processing
 │   └── integration/           # Final integration
-└── tests/                     # Testing framework
-    ├── integration/           # Integration tests
-    ├── performance/           # Performance tests
-    └── end_to_end/           # End-to-end tests
+├── tests/                      # Testing framework
+│   ├── integration/           # Integration tests
+│   ├── performance/           # Performance tests
+│   └── end_to_end/            # End-to-end tests
+└── documentation/              # Core documentation framework
 ```
 
 ## Quick Commands
