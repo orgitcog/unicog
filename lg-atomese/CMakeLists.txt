@@ -68,7 +68,7 @@ file(GLOB_RECURSE LG_ATOMESE_HEADERS
 # Create lg-atomese library - only if we have AtomSpace and sources
 if(LG_ATOMESE_SOURCES AND HAVE_ATOMSPACE)
     add_library(lg-atomese SHARED ${LG_ATOMESE_SOURCES})
-ADD_DEPENDENCIES(lg-atomese atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(lg-atomese atombase atomcore atomspace value cogutil truthvalue)
 
     
     # Link dependencies

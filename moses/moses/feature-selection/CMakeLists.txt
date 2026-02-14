@@ -11,7 +11,7 @@ ADD_LIBRARY(feature_selection SHARED
 	scorers/moses_optim.cc
 	main/feature-selection.cc
 )
-ADD_DEPENDENCIES(feature_selection cogutil comboreduct moses)
+ADD_DEPENDENCIES(feature_selection cogutil comboreduct)
 
 
 TARGET_LINK_LIBRARIES(feature_selection

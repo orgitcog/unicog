@@ -8,7 +8,7 @@ ADD_LIBRARY (persist-flow SHARED
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(persist-flow atombase atomcore atomspace atomvalue cogutil persist storage_types truthvalue)
+ADD_DEPENDENCIES(persist-flow atombase atomcore atomspace value cogutil persist storage_types truthvalue)
 
 TARGET_LINK_LIBRARIES(persist-flow
 	persist

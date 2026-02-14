@@ -4,7 +4,7 @@ INCLUDE_DIRECTORIES(${JSONCPP_INCLUDE_DIRS})
 ADD_LIBRARY (atomspacepublishermodule SHARED
 	AtomSpacePublisherModule
 )
-ADD_DEPENDENCIES(atomspacepublishermodule atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+ADD_DEPENDENCIES(atomspacepublishermodule atombase atomcore atomspace value cogutil network server truthvalue)
 
 
 TARGET_LINK_LIBRARIES(atomspacepublishermodule

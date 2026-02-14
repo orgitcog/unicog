@@ -36,7 +36,7 @@ ADD_LIBRARY(nlp_oc_types_cython SHARED
 	nlp_oc_types.cpp
 )
 
-ADD_DEPENDENCIES(nlp_oc_types_cython atombase atomcore atomspace atomvalue cogutil nlp-oc-types truthvalue)
+ADD_DEPENDENCIES(nlp_oc_types_cython atombase atomcore atomspace value cogutil nlp-oc-types truthvalue)
 
 TARGET_LINK_LIBRARIES(nlp_oc_types_cython
 	nlp-oc-types

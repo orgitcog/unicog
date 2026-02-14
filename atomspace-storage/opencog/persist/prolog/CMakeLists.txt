@@ -4,7 +4,7 @@ ADD_LIBRARY(datalog SHARED
 	DecodeProlog.cc
 	EncodeProlog.cc
 )
-ADD_DEPENDENCIES(datalog atombase atomcore atomspace atomvalue cogutil execution truthvalue)
+ADD_DEPENDENCIES(datalog atombase atomcore atomspace value cogutil execution truthvalue)
 
 
 TARGET_LINK_LIBRARIES(datalog

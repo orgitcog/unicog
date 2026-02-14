@@ -84,7 +84,7 @@ ADD_LIBRARY(autonomous-agency STATIC
     ${METACYCLES_SOURCES}
     ${AUTOGENESIS_SOURCES}
 )
-ADD_DEPENDENCIES(autonomous-agency atombase atomcore atomspace atomvalue attention cogutil truthvalue)
+ADD_DEPENDENCIES(autonomous-agency atombase atomcore atomspace value attention cogutil truthvalue)
 
 
 # Link required libraries

@@ -32,7 +32,7 @@ ADD_LIBRARY(storage_cython SHARED
 	storage.cpp
 )
 
-ADD_DEPENDENCIES(storage_cython atombase atomcore atomspace atomvalue cogutil persist storage_types truthvalue)
+ADD_DEPENDENCIES(storage_cython atombase atomcore atomspace value cogutil persist storage_types truthvalue)
 
 TARGET_LINK_LIBRARIES(storage_cython
 	# utilities_cython

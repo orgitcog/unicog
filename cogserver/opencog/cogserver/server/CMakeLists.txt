@@ -10,7 +10,7 @@ ADD_LIBRARY (server SHARED
 	WebServer.cc
 )
 
-ADD_DEPENDENCIES(server atombase atomcore atomspace atomvalue cogutil network truthvalue)
+ADD_DEPENDENCIES(server atombase atomcore atomspace value cogutil network truthvalue)
 
 TARGET_LINK_LIBRARIES(server
 	network
