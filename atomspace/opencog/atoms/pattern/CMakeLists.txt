@@ -17,7 +17,7 @@ ADD_LIBRARY (pattern
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(pattern atombase atomcore atomvalue cogutil opencog_atom_types truthvalue)
+ADD_DEPENDENCIES(pattern atombase atomcore value cogutil opencog_atom_types truthvalue)
 
 # TARGET_COMPILE_OPTIONS(pattern PRIVATE -DQDEBUG=1)
 

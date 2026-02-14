@@ -6,7 +6,7 @@ ADD_LIBRARY (atomspace-cwrapper
     Value_CWrapper.cpp
 )
 
-ADD_DEPENDENCIES(atomspace-cwrapper atombase atomcore atomspace atomvalue cogutil execution query-engine truthvalue)
+ADD_DEPENDENCIES(atomspace-cwrapper atombase atomcore atomspace value cogutil execution query-engine truthvalue)
 
 TARGET_LINK_LIBRARIES(atomspace-cwrapper
 	query-engine

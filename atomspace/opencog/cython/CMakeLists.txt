@@ -29,7 +29,7 @@ ADD_LIBRARY(PythonEval
 	PythonEval.cc
 )
 
-ADD_DEPENDENCIES(PythonEval atombase atomcore atomspace atomspace_cython atomvalue cogutil execution pattern py_atomspace_header truthvalue type_constructors)
+ADD_DEPENDENCIES(PythonEval atombase atomcore atomspace atomspace_cython value cogutil execution pattern py_atomspace_header truthvalue type_constructors)
 
 TARGET_LINK_LIBRARIES(PythonEval
 	pattern

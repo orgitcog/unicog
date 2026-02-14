@@ -81,7 +81,7 @@ ADD_LIBRARY (chem-demo-types SHARED
 
 # Without this, parallel make will race and attempt to build the
 # shared library before the needed generated files are created!
-ADD_DEPENDENCIES(chem-demo-types atom_types atombase atomcore atomspace atomspace-types atomvalue chem_demo_atom_types cogutil truthvalue)
+ADD_DEPENDENCIES(chem-demo-types atom_types atombase atomcore atomspace atomspace-types value chem_demo_atom_types cogutil truthvalue)
 
 # Add linking targets for the library.
 # Generally, you should use ${ATOMSPACE_atomtypes_LIBRARY} but
@@ -146,7 +146,7 @@ CYTHON_ADD_MODULE_PYX(chempydemo
 ADD_LIBRARY(chempydemo SHARED
 	chempydemo.cpp
 )
-ADD_DEPENDENCIES(chempydemo atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(chempydemo atombase atomcore atomspace value cogutil truthvalue)
 
 
 TARGET_LINK_LIBRARIES(chempydemo

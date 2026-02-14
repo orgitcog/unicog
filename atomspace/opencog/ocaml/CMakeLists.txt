@@ -15,7 +15,7 @@ ADD_LIBRARY (camlatoms
 	mlwrappers.cc
 	storewrappers.cc
 )
-ADD_DEPENDENCIES(camlatoms atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(camlatoms atombase atomcore atomspace value cogutil truthvalue)
 
 
 SET_TARGET_PROPERTIES(camlatoms PROPERTIES

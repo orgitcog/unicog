@@ -307,11 +307,13 @@ endif()
 
 # Phase VI: CogZero - Agent-Zero C++ Implementation
 # High-performance autonomous agent framework optimized for OpenCog
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cogzero/CMakeLists.txt")
+# TEMPORARILY DISABLED: CogZero agentzero-* modules need pkg-config updates for monorepo
+# TODO: Update all agentzero-*/CMakeLists.txt to use monorepo targets like agentzero-core does
+if(FALSE AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cogzero/CMakeLists.txt")
     add_subdirectory(cogzero)
     message(STATUS "CogZero Agent Framework: ENABLED")
 else()
-    message(STATUS "CogZero Agent Framework: NOT FOUND")
+    message(STATUS "CogZero Agent Framework: TEMPORARILY DISABLED (requires pkg-config updates)")
 endif()
 
 # Add Phase VI CogZero target
