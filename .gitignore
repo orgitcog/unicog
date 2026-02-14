@@ -43,5 +43,18 @@ Thumbs.db
 test_tensor_rules
 test_*_kernel
 *_test
-*.test.upstream_cache/
+*.test
+
+# Data artifacts (generated files that should not be committed)
+data/test-results/*.log
+data/test-results/*.json
+data/entelechy/*.json
+data/todo-fixme/*.json
+data/todo-fixme/*.png
+data/analysis-results/*.json
+data/analysis-results/*.png
+data/cognitive-state/*.json
+data/cognitive-state/*.npy
+
+# Upstream cache
 .upstream_cache/

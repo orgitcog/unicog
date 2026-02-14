@@ -1,5 +1,7 @@
 # OpenCog Unified Cognitive Repository
 
+> 📘 **New to this repository?** See [NAVIGATION.md](NAVIGATION.md) for a comprehensive guide to finding your way around.
+
 ## Cognitive Vision
 Unified integration of OpenCog core components as a single monorepo, designed for ease of deployment, automation, and interactive neural-symbolic exploration. All components are directly included (no submodules) for seamless development and integration.
 
@@ -25,8 +27,29 @@ opencog-unified/
 ├── knowledge-base/             # Knowledge management
 ├── tutorial-automation/        # Interactive tutorials
 ├── scripts/                    # Automation & validation scripts
+│   ├── analysis/              # Analysis and metrics scripts
+│   ├── bootstrap/             # Integration and setup scripts
+│   ├── build/                 # Build optimization scripts
+│   ├── demo/                  # Demonstration scripts
+│   ├── entelechy/             # Entelechy framework scripts
+│   ├── implementation/        # Implementation automation
+│   └── testing/               # Test execution scripts
 ├── tests/                      # Integration tests
-└── documentation/              # Project documentation
+├── docs/                       # Project documentation
+│   ├── archive/               # Historical documentation
+│   ├── cognitive/             # Cognitive architecture docs
+│   ├── entelechy/             # Entelechy framework docs
+│   ├── guides/                # Implementation guides
+│   ├── phases/                # Phase-specific documentation
+│   ├── reports/               # Progress reports and summaries
+│   └── todo-fixme/            # TODO/FIXME tracking
+├── data/                       # Generated data and results
+│   ├── analysis-results/      # Analysis outputs
+│   ├── cognitive-state/       # Cognitive state snapshots
+│   ├── entelechy/             # Entelechy tracking data
+│   ├── test-results/          # Test outputs and logs
+│   └── todo-fixme/            # TODO/FIXME tracking data
+└── documentation/              # Core documentation framework
 ```
 
 ## Monorepo Structure

@@ -1,0 +1,38 @@
+# FIXME Resolution Makefile Targets
+# Include this in your main Makefile with: include scripts/fixme/Makefile.fixme
+
+.PHONY: fixme-status fixme-easy-wins fixme-report fixme-setup
+
+fixme-status:
+	@echo "📊 Current FIXME status:"
+	@python3 scripts/implementation/fixme_resolution_tracker.py --report | head -20
+
+fixme-easy-wins:
+	@echo "🚀 Available easy wins:"
+	@python3 scripts/implementation/fixme_resolution_tracker.py --easy-wins
+
+fixme-report:
+	@echo "📈 Generating full progress report..."
+	@python3 scripts/implementation/fixme_resolution_tracker.py --report
+	@echo "Report saved to docs/todo-fixme/FIXME_RESOLUTION_PROGRESS_REPORT.md"
+
+fixme-dry-run:
+	@echo "🔍 Showing what easy fixes would be applied:"
+	@python3 scripts/implementation/fixme_easy_wins.py --dry-run
+
+fixme-apply-easy:
+	@echo "🛠️  Applying automated easy fixes..."
+	@python3 scripts/implementation/fixme_easy_wins.py
+
+fixme-setup:
+	@echo "🔧 Setting up FIXME development environment..."
+	@python3 scripts/build/setup_fixme_environment.py
+
+fixme-help:
+	@echo "FIXME Resolution Targets:"
+	@echo "  fixme-status      - Show current progress"
+	@echo "  fixme-easy-wins   - List available easy fixes"
+	@echo "  fixme-report      - Generate full progress report"
+	@echo "  fixme-dry-run     - Preview automated fixes"
+	@echo "  fixme-apply-easy  - Apply automated easy fixes"
+	@echo "  fixme-setup       - Set up development environment"
