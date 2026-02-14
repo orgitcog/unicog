@@ -1,5 +1,5 @@
 {
-  "timestamp": 1770266771.8545892,
+  "timestamp": 1771054877.9207587,
   "validations": {
     "directory_structure": {
       "status": "invalid"
@@ -455,77 +455,77 @@
     },
     "integration_tests": {
       "tests_found": [
-        "test_atomspace-restful.py",
-        "test_ure_dependencies.py",
-        "test_lg_atomese_dependency.py",
-        "test_learn.py",
-        "test_phase2_ecan_attention.py",
-        "test_lg-atomese.py",
         "test_miner.py",
-        "test_aprfe_comprehensive.py",
-        "test_moses.py",
-        "test_opencog.py",
-        "test_atomspace-rocks.py",
         "test_attention_spreading_benchmarks.py",
-        "test_unify_dependency.py"
+        "test_atomspace-restful.py",
+        "test_aprfe_comprehensive.py",
+        "test_phase2_ecan_attention.py",
+        "test_learn.py",
+        "test_lg_atomese_dependency.py",
+        "test_ure_dependencies.py",
+        "test_moses.py",
+        "test_lg-atomese.py",
+        "test_unify_dependency.py",
+        "test_opencog.py",
+        "test_atomspace-rocks.py"
       ],
       "tests_run": [
-        "test_atomspace-restful.py",
-        "test_ure_dependencies.py",
-        "test_lg_atomese_dependency.py",
-        "test_learn.py",
-        "test_phase2_ecan_attention.py",
-        "test_lg-atomese.py",
         "test_miner.py",
-        "test_aprfe_comprehensive.py",
-        "test_moses.py",
-        "test_opencog.py",
-        "test_atomspace-rocks.py",
         "test_attention_spreading_benchmarks.py",
-        "test_unify_dependency.py"
+        "test_atomspace-restful.py",
+        "test_aprfe_comprehensive.py",
+        "test_phase2_ecan_attention.py",
+        "test_learn.py",
+        "test_lg_atomese_dependency.py",
+        "test_ure_dependencies.py",
+        "test_moses.py",
+        "test_lg-atomese.py",
+        "test_unify_dependency.py",
+        "test_opencog.py",
+        "test_atomspace-rocks.py"
       ],
       "tests_passed": [
-        "test_ure_dependencies.py",
+        "test_attention_spreading_benchmarks.py",
         "test_phase2_ecan_attention.py",
-        "test_moses.py",
-        "test_attention_spreading_benchmarks.py"
+        "test_ure_dependencies.py",
+        "test_moses.py"
       ],
       "tests_failed": [
         {
-          "test": "test_atomspace-restful.py",
-          "error": "  File \"/home/runner/work/unicog/unicog/tests/integration/test_atomspace-restful.py\", line 14\n    class TestAtomspace-restfulIntegration(unittest.TestCase):\n                       ^\nSyntaxError: invalid syntax\n"
-        },
-        {
-          "test": "test_lg_atomese_dependency.py",
-          "error": ""
-        },
-        {
-          "test": "test_learn.py",
-          "error": "EEE\n======================================================================\nERROR: test_learn_basic_functionality (__main__.TestLearnIntegration.test_learn_basic_functionality)\nTest basic learn functionality\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 39, in test_learn_basic_functionality\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 49, in test_learn_basic_functionality\n    self.fail(f\"Basic functionality test failed for {component}: {e}\")\n                                                     ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_learn_dependencies (__main__.TestLearnIntegration.test_learn_dependencies)\nTest learn dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 56, in test_learn_dependencies\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 72, in test_learn_dependencies\n    self.fail(f\"Dependency integration test failed for {component}: {e}\")\n                                                        ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_learn_import (__main__.TestLearnIntegration.test_learn_import)\nTest that learn can be imported\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 28, in test_learn_import\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 31, in test_learn_import\n    self.fail(f\"Failed to import {component}: {e}\")\n                                  ^^^^^^^^^\nNameError: name 'component' is not defined\n\n----------------------------------------------------------------------\nRan 3 tests in 0.006s\n\nFAILED (errors=3)\n"
-        },
-        {
-          "test": "test_lg-atomese.py",
-          "error": "  File \"/home/runner/work/unicog/unicog/tests/integration/test_lg-atomese.py\", line 14\n    class TestLg-atomeseIntegration(unittest.TestCase):\n                ^\nSyntaxError: invalid syntax\n"
-        },
-        {
           "test": "test_miner.py",
           "error": ".F....\n======================================================================\nFAIL: test_miner_dependencies_declared (__main__.TestMinerIntegration.test_miner_dependencies_declared)\nTest that miner declares atomspace and ure dependencies.\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_miner.py\", line 39, in test_miner_dependencies_declared\n    self.assertIn(\"find_package(AtomSpace REQUIRED)\", content,\nAssertionError: 'find_package(AtomSpace REQUIRED)' not found in '#\\n# Miner CMake file - Pattern Mining for OpenCog\\n#\\n# Week 14: miner Integration - Pattern mining algorithms with ure dependency\\n#\\n\\nCMAKE_MINIMUM_REQUIRED(VERSION 3.12)\\n\\nPROJECT(miner)\\n\\n# Set C++ standard\\nset(CMAKE_CXX_STANDARD 17)\\nset(CMAKE_CXX_STANDARD_REQUIRED ON)\\n\\n# Find required dependencies\\nfind_package(CogUtil QUIET)\\nfind_package(AtomSpace QUIET)\\nfind_package(URE QUIET)\\n\\n# In monorepo context, handle missing packages\\nIF(NOT COGUTIL_FOUND)\\n\\tSET(COGUTIL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/cogutil)\\nENDIF()\\nIF(NOT ATOMSPACE_FOUND)\\n\\tSET(ATOMSPACE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/atomspace)\\nENDIF()\\nIF(NOT URE_FOUND)\\n\\tSET(URE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/ure)\\nENDIF()\\n\\n# Include directories\\ninclude_directories(\\n    ${CMAKE_CURRENT_SOURCE_DIR}\\n    ${CMAKE_CURRENT_SOURCE_DIR}/opencog\\n    ${COGUTIL_INCLUDE_DIR}\\n    ${ATOMSPACE_INCLUDE_DIR}\\n    ${URE_INCLUDE_DIR}\\n)\\n\\n# Miner core source files\\nfile(GLOB_RECURSE MINER_SOURCES\\n    \"opencog/miner/*.cc\"\\n    \"opencog/miner/*.cpp\"\\n)\\n\\nfile(GLOB_RECURSE MINER_HEADERS\\n    \"opencog/miner/*.h\"\\n    \"opencog/miner/*.hpp\"\\n)\\n\\n# Create miner library\\nif(MINER_SOURCES)\\n    add_library(miner SHARED ${MINER_SOURCES})\\nADD_DEPENDENCIES(miner atombase atomcore atomspace atomvalue cogutil truthvalue unify ure)\\n\\n    \\n    # Link dependencies\\n    target_link_libraries(miner\\n        ${COGUTIL_LIBRARY}\\n        ${ATOMSPACE_LIBRARY}\\n        ${URE_LIBRARY}\\n    )\\n    \\n    # Set library properties\\n    set_target_properties(miner PROPERTIES\\n        VERSION ${OPENCOG_VERSION}\\n        SOVERSION ${OPENCOG_SOVERSION}\\n    )\\n    \\n    # Install library and headers\\n    install(TARGETS miner\\n        LIBRARY DESTINATION lib\\n        RUNTIME DESTINATION bin\\n    )\\n    \\n    install(FILES ${MINER_HEADERS}\\n        DESTINATION include/opencog/miner\\n    )\\nendif()\\n\\n# Miner executables\\nfile(GLOB MINER_EXECUTABLES \"examples/*.cc\")\\nforeach(executable_source ${MINER_EXECUTABLES})\\n    get_filename_component(executable_name ${executable_source} NAME_WE)\\n    add_executable(${executable_name} ${executable_source})\\n    target_link_libraries(${executable_name} miner ${COGUTIL_LIBRARY} ${ATOMSPACE_LIBRARY} ${URE_LIBRARY})\\n    install(TARGETS ${executable_name} DESTINATION bin)\\nendforeach()\\n\\n# Add tests if they exist\\nif(EXISTS \"${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt\")\\n    add_subdirectory(tests)\\nendif()\\n\\n# Create miner-specific target\\nadd_custom_target(miner-all\\n    DEPENDS miner\\n    COMMENT \"Building miner (Pattern Mining) component\"\\n)\\n\\nMESSAGE(STATUS \"Miner (Pattern Mining) component configured\")' : Miner should declare AtomSpace dependency\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nFAILED (failures=1)\n"
+        },
+        {
+          "test": "test_atomspace-restful.py",
+          "error": "  File \"/home/runner/work/unicog/unicog/tests/integration/test_atomspace-restful.py\", line 14\n    class TestAtomspace-restfulIntegration(unittest.TestCase):\n                       ^\nSyntaxError: invalid syntax\n"
         },
         {
           "test": "test_aprfe_comprehensive.py",
           "error": ""
         },
         {
-          "test": "test_opencog.py",
-          "error": "EEE\n======================================================================\nERROR: test_opencog_basic_functionality (__main__.TestOpencogIntegration.test_opencog_basic_functionality)\nTest basic opencog functionality\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 39, in test_opencog_basic_functionality\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 49, in test_opencog_basic_functionality\n    self.fail(f\"Basic functionality test failed for {component}: {e}\")\n                                                     ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_dependencies (__main__.TestOpencogIntegration.test_opencog_dependencies)\nTest opencog dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 56, in test_opencog_dependencies\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 72, in test_opencog_dependencies\n    self.fail(f\"Dependency integration test failed for {component}: {e}\")\n                                                        ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_import (__main__.TestOpencogIntegration.test_opencog_import)\nTest that opencog can be imported\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 28, in test_opencog_import\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 31, in test_opencog_import\n    self.fail(f\"Failed to import {component}: {e}\")\n                                  ^^^^^^^^^\nNameError: name 'component' is not defined\n\n----------------------------------------------------------------------\nRan 3 tests in 0.005s\n\nFAILED (errors=3)\n"
+          "test": "test_learn.py",
+          "error": "EEE\n======================================================================\nERROR: test_learn_basic_functionality (__main__.TestLearnIntegration.test_learn_basic_functionality)\nTest basic learn functionality\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 39, in test_learn_basic_functionality\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 49, in test_learn_basic_functionality\n    self.fail(f\"Basic functionality test failed for {component}: {e}\")\n                                                     ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_learn_dependencies (__main__.TestLearnIntegration.test_learn_dependencies)\nTest learn dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 56, in test_learn_dependencies\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 72, in test_learn_dependencies\n    self.fail(f\"Dependency integration test failed for {component}: {e}\")\n                                                        ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_learn_import (__main__.TestLearnIntegration.test_learn_import)\nTest that learn can be imported\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 28, in test_learn_import\n    module = importlib.import_module(\"learn\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'learn'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_learn.py\", line 31, in test_learn_import\n    self.fail(f\"Failed to import {component}: {e}\")\n                                  ^^^^^^^^^\nNameError: name 'component' is not defined\n\n----------------------------------------------------------------------\nRan 3 tests in 0.011s\n\nFAILED (errors=3)\n"
         },
         {
-          "test": "test_atomspace-rocks.py",
-          "error": "  File \"/home/runner/work/unicog/unicog/tests/integration/test_atomspace-rocks.py\", line 14\n    class TestAtomspace-rocksIntegration(unittest.TestCase):\n                       ^\nSyntaxError: invalid syntax\n"
+          "test": "test_lg_atomese_dependency.py",
+          "error": ""
+        },
+        {
+          "test": "test_lg-atomese.py",
+          "error": "  File \"/home/runner/work/unicog/unicog/tests/integration/test_lg-atomese.py\", line 14\n    class TestLg-atomeseIntegration(unittest.TestCase):\n                ^\nSyntaxError: invalid syntax\n"
         },
         {
           "test": "test_unify_dependency.py",
           "error": ""
+        },
+        {
+          "test": "test_opencog.py",
+          "error": "EEE\n======================================================================\nERROR: test_opencog_basic_functionality (__main__.TestOpencogIntegration.test_opencog_basic_functionality)\nTest basic opencog functionality\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 39, in test_opencog_basic_functionality\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 49, in test_opencog_basic_functionality\n    self.fail(f\"Basic functionality test failed for {component}: {e}\")\n                                                     ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_dependencies (__main__.TestOpencogIntegration.test_opencog_dependencies)\nTest opencog dependency integration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 56, in test_opencog_dependencies\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 72, in test_opencog_dependencies\n    self.fail(f\"Dependency integration test failed for {component}: {e}\")\n                                                        ^^^^^^^^^\nNameError: name 'component' is not defined\n\n======================================================================\nERROR: test_opencog_import (__main__.TestOpencogIntegration.test_opencog_import)\nTest that opencog can be imported\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 28, in test_opencog_import\n    module = importlib.import_module(\"opencog\")\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'opencog'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/unicog/unicog/tests/integration/test_opencog.py\", line 31, in test_opencog_import\n    self.fail(f\"Failed to import {component}: {e}\")\n                                  ^^^^^^^^^\nNameError: name 'component' is not defined\n\n----------------------------------------------------------------------\nRan 3 tests in 0.006s\n\nFAILED (errors=3)\n"
+        },
+        {
+          "test": "test_atomspace-rocks.py",
+          "error": "  File \"/home/runner/work/unicog/unicog/tests/integration/test_atomspace-rocks.py\", line 14\n    class TestAtomspace-rocksIntegration(unittest.TestCase):\n                       ^\nSyntaxError: invalid syntax\n"
         }
       ],
       "status": "some_tests_failed"
