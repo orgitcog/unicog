@@ -4,7 +4,7 @@
 ADD_LIBRARY (csv SHARED
 	table_read.cc
 )
-ADD_DEPENDENCIES(csv atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(csv atombase atomcore atomspace value cogutil truthvalue)
 
 
 TARGET_LINK_LIBRARIES(csv
@@ -27,7 +27,7 @@ INSTALL (FILES
 ADD_LIBRARY (csv-table SHARED
    TableSCM.cc
 )
-ADD_DEPENDENCIES(csv-table atombase atomcore atomspace atomvalue cogutil smob truthvalue)
+ADD_DEPENDENCIES(csv-table atombase atomcore atomspace value cogutil smob truthvalue)
 
 
 TARGET_LINK_LIBRARIES(csv-table

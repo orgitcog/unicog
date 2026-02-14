@@ -8,7 +8,7 @@ ADD_LIBRARY (persist-monospace SHARED
 	MonoPersistSCM.cc
 )
 
-ADD_DEPENDENCIES(persist-monospace atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(persist-monospace atombase atomcore atomspace value cogutil truthvalue)
 
 TARGET_LINK_LIBRARIES(persist-monospace
 	${ATOMSPACE_STORAGE_LIBRARIES}

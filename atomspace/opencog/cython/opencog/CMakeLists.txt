@@ -76,7 +76,7 @@ ADD_CUSTOM_TARGET(py_atomspace_header
 
 # XXX FIXME Cython should not static link the atom-types, but
 # but should instead dynamic-load them, as needed.
-ADD_DEPENDENCIES(atomspace_cython atombase atomcore atomspace atomvalue cogutil opencog_atom_types truthvalue)
+ADD_DEPENDENCIES(atomspace_cython atombase atomcore atomspace value cogutil opencog_atom_types truthvalue)
 
 TARGET_LINK_LIBRARIES(atomspace_cython
 	${NO_AS_NEEDED}
@@ -111,7 +111,7 @@ CYTHON_ADD_MODULE_PYX(type_constructors
 ADD_LIBRARY(type_constructors
 	type_constructors.cpp
 )
-ADD_DEPENDENCIES(type_constructors atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(type_constructors atombase atomcore atomspace value cogutil truthvalue)
 
 
 TARGET_LINK_LIBRARIES(type_constructors
@@ -136,7 +136,7 @@ ADD_LIBRARY(utilities_cython
 	utilities.cpp
 	type_constructors.cpp
 )
-ADD_DEPENDENCIES(utilities_cython atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(utilities_cython atombase atomcore atomspace value cogutil truthvalue)
 
 
 TARGET_LINK_LIBRARIES(utilities_cython
@@ -170,7 +170,7 @@ CYTHON_ADD_MODULE_PYX(execute
 ADD_LIBRARY(exec_cython
 	"execute.cpp"
 )
-ADD_DEPENDENCIES(exec_cython atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(exec_cython atombase atomcore atomspace value cogutil truthvalue)
 
 
 TARGET_LINK_LIBRARIES(exec_cython
@@ -220,7 +220,7 @@ IF (HAVE_GUILE)
 		PyScheme.cc
 		scheme.cpp
 	)
-ADD_DEPENDENCIES(scheme atombase atomcore atomspace atomvalue cogutil smob truthvalue)
+ADD_DEPENDENCIES(scheme atombase atomcore atomspace value cogutil smob truthvalue)
 
 
 	TARGET_LINK_LIBRARIES(scheme

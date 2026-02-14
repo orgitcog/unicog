@@ -8,6 +8,7 @@ ADD_LIBRARY (moses_exec SHARED
     moses_exec_def.cc
     table-problems.cc
 )
+ADD_DEPENDENCIES(moses_exec cogutil comboreduct moses)
 
 ADD_EXECUTABLE (moses-exec moses-exec.cc)
 TARGET_LINK_LIBRARIES (moses-exec

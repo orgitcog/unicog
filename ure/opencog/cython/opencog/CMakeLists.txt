@@ -37,7 +37,7 @@ CYTHON_ADD_MODULE_PYX(ure
 ADD_LIBRARY(ure_cython
 	ure.cpp
 )
-ADD_DEPENDENCIES(ure_cython atombase atomcore atomspace atomvalue cogutil truthvalue unify ure)
+ADD_DEPENDENCIES(ure_cython atombase atomcore atomspace value cogutil truthvalue unify ure)
 
 
 TARGET_LINK_LIBRARIES(ure_cython

@@ -26,7 +26,7 @@ ADD_LIBRARY(ure
 	ThompsonSampling.cc
 )
 
-ADD_DEPENDENCIES(ure atombase atomcore atomspace atomvalue cogutil truthvalue unify ure-types)
+ADD_DEPENDENCIES(ure atombase atomcore atomspace value cogutil truthvalue unify ure-types)
 
 TARGET_LINK_LIBRARIES(ure
 	ure-types

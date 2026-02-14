@@ -15,7 +15,7 @@ ADD_LIBRARY (openpsi SHARED
 	OpenPsiRules.cc
 	OpenPsiSCM.cc
 )
-ADD_DEPENDENCIES(openpsi atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(openpsi atombase atomcore atomspace value cogutil truthvalue)
 
 
 TARGET_LINK_LIBRARIES (openpsi

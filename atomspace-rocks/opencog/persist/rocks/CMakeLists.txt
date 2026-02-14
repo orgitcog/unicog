@@ -10,7 +10,7 @@ ADD_LIBRARY (persist-rocks SHARED
 	RocksPersistSCM.cc
 )
 
-ADD_DEPENDENCIES(persist-rocks atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(persist-rocks atombase atomcore atomspace value cogutil truthvalue)
 
 TARGET_LINK_LIBRARIES(persist-rocks
 	${ATOMSPACE_STORAGE_LIBRARIES}

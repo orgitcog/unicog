@@ -9,7 +9,7 @@ ADD_LIBRARY (foreign
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(foreign atombase atomvalue cogutil opencog_atom_types truthvalue)
+ADD_DEPENDENCIES(foreign atombase value cogutil opencog_atom_types truthvalue)
 
 TARGET_LINK_LIBRARIES(foreign
 	#datalog

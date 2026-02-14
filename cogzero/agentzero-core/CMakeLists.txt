@@ -13,105 +13,151 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find required OpenCog packages
-find_package(PkgConfig REQUIRED)
-
-# Find cogutil
-pkg_check_modules(COGUTIL REQUIRED cogutil)
-if (COGUTIL_FOUND)
-    message(STATUS "Found cogutil version ${COGUTIL_VERSION}")
-    include_directories(${COGUTIL_INCLUDE_DIRS})
-    link_directories(${COGUTIL_LIBRARY_DIRS})
-endif()
-
-# Find atomspace  
-pkg_check_modules(ATOMSPACE REQUIRED atomspace)
-if (ATOMSPACE_FOUND)
-    message(STATUS "Found atomspace version ${ATOMSPACE_VERSION}")
-    include_directories(${ATOMSPACE_INCLUDE_DIRS})
-    link_directories(${ATOMSPACE_LIBRARY_DIRS})
-endif()
-
-# Find cogserver (optional)
-pkg_check_modules(COGSERVER cogserver)
-if (COGSERVER_FOUND)
-    message(STATUS "Found cogserver version ${COGSERVER_VERSION}")
-    include_directories(${COGSERVER_INCLUDE_DIRS})
-    link_directories(${COGSERVER_LIBRARY_DIRS})
+# When part of monorepo, parent will have set these variables
+if(DEFINED COGZERO_COGUTIL_TARGET)
+    # Monorepo build - use parent-provided targets
+    set(COGUTIL_FOUND TRUE)
+    message(STATUS "AgentZero-Core: Using monorepo cogutil target")
 else()
-    message(STATUS "CogServer not found - some features will be disabled")
-    set(COGSERVER_FOUND FALSE)
-endif()
-
-# Find attention module
-pkg_check_modules(ATTENTION attention)
-if (ATTENTION_FOUND)
-    message(STATUS "Found attention version ${ATTENTION_VERSION}")
-    include_directories(${ATTENTION_INCLUDE_DIRS})
-    link_directories(${ATTENTION_LIBRARY_DIRS})
-else()
-    message(STATUS "Attention module not found via pkg-config, looking for system includes")
-    # Look for attention headers in system paths
-    find_path(ATTENTION_INCLUDE_PATH
-        NAMES opencog/attentionbank/bank/AttentionBank.h
-        PATHS /usr/local/include /usr/include
-        PATH_SUFFIXES opencog
-    )
-    if(ATTENTION_INCLUDE_PATH)
-        message(STATUS "Found attention headers at ${ATTENTION_INCLUDE_PATH}")
-        include_directories(${ATTENTION_INCLUDE_PATH})
-        set(ATTENTION_FOUND TRUE)
+    # Standalone build - use pkg-config
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(COGUTIL REQUIRED cogutil)
+    if (COGUTIL_FOUND)
+        message(STATUS "Found cogutil version ${COGUTIL_VERSION}")
+        include_directories(${COGUTIL_INCLUDE_DIRS})
+        link_directories(${COGUTIL_LIBRARY_DIRS})
     endif()
 endif()
 
-# Find PLN (Probabilistic Logic Networks) module
-pkg_check_modules(PLN pln)
-if (PLN_FOUND)
-    message(STATUS "Found PLN version ${PLN_VERSION}")
-    include_directories(${PLN_INCLUDE_DIRS})
-    link_directories(${PLN_LIBRARY_DIRS})
+if(DEFINED COGZERO_ATOMSPACE_TARGET)
+    set(ATOMSPACE_FOUND TRUE)
+    message(STATUS "AgentZero-Core: Using monorepo atomspace target")
 else()
-    message(STATUS "PLN module not found via pkg-config, looking for system includes")
-    find_path(PLN_INCLUDE_PATH
-        NAMES opencog/pln/PLN.h
-        PATHS /usr/local/include /usr/include
-        PATH_SUFFIXES opencog
-    )
-    if(PLN_INCLUDE_PATH)
-        message(STATUS "Found PLN headers at ${PLN_INCLUDE_PATH}")
-        include_directories(${PLN_INCLUDE_PATH})
-        set(PLN_FOUND TRUE)
+    pkg_check_modules(ATOMSPACE REQUIRED atomspace)
+    if (ATOMSPACE_FOUND)
+        message(STATUS "Found atomspace version ${ATOMSPACE_VERSION}")
+        include_directories(${ATOMSPACE_INCLUDE_DIRS})
+        link_directories(${ATOMSPACE_LIBRARY_DIRS})
     endif()
 endif()
 
-# Find URE (Unified Rule Engine) module
-pkg_check_modules(URE ure)
-if (URE_FOUND)
-    message(STATUS "Found URE version ${URE_VERSION}")
-    include_directories(${URE_INCLUDE_DIRS})
-    link_directories(${URE_LIBRARY_DIRS})
+if(DEFINED COGZERO_COGSERVER_TARGET)
+    set(COGSERVER_FOUND TRUE)
+    message(STATUS "AgentZero-Core: Using monorepo cogserver target")
 else()
-    message(STATUS "URE module not found via pkg-config, looking for system includes")
-    find_path(URE_INCLUDE_PATH
-        NAMES opencog/ure/Rule.h
-        PATHS /usr/local/include /usr/include
-        PATH_SUFFIXES opencog
-    )
-    if(URE_INCLUDE_PATH)
-        message(STATUS "Found URE headers at ${URE_INCLUDE_PATH}")
-        include_directories(${URE_INCLUDE_PATH})
-        set(URE_FOUND TRUE)
+    if(NOT DEFINED PkgConfig_FOUND)
+        find_package(PkgConfig REQUIRED)
+    endif()
+    pkg_check_modules(COGSERVER cogserver)
+    if (COGSERVER_FOUND)
+        message(STATUS "Found cogserver version ${COGSERVER_VERSION}")
+        include_directories(${COGSERVER_INCLUDE_DIRS})
+        link_directories(${COGSERVER_LIBRARY_DIRS})
+    else()
+        message(STATUS "CogServer not found - some features will be disabled")
+        set(COGSERVER_FOUND FALSE)
     endif()
 endif()
 
-# Find Miner module for pattern discovery
-pkg_check_modules(MINER miner)
-if (MINER_FOUND)
-    message(STATUS "Found miner version ${MINER_VERSION}")
-    include_directories(${MINER_INCLUDE_DIRS})
-    link_directories(${MINER_LIBRARY_DIRS})
+# Optional dependencies - check monorepo first
+if(DEFINED COGZERO_ATTENTION_TARGET)
+    set(ATTENTION_FOUND TRUE)
+    message(STATUS "AgentZero-Core: Using monorepo attention target")
 else()
-    message(STATUS "Miner module not found - pattern discovery features may be limited")
-    set(MINER_FOUND FALSE)
+    if(NOT DEFINED PkgConfig_FOUND)
+        find_package(PkgConfig REQUIRED)
+    endif()
+    pkg_check_modules(ATTENTION attention)
+    if (ATTENTION_FOUND)
+        message(STATUS "Found attention version ${ATTENTION_VERSION}")
+        include_directories(${ATTENTION_INCLUDE_DIRS})
+        link_directories(${ATTENTION_LIBRARY_DIRS})
+    else()
+        message(STATUS "Attention module not found via pkg-config, looking for system includes")
+        # Look for attention headers in system paths
+        find_path(ATTENTION_INCLUDE_PATH
+            NAMES opencog/attentionbank/bank/AttentionBank.h
+            PATHS /usr/local/include /usr/include
+            PATH_SUFFIXES opencog
+        )
+        if(ATTENTION_INCLUDE_PATH)
+            message(STATUS "Found attention headers at ${ATTENTION_INCLUDE_PATH}")
+            include_directories(${ATTENTION_INCLUDE_PATH})
+            set(ATTENTION_FOUND TRUE)
+        endif()
+    endif()
+endif()
+
+if(DEFINED COGZERO_PLN_TARGET)
+    set(PLN_FOUND TRUE)
+    message(STATUS "AgentZero-Core: Using monorepo pln target")
+else()
+    if(NOT DEFINED PkgConfig_FOUND)
+        find_package(PkgConfig REQUIRED)
+    endif()
+    pkg_check_modules(PLN pln)
+    if (PLN_FOUND)
+        message(STATUS "Found PLN version ${PLN_VERSION}")
+        include_directories(${PLN_INCLUDE_DIRS})
+        link_directories(${PLN_LIBRARY_DIRS})
+    else()
+        message(STATUS "PLN module not found via pkg-config, looking for system includes")
+        find_path(PLN_INCLUDE_PATH
+            NAMES opencog/pln/PLN.h
+            PATHS /usr/local/include /usr/include
+            PATH_SUFFIXES opencog
+        )
+        if(PLN_INCLUDE_PATH)
+            message(STATUS "Found PLN headers at ${PLN_INCLUDE_PATH}")
+            include_directories(${PLN_INCLUDE_PATH})
+            set(PLN_FOUND TRUE)
+        endif()
+    endif()
+endif()
+
+if(DEFINED COGZERO_URE_TARGET)
+    set(URE_FOUND TRUE)
+    message(STATUS "AgentZero-Core: Using monorepo ure target")
+else()
+    if(NOT DEFINED PkgConfig_FOUND)
+        find_package(PkgConfig REQUIRED)
+    endif()
+    pkg_check_modules(URE ure)
+    if (URE_FOUND)
+        message(STATUS "Found URE version ${URE_VERSION}")
+        include_directories(${URE_INCLUDE_DIRS})
+        link_directories(${URE_LIBRARY_DIRS})
+    else()
+        message(STATUS "URE module not found via pkg-config, looking for system includes")
+        find_path(URE_INCLUDE_PATH
+            NAMES opencog/ure/Rule.h
+            PATHS /usr/local/include /usr/include
+            PATH_SUFFIXES opencog
+        )
+        if(URE_INCLUDE_PATH)
+            message(STATUS "Found URE headers at ${URE_INCLUDE_PATH}")
+            include_directories(${URE_INCLUDE_PATH})
+            set(URE_FOUND TRUE)
+        endif()
+    endif()
+endif()
+
+if(DEFINED COGZERO_MINER_TARGET)
+    set(MINER_FOUND TRUE)
+    message(STATUS "AgentZero-Core: Using monorepo miner target")
+else()
+    if(NOT DEFINED PkgConfig_FOUND)
+        find_package(PkgConfig REQUIRED)
+    endif()
+    pkg_check_modules(MINER miner)
+    if (MINER_FOUND)
+        message(STATUS "Found miner version ${MINER_VERSION}")
+        include_directories(${MINER_INCLUDE_DIRS})
+        link_directories(${MINER_LIBRARY_DIRS})
+    else()
+        message(STATUS "Miner module not found - pattern discovery features may be limited")
+        set(MINER_FOUND FALSE)
+    endif()
 endif()
 
 # Include directories
@@ -153,54 +199,74 @@ if(AGENTZERO_CORE_SOURCES)
         ${AGENTZERO_CORE_HEADERS}
     )
 
-    target_link_libraries(agentzero-core
-        ${COGUTIL_LIBRARIES}
-        ${ATOMSPACE_LIBRARIES}
-        ${Boost_LIBRARIES}
-    )
+    # Link required dependencies (use monorepo targets if available)
+    if(DEFINED COGZERO_COGUTIL_TARGET)
+        target_link_libraries(agentzero-core ${COGZERO_COGUTIL_TARGET})
+    else()
+        target_link_libraries(agentzero-core ${COGUTIL_LIBRARIES})
+    endif()
     
-    # Link cogserver libraries if available
-    if(COGSERVER_FOUND AND COGSERVER_LIBRARIES)
-        target_link_libraries(agentzero-core ${COGSERVER_LIBRARIES})
+    if(DEFINED COGZERO_ATOMSPACE_TARGET)
+        target_link_libraries(agentzero-core ${COGZERO_ATOMSPACE_TARGET})
+    else()
+        target_link_libraries(agentzero-core ${ATOMSPACE_LIBRARIES})
+    endif()
+    
+    target_link_libraries(agentzero-core ${Boost_LIBRARIES})
+    
+    # Link cogserver if available
+    if(COGSERVER_FOUND)
+        if(DEFINED COGZERO_COGSERVER_TARGET)
+            target_link_libraries(agentzero-core ${COGZERO_COGSERVER_TARGET})
+        elseif(COGSERVER_LIBRARIES)
+            target_link_libraries(agentzero-core ${COGSERVER_LIBRARIES})
+        endif()
         target_compile_definitions(agentzero-core PRIVATE HAVE_COGSERVER=1)
-        message(STATUS "Linking cogserver libraries: ${COGSERVER_LIBRARIES}")
+        message(STATUS "AgentZero-Core: Linking cogserver")
     endif()
     
-    # Link attention libraries if available
-    if(ATTENTION_FOUND AND ATTENTION_LIBRARIES)
-        target_link_libraries(agentzero-core ${ATTENTION_LIBRARIES})
+    # Link attention if available
+    if(ATTENTION_FOUND)
+        if(DEFINED COGZERO_ATTENTION_TARGET)
+            target_link_libraries(agentzero-core ${COGZERO_ATTENTION_TARGET})
+        elseif(ATTENTION_LIBRARIES)
+            target_link_libraries(agentzero-core ${ATTENTION_LIBRARIES})
+        endif()
         target_compile_definitions(agentzero-core PRIVATE HAVE_ATTENTION_BANK=1)
-        message(STATUS "Linking attention libraries: ${ATTENTION_LIBRARIES}")
-    elseif(ATTENTION_FOUND)
-        target_compile_definitions(agentzero-core PRIVATE HAVE_ATTENTION_BANK=1) 
-        message(STATUS "Attention headers found, compiling with attention support")
+        message(STATUS "AgentZero-Core: Linking attention")
     endif()
     
-    # Link PLN libraries if available
-    if(PLN_FOUND AND PLN_LIBRARIES)
-        target_link_libraries(agentzero-core ${PLN_LIBRARIES})
+    # Link PLN if available
+    if(PLN_FOUND)
+        if(DEFINED COGZERO_PLN_TARGET)
+            target_link_libraries(agentzero-core ${COGZERO_PLN_TARGET})
+        elseif(PLN_LIBRARIES)
+            target_link_libraries(agentzero-core ${PLN_LIBRARIES})
+        endif()
         target_compile_definitions(agentzero-core PRIVATE HAVE_PLN=1)
-        message(STATUS "Linking PLN libraries: ${PLN_LIBRARIES}")
-    elseif(PLN_FOUND)
-        target_compile_definitions(agentzero-core PRIVATE HAVE_PLN=1)
-        message(STATUS "PLN headers found, compiling with PLN support")
+        message(STATUS "AgentZero-Core: Linking PLN")
     endif()
     
-    # Link URE libraries if available
-    if(URE_FOUND AND URE_LIBRARIES)
-        target_link_libraries(agentzero-core ${URE_LIBRARIES})
+    # Link URE if available
+    if(URE_FOUND)
+        if(DEFINED COGZERO_URE_TARGET)
+            target_link_libraries(agentzero-core ${COGZERO_URE_TARGET})
+        elseif(URE_LIBRARIES)
+            target_link_libraries(agentzero-core ${URE_LIBRARIES})
+        endif()
         target_compile_definitions(agentzero-core PRIVATE HAVE_URE=1)
-        message(STATUS "Linking URE libraries: ${URE_LIBRARIES}")
-    elseif(URE_FOUND)
-        target_compile_definitions(agentzero-core PRIVATE HAVE_URE=1)
-        message(STATUS "URE headers found, compiling with URE support")
+        message(STATUS "AgentZero-Core: Linking URE")
     endif()
     
-    # Link Miner libraries if available
-    if(MINER_FOUND AND MINER_LIBRARIES)
-        target_link_libraries(agentzero-core ${MINER_LIBRARIES})
+    # Link Miner if available
+    if(MINER_FOUND)
+        if(DEFINED COGZERO_MINER_TARGET)
+            target_link_libraries(agentzero-core ${COGZERO_MINER_TARGET})
+        elseif(MINER_LIBRARIES)
+            target_link_libraries(agentzero-core ${MINER_LIBRARIES})
+        endif()
         target_compile_definitions(agentzero-core PRIVATE HAVE_MINER=1)
-        message(STATUS "Linking miner libraries: ${MINER_LIBRARIES}")
+        message(STATUS "AgentZero-Core: Linking miner")
     endif()
 
     target_include_directories(agentzero-core PUBLIC

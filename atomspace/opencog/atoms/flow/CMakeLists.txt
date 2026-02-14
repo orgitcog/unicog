@@ -25,7 +25,7 @@ ADD_LIBRARY (atomflow
 )
 
 # Without this, parallel make will race and crap up the generated files.
-ADD_DEPENDENCIES(atomflow atombase atomcore atomvalue cogutil opencog_atom_types truthvalue)
+ADD_DEPENDENCIES(atomflow atombase atomcore value cogutil opencog_atom_types truthvalue)
 
 TARGET_LINK_LIBRARIES(atomflow
 	atomcore

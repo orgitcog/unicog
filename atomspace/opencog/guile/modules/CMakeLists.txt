@@ -54,7 +54,7 @@ ADD_GUILE_MODULE (FILES
 # --------------------------------
 
 ADD_LIBRARY (type-utils TypeUtilsSCM.cc)
-ADD_DEPENDENCIES(type-utils atombase atomcore atomspace atomvalue cogutil smob truthvalue)
+ADD_DEPENDENCIES(type-utils atombase atomcore atomspace value cogutil smob truthvalue)
 
 
 TARGET_LINK_LIBRARIES(type-utils

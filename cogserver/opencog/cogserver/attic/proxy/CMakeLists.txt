@@ -3,7 +3,7 @@ ADD_LIBRARY (w-thru-proxy SHARED
 	ThruCommands.cc
 	WriteThruProxy.cc
 )
-ADD_DEPENDENCIES(w-thru-proxy atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+ADD_DEPENDENCIES(w-thru-proxy atombase atomcore atomspace value cogutil network server truthvalue)
 
 
 TARGET_LINK_LIBRARIES(w-thru-proxy
@@ -22,7 +22,7 @@ ADD_LIBRARY (r-thru-proxy SHARED
 	ReadThruProxy.cc
 	ThruCommands.cc
 )
-ADD_DEPENDENCIES(r-thru-proxy atombase atomcore atomspace atomvalue cogutil network server truthvalue)
+ADD_DEPENDENCIES(r-thru-proxy atombase atomcore atomspace value cogutil network server truthvalue)
 
 
 TARGET_LINK_LIBRARIES(r-thru-proxy

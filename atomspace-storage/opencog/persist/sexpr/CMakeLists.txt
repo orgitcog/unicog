@@ -5,7 +5,7 @@ ADD_LIBRARY (sexpr SHARED
 	FrameSexpr.cc
 	ValueSexpr.cc
 )
-ADD_DEPENDENCIES(sexpr atombase atomcore atomspace atomvalue cogutil truthvalue)
+ADD_DEPENDENCIES(sexpr atombase atomcore atomspace value cogutil truthvalue)
 
 
 TARGET_LINK_LIBRARIES(sexpr

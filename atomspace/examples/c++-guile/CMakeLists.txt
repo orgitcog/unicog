@@ -13,7 +13,7 @@ TARGET_LINK_LIBRARIES(PrimitiveExample
 ADD_LIBRARY (example
 	ExampleSCM.cc
 )
-ADD_DEPENDENCIES(example atombase atomcore atomspace atomvalue cogutil smob truthvalue)
+ADD_DEPENDENCIES(example atombase atomcore atomspace value cogutil smob truthvalue)
 
 
 TARGET_LINK_LIBRARIES(example

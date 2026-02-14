@@ -51,7 +51,7 @@ file(GLOB_RECURSE ASMOSES_HEADERS
 # Create asmoses library
 if(ASMOSES_SOURCES)
     add_library(asmoses SHARED ${ASMOSES_SOURCES})
-ADD_DEPENDENCIES(asmoses atombase atomcore atomspace atomvalue cogutil truthvalue unify ure)
+ADD_DEPENDENCIES(asmoses atombase atomcore atomspace value cogutil truthvalue unify ure)
 
     
     # Link dependencies

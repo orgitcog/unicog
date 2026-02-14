@@ -16,7 +16,7 @@ CYTHON_ADD_MODULE_PYX(storage_rocks)
 ADD_LIBRARY(storage_rocks_cython SHARED
 	storage_rocks.cpp
 )
-ADD_DEPENDENCIES(storage_rocks_cython atombase atomcore atomspace atomvalue cogutil persist persist-monospace persist-rocks truthvalue)
+ADD_DEPENDENCIES(storage_rocks_cython atombase atomcore atomspace value cogutil persist persist-monospace persist-rocks truthvalue)
 
 
 TARGET_LINK_LIBRARIES(storage_rocks_cython

@@ -8,7 +8,7 @@ ADD_LIBRARY (sureal SHARED
 	SuRealPMCB.cc
 )
 
-ADD_DEPENDENCIES(sureal also atombase atomcore atomspace atomvalue by cogutil default dependencies include nlp_oc_atom_types the truthvalue types)
+ADD_DEPENDENCIES(sureal also atombase atomcore atomspace value by cogutil default dependencies include nlp_oc_atom_types the truthvalue types)
 
 TARGET_LINK_LIBRARIES(sureal
 	lg-dict
